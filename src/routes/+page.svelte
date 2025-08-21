@@ -8,7 +8,7 @@
     import { receivingEmail } from "../lib/stores";
     let address = $receivingEmail;
 
-    const url = "https://post.justatemp.com"
+const url = "https://firetempmail-postservice.badr-hsn96.workers.dev"
   
     let copyrightYear = new Date().getFullYear();
     let emails = []
@@ -33,7 +33,7 @@
     // @ts-ignore
     async function generateEmail(reload) {
         let words = generate(2)
-        receivingEmail.set(words[0] + "." + words[1] + Math.floor(Math.random() * 1000) + "@justatemp.com")
+        receivingEmail.set(words[0] + "." + words[1] + Math.floor(Math.random() * 1000) + "@firetempmail.com")
 
         if (reload) {
             // use this instead of window.location.reload(); to avoid resending POST requests
@@ -236,7 +236,7 @@
                             <!--
                             Set the password for your profile<br><br>You or someone else has requested a Miro profile for this email address. To create &nbsp;your profile, click on the button to set your password.<br><br><span style="border: 2px solid rgb(13,110,253);border-radius: 10px;padding: 1px 8px;"><a href="#" style="text-decoration: none;">Set Password<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="margin-bottom: 4px;margin-left: 4px;">
                                         <path d="M10 6H6C4.89543 6 4 6.89543 4 8V18C4 19.1046 4.89543 20 6 20H16C17.1046 20 18 19.1046 18 18V14M14 4H20M20 4V10M20 4L10 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg></a></span><br><br>If you didn't make this request, you can safely ignore this email. If you have any questions, you can&nbsp;contact us through our form.<br><br>This email was sent to&nbsp;max@justatemp.com.<br><br>Miro, 201 Spear St., Suite 1100<br>San Francisco, CA&nbsp;94105, United States<br><br><span style="border: 2px solid rgb(13,110,253);border-radius: 10px;padding: 1px 8px;"><a href="#" style="text-decoration: none;">Help Center<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="margin-bottom: 4px;margin-left: 4px;">
+                                    </svg></a></span><br><br>If you didn't make this request, you can safely ignore this email. If you have any questions, you can&nbsp;contact us through our form.<br><br>This email was sent to&nbsp;max@firetempmail.com.<br><br>Miro, 201 Spear St., Suite 1100<br>San Francisco, CA&nbsp;94105, United States<br><br><span style="border: 2px solid rgb(13,110,253);border-radius: 10px;padding: 1px 8px;"><a href="#" style="text-decoration: none;">Help Center<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="margin-bottom: 4px;margin-left: 4px;">
                                         <path d="M10 6H6C4.89543 6 4 6.89543 4 8V18C4 19.1046 4.89543 20 6 20H16C17.1046 20 18 19.1046 18 18V14M14 4H20M20 4V10M20 4L10 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                     </svg></a></span>&nbsp; |&nbsp;&nbsp;<span style="border: 2px solid rgb(13,110,253);border-radius: 10px;padding: 1px 8px;"><a href="#" style="text-decoration: none;">Privacy Policy<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="margin-bottom: 4px;margin-left: 4px;">
                                         <path d="M10 6H6C4.89543 6 4 6.89543 4 8V18C4 19.1046 4.89543 20 6 20H16C17.1046 20 18 19.1046 18 18V14M14 4H20M20 4V10M20 4L10 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -271,7 +271,7 @@
                     <a href="https://berrysauce.me/terms" target="_blank" style="color: inherit;">Terms</a>&nbsp;&nbsp;
                     <a href="https://github.com/berrysauce/justatemp/blob/main/LICENSE" target="_blank" style="color: inherit;">License</a>&nbsp;&nbsp;
                     <!--sse-->
-                    <a href="mailto:hey@justatemp.com" style="color: inherit;">Contact</a>
+                    <a href="mailto:hey@firetempmail.com" style="color: inherit;">Contact</a>
                     <!--/sse-->
                 </span>
             </p>
