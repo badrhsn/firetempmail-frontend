@@ -8,8 +8,8 @@
     import { receivingEmail } from "../lib/stores";
     let address = $receivingEmail;
 
-const url = "https://firetempmail-postservice.badr-hsn96.workers.dev"
-  
+const url = "https://postservice.firetempmail.com"
+
     let copyrightYear = new Date().getFullYear();
     let emails = []
     let stats = {}
