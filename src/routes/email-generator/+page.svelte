@@ -515,12 +515,10 @@ Instantly generate a disposable Email Generator address. Keep your real email ad
             {/if}
 
             <h1 class="text-start" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
-                <span style="font-weight: normal !important; color: rgb(255, 255, 255);">📮&nbsp;</span>
-        Your Email Generator address
+         Email Generator 
             </h1>
             <p class="text-start" style="margin-bottom: 32px;font-size: 20px;">
-Instantly generate a disposable Email Generator address. Keep your real email address private and your inbox clean from unwanted messages and spam.
-            </p>
+Email Generator is a free temporary email generator that instantly creates a disposable email address. Your temp mail inbox works just like a real one, but it automatically expires after a certain time, keeping your personal inbox safe. Nowadays, most websites require email verification, but sharing your real address can lead to endless spam. With our instant temp mail service, you can quickly receive emails, confirm accounts, and protect your privacy with ease. Use anonymous email addresses anytime you need secure, fast, and free temporary emails.            </p>
         </div>
 
         <!-- Footer -->
