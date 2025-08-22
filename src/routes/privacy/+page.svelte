@@ -1,9 +1,5 @@
 <script>
-    import Header from '$lib/components/ui/Header.svelte';
-    import Footer from '$lib/components/ui/Footer.svelte';
-    
     let copyrightYear = new Date().getFullYear();
-    let stats = { count: 0 };
 </script>
 
 <svelte:head>
@@ -13,7 +9,11 @@
 <section class="py-4 py-xl-5">
     <div class="container" style="max-width: 800px;">
         <div class="text-center p-4 p-lg-5">
-            <Header />
+            <!-- Header -->
+            <h1 class="text-start" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
+                <span style="font-weight: normal !important; color: rgb(255, 255, 255);">📮&nbsp;</span>
+                Fire Temp Mail
+            </h1>
             
             <div class="text-start">
                 <h2>Privacy Policy</h2>
@@ -24,9 +24,16 @@
                 
                 <h3>How We Use Your Information</h3>
                 <p>We use the collected emails solely to provide the temporary email service. We do not share your emails with third parties.</p>
+                
+                <h3>Data Retention</h3>
+                <p>All emails are automatically deleted from our servers after 24 hours.</p>
             </div>
         </div>
-
-        <Footer {copyrightYear} {stats} />
     </div>
 </section>
+
+<footer class="py-4 py-xl-5">
+    <div class="container text-center">
+        <p>&copy; {copyrightYear} Fire Temp Mail. All rights reserved.</p>
+    </div>
+</footer>
