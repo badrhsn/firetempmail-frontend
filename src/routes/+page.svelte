@@ -42,12 +42,15 @@
         }
     }
     
+        // @ts-ignore
     async function generateEmail(reload) {
-        let words = generate(2);
-        receivingEmail.set(words[0] + "." + words[1] + Math.floor(Math.random() * 1000) + "@firetempmail.com");
+        let words = generate(2)
+        receivingEmail.set(words[0] + "." + words[1] + Math.floor(Math.random() * 1000) + "@firetempmail.com")
 
         if (reload) {
-            await loadEmails();
+            // use this instead of window.location.reload(); to avoid resending POST requests
+            // @ts-ignore
+            window.location = window.location.href;
         }
     }
   
@@ -365,7 +368,7 @@
                                 </div>
                             </div>
                             <p class="text-start" style="margin-bottom: 0px;margin-top: 32px;">
-                                {@html email["content-plain-formatted"] || 'No content available'}
+                                {@html email["content-html"] || 'No content available'}
                             </p>
                         </div>
                     {/if}
