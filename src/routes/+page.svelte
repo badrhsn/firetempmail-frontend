@@ -12,6 +12,8 @@
     let stats = {};
     let toasts = [];
     let isCopying = false;
+    let selectedEmail = null;
+    let viewMode = 'list'; // 'list' or 'detail'
 
     // automatically stop auto-refresh after 20 refreshes
     let stopReloadOn = 20;
@@ -33,6 +35,9 @@
             const data = await response.json();
             emails = data.mails || [];
             stats = data.stats || {};
+            
+            // Sort emails by date (newest first)
+            emails.sort((a, b) => new Date(b.date) - new Date(a.date));
         } catch (error) {
             console.error("Failed to load emails:", error);
             showToast("Error", "Failed to load emails. Please try again.", "error");
@@ -53,6 +58,7 @@
   
     async function manualReload() {
         await loadEmails();
+        showToast("Info", "Emails refreshed", "info");
     }
   
     async function timedReload() {
@@ -81,6 +87,13 @@
                     if (stats.count) {
                         stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
                     }
+                    
+                    // If we're viewing the deleted email, go back to list
+                    if (selectedEmail && selectedEmail.recipient + "-" + selectedEmail.suffix === emailKey) {
+                        selectedEmail = null;
+                        viewMode = 'list';
+                    }
+                    
                     showToast("Success", "Email deleted successfully.", "success");
                 } else {
                     showToast("Error", `Failed to delete email: ${data.msg}`, "error");
@@ -151,6 +164,44 @@
 
     function removeToast(id) {
         toasts = toasts.filter(toast => toast.id !== id);
+    }
+
+    function viewEmail(email) {
+        selectedEmail = email;
+        viewMode = 'detail';
+    }
+
+    function formatDate(dateString) {
+        if (!dateString) return 'Unknown date';
+        
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffTime = Math.abs(now - date);
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        
+        if (diffDays === 0) {
+            // Today
+            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        } else if (diffDays === 1) {
+            // Yesterday
+            return 'Yesterday';
+        } else if (diffDays < 7) {
+            // Within the last week
+            return date.toLocaleDateString([], { weekday: 'short' });
+        } else {
+            // Older than a week
+            return date.toLocaleDateString([], { month: 'short', day: 'numeric' });
+        }
+    }
+
+    function getEmailPreview(content) {
+        if (!content) return 'No content';
+        
+        // Remove HTML tags for text preview
+        const text = content.replace(/<[^>]*>/g, '');
+        
+        // Return first 100 characters with ellipsis if needed
+        return text.length > 100 ? text.substring(0, 100) + '...' : text;
     }
 
     // automatic refresh every 20 seconds
@@ -246,10 +297,10 @@
             <!-- Header -->
             <h1 class="text-start" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
                 <span style="font-weight: normal !important; color: rgb(255, 255, 255);">📮&nbsp;</span>
-                Fire Temp Mail Your Temporary Email Address
+                Fire Temp Mail
             </h1>
             <p class="text-start" style="margin-bottom: 32px;font-size: 20px;">
-Forget about spam, advertising mailings, hacking and attacking robots. Keep your real mailbox clean and secure. Temp Mail provides temporary, secure, anonymous, free, disposable email address.
+                Yet another temporary email generator. But this time open source, ad-free, and privacy-friendly. Generate a temporary email below and receive emails.
             </p>
             
             <!-- Email Address with Copy Button -->
@@ -317,67 +368,148 @@ Forget about spam, advertising mailings, hacking and attacking robots. Keep your
                 </div>
             {/if}
 
-            {#if emails.length === 0}
-                <!-- Incoming Emails -->
-                <div style="padding: 32px;border-radius: 16px;margin-bottom: 32px;border: 2px dashed rgb(215,215,215) ;">
-                    <p style="font-size: 20px;margin-top: 16px;font-weight: 500;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 44px;margin-bottom: 16px;color: rgb(215,215,215);">
-                            <path d="M3 21V17M3 17V5C3 3.89543 3.89543 3 5 3H11.5L12.5 4H21L18 10L21 16H12.5L11.5 15H5C3.89543 15 3 15.8954 3 17ZM12 3.5V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                        <br>
-                        Incoming mails will show up here
-                    </p>
-                </div>
-            {:else}
-                <!--sse-->
-                {#each emails as email (email.recipient + '-' + email.suffix)}
-                    {#if email && email.sender && email.recipient}
-                        <!-- Email Template -->
-                        <div style="padding: 32px;border: 2px solid rgb(215,215,215);border-radius: 16px;margin-bottom: 32px;overflow: hidden;">
-                            <div class="d-xl-flex justify-content-xl-start align-items-xl-center" style="margin-bottom: 22px;height: 56px;">
-                                <div class="text-start flex-grow-1" style="padding-bottom: 16px;border-bottom: 2px solid rgb(215,215,215);position: relative;display: inline;overflow: hidden;">
-                                    <p style="font-size: 20px;margin-bottom: 0px;width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;position: relative;padding-right: 100px;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="1em" viewBox="0 0 24 24" width="1em" fill="currentColor" style="margin-top: -4px;margin-right: 8px;color: rgb(255,221,51);">
-                                            <g><rect fill="none" height="24" width="24"></rect></g>
-                                            <g><g><path d="M12,2C6.47,2,2,6.47,2,12s4.47,10,10,10s10-4.47,10-10S17.53,2,12,2z"></path></g></g>
-                                        </svg>
-                                        {email.sender || 'Unknown Sender'}
-                                        
-                                        <span style="top: 0;right: 0;position: absolute;width: 100px;">
-                                            <!-- Forward -->
-                                            <button class="btn btn-primary" type="button" on:click={() => forwardEmail(email)} style="padding: 4px;border-style: none;background: rgba(255,255,255,0);">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 24px;margin-top: -4px;color: rgb(33,37,41);">
-                                                    <path d="M3 10H13C17.4183 10 21 13.5817 21 18V20M3 10L9 16M3 10L9 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </button>
-                                            
-                                            <!-- Info -->
-                                            <button class="btn btn-primary" type="button" style="padding: 4px;border-style: none;background: rgba(255,255,255,0);">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 24px;margin-top: -4px;color: rgb(33,37,41);">
-                                                    <path d="M13 16H12V12H11M12 8H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </button>
-                                            
-                                            <!-- Delete -->
-                                            <button class="btn btn-primary" type="button" on:click={() => deleteEmail(email)} style="padding: 4px;border-style: none;background: rgba(255,255,255,0);">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 24px;margin-top: -4px;color: var(--bs-red);">
-                                                    <path d="M19 7L18.1327 19.1425C18.0579 20.1891 17.187 21 16.1378 21H7.86224C6.81296 21 5.94208 20.1891 5.86732 19.1425L5 7M10 11V17M14 11V17M15 7V4C15 3.44772 14.5523 3 14 3H10C9.44772 3 9 3.44772 9 4V7M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </p>
-                                    <p style="font-size: 20px;font-weight: 600;margin-bottom: 0px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                                        {email.subject || '(No Subject)'}
-                                    </p>
-                                </div>
-                            </div>
-                            <div style="margin-top: 32px; overflow: auto; max-width: 100%;">
-                                {@html email["content-html"] || 'No content available'}
+            {#if viewMode === 'detail' && selectedEmail}
+                <!-- Email Detail View -->
+                <div style="border: 2px solid rgb(215,215,215);border-radius: 16px;margin-bottom: 32px;overflow: hidden;">
+                    <!-- Email Header -->
+                    <div style="padding: 24px; border-bottom: 1px solid rgb(215,215,215);">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                            <button on:click={() => { viewMode = 'list'; selectedEmail = null; }} style="
+                                background: transparent;
+                                border: none;
+                                padding: 4px 8px;
+                                cursor: pointer;
+                                color: var(--bs-primary);
+                                display: flex;
+                                align-items: center;
+                                font-size: 14px;
+                            ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                                    <path d="M19 12H5M5 12L11 18M5 12L11 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Back to inbox
+                            </button>
+                            
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn btn-primary" type="button" on:click={() => forwardEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-dark);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                        <path d="M3 10H13C17.4183 10 21 13.5817 21 18V20M3 10L9 16M3 10L9 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                
+                                <button class="btn btn-primary" type="button" on:click={() => deleteEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-red);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                        <path d="M19 7L18.1327 19.1425C18.0579 20.1891 17.187 21 16.1378 21H7.86224C6.81296 21 5.94208 20.1891 5.86732 19.1425L5 7M10 11V17M14 11V17M15 7V4C15 3.44772 14.5523 3 14 3H10C9.44772 3 9 3.44772 9 4V7M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
-                    {/if}
-                {/each}
-                <!--/sse-->
+                        
+                        <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 8px;">
+                            {selectedEmail.subject || '(No Subject)'}
+                        </h2>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center;">
+                                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="20" viewBox="0 0 24 24" width="20" fill="currentColor" style="margin-right: 8px; color: rgb(255,221,51);">
+                                    <g><rect fill="none" height="24" width="24"></rect></g>
+                                    <g><g><path d="M12,2C6.47,2,2,6.47,2,12s4.47,10,10,10s10-4.47,10-10S17.53,2,12,2z"></path></g></g>
+                                </svg>
+                                <span style="font-weight: 500;">{selectedEmail.sender || 'Unknown Sender'}</span>
+                            </div>
+                            
+                            <span style="color: var(--bs-secondary); font-size: 14px;">
+                                {selectedEmail.date ? new Date(selectedEmail.date).toLocaleString() : 'Unknown date'}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Email Body -->
+                    <div style="padding: 24px; overflow: auto; max-width: 100%; min-height: 200px;">
+                        {@html selectedEmail["content-html"] || selectedEmail["content-text"] || 'No content available'}
+                    </div>
+                </div>
+            {:else}
+                <!-- Email List View -->
+                {#if emails.length === 0}
+                    <!-- Empty State -->
+                    <div style="padding: 32px;border-radius: 16px;margin-bottom: 32px;border: 2px dashed rgb(215,215,215) ;">
+                        <p style="font-size: 20px;margin-top: 16px;font-weight: 500;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 44px;margin-bottom: 16px;color: rgb(215,215,215);">
+                                <path d="M3 21V17M3 17V5C3 3.89543 3.89543 3 5 3H11.5L12.5 4H21L18 10L21 16H12.5L11.5 15H5C3.89543 15 3 15.8954 3 17ZM12 3.5V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <br>
+                            Incoming mails will show up here
+                        </p>
+                    </div>
+                {:else}
+                    <!-- Email List -->
+                    <div style="border: 2px solid rgb(215,215,215);border-radius: 16px;margin-bottom: 32px;overflow: hidden;">
+                        <!-- List Header -->
+                        <div style="padding: 16px; background: #f8f9fa; border-bottom: 1px solid rgb(215,215,215); display: flex; justify-content: space-between; align-items: center;">
+                            <h3 style="margin: 0; font-size: 18px; font-weight: 600;">Inbox ({emails.length})</h3>
+                            <button on:click={manualReload} style="
+                                background: transparent;
+                                border: 1px solid rgb(215,215,215);
+                                border-radius: 8px;
+                                padding: 4px 12px;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                font-size: 14px;
+                            ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right: 6px;">
+                                    <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Refresh
+                            </button>
+                        </div>
+                        
+                        <!-- Email Items -->
+                        <div style="max-height: 500px; overflow-y: auto;">
+                            {#each emails as email (email.recipient + '-' + email.suffix)}
+                                {#if email && email.sender && email.recipient}
+                                    <div on:click={() => viewEmail(email)} style="
+                                        padding: 16px;
+                                        border-bottom: 1px solid rgb(240,240,240);
+                                        cursor: pointer;
+                                        transition: background-color 0.2s;
+                                        display: flex;
+                                        align-items: flex-start;
+                                    " 
+                                    on:mouseenter={(e) => e.currentTarget.style.backgroundColor = '#f8f9fa'} 
+                                    on:mouseleave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
+
+                                        <div style="flex-shrink: 0; margin-right: 12px;">
+                                            <div style="width: 40px; height: 40px; border-radius: 50%; background: #e9ecef; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #6c757d;">
+                                                {email.sender ? email.sender.charAt(0).toUpperCase() : '?'}
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="flex: 1; min-width: 0;">
+                                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px;">
+                                                <span style="font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 12px;">
+                                                    {email.sender || 'Unknown Sender'}
+                                                </span>
+                                                <span style="color: var(--bs-secondary); font-size: 12px; flex-shrink: 0;">
+                                                    {formatDate(email.date)}
+                                                </span>
+                                            </div>
+                                            
+                                            <p style="font-weight: 600; margin: 0 0 4px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                                {email.subject || '(No Subject)'}
+                                            </p>
+                                            
+                                            <p style="color: var(--bs-secondary); margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px;">
+                                                {getEmailPreview(email["content-html"] || email["content-text"])}
+                                            </p>
+                                        </div>
+                                    </div>
+                                {/if}
+                            {/each}
+                        </div>
+                    </div>
+                {/if}
             {/if}
         </div>
 
