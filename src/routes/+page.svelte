@@ -305,54 +305,36 @@
 Forget about spam, advertising mailings, hacking and attacking robots. Keep your real mailbox clean and secure. Temp Mail provides temporary, secure, anonymous, free, disposable email address.
             </p>
             
-            <!-- Email Address with Copy Button -->
-            <div class="d-xl-flex justify-content-xl-center align-items-xl-center" style="margin-top: 32px;margin-bottom: 16px;">
-                <div style="
-                    padding: 8px 30px;
-                    border: 2px solid rgb(215,215,215);
-                    border-radius: 16px;
-                    width: 100%;
-                    margin-right: 16px;
-                    height: 50px;
-                    margin-bottom: 16px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    background: white;
-                ">
-                    <p class="text-truncate text-start" style="margin-bottom: 0px;font-size: 20px;flex: 1;">
-                        <!--sse-->{address}<!--/sse-->
-                    </p>
-                    <button 
-                        on:click={copyToClipboard} 
-                        class="btn btn-sm" 
-                        style="
-                            margin-left: 12px;
-                            background: transparent;
-                            border: none;
-                            padding: 4px 8px;
-                            color: {isCopying ? 'var(--bs-success)' : 'var(--bs-primary)'};
-                        "
-                        title="Copy to clipboard"
-                    >
-                        {#if isCopying}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        {:else}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M14 20H18C19.1046 20 20 19.1046 20 18V14C20 12.8954 19.1046 12 18 12H14C12.8954 12 12 12.8954 12 14V18C12 19.1046 12.8954 20 14 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        {/if}
-                    </button>
-                </div>
-                <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)} style="padding: 8px 30px;border-radius: 16px;border-width: 2px;border-color: rgb(33,37,41);background: rgb(33,37,41);font-weight: 500;height: 50px;font-size: 20px;min-width: 220px;margin-bottom: 16px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 24px;margin-top: -4px;margin-right: 6px;">
-                        <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                    Re-generate
-                </button>
-            </div>
+<!-- Email Address with Copy Button -->
+<div class="email-address-container">
+    <div class="email-display">
+        <p class="email-text">
+            <!--sse-->{address}<!--/sse-->
+        </p>
+        <button 
+            on:click={copyToClipboard} 
+            class="copy-btn" 
+            title="Copy to clipboard"
+            style="color: {isCopying ? 'var(--bs-success)' : 'var(--bs-primary)'};"
+        >
+            {#if isCopying}
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            {:else}
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M14 20H18C19.1046 20 20 19.1046 20 18V14C20 12.8954 19.1046 12 18 12H14C12.8954 12 12 12.8954 12 14V18C12 19.1046 12.8954 20 14 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            {/if}
+        </button>
+    </div>
+    <button class="regenerate-btn" type="button" on:click={() => generateEmail(true)}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none">
+            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Re-generate
+    </button>
+</div>
             
             {#if reloadActive}
                 <!-- Loading Indicator -->
@@ -584,4 +566,131 @@ Disposable email is a free service that provides you with a temporary email addr
     .btn:hover {
         opacity: 0.8;
     }
+
+    .email-address-container {
+    margin-top: 32px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.email-display {
+    padding: 8px 30px;
+    border: 2px solid rgb(215,215,215);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    min-height: 50px;
+}
+
+.email-text {
+    margin-bottom: 0px;
+    font-size: 20px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.copy-btn {
+    margin-left: 12px;
+    background: transparent;
+    border: none;
+    padding: 4px 8px;
+    color: var(--bs-primary);
+}
+
+.regenerate-btn {
+    padding: 8px 30px;
+    border-radius: 16px;
+    border-width: 2px;
+    border-color: rgb(33,37,41);
+    background: rgb(33,37,41);
+    font-weight: 500;
+    height: 50px;
+    font-size: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.regenerate-btn svg {
+    font-size: 24px;
+}
+
+/* Desktop styles - side by side layout */
+@media (min-width: 1200px) {
+    .email-address-container {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .email-display {
+        width: 100%;
+        margin-right: 16px;
+        margin-bottom: 0;
+    }
+    
+    .regenerate-btn {
+        min-width: 220px;
+        margin-bottom: 0;
+    }
+}
+
+/* Mobile styles - stacked layout */
+@media (max-width: 1199px) {
+    .email-text {
+        white-space: normal;
+        text-overflow: clip;
+        word-break: break-all;
+    }
+}
+
+.copy-btn:hover,
+.regenerate-btn:hover {
+    opacity: 0.8;
+}
+/* Mobile styles for toast */
+@media (max-width: 768px) {
+    .toast-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+/* Mobile styles for email list */
+@media (max-width: 768px) {
+    .email-item {
+        padding: 12px;
+    }
+    
+    .email-avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+        margin-right: 8px;
+    }
+    
+    .email-sender {
+        font-size: 14px;
+    }
+    
+    .email-date {
+        font-size: 11px;
+    }
+    
+    .email-subject {
+        font-size: 14px;
+    }
+    
+    .email-preview {
+        font-size: 12px;
+    }
+}
 </style>
