@@ -3,32 +3,30 @@
     import { error } from '@sveltejs/kit';
     
     export function load({ params }) {
-        console.log('🚀 Load function called with params:', params);
+        console.log('Loading post for slug:', params.slug);
         
         const post = getPostBySlug(params.slug);
-        console.log('📄 Post retrieved:', post);
+        console.log('Post found:', post);
         
         if (!post) {
-            console.error('❌ Post not found for slug:', params.slug);
+            console.error('Post not found for slug:', params.slug);
             error(404, `Blog post not found: ${params.slug}`);
         }
         
-        return {
-            post,
-            seo: {
-                title: `${post.title} - Fire Temp Mail Blog`,
-                description: post.excerpt,
-                keywords: `${post.category}, temporary email, disposable email, privacy`
-            }
-        };
+        // Return only the data, don't try to modify $page here
+        return { post };
     }
     
-    // Add a safe default to prevent undefined errors
-    let { post } = $page.data;
+    // The data returned from load function is available in $page.data
+    // But we need to be careful how we use it
+    export let data;
+    
+    // Extract post from the data
+    $: post = data?.post;
     $: safePost = post || {
-        title: 'Loading...',
-        excerpt: '',
-        category: '',
+        title: 'Post Not Found',
+        excerpt: 'The requested blog post could not be found.',
+        category: 'Error',
         date: '',
         author: '',
         readTime: ''
@@ -43,10 +41,15 @@
 </svelte:head>
 
 {#if !post}
-    <div style="text-align: center; padding: 2rem;">
-        <h2>Loading post...</h2>
-        <p>Please wait while we load the blog post.</p>
-    </div>
+    <section class="py-4 py-xl-5">
+        <div class="container" style="max-width: 800px;">
+            <div class="text-center p-4 p-lg-5">
+                <h1>Post Not Found</h1>
+                <p>The requested blog post could not be found.</p>
+                <a href="/blog">← Back to Blog</a>
+            </div>
+        </div>
+    </section>
 {:else}
     <section class="py-4 py-xl-5">
         <div class="container" style="max-width: 800px;">

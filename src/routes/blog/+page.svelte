@@ -1,12 +1,10 @@
 <script>
     import { blogPosts } from '$lib/data/blogPosts';
-    import { page } from '$app/stores';
     
     let copyrightYear = new Date().getFullYear();
     
-    // Set metadata for SEO
-    $page.data.title = "Blog - Fire Temp Mail | Temporary Email Insights";
-    $page.data.description = "Read our latest articles about email privacy, online security, and how to protect your digital identity with temporary email services.";
+    // Set page metadata directly instead of using $page.data
+    // This is the correct way to set page metadata in SvelteKit
 </script>
 
 <svelte:head>
