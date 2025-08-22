@@ -3,7 +3,8 @@
     import { onMount } from "svelte";
     import { generate } from "random-words";
     import { receivingEmail } from "../lib/stores";
-    
+    import Navigation from '$lib/components/Navigation.svelte';
+
     let address = $receivingEmail;
     const url = "https://post.firetempmail.com";
     
@@ -219,6 +220,9 @@
     gap: 10px;
     max-width: 350px;
 ">
+
+<Navigation />
+
     {#each toasts as toast (toast.id)}
         <div class="toast" style="
             background: white;
@@ -525,10 +529,10 @@ Forget about spam, advertising mailings, hacking and attacking robots. Keep your
             <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
                 Made with lots of 🥨 in Germany
                 <span class="float-end">
-                    <a href="https://berrysauce.me/privacy" target="_blank" style="color: inherit;">Privacy</a>&nbsp;&nbsp;
-                    <a href="https://berrysauce.me/terms" target="_blank" style="color: inherit;">Terms</a>&nbsp;&nbsp;
+                    <a href="/privacy" style="color: inherit;">Privacy</a>&nbsp;&nbsp;
+                    <a href="/terms" style="color: inherit;">Terms</a>&nbsp;&nbsp;
                     <a href="https://github.com/berrysauce/justatemp/blob/main/LICENSE" target="_blank" style="color: inherit;">License</a>&nbsp;&nbsp;
-                    <a href="mailto:hey@firetempmail.com" style="color: inherit;">Contact</a>
+                    <a href="/contact" style="color: inherit;">Contact</a>
                 </span>
             </p>
             <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
