@@ -61,21 +61,25 @@ const url = "https://post.firetempmail.com"
         reloadCounter += 1
     }
 
-    async function deleteEmail(email) {
-        if (confirm("Do you really want to permanently delete this email?")) {
-            let emailKey = email.recipient + "-" + email.suffix
-            const response = await fetch(`${url}/mail/delete?key=${emailKey}`);
-            const data = await response.json();
+async function deleteEmail(email) {
+    if (confirm("Do you really want to permanently delete this email?")) {
+        let emailKey = email.recipient + "-" + email.suffix;
+        const response = await fetch(`${url}/mail/delete?key=${emailKey}`);
+        const data = await response.json();
+        
+        if (data.code === 200) {
+            // Remove the deleted email from the local array instead of reloading
+            emails = emails.filter(e => e.recipient + "-" + e.suffix !== emailKey);
             
-            if (data.code === 200) {
-                // use this instead of window.location.reload(); to avoid resending POST requests
-                // @ts-ignore
-                window.location = window.location.href;
-            } else {
-                console.log(`ERROR - Failed to delete email with request status ${data.code}`)
+            // Also update stats if needed
+            if (stats.count) {
+                stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
             }
+        } else {
+            console.log(`ERROR - Failed to delete email with request status ${data.code}`);
         }
     }
+}
 
     async function forwardEmail(email) {
         let emailKey = email.recipient + "-" + email.suffix
