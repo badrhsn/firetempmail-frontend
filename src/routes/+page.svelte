@@ -221,8 +221,6 @@
     max-width: 350px;
 ">
 
-<Navigation />
-
     {#each toasts as toast (toast.id)}
         <div class="toast" style="
             background: white;
