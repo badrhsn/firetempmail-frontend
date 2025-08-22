@@ -1,27 +1,30 @@
 <script>
-    import { getPostBySlug } from '$lib/data/blogPosts';
+    import { getPostBySlug, debugSlugs } from '$lib/data/blogPosts';
     import { error } from '@sveltejs/kit';
     
     export function load({ params }) {
-        console.log('Loading post for slug:', params.slug);
+        console.log('🚀 Load function called with params:', params);
+        
+        // Debug available slugs
+        debugSlugs();
         
         const post = getPostBySlug(params.slug);
-        console.log('Post found:', post);
         
         if (!post) {
-            console.error('Post not found for slug:', params.slug);
-            error(404, `Blog post not found: ${params.slug}`);
+            console.error('❌ Post not found for slug:', params.slug);
+            return {
+                status: 404,
+                error: new Error(`Blog post not found: ${params.slug}`)
+            };
         }
         
-        // Return only the data, don't try to modify $page here
+        console.log('✅ Successfully loaded post:', post.title);
         return { post };
     }
     
-    // The data returned from load function is available in $page.data
-    // But we need to be careful how we use it
     export let data;
     
-    // Extract post from the data
+    // Extract post from the data with safe defaults
     $: post = data?.post;
     $: safePost = post || {
         title: 'Post Not Found',
@@ -33,6 +36,14 @@
     };
     
     let copyrightYear = new Date().getFullYear();
+    
+    // Debug when data changes
+    $: {
+        if (data) {
+            console.log('📄 Page data received:', data);
+            console.log('📖 Post data:', data.post);
+        }
+    }
 </script>
 
 <svelte:head>
@@ -46,11 +57,22 @@
             <div class="text-center p-4 p-lg-5">
                 <h1>Post Not Found</h1>
                 <p>The requested blog post could not be found.</p>
+                <p>Slug attempted: <code>{$page.params.slug}</code></p>
                 <a href="/blog">← Back to Blog</a>
+                
+                <!-- Debug info -->
+                <div style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                    <h3>Debug Information</h3>
+                    <p>Check the browser console for more details.</p>
+                    <button on:click={() => debugSlugs()} style="padding: 0.5rem 1rem; background: #007bff; color: white; border: none; border-radius: 4px;">
+                        Show Available Slugs in Console
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 {:else}
+    <!-- Your existing post content here -->
     <section class="py-4 py-xl-5">
         <div class="container" style="max-width: 800px;">
             <div class="text-center p-4 p-lg-5">

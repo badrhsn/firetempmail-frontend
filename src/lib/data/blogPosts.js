@@ -24,16 +24,39 @@ export const blogPosts = [
     }
 ];
 
+// Add debug function to see what's happening
+export const debugSlugs = () => {
+    console.log('Available slugs:', blogPosts.map(post => post.slug));
+    console.log('Available titles:', blogPosts.map(post => post.title));
+    return blogPosts;
+};
+
 // Simple function to get popular articles
 export const getPopularArticles = () => {
     return blogPosts.slice(0, 2);
 };
 
-// Simple function to get post by slug
+// Enhanced function to get post by slug with debugging
 export const getPostBySlug = (slug) => {
-    console.log('Looking for slug:', slug);
+    console.log('🔍 Searching for slug:', slug);
+    console.log('📝 Available slugs:', blogPosts.map(post => post.slug));
+    
     const post = blogPosts.find(post => post.slug === slug);
-    console.log('Found post:', post);
+    
+    if (!post) {
+        console.warn('❌ No post found for slug:', slug);
+        // Try case-insensitive search
+        const caseInsensitivePost = blogPosts.find(post => 
+            post.slug.toLowerCase() === slug.toLowerCase()
+        );
+        if (caseInsensitivePost) {
+            console.warn('⚠️  Found post with case-insensitive match:', caseInsensitivePost.slug);
+            return caseInsensitivePost;
+        }
+    } else {
+        console.log('✅ Found post:', post.title);
+    }
+    
     return post;
 };
 

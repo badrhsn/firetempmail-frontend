@@ -1,10 +1,14 @@
 <script>
-    import { blogPosts } from '$lib/data/blogPosts';
+    import { blogPosts, debugSlugs } from '$lib/data/blogPosts';
     
     let copyrightYear = new Date().getFullYear();
     
-    // Set page metadata directly instead of using $page.data
-    // This is the correct way to set page metadata in SvelteKit
+    // Debug on component mount
+    import { onMount } from 'svelte';
+    onMount(() => {
+        console.log('Blog page mounted');
+        debugSlugs();
+    });
 </script>
 
 <svelte:head>
