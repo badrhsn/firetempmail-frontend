@@ -532,9 +532,9 @@ Email Generator is a free temporary email generator that instantly creates a dis
                 &nbsp;emails so far.
             </p>
             <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
-                Made with lots of 🥨 in Germany
                 <span class="float-end">
-                    <a href="/" style="color: inherit;">Home</a>&nbsp;&nbsp;
+                    <a href="/email-generator" style="color: inherit;">Email Generator</a>&nbsp;&nbsp;
+                    <a href="/blog" style="color: inherit;">Blog</a>&nbsp;&nbsp;
                     <a href="/privacy-policy" style="color: inherit;">Privacy</a>&nbsp;&nbsp;
                     <a href="/terms" style="color: inherit;">Terms</a>&nbsp;&nbsp;
                     <a href="/contact" style="color: inherit;">Contact</a>

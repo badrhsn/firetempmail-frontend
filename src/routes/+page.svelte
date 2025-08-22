@@ -501,6 +501,53 @@ What is Disposable Temporary E-mail?
             <p class="text-center" style="margin-bottom: 32px;font-size: 20px;">
 Disposable email is a free service that provides you with a temporary email address that automatically self-destructs after a set period of time. This service is often called tempmail, 10 minute mail, 10minmail, throwaway email, fake mail, fake email generator, burner mail, or trash mail. Many websites, Wi-Fi providers, forums, and blogs require users to register before accessing content, posting comments, or downloading files. Instead of exposing your real inbox to spam, you can rely on Temp-Mail, the most advanced disposable email service, to stay safe, protect your privacy, and keep unwanted messages out.        
             </p>
+            <!-- Add this after the "What is Disposable Temporary E-mail?" section -->
+
+<!-- Popular Articles Section -->
+<div style="margin: 3rem 0; padding: 2rem 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee;">
+    <h2 class="text-center" style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 2rem;">
+        Popular Articles from Our Blog
+    </h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+        {#each getPopularArticles() as article}
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; transition: transform 0.2s;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
+                    <span style="background: #e9ecef; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.7rem; font-weight: 500;">
+                        {article.category}
+                    </span>
+                    <span style="margin: 0 0.5rem; color: #6c757d;">•</span>
+                    <span style="color: #6c757d; font-size: 0.8rem;">{article.readTime}</span>
+                </div>
+                
+                <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem; font-weight: 600;">
+                    <a href="/blog/{article.slug}" style="color: inherit; text-decoration: none;">
+                        {article.title}
+                    </a>
+                </h3>
+                
+                <p style="color: #6c757d; margin-bottom: 1rem; font-size: 0.9rem;">
+                    {article.excerpt}
+                </p>
+                
+                <a href="/blog/{article.slug}" style="color: #007bff; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                    Read More →
+                </a>
+            </div>
+        {/each}
+    </div>
+    
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="/blog" class="btn btn-primary">
+            Visit Our Blog
+        </a>
+    </div>
+</div>
+
+<!-- Add this import at the top of your script section -->
+<script>
+    import { getPopularArticles } from '$lib/data/blogPosts';
+</script>
         </div>
 
         <!-- Footer -->
@@ -513,9 +560,9 @@ Disposable email is a free service that provides you with a temporary email addr
                 &nbsp;emails so far.
             </p>
             <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
-                Made with lots of 🥨 in Germany
                 <span class="float-end">
                     <a href="/email-generator" style="color: inherit;">Email Generator</a>&nbsp;&nbsp;
+                    <a href="/blog" style="color: inherit;">Blog</a>&nbsp;&nbsp;
                     <a href="/privacy-policy" style="color: inherit;">Privacy</a>&nbsp;&nbsp;
                     <a href="/terms" style="color: inherit;">Terms</a>&nbsp;&nbsp;
                     <a href="/contact" style="color: inherit;">Contact</a>
