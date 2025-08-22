@@ -365,7 +365,7 @@
                                 </div>
                             </div>
                             <p class="text-start" style="margin-bottom: 0px;margin-top: 32px;">
-                                {@html email["content-plain-formatted"] || 'No content available'}
+                                {@html email["content-html"] || 'No content available'}
                             </p>
                         </div>
                     {/if}
