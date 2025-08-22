@@ -535,15 +535,14 @@ Instantly generate a disposable Email Generator address. Keep your real email ad
             <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
                 Made with lots of 🥨 in Germany
                 <span class="float-end">
-                    <a href="/" style="color: inherit;">Privacy</a>&nbsp;&nbsp;
+                    <a href="/" style="color: inherit;">Home</a>&nbsp;&nbsp;
                     <a href="/privacy-policy" style="color: inherit;">Privacy</a>&nbsp;&nbsp;
                     <a href="/terms" style="color: inherit;">Terms</a>&nbsp;&nbsp;
-                    <a href="https://github.com/berrysauce/justatemp/blob/main/LICENSE" target="_blank" style="color: inherit;">License</a>&nbsp;&nbsp;
                     <a href="/contact" style="color: inherit;">Contact</a>
                 </span>
             </p>
             <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
-                Copyright © {copyrightYear} berrysauce
+                Copyright © {copyrightYear}
             </p>
         </div>
     </div>
