@@ -1,16 +1,22 @@
 <script>
+    // Completely minimal version - no imports
     export function load({ params }) {
-        // Simple test to see if routing works
+        console.log('Params received:', params);
+        
+        // Return simple test data
         return {
-            slug: params.slug,
-            title: `Post: ${params.slug}`,
-            content: "This is a test blog post."
+            testData: {
+                slug: params.slug,
+                message: 'This is a test post',
+                timestamp: new Date().toISOString()
+            }
         };
     }
     
-    let { slug, title, content } = $page.data;
+    let { testData } = $page.data;
 </script>
 
-<h1>{title}</h1>
-<p>{content}</p>
-<p>Slug: {slug}</p>
+<h1>Test Blog Post</h1>
+<p>Slug: {testData.slug}</p>
+<p>{testData.message}</p>
+<p>Loaded at: {testData.timestamp}</p>
