@@ -297,10 +297,10 @@
             <!-- Header -->
             <h1 class="text-start" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
                 <span style="font-weight: normal !important; color: rgb(255, 255, 255);">📮&nbsp;</span>
-                Fire Temp Mail
+            Your Temporary Email Address
             </h1>
             <p class="text-start" style="margin-bottom: 32px;font-size: 20px;">
-                Yet another temporary email generator. But this time open source, ad-free, and privacy-friendly. Generate a temporary email below and receive emails.
+Forget about spam, advertising mailings, hacking and attacking robots. Keep your real mailbox clean and secure. Temp Mail provides temporary, secure, anonymous, free, disposable email address.
             </p>
             
             <!-- Email Address with Copy Button -->
