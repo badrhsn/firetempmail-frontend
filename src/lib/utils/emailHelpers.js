@@ -14,3 +14,8 @@ export function getEmailPreview(content) {
     // Return first 100 characters with ellipsis if needed
     return text.length > 100 ? text.substring(0, 100) + '...' : text;
 }
+
+// Add this function
+export function formatDate(date) {
+    return new Date(date).toLocaleString();
+}
