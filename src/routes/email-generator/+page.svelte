@@ -2,7 +2,7 @@
 // @ts-nocheck
     import { onMount } from "svelte";
     import { generate } from "random-words";
-    import { receivingEmail } from "../lib/stores";
+    import { receivingEmail } from "../../lib/stores";
     import Navigation from '$lib/components/Navigation.svelte';
 
     let address = $receivingEmail;
