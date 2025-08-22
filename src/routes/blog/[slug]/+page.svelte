@@ -1,26 +1,16 @@
 <script>
-    import { getPostBySlug } from '$lib/data/blogPosts';
-    import { error } from '@sveltejs/kit';
-    
     export function load({ params }) {
-        const post = getPostBySlug(params.slug);
-        
-        if (!post) {
-            error(404, 'Post not found');
-        }
-        
+        // Simple test to see if routing works
         return {
-            post
+            slug: params.slug,
+            title: `Post: ${params.slug}`,
+            content: "This is a test blog post."
         };
     }
     
-    let { post } = $page.data;
+    let { slug, title, content } = $page.data;
 </script>
 
-<svelte:head>
-    <title>{post.title} - Fire Temp Mail Blog</title>
-    <meta name="description" content={post.excerpt} />
-</svelte:head>
-
-<h1>{post.title}</h1>
-<p>Blog post content would go here...</p>
+<h1>{title}</h1>
+<p>{content}</p>
+<p>Slug: {slug}</p>
