@@ -1,75 +1,35 @@
 <script>
+// @ts-nocheck
     import { onMount } from "svelte";
     import { generate } from "random-words";
+    import { receivingEmail } from "../lib/stores";
     
-    // Simple stores implementation
-    let receivingEmail = $state(null);
-    let emails = $state([]);
-    let stats = $state({});
-    let selectedEmail = $state(null);
-    let toasts = $state([]);
-    let isCopying = $state(false);
-    let reloadActive = $state(true);
-    let reloadCounter = $state(0);
-    let viewMode = $state('list');
-    
+    let address = $receivingEmail;
     const url = "https://post.firetempmail.com";
+    
     let copyrightYear = new Date().getFullYear();
-    const stopReloadOn = 20;
-    let intervalID;
-    
-    // Helper functions
-    function showToast(title, message, type = "info") {
-        const id = Date.now();
-        toasts = [...toasts, { id, title, message, type }];
-        
-        setTimeout(() => {
-            toasts = toasts.filter(toast => toast.id !== id);
-        }, type === "success" ? 3000 : 5000);
-    }
-    
-    function removeToast(id) {
-        toasts = toasts.filter(toast => toast.id !== id);
-    }
-    
-    function generateEmail() {
-        let words = generate(2);
-        return words[0] + "." + words[1] + Math.floor(Math.random() * 1000) + "@firetempmail.com";
-    }
-    
-    function formatDate(dateString) {
-        if (!dateString) return 'Unknown date';
-        const date = new Date(dateString);
-        const now = new Date();
-        const diffTime = Math.abs(now - date);
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-        
-        if (diffDays === 0) {
-            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        } else if (diffDays === 1) {
-            return 'Yesterday';
-        } else if (diffDays < 7) {
-            return date.toLocaleDateString([], { weekday: 'short' });
-        } else {
-            return date.toLocaleDateString([], { month: 'short', day: 'numeric' });
+    let emails = [];
+    let stats = {};
+    let toasts = [];
+    let isCopying = false;
+    let selectedEmail = null;
+    let viewMode = 'list'; // 'list' or 'detail'
+
+    // automatically stop auto-refresh after 20 refreshes
+    let stopReloadOn = 20;
+    let reloadCounter = 0;
+    let reloadActive = true;
+  
+    onMount(async function () {
+        await loadEmails();
+        if (address === null) {
+            generateEmail(false);
         }
-    }
+    });
     
-    function getEmailPreview(content) {
-        if (!content) return 'No content';
-        const text = content.replace(/<[^>]*>/g, '');
-        return text.length > 100 ? text.substring(0, 100) + '...' : text;
-    }
-    
-    function getFullDate(dateString) {
-        if (!dateString) return 'Unknown date';
-        return new Date(dateString).toLocaleString();
-    }
-    
-    // API functions
     async function loadEmails() {
         try {
-            const response = await fetch(`${url}/mail/get?address=${receivingEmail}`);
+            const response = await fetch(`${url}/mail/get?address=${address}`);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             
             const data = await response.json();
@@ -84,6 +44,32 @@
         }
     }
     
+    // @ts-ignore
+    async function generateEmail(reload) {
+        let words = generate(2)
+        receivingEmail.set(words[0] + "." + words[1] + Math.floor(Math.random() * 1000) + "@firetempmail.com")
+
+        if (reload) {
+            // use this instead of window.location.reload(); to avoid resending POST requests
+            // @ts-ignore
+            window.location = window.location.href;
+        }
+    }
+  
+    async function manualReload() {
+        await loadEmails();
+        showToast("Info", "Emails refreshed", "info");
+    }
+  
+    async function timedReload() {
+        if (reloadCounter >= stopReloadOn) {
+            reloadActive = false;
+            clearInterval(intervalID);
+        }
+        await loadEmails();
+        reloadCounter += 1;
+    }
+
     async function deleteEmail(email) {
         if (!email || !email.recipient || !email.suffix) return;
         
@@ -94,12 +80,15 @@
                 const data = await response.json();
                 
                 if (data.code === 200) {
+                    // Remove the deleted email from the local array
                     emails = emails.filter(e => e && e.recipient + "-" + e.suffix !== emailKey);
                     
+                    // Update stats
                     if (stats.count) {
                         stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
                     }
                     
+                    // If we're viewing the deleted email, go back to list
                     if (selectedEmail && selectedEmail.recipient + "-" + selectedEmail.suffix === emailKey) {
                         selectedEmail = null;
                         viewMode = 'list';
@@ -115,7 +104,7 @@
             }
         }
     }
-    
+
     async function forwardEmail(email) {
         if (!email || !email.recipient || !email.suffix) return;
         
@@ -147,13 +136,13 @@
             showToast("Error", "Failed to forward email. Please try again.", "error");
         }
     }
-    
+
     async function copyToClipboard() {
-        if (!receivingEmail) return;
+        if (!address) return;
         
         isCopying = true;
         try {
-            await navigator.clipboard.writeText(receivingEmail);
+            await navigator.clipboard.writeText(address);
             showToast("Success", "Email address copied to clipboard!", "success");
         } catch (error) {
             console.error("Copy failed:", error);
@@ -162,44 +151,61 @@
             setTimeout(() => { isCopying = false; }, 1000);
         }
     }
-    
-    async function manualReload() {
-        await loadEmails();
-        showToast("Info", "Emails refreshed", "info");
+
+    function showToast(title, message, type = "info") {
+        const id = Date.now();
+        toasts = [...toasts, { id, title, message, type }];
+        
+        // Auto-remove after 3 seconds for success messages, 5 for others
+        setTimeout(() => {
+            toasts = toasts.filter(toast => toast.id !== id);
+        }, type === "success" ? 3000 : 5000);
     }
-    
-    async function timedReload() {
-        if (reloadCounter >= stopReloadOn) {
-            reloadActive = false;
-            clearInterval(intervalID);
-        }
-        await loadEmails();
-        reloadCounter += 1;
+
+    function removeToast(id) {
+        toasts = toasts.filter(toast => toast.id !== id);
     }
-    
+
     function viewEmail(email) {
         selectedEmail = email;
         viewMode = 'detail';
     }
-    
-    function handleRegenerate() {
-        receivingEmail = generateEmail();
-        window.location = window.location.href;
-    }
-    
-    // Initialize
-    onMount(async function () {
-        if (receivingEmail === null) {
-            receivingEmail = generateEmail();
+
+    function formatDate(dateString) {
+        if (!dateString) return 'Unknown date';
+        
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffTime = Math.abs(now - date);
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        
+        if (diffDays === 0) {
+            // Today
+            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        } else if (diffDays === 1) {
+            // Yesterday
+            return 'Yesterday';
+        } else if (diffDays < 7) {
+            // Within the last week
+            return date.toLocaleDateString([], { weekday: 'short' });
+        } else {
+            // Older than a week
+            return date.toLocaleDateString([], { month: 'short', day: 'numeric' });
         }
-        await loadEmails();
+    }
+
+    function getEmailPreview(content) {
+        if (!content) return 'No content';
         
-        intervalID = setInterval(timedReload, 20000);
+        // Remove HTML tags for text preview
+        const text = content.replace(/<[^>]*>/g, '');
         
-        return () => {
-            if (intervalID) clearInterval(intervalID);
-        };
-    });
+        // Return first 100 characters with ellipsis if needed
+        return text.length > 100 ? text.substring(0, 100) + '...' : text;
+    }
+
+    // automatic refresh every 20 seconds
+    const intervalID = setInterval(timedReload, 20000); 
 </script>
 
 <!-- Toast Notifications -->
@@ -222,33 +228,33 @@
             display: flex;
             align-items: flex-start;
             border-left: 4px solid 
-                {toast.type === 'success' ? '#28a745' : 
-                 toast.type === 'error' ? '#dc3545' : 
-                 '#17a2b8'};
+                {toast.type === 'success' ? 'var(--bs-success)' : 
+                 toast.type === 'error' ? 'var(--bs-danger)' : 
+                 'var(--bs-info)'};
             animation: slideIn 0.3s ease-out;
             max-width: 100%;
         ">
             <div style="margin-right: 0.75rem; flex-shrink: 0;">
                 {#if toast.type === 'success'}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" style="color: #28a745;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" style="color: var(--bs-success);">
                         <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 {:else if toast.type === 'error'}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" style="color: #dc3545;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" style="color: var(--bs-danger);">
                         <path d="M12 9V11M12 15H12.01M5.07183 19H18.9282C20.4678 19 21.4301 17.3333 20.6603 16L13.7321 4C12.9623 2.66667 11.0378 2.66667 10.268 4L3.33978 16C2.56998 17.3333 3.53223 19 5.07183 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 {:else}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" style="color: #17a2b8;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" style="color: var(--bs-info);">
                         <path d="M13 16H12V12H11M12 8H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 {/if}
             </div>
             
             <div style="flex: 1; min-width: 0;">
-                <h4 style="margin: 0 0 0.25rem 0; font-size: 0.9rem; color: #343a40; overflow: hidden; text-overflow: ellipsis;">
+                <h4 style="margin: 0 0 0.25rem 0; font-size: 0.9rem; color: var(--bs-dark); overflow: hidden; text-overflow: ellipsis;">
                     {toast.title}
                 </h4>
-                <p style="margin: 0; font-size: 0.8rem; color: #6c757d; overflow: hidden; text-overflow: ellipsis;">
+                <p style="margin: 0; font-size: 0.8rem; color: var(--bs-secondary); overflow: hidden; text-overflow: ellipsis;">
                     {toast.message}
                 </p>
             </div>
@@ -259,7 +265,7 @@
                 padding: 0;
                 margin-left: 0.5rem;
                 cursor: pointer;
-                color: #6c757d;
+                color: var(--bs-secondary);
                 flex-shrink: 0;
             ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -272,14 +278,14 @@
 
 <!-- Away Banner -->
 {#if !reloadActive}
-    <div style="background: #dc3545;padding: 16px;">
+    <div style="background: var(--bs-red);padding: 16px;">
         <p class="text-center" style="margin-bottom: 0px;color: rgba(255,255,255,0.8);font-weight: 500;">
             <span style="font-weight: 600;color: rgb(255,255,255);">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 20px;margin-top: -4px;margin-right: 8px;">
                     <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
                 Are you still there?
-            </span> 
+            </span> 
             Please reload the page to re-enable automatic refresh.
         </p>
     </div>
@@ -313,7 +319,7 @@
                     background: white;
                 ">
                     <p class="text-truncate text-start" style="margin-bottom: 0px;font-size: 20px;flex: 1;">
-                        {receivingEmail}
+                        <!--sse-->{address}<!--/sse-->
                     </p>
                     <button 
                         on:click={copyToClipboard} 
@@ -323,7 +329,7 @@
                             background: transparent;
                             border: none;
                             padding: 4px 8px;
-                            color: {isCopying ? '#28a745' : '#007bff'};
+                            color: {isCopying ? 'var(--bs-success)' : 'var(--bs-primary)'};
                         "
                         title="Copy to clipboard"
                     >
@@ -338,7 +344,7 @@
                         {/if}
                     </button>
                 </div>
-                <button class="btn btn-primary" type="button" on:click={handleRegenerate} style="padding: 8px 30px;border-radius: 16px;border-width: 2px;border-color: rgb(33,37,41);background: rgb(33,37,41);font-weight: 500;height: 50px;font-size: 20px;min-width: 220px;margin-bottom: 16px;">
+                <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)} style="padding: 8px 30px;border-radius: 16px;border-width: 2px;border-color: rgb(33,37,41);background: rgb(33,37,41);font-weight: 500;height: 50px;font-size: 20px;min-width: 220px;margin-bottom: 16px;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 24px;margin-top: -4px;margin-right: 6px;">
                         <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
@@ -355,7 +361,7 @@
             {:else}
                 <!-- Automatic refresh stopped -->
                 <div style="padding: 32px;margin-bottom: 32px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 32px;margin-top: -6px;margin-right: 16px;color: #dc3545;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 32px;margin-top: -6px;margin-right: 16px;color: var(--bs-red);">
                         <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span style="font-weight: 500;font-size: 20px;">Automatic refresh stopped</span>
@@ -373,7 +379,7 @@
                                 border: none;
                                 padding: 4px 8px;
                                 cursor: pointer;
-                                color: #007bff;
+                                color: var(--bs-primary);
                                 display: flex;
                                 align-items: center;
                                 font-size: 14px;
@@ -385,13 +391,13 @@
                             </button>
                             
                             <div style="display: flex; gap: 8px;">
-                                <button class="btn btn-primary" type="button" on:click={() => forwardEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: #343a40;">
+                                <button class="btn btn-primary" type="button" on:click={() => forwardEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-dark);">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
                                         <path d="M3 10H13C17.4183 10 21 13.5817 21 18V20M3 10L9 16M3 10L9 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </button>
                                 
-                                <button class="btn btn-primary" type="button" on:click={() => deleteEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: #dc3545;">
+                                <button class="btn btn-primary" type="button" on:click={() => deleteEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-red);">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
                                         <path d="M19 7L18.1327 19.1425C18.0579 20.1891 17.187 21 16.1378 21H7.86224C6.81296 21 5.94208 20.1891 5.86732 19.1425L5 7M10 11V17M14 11V17M15 7V4C15 3.44772 14.5523 3 14 3H10C9.44772 3 9 3.44772 9 4V7M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
@@ -412,8 +418,8 @@
                                 <span style="font-weight: 500;">{selectedEmail.sender || 'Unknown Sender'}</span>
                             </div>
                             
-                            <span style="color: #6c757d; font-size: 14px;">
-                                {getFullDate(selectedEmail.date)}
+                            <span style="color: var(--bs-secondary); font-size: 14px;">
+                                {selectedEmail.date ? new Date(selectedEmail.date).toLocaleString() : 'Unknown date'}
                             </span>
                         </div>
                     </div>
@@ -485,7 +491,7 @@
                                                 <span style="font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 12px;">
                                                     {email.sender || 'Unknown Sender'}
                                                 </span>
-                                                <span style="color: #6c757d; font-size: 12px; flex-shrink: 0;">
+                                                <span style="color: var(--bs-secondary); font-size: 12px; flex-shrink: 0;">
                                                     {formatDate(email.date)}
                                                 </span>
                                             </div>
@@ -494,7 +500,7 @@
                                                 {email.subject || '(No Subject)'}
                                             </p>
                                             
-                                            <p style="color: #6c757d; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px;">
+                                            <p style="color: var(--bs-secondary); margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px;">
                                                 {getEmailPreview(email["content-html"] || email["content-text"])}
                                             </p>
                                         </div>
@@ -519,8 +525,8 @@
             <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
                 Made with lots of 🥨 in Germany
                 <span class="float-end">
-                    <a href="/privacy" style="color: inherit;">Privacy</a>&nbsp;&nbsp;
-                    <a href="/terms" style="color: inherit;">Terms</a>&nbsp;&nbsp;
+                    <a href="https://berrysauce.me/privacy" target="_blank" style="color: inherit;">Privacy</a>&nbsp;&nbsp;
+                    <a href="https://berrysauce.me/terms" target="_blank" style="color: inherit;">Terms</a>&nbsp;&nbsp;
                     <a href="https://github.com/berrysauce/justatemp/blob/main/LICENSE" target="_blank" style="color: inherit;">License</a>&nbsp;&nbsp;
                     <a href="mailto:hey@firetempmail.com" style="color: inherit;">Contact</a>
                 </span>
@@ -551,7 +557,7 @@
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         display: flex;
         align-items: flex-start;
-        border-left: 4px solid #17a2b8;
+        border-left: 4px solid var(--bs-info);
         animation: slideIn 0.3s ease-out;
         max-width: 100%;
     }
