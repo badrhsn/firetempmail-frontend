@@ -17,7 +17,9 @@ export async function loadEmails(address) {
 }
 
 export async function deleteEmail(email) {
-    if (!email || !email.recipient || !email.suffix) return;
+    if (!email || !email.recipient || !email.suffix) {
+        throw new Error("Invalid email object");
+    }
     
     let emailKey = email.recipient + "-" + email.suffix;
     const response = await fetch(`${url}/mail/delete?key=${emailKey}`);

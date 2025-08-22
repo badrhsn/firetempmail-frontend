@@ -63,6 +63,9 @@
         await loadEmailsData();
         showToast("Info", "Emails refreshed", "info");
     }
+    
+    // Handle empty state
+    $: isEmptyState = $emails.length === 0 && $viewMode === 'list';
 </script>
 
 <ToastContainer />
@@ -109,11 +112,22 @@
 
             {#if $viewMode === 'detail'}
                 <EmailDetail />
+            {:else if isEmptyState}
+                <!-- Empty State -->
+                <div style="padding: 32px;border-radius: 16px;margin-bottom: 32px;border: 2px dashed rgb(215,215,215) ;">
+                    <p style="font-size: 20px;margin-top: 16px;font-weight: 500;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 44px;margin-bottom: 16px;color: rgb(215,215,215);">
+                            <path d="M3 21V17M3 17V5C3 3.89543 3.89543 3 5 3H11.5L12.5 4H21L18 10L21 16H12.5L11.5 15H5C3.89543 15 3 15.8954 3 17ZM12 3.5V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        <br>
+                        Incoming mails will show up here
+                    </p>
+                </div>
             {:else}
                 <EmailList {manualReload} />
             {/if}
         </div>
 
-        <Footer {copyrightYear} {stats} />
+        <Footer {copyrightYear} stats={$stats} />
     </div>
 </section>
