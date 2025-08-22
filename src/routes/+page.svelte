@@ -301,7 +301,7 @@
                 <span style="font-weight: normal !important; color: rgb(255, 255, 255);">📮&nbsp;</span>
             Your Temporary Email Address
             </h1>
-            <p class="text-start" style="margin-bottom: 32px;font-size: 20px;">
+            <p class="text-center" style="margin-bottom: 32px;font-size: 20px;">
 Forget about spam, advertising mailings, hacking and attacking robots. Keep your real mailbox clean and secure. Temp Mail provides temporary, secure, anonymous, free, disposable email address.
             </p>
             
@@ -495,10 +495,10 @@ Forget about spam, advertising mailings, hacking and attacking robots. Keep your
                     </div>
                 {/if}
             {/if}
-                        <h1 class="text-start" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
+                        <h1 class="text-center" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
 What is Disposable Temporary E-mail?
             </h1>
-            <p class="text-start" style="margin-bottom: 32px;font-size: 20px;">
+            <p class="text-center" style="margin-bottom: 32px;font-size: 20px;">
 Disposable email is a free service that provides you with a temporary email address that automatically self-destructs after a set period of time. This service is often called tempmail, 10 minute mail, 10minmail, throwaway email, fake mail, fake email generator, burner mail, or trash mail. Many websites, Wi-Fi providers, forums, and blogs require users to register before accessing content, posting comments, or downloading files. Instead of exposing your real inbox to spam, you can rely on Temp-Mail, the most advanced disposable email service, to stay safe, protect your privacy, and keep unwanted messages out.        
             </p>
         </div>
