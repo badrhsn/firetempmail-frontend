@@ -1,59 +1,39 @@
 <script>
+    // COMPLETELY remove all imports initially
     export function load({ params }) {
         console.log('Load function called with params:', params);
         
-        // Return simple test data
+        // Return simple test data without any external functions
         return {
-            testData: {
-                slug: params.slug,
+            post: {
                 title: 'Test Post: ' + params.slug,
-                excerpt: 'This is a test post',
-                category: 'Test',
-                date: '2023-11-15',
-                author: 'Test Author',
-                readTime: '2 min read'
+                excerpt: 'This is a test post for debugging',
+                category: 'Debug',
+                date: '2023-11-15', 
+                author: 'Debug Author',
+                readTime: '2 min read',
+                content: 'This is test content for debugging purposes.'
             }
         };
     }
     
     export let data;
-    
-    // Debug what we receive
-    $: {
-        console.log('Data received:', data);
-        console.log('Test data:', data?.testData);
-    }
-    
-    $: testData = data?.testData || {
-        title: 'Loading...',
-        excerpt: 'Please wait while we load the post.',
-        category: 'Loading',
-        date: '',
-        author: '',
-        readTime: ''
-    };
+    $: post = data?.post;
 </script>
 
 <svelte:head>
-    <title>{testData.title}</title>
-    <meta name="description" content={testData.excerpt} />
+    <title>{post.title} - Fire Temp Mail Blog</title>
+    <meta name="description" content={post.excerpt} />
 </svelte:head>
 
 <section class="py-4 py-xl-5">
     <div class="container" style="max-width: 800px;">
         <div class="text-center p-4 p-lg-5">
-            <h1>{testData.title}</h1>
-            <p>{testData.excerpt}</p>
-            <p>Category: {testData.category}</p>
-            <p>By {testData.author} on {testData.date}</p>
+            <h1>{post.title}</h1>
+            <p>{post.excerpt}</p>
+            <p>Category: {post.category}</p>
+            <p>By {post.author} on {post.date}</p>
             <a href="/blog">← Back to Blog</a>
-            
-            <!-- Debug info -->
-            <div style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
-                <h3>Debug Information</h3>
-                <p>Slug from URL: {$page.params.slug}</p>
-                <p>Data received: {JSON.stringify(data, null, 2)}</p>
-            </div>
         </div>
     </div>
 </section>
