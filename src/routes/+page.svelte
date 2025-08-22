@@ -10,10 +10,7 @@
     let copyrightYear = new Date().getFullYear();
     let emails = [];
     let stats = {};
-    let showModal = false;
-    let modalTitle = "";
-    let modalMessage = "";
-    let modalType = "info"; // info, success, error
+    let toasts = [];
     let isCopying = false;
 
     // automatically stop auto-refresh after 20 refreshes
@@ -38,11 +35,11 @@
             stats = data.stats || {};
         } catch (error) {
             console.error("Failed to load emails:", error);
-            showModalMessage("Error", "Failed to load emails. Please try again.", "error");
+            showToast("Error", "Failed to load emails. Please try again.", "error");
         }
     }
     
-        // @ts-ignore
+    // @ts-ignore
     async function generateEmail(reload) {
         let words = generate(2)
         receivingEmail.set(words[0] + "." + words[1] + Math.floor(Math.random() * 1000) + "@firetempmail.com")
@@ -84,13 +81,13 @@
                     if (stats.count) {
                         stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
                     }
-                    showModalMessage("Success", "Email deleted successfully.", "success");
+                    showToast("Success", "Email deleted successfully.", "success");
                 } else {
-                    showModalMessage("Error", `Failed to delete email: ${data.msg}`, "error");
+                    showToast("Error", `Failed to delete email: ${data.msg}`, "error");
                 }
             } catch (error) {
                 console.error("Delete error:", error);
-                showModalMessage("Error", "Failed to delete email. Please try again.", "error");
+                showToast("Error", "Failed to delete email. Please try again.", "error");
             }
         }
     }
@@ -102,7 +99,7 @@
         let forwardTo = prompt("Please enter the email address you want to forward this email to:", "");
 
         if (forwardTo === null || forwardTo === "") {
-            showModalMessage("Error", "No email address entered.", "error");
+            showToast("Error", "No email address entered.", "error");
             return;
         }
 
@@ -117,13 +114,13 @@
             
             const data = await response.json();
             if (data.code === 200) {
-                showModalMessage("Success", "Email forwarded successfully!", "success");
+                showToast("Success", "Email forwarded successfully!", "success");
             } else {
-                showModalMessage("Error", `Failed to forward email: ${data.msg}`, "error");
+                showToast("Error", `Failed to forward email: ${data.msg}`, "error");
             }
         } catch (error) {
             console.error("Forward error:", error);
-            showModalMessage("Error", "Failed to forward email. Please try again.", "error");
+            showToast("Error", "Failed to forward email. Please try again.", "error");
         }
     }
 
@@ -133,93 +130,100 @@
         isCopying = true;
         try {
             await navigator.clipboard.writeText(address);
-            showModalMessage("Success", "Email address copied to clipboard!", "success");
+            showToast("Success", "Email address copied to clipboard!", "success");
         } catch (error) {
             console.error("Copy failed:", error);
-            showModalMessage("Error", "Failed to copy to clipboard.", "error");
+            showToast("Error", "Failed to copy to clipboard.", "error");
         } finally {
             setTimeout(() => { isCopying = false; }, 1000);
         }
     }
 
-    function showModalMessage(title, message, type = "info") {
-        modalTitle = title;
-        modalMessage = message;
-        modalType = type;
-        showModal = true;
+    function showToast(title, message, type = "info") {
+        const id = Date.now();
+        toasts = [...toasts, { id, title, message, type }];
         
-        // Auto-hide after 3 seconds for success messages
-        if (type === "success") {
-            setTimeout(() => {
-                showModal = false;
-            }, 3000);
-        }
+        // Auto-remove after 3 seconds for success messages, 5 for others
+        setTimeout(() => {
+            toasts = toasts.filter(toast => toast.id !== id);
+        }, type === "success" ? 3000 : 5000);
     }
 
-    function closeModal() {
-        showModal = false;
+    function removeToast(id) {
+        toasts = toasts.filter(toast => toast.id !== id);
     }
 
     // automatic refresh every 20 seconds
     const intervalID = setInterval(timedReload, 20000); 
 </script>
 
-<!-- Modal Component -->
-{#if showModal}
-    <div class="modal-backdrop" on:click={closeModal} style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-    ">
-        <div class="modal-content" on:click|stopPropagation style="
+<!-- Toast Notifications -->
+<div class="toast-container" style="
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 350px;
+">
+    {#each toasts as toast (toast.id)}
+        <div class="toast" style="
             background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: flex-start;
+            border-left: 4px solid 
+                {toast.type === 'success' ? 'var(--bs-success)' : 
+                 toast.type === 'error' ? 'var(--bs-danger)' : 
+                 'var(--bs-info)'};
+            animation: slideIn 0.3s ease-out;
+            max-width: 100%;
         ">
-            <div style="margin-bottom: 1rem;">
-                {#if modalType === 'success'}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" style="color: var(--bs-success);">
+            <div style="margin-right: 0.75rem; flex-shrink: 0;">
+                {#if toast.type === 'success'}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" style="color: var(--bs-success);">
                         <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                {:else if modalType === 'error'}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" style="color: var(--bs-danger);">
+                {:else if toast.type === 'error'}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" style="color: var(--bs-danger);">
                         <path d="M12 9V11M12 15H12.01M5.07183 19H18.9282C20.4678 19 21.4301 17.3333 20.6603 16L13.7321 4C12.9623 2.66667 11.0378 2.66667 10.268 4L3.33978 16C2.56998 17.3333 3.53223 19 5.07183 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 {:else}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" style="color: var(--bs-info);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" style="color: var(--bs-info);">
                         <path d="M13 16H12V12H11M12 8H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 {/if}
             </div>
             
-            <h3 style="margin-bottom: 0.5rem; color: var(--bs-dark);">{modalTitle}</h3>
-            <p style="margin-bottom: 1.5rem; color: var(--bs-secondary);">{modalMessage}</p>
+            <div style="flex: 1; min-width: 0;">
+                <h4 style="margin: 0 0 0.25rem 0; font-size: 0.9rem; color: var(--bs-dark); overflow: hidden; text-overflow: ellipsis;">
+                    {toast.title}
+                </h4>
+                <p style="margin: 0; font-size: 0.8rem; color: var(--bs-secondary); overflow: hidden; text-overflow: ellipsis;">
+                    {toast.message}
+                </p>
+            </div>
             
-            <button on:click={closeModal} style="
-                background: var(--bs-primary);
-                color: white;
+            <button on:click={() => removeToast(toast.id)} style="
+                background: none;
                 border: none;
-                padding: 0.5rem 1.5rem;
-                border-radius: 8px;
+                padding: 0;
+                margin-left: 0.5rem;
                 cursor: pointer;
-                font-weight: 500;
+                color: var(--bs-secondary);
+                flex-shrink: 0;
             ">
-                OK
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </button>
         </div>
-    </div>
-{/if}
+    {/each}
+</div>
 
 <!-- Away Banner -->
 {#if !reloadActive}
@@ -329,7 +333,7 @@
                 {#each emails as email (email.recipient + '-' + email.suffix)}
                     {#if email && email.sender && email.recipient}
                         <!-- Email Template -->
-                        <div style="padding: 32px;border: 2px solid rgb(215,215,215);border-radius: 16px;margin-bottom: 32px;">
+                        <div style="padding: 32px;border: 2px solid rgb(215,215,215);border-radius: 16px;margin-bottom: 32px;overflow: hidden;">
                             <div class="d-xl-flex justify-content-xl-start align-items-xl-center" style="margin-bottom: 22px;height: 56px;">
                                 <div class="text-start flex-grow-1" style="padding-bottom: 16px;border-bottom: 2px solid rgb(215,215,215);position: relative;display: inline;overflow: hidden;">
                                     <p style="font-size: 20px;margin-bottom: 0px;width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;position: relative;padding-right: 100px;">
@@ -367,9 +371,9 @@
                                     </p>
                                 </div>
                             </div>
-                            <p class="text-start" style="margin-bottom: 0px;margin-top: 32px;">
+                            <div style="margin-top: 32px; overflow: auto; max-width: 100%;">
                                 {@html email["content-html"] || 'No content available'}
-                            </p>
+                            </div>
                         </div>
                     {/if}
                 {/each}
@@ -403,27 +407,38 @@
 </section>
 
 <style>
-    .modal-backdrop {
+    .toast-container {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
+        top: 20px;
+        right: 20px;
+        z-index: 10000;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 350px;
     }
     
-    .modal-content {
+    .toast {
         background: white;
-        padding: 2rem;
-        border-radius: 16px;
-        max-width: 400px;
-        width: 90%;
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        display: flex;
+        align-items: flex-start;
+        border-left: 4px solid var(--bs-info);
+        animation: slideIn 0.3s ease-out;
+        max-width: 100%;
+    }
+    
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
     }
     
     .btn:hover {
