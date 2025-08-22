@@ -527,7 +527,7 @@ Forget about spam, advertising mailings, hacking and attacking robots. Keep your
             <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
                 Made with lots of 🥨 in Germany
                 <span class="float-end">
-                    <a href="/privacy" style="color: inherit;">Privacy</a>&nbsp;&nbsp;
+                    <a href="/privacy-policy" style="color: inherit;">Privacy</a>&nbsp;&nbsp;
                     <a href="/terms" style="color: inherit;">Terms</a>&nbsp;&nbsp;
                     <a href="https://github.com/berrysauce/justatemp/blob/main/LICENSE" target="_blank" style="color: inherit;">License</a>&nbsp;&nbsp;
                     <a href="/contact" style="color: inherit;">Contact</a>
