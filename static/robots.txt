@@ -1,13 +1,30 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
 Sitemap: https://firetempmail.com/sitemap.xml
 
-# Disallow query parameters
+# Block query parameters that don't change content
 Disallow: /*?*
 Disallow: /*&
+Disallow: /*=
 
-# Allow CSS and JS
-Allow: .css$
-Allow: .js$
+# Allow all static assets
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.ico$
+
+# Specific instructions for search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Crawl delay (optional - only if you have server load issues)
+# Crawl-delay: 1
