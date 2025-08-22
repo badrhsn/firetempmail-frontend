@@ -4,7 +4,7 @@
     import { generate } from "random-words";
     import { receivingEmail } from "../lib/stores";
     import Navigation from '$lib/components/Navigation.svelte';
-
+    import { getPopularArticles } from '$lib/data/blogPosts';
     let address = $receivingEmail;
     const url = "https://post.firetempmail.com";
     
@@ -545,9 +545,7 @@ Disposable email is a free service that provides you with a temporary email addr
 </div>
 
 <!-- Add this import at the top of your script section -->
-<script>
-    import { getPopularArticles } from '$lib/data/blogPosts';
-</script>
+
         </div>
 
         <!-- Footer -->
