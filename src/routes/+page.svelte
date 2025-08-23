@@ -659,7 +659,9 @@ Disposable email is a free service that provides you with a temporary email addr
         background: linear-gradient(to bottom, #f8f9fa, #ffffff);
         border-radius: 12px;
     }
-    
+    li{
+        list-style: none;
+    }
     .seo-rich-content {
         line-height: 1.8;
         color: #2c3e50;
