@@ -14,7 +14,6 @@
     ];
     
     onMount(() => {
-        // Get current path for active navigation highlighting
         currentPath = window.location.pathname;
     });
     
@@ -28,57 +27,61 @@
 </script>
 
 <header class="header">
-    <div class="header-container">
-        <!-- Logo -->
-        <a href="/" class="logo" aria-label="Fire Temp Mail Home">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
-                <path d="M16 2C8.268 2 2 8.268 2 16C2 23.732 8.268 30 16 30C23.732 30 30 23.732 30 16C30 8.268 23.732 2 16 2Z" fill="#007bff"/>
-                <path d="M22 12L16 17L10 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M10 14L16 19L22 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M10 16L16 21L22 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="logo-text">Fire Temp Mail</span>
-        </a>
-        
-        <!-- Desktop Navigation -->
-        <nav class="desktop-nav">
-            <ul>
-                {#each navItems as item}
-                    <li>
-                        <a 
-                            href={item.path} 
-                            class:active={currentPath === item.path}
-                            on:click={closeMenu}
-                        >
-                            {item.name}
-                        </a>
-                    </li>
-                {/each}
-            </ul>
-        </nav>
-        
-        <!-- Mobile Menu Button -->
-        <button class="mobile-menu-button" on:click={toggleMenu} aria-label="Toggle menu">
-            <span class={isMenuOpen ? 'hamburger open' : 'hamburger'}></span>
-        </button>
+    <div class="container">
+        <div class="header-content">
+            <!-- Logo -->
+            <a href="/" class="logo" aria-label="Fire Temp Mail Home">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+                    <path d="M16 2C8.268 2 2 8.268 2 16C2 23.732 8.268 30 16 30C23.732 30 30 23.732 30 16C30 8.268 23.732 2 16 2Z" fill="#007bff"/>
+                    <path d="M22 12L16 17L10 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 14L16 19L22 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 16L16 21L22 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="logo-text">Fire Temp Mail</span>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <ul>
+                    {#each navItems as item}
+                        <li>
+                            <a 
+                                href={item.path} 
+                                class:active={currentPath === item.path}
+                                on:click={closeMenu}
+                            >
+                                {item.name}
+                            </a>
+                        </li>
+                    {/each}
+                </ul>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-button" on:click={toggleMenu} aria-label="Toggle menu">
+                <span class={isMenuOpen ? 'hamburger open' : 'hamburger'}></span>
+            </button>
+        </div>
     </div>
     
     <!-- Mobile Navigation -->
     {#if isMenuOpen}
         <nav class="mobile-nav">
-            <ul>
-                {#each navItems as item}
-                    <li>
-                        <a 
-                            href={item.path} 
-                            class:active={currentPath === item.path}
-                            on:click={closeMenu}
-                        >
-                            {item.name}
-                        </a>
-                    </li>
-                {/each}
-            </ul>
+            <div class="container">
+                <ul>
+                    {#each navItems as item}
+                        <li>
+                            <a 
+                                href={item.path} 
+                                class:active={currentPath === item.path}
+                                on:click={closeMenu}
+                            >
+                                {item.name}
+                            </a>
+                        </li>
+                    {/each}
+                </ul>
+            </div>
         </nav>
     {/if}
 </header>
@@ -92,13 +95,17 @@
         z-index: 1000;
     }
     
-    .header-container {
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
+    .header-content {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem;
-        max-width: 1200px;
-        margin: 0 auto;
+        padding: 1rem 0;
     }
     
     .logo {
@@ -203,14 +210,13 @@
     .mobile-nav {
         display: none;
         background: white;
-        padding: 1rem;
         border-top: 1px solid #e9ecef;
     }
     
     .mobile-nav ul {
         list-style: none;
         margin: 0;
-        padding: 0;
+        padding: 1rem 0;
     }
     
     .mobile-nav li {
