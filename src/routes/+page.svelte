@@ -541,7 +541,7 @@ Disposable email is a free service that provides you with a temporary email addr
     </div>
     
     <div style="text-align: center; margin-top: 2rem;">
-        <a href="/blog" class="btn btn-primary">
+        <a href="/blog" class="btn btn-blog">
             Visit Our Blog
         </a>
     </div>
@@ -653,6 +653,22 @@ Disposable email is a free service that provides you with a temporary email addr
 }
 
 .regenerate-btn {
+    padding: 8px 30px;
+    border-radius: 16px;
+    border-width: 2px;
+    border-color: rgb(33,37,41);
+    background: rgb(33,37,41);
+    font-weight: 500;
+    height: 50px;
+    font-size: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-blog {
     padding: 8px 30px;
     border-radius: 16px;
     border-width: 2px;
