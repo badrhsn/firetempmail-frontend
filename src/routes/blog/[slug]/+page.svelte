@@ -5,6 +5,8 @@
     let post = null;
     let error = null;
     let isLoading = true;
+    let scrollPercentage = 0;
+    let copyrightYear = new Date().getFullYear();
     
     onMount(() => {
         try {
@@ -24,15 +26,38 @@
         } finally {
             isLoading = false;
         }
+        
+        // Add scroll event listener for progress bar
+        const handleScroll = () => {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Calculate scroll percentage
+            scrollPercentage = (scrollTop / documentHeight) * 100;
+            
+            // Ensure it stays between 0 and 100
+            scrollPercentage = Math.max(0, Math.min(100, scrollPercentage));
+        };
+        
+        window.addEventListener('scroll', handleScroll);
+        
+        // Cleanup event listener when component is destroyed
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
     });
-    
-    let copyrightYear = new Date().getFullYear();
 </script>
 
 <svelte:head>
     <title>{post ? post.title : 'Blog Post'} - Fire Temp Mail Blog</title>
     <meta name="description" content={post ? post.excerpt : 'Blog post'} />
 </svelte:head>
+
+<!-- Reading Progress Bar -->
+<div class="reading-progress-bar">
+    <div class="reading-progress" style={`width: ${scrollPercentage}%`}></div>
+</div>
 
 {#if isLoading}
     <section class="py-4 py-xl-5">
@@ -101,24 +126,8 @@
                 </div>
                 
                 <!-- Article Content -->
-                <div style="text-align: left; line-height: 1.8;">
-                    <p>This is where your full blog post content would appear. In a real implementation, you would have actual content here, possibly loaded from a CMS or markdown files.</p>
-                    
-                    <p>For now, this is a placeholder for the blog post content. You would typically have several paragraphs, images, and other elements that make up a complete blog post.</p>
-                    
-                    <h2>Why Temporary Email Matters</h2>
-                    <p>Temporary email services provide an essential layer of privacy protection in today's digital world. They allow you to:</p>
-                    <ul>
-                        <li>Sign up for services without revealing your personal email</li>
-                        <li>Avoid spam and unwanted marketing emails</li>
-                        <li>Protect your primary inbox from data breaches</li>
-                        <li>Maintain anonymity when needed</li>
-                    </ul>
-                    
-                    <h2>Getting Started with Fire Temp Mail</h2>
-                    <p>Using our service is simple: just generate a temporary email address and start using it immediately. No registration required, no personal information collected.</p>
-                    
-                    <p>We hope you find this information helpful in your journey to better online privacy!</p>
+                <div class="article-content" style="text-align: left; line-height: 1.8;">
+                    {@html post.content}
                 </div>
                 
                 <!-- Share buttons -->
@@ -160,3 +169,82 @@
         </div>
     </section>
 {/if}
+
+<style>
+    .reading-progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: rgba(0, 123, 255, 0.2);
+        z-index: 10000;
+        transition: opacity 0.3s;
+    }
+    
+    .reading-progress {
+        height: 100%;
+        background: linear-gradient(90deg, #007bff, #0056b3);
+        transition: width 0.2s ease-out;
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    }
+    
+    /* Article content styling */
+    .article-content h2 {
+        font-family: 'Inter Tight', sans-serif;
+        font-weight: 600;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: #2c3e50;
+    }
+    
+    .article-content h3 {
+        font-family: 'Inter Tight', sans-serif;
+        font-weight: 500;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: #34495e;
+    }
+    
+    .article-content p {
+        margin-bottom: 1rem;
+        color: #2c3e50;
+    }
+    
+    .article-content ul, .article-content ol {
+        margin-bottom: 1rem;
+        padding-left: 1.5rem;
+    }
+    
+    .article-content li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .article-content strong {
+        font-weight: 600;
+        color: #2c3e50;
+    }
+    
+    .note-box {
+        background: #e8f4fd;
+        border-left: 4px solid #2196F3;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        border-radius: 4px;
+    }
+    
+    .warning-box {
+        background: #fff3e0;
+        border-left: 4px solid #ff9800;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        border-radius: 4px;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .reading-progress-bar {
+            height: 3px;
+        }
+    }
+</style>
