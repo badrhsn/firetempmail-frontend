@@ -72,6 +72,7 @@
                     <a href="/email-generator" style="color: inherit;">Email Generator</a>&nbsp;&nbsp;
                     <a href="/privacy-policy" style="color: inherit;">Privacy</a>&nbsp;&nbsp;
                     <a href="/terms" style="color: inherit;">Terms</a>&nbsp;&nbsp;
+                    <a href="/faq" style="color: inherit;">FAQ</a>&nbsp;&nbsp;
                     <a href="/contact" style="color: inherit;">Contact</a>
                 </span>
             </p>
