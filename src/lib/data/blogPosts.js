@@ -130,3 +130,7 @@ export const getPopularArticles = () => {
 
 // Make sure to export the raw data too for debugging
 export { blogPosts };
+// Add this export at the end of the file
+export const debugSlugs = () => {
+    return blogPosts.map(post => post.slug);
+};

@@ -8,6 +8,26 @@
     let scrollPercentage = 0;
     let copyrightYear = new Date().getFullYear();
     
+    // Share functions
+    function shareOnFacebook(post) {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent(post.title);
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
+    }
+    
+    function shareOnTwitter(post) {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent(post.title);
+        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+    }
+    
+    function shareOnLinkedIn(post) {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(post.title);
+        const summary = encodeURIComponent(post.excerpt);
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}&summary=${summary}`, '_blank');
+    }
+    
     onMount(() => {
         try {
             // Get the slug from the URL
@@ -126,7 +146,7 @@
                 </div>
                 
                 <!-- Article Content -->
-                <div class="article-content" style="text-align: left; line-height: 1.8;">
+                <div style="text-align: left; line-height: 1.8;">
                     {@html post.content}
                 </div>
                 
@@ -134,9 +154,9 @@
                 <div style="text-align: left; margin: 2rem 0; padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
                     <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Share this article</h3>
                     <div style="display: flex; gap: 1rem;">
-                        <a href="#" style="padding: 0.5rem 1rem; background: #3b5998; color: white; border-radius: 4px; text-decoration: none;">Facebook</a>
-                        <a href="#" style="padding: 0.5rem 1rem; background: #1da1f2; color: white; border-radius: 4px; text-decoration: none;">Twitter</a>
-                        <a href="#" style="padding: 0.5rem 1rem; background: #0077b5; color: white; border-radius: 4px; text-decoration: none;">LinkedIn</a>
+                        <button on:click={() => shareOnFacebook(post)} style="padding: 0.5rem 1rem; background: #3b5998; color: white; border-radius: 4px; text-decoration: none; border: none; cursor: pointer;">Facebook</button>
+                        <button on:click={() => shareOnTwitter(post)} style="padding: 0.5rem 1rem; background: #1da1f2; color: white; border-radius: 4px; text-decoration: none; border: none; cursor: pointer;">Twitter</button>
+                        <button on:click={() => shareOnLinkedIn(post)} style="padding: 0.5rem 1rem; background: #0077b5; color: white; border-radius: 4px; text-decoration: none; border: none; cursor: pointer;">LinkedIn</button>
                     </div>
                 </div>
             </div>
@@ -187,58 +207,6 @@
         background: linear-gradient(90deg, #007bff, #0056b3);
         transition: width 0.2s ease-out;
         box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-    }
-    
-    /* Article content styling */
-    .article-content h2 {
-        font-family: 'Inter Tight', sans-serif;
-        font-weight: 600;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-        color: #2c3e50;
-    }
-    
-    .article-content h3 {
-        font-family: 'Inter Tight', sans-serif;
-        font-weight: 500;
-        margin-top: 1.5rem;
-        margin-bottom: 0.75rem;
-        color: #34495e;
-    }
-    
-    .article-content p {
-        margin-bottom: 1rem;
-        color: #2c3e50;
-    }
-    
-    .article-content ul, .article-content ol {
-        margin-bottom: 1rem;
-        padding-left: 1.5rem;
-    }
-    
-    .article-content li {
-        margin-bottom: 0.5rem;
-    }
-    
-    .article-content strong {
-        font-weight: 600;
-        color: #2c3e50;
-    }
-    
-    .note-box {
-        background: #e8f4fd;
-        border-left: 4px solid #2196F3;
-        padding: 1rem;
-        margin: 1.5rem 0;
-        border-radius: 4px;
-    }
-    
-    .warning-box {
-        background: #fff3e0;
-        border-left: 4px solid #ff9800;
-        padding: 1rem;
-        margin: 1.5rem 0;
-        border-radius: 4px;
     }
     
     /* Responsive design */
