@@ -292,8 +292,6 @@
         </p>
     </div>
 {/if}
-
-<section class="py-4 py-xl-5">
     <!-- Header section -->
 <header class="header">
     <div class="header-container">
@@ -307,6 +305,8 @@
         </a>
     </div>
 </header>
+<section class="py-4 py-xl-5">
+
     <div class="container" style="max-width: 800px;">
         <div class="text-center p-4 p-lg-5">
             <!-- Header -->
