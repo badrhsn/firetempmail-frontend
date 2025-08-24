@@ -302,7 +302,7 @@
 Fire Temp Mail – Your Free Temporary Disposable Email Address
 
             </h1>
-<p class="text-center" style="margin-bottom: 32px;font-size: 15px;">
+<p class="text-center" style="margin-bottom: 32px;font-size: 18px;">
 Tired of spam and junk? With <strong>Temp Mail</strong>, you can instantly generate a free, disposable email address that protects your privacy. Whether you need a <strong>temp mail edu</strong> for free trials, a <strong>temp mail Gmail</strong> alternative for quick sign-ups, or just a temporary inbox to receive emails safely, Fire Temp Mail keeps your <strong>real email address</strong> secure and your <strong>personal inbox</strong> clean.
 </p>
             
@@ -500,7 +500,7 @@ Tired of spam and junk? With <strong>Temp Mail</strong>, you can instantly gener
                         <h3 class="text-center" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
 What is Disposable Temporary E-mail?
             </h3>
-<p class="text-center" style="margin-bottom: 32px;font-size: 15px;">
+<p class="text-center" style="margin-bottom: 32px;font-size: 18px;">
 A <strong>disposable email address</strong> is a free <strong>temporary email service</strong> that creates a short-term inbox for receiving emails. Often called <em>tempmail</em>, <em>10minmail</em>, <em>throwaway email</em>, or <em>burner mail</em>, it helps you <strong>avoid spam</strong> and protect your <strong>primary email</strong>. Instead of exposing your real <strong>email accounts</strong>, you can rely on Fire Temp Mail to keep your <strong>personal inbox</strong> safe, private, and spam-free.
 </p>
             <!-- Add this after the "What is Disposable Temporary E-mail?" section -->
