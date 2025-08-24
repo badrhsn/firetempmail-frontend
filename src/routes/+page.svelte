@@ -292,19 +292,6 @@
         </p>
     </div>
 {/if}
-    <!-- Header section -->
-<header class="header">
-    <div class="header-container">
-        <a href="/" class="logo-link" aria-label="Fire Temp Mail Home">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo">
-                <path d="M20 5C15 5 10 10 10 15C10 20 15 25 20 30C25 25 30 20 30 15C30 10 25 5 20 5Z" fill="#FF6B35"/>
-                <rect x="12" y="18" width="16" height="10" rx="2" fill="#007bff"/>
-                <path d="M12 18L20 23L28 18" stroke="white" stroke-width="2"/>
-            </svg>
-            <span class="logo-text">Fire Temp Mail</span>
-        </a>
-    </div>
-</header>
 <section class="py-4 py-xl-5">
 
     <div class="container" style="max-width: 800px;">
@@ -702,62 +689,6 @@ Disposable email is a free service that provides you with a temporary email addr
 </section>
 
 <style>
-        /* Add the header styles to your existing style section */
-    .header {
-        background: white;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        padding: 1rem 0;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
-    
-    .header-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .logo-link {
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-        color: #2c3e50;
-        font-weight: 700;
-        font-size: 1.5rem;
-        transition: opacity 0.2s;
-    }
-    
-    .logo-link:hover {
-        opacity: 0.8;
-    }
-    
-    .logo {
-        margin-right: 0.75rem;
-    }
-    
-    .logo-text {
-        font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-        background: linear-gradient(90deg, #007bff, #FF6B35);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    
-    @media (max-width: 768px) {
-        .logo-text {
-            font-size: 1.25rem;
-        }
-        
-        .logo {
-            width: 32px;
-            height: 32px;
-        }
-    }
-
 
     .seo-content-section {
         background: linear-gradient(to bottom, #f8f9fa, #ffffff);
