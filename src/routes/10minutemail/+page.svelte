@@ -2,9 +2,9 @@
 // @ts-nocheck
     import { onMount } from "svelte";
     import { generate } from "random-words";
-    import { receivingEmail } from "../lib/stores";
+    import { receivingEmail } from "../../lib/stores";
     import Navigation from '$lib/components/Navigation.svelte';
-    import { getPopularArticles } from '$lib/data/blogPosts';
+
     let address = $receivingEmail;
     const url = "https://post.firetempmail.com";
     
@@ -292,50 +292,67 @@
         </p>
     </div>
 {/if}
-<section class="py-4 py-xl-5">
 
+<section class="py-4 py-xl-5">
     <div class="container" style="max-width: 800px;">
         <div class="text-center p-4 p-lg-5">
             <!-- Header -->
             <h1 class="text-start" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
                 <span style="font-weight: normal !important; color: rgb(255, 255, 255);">📮&nbsp;</span>
-Fire Temp Mail – Your Free Temporary Disposable Email Address
-
+    10 Minute Mail address
+        
             </h1>
-<p class="text-center" style="margin-bottom: 32px;font-size: 18px;">
-Tired of spam and junk? With <strong>Temp Mail</strong>, you can instantly generate a free, disposable email address that protects your privacy. Whether you need a <strong>temp mail edu</strong> for free trials, a <strong>temp mail Gmail</strong> alternative for quick sign-ups, or just a temporary inbox to receive emails safely, Fire Temp Mail keeps your <strong>real email address</strong> secure and your <strong>personal inbox</strong> clean.
-</p>
-            
-<!-- Email Address with Copy Button -->
-<div class="email-address-container">
-    <div class="email-display">
-        <p class="email-text">
-            <!--sse-->{address}<!--/sse-->
-        </p>
-        <button 
-            on:click={copyToClipboard} 
-            class="copy-btn" 
-            title="Copy to clipboard"
-            style="color: {isCopying ? 'var(--bs-success)' : 'var(--bs-primary)'};"
-        >
-            {#if isCopying}
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            {:else}
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M14 20H18C19.1046 20 20 19.1046 20 18V14C20 12.8954 19.1046 12 18 12H14C12.8954 12 12 12.8954 12 14V18C12 19.1046 12.8954 20 14 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            {/if}
-        </button>
-    </div>
-    <button class="regenerate-btn" type="button" on:click={() => generateEmail(true)}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none">
-            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Re-generate
-    </button>
-</div>
+            <p class="text-start" style="margin-bottom: 32px;font-size: 20px;">
+10 Minute Mail is a free, instant disposable email service that self-destructs after ten minutes. With email required for countless online activities, exposing your real inbox can invite spam and unwanted messages. Using a temporary 10 Minute Mail keeps your personal email safe. Some users may also refer to this service as 10MinuteEmail, 10Minutemail, or 10 minutes email.
+ </p>
+            <!-- Email Address with Copy Button -->
+            <div class="d-xl-flex justify-content-xl-center align-items-xl-center" style="margin-top: 32px;margin-bottom: 16px;">
+                <div style="
+                    padding: 8px 30px;
+                    border: 2px solid rgb(215,215,215);
+                    border-radius: 16px;
+                    width: 100%;
+                    margin-right: 16px;
+                    height: 50px;
+                    margin-bottom: 16px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    background: white;
+                ">
+                    <p class="text-truncate text-start" style="margin-bottom: 0px;font-size: 20px;flex: 1;">
+                        <!--sse-->{address}<!--/sse-->
+                    </p>
+                    <button 
+                        on:click={copyToClipboard} 
+                        class="btn btn-sm" 
+                        style="
+                            margin-left: 12px;
+                            background: transparent;
+                            border: none;
+                            padding: 4px 8px;
+                            color: {isCopying ? 'var(--bs-success)' : 'var(--bs-primary)'};
+                        "
+                        title="Copy to clipboard"
+                    >
+                        {#if isCopying}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        {:else}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M14 20H18C19.1046 20 20 19.1046 20 18V14C20 12.8954 19.1046 12 18 12H14C12.8954 12 12 12.8954 12 14V18C12 19.1046 12.8954 20 14 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        {/if}
+                    </button>
+                </div>
+                <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)} style="padding: 8px 30px;border-radius: 16px;border-width: 2px;border-color: rgb(33,37,41);background: rgb(33,37,41);font-weight: 500;height: 50px;font-size: 20px;min-width: 220px;margin-bottom: 16px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 24px;margin-top: -4px;margin-right: 6px;">
+                        <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    Re-generate
+                </button>
+            </div>
             
             {#if reloadActive}
                 <!-- Loading Indicator -->
@@ -497,169 +514,12 @@ Tired of spam and junk? With <strong>Temp Mail</strong>, you can instantly gener
                 {/if}
             {/if}
 
-                        <h3 class="text-center" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
-What is Disposable Temporary E-mail?
-            </h3>
-<p class="text-center" style="margin-bottom: 32px;font-size: 18px;">
-A <strong>disposable email address</strong> is a free <strong>temporary email service</strong> that creates a short-term inbox for receiving emails. Often called <em>tempmail</em>, <em>10minmail</em>, <em>throwaway email</em>, or <em>burner mail</em>, it helps you <strong>avoid spam</strong> and protect your <strong>primary email</strong>. Instead of exposing your real <strong>email accounts</strong>, you can rely on Fire Temp Mail to keep your <strong>personal inbox</strong> safe, private, and spam-free.
-</p>
-            <!-- Add this after the "What is Disposable Temporary E-mail?" section -->
-
-<!-- Popular Articles Section -->
-<div style="margin: 3rem 0; padding: 2rem 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee;">
-    <h2 class="text-center" style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 2rem;">
-        Popular Articles from Our Blog
-    </h2>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-        {#each getPopularArticles() as article}
-            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; transition: transform 0.2s;">
-                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
-                    <span style="background: #e9ecef; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.7rem; font-weight: 500;">
-                        {article.category}
-                    </span>
-                    <span style="margin: 0 0.5rem; color: #6c757d;">•</span>
-                    <span style="color: #6c757d; font-size: 0.8rem;">{article.readTime}</span>
-                </div>
-                
-                <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem; font-weight: 600;">
-                    <a href="/blog/{article.slug}" style="color: inherit; text-decoration: none;">
-                        {article.title}
-                    </a>
-                </h3>
-                
-                <p style="color: #6c757d; margin-bottom: 1rem; font-size: 0.9rem;">
-                    {article.excerpt}
-                </p>
-                
-                <a href="/blog/{article.slug}" style="color: #007bff; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
-                    Read More →
-                </a>
-            </div>
-        {/each}
-    </div>
-    
-    <div style="text-align: center; margin-top: 2rem;">
-        <a href="/blog" class="btn btn-blog">
-            Visit Our Blog
-        </a>
-    </div>
-</div>
-
-<!-- Add this after the Popular Articles section on your main page -->
-
-<div class="seo-content-section">
-    <div class="container">
-        <h2 class="section-title">
-            The Technology Behind Disposable Email Addresses
-        </h2>
-        
-        <div class="seo-rich-content">
-            <p>In today's digital world, email addresses have become our online passports—essential for work communication, business connections, social interactions, and accessing services. Nearly all applications and online services require an email address for registration, as do loyalty programs, contests, and special offers.</p>
-            
-            <h3>What Are Disposable Email Addresses?</h3>
-            <p>Disposable Email Addresses (DEAs) provide an innovative solution for maintaining online privacy while accessing digital services. These temporary addresses allow you to:</p>
-            
-            <div class="feature-list">
-                <div class="feature-item">
-                    <span class="feature-icon">→</span>
-                    <span>Register for services without revealing your primary email</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">→</span>
-                    <span>Protect your identity from data breaches and spam lists</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">→</span>
-                    <span>Maintain control over your digital footprint</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">→</span>
-                    <span>Automatically expire after a set period</span>
-                </div>
-            </div>
-            
-            <p>When a disposable address is compromised or begins receiving unwanted emails, you can simply retire it without affecting your primary communication channels.</p>
-            
-            <h3>Practical Uses for Temporary Email Addresses</h3>
-            
-            <div class="use-cases">
-                <div class="use-case">
-                    <h4>Extended Free Trials</h4>
-                    <p>Many streaming services like Netflix, Hulu, and Amazon Prime offer limited-time trials. With disposable emails, you can extend your trial periods while maintaining access to these services.</p>
-                </div>
-                
-                <div class="use-case">
-                    <h4>Retail Offers Without Spam</h4>
-                    <p>Stores frequently request email addresses for special offers, which often leads to promotional spam. Temporary emails let you access these benefits without cluttering your primary inbox.</p>
-                </div>
-                
-                <div class="use-case">
-                    <h4>Application Testing</h4>
-                    <p>Developers can create multiple test accounts using disposable emails to thoroughly evaluate their applications before public release.</p>
-                </div>
-                
-                <div class="use-case">
-                    <h4>Multiple Account Management</h4>
-                    <p>When services require separate accounts for different purposes (like managing multiple social media profiles), disposable emails provide the necessary separation without creating permanent new accounts.</p>
-                </div>
-                
-                <div class="use-case">
-                    <h4>Spam Prevention</h4>
-                    <p>Using temporary emails for forums, discussion groups, and web forms significantly reduces spam in your primary inbox.</p>
-                </div>
-            </div>
-            
-            <h3>Choosing the Right Disposable Email Service</h3>
-            <p>The best temporary email providers offer:</p>
-            
-            <div class="feature-list">
-                <div class="feature-item">
-                    <span class="feature-icon">→</span>
-                    <span>Instant email generation with a single click</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">→</span>
-                    <span>No registration requirements or personal information collection</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">→</span>
-                    <span>Complete anonymity for users</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">→</span>
-                    <span>Unlimited email address creation</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">→</span>
-                    <span>Temporary inbox functionality</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">→</span>
-                    <span>User-friendly interface</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">→</span>
-                    <span>Customizable address options</span>
-                </div>
-            </div>
-            
-            <h3>How to Use Disposable Email Addresses Effectively</h3>
-            <p>While some users create secondary accounts with traditional providers like Gmail, this approach requires managing multiple inboxes. Professional disposable email services like Fire Temp Mail offer a more efficient solution by providing temporary addresses that forward to your primary email while maintaining complete separation.</p>
-            
-            <p>The advanced functionality allows you to filter messages—sending suspicious emails directly to trash while delivering important communications to your main inbox. If an address becomes compromised, you can simply disable it without affecting your other accounts.</p>
-            
-            <div class="conclusion-box">
-                <h4>Conclusion: Enhance Your Online Privacy</h4>
-                <p>Implementing a disposable email system is an effective strategy for participating in online forums, chat rooms, file-sharing services, and bulletin boards while protecting your primary identity. By using temporary addresses from Fire Temp Mail, you ensure your personal information remains secure and your inbox stays free from unwanted spam.</p>
-                
-                <p>Take control of your digital privacy today with our secure, anonymous temporary email service designed to keep your online activities separate from your personal communication channels.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-
+            <h1 class="text-center" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
+         Email Generator 
+            </h1>
+            <p class="text-center" style="margin-bottom: 32px;font-size: 20px;">
+Email Generator is a free temporary email generator that instantly creates a disposable email address. Your temp mail inbox works just like a real one, but it automatically expires after a certain time, keeping your personal inbox safe. Nowadays, most websites require email verification, but sharing your real address can lead to endless spam. With our instant temp mail service, you can quickly receive emails, confirm accounts, and protect your privacy with ease. Use anonymous email addresses anytime you need secure, fast, and free temporary emails.           
+ </p>
         </div>
 
         <!-- Footer -->
@@ -673,8 +533,8 @@ A <strong>disposable email address</strong> is a free <strong>temporary email se
             </p>
             <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
                 <span class="float-end">
+                    <a href="/" style="color: inherit;">Home</a>&nbsp;&nbsp;
                     <a href="/email-generator" style="color: inherit;">Email Generator</a>&nbsp;&nbsp;
-                    <a href="/10minutemail" style="color: inherit;">10 Minute Mail</a>&nbsp;&nbsp;
                     <a href="/blog" style="color: inherit;">Blog</a>&nbsp;&nbsp;
                     <a href="/privacy-policy" style="color: inherit;">Privacy</a>&nbsp;&nbsp;
                     <a href="/terms" style="color: inherit;">Terms</a>&nbsp;&nbsp;
@@ -690,107 +550,6 @@ A <strong>disposable email address</strong> is a free <strong>temporary email se
 </section>
 
 <style>
-
-    .seo-content-section {
-        background: linear-gradient(to bottom, #f8f9fa, #ffffff);
-        border-radius: 12px;
-        margin: 3rem 0;
-        padding: 2rem 0;
-    }
-    
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem;
-    }
-    
-    .section-title {
-        font-family: 'Inter Tight', sans-serif;
-        font-weight: 600;
-        margin-bottom: 2rem;
-        text-align: center;
-        color: #2c3e50;
-    }
-    
-    .seo-rich-content {
-        line-height: 1.8;
-        color: #2c3e50;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-    
-    .seo-rich-content h3 {
-        font-size: 1.5rem;
-        margin: 2rem 0 1rem 0;
-        color: #007bff;
-        font-weight: 600;
-    }
-    
-    .seo-rich-content h4 {
-        font-size: 1.2rem;
-        margin: 1.5rem 0 0.5rem 0;
-        color: #2c3e50;
-        font-weight: 600;
-    }
-    
-    .seo-rich-content p {
-        margin-bottom: 1.2rem;
-    }
-    
-    .feature-list {
-        margin-bottom: 1.5rem;
-    }
-    
-    .feature-item {
-        padding: 0.5rem 0;
-        display: flex;
-        align-items: flex-start;
-    }
-    
-    .feature-icon {
-        color: #007bff;
-        font-weight: bold;
-        margin-right: 0.5rem;
-        flex-shrink: 0;
-    }
-    
-    .use-cases {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1.5rem;
-        margin: 2rem 0;
-    }
-    
-    .use-case {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        transition: transform 0.2s;
-    }
-    
-    .use-case:hover {
-        transform: translateY(-5px);
-    }
-    
-    .conclusion-box {
-        background: #e8f4fd;
-        padding: 2rem;
-        border-radius: 8px;
-        border-left: 4px solid #007bff;
-        margin: 2rem 0;
-    }
-    
-    @media (max-width: 768px) {
-        .use-cases {
-            grid-template-columns: 1fr;
-        }
-        
-        .seo-rich-content h3 {
-            font-size: 1.3rem;
-        }
-    }
-    
     .toast-container {
         position: fixed;
         top: 20px;
@@ -828,147 +587,4 @@ A <strong>disposable email address</strong> is a free <strong>temporary email se
     .btn:hover {
         opacity: 0.8;
     }
-
-    .email-address-container {
-    margin-top: 32px;
-    margin-bottom: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.email-display {
-    padding: 8px 30px;
-    border: 2px solid rgb(215,215,215);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: white;
-    min-height: 50px;
-}
-
-.email-text {
-    margin-bottom: 0px;
-    font-size: 20px;
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.copy-btn {
-    margin-left: 12px;
-    background: transparent;
-    border: none;
-    padding: 4px 8px;
-    color: var(--bs-primary);
-}
-
-.regenerate-btn {
-    padding: 8px 30px;
-    border-radius: 16px;
-    border-width: 2px;
-    border-color: rgb(33,37,41);
-    background: rgb(33,37,41);
-    font-weight: 500;
-    height: 50px;
-    font-size: 20px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
-
-.btn-blog {
-    padding: 8px 30px;
-    border-radius: 16px;
-    border-width: 2px;
-    border-color: rgb(33,37,41);
-    background: rgb(33,37,41);
-    font-weight: 500;
-    height: 50px;
-    font-size: 20px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
-
-.regenerate-btn svg {
-    font-size: 24px;
-}
-
-/* Desktop styles - side by side layout */
-@media (min-width: 1200px) {
-    .email-address-container {
-        flex-direction: row;
-        align-items: center;
-    }
-    
-    .email-display {
-        width: 100%;
-        margin-right: 16px;
-        margin-bottom: 0;
-    }
-    
-    .regenerate-btn {
-        min-width: 220px;
-        margin-bottom: 0;
-    }
-}
-
-/* Mobile styles - stacked layout */
-@media (max-width: 1199px) {
-    .email-text {
-        white-space: normal;
-        text-overflow: clip;
-        word-break: break-all;
-    }
-}
-
-.copy-btn:hover,
-.regenerate-btn:hover {
-    opacity: 0.8;
-}
-/* Mobile styles for toast */
-@media (max-width: 768px) {
-    .toast-container {
-        top: 10px;
-        right: 10px;
-        left: 10px;
-        max-width: none;
-    }
-}
-/* Mobile styles for email list */
-@media (max-width: 768px) {
-    .email-item {
-        padding: 12px;
-    }
-    
-    .email-avatar {
-        width: 32px;
-        height: 32px;
-        font-size: 14px;
-        margin-right: 8px;
-    }
-    
-    .email-sender {
-        font-size: 14px;
-    }
-    
-    .email-date {
-        font-size: 11px;
-    }
-    
-    .email-subject {
-        font-size: 14px;
-    }
-    
-    .email-preview {
-        font-size: 12px;
-    }
-}
 </style>

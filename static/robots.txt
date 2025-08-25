@@ -1,14 +1,11 @@
+# Allow all bots to crawl the main site
 User-agent: *
 Allow: /
 
+# Sitemap for better indexing
 Sitemap: https://firetempmail.com/sitemap.xml
 
-# Block query parameters that don't change content
-Disallow: /*?*
-Disallow: /*&
-Disallow: /*=
-
-# Allow all static assets
+# Allow all static assets (CSS, JS, images) to help Google render pages
 Allow: /*.css$
 Allow: /*.js$
 Allow: /*.png$
@@ -19,12 +16,13 @@ Allow: /*.svg$
 Allow: /*.webp$
 Allow: /*.ico$
 
-# Specific instructions for search engines
+# Optional: block only tracking parameters, not content-changing queries
+Disallow: /*?utm_*
+Disallow: /*&utm_*
+
+# Ensure Googlebot and Bingbot can crawl everything
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
-
-# Crawl delay (optional - only if you have server load issues)
-# Crawl-delay: 1

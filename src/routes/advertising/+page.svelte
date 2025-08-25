@@ -38,6 +38,7 @@
             <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
                 <span class="float-end">
                     <a href="/email-generator" style="color: inherit;">Email Generator</a>&nbsp;&nbsp;
+                    <a href="/10minutemail" style="color: inherit;">10 Minute Mail</a>&nbsp;&nbsp;
                     <a href="/blog" style="color: inherit;">Blog</a>&nbsp;&nbsp;
                     <a href="/privacy-policy" style="color: inherit;">Privacy</a>&nbsp;&nbsp;
                     <a href="/terms" style="color: inherit;">Terms</a>&nbsp;&nbsp;
