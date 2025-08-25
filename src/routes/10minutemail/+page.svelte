@@ -515,11 +515,10 @@
             {/if}
 
             <h1 class="text-center" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
-         Email Generator 
+         10 Minute Mail 
             </h1>
             <p class="text-center" style="margin-bottom: 32px;font-size: 20px;">
-Email Generator is a free temporary email generator that instantly creates a disposable email address. Your temp mail inbox works just like a real one, but it automatically expires after a certain time, keeping your personal inbox safe. Nowadays, most websites require email verification, but sharing your real address can lead to endless spam. With our instant temp mail service, you can quickly receive emails, confirm accounts, and protect your privacy with ease. Use anonymous email addresses anytime you need secure, fast, and free temporary emails.           
- </p>
+10 Minute Mail is a free, instant disposable email service that self-destructs after ten minutes. With email required for countless online activities, exposing your real inbox can invite spam and unwanted messages. Using a temporary 10 Minute Mail keeps your personal email safe. Some users may also refer to this service as 10MinuteEmail, 10Minutemail, or 10 minutes email. </p>
         </div>
 
         <!-- Footer -->
