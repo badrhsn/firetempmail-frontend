@@ -13,7 +13,7 @@ export async function GET() {
             priority: '1.0'
         },
         {
-            url: '/privacy',
+            url: '/privacy-policy',
             lastmod: '2023-10-20',
             changefreq: 'monthly',
             priority: '0.8'
