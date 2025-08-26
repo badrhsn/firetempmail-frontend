@@ -2,10 +2,6 @@
     let copyrightYear = new Date().getFullYear();
 </script>
 
-<script>
-    let copyrightYear = new Date().getFullYear();
-</script>
-
 <svelte:head>
     <title>Terms of Service - Fire Temp Mail | Temporary Email Service</title>
     
