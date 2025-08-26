@@ -2,11 +2,25 @@
     let copyrightYear = new Date().getFullYear();
 </script>
 
+<script>
+    let copyrightYear = new Date().getFullYear();
+</script>
+
 <svelte:head>
-    <title>Terms of Service - Fire Temp Mail</title>
+    <title>Terms of Service - Fire Temp Mail | Temporary Email Service</title>
+    
     <meta name="description" content="Read the Terms of Service for Fire Temp Mail. Learn about acceptable use, service availability, premium features, and your rights and responsibilities when using our temporary email service.">
+    <meta name="keywords" content="Terms of Service, temp mail, disposable email, email privacy, email security, Fire Temp Mail">
     <meta name="robots" content="index, follow">
-</svelte:head>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://firetempmail.com/terms" />
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Terms of Service - Fire Temp Mail" />
+    <meta property="og:description" content="Review the Terms of Service for Fire Temp Mail. Understand acceptable use, service availability, premium features, and user responsibilities." />
+    <meta property="og:type" content="website" />
+    <meta prop
 
 <section class="py-4 py-xl-5">
     <div class="container" style="max-width: 800px;">
