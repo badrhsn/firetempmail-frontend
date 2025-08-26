@@ -20,7 +20,9 @@
     <meta property="og:title" content="Terms of Service - Fire Temp Mail" />
     <meta property="og:description" content="Review the Terms of Service for Fire Temp Mail. Understand acceptable use, service availability, premium features, and user responsibilities." />
     <meta property="og:type" content="website" />
-    <meta prop
+    <meta property="og:url" content="https://firetempmail.com/terms" />
+</svelte:head>
+
 
 <section class="py-4 py-xl-5">
     <div class="container" style="max-width: 800px;">
