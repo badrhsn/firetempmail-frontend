@@ -19,6 +19,7 @@
     let showForwardModal = false;
     let forwardToEmail = '';
     let emailToForward = null;
+    let isLoading = false;
 
     // automatically stop auto-refresh after 20 refreshes
     let stopReloadOn = 20;
@@ -33,6 +34,7 @@
     });
     
     async function loadEmails() {
+        isLoading = true;
         try {
             const response = await fetch(`${url}/mail/get?address=${address}`);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -56,6 +58,8 @@
         } catch (error) {
             console.error("Failed to load emails:", error);
             showToast("Error", "Failed to load emails. Please try again.", "error");
+        } finally {
+            isLoading = false;
         }
     }
     
@@ -128,6 +132,21 @@
                 console.error("Delete error:", error);
                 showToast("Error", "Failed to delete email. Please try again.", "error");
             }
+        }
+    }
+
+    // Delete current email address and generate a new one
+    function deleteEmailAddress() {
+        if (confirm("Are you sure you want to delete this email address? All messages will be lost.")) {
+            // Clear current emails
+            emails = [];
+            unreadEmails.clear();
+            stats = {};
+            
+            // Generate a new email
+            generateEmail(true);
+            
+            showToast("Success", "New email address generated", "success");
         }
     }
 
@@ -259,22 +278,6 @@
     // automatic refresh every 20 seconds
     const intervalID = setInterval(timedReload, 20000); 
 </script>
-<svelte:head>
-    <title>Email Generator - Fire Temp Mail | Free Temporary Email Service</title>
-    
-    <meta name="description" content="Generate a free temporary disposable email address instantly with Fire Temp Mail. Keep your real inbox safe from spam while receiving emails anonymously.">
-    <meta name="keywords" content="temporary email, disposable email, temp mail, free email generator, Fire Temp Mail, anonymous email">
-    <meta name="robots" content="index, follow">
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://firetempmail.com/email-generator" />
-
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="Email Generator - Fire Temp Mail" />
-    <meta property="og:description" content="Instantly generate a disposable email address with Fire Temp Mail. Keep your real inbox private and spam-free." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://firetempmail.com/email-generator" />
-</svelte:head>
 
 <!-- Toast Notifications -->
 <div class="toast-container">
@@ -394,21 +397,45 @@
                         {/if}
                     </button>
                 </div>
-                <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    Re-generate
-                </button>
+                <div class="email-action-buttons">
+                    <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Re-generate
+                    </button>
+                    
+                    <!-- New Refresh Button -->
+                    <button class="btn btn-secondary" on:click={manualReload} title="Refresh emails" disabled={isLoading}>
+                        {#if isLoading}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" class="spinner">
+                                <path d="M12 2V6M12 18V22M4.93 4.93L7.76 7.76M16.24 16.24L19.07 19.07M2 12H6M18 12H22M4.93 19.07L7.76 16.24M16.24 7.76L19.07 4.93" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        {:else}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        {/if}
+                        Refresh
+                    </button>
+                    
+                    <!-- New Delete Email Button -->
+                    <button class="btn btn-danger" on:click={deleteEmailAddress} title="Delete this email and generate a new one">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M19 7L18.1327 19.1425C18.0579 20.1891 17.187 21 16.1378 21H7.86224C6.81296 21 5.94208 20.1891 5.86732 19.1425L5 7M10 11V17M14 11V17M15 7V4C15 3.44772 14.5523 3 14 3H10C9.44772 3 9 3.44772 9 4V7M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Delete Email
+                    </button>
+                </div>
             </div>
             
-            {#if reloadActive}
+            {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
                     <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
                     <span>Waiting for incoming emails</span>
                 </div>
-            {:else}
+            {:else if !reloadActive}
                 <!-- Automatic refresh stopped -->
                 <div class="refresh-stopped">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
@@ -723,6 +750,9 @@
         font-weight: 500;
         border: none;
         font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
     
     .btn-primary {
@@ -734,6 +764,16 @@
         background: #f8f9fa;
         color: #212529;
         border: 1px solid #dee2e6;
+    }
+    
+    .btn-danger {
+        background: #dc3545;
+        color: white;
+    }
+    
+    .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
     }
     
     /* Away Banner */
@@ -775,20 +815,16 @@
     /* Email Address Container */
     .email-address-container {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
+        gap: 16px;
         margin-top: 32px;
         margin-bottom: 16px;
-        gap: 16px;
-        flex-wrap: wrap;
     }
     
     .email-display {
         padding: 8px 30px;
         border: 2px solid rgb(215,215,215);
         border-radius: 16px;
-        flex: 1;
-        min-width: 300px;
         height: 50px;
         display: flex;
         align-items: center;
@@ -815,6 +851,13 @@
         cursor: pointer;
     }
     
+    .email-action-buttons {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
     /* Loading and Status Indicators */
     .loading-indicator, .refresh-stopped {
         padding: 32px;
@@ -837,6 +880,16 @@
     .loading-indicator span, .refresh-stopped span {
         font-weight: 500;
         font-size: 20px;
+    }
+    
+    /* Spinner animation */
+    .spinner {
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
     }
     
     /* Email Detail View */
@@ -1179,8 +1232,13 @@
             min-width: unset;
         }
         
-        .btn-primary {
+        .email-action-buttons {
+            flex-direction: column;
+        }
+        
+        .btn {
             min-width: 100%;
+            justify-content: center;
         }
         
         .email-items {
