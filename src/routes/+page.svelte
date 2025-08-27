@@ -357,43 +357,38 @@
     </div>
 {/if}
 <section class="py-4 py-xl-5">
-
-    <div class="container" style="max-width: 800px;">
+    <div class="container">
         <div class="text-center p-4 p-lg-5">
             <!-- Header -->
-            <h1 class="text-start" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
-                <span style="font-weight: normal !important; color: rgb(255, 255, 255);">📮&nbsp;</span>
-Fire Temp Mail – Your Free Temporary Disposable Email Address
-
+            <h1>
+                <span>📮&nbsp;</span>
+                Fire Temp Mail – Your Free Temporary Disposable Email Generator
             </h1>
-<p class="text-center" style="margin-bottom: 32px;font-size: 18px;">
-Tired of spam and junk? With <strong>Temp Mail</strong>, you can instantly generate a free, disposable email address that protects your privacy. Whether you need a <strong>temp mail edu</strong> for free trials, a <strong>temp mail Gmail</strong> alternative for quick sign-ups, or just a temporary inbox to receive emails safely, Fire Temp Mail keeps your <strong>real email address</strong> secure and your <strong>personal inbox</strong> clean.
-</p>
+            <p class="lead">
+                Instantly generate a disposable Email Generator address. Keep your real email address private and your inbox clean from unwanted messages and spam.
+            </p>
             
-<!-- Email Address with Copy Button -->
-<div class="email-address-container">
-    <div class="email-display">
-        <p class="email-text">
-            <!--sse-->{address}<!--/sse-->
-        </p>
-        <button 
-            on:click={copyToClipboard} 
-            class="copy-btn" 
-            title="Copy to clipboard"
-            style="color: {isCopying ? 'var(--bs-success)' : 'var(--bs-primary)'};"
-        >
-            {#if isCopying}
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            {:else}
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M14 20H18C19.1046 20 20 19.1046 20 18V14C20 12.8954 19.1046 12 18 12H14C12.8954 12 12 12.8954 12 14V18C12 19.1046 12.8954 20 14 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            {/if}
-        </button>
-    </div>
-    <div class="email-action-buttons">
+            <!-- Email Address with Copy Button -->
+            <div class="email-address-container">
+                <div class="email-display">
+                    <p>{address}</p>
+                    <button 
+                        on:click={copyToClipboard} 
+                        class="btn-copy"
+                        title="Copy to clipboard"
+                    >
+                        {#if isCopying}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        {:else}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M14 20H18C19.1046 20 20 19.1046 20 18V14C20 12.8954 19.1046 12 18 12H14C12.8954 12 12 12.8954 12 14V18C12 19.1046 12.8954 20 14 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        {/if}
+                    </button>
+                </div>
+                <div class="email-action-buttons">
                     <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -423,27 +418,27 @@ Tired of spam and junk? With <strong>Temp Mail</strong>, you can instantly gener
                         Delete Email
                     </button>
                 </div>
-</div>
+            </div>
             
-            {#if reloadActive}
+            {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
-                <div style="padding: 32px;margin-bottom: 32px;">
-                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading" style="width: 32px;height: 32px;margin-top: -8px;margin-right: 16px;">
-                    <span style="font-weight: 500;font-size: 20px;">Waiting for incoming emails</span>
+                <div class="loading-indicator">
+                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
+                    <span>Waiting for incoming emails</span>
                 </div>
-            {:else}
+            {:else if !reloadActive}
                 <!-- Automatic refresh stopped -->
-                <div style="padding: 32px;margin-bottom: 32px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 32px;margin-top: -6px;margin-right: 16px;color: var(--bs-red);">
-                        <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <div class="refresh-stopped">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span style="font-weight: 500;font-size: 20px;">Automatic refresh stopped</span>
+                    <span>Automatic refresh stopped</span>
                 </div>
             {/if}
 
             {#if viewMode === 'detail' && selectedEmail}
                 <!-- Email Detail View -->
-                <div style="border: 2px solid rgb(215,215,215);border-radius: 16px;margin-bottom: 32px;overflow: hidden;">
+                                <div style="border: 2px solid rgb(215,215,215);border-radius: 16px;margin-bottom: 32px;overflow: hidden;">
                     <!-- Email Header -->
                     <div style="padding: 24px; border-bottom: 1px solid rgb(215,215,215);">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
@@ -506,32 +501,21 @@ Tired of spam and junk? With <strong>Temp Mail</strong>, you can instantly gener
                 <!-- Email List View -->
                 {#if emails.length === 0}
                     <!-- Empty State -->
-                    <div style="padding: 32px;border-radius: 16px;margin-bottom: 32px;border: 2px dashed rgb(215,215,215) ;">
-                        <p style="font-size: 20px;margin-top: 16px;font-weight: 500;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 44px;margin-bottom: 16px;color: rgb(215,215,215);">
-                                <path d="M3 21V17M3 17V5C3 3.89543 3.89543 3 5 3H11.5L12.5 4H21L18 10L21 16H12.5L11.5 15H5C3.89543 15 3 15.8954 3 17ZM12 3.5V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                            <br>
-                            Incoming mails will show up here
-                        </p>
+                    <div class="empty-inbox">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                        </svg>
+                        <p>Your inbox is empty</p>
+                        <p>Emails sent to your temporary address will appear here</p>
                     </div>
                 {:else}
                     <!-- Email List -->
-                    <div style="border: 2px solid rgb(215,215,215);border-radius: 16px;margin-bottom: 32px;overflow: hidden;">
+                    <div class="email-list-container">
                         <!-- List Header -->
-                        <div style="padding: 16px; background: #f8f9fa; border-bottom: 1px solid rgb(215,215,215); display: flex; justify-content: space-between; align-items: center;">
-                            <h3 style="margin: 0; font-size: 18px; font-weight: 600;">Inbox ({emails.length})</h3>
-                            <button on:click={manualReload} style="
-                                background: transparent;
-                                border: 1px solid rgb(215,215,215);
-                                border-radius: 8px;
-                                padding: 4px 12px;
-                                cursor: pointer;
-                                display: flex;
-                                align-items: center;
-                                font-size: 14px;
-                            ">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right: 6px;">
+                        <div class="list-header">
+                            <h3>Inbox ({emails.length})</h3>
+                            <button on:click={manualReload} class="btn-refresh">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
                                     <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                                 Refresh
@@ -539,41 +523,35 @@ Tired of spam and junk? With <strong>Temp Mail</strong>, you can instantly gener
                         </div>
                         
                         <!-- Email Items -->
-                        <div style="max-height: 500px; overflow-y: auto;">
+                        <div class="email-items">
                             {#each emails as email (email.recipient + '-' + email.suffix)}
                                 {#if email && email.sender && email.recipient}
-                                    <div on:click={() => viewEmail(email)} style="
-                                        padding: 16px;
-                                        border-bottom: 1px solid rgb(240,240,240);
-                                        cursor: pointer;
-                                        transition: background-color 0.2s;
-                                        display: flex;
-                                        align-items: flex-start;
-                                    " 
-                                    on:mouseenter={(e) => e.currentTarget.style.backgroundColor = '#f8f9fa'} 
-                                    on:mouseleave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
-
-                                        <div style="flex-shrink: 0; margin-right: 12px;">
-                                            <div style="width: 40px; height: 40px; border-radius: 50%; background: #e9ecef; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #6c757d;">
+                                    <div 
+                                        on:click={() => markAsRead(email)}
+                                        on:keypress={(e) => e.key === 'Enter' || e.key === ' ' ? markAsRead(email) : null}
+                                        role="button"
+                                        tabindex="0"
+                                        class:unread={isUnread(email)}
+                                        class="email-item"
+                                    >
+                                        <div class="email-avatar">
+                                            <div class="avatar">
                                                 {email.sender ? email.sender.charAt(0).toUpperCase() : '?'}
                                             </div>
+                                            {#if isUnread(email)}
+                                                <div class="unread-indicator"></div>
+                                            {/if}
                                         </div>
                                         
-                                        <div style="flex: 1; min-width: 0;">
-                                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px;">
-                                                <span style="font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 12px;">
-                                                    {email.sender || 'Unknown Sender'}
-                                                </span>
-                                                <span style="color: var(--bs-secondary); font-size: 12px; flex-shrink: 0;">
-                                                    {formatDate(email.date)}
-                                                </span>
+                                        <div class="email-content">
+                                            <div class="email-header">
+                                                <span class="email-sender">{email.sender || 'Unknown Sender'}</span>
+                                                <span class="email-date">{formatDate(email.date)}</span>
                                             </div>
                                             
-                                            <p style="font-weight: 600; margin: 0 0 4px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                                {email.subject || '(No Subject)'}
-                                            </p>
+                                            <p class="email-subject">{email.subject || '(No Subject)'}</p>
                                             
-                                            <p style="color: var(--bs-secondary); margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px;">
+                                            <p class="email-preview">
                                                 {getEmailPreview(email["content-html"] || email["content-text"])}
                                             </p>
                                         </div>
@@ -1059,4 +1037,701 @@ A <strong>disposable email address</strong> is a free <strong>temporary email se
         font-size: 12px;
     }
 }
+
+ /* Toast Notifications */
+    .toast-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 350px;
+    }
+    
+    .toast {
+        background: white;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        display: flex;
+        align-items: flex-start;
+        animation: slideIn 0.3s ease-out;
+        max-width: 100%;
+    }
+    
+    .toast-success {
+        border-left: 4px solid var(--bs-success);
+    }
+    
+    .toast-error {
+        border-left: 4px solid var(--bs-danger);
+    }
+    
+    .toast-info {
+        border-left: 4px solid var(--bs-info);
+    }
+    
+    .toast-icon {
+        margin-right: 0.75rem;
+        flex-shrink: 0;
+    }
+    
+    .toast-success .toast-icon {
+        color: var(--bs-success);
+    }
+    
+    .toast-error .toast-icon {
+        color: var(--bs-danger);
+    }
+    
+    .toast-info .toast-icon {
+        color: var(--bs-info);
+    }
+    
+    .toast-content {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .toast-content h4 {
+        margin: 0 0 0.25rem 0;
+        font-size: 0.9rem;
+        color: var(--bs-dark);
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .toast-content p {
+        margin: 0;
+        font-size: 0.8rem;
+        color: var(--bs-secondary);
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .toast-close {
+        background: none;
+        border: none;
+        padding: 0;
+        margin-left: 0.5rem;
+        cursor: pointer;
+        color: var(--bs-secondary);
+        flex-shrink: 0;
+    }
+    
+    /* Modal */
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10001;
+        padding: 20px;
+    }
+    
+    .modal {
+        background: white;
+        border-radius: 16px;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+    }
+    
+    .modal-header {
+        padding: 24px 24px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .modal-header h3 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+    
+    .modal-close {
+        background: none;
+        border: none;
+        padding: 4px;
+        cursor: pointer;
+        color: var(--bs-secondary);
+    }
+    
+    .modal-body {
+        padding: 24px;
+    }
+    
+    .modal-body p {
+        margin-bottom: 16px;
+    }
+    
+    .modal-input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid rgb(215,215,215);
+        border-radius: 8px;
+        font-size: 16px;
+    }
+    
+    .modal-footer {
+        padding: 0 24px 24px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+        border: none;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .btn-primary {
+        background: rgb(33,37,41);
+        color: white;
+    }
+    
+    .btn-secondary {
+        background: #f8f9fa;
+        color: #212529;
+        border: 1px solid #dee2e6;
+    }
+    
+    .btn-danger {
+        background: #dc3545;
+        color: white;
+    }
+    
+    .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    
+    /* Away Banner */
+    .away-banner {
+        background: var(--bs-red);
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: white;
+    }
+    
+    /* Container */
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    /* Header */
+    h1 {
+        font-family: 'Inter Tight', sans-serif;
+        font-weight: 600;
+        margin-bottom: 16px;
+        text-align: left;
+    }
+    
+    h1 span {
+        font-weight: normal !important;
+        color: rgb(255, 255, 255);
+    }
+    
+    .lead {
+        text-align: left;
+        margin-bottom: 32px;
+        font-size: 20px;
+    }
+    
+    /* Email Address Container */
+    .email-address-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 32px;
+        margin-bottom: 16px;
+    }
+    
+    .email-display {
+        padding: 8px 30px;
+        border: 2px solid rgb(215,215,215);
+        border-radius: 16px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: white;
+    }
+    
+    .email-display p {
+        margin-bottom: 0;
+        font-size: 20px;
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: left;
+    }
+    
+    .btn-copy {
+        margin-left: 12px;
+        background: transparent;
+        border: none;
+        padding: 4px 8px;
+        color: var(--bs-primary);
+        cursor: pointer;
+    }
+    
+    .email-action-buttons {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    /* Loading and Status Indicators */
+    .loading-indicator, .refresh-stopped {
+        padding: 32px;
+        margin-bottom: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+    }
+    
+    .loading-indicator img {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .refresh-stopped svg {
+        color: var(--bs-red);
+    }
+    
+    .loading-indicator span, .refresh-stopped span {
+        font-weight: 500;
+        font-size: 20px;
+    }
+    
+    /* Spinner animation */
+    .spinner {
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    
+    /* Email Detail View */
+    .email-detail {
+        border: 2px solid rgb(215,215,215);
+        border-radius: 16px;
+        margin-bottom: 32px;
+        overflow: hidden;
+    }
+    
+    .email-header {
+        padding: 24px;
+        border-bottom: 1px solid rgb(215,215,215);
+    }
+    
+    .email-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 16px;
+    }
+    
+    .btn-back {
+        background: transparent;
+        border: none;
+        padding: 4px 8px;
+        cursor: pointer;
+        color: var(--bs-primary);
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+    }
+    
+    .action-buttons {
+        display: flex;
+        gap: 8px;
+    }
+    
+    .btn-action {
+        padding: 4px 8px;
+        border-radius: 8px;
+        background: transparent;
+        border: 1px solid rgb(215,215,215);
+        cursor: pointer;
+    }
+    
+    .btn-delete {
+        color: var(--bs-red);
+    }
+    
+    .email-detail h2 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    
+    .email-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .sender {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+    }
+    
+    .sender svg {
+        margin-right: 8px;
+        color: rgb(255,221,51);
+    }
+    
+    .email-date {
+        color: var(--bs-secondary);
+        font-size: 14px;
+    }
+    
+    .email-body {
+        padding: 24px;
+        overflow-y: auto;
+        max-height: 400px;
+        word-break: break-word;
+    }
+    
+    /* Empty Inbox */
+    .empty-inbox {
+        padding: 32px;
+        border-radius: 16px;
+        margin-bottom: 32px;
+        border: 2px dashed rgb(215,215,215);
+        text-align: center;
+    }
+    
+    .empty-inbox svg {
+        color: rgb(215,215,215);
+        margin-bottom: 16px;
+    }
+    
+    .empty-inbox p:first-of-type {
+        font-size: 20px;
+        margin-top: 16px;
+        font-weight: 500;
+        color: #6c757d;
+    }
+    
+    .empty-inbox p:last-of-type {
+        color: #6c757d;
+    }
+    
+    /* Email List */
+    .email-list-container {
+        border: 2px solid rgb(215,215,215);
+        border-radius: 16px;
+        margin-bottom: 32px;
+        overflow: hidden;
+    }
+    
+    .list-header {
+        padding: 16px;
+        background: #f8f9fa;
+        border-bottom: 1px solid rgb(215,215,215);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .list-header h3 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    
+    .btn-refresh {
+        background: transparent;
+        border: 1px solid rgb(215,215,215);
+        border-radius: 8px;
+        padding: 4px 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        gap: 6px;
+    }
+    
+    .email-items {
+        max-height: 500px;
+        overflow-y: auto;
+    }
+    
+    .email-item {
+        padding: 16px;
+        border-bottom: 1px solid rgb(240,240,240);
+        cursor: pointer;
+        transition: background-color 0.2s;
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .email-item:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .email-item.unread {
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+    
+    .email-item.unread:hover {
+        background-color: rgba(13, 110, 253, 0.08);
+    }
+    
+    .email-avatar {
+        flex-shrink: 0;
+        margin-right: 12px;
+        position: relative;
+    }
+    
+    .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #e9ecef;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        color: #6c757d;
+    }
+    
+    .unread-indicator {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--bs-primary);
+        border: 2px solid white;
+    }
+    
+    .email-content {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .email-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 4px;
+    }
+    
+    .email-sender {
+        font-weight: 600;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-right: 12px;
+    }
+    
+    .email-item.unread .email-sender {
+        font-weight: 700;
+        color: var(--bs-dark);
+    }
+    
+    .email-date {
+        color: var(--bs-secondary);
+        font-size: 12px;
+        flex-shrink: 0;
+    }
+    
+    .email-subject {
+        font-weight: 600;
+        margin: 0 0 4px 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .email-item.unread .email-subject {
+        font-weight: 700;
+        color: var(--bs-dark);
+    }
+    
+    .email-preview {
+        color: var(--bs-secondary);
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 14px;
+    }
+    
+    /* Description */
+    h2 {
+        font-family: 'Inter Tight', sans-serif;
+        font-weight: 600;
+        margin-bottom: 16px;
+        text-align: center;
+    }
+    
+    .description {
+        margin-bottom: 32px;
+        font-size: 20px;
+        text-align: center;
+    }
+    
+    /* Footer */
+    .stats {
+        margin-bottom: 32px;
+        font-size: 16px;
+        text-align: left;
+    }
+    
+    .count {
+        color: rgb(255,255,255);
+        background: rgb(33,37,41);
+        border-radius: 10px;
+        padding: 4px 12px;
+        font-size: 14px;
+        margin-right: 2px;
+        margin-left: 2px;
+        font-family: monospace;
+    }
+    
+    .footer-links {
+        margin-bottom: 4px;
+        font-size: 16px;
+        text-align: left;
+    }
+    
+    .float-end {
+        float: right;
+    }
+    
+    .copyright {
+        margin-bottom: 4px;
+        font-size: 16px;
+        text-align: left;
+    }
+    
+    /* Animations */
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes scaleIn {
+        from { 
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        to { 
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .email-address-container {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        .email-display {
+            width: 100%;
+            margin-right: 0;
+            min-width: unset;
+        }
+        
+        .email-action-buttons {
+            flex-direction: column;
+        }
+        
+        .btn {
+            min-width: 100%;
+            justify-content: center;
+        }
+        
+        .email-items {
+            max-height: 300px;
+        }
+        
+        .modal-backdrop {
+            padding: 10px;
+        }
+        
+        .modal {
+            width: 95%;
+        }
+        
+        .float-end {
+            float: none;
+            display: block;
+            text-align: center;
+            margin-top: 16px;
+        }
+        
+        .footer-links {
+            text-align: center;
+        }
+        
+        .email-item {
+            padding: 12px;
+        }
+        
+        .avatar {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .email-sender {
+            font-size: 14px;
+        }
+        
+        .email-date {
+            font-size: 11px;
+        }
+        
+        .email-subject {
+            font-size: 14px;
+        }
+        
+        .email-preview {
+            font-size: 12px;
+        }
+    }
 </style>
