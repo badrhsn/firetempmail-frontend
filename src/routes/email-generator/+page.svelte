@@ -602,7 +602,7 @@
         </div>
 
         <!-- Footer -->
-        <div class="text-center p-4 p-lg-5">
+<div class="text-center p-4 p-lg-5">
             <p class="stats">
                 We've received&nbsp;
                 <span class="count">{stats.count || '0'}</span>
