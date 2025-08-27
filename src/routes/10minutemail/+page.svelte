@@ -587,23 +587,25 @@
 
         <!-- Footer -->
         <div class="text-center p-4 p-lg-5">
-            <p class="stats">
+            <p class="text-start" style="margin-bottom: 32px;font-size: 16px;">
                 We've received&nbsp;
-                <span class="count">{stats.count || '0'}</span>
+                <span class="font-monospace" style="color: rgb(255,255,255);background: rgb(33,37,41);border-radius: 10px;padding: 4px 12px;font-size: 14px;margin-right: 2px;margin-left: 2px;">
+                    {stats.count || '0'}
+                </span>
                 &nbsp;emails so far.
             </p>
-            <p class="footer-links">
+            <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
                 <span class="float-end">
-                    <a href="/">Home</a>&nbsp;&nbsp;
-                    <a href="/10minutemail">10 Minute Mail</a>&nbsp;&nbsp;
-                    <a href="/blog">Blog</a>&nbsp;&nbsp;
-                    <a href="/privacy-policy">Privacy</a>&nbsp;&nbsp;
-                    <a href="/terms">Terms</a>&nbsp;&nbsp;
-                    <a href="/faq">FAQ</a>&nbsp;&nbsp;
-                    <a href="/contact">Contact</a>
+                    <a href="/" style="color: inherit;">Home</a>&nbsp;&nbsp;
+                    <a href="/email-generator" style="color: inherit;">Email Generator</a>&nbsp;&nbsp;
+                    <a href="/blog" style="color: inherit;">Blog</a>&nbsp;&nbsp;
+                    <a href="/privacy-policy" style="color: inherit;">Privacy</a>&nbsp;&nbsp;
+                    <a href="/terms" style="color: inherit;">Terms</a>&nbsp;&nbsp;
+                    <a href="/faq" style="color: inherit;">FAQ</a>&nbsp;&nbsp;
+                    <a href="/contact" style="color: inherit;">Contact</a>
                 </span>
             </p>
-            <p class="copyright">
+            <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
                 Copyright © {copyrightYear}
             </p>
         </div>
