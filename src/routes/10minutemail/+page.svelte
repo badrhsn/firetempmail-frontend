@@ -207,9 +207,7 @@
 
     // automatic refresh every 20 seconds
     const intervalID = setInterval(timedReload, 20000); 
-</script>
-<script>
-    let copyrightYear = new Date().getFullYear();
+
 </script>
 
 <svelte:head>
