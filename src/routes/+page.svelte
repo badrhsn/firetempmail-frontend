@@ -21,6 +21,14 @@
     let reloadCounter = 0;
     let reloadActive = true;
   
+
+    
+    let unreadEmails = new Set(); // Track unread emails
+    let showForwardModal = false;
+    let forwardToEmail = '';
+    let emailToForward = null;
+    let isLoading = false;
+
     onMount(async function () {
         await loadEmails();
         if (address === null) {
