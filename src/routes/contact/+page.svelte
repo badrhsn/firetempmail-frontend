@@ -55,19 +55,19 @@
         </div>
 
         <!-- Footer -->
-        <div class="text-center p-4 p-lg-5">
-            <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
+               <div class="text-center p-4 p-lg-5">
+            <p class="footer-links">
                 <span class="float-end">
-                    <a href="/" style="color: inherit;">Home</a>&nbsp;&nbsp;
-                    <a href="/email-generator" style="color: inherit;">Email Generator</a>&nbsp;&nbsp;
-                    <a href="/10minutemail" style="color: inherit;">10 Minute Mail</a>&nbsp;&nbsp;
-                    <a href="/blog" style="color: inherit;">Blog</a>&nbsp;&nbsp;
-                    <a href="/privacy-policy" style="color: inherit;">Privacy</a>&nbsp;&nbsp;
-                    <a href="/terms" style="color: inherit;">Terms</a>&nbsp;&nbsp;
-                    <a href="/faq" style="color: inherit;">FAQ</a>&nbsp;&nbsp;
+                    <a href="/">Home</a>&nbsp;&nbsp;
+                    <a href="/10minutemail">10 Minute Mail</a>&nbsp;&nbsp;
+                    <a href="/blog">Blog</a>&nbsp;&nbsp;
+                    <a href="/privacy-policy">Privacy</a>&nbsp;&nbsp;
+                    <a href="/terms">Terms</a>&nbsp;&nbsp;
+                    <a href="/faq">FAQ</a>&nbsp;&nbsp;
+                    <a href="/contact">Contact</a>
                 </span>
             </p>
-            <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
+            <p class="copyright">
                 Copyright © {copyrightYear}
             </p>
         </div>
