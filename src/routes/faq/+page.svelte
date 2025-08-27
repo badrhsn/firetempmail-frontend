@@ -144,20 +144,6 @@
     </script>
 </svelte:head>
 
-<!-- Schema.org Breadcrumb markup -->
-<nav aria-label="Breadcrumb" class="breadcrumb" style="max-width: 800px; margin: 0 auto; padding: 1rem 0;">
-    <ol itemscope itemtype="https://schema.org/BreadcrumbList">
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
-            <meta itemprop="position" content="1" />
-        </li>
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="name">FAQ</span>
-            <meta itemprop="position" content="2" />
-        </li>
-    </ol>
-</nav>
-
 <section class="py-4 py-xl-5">
     <div class="container" style="max-width: 800px;">
         <div class="text-center p-4 p-lg-5">
