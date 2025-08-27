@@ -208,6 +208,33 @@
     // automatic refresh every 20 seconds
     const intervalID = setInterval(timedReload, 20000); 
 </script>
+<script>
+    let copyrightYear = new Date().getFullYear();
+</script>
+
+<svelte:head>
+    <title>10 Minute Mail - Fire Temp Mail</title>
+    <meta name="description" content="Get a free, disposable 10 Minute Mail address instantly. Protect your personal inbox from spam with Fire Temp Mail's temporary email service.">
+    <meta name="keywords" content="10 Minute Mail, disposable email, temporary email, Fire Temp Mail, temp mail, free email">
+    <meta name="author" content="Fire Temp Mail">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Open Graph / Social sharing -->
+    <meta property="og:title" content="10 Minute Mail - Fire Temp Mail">
+    <meta property="og:description" content="Protect your personal inbox from spam with a free 10 Minute Mail address from Fire Temp Mail.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://firetempmail.com/10minutemail">
+    <meta property="og:image" content="https://firetempmail.com/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="10 Minute Mail - Fire Temp Mail">
+    <meta name="twitter:description" content="Protect your personal inbox from spam with a free 10 Minute Mail address from Fire Temp Mail.">
+    <meta name="twitter:image" content="https://firetempmail.com/og-image.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://firetempmail.com/10minutemail">
+</svelte:head>
 
 <!-- Toast Notifications -->
 <div class="toast-container" style="

@@ -4,7 +4,28 @@
 
 <svelte:head>
     <title>Contact Us - Fire Temp Mail</title>
+    <meta name="description" content="Get in touch with Fire Temp Mail. Contact our support, business, or report abuse via email. We're here to help!">
+    <meta name="keywords" content="contact, support, email, Fire Temp Mail, temp mail, report abuse, business inquiry">
+    <meta name="author" content="Fire Temp Mail">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Open Graph / Social sharing -->
+    <meta property="og:title" content="Contact Us - Fire Temp Mail">
+    <meta property="og:description" content="Get in touch with Fire Temp Mail. Contact our support, business, or report abuse via email.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://firetempmail.com/contact">
+    <meta property="og:image" content="https://firetempmail.com/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact Us - Fire Temp Mail">
+    <meta name="twitter:description" content="Get in touch with Fire Temp Mail. Contact our support, business, or report abuse via email.">
+    <meta name="twitter:image" content="https://firetempmail.com/og-image.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://firetempmail.com/contact">
 </svelte:head>
+
 
 <section class="py-4 py-xl-5">
     <div class="container" style="max-width: 800px;">
