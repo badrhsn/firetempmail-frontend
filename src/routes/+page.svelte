@@ -368,7 +368,7 @@
                 Instantly generate a disposable Email Generator address. Keep your real email address private and your inbox clean from unwanted messages and spam.
             </p>
             
-            <!-- Email Address with Copy Button -->
+             <!-- Email Address with Copy Button -->
             <div class="email-address-container">
                 <div class="email-display">
                     <p>{address}</p>
@@ -389,8 +389,14 @@
                     </button>
                 </div>
                 <div class="email-action-buttons">
+                    <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Re-generate
+                    </button>
                     
-                    <!-- New Refresh Button -->
+                    <!-- Refresh Button -->
                     <button class="btn btn-secondary" on:click={manualReload} title="Refresh emails" disabled={isLoading}>
                         {#if isLoading}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" class="spinner">
@@ -402,14 +408,6 @@
                             </svg>
                         {/if}
                         Refresh
-                    </button>
-                    
-                    <!-- New Delete Email Button -->
-                    <button class="btn btn-danger" on:click={() => generateEmail(true)} title="Delete this email and generate a new one">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <path d="M19 7L18.1327 19.1425C18.0579 20.1891 17.187 21 16.1378 21H7.86224C6.81296 21 5.94208 20.1891 5.86732 19.1425L5 7M10 11V17M14 11V17M15 7V4C15 3.44772 14.5523 3 14 3H10C9.44772 3 9 3.44772 9 4V7M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        Delete
                     </button>
                 </div>
             </div>
@@ -1180,6 +1178,7 @@ A <strong>disposable email address</strong> is a free <strong>temporary email se
     }
     
     .btn {
+        padding: 10px 20px;
         border-radius: 8px;
         cursor: pointer;
         font-weight: 500;
@@ -1287,12 +1286,50 @@ A <strong>disposable email address</strong> is a free <strong>temporary email se
     }
     
     .email-action-buttons {
-        display: -webkit-inline-box;
+        display: flex;
         gap: 12px;
         justify-content: center;
         flex-wrap: wrap;
+        width: 100%;
     }
-    
+
+        .email-action-buttons .btn {
+        flex: 1;
+        min-width: 140px;
+        max-width: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 16px;
+        transition: all 0.2s ease;
+    }
+        .email-action-buttons .btn-primary {
+        background: rgb(33,37,41);
+        color: white;
+        border: 2px solid rgb(33,37,41);
+    }
+
+        .email-action-buttons .btn-secondary {
+        background: #f8f9fa;
+        color: #212529;
+        border: 2px solid #dee2e6;
+    }
+    .email-action-buttons .btn:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+      .email-action-buttons .btn:active {
+        transform: translateY(0);
+    }
+       .email-action-buttons .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
     /* Loading and Status Indicators */
     .loading-indicator, .refresh-stopped {
         padding: 32px;
@@ -1653,6 +1690,21 @@ A <strong>disposable email address</strong> is a free <strong>temporary email se
             transform: scale(1);
         }
     }
+        @media (min-width: 769px) and (max-width: 992px) {
+        .email-action-buttons {
+            flex-direction: row;
+        }
+        
+        .email-action-buttons .btn {
+            min-width: 160px;
+        }
+    }
+
+    @media (min-width: 993px) {
+        .email-action-buttons {
+            flex-direction: row;
+        }
+    }
     
     /* Responsive Design */
     @media (max-width: 768px) {
@@ -1667,10 +1719,18 @@ A <strong>disposable email address</strong> is a free <strong>temporary email se
             min-width: unset;
         }
         
+        .email-action-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
         
+        .email-action-buttons .btn {
+            width: 100%;
+            max-width: 100%;
+        }
         
         .btn {
-            min-width: 50%;
+            min-width: 100%;
             justify-content: center;
         }
         
