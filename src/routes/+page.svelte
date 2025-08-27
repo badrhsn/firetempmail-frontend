@@ -47,8 +47,8 @@
     
     // @ts-ignore
     async function generateEmail(reload) {
-        let words = generate(2)
-        receivingEmail.set(words[0] + "." + words[1] + Math.floor(Math.random() * 1000) + "@firetempmail.com")
+        let words = generate(1)
+        receivingEmail.set(words[0] + Math.floor(Math.random() * 1000) + "@firetempmail.com")
 
         if (reload) {
             // use this instead of window.location.reload(); to avoid resending POST requests
@@ -69,6 +69,21 @@
         }
         await loadEmails();
         reloadCounter += 1;
+    }
+
+        // Delete current email address and generate a new one
+    function deleteEmailAddress() {
+        if (confirm("Are you sure you want to delete this email address? All messages will be lost.")) {
+            // Clear current emails
+            emails = [];
+            unreadEmails.clear();
+            stats = {};
+            
+            // Generate a new email
+            generateEmail(true);
+            
+            showToast("Success", "New email address generated", "success");
+        }
     }
 
     async function deleteEmail(email) {
@@ -329,12 +344,36 @@ Tired of spam and junk? With <strong>Temp Mail</strong>, you can instantly gener
             {/if}
         </button>
     </div>
-    <button class="regenerate-btn" type="button" on:click={() => generateEmail(true)}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none">
-            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Re-generate
-    </button>
+    <div class="email-action-buttons">
+                    <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Re-generate
+                    </button>
+                    
+                    <!-- New Refresh Button -->
+                    <button class="btn btn-secondary" on:click={manualReload} title="Refresh emails" disabled={isLoading}>
+                        {#if isLoading}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" class="spinner">
+                                <path d="M12 2V6M12 18V22M4.93 4.93L7.76 7.76M16.24 16.24L19.07 19.07M2 12H6M18 12H22M4.93 19.07L7.76 16.24M16.24 7.76L19.07 4.93" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        {:else}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        {/if}
+                        Refresh
+                    </button>
+                    
+                    <!-- New Delete Email Button -->
+                    <button class="btn btn-danger" on:click={deleteEmailAddress} title="Delete this email and generate a new one">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M19 7L18.1327 19.1425C18.0579 20.1891 17.187 21 16.1378 21H7.86224C6.81296 21 5.94208 20.1891 5.86732 19.1425L5 7M10 11V17M14 11V17M15 7V4C15 3.44772 14.5523 3 14 3H10C9.44772 3 9 3.44772 9 4V7M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Delete Email
+                    </button>
+                </div>
 </div>
             
             {#if reloadActive}
