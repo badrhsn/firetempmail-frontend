@@ -598,9 +598,6 @@ A <strong>disposable email address</strong> is a free <strong>temporary email se
                     {article.excerpt}
                 </p>
                 
-                <a href="/blog/{article.slug}" style="color: #007bff; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
-                    Read More →
-                </a>
             </div>
         {/each}
     </div>

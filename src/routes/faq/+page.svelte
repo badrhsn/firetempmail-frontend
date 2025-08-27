@@ -124,7 +124,6 @@
     <meta property="og:title" content="Frequently Asked Questions - Fire Temp Mail" />
     <meta property="og:description" content="Get answers to common questions about Fire Temp Mail's temporary email service for privacy and security." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://firetempmail.com/faq" />
     
     <!-- JSON-LD structured data for FAQ SEO -->
     <script type="application/ld+json">

@@ -270,22 +270,27 @@
     const intervalID = setInterval(timedReload, 20000); 
 </script>
 <svelte:head>
-    <title>Email Generator - Fire Temp Mail | Free Temporary Email Service</title>
-    
-    <meta name="description" content="Generate a free temporary disposable email address instantly with Fire Temp Mail. Keep your real inbox safe from spam while receiving emails anonymously.">
-    <meta name="keywords" content="temporary email, disposable email, temp mail, free email generator, Fire Temp Mail, anonymous email">
-    <meta name="robots" content="index, follow">
+    <title>10 Minute Mail - Fire Temp Mail</title>
+    <meta name="description" content="Get a free, disposable 10 Minute Mail address instantly. Protect your personal inbox from spam with Fire Temp Mail's temporary email service.">
+    <meta name="keywords" content="10 Minute Mail, disposable email, temporary email, Fire Temp Mail, temp mail, free email">
+    <meta name="author" content="Fire Temp Mail">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Open Graph / Social sharing -->
+    <meta property="og:title" content="10 Minute Mail - Fire Temp Mail">
+    <meta property="og:description" content="Protect your personal inbox from spam with a free 10 Minute Mail address from Fire Temp Mail.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://firetempmail.com/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="10 Minute Mail - Fire Temp Mail">
+    <meta name="twitter:description" content="Protect your personal inbox from spam with a free 10 Minute Mail address from Fire Temp Mail.">
+    <meta name="twitter:image" content="https://firetempmail.com/og-image.png">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://firetempmail.com/email-generator" />
-
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="Email Generator - Fire Temp Mail" />
-    <meta property="og:description" content="Instantly generate a disposable email address with Fire Temp Mail. Keep your real inbox private and spam-free." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://firetempmail.com/email-generator" />
+    <link rel="canonical" href="https://firetempmail.com/10minutemail">
 </svelte:head>
-
 <!-- Toast Notifications -->
 <div class="toast-container">
     {#each toasts as toast (toast.id)}
@@ -597,7 +602,7 @@
             <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
                 <span class="float-end">
                     <a href="/" style="color: inherit;">Home</a>&nbsp;&nbsp;
-                    <a href="/email-generator" style="color: inherit;">Email Generator</a>&nbsp;&nbsp;
+                    <a href="/10minutemail" style="color: inherit;">10 Minute Mail</a>&nbsp;&nbsp;
                     <a href="/blog" style="color: inherit;">Blog</a>&nbsp;&nbsp;
                     <a href="/privacy-policy" style="color: inherit;">Privacy</a>&nbsp;&nbsp;
                     <a href="/terms" style="color: inherit;">Terms</a>&nbsp;&nbsp;
