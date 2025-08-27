@@ -269,6 +269,38 @@
     // automatic refresh every 20 seconds
     const intervalID = setInterval(timedReload, 20000); 
 </script>
+<svelte:head>
+    <!-- Page Title -->
+    <title>Fire Temp Mail – Free Temporary Disposable Email Generator</title>
+
+    <!-- Meta Tags -->
+    <meta name="description" content="Generate a free temporary disposable email address instantly with Fire Temp Mail. Protect your inbox from spam and keep your real email private." />
+    <meta name="keywords" content="temporary email, disposable email, temp mail, free email generator, anonymous email, spam-free inbox" />
+    <meta name="author" content="Fire Temp Mail" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:title" content="Fire Temp Mail – Free Temporary Disposable Email Generator" />
+    <meta property="og:description" content="Generate a free temporary disposable email address instantly with Fire Temp Mail. Protect your inbox from spam and keep your real email private." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourdomain.com" />
+    <meta property="og:image" content="https://yourdomain.com/assets/img/social-preview.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Fire Temp Mail – Free Temporary Disposable Email Generator" />
+    <meta name="twitter:description" content="Generate a free temporary disposable email address instantly with Fire Temp Mail. Protect your inbox from spam and keep your real email private." />
+    <meta name="twitter:image" content="https://yourdomain.com/assets/img/social-preview.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+    <!-- Preconnect for fonts if needed -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+</svelte:head>
 
 <!-- Toast Notifications -->
 <div class="toast-container">
