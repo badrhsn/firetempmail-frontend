@@ -73,8 +73,8 @@
     
     // @ts-ignore
     async function generateEmail(reload) {
-        let words = generate(2)
-        receivingEmail.set(words[0] + "." + words[1] + Math.floor(Math.random() * 1000) + "@firetempmail.com")
+        let words = generate(1)
+        receivingEmail.set(words[0] + Math.floor(Math.random() * 1000) + "@firetempmail.com")
 
         if (reload) {
             // use this instead of window.location.reload(); to avoid resending POST requests
