@@ -13,7 +13,6 @@
     <meta property="og:title" content="Contact Us - Fire Temp Mail">
     <meta property="og:description" content="Get in touch with Fire Temp Mail. Contact our support, business, or report abuse via email.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://firetempmail.com/contact">
     <meta property="og:image" content="https://firetempmail.com/og-image.png">
 
     <!-- Twitter Card -->

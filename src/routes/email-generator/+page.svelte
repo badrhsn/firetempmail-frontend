@@ -270,38 +270,20 @@
     const intervalID = setInterval(timedReload, 20000); 
 </script>
 <svelte:head>
-    <!-- Page Title -->
-    <title>Fire Temp Mail – Free Temporary Disposable Email Generator</title>
+    <title>Email Generator - Fire Temp Mail | Free Temporary Email Service</title>
+    
+    <meta name="description" content="Generate a free temporary disposable email address instantly with Fire Temp Mail. Keep your real inbox safe from spam while receiving emails anonymously.">
+    <meta name="keywords" content="temporary email, disposable email, temp mail, free email generator, Fire Temp Mail, anonymous email">
+    <meta name="robots" content="index, follow">
 
-    <!-- Meta Tags -->
-    <meta name="description" content="Generate a free temporary disposable email address instantly with Fire Temp Mail. Protect your inbox from spam and keep your real email private." />
-    <meta name="keywords" content="temporary email, disposable email, temp mail, free email generator, anonymous email, spam-free inbox" />
-    <meta name="author" content="Fire Temp Mail" />
-    <meta name="robots" content="index, follow" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://firetempmail.com/email-generator" />
 
-    <!-- Open Graph / Social Sharing -->
-    <meta property="og:title" content="Fire Temp Mail – Free Temporary Disposable Email Generator" />
-    <meta property="og:description" content="Generate a free temporary disposable email address instantly with Fire Temp Mail. Protect your inbox from spam and keep your real email private." />
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Email Generator - Fire Temp Mail" />
+    <meta property="og:description" content="Instantly generate a disposable email address with Fire Temp Mail. Keep your real inbox private and spam-free." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://yourdomain.com" />
-    <meta property="og:image" content="https://yourdomain.com/assets/img/social-preview.png" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Fire Temp Mail – Free Temporary Disposable Email Generator" />
-    <meta name="twitter:description" content="Generate a free temporary disposable email address instantly with Fire Temp Mail. Protect your inbox from spam and keep your real email private." />
-    <meta name="twitter:image" content="https://yourdomain.com/assets/img/social-preview.png" />
-
-    <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-
-    <!-- Preconnect for fonts if needed -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
 </svelte:head>
-
 <!-- Toast Notifications -->
 <div class="toast-container">
     {#each toasts as toast (toast.id)}
@@ -421,14 +403,6 @@
                     </button>
                 </div>
                 <div class="email-action-buttons">
-                    <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        Re-generate
-                    </button>
-                    
-                    <!-- New Refresh Button -->
                     <button class="btn btn-secondary" on:click={manualReload} title="Refresh emails" disabled={isLoading}>
                         {#if isLoading}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" class="spinner">
@@ -441,9 +415,7 @@
                         {/if}
                         Refresh
                     </button>
-                    
-                    <!-- New Delete Email Button -->
-                    <button class="btn btn-danger" on:click={deleteEmailAddress} title="Delete this email and generate a new one">
+                    <button class="btn btn-danger" type="button" on:click={() => generateEmail(true)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M19 7L18.1327 19.1425C18.0579 20.1891 17.187 21 16.1378 21H7.86224C6.81296 21 5.94208 20.1891 5.86732 19.1425L5 7M10 11V17M14 11V17M15 7V4C15 3.44772 14.5523 3 14 3H10C9.44772 3 9 3.44772 9 4V7M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -629,7 +601,289 @@
 </section>
 
 <style>
-    /* Toast Notifications */
+
+    .seo-content-section {
+        background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+        border-radius: 12px;
+        margin: 3rem 0;
+        padding: 2rem 0;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
+    .section-title {
+        font-family: 'Inter Tight', sans-serif;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        text-align: center;
+        color: #2c3e50;
+    }
+    
+    .seo-rich-content {
+        line-height: 1.8;
+        color: #2c3e50;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .seo-rich-content h3 {
+        font-size: 1.5rem;
+        margin: 2rem 0 1rem 0;
+        color: #007bff;
+        font-weight: 600;
+    }
+    
+    .seo-rich-content h4 {
+        font-size: 1.2rem;
+        margin: 1.5rem 0 0.5rem 0;
+        color: #2c3e50;
+        font-weight: 600;
+    }
+    
+    .seo-rich-content p {
+        margin-bottom: 1.2rem;
+    }
+    
+    .feature-list {
+        margin-bottom: 1.5rem;
+    }
+    
+    .feature-item {
+        padding: 0.5rem 0;
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .feature-icon {
+        color: #007bff;
+        font-weight: bold;
+        margin-right: 0.5rem;
+        flex-shrink: 0;
+    }
+    
+    .use-cases {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+    
+    .use-case {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s;
+    }
+    
+    .use-case:hover {
+        transform: translateY(-5px);
+    }
+    
+    .conclusion-box {
+        background: #e8f4fd;
+        padding: 2rem;
+        border-radius: 8px;
+        border-left: 4px solid #007bff;
+        margin: 2rem 0;
+    }
+    
+    @media (max-width: 768px) {
+        .use-cases {
+            grid-template-columns: 1fr;
+        }
+        
+        .seo-rich-content h3 {
+            font-size: 1.3rem;
+        }
+    }
+    
+    .toast-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 350px;
+    }
+    
+    .toast {
+        background: white;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        display: flex;
+        align-items: flex-start;
+        border-left: 4px solid var(--bs-info);
+        animation: slideIn 0.3s ease-out;
+        max-width: 100%;
+    }
+    
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    .btn:hover {
+        opacity: 0.8;
+    }
+
+    .email-address-container {
+    margin-top: 32px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.email-display {
+    padding: 8px 30px;
+    border: 2px solid rgb(215,215,215);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    min-height: 50px;
+}
+
+.email-text {
+    margin-bottom: 0px;
+    font-size: 20px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.copy-btn {
+    margin-left: 12px;
+    background: transparent;
+    border: none;
+    padding: 4px 8px;
+    color: var(--bs-primary);
+}
+
+.regenerate-btn {
+    padding: 8px 30px;
+    border-radius: 16px;
+    border-width: 2px;
+    border-color: rgb(33,37,41);
+    background: rgb(33,37,41);
+    font-weight: 500;
+    height: 50px;
+    font-size: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-blog {
+    padding: 8px 30px;
+    border-radius: 16px;
+    border-width: 2px;
+    border-color: rgb(33,37,41);
+    background: rgb(33,37,41);
+    font-weight: 500;
+    height: 50px;
+    font-size: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.regenerate-btn svg {
+    font-size: 24px;
+}
+
+/* Desktop styles - side by side layout */
+@media (min-width: 1200px) {
+    .email-address-container {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .email-display {
+        width: 100%;
+        margin-right: 16px;
+        margin-bottom: 0;
+    }
+    
+    .regenerate-btn {
+        min-width: 220px;
+        margin-bottom: 0;
+    }
+}
+
+/* Mobile styles - stacked layout */
+@media (max-width: 1199px) {
+    .email-text {
+        white-space: normal;
+        text-overflow: clip;
+        word-break: break-all;
+    }
+}
+
+.copy-btn:hover,
+.regenerate-btn:hover {
+    opacity: 0.8;
+}
+/* Mobile styles for toast */
+@media (max-width: 768px) {
+    .toast-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+/* Mobile styles for email list */
+@media (max-width: 768px) {
+    .email-item {
+        padding: 12px;
+    }
+    
+    .email-avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+        margin-right: 8px;
+    }
+    
+    .email-sender {
+        font-size: 14px;
+    }
+    
+    .email-date {
+        font-size: 11px;
+    }
+    
+    .email-subject {
+        font-size: 14px;
+    }
+    
+    .email-preview {
+        font-size: 12px;
+    }
+}
+
+ /* Toast Notifications */
     .toast-container {
         position: fixed;
         top: 20px;
@@ -892,8 +1146,46 @@
         gap: 12px;
         justify-content: center;
         flex-wrap: wrap;
+        width: 100%;
     }
-    
+
+        .email-action-buttons .btn {
+        flex: 1;
+        min-width: 140px;
+        max-width: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 16px;
+        transition: all 0.2s ease;
+    }
+        .email-action-buttons .btn-primary {
+        background: rgb(33,37,41);
+        color: white;
+        border: 2px solid rgb(33,37,41);
+    }
+
+        .email-action-buttons .btn-secondary {
+        background: #f8f9fa;
+        color: #212529;
+        border: 2px solid #dee2e6;
+    }
+    .email-action-buttons .btn:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+      .email-action-buttons .btn:active {
+        transform: translateY(0);
+    }
+       .email-action-buttons .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
     /* Loading and Status Indicators */
     .loading-indicator, .refresh-stopped {
         padding: 32px;
@@ -1254,6 +1546,21 @@
             transform: scale(1);
         }
     }
+        @media (min-width: 769px) and (max-width: 992px) {
+        .email-action-buttons {
+            flex-direction: row;
+        }
+        
+        .email-action-buttons .btn {
+            min-width: 160px;
+        }
+    }
+
+    @media (min-width: 993px) {
+        .email-action-buttons {
+            flex-direction: row;
+        }
+    }
     
     /* Responsive Design */
     @media (max-width: 768px) {
@@ -1270,6 +1577,12 @@
         
         .email-action-buttons {
             flex-direction: column;
+            align-items: center;
+        }
+        
+        .email-action-buttons .btn {
+            width: 100%;
+            max-width: 100%;
         }
         
         .btn {
