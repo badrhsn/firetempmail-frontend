@@ -29,12 +29,23 @@
     });
     
     async function loadEmails() {
+        isLoading = true;
         try {
             const response = await fetch(`${url}/mail/get?address=${address}`);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             
             const data = await response.json();
-            emails = data.mails || [];
+            const newEmails = data.mails || [];
+            
+            // Mark new emails as unread
+            newEmails.forEach(email => {
+                const emailKey = email.recipient + "-" + email.suffix;
+                if (!emails.some(e => e.recipient + "-" + e.suffix === emailKey)) {
+                    unreadEmails.add(emailKey);
+                }
+            });
+            
+            emails = newEmails;
             stats = data.stats || {};
             
             // Sort emails by date (newest first)
@@ -42,7 +53,17 @@
         } catch (error) {
             console.error("Failed to load emails:", error);
             showToast("Error", "Failed to load emails. Please try again.", "error");
+        } finally {
+            isLoading = false;
         }
+    }
+    
+    // Mark email as read when viewed
+    function markAsRead(email) {
+        if (!email) return;
+        const emailKey = email.recipient + "-" + email.suffix;
+        unreadEmails.delete(emailKey);
+        viewEmail(email);
     }
     
     // @ts-ignore
@@ -71,21 +92,6 @@
         reloadCounter += 1;
     }
 
-        // Delete current email address and generate a new one
-    function deleteEmailAddress() {
-        if (confirm("Are you sure you want to delete this email address? All messages will be lost.")) {
-            // Clear current emails
-            emails = [];
-            unreadEmails.clear();
-            stats = {};
-            
-            // Generate a new email
-            generateEmail(true);
-            
-            showToast("Success", "New email address generated", "success");
-        }
-    }
-
     async function deleteEmail(email) {
         if (!email || !email.recipient || !email.suffix) return;
         
@@ -98,6 +104,9 @@
                 if (data.code === 200) {
                     // Remove the deleted email from the local array
                     emails = emails.filter(e => e && e.recipient + "-" + e.suffix !== emailKey);
+                    
+                    // Remove from unread set if it was there
+                    unreadEmails.delete(emailKey);
                     
                     // Update stats
                     if (stats.count) {
@@ -119,6 +128,27 @@
                 showToast("Error", "Failed to delete email. Please try again.", "error");
             }
         }
+    }
+
+    // Delete current email address and generate a new one
+    function deleteEmailAddress() {
+        if (confirm("Are you sure you want to delete this email address? All messages will be lost.")) {
+            // Clear current emails
+            emails = [];
+            unreadEmails.clear();
+            stats = {};
+            
+            // Generate a new email
+            generateEmail(true);
+            
+            showToast("Success", "New email address generated", "success");
+        }
+    }
+
+    function openForwardModal(email) {
+        emailToForward = email;
+        forwardToEmail = '';
+        showForwardModal = true;
     }
 
     async function forwardEmail(email) {
@@ -185,6 +215,12 @@
     function viewEmail(email) {
         selectedEmail = email;
         viewMode = 'detail';
+        
+        // Mark as read when viewing
+        if (email) {
+            const emailKey = email.recipient + "-" + email.suffix;
+            unreadEmails.delete(emailKey);
+        }
     }
 
     function formatDate(dateString) {
@@ -218,6 +254,11 @@
         
         // Return first 100 characters with ellipsis if needed
         return text.length > 100 ? text.substring(0, 100) + '...' : text;
+    }
+
+    function isUnread(email) {
+        if (!email || !email.recipient || !email.suffix) return false;
+        return unreadEmails.has(email.recipient + "-" + email.suffix);
     }
 
     // automatic refresh every 20 seconds
