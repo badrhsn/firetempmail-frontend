@@ -156,44 +156,35 @@
         showForwardModal = true;
     }
 
-    async function forwardEmail() {
-        if (!emailToForward || !emailToForward.recipient || !emailToForward.suffix) return;
+    async function forwardEmail(email) {
+        if (!email || !email.recipient || !email.suffix) return;
         
-        if (!forwardToEmail) {
-            showToast("Error", "Please enter a valid email address.", "error");
-            return;
-        }
+        let emailKey = email.recipient + "-" + email.suffix;
+        let forwardTo = prompt("Please enter the email address you want to forward this email to:", "");
 
-        // Simple email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(forwardToEmail)) {
-            showToast("Error", "Please enter a valid email address.", "error");
+        if (forwardTo === null || forwardTo === "") {
+            showToast("Error", "No email address entered.", "error");
             return;
         }
 
         try {
-            let emailKey = emailToForward.recipient + "-" + emailToForward.suffix;
             const response = await fetch(`${url}/mail/forward`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ key: emailKey, forward: forwardToEmail }),
+                body: JSON.stringify({ key: emailKey, forward: forwardTo }),
             });
             
             const data = await response.json();
             if (data.code === 200) {
-                showToast("Success", `Email forwarded to ${forwardToEmail}!`, "success");
+                showToast("Success", "Email forwarded successfully!", "success");
             } else {
                 showToast("Error", `Failed to forward email: ${data.msg}`, "error");
             }
         } catch (error) {
             console.error("Forward error:", error);
             showToast("Error", "Failed to forward email. Please try again.", "error");
-        } finally {
-            showForwardModal = false;
-            emailToForward = null;
-            forwardToEmail = '';
         }
     }
 
