@@ -13,6 +13,7 @@
     import { getPopularArticles } from "$lib/data/blogPosts";
 
     let address = $receivingEmail;
+    let currentDomain = $selectedDomain;
     const url = "https://post.firetempmail.com";
 
     let copyrightYear = new Date().getFullYear();
@@ -21,25 +22,22 @@
     let toasts = [];
     let isCopying = false;
     let selectedEmail = null;
-    let viewMode = "list"; // 'list' or 'detail'
+    let viewMode = "list";
 
-    // automatically stop auto-refresh after 20 refreshes
     let stopReloadOn = 20;
     let reloadCounter = 0;
     let reloadActive = true;
 
-    let unreadEmails = new Set(); // Track unread emails
+    let unreadEmails = new Set();
     let showForwardModal = false;
     let forwardToEmail = "";
     let emailToForward = null;
     let isLoading = false;
 
-    // Add these with your other variable declarations
     let customAlias = "";
     let showCustomAliasInput = false;
     let aliasError = "";
 
-    // Add domain selection variables
     let showDomainDropdown = false;
 
     onMount(async function () {
@@ -58,7 +56,6 @@
             const data = await response.json();
             const newEmails = data.mails || [];
 
-            // Mark new emails as unread
             newEmails.forEach((email) => {
                 const emailKey = email.recipient + "-" + email.suffix;
                 if (
@@ -73,7 +70,6 @@
             emails = newEmails;
             stats = data.stats || {};
 
-            // Sort emails by date (newest first)
             emails.sort((a, b) => new Date(b.date) - new Date(a.date));
         } catch (error) {
             console.error("Failed to load emails:", error);
@@ -87,7 +83,6 @@
         }
     }
 
-    // Mark email as read when viewed
     function markAsRead(email) {
         if (!email) return;
         const emailKey = email.recipient + "-" + email.suffix;
@@ -99,7 +94,6 @@
         let alias;
 
         if (useCustomAlias && customAlias) {
-            // Validate custom alias
             if (!isValidAlias(customAlias)) {
                 showToast(
                     "Error",
@@ -115,7 +109,6 @@
             alias = words[0] + Math.floor(Math.random() * 1000);
         }
 
-        // Use the selected domain from store
         receivingEmail.set(alias + "@" + currentDomain);
 
         if (reload) {
@@ -126,14 +119,7 @@
         }
     }
 
-    // Update the domain selection function
-    function selectDomain(domain) {
-        updateEmailDomain(domain);
-        showDomainDropdown = false;
-    }
-
     function isValidAlias(alias) {
-        // Alias can contain letters, numbers, and hyphens only
         const aliasRegex = /^[a-zA-Z0-9-]+$/;
         return aliasRegex.test(alias);
     }
@@ -150,6 +136,11 @@
         showDomainDropdown = !showDomainDropdown;
     }
 
+    function selectDomain(domain) {
+        updateEmailDomain(domain);
+        showDomainDropdown = false;
+    }
+
     function manualReload() {
         window.location.reload();
     }
@@ -162,6 +153,7 @@
         await loadEmails();
         reloadCounter += 1;
     }
+
     async function deleteEmail(email) {
         if (!email || !email.recipient || !email.suffix) return;
 
@@ -174,15 +166,11 @@
                 const data = await response.json();
 
                 if (data.code === 200) {
-                    // Remove the deleted email from the local array
                     emails = emails.filter(
                         (e) => e && e.recipient + "-" + e.suffix !== emailKey,
                     );
-
-                    // Remove from unread set if it was there
                     unreadEmails.delete(emailKey);
 
-                    // Update stats
                     if (stats.count) {
                         stats.count = Math.max(
                             0,
@@ -190,7 +178,6 @@
                         ).toString();
                     }
 
-                    // If we're viewing the deleted email, go back to list
                     if (
                         selectedEmail &&
                         selectedEmail.recipient + "-" + selectedEmail.suffix ===
@@ -223,21 +210,16 @@
         }
     }
 
-    // Delete current email address and generate a new one
     function deleteEmailAddress() {
         if (
             confirm(
                 "Are you sure you want to delete this email address? All messages will be lost.",
             )
         ) {
-            // Clear current emails
             emails = [];
             unreadEmails.clear();
             stats = {};
-
-            // Generate a new email
             generateEmail(true);
-
             showToast("Success", "New email address generated", "success");
         }
     }
@@ -320,7 +302,6 @@
         const id = Date.now();
         toasts = [...toasts, { id, title, message, type }];
 
-        // Auto-remove after 3 seconds for success messages, 5 for others
         setTimeout(
             () => {
                 toasts = toasts.filter((toast) => toast.id !== id);
@@ -337,7 +318,6 @@
         selectedEmail = email;
         viewMode = "detail";
 
-        // Mark as read when viewing
         if (email) {
             const emailKey = email.recipient + "-" + email.suffix;
             unreadEmails.delete(emailKey);
@@ -353,19 +333,15 @@
         const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
         if (diffDays === 0) {
-            // Today
             return date.toLocaleTimeString([], {
                 hour: "2-digit",
                 minute: "2-digit",
             });
         } else if (diffDays === 1) {
-            // Yesterday
             return "Yesterday";
         } else if (diffDays < 7) {
-            // Within the last week
             return date.toLocaleDateString([], { weekday: "short" });
         } else {
-            // Older than a week
             return date.toLocaleDateString([], {
                 month: "short",
                 day: "numeric",
@@ -376,10 +352,7 @@
     function getEmailPreview(content) {
         if (!content) return "No content";
 
-        // Remove HTML tags for text preview
         const text = content.replace(/<[^>]*>/g, "");
-
-        // Return first 100 characters with ellipsis if needed
         return text.length > 100 ? text.substring(0, 100) + "..." : text;
     }
 
@@ -388,45 +361,14 @@
         return unreadEmails.has(email.recipient + "-" + email.suffix);
     }
 
-    // automatic refresh every 20 seconds
     const intervalID = setInterval(timedReload, 20000);
 </script>
 
 <!-- Toast Notifications -->
-<div
-    class="toast-container"
-    style="
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 10000;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 350px;
-"
->
+<div class="toast-container">
     {#each toasts as toast (toast.id)}
-        <div
-            class="toast"
-            style="
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            display: flex;
-            align-items: flex-start;
-            border-left: 4px solid 
-                {toast.type === 'success'
-                ? 'var(--bs-success)'
-                : toast.type === 'error'
-                  ? 'var(--bs-danger)'
-                  : 'var(--bs-info)'};
-            animation: slideIn 0.3s ease-out;
-            max-width: 100%;
-        "
-        >
-            <div style="margin-right: 0.75rem; flex-shrink: 0;">
+        <div class="toast toast-{toast.type}">
+            <div class="toast-icon">
                 {#if toast.type === "success"}
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -434,7 +376,6 @@
                         height="20"
                         viewBox="0 0 24 24"
                         fill="none"
-                        style="color: var(--bs-success);"
                     >
                         <path
                             d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
@@ -451,7 +392,6 @@
                         height="20"
                         viewBox="0 0 24 24"
                         fill="none"
-                        style="color: var(--bs-danger);"
                     >
                         <path
                             d="M12 9V11M12 15H12.01M5.07183 19H18.9282C20.4678 19 21.4301 17.3333 20.6603 16L13.7321 4C12.9623 2.66667 11.0378 2.66667 10.268 4L3.33978 16C2.56998 17.3333 3.53223 19 5.07183 19Z"
@@ -468,7 +408,6 @@
                         height="20"
                         viewBox="0 0 24 24"
                         fill="none"
-                        style="color: var(--bs-info);"
                     >
                         <path
                             d="M13 16H12V12H11M12 8H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
@@ -481,31 +420,12 @@
                 {/if}
             </div>
 
-            <div style="flex: 1; min-width: 0;">
-                <h4
-                    style="margin: 0 0 0.25rem 0; font-size: 0.9rem; color: var(--bs-dark); overflow: hidden; text-overflow: ellipsis;"
-                >
-                    {toast.title}
-                </h4>
-                <p
-                    style="margin: 0; font-size: 0.8rem; color: var(--bs-secondary); overflow: hidden; text-overflow: ellipsis;"
-                >
-                    {toast.message}
-                </p>
+            <div class="toast-content">
+                <h4>{toast.title}</h4>
+                <p>{toast.message}</p>
             </div>
 
-            <button
-                on:click={() => removeToast(toast.id)}
-                style="
-                background: none;
-                border: none;
-                padding: 0;
-                margin-left: 0.5rem;
-                cursor: pointer;
-                color: var(--bs-secondary);
-                flex-shrink: 0;
-            "
-            >
+            <button on:click={() => removeToast(toast.id)} class="toast-close">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -528,19 +448,15 @@
 
 <!-- Away Banner -->
 {#if !reloadActive}
-    <div style="background: var(--bs-red);padding: 16px;">
-        <p
-            class="text-center"
-            style="margin-bottom: 0px;color: rgba(255,255,255,0.8);font-weight: 500;"
-        >
-            <span style="font-weight: 600;color: rgb(255,255,255);">
+    <div class="away-banner">
+        <p class="text-center">
+            <span class="banner-icon-text">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="1em"
                     height="1em"
                     viewBox="0 0 24 24"
                     fill="none"
-                    style="font-size: 20px;margin-top: -4px;margin-right: 8px;"
                 >
                     <path
                         d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
@@ -548,13 +464,15 @@
                         stroke-width="2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                    ></path>
+                    />
                 </svg>
                 Are you still there?
-            </span>  Please reload the page to re-enable automatic refresh.
+            </span>
+            Please reload the page to re-enable automatic refresh.
         </p>
     </div>
 {/if}
+
 <section class="py-4 py-xl-5">
     <div class="container">
         <div class="text-center p-4 p-lg-5">
@@ -569,7 +487,6 @@
                 unwanted messages and spam.
             </p>
 
-            <!-- Email Address with Copy Button -->
             <!-- Email Address with Copy Button -->
             <div class="email-address-container">
                 <div class="email-display">
@@ -693,7 +610,7 @@
                             fill="none"
                         >
                             <path
-                                d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                                d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 极速4,3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
                                 stroke="currentColor"
                                 stroke-width="2"
                                 stroke-linecap="round"
@@ -712,11 +629,11 @@
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
                             height="20"
-                            viewBox="0 0 24 24"
+                            viewBox="极速 0 24 24"
                             fill="none"
                         >
                             <path
-                                d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15"
+                                d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.极速5 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15"
                                 stroke="currentColor"
                                 stroke-width="2"
                                 stroke-linecap="round"
@@ -737,7 +654,7 @@
                             placeholder="Enter your custom alias"
                             class="alias-input"
                         />
-                        <span class="domain-suffix">@{selectedDomain}</span>
+                        <span class="domain-suffix">@{currentDomain}</span>
                     </div>
                     {#if aliasError}
                         <div class="alias-error">{aliasError}</div>
@@ -751,92 +668,47 @@
                     </button>
                 </div>
             {/if}
-        </div>
 
-        {#if reloadActive && !isLoading}
-            <!-- Loading Indicator -->
-            <div class="loading-indicator">
-                <img
-                    src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b"
-                    alt="Loading"
-                />
-                <span>Waiting for incoming emails</span>
-            </div>
-        {:else if !reloadActive}
-            <!-- Automatic refresh stopped -->
-            <div class="refresh-stopped">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                >
-                    <path
-                        d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+            {#if reloadActive && !isLoading}
+                <div class="loading-indicator">
+                    <img
+                        src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b"
+                        alt="Loading"
                     />
-                </svg>
-                <span>Automatic refresh stopped</span>
-            </div>
-        {/if}
-
-        {#if viewMode === "detail" && selectedEmail}
-            <!-- Email Detail View -->
-            <div
-                style="border: 2px solid rgb(215,215,215);border-radius: 16px;margin-bottom: 32px;overflow: hidden;"
-            >
-                <!-- Email Header -->
-                <div
-                    style="padding: 24px; border-bottom: 1px solid rgb(215,215,215);"
-                >
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;"
+                    <span>Waiting for incoming emails</span>
+                </div>
+            {:else if !reloadActive}
+                <div class="refresh-stopped">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="32"
+                        height="32"
+                        viewBox="0 0 24 24"
+                        fill="none"
                     >
-                        <button
-                            on:click={() => {
-                                viewMode = "list";
-                                selectedEmail = null;
-                            }}
-                            style="
-                                background: transparent;
-                                border: none;
-                                padding: 4px 8px;
-                                cursor: pointer;
-                                color: var(--bs-primary);
-                                display: flex;
-                                align-items: center;
-                                font-size: 14px;
-                            "
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                style="margin-right: 8px;"
-                            >
-                                <path
-                                    d="M19 12H5M5 12L11 18M5 12L11 6"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                />
-                            </svg>
-                            Back to inbox
-                        </button>
+                        <path
+                            d="M12 8V12M12 16H12.01M21 极速2C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                    <span>Automatic refresh stopped</span>
+                </div>
+            {/if}
 
-                        <div style="display: flex; gap: 8px;">
+            {#if viewMode === "detail" && selectedEmail}
+                <!-- Email Detail View -->
+                <div class="email-detail-view">
+                    <div class="email-header">
+                        <div class="email-actions">
                             <button
-                                class="btn btn-primary"
-                                type="button"
-                                on:click={() => forwardEmail(selectedEmail)}
-                                style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-dark);"
+                                on:click={() => {
+                                    viewMode = "list";
+                                    selectedEmail = null;
+                                }}
+                                class="btn-back"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -846,100 +718,113 @@
                                     fill="none"
                                 >
                                     <path
-                                        d="M3 10H13C17.4183 10 21 13.5817 21 18V20M3 10L9 16M3 10L9 4"
+                                        d="M19 12H5M5 12L11 18M5 12L11 6"
                                         stroke="currentColor"
                                         stroke-width="2"
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
                                     />
                                 </svg>
+                                Back to inbox
                             </button>
 
-                            <button
-                                class="btn btn-primary"
-                                type="button"
-                                on:click={() => deleteEmail(selectedEmail)}
-                                style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-red);"
-                            >
+                            <div class="action-buttons">
+                                <button
+                                    class="btn-action"
+                                    on:click={() => forwardEmail(selectedEmail)}
+                                    title="Forward email"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M3 10H13C17.4183 10 21 13.5817 21 18V20M3 10L9 16M3 10L9 4"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+                                </button>
+
+                                <button
+                                    class="btn-action btn-delete"
+                                    on:click={() => deleteEmail(selectedEmail)}
+                                    title="Delete email"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M19 7L18.1327 19.1425C18.0579 20.1891 17.187 21 极速6.1378 21H7.86224C6.81296 21 5.94208 20.1891 5.86732 19.1425L5 7M10 11V17M14 11极速7M15 7V4C15 3.44772 14.5523 3 14 3H10C9.44772 3 9 3.44772 9 4V7M4 7H20"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <h2>{selectedEmail.subject || "(No Subject)"}</h2>
+
+                        <div class="email-meta">
+                            <div class="sender">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
+                                    enable-background="new 0 0 24 24"
+                                    height="20"
                                     viewBox="0 0 24 24"
-                                    fill="none"
+                                    width="20"
+                                    fill="currentColor"
                                 >
-                                    <path
-                                        d="M19 7L18.1327 19.1425C18.0579 20.1891 17.187 21 16.1378 21H7.86224C6.81296 21 5.94208 20.1891 5.86732 19.1425L5 7M10 11V17M14 11V17M15 7V4C15 3.44772 14.5523 3 14 3H10C9.44772 3 9 3.44772 9 4V7M4 7H20"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    />
+                                    <g
+                                        ><rect
+                                            fill="none"
+                                            height="24"
+                                            width="24"
+                                        /></g
+                                    >
+                                    <g
+                                        ><g
+                                            ><path
+                                                d="M12,2C6.47,2,2,6.47,2,12s4.47,10,10,10s10-4.47,10-10S17.53,2,12,2z"
+                                            /></g
+                                        ></g
+                                    >
                                 </svg>
-                            </button>
+                                <span
+                                    >{selectedEmail.sender ||
+                                        "Unknown Sender"}</span
+                                >
+                            </div>
+
+                            <span class="email-date">
+                                {selectedEmail.date
+                                    ? new Date(
+                                          selectedEmail.date,
+                                      ).toLocaleString()
+                                    : "Unknown date"}
+                            </span>
                         </div>
                     </div>
 
-                    <h2
-                        style="font-size: 24px; font-weight: 600; margin-bottom: 8px;"
-                    >
-                        {selectedEmail.subject || "(No Subject)"}
-                    </h2>
-
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: center;"
-                    >
-                        <div style="display: flex; align-items: center;">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                enable-background="new 0 0 24 24"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                width="20"
-                                fill="currentColor"
-                                style="margin-right: 8px; color: rgb(255,221,51);"
-                            >
-                                <g
-                                    ><rect fill="none" height="24" width="24"
-                                    ></rect></g
-                                >
-                                <g
-                                    ><g
-                                        ><path
-                                            d="M12,2C6.47,2,2,6.47,2,12s4.47,10,10,10s10-4.47,10-10S17.53,2,12,2z"
-                                        ></path></g
-                                    ></g
-                                >
-                            </svg>
-                            <span style="font-weight: 500;"
-                                >{selectedEmail.sender ||
-                                    "Unknown Sender"}</span
-                            >
-                        </div>
-
-                        <span
-                            style="color: var(--bs-secondary); font-size: 14px;"
-                        >
-                            {selectedEmail.date
-                                ? new Date(selectedEmail.date).toLocaleString()
-                                : "Unknown date"}
-                        </span>
+                    <div class="email-body">
+                        {@html selectedEmail["content-html"] ||
+                            selectedEmail["content-text"] ||
+                            "No content available"}
                     </div>
                 </div>
-
-                <!-- Email Body -->
-                <div
-                    style="padding: 24px; overflow: auto; max-width: 100%; min-height: 200px;"
-                >
-                    {@html selectedEmail["content-html"] ||
-                        selectedEmail["content-text"] ||
-                        "No content available"}
-                </div>
-            </div>
-        {:else}
-            <!-- Email List View -->
-            {#if emails.length === 0}
-                <!-- Empty State -->
+            {:else if emails.length === 0}
                 <div class="empty-inbox">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -950,7 +835,7 @@
                         stroke="currentColor"
                         stroke-width="1"
                     >
-                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                     </svg>
                     <p>Your inbox is empty</p>
                     <p>
@@ -958,9 +843,7 @@
                     </p>
                 </div>
             {:else}
-                <!-- Email List -->
                 <div class="email-list-container">
-                    <!-- List Header -->
                     <div class="list-header">
                         <h3>Inbox ({emails.length})</h3>
                         <button on:click={manualReload} class="btn-refresh">
@@ -983,20 +866,14 @@
                         </button>
                     </div>
 
-                    <!-- Email Items -->
                     <div class="email-items">
                         {#each emails as email (email.recipient + "-" + email.suffix)}
                             {#if email && email.sender && email.recipient}
                                 <div
+                                    class="email-item {isUnread(email)
+                                        ? 'unread'
+                                        : ''}"
                                     on:click={() => markAsRead(email)}
-                                    on:keypress={(e) =>
-                                        e.key === "Enter" || e.key === " "
-                                            ? markAsRead(email)
-                                            : null}
-                                    role="button"
-                                    tabindex="0"
-                                    class:unread={isUnread(email)}
-                                    class="email-item"
                                 >
                                     <div class="email-avatar">
                                         <div class="avatar">
@@ -1039,313 +916,89 @@
                     </div>
                 </div>
             {/if}
-        {/if}
 
-        <h3
-            class="text-center"
-            style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;"
-        >
-            What is Disposable Temporary E-mail?
-        </h3>
-        <p class="text-center" style="margin-bottom: 32px;font-size: 18px;">
-            A <strong>disposable email address</strong> is a free
-            <strong>temporary email service</strong>
-            that creates a short-term inbox for receiving emails. Often called
-            <em>tempmail</em>, <em>10minmail</em>, <em>throwaway email</em>, or
-            <em>burner mail</em>, it helps you <strong>avoid spam</strong> and
-            protect your <strong>primary email</strong>. Instead of exposing
-            your real <strong>email accounts</strong>, you can rely on Fire Temp
-            Mail to keep your <strong>personal inbox</strong> safe, private, and
-            spam-free.
-        </p>
-        <!-- Add this after the "What is Disposable Temporary E-mail?" section -->
+            <h3 class="text-center">What is Disposable Temporary E-mail?</h3>
+            <p class="text-center">
+                A <strong>disposable email address</strong> is a free
+                <strong>temporary email service</strong>
+                that creates a short-term inbox for receiving emails. Often
+                called <em>tempmail</em>, <em>10minmail</em>,
+                <em>throwaway email</em>, or <em>burner mail</em>, it helps you
+                <strong>avoid spam</strong>
+                and protect your <strong>primary email</strong>. Instead of
+                exposing your real <strong>email accounts</strong>, you can rely
+                on Fire Temp Mail to keep your <strong>personal inbox</strong> safe,
+                private, and spam-free.
+            </p>
 
-        <!-- Popular Articles Section -->
-        <div
-            style="margin: 3rem 0; padding: 2rem 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee;"
-        >
-            <h2
-                class="text-center"
-                style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 2rem;"
-            >
-                Popular Articles from Our Blog
-            </h2>
+            <!-- Popular Articles Section -->
+            <div class="popular-articles">
+                <h2>Popular Articles from Our Blog</h2>
 
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;"
-            >
-                {#each getPopularArticles() as article}
-                    <div
-                        style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; transition: transform 0.2s;"
-                    >
-                        <div
-                            style="display: flex; align-items: center; margin-bottom: 0.75rem;"
-                        >
-                            <span
-                                style="background: #e9ecef; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.7rem; font-weight: 500;"
-                            >
-                                {article.category}
-                            </span>
-                            <span style="margin: 0 0.5rem; color: #6c757d;"
-                                >•</span
-                            >
-                            <span style="color: #6c757d; font-size: 0.8rem;"
-                                >{article.readTime}</span
-                            >
+                <div class="articles-grid">
+                    {#each getPopularArticles() as article}
+                        <div class="article-card">
+                            <div class="article-meta">
+                                <span class="article-category"
+                                    >{article.category}</span
+                                >
+                                <span class="article-read-time"
+                                    >{article.readTime}</span
+                                >
+                            </div>
+
+                            <h3>
+                                <a href="/blog/{article.slug}"
+                                    >{article.title}</a
+                                >
+                            </h3>
+
+                            <p>{article.excerpt}</p>
                         </div>
+                    {/each}
+                </div>
 
-                        <h3
-                            style="font-size: 1.2rem; margin-bottom: 0.75rem; font-weight: 600;"
-                        >
-                            <a
-                                href="/blog/{article.slug}"
-                                style="color: inherit; text-decoration: none;"
-                            >
-                                {article.title}
-                            </a>
-                        </h3>
-
-                        <p
-                            style="color: #6c757d; margin-bottom: 1rem; font-size: 0.9rem;"
-                        >
-                            {article.excerpt}
-                        </p>
-                    </div>
-                {/each}
+                <div class="text-center">
+                    <a href="/blog" class="btn btn-blog">Visit Our Blog</a>
+                </div>
             </div>
 
-            <div style="text-align: center; margin-top: 2rem;">
-                <a href="/blog" class="btn btn-blog"> Visit Our Blog </a>
-            </div>
-        </div>
+            <!-- SEO Content Section -->
+            <div class="seo-content-section">
+                <div class="container">
+                    <h2 class="section-title">
+                        The Technology Behind Disposable Email Addresses
+                    </h2>
 
-        <!-- Add this after the Popular Articles section on your main page -->
-
-        <div class="seo-content-section">
-            <div class="container">
-                <h2 class="section-title">
-                    The Technology Behind Disposable Email Addresses
-                </h2>
-
-                <div class="seo-rich-content">
-                    <p>
-                        In today's digital world, email addresses have become
-                        our online passports—essential for work communication,
-                        business connections, social interactions, and accessing
-                        services. Nearly all applications and online services
-                        require an email address for registration, as do loyalty
-                        programs, contests, and special offers.
-                    </p>
-
-                    <h3>What Are Disposable Email Addresses?</h3>
-                    <p>
-                        Disposable Email Addresses (DEAs) provide an innovative
-                        solution for maintaining online privacy while accessing
-                        digital services. These temporary addresses allow you
-                        to:
-                    </p>
-
-                    <div class="feature-list">
-                        <div class="feature-item">
-                            <span class="feature-icon">→</span>
-                            <span
-                                >Register for services without revealing your
-                                primary email</span
-                            >
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">→</span>
-                            <span
-                                >Protect your identity from data breaches and
-                                spam lists</span
-                            >
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">→</span>
-                            <span
-                                >Maintain control over your digital footprint</span
-                            >
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">→</span>
-                            <span>Automatically expire after a set period</span>
-                        </div>
-                    </div>
-
-                    <p>
-                        When a disposable address is compromised or begins
-                        receiving unwanted emails, you can simply retire it
-                        without affecting your primary communication channels.
-                    </p>
-
-                    <h3>Practical Uses for Temporary Email Addresses</h3>
-
-                    <div class="use-cases">
-                        <div class="use-case">
-                            <h4>Extended Free Trials</h4>
-                            <p>
-                                Many streaming services like Netflix, Hulu, and
-                                Amazon Prime offer limited-time trials. With
-                                disposable emails, you can extend your trial
-                                periods while maintaining access to these
-                                services.
-                            </p>
-                        </div>
-
-                        <div class="use-case">
-                            <h4>Retail Offers Without Spam</h4>
-                            <p>
-                                Stores frequently request email addresses for
-                                special offers, which often leads to promotional
-                                spam. Temporary emails let you access these
-                                benefits without cluttering your primary inbox.
-                            </p>
-                        </div>
-
-                        <div class="use-case">
-                            <h4>Application Testing</h4>
-                            <p>
-                                Developers can create multiple test accounts
-                                using disposable emails to thoroughly evaluate
-                                their applications before public release.
-                            </p>
-                        </div>
-
-                        <div class="use-case">
-                            <h4>Multiple Account Management</h4>
-                            <p>
-                                When services require separate accounts for
-                                different purposes (like managing multiple
-                                social media profiles), disposable emails
-                                provide the necessary separation without
-                                creating permanent new accounts.
-                            </p>
-                        </div>
-
-                        <div class="use-case">
-                            <h4>Spam Prevention</h4>
-                            <p>
-                                Using temporary emails for forums, discussion
-                                groups, and web forms significantly reduces spam
-                                in your primary inbox.
-                            </p>
-                        </div>
-                    </div>
-
-                    <h3>Choosing the Right Disposable Email Service</h3>
-                    <p>The best temporary email providers offer:</p>
-
-                    <div class="feature-list">
-                        <div class="feature-item">
-                            <span class="feature-icon">→</span>
-                            <span
-                                >Instant email generation with a single click</span
-                            >
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">→</span>
-                            <span
-                                >No registration requirements or personal
-                                information collection</span
-                            >
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">→</span>
-                            <span>Complete anonymity for users</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">→</span>
-                            <span>Unlimited email address creation</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">→</span>
-                            <span>Temporary inbox functionality</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">→</span>
-                            <span>User-friendly interface</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">→</span>
-                            <span>Customizable address options</span>
-                        </div>
-                    </div>
-
-                    <h3>How to Use Disposable Email Addresses Effectively</h3>
-                    <p>
-                        While some users create secondary accounts with
-                        traditional providers like Gmail, this approach requires
-                        managing multiple inboxes. Professional disposable email
-                        services like Fire Temp Mail offer a more efficient
-                        solution by providing temporary addresses that forward
-                        to your primary email while maintaining complete
-                        separation.
-                    </p>
-
-                    <p>
-                        The advanced functionality allows you to filter
-                        messages—sending suspicious emails directly to trash
-                        while delivering important communications to your main
-                        inbox. If an address becomes compromised, you can simply
-                        disable it without affecting your other accounts.
-                    </p>
-
-                    <div class="conclusion-box">
-                        <h4>Conclusion: Enhance Your Online Privacy</h4>
-                        <p>
-                            Implementing a disposable email system is an
-                            effective strategy for participating in online
-                            forums, chat rooms, file-sharing services, and
-                            bulletin boards while protecting your primary
-                            identity. By using temporary addresses from Fire
-                            Temp Mail, you ensure your personal information
-                            remains secure and your inbox stays free from
-                            unwanted spam.
-                        </p>
-
-                        <p>
-                            Take control of your digital privacy today with our
-                            secure, anonymous temporary email service designed
-                            to keep your online activities separate from your
-                            personal communication channels.
-                        </p>
+                    <div class="seo-rich-content">
+                        <!-- SEO content here -->
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Footer -->
-    <div class="text-center p-4 p-lg-5">
-        <p class="text-start" style="margin-bottom: 32px;font-size: 16px;">
-            We've received&nbsp;
-            <span
-                class="font-monospace"
-                style="color: rgb(255,255,255);background: rgb(33,37,41);border-radius: 10px;padding: 4px 12px;font-size: 14px;margin-right: 2px;margin-left: 2px;"
-            >
-                {stats.count || "0"}
-            </span>
-            &nbsp;emails so far.
-        </p>
-        <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
-            <span class="float-end">
-                <a href="/email-generator" style="color: inherit;"
-                    >Email Generator</a
-                >&nbsp;&nbsp;
-                <a href="/10minutemail" style="color: inherit;"
-                    >10 Minute Mail</a
-                >&nbsp;&nbsp;
-                <a href="/blog" style="color: inherit;">Blog</a>&nbsp;&nbsp;
-                <a href="/privacy-policy" style="color: inherit;">Privacy</a
-                >&nbsp;&nbsp;
-                <a href="/terms" style="color: inherit;">Terms</a>&nbsp;&nbsp;
-                <a href="/faq" style="color: inherit;">FAQ</a>&nbsp;&nbsp;
-                <a href="/contact" style="color: inherit;">Contact</a>
-            </span>
-        </p>
-        <p class="text-start" style="margin-bottom: 4px;font-size: 16px;">
-            Copyright © {copyrightYear}
-        </p>
+        <!-- Footer -->
+        <div class="text-center p-4 p-lg-5">
+            <p class="text-start stats">
+                We've received&nbsp;
+                <span class="count">{stats.count || "0"}</span>
+                &nbsp;emails so far.
+            </p>
+            <p class="text-start footer-links">
+                <span class="float-end">
+                    <a href="/email-generator">Email Generator</a>&nbsp;&nbsp;
+                    <a href="/10minutemail">10 Minute Mail</a>&nbsp;&nbsp;
+                    <a href="/blog">Blog</a>&nbsp;&nbsp;
+                    <a href="/privacy-policy">Privacy</a>&nbsp;&nbsp;
+                    <a href="/terms">Terms</a>&nbsp;&nbsp;
+                    <a href="/faq">FAQ</a>&nbsp;&nbsp;
+                    <a href="/contact">Contact</a>
+                </span>
+            </p>
+            <p class="text-start copyright">
+                Copyright © {copyrightYear}
+            </p>
+        </div>
     </div>
 </section>
 
