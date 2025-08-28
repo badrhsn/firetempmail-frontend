@@ -86,11 +86,11 @@ let showDomainDropdown = false;
         viewEmail(email);
     }
     
+    // @ts-ignore
     async function generateEmail(reload, useCustomAlias = false) {
         let alias;
         
         if (useCustomAlias && customAlias) {
-            // Validate custom alias
             if (!isValidAlias(customAlias)) {
                 showToast("Error", "Alias can only contain letters, numbers, and hyphens", "error");
                 return;
@@ -106,24 +106,26 @@ let showDomainDropdown = false;
         receivingEmail.set(alias + "@" + currentDomain);
 
         if (reload) {
-            // use this instead of window.location.reload(); to avoid resending POST requests
-            // @ts-ignore
-            window.location = window.location.href;
+            window.location.reload();
         } else {
-            // Reset custom alias field
             customAlias = '';
             showCustomAliasInput = false;
         }
     }
     
-    // Add these domain-related functions
-    function toggleDomainDropdown() {
-        showDomainDropdown = !showDomainDropdown;
+    function toggleDomainSelector() {
+        showDomainSelector = !showDomainSelector;
     }
     
     function selectDomain(domain) {
         updateEmailDomain(domain);
-        showDomainDropdown = false;
+        showDomainSelector = false;
+        
+        // If we have an existing email address, update it with the new domain
+        if (address && address.includes('@')) {
+            const aliasPart = address.split('@')[0];
+            receivingEmail.set(aliasPart + '@' + domain);
+        }
     }
 
 function isValidAlias(alias) {
@@ -421,7 +423,7 @@ window.location.reload();
             </p>
             
              <!-- Email Address with Copy Button -->
-            <!-- Email Address with Copy Button -->
+<!-- Email Address with Copy Button -->
 <div class="email-address-container">
     <div class="email-display">
         <p>{address}</p>
@@ -432,37 +434,14 @@ window.location.reload();
         >
             {#if isCopying}
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             {:else}
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M14 20H18C19.1046 20 20 19.1046 20 18V14C20 12.8954 19.1046 12 18 12H14C12.8954 12 12 12.8954 12 14V18C12 19.1046 12.8954 20 14 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M14 20H18C19.1046 20 20 19.1046 20 18V14C20 12.8954 19.1046 12 18 12H14C12.8954 12 12 12.8954 12 14V18C12 19.1046 12.8954 20 14 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             {/if}
         </button>
-    </div>
-    
-    <!-- Domain Selection -->
-    <div class="domain-selection">
-        <button class="btn btn-outline" on:click={toggleDomainDropdown}>
-            <span>{currentDomain}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </button>
-        
-        {#if showDomainDropdown}
-            <div class="domain-dropdown">
-                {#each availableDomains as domain}
-                    <div 
-                        class="domain-option {currentDomain === domain ? 'active' : ''}" 
-                        on:click={() => selectDomain(domain)}
-                    >
-                        {domain}
-                    </div>
-                {/each}
-            </div>
-        {/if}
     </div>
     
     <div class="email-action-buttons">
@@ -480,14 +459,55 @@ window.location.reload();
             Custom Alias
         </button>
         
+        <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Change Domain
+        </button>
+        
         <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+            </svg>
             Refresh Page
         </button>
     </div>
 </div>
+
+<!-- Domain Selector Modal -->
+{#if showDomainSelector}
+    <div class="modal-backdrop" on:click={() => showDomainSelector = false}>
+        <div class="modal" on:click|stopPropagation>
+            <div class="modal-header">
+                <h3>Select Email Domain</h3>
+                <button on:click={() => showDomainSelector = false} class="modal-close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M6 18L18 6M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="domain-options">
+                    {#each availableDomains as domain}
+                        <div 
+                            class="domain-option {currentDomain === domain ? 'active' : ''}" 
+                            on:click={() => selectDomain(domain)}
+                        >
+                            <span class="domain-name">@{domain}</span>
+                            {#if currentDomain === domain}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            {/if}
+                        </div>
+                    {/each}
+                </div>
+            </div>
+        </div>
+    </div>
+{/if}
 
 {#if showCustomAliasInput}
 <div class="custom-alias-container">
@@ -498,7 +518,7 @@ window.location.reload();
             placeholder="Enter your custom alias"
             class="alias-input"
         />
-        <span class="domain-suffix">@{currentDomain}</span> <!-- Update this line -->
+        <span class="domain-suffix">@{currentDomain}</span>
     </div>
     {#if aliasError}
         <div class="alias-error">{aliasError}</div>
@@ -846,6 +866,102 @@ A <strong>disposable email address</strong> is a free <strong>temporary email se
 </section>
 
 <style>
+    /* Domain Selector Modal */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10001;
+    padding: 20px;
+}
+
+.modal {
+    background: white;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: #6c757d;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.domain-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.domain-option {
+    padding: 12px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.domain-option:hover {
+    border-color: #007bff;
+    background-color: #f8f9fa;
+}
+
+.domain-option.active {
+    border-color: #007bff;
+    background-color: #e8f4fd;
+}
+
+.domain-name {
+    font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .email-action-buttons {
+        flex-direction: column;
+    }
+    
+    .email-action-buttons .btn {
+        width: 100%;
+    }
+    
+    .modal {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
     /* Domain Selection Styles */
 .domain-selection {
     position: relative;
