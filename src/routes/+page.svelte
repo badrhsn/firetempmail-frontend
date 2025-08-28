@@ -38,6 +38,7 @@
     let aliasError = "";
 
     let showDomainDropdown = false;
+    let showDomainSelector = false;
 
     onMount(async function () {
         await loadEmails();
@@ -571,7 +572,6 @@
                 unwanted messages and spam.
             </p>
 
-            <!-- Email Address with Copy Button -->
             <!-- Email Address with Copy Button -->
             <div class="email-address-container">
                 <div class="email-display">
