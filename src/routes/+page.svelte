@@ -2,10 +2,16 @@
 // @ts-nocheck
     import { onMount } from "svelte";
     import { generate } from "random-words";
-    import { receivingEmail } from "../lib/stores";
+        import { 
+        receivingEmail, 
+        availableDomains, 
+        selectedDomain, 
+        updateEmailDomain
+    } from "../lib/stores";
     import Navigation from '$lib/components/Navigation.svelte';
     import { getPopularArticles } from '$lib/data/blogPosts';
     let address = $receivingEmail;
+    let currentDomain = $selectedDomain;
     const url = "https://post.firetempmail.com";
     
     let copyrightYear = new Date().getFullYear();
@@ -32,6 +38,8 @@
 let customAlias = '';
 let showCustomAliasInput = false;
 let aliasError = '';
+
+let showDomainDropdown = false;
 
     onMount(async function () {
         await loadEmails();
@@ -78,35 +86,46 @@ let aliasError = '';
         viewEmail(email);
     }
     
-// @ts-ignore
-async function generateEmail(reload, useCustomAlias = false) {
-    let alias;
-    
-    if (useCustomAlias && customAlias) {
-        // Validate custom alias
-        if (!isValidAlias(customAlias)) {
-            showToast("Error", "Alias can only contain letters, numbers, and hyphens", "error");
-            return;
+    async function generateEmail(reload, useCustomAlias = false) {
+        let alias;
+        
+        if (useCustomAlias && customAlias) {
+            // Validate custom alias
+            if (!isValidAlias(customAlias)) {
+                showToast("Error", "Alias can only contain letters, numbers, and hyphens", "error");
+                return;
+            }
+            
+            alias = customAlias;
+        } else {
+            let words = generate(1);
+            alias = words[0] + Math.floor(Math.random() * 1000);
         }
         
-        alias = customAlias;
-    } else {
-        let words = generate(1);
-        alias = words[0] + Math.floor(Math.random() * 1000);
+        // Use the selected domain from store
+        receivingEmail.set(alias + "@" + currentDomain);
+
+        if (reload) {
+            // use this instead of window.location.reload(); to avoid resending POST requests
+            // @ts-ignore
+            window.location = window.location.href;
+        } else {
+            // Reset custom alias field
+            customAlias = '';
+            showCustomAliasInput = false;
+        }
     }
     
-    receivingEmail.set(alias + "@firetempmail.com");
-
-    if (reload) {
-        // use this instead of window.location.reload(); to avoid resending POST requests
-        // @ts-ignore
-        window.location = window.location.href;
-    } else {
-        // Reset custom alias field
-        customAlias = '';
-        showCustomAliasInput = false;
+    // Add these domain-related functions
+    function toggleDomainDropdown() {
+        showDomainDropdown = !showDomainDropdown;
     }
-}
+    
+    function selectDomain(domain) {
+        updateEmailDomain(domain);
+        showDomainDropdown = false;
+    }
+
 function isValidAlias(alias) {
     // Alias can contain letters, numbers, and hyphens only
     const aliasRegex = /^[a-zA-Z0-9-]+$/;
@@ -402,46 +421,72 @@ window.location.reload();
             </p>
             
              <!-- Email Address with Copy Button -->
-            <div class="email-address-container">
-                <div class="email-display">
-                    <p>{address}</p>
-                    <button 
-                        on:click={copyToClipboard} 
-                        class="btn-copy"
-                        title="Copy to clipboard"
+            <!-- Email Address with Copy Button -->
+<div class="email-address-container">
+    <div class="email-display">
+        <p>{address}</p>
+        <button 
+            on:click={copyToClipboard} 
+            class="btn-copy"
+            title="Copy to clipboard"
+        >
+            {#if isCopying}
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            {:else}
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M8 16H6C4.89543 极速 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M14 20H18C19.1046 20 20 19.1046 20 18V14极速20 12.8954 19.1046 极速2 18 12H14C12.8954 12 12 12.8954 12 14V18C12 19.1046 12.8954 20 14 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            {/if}
+        </button>
+    </div>
+    
+    <!-- Domain Selection -->
+    <div class="domain-selection">
+        <button class="btn btn-outline" on:click={toggleDomainDropdown}>
+            <span>{currentDomain}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        
+        {#if showDomainDropdown}
+            <div class="domain-dropdown">
+                {#each availableDomains as domain}
+                    <div 
+                        class="domain-option {currentDomain === domain ? 'active' : ''}" 
+                        on:click={() => selectDomain(domain)}
                     >
-                        {#if isCopying}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        {:else}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M14 20H18C19.1046 20 20 19.1046 20 18V14C20 12.8954 19.1046 12 18 12H14C12.8954 12 12 12.8954 12 14V18C12 19.1046 12.8954 20 14 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        {/if}
-                    </button>
-                </div>
-                <div class="email-action-buttons">
-    <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Random Alias
-    </button>
+                        {domain}
+                    </div>
+                {/each}
+            </div>
+        {/if}
+    </div>
     
-    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Custom Alias
-    </button>
-    
-    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Refresh Page
-    </button>
+    <div class="email-action-buttons">
+        <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 极速 24 24" fill="none">
+                <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15极速19.4185M19.4185 15C18.231极速 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Random Alias
+        </button>
+        
+        <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width极速2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Custom Alias
+        </button>
+        
+        <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M4 4极速9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Refresh Page
+        </button>
+    </div>
 </div>
 
 {#if showCustomAliasInput}
@@ -453,7 +498,7 @@ window.location.reload();
             placeholder="Enter your custom alias"
             class="alias-input"
         />
-        <span class="domain-suffix">@firetempmail.com</span>
+        <span class="domain-suffix">@{currentDomain}</span> <!-- Update this line -->
     </div>
     {#if aliasError}
         <div class="alias-error">{aliasError}</div>
@@ -467,7 +512,6 @@ window.location.reload();
     </button>
 </div>
 {/if}
-            </div>
             
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
@@ -802,6 +846,99 @@ A <strong>disposable email address</strong> is a free <strong>temporary email se
 </section>
 
 <style>
+    /* Domain Selection Styles */
+.domain-selection {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.domain-selection .btn-outline {
+    background: transparent;
+    border: 2px solid rgb(215,215,215);
+    color: var(--text-primary);
+    padding: 10px 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    width: 100%;
+    justify-content: center;
+}
+
+.domain-selection .btn-outline:hover {
+    background: var(--bg-secondary);
+}
+
+.domain-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid rgb(215,215,215);
+    border-radius: 8px;
+    margin-top: 4px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.domain-option {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.domain-option:last-child {
+    border-bottom: none;
+}
+
+.domain-option:hover {
+    background-color: #f8f9fa;
+}
+
+.domain-option.active {
+    background-color: #e9ecef;
+    font-weight: 600;
+}
+
+/* Update the domain suffix in custom alias input */
+.alias-input-group .domain-suffix {
+    padding: 10px 12px;
+    background-color: #eee;
+    border: 2px solid #ddd;
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+    font-size: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .domain-selection {
+        width: 100%;
+    }
+    
+    .domain-selection .btn-outline {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .domain-dropdown {
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+}
+
+@media (min-width: 769px) {
+    .domain-selection {
+        width: auto;
+        min-width: 200px;
+    }
+}
 .custom-alias-container {
     margin-top: 16px;
     padding: 16px;

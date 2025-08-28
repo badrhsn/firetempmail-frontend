@@ -10,7 +10,7 @@ export const availableDomains = [
 ];
 
 // Default domain
-export const defaultDomain = 'firetempmail.com';
+export const defaultDomain = 'offredaily.sa.com';
 
 // Store for selected domain
 export const selectedDomain = writable(
