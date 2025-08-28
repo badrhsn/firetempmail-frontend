@@ -30,7 +30,65 @@
     let customAlias = '';
     let showCustomAliasInput = false;
     let aliasError = '';
-  
+    let isEditingAlias = false;
+
+function toggleEditAlias() {
+    isEditingAlias = !isEditingAlias;
+    if (isEditingAlias) {
+        // When switching to edit mode, extract the alias part from the current email
+        if (address) {
+            customAlias = address.split('@')[0];
+        }
+    } else {
+        // When canceling edit mode, clear the custom alias
+        customAlias = '';
+        aliasError = '';
+    }
+}
+
+function isValidAlias(alias) {
+    // Alias can contain letters, numbers, and hyphens only
+    const aliasRegex = /^[a-zA-Z0-9-]+$/;
+    return aliasRegex.test(alias);
+}
+
+function saveCustomAlias() {
+    if (!customAlias) {
+        showToast("Error", "Please enter an alias", "error");
+        return;
+    }
+    
+    // Validate custom alias
+    if (!isValidAlias(customAlias)) {
+        aliasError = "Alias can only contain letters, numbers, and hyphens";
+        showToast("Error", aliasError, "error");
+        return;
+    }
+    
+    // Set the new email address
+    receivingEmail.set(customAlias + "@firetempmail.com");
+    
+    // Reset edit mode
+    isEditingAlias = false;
+    aliasError = '';
+    
+    // Reload the page to get emails for the new address
+    // @ts-ignore
+    window.location = window.location.href;
+}
+
+// Update your existing generateEmail function
+// @ts-ignore
+async function generateEmail(reload) {
+    let words = generate(1);
+    receivingEmail.set(words[0] + Math.floor(Math.random() * 1000) + "@firetempmail.com");
+
+    if (reload) {
+        // use this instead of window.location.reload(); to avoid resending POST requests
+        // @ts-ignore
+        window.location = window.location.href;
+    }
+}
     onMount(async function () {
         await loadEmails();
         if (address === null) {
@@ -76,41 +134,8 @@
         viewEmail(email);
     }
     
-    // @ts-ignore
-// @ts-ignore
-async function generateEmail(reload, useCustomAlias = false) {
-    let alias;
-    
-    if (useCustomAlias && customAlias) {
-        // Validate custom alias
-        if (!isValidAlias(customAlias)) {
-            showToast("Error", "Alias can only contain letters, numbers, and hyphens", "error");
-            return;
-        }
-        
-        alias = customAlias;
-    } else {
-        let words = generate(1);
-        alias = words[0] + Math.floor(Math.random() * 1000);
-    }
-    
-    receivingEmail.set(alias + "@firetempmail.com");
 
-    if (reload) {
-        // use this instead of window.location.reload(); to avoid resending POST requests
-        // @ts-ignore
-        window.location = window.location.href;
-    } else {
-        // Reset custom alias field
-        customAlias = '';
-        showCustomAliasInput = false;
-    }
-}
-function isValidAlias(alias) {
-    // Alias can contain letters, numbers, and hyphens only
-    const aliasRegex = /^[a-zA-Z0-9-]+$/;
-    return aliasRegex.test(alias);
-}
+
 function toggleCustomAlias() {
     showCustomAliasInput = !showCustomAliasInput;
     if (!showCustomAliasInput) {
@@ -425,38 +450,79 @@ function toggleCustomAlias() {
             </p>
             
             <!-- Email Address with Copy Button -->
-            <div class="email-address-container">
-                <div class="email-display">
-                    <p>{address}</p>
-                    <button 
-                        on:click={copyToClipboard} 
-                        class="btn-copy"
-                        title="Copy to clipboard"
-                    >
-                        {#if isCopying}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        {:else}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M14 20H18C19.1046 20 20 19.1046 20 18V14C20 12.8954 19.1046 12 18 12H14C12.8954 12 12 12.8954 12 14V18C12 19.1046 12.8954 20 14 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        {/if}
-                    </button>
-                </div>
-                <div class="email-action-buttons">
+            <!-- Email Address with Edit/Copy Buttons -->
+<div class="email-address-container">
+    {#if isEditingAlias}
+        <!-- Edit Mode -->
+        <div class="email-edit-container">
+            <div class="alias-input-group">
+                <input 
+                    type="text" 
+                    bind:value={customAlias}
+                    placeholder="Enter your custom alias"
+                    class="alias-input"
+                />
+                <span class="domain-suffix">@firetempmail.com</span>
+            </div>
+            <div class="edit-action-buttons">
+                <button class="btn btn-success" on:click={saveCustomAlias}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Save
+                </button>
+                <button class="btn btn-secondary" on:click={toggleEditAlias}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Cancel
+                </button>
+            </div>
+        </div>
+        {#if aliasError}
+            <div class="alias-error">{aliasError}</div>
+        {/if}
+    {:else}
+        <!-- Display Mode -->
+        <div class="email-display">
+            <p>{address}</p>
+            <div class="email-display-actions">
+                <button 
+                    on:click={copyToClipboard} 
+                    class="btn-copy"
+                    title="Copy to clipboard"
+                >
+                    {#if isCopying}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    {:else}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M14 20H18C19.1046 20 20 19.1046 20 18V14C20 12.8954 19.1046 12 18 12H14C12.8954 12 12 12.8954 12 14V18C12 19.1046 12.8954 20 14 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    {/if}
+                </button>
+                <button 
+                    on:click={toggleEditAlias} 
+                    class="btn-edit"
+                    title="Edit alias"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13M18.5 2.5C18.8978 2.10217 19.4374 1.87868 20 1.87868C20.5626 1.87868 21.1022 2.10217 21.5 2.5C21.8978 2.89782 22.1213 3.43739 22.1213 4C22.1213 4.56261 21.8978 5.10217 21.5 5.5L12 15L8 16L9 12L18.5 2.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    {/if}
+</div>
+
+<!-- Action Buttons -->
+<div class="email-action-buttons">
     <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         Random Alias
-    </button>
-    
-    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Custom Alias
     </button>
     
     <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
@@ -466,31 +532,6 @@ function toggleCustomAlias() {
         Refresh Page
     </button>
 </div>
-
-{#if showCustomAliasInput}
-<div class="custom-alias-container">
-    <div class="alias-input-group">
-        <input 
-            type="text" 
-            bind:value={customAlias}
-            placeholder="Enter your custom alias"
-            class="alias-input"
-        />
-        <span class="domain-suffix">@firetempmail.com</span>
-    </div>
-    {#if aliasError}
-        <div class="alias-error">{aliasError}</div>
-    {/if}
-    <button 
-        class="btn btn-primary" 
-        on:click={() => generateEmail(true, true)}
-        disabled={!customAlias}
-    >
-        Generate Custom Email
-    </button>
-</div>
-{/if}
-            </div>
             
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
@@ -669,6 +710,127 @@ function toggleCustomAlias() {
 </section>
 
 <style>
+.email-address-container {
+    margin-top: 32px;
+    margin-bottom: 16px;
+}
+
+.email-display {
+    padding: 8px 30px;
+    border: 2px solid rgb(215,215,215);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    min-height: 50px;
+}
+
+.email-display p {
+    margin-bottom: 0;
+    font-size: 20px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.email-display-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-copy, .btn-edit {
+    background: transparent;
+    border: none;
+    padding: 4px 8px;
+    color: var(--bs-primary);
+    cursor: pointer;
+}
+
+.email-edit-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.alias-input-group {
+    display: flex;
+    align-items: center;
+}
+
+.alias-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px 0 0 8px;
+    font-size: 16px;
+}
+
+.domain-suffix {
+    padding: 12px 16px;
+    background-color: #eee;
+    border: 2px solid #ddd;
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+    font-size: 16px;
+}
+
+.edit-action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.edit-action-buttons .btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+}
+
+.alias-error {
+    color: #dc3545;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .alias-input-group {
+        flex-direction: column;
+    }
+    
+    .alias-input {
+        border-radius: 8px;
+        margin-bottom: 8px;
+        width: 100%;
+    }
+    
+    .domain-suffix {
+        border-radius: 8px;
+        border: 2px solid #ddd;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .edit-action-buttons {
+        flex-direction: column;
+    }
+    
+    .email-display {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+    
+    .email-display p {
+        text-align: center;
+    }
+}
+
+
 .custom-alias-container {
     margin-top: 16px;
     padding: 16px;

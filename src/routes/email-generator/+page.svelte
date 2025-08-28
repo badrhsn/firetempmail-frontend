@@ -25,6 +25,10 @@
     let stopReloadOn = 20;
     let reloadCounter = 0;
     let reloadActive = true;
+    // Add these with your other variable declarations
+    let customAlias = '';
+    let isEditingAlias = false;
+    let aliasError = '';
   
     onMount(async function () {
         await loadEmails();
