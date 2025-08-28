@@ -1,15 +1,66 @@
 import { writable } from "svelte/store"
 import { browser } from "$app/environment"
-
-// Generate a random email address incase it's not set in local storage
 import { generate } from "random-words";
 
-let words = generate({ exactly: 1, maxLength: 5 });
-let alt = words[0] + Math.floor(Math.random() * 1000) + "@firetempmail.com"; // format: word1.word2<random_number>@justatemp.com
+// Available domains for email generation
+export const availableDomains = [
+    'offredaily.sa.com', 
+    'ctm.edu.pl', 
+    'jobsdeforyou.sa.com',
+];
+
+// Default domain
+export const defaultDomain = 'firetempmail.com';
+
+// Store for selected domain
+export const selectedDomain = writable(
+    browser && localStorage.getItem("selectedDomain") || defaultDomain
+);
+
+selectedDomain.subscribe((val) => {
+    if (browser) return (localStorage.selectedDomain = val);
+});
+
+// Generate a random email address
+function generateRandomEmail(domain = defaultDomain) {
+    let words = generate({ exactly: 1, maxLength: 5 });
+    return words[0] + Math.floor(Math.random() * 1000) + "@" + domain;
+}
+
+// Get the current domain from local storage or use default
+const currentDomain = browser ? localStorage.getItem("selectedDomain") || defaultDomain : defaultDomain;
+
+// Generate initial email with current domain
+let alt = generateRandomEmail(currentDomain);
 
 // Make the email address a store
-// Thanks to u/sharath725 (https://www.reddit.com/r/sveltejs/comments/p438og/comment/h90fdjc)
-export const receivingEmail = writable(browser && localStorage.getItem("receivingEmail") || alt) // hihi
-receivingEmail.subscribe((val) => {                                                              // 2690 is the count of received emails by junk.boats
-  if (browser) return (localStorage.receivingEmail = val)
-})
+export const receivingEmail = writable(browser && localStorage.getItem("receivingEmail") || alt);
+
+receivingEmail.subscribe((val) => {
+    if (browser) return (localStorage.receivingEmail = val);
+});
+
+// Function to update email with new domain
+export function updateEmailDomain(newDomain) {
+    if (browser) {
+        receivingEmail.update(currentEmail => {
+            if (currentEmail && currentEmail.includes('@')) {
+                const alias = currentEmail.split('@')[0];
+                return alias + '@' + newDomain;
+            }
+            return generateRandomEmail(newDomain);
+        });
+        selectedDomain.set(newDomain);
+    }
+}
+
+// Function to generate completely new random email
+export function generateNewRandomEmail() {
+    if (browser) {
+        selectedDomain.update(currentDomain => {
+            const newEmail = generateRandomEmail(currentDomain);
+            receivingEmail.set(newEmail);
+            return currentDomain;
+        });
+    }
+}
