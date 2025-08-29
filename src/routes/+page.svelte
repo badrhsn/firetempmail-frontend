@@ -413,20 +413,10 @@
                 </div>
             </div>
             
-            <!-- Domain Selector Modal -->
-            {#if showDomainSelector}
-                <div class="modal-backdrop" on:click={() => showDomainSelector = false}>
-                    <div class="modal" on:click|stopPropagation>
-                        <div class="modal-header">
-                            <h3>Select Email Domain</h3>
-                            <button on:click={() => showDomainSelector = false} class="modal-close">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M6 18L18 6M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="domain-options">
+            <!-- Domain Selector Dropdown -->
+                    {#if showDomainSelector}
+                        <div class="domain-dropdown-container">
+                            <div class="domain-dropdown">
                                 {#each availableDomains as domain}
                                     <div 
                                         class="domain-option {currentDomain === domain ? 'active' : ''}" 
@@ -442,9 +432,7 @@
                                 {/each}
                             </div>
                         </div>
-                    </div>
-                </div>
-            {/if}
+                    {/if}
             
             {#if showCustomAliasInput}
             <div class="custom-alias-container">
@@ -1077,6 +1065,59 @@
 </section>
 
 <style>
+    /* Domain Selector Dropdown */
+.domain-dropdown-container {
+    position: relative;
+    width: 100%;
+    margin-top: 16px;
+}
+
+.domain-dropdown {
+    background: white;
+    border: 2px solid rgb(215,215,215);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    overflow: hidden;
+    animation: dropdownSlideIn 0.2s ease-out;
+}
+
+@keyframes dropdownSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.domain-option {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.domain-option:last-child {
+    border-bottom: none;
+}
+
+.domain-option:hover {
+    background-color: #f8f9fa;
+}
+
+.domain-option.active {
+    background-color: #e9ecef;
+    font-weight: 600;
+}
+
+.domain-name {
+    font-weight: 500;
+}
     /* Domain Selector Modal */
     .modal-backdrop {
         position: fixed;
