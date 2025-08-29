@@ -458,6 +458,7 @@ function selectDomain(domain) {
                 </button>
             </div>
             {/if}
+            </div>
             
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
