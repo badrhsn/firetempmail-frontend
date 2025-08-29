@@ -1066,121 +1066,77 @@ function selectDomain(domain) {
 </section>
 
 <style>
-    /* Fix container width for large screens */
-    .container {
-        max-width: 1200px !important; /* Increased from 800px */
-        width: 100%;
-    }
 
-    /* Email list container improvements */
-    .email-list-container {
-        width: 100%;
-        max-width: none;
-    }
+    /* Domain Selector Dropdown */
+.domain-dropdown-container {
+    position: relative;
+    width: 100%;
+    margin-top: 16px;
+}
 
-    /* Better email display on large screens */
-    .email-display {
-        max-width: 100%;
-    }
+.domain-dropdown {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    animation: dropdownSlideIn 0.2s ease-out;
+}
 
-    /* Improved email items for large screens */
-    @media (min-width: 1200px) {
-        .email-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-            gap: 1rem;
-            padding: 1rem;
-            max-height: none;
-        }
-        
-        .email-item {
-            border: 1px solid rgb(240,240,240);
-            border-radius: 8px;
-            margin-bottom: 0;
-            padding: 1.25rem;
-        }
-        
-        .email-item:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transform: translateY(-2px);
-        }
-        
-        /* Improve action buttons layout */
-        .email-action-buttons {
-            justify-content: flex-start;
-        }
+@keyframes dropdownSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
     }
-
-    /* Rest of your CSS remains the same */
-    .domain-dropdown-container {
-        position: relative;
-        width: 100%;
-        margin-top: 16px;
-    }
-
-    .domain-dropdown {
-        background: white;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        overflow: hidden;
-        animation: dropdownSlideIn 0.2s ease-out;
-    }
-
-    @keyframes dropdownSlideIn {
-        from {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .domain-option {
-        padding: 12px 16px;
-        cursor: pointer;
-        transition: background-color 0.2s ease;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid #f0f0f0;
-    }
-
-    .domain-option:last-child {
-        border-bottom: none;
-    }
-
-    .domain-option:hover {
-        background-color: #f8f9fa;
-    }
-
-    .domain-option.active {
-        background-color: #e9ecef;
-        font-weight: 600;
-    }
-
-    .domain-name {
-        font-weight: 500;
-        color: #212529;
-    }
-
-    /* Remove blue border from buttons on focus */
-    .btn:focus {
-        outline: none;
-        box-shadow: none;
-    }
-
-    /* Improve button hover effects */
-    .btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    .btn:active {
+    to {
+        opacity: 1;
         transform: translateY(0);
     }
+}
+
+.domain-option {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.domain-option:last-child {
+    border-bottom: none;
+}
+
+.domain-option:hover {
+    background-color: #f8f9fa;
+}
+
+.domain-option.active {
+    background-color: #e9ecef;
+    font-weight: 600;
+}
+
+.domain-name {
+    font-weight: 500;
+    color: #212529;
+}
+
+/* Remove blue border from buttons on focus */
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Improve button hover effects */
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
     /* Domain Selector Dropdown */
 .domain-dropdown-container {
     position: relative;
