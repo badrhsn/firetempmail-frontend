@@ -127,13 +127,12 @@
     }
     
 function selectDomain(domain) {
-    // Force immediate update
     updateEmailDomain(domain);
     showDomainSelector = false;
     
-    // Manually update the address variable to ensure reactivity
-    $receivingEmail = $receivingEmail.split('@')[0] + '@' + domain;
-    $selectedDomain = domain;
+    // Force UI update
+    address = $receivingEmail;
+    currentDomain = domain;
 }
     
     function manualReload() {
@@ -366,7 +365,7 @@ function selectDomain(domain) {
             <!-- Email Address with Copy Button -->
             <div class="email-address-container">
                 <div class="email-display">
-                    <p>{receivingEmail}</p>
+                    <p>{address}</p>
                     <button 
                         on:click={copyToClipboard} 
                         class="btn-copy"
