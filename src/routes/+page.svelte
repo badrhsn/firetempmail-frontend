@@ -742,12 +742,12 @@ function selectDomain(domain) {
                 {/if}
             {/if}
 
-            <h3
+            <h2
                 class="text-center"
                 style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;"
             >
                 What is Disposable Temporary E-mail?
-            </h3>
+            </h2>
             <p class="text-center" style="margin-bottom: 32px;font-size: 18px;">
                 A <strong>disposable email address</strong> is a free
                 <strong>temporary email service</strong>
