@@ -1,61 +1,69 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    %sveltekit.head%
-
-    <title>Temp Mail - Disposable Temporary Email</title>
-    <link rel="canonical" href="https://firetempmail.com">
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
     <title>Fire Temp Mail | Free Disposable Temporary Email Generator</title>
+    
+    <!-- SEO Meta Tags -->
     <meta name="description" content="Fire Temp Mail provides free disposable temporary email addresses to protect your privacy, block spam, and stay anonymous online. Instantly generate a secure temp email inbox today.">
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://firetempmail.com/" />
-    <meta property="og:site_name" content="Temp Mail" />
-    <meta name="twitter:card" content="summary" />
-    <meta property="og:description"
-        content="Keep spam out of your mail and stay safe - just use a disposable temporary email address! Protect your personal email address from spam with Temp-mail" />
-    <meta name="keywords" content="free, temporary, email, disposable, mail, email address" />
-    <link rel="apple-touch-icon" type="image/png" sizes="180x180"
-        href="/assets/img/apple-touch-icon.png?h=70b5822a650fbd65b442efd5fc202d9e">
-    <link rel="icon" type="image/png" sizes="16x16"
-        href="/assets/img/favicon-16x16.png?h=f92aa8eae4ce8dad06fd4b9a2d0b68f8">
-    <link rel="icon" type="image/png" sizes="16x16"
-        href="/assets/img/favicon-16x16.png?h=f92aa8eae4ce8dad06fd4b9a2d0b68f8" media="(prefers-color-scheme: dark)">
-    <link rel="icon" type="image/png" sizes="32x32"
-        href="/assets/img/favicon-32x32.png?h=f92aa8eae4ce8dad06fd4b9a2d0b68f8">
-    <link rel="icon" type="image/png" sizes="32x32"
-        href="/assets/img/favicon-32x32.png?h=f92aa8eae4ce8dad06fd4b9a2d0b68f8" media="(prefers-color-scheme: dark)">
-    <link rel="icon" type="image/png" sizes="180x180"
-        href="/assets/img/apple-touch-icon.png?h=70b5822a650fbd65b442efd5fc202d9e">
-    <link rel="icon" type="image/png" sizes="192x192"
-        href="/assets/img/android-chrome-192x192.png?h=70b5822a650fbd65b442efd5fc202d9e">
-    <link rel="icon" type="image/png" sizes="512x512"
-        href="/assets/img/android-chrome-512x512.png?h=70b5822a650fbd65b442efd5fc202d9e">
+    <meta name="keywords" content="free, temporary, email, disposable, mail, email address">
+    <link rel="canonical" href="https://firetempmail.com">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://firetempmail.com/">
+    <meta property="og:site_name" content="Temp Mail">
+    <meta property="og:description" content="Keep spam out of your mail and stay safe - just use a disposable temporary email address! Protect your personal email address from spam with Temp-mail">
+    <meta name="twitter:card" content="summary">
+    
+    <!-- Favicon and App Icons -->
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/assets/img/apple-touch-icon.png?h=70b5822a650fbd65b442efd5fc202d9e">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png?h=f92aa8eae4ce8dad06fd4b9a2d0b68f8">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png?h=f92aa8eae4ce8dad06fd4b9a2d0b68f8">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/android-chrome-192x192.png?h=70b5822a650fbd65b442efd5fc202d9e">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/android-chrome-512x512.png?h=70b5822a650fbd65b442efd5fc202d9e">
+    
+    <!-- Dark mode favicon variants -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png?h=f92aa8eae4ce8dad06fd4b9a2d0b68f8" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png?h=f92aa8eae4ce8dad06fd4b9a2d0b68f8" media="(prefers-color-scheme: dark)">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=cd822b7fd22c8a95a68470c795adea69">
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link
-        href="https://fonts.bunny.net/css?family=inter:100,200,300,400,500,600,700,800,900|inter-tight:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900i"
-        rel="stylesheet" />
-    <!-- Google tag (gtag.js) -->
+    <link href="https://fonts.bunny.net/css?family=inter:100,200,300,400,500,600,700,800,900|inter-tight:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900i" rel="stylesheet">
+    
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-V7Y8WEB63T"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-V7Y8WEB63T');
     </script>
+    
+    <!-- SvelteKit Head -->
+    %sveltekit.head%
+    
     <style>
-        /* Header Styles */
-        .app-header {
-            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        /* ===== VARIABLES ===== */
+        :root {
+            --header-bg: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --text-light: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.9);
+            --font-primary: 'Inter', sans-serif;
+            --font-accent: 'Inter Tight', sans-serif;
         }
-
+        
+        /* ===== HEADER STYLES ===== */
+        .app-header {
+            background: var(--header-bg);
+            padding: 1rem 0;
+            box-shadow: var(--header-shadow);
+        }
+        
         .header-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -64,58 +72,52 @@
             align-items: center;
             justify-content: space-between;
         }
-
+        
         .logo-container {
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            color: white;
+            color: var(--text-light);
+            transition: opacity 0.2s ease;
         }
-
+        
+        .logo-container:hover {
+            opacity: 0.9;
+        }
+        
         .logo-icon {
             font-size: 28px;
             font-weight: bold;
         }
-
+        
         .logo-text {
-            font-family: 'Inter Tight', sans-serif;
+            font-family: var(--font-accent);
             font-weight: 700;
             font-size: 24px;
             letter-spacing: -0.5px;
         }
-
+        
         .logo-tagline {
             font-size: 14px;
-            opacity: 0.9;
+            color: var(--text-muted);
             margin-left: 8px;
             font-weight: 300;
         }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .logo-text {
-                font-size: 20px;
-            }
-            
-            .logo-tagline {
-                display: none;
-            }
-        }
-
-        /* Blog specific styles */
+        
+        /* ===== BLOG STYLES ===== */
         .blog-post-card {
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             border: 1px solid #e9ecef;
             border-radius: 8px;
             overflow: hidden;
         }
-
+        
         .blog-post-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-
+        
         .blog-category {
             background: #e9ecef;
             padding: 0.25rem 0.75rem;
@@ -124,7 +126,7 @@
             font-weight: 500;
             display: inline-block;
         }
-
+        
         .read-more-btn {
             color: #007bff;
             text-decoration: none;
@@ -132,25 +134,49 @@
             display: inline-flex;
             align-items: center;
         }
-
+        
         .read-more-btn:hover {
             text-decoration: underline;
         }
-
+        
         .read-more-btn::after {
             content: "→";
             margin-left: 0.5rem;
             transition: transform 0.2s ease;
         }
-
+        
         .read-more-btn:hover::after {
             transform: translateX(4px);
+        }
+        
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .logo-text {
+                font-size: 20px;
+            }
+            
+            .logo-tagline {
+                display: none;
+            }
+            
+            .header-container {
+                padding: 0 0.75rem;
+            }
+        }
+        
+        /* ===== BODY STYLES ===== */
+        body {
+            font-family: var(--font-primary);
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
         }
     </style>
 </head>
 
-<body data-sveltekit-preload-data="hover" style="font-family: Inter, sans-serif;">
-    <!-- Simple Header with Logo -->
+<body data-sveltekit-preload-data="hover">
+    <!-- Header Section -->
     <header class="app-header">
         <div class="header-container">
             <a href="/" class="logo-container">
@@ -163,10 +189,11 @@
         </div>
     </header>
 
+    <!-- SvelteKit Content -->
     <div style="display: contents">%sveltekit.body%</div>
     
+    <!-- Scripts -->
     <script src="/assets/js/jquery.min.js?h=6bcc3684f18aa21874fa709f122723cf"></script>
     <script src="/assets/bootstrap/js/bootstrap.min.js?h=e55bde7d6e36ebf17ba0b8c1e80e4065"></script>
 </body>
-
 </html>
