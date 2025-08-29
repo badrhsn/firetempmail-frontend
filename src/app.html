@@ -14,20 +14,16 @@
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://firetempmail.com/">
-    <meta property="og:site_name" content="Temp Mail">
-    <meta property="og:description" content="Keep spam out of your mail and stay safe - just use a disposable temporary email address! Protect your personal email address from spam with Temp-mail">
+    <meta property="og:site_name" content="Fire Temp Mail">
+    <meta property="og:description" content="Keep spam out of your mail and stay safe - just use a disposable temporary email address! Protect your personal email address from spam with Fire Temp Mail">
     <meta name="twitter:card" content="summary">
     
     <!-- Favicon and App Icons -->
-    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/assets/img/apple-touch-icon.png?h=70b5822a650fbd65b442efd5fc202d9e">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png?h=f92aa8eae4ce8dad06fd4b9a2d0b68f8">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png?h=f92aa8eae4ce8dad06fd4b9a2d0b68f8">
-    <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/android-chrome-192x192.png?h=70b5822a650fbd65b442efd5fc202d9e">
-    <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/android-chrome-512x512.png?h=70b5822a650fbd65b442efd5fc202d9e">
-    
-    <!-- Dark mode favicon variants -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png?h=f92aa8eae4ce8dad06fd4b9a2d0b68f8" media="(prefers-color-scheme: dark)">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png?h=f92aa8eae4ce8dad06fd4b9a2d0b68f8" media="(prefers-color-scheme: dark)">
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/images/Icon.jpg?h=70b5822a650fbd65b442efd5fc202d9e">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg?h=f92aa8eae4ce8dad06fd4b9a2d0b68f8">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg?h=f92aa8eae4ce8dad06fd4b9a2d0b68f8">
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/AndroidIcon.jpg?h=70b5822a650fbd65b442efd5fc202d9e">
+    <link rel="icon" type="image/png" sizes="512x512" href="/images/AndroidIcon.jpg?h=70b5822a650fbd65b442efd5fc202d9e">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=cd822b7fd22c8a95a68470c795adea69">
@@ -43,232 +39,499 @@
         gtag('config', 'G-V7Y8WEB63T');
     </script>
     
-    <!-- SvelteKit Head -->
-    %sveltekit.head%
-    
     <style>
-		.app-header {
-    background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
-    padding: 1rem 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    transition: background 0.3s ease;
-}
-
-.app-header:hover {
-    background: linear-gradient(135deg, #ff8e6d 0%, #ffc48f 100%);
-}
-
-.header-container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    color: #ffffff;
-    transition: opacity 0.2s ease;
-}
-
-.logo-container:hover {
-    opacity: 0.9;
-}
-
-.logo-icon {
-    font-size: 30px;
-}
-
-.logo-text-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.logo-text {
-    font-family: 'Inter Tight', sans-serif;
-    font-weight: 800;
-    font-size: 24px;
-}
-
-.logo-tagline {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.85);
-    margin-top: 2px;
-    font-weight: 400;
-}
-
-.header-nav {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
-.nav-link {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
-}
-
-.nav-link:hover {
-    color: #ffe8d6;
-}
-
-.nav-link.btn-primary {
-    background: #ffffff;
-    color: #ff7e5f;
-    padding: 0.4rem 1rem;
-    border-radius: 6px;
-    font-weight: 600;
-    transition: all 0.2s ease;
-}
-
-.nav-link.btn-primary:hover {
-    background: #ffe8d6;
-    color: #ff5f3f;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 992px) {
-    .header-nav {
-        gap: 0.5rem;
-    }
-    
-    .logo-text {
-        font-size: 22px;
-    }
-    
-    .logo-tagline {
-        font-size: 12px;
-    }
-}
-
-@media (max-width: 768px) {
-    .header-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.75rem;
-    }
-
-    .header-nav {
-        flex-wrap: wrap;
-    }
-}
-        /* ===== VARIABLES ===== */
-        :root {
-            --header-bg: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            --text-light: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.9);
-            --font-primary: 'Inter', sans-serif;
-            --font-accent: 'Inter Tight', sans-serif;
+        /* ===== MODERN HEADER STYLES ===== */
+        .modern-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff4757 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(255, 107, 53, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
-    
-        
-        /* ===== BLOG STYLES ===== */
-        .blog-post-card {
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            overflow: hidden;
+
+        .modern-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
-        
-        .blog-post-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+        .header-container {
+            position: relative;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
         }
-        
-        .blog-category {
-            background: #e9ecef;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            display: inline-block;
-        }
-        
-        .read-more-btn {
-            color: #007bff;
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             text-decoration: none;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .logo-container:hover {
+            transform: translateY(-2px);
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 36px;
+            position: relative;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.3));
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-container:hover .logo-icon::before {
+            opacity: 1;
+        }
+
+        .logo-container:hover .logo-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .logo-text-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text {
+            font-family: 'Inter Tight', sans-serif;
+            font-weight: 800;
+            font-size: 28px;
+            line-height: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-tagline {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 2px;
             font-weight: 500;
-            display: inline-flex;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 0.5rem;
             align-items: center;
         }
-        
-        .read-more-btn:hover {
-            text-decoration: underline;
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 10px 16px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
-        
-        .read-more-btn::after {
-            content: "→";
-            margin-left: 0.5rem;
-            transition: transform 0.2s ease;
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        
-        .read-more-btn:hover::after {
-            transform: translateX(4px);
+
+        .nav-link:hover::before {
+            opacity: 1;
         }
-        
+
+        .nav-link:hover {
+            color: #ffffff;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-link.btn-contact {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            color: #ff6b35;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin-left: 8px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-link.btn-contact::before {
+            display: none;
+        }
+
+        .nav-link.btn-contact:hover {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #e55039;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+
+        .mobile-menu-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 320px;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff4757 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 9999;
+            padding: 2rem;
+            transition: right 0.3s ease;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .mobile-menu-close {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: #ffffff;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-close:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1);
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .mobile-nav-link {
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 15px 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .mobile-nav-link:hover {
+            color: #ffffff;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(10px);
+        }
+
+        .mobile-contact-btn {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            color: #ff6b35;
+            font-weight: 700;
+            margin-top: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .mobile-contact-btn:hover {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #e55039;
+            transform: translateX(0) scale(1.02);
+        }
+
+        /* Gradient bottom border */
+        .modern-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+        }
+
         /* ===== RESPONSIVE DESIGN ===== */
-        @media (max-width: 768px) {
-            .logo-text {
-                font-size: 20px;
+        @media (max-width: 992px) {
+            .header-nav .nav-link:not(.btn-contact) {
+                display: none;
             }
             
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 1rem;
+                height: 70px;
+            }
+            
+            .logo-text {
+                font-size: 24px;
+            }
+            
+            .logo-tagline {
+                font-size: 12px;
+            }
+            
+            .logo-icon {
+                font-size: 30px;
+            }
+
+            .mobile-menu {
+                width: 280px;
+            }
+        }
+
+        @media (max-width: 480px) {
             .logo-tagline {
                 display: none;
             }
             
             .header-container {
-                padding: 0 0.75rem;
+                height: 65px;
             }
         }
-        
+
         /* ===== BODY STYLES ===== */
         body {
-            font-family: var(--font-primary);
+            font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
             color: #333;
             line-height: 1.6;
         }
+
+        /* Demo content styles */
+        .demo-content {
+            padding: 2rem;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
     </style>
 </head>
 
-<body data-sveltekit-preload-data="hover">
-    <!-- Header Section -->
-	<header class="app-header">
-		<div class="header-container">
-			<a href="/" class="logo-container">
-				<div class="logo-icon">🔥</div>
-				<div class="logo-text-container">
-					<span class="logo-text">Temp Mail</span>
-					<span class="logo-tagline">Fast & Secure Disposable Emails</span>
-				</div>
-			</a>
-			<nav class="header-nav">
-				<a href="/" class="nav-link">Home</a>
-				<a href="/email-generator" class="nav-link">Email Generator</a>
-				<a href="/temp-mail-edu" class="nav-link">Temp Mail EDU</a>
-				<a href="/10minutemail" class="nav-link">10 Minute Mail</a>
-				<a href="/blog" class="nav-link">Blog</a>
-				<a href="/contact" class="nav-link btn btn-primary">Contact</a>
-			</nav>
-		</div>
-	</header>
+<body>
+    <!-- Modern Header Section -->
+    <header class="modern-header">
+        <div class="header-container">
+            <a href="/" class="logo-container">
+                <div class="logo-icon">🔥</div>
+                <div class="logo-text-container">
+                    <span class="logo-text">Fire Temp Mail</span>
+                    <span class="logo-tagline">Fast & Secure Disposable Emails</span>
+                </div>
+            </a>
+            
+            <nav class="header-nav">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/email-generator" class="nav-link">Email Generator</a>
+                <a href="/temp-mail-edu" class="nav-link">Temp Mail EDU</a>
+                <a href="/10minutemail" class="nav-link">10 Minute Mail</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/contact" class="nav-link btn-contact">Contact</a>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
 
-    <!-- SvelteKit Content -->
-    <div style="display: contents">%sveltekit.body%</div>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
     
-    <!-- Scripts -->
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo-container">
+                <div class="logo-icon" style="font-size: 24px;">🔥</div>
+                <div class="logo-text-container">
+                    <span class="logo-text" style="font-size: 20px;">Fire Temp Mail</span>
+                    <span class="logo-tagline" style="font-size: 11px;">Disposable Emails</span>
+                </div>
+            </div>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <nav class="mobile-nav-links">
+            <a href="/" class="mobile-nav-link">Home</a>
+            <a href="/email-generator" class="mobile-nav-link">Email Generator</a>
+            <a href="/temp-mail-edu" class="mobile-nav-link">Temp Mail EDU</a>
+            <a href="/10minutemail" class="mobile-nav-link">10 Minute Mail</a>
+            <a href="/blog" class="mobile-nav-link">Blog</a>
+            <a href="/contact" class="mobile-nav-link mobile-contact-btn">Contact</a>
+        </nav>
+    </div>
+    <div style="display: contents">%sveltekit.body%</div>
+
+    <!-- Demo Content -->
+    <div class="demo-content">
+        <h1>Modern Header Demo</h1>
+        <p>This is a demo page showing the modern Fire Temp Mail header design. The header features:</p>
+        <ul>
+            <li>Glassmorphism effect with backdrop blur</li>
+            <li>Smooth animations and hover effects</li>
+            <li>Responsive mobile menu</li>
+            <li>Modern gradient design</li>
+            <li>Enhanced logo with glow effects</li>
+        </ul>
+        <p>Scroll down to see the sticky header behavior...</p>
+        
+        <!-- Add more content to test sticky behavior -->
+        <div style="height: 200vh; background: linear-gradient(to bottom, #f8f9fa, #dee2e6); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+            <h2>Scroll Content</h2>
+            <p>Keep scrolling to test the sticky header functionality. The header should remain at the top with its glassmorphism effect.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript for Mobile Menu -->
+    <script>
+        function toggleMobileMenu() {
+            const overlay = document.querySelector('.mobile-menu-overlay');
+            const menu = document.querySelector('.mobile-menu');
+            
+            overlay.classList.add('active');
+            menu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            const overlay = document.querySelector('.mobile-menu-overlay');
+            const menu = document.querySelector('.mobile-menu');
+            
+            overlay.classList.remove('active');
+            menu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close menu when clicking on nav links
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMobileMenu();
+            }
+        });
+    </script>
+
+    <!-- Original Scripts -->
     <script src="/assets/js/jquery.min.js?h=6bcc3684f18aa21874fa709f122723cf"></script>
     <script src="/assets/bootstrap/js/bootstrap.min.js?h=e55bde7d6e36ebf17ba0b8c1e80e4065"></script>
 </body>
