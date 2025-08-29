@@ -236,7 +236,7 @@ const blogPosts = [
     title: "How to Recover a Temporary Email Address with Custom Alias",
     excerpt: "Learn how Fire Temp Mail lets you recover deleted temporary email addresses by using the custom alias feature.",
     slug: "how-to-recover-temp-mail-email-address",
-    date: "2023-11-20",
+    date: "2025-08-20",
     author: "Fire Temp Mail Team",
     category: "Guides",
     readTime: "10 min read",
