@@ -78,7 +78,7 @@
     
     function markAsRead(email) {
         if (!email) return;
-        const emailKey = email.recipient + "-"极速 email.suffix;
+        const emailKey = email.recipient + "-" + email.suffix;
         unreadEmails.delete(emailKey);
         viewEmail(email);
     }
