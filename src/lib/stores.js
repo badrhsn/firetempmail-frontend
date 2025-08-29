@@ -18,7 +18,9 @@ export const selectedDomain = writable(
 );
 
 selectedDomain.subscribe((val) => {
-    if (browser) return (localStorage.selectedDomain = val);
+    if (browser) {
+        localStorage.setItem("selectedDomain", val);
+    }
 });
 
 // Generate a random email address
@@ -27,17 +29,17 @@ function generateRandomEmail(domain = defaultDomain) {
     return words[0] + Math.floor(Math.random() * 1000) + "@" + domain;
 }
 
-// Get the current domain from local storage or use default
-const currentDomain = browser ? localStorage.getItem("selectedDomain") || defaultDomain : defaultDomain;
-
-// Generate initial email with current domain
-let alt = generateRandomEmail(currentDomain);
-
 // Make the email address a store
-export const receivingEmail = writable(browser && localStorage.getItem("receivingEmail") || alt);
+export const receivingEmail = writable(
+    browser && localStorage.getItem("receivingEmail") || generateRandomEmail(
+        browser && localStorage.getItem("selectedDomain") || defaultDomain
+    )
+);
 
 receivingEmail.subscribe((val) => {
-    if (browser) return (localStorage.receivingEmail = val);
+    if (browser) {
+        localStorage.setItem("receivingEmail", val);
+    }
 });
 
 // Function to update email with new domain
@@ -46,11 +48,17 @@ export function updateEmailDomain(newDomain) {
         receivingEmail.update(currentEmail => {
             if (currentEmail && currentEmail.includes('@')) {
                 const alias = currentEmail.split('@')[0];
-                return alias + '@' + newDomain;
+                const newEmail = alias + '@' + newDomain;
+                localStorage.setItem("receivingEmail", newEmail);
+                return newEmail;
             }
-            return generateRandomEmail(newDomain);
+            const newEmail = generateRandomEmail(newDomain);
+            localStorage.setItem("receivingEmail", newEmail);
+            return newEmail;
         });
+        
         selectedDomain.set(newDomain);
+        localStorage.setItem("selectedDomain", newDomain);
     }
 }
 

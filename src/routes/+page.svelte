@@ -11,8 +11,10 @@
     import Navigation from '$lib/components/Navigation.svelte';
     import { getPopularArticles } from '$lib/data/blogPosts';
     
+    // These will reactively update when the stores change
     let address = $receivingEmail;
     let currentDomain = $selectedDomain;
+    
     const url = "https://post.firetempmail.com";
     
     let copyrightYear = new Date().getFullYear();
@@ -76,12 +78,11 @@
     
     function markAsRead(email) {
         if (!email) return;
-        const emailKey = email.recipient + "-" + email.suffix;
+        const emailKey = email.recipient + "-"极速 email.suffix;
         unreadEmails.delete(emailKey);
         viewEmail(email);
     }
     
-    // @ts-ignore
     async function generateEmail(reload, useCustomAlias = false) {
         let alias;
         
@@ -97,7 +98,7 @@
             alias = words[0] + Math.floor(Math.random() * 1000);
         }
         
-        // Use the selected domain from store
+        // This will automatically update the address reactive variable
         receivingEmail.set(alias + "@" + currentDomain);
 
         if (reload) {
@@ -105,25 +106,6 @@
         } else {
             customAlias = '';
             showCustomAliasInput = false;
-        }
-    }
-    
-    // Add these domain-related functions
-    function toggleDomainSelector() {
-        showDomainSelector = !showDomainSelector;
-    }
-    
-    function selectDomain(domain) {
-        updateEmailDomain(domain);
-        showDomainSelector = false;
-        
-        // Update the email display immediately with the new domain
-        if (address && address.includes('@')) {
-            const aliasPart = address.split('@')[0];
-            receivingEmail.set(aliasPart + '@' + domain);
-        } else {
-            // If no address exists yet, generate a new one
-            generateEmail(false);
         }
     }
     
@@ -140,7 +122,22 @@
         }
     }
     
-
+    function toggleDomainSelector() {
+        showDomainSelector = !showDomainSelector;
+    }
+    
+function selectDomain(domain) {
+    console.log("Selecting domain:", domain);
+    console.log("Current address before:", address);
+    
+    updateEmailDomain(domain);
+    showDomainSelector = false;
+    
+    // Check if the address updated
+    setTimeout(() => {
+        console.log("Current address after:", address);
+    }, 100);
+}
     
     function manualReload() {
         window.location.reload();
