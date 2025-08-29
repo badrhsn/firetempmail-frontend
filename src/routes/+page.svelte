@@ -1067,7 +1067,7 @@ function selectDomain(domain) {
 
 <style>
 
-    /* Domain Selector Dropdown */
+/* Domain Selector Dropdown */
 .domain-dropdown-container {
     position: relative;
     width: 100%;
@@ -1137,240 +1137,132 @@ function selectDomain(domain) {
 .btn:active {
     transform: translateY(0);
 }
-  
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .email-action-buttons {
-            flex-direction: column;
-        }
 
-        .email-action-buttons .btn {
-            width: 100%;
-        }
+.custom-alias-container {
+    margin-top: 16px;
+    padding: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
 
-        .modal {
-            width: 90%;
-            margin: 0 auto;
-        }
-    }
-    /* Domain Selection Styles */
-    .domain-selection {
-        position: relative;
-        margin-bottom: 16px;
-    }
+.alias-input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
 
-    .domain-selection .btn-outline {
-        background: transparent;
-        border: 2px solid rgb(215, 215, 215);
-        color: var(--text-primary);
-        padding: 10px 16px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        cursor: pointer;
-        width: 100%;
-        justify-content: center;
-    }
+.alias-input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px 0 0 6px;
+    font-size: 16px;
+}
 
-    .domain-selection .btn-outline:hover {
-        background: var(--bg-secondary);
-    }
+.domain-suffix {
+    padding: 10px 12px;
+    background-color: #eee;
+    border: 2px solid #ddd;
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+    font-size: 16px;
+}
 
-    .domain-dropdown {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: white;
-        border: 2px solid rgb(215, 215, 215);
-        border-radius: 8px;
-        margin-top: 4px;
-        z-index: 1000;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        max-height: 200px;
-        overflow-y: auto;
-    }
+.alias-error {
+    color: #dc3545;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
 
-    .domain-option {
-        padding: 12px 16px;
-        cursor: pointer;
-        transition: background-color 0.2s;
-        border-bottom: 1px solid #f0f0f0;
-    }
-
-    .domain-option:last-child {
-        border-bottom: none;
-    }
-
-    .domain-option:hover {
-        background-color: #f8f9fa;
-    }
-
-    .domain-option.active {
-        background-color: #e9ecef;
-        font-weight: 600;
-    }
-
-    /* Update the domain suffix in custom alias input */
-    .alias-input-group .domain-suffix {
-        padding: 10px 12px;
-        background-color: #eee;
-        border: 2px solid #ddd;
-        border-left: none;
-        border-radius: 0 6px 6px 0;
-        font-size: 16px;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .domain-selection {
-            width: 100%;
-        }
-
-        .domain-selection .btn-outline {
-            width: 100%;
-            justify-content: center;
-        }
-
-        .domain-dropdown {
-            width: 100%;
-            left: 0;
-            right: 0;
-        }
-    }
-
-    @media (min-width: 769px) {
-        .domain-selection {
-            width: auto;
-            min-width: 200px;
-        }
-    }
-    .custom-alias-container {
-        margin-top: 16px;
-        padding: 16px;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        background-color: #f9f9f9;
-    }
-
+@media (max-width: 768px) {
     .alias-input-group {
-        display: flex;
-        align-items: center;
-        margin-bottom: 12px;
+        flex-direction: column;
     }
-
+    
     .alias-input {
-        flex: 1;
-        padding: 10px 12px;
-        border: 2px solid #ddd;
-        border-radius: 6px 0 0 6px;
-        font-size: 16px;
+        border-radius: 6px;
+        margin-bottom: 8px;
+        width: 100%;
     }
-
+    
     .domain-suffix {
-        padding: 10px 12px;
-        background-color: #eee;
+        border-radius: 6px;
         border: 2px solid #ddd;
-        border-left: none;
-        border-radius: 0 6px 6px 0;
-        font-size: 16px;
+        width: 100%;
+        text-align: center;
     }
-
-    .alias-error {
-        color: #dc3545;
-        margin-bottom: 12px;
-        font-size: 14px;
-    }
-
-    @media (max-width: 768px) {
-        .alias-input-group {
-            flex-direction: column;
-        }
-
-        .alias-input {
-            border-radius: 6px;
-            margin-bottom: 8px;
-            width: 100%;
-        }
-
-        .domain-suffix {
-            border-radius: 6px;
-            border: 2px solid #ddd;
-            width: 100%;
-            text-align: center;
-        }
-    }
+}
     .seo-content-section {
         background: linear-gradient(to bottom, #f8f9fa, #ffffff);
         border-radius: 12px;
         margin: 3rem 0;
         padding: 2rem 0;
     }
-
+    
     .container {
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 1rem;
     }
-
+    
     .section-title {
-        font-family: "Inter Tight", sans-serif;
+        font-family: 'Inter Tight', sans-serif;
         font-weight: 600;
         margin-bottom: 2rem;
         text-align: center;
         color: #2c3e50;
     }
-
+    
     .seo-rich-content {
         line-height: 1.8;
         color: #2c3e50;
         max-width: 800px;
         margin: 0 auto;
     }
-
+    
     .seo-rich-content h3 {
         font-size: 1.5rem;
         margin: 2rem 0 1rem 0;
         color: #007bff;
         font-weight: 600;
     }
-
+    
     .seo-rich-content h4 {
         font-size: 1.2rem;
         margin: 1.5rem 0 0.5rem 0;
         color: #2c3e50;
         font-weight: 600;
     }
-
+    
     .seo-rich-content p {
         margin-bottom: 1.2rem;
     }
-
+    
     .feature-list {
         margin-bottom: 1.5rem;
     }
-
+    
     .feature-item {
         padding: 0.5rem 0;
         display: flex;
         align-items: flex-start;
     }
-
+    
     .feature-icon {
         color: #007bff;
         font-weight: bold;
         margin-right: 0.5rem;
         flex-shrink: 0;
     }
-
+    
     .use-cases {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 1.5rem;
         margin: 2rem 0;
     }
-
+    
     .use-case {
         background: white;
         padding: 1.5rem;
@@ -1378,11 +1270,11 @@ function selectDomain(domain) {
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         transition: transform 0.2s;
     }
-
+    
     .use-case:hover {
         transform: translateY(-5px);
     }
-
+    
     .conclusion-box {
         background: #e8f4fd;
         padding: 2rem;
@@ -1390,17 +1282,17 @@ function selectDomain(domain) {
         border-left: 4px solid #007bff;
         margin: 2rem 0;
     }
-
+    
     @media (max-width: 768px) {
         .use-cases {
             grid-template-columns: 1fr;
         }
-
+        
         .seo-rich-content h3 {
             font-size: 1.3rem;
         }
     }
-
+    
     .toast-container {
         position: fixed;
         top: 20px;
@@ -1411,19 +1303,19 @@ function selectDomain(domain) {
         gap: 10px;
         max-width: 350px;
     }
-
+    
     .toast {
         background: white;
         padding: 1rem;
         border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         display: flex;
         align-items: flex-start;
         border-left: 4px solid var(--bs-info);
         animation: slideIn 0.3s ease-out;
         max-width: 100%;
     }
-
+    
     @keyframes slideIn {
         from {
             transform: translateX(100%);
@@ -1434,155 +1326,155 @@ function selectDomain(domain) {
             opacity: 1;
         }
     }
-
+    
     .btn:hover {
         opacity: 0.8;
     }
 
     .email-address-container {
-        margin-top: 32px;
-        margin-bottom: 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
+    margin-top: 32px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
 
+.email-display {
+    padding: 8px 30px;
+    border: 2px solid rgb(215,215,215);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    min-height: 50px;
+}
+
+.email-text {
+    margin-bottom: 0px;
+    font-size: 20px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.copy-btn {
+    margin-left: 12px;
+    background: transparent;
+    border: none;
+    padding: 4px 8px;
+    color: var(--bs-primary);
+}
+
+.regenerate-btn {
+    padding: 8px 30px;
+    border-radius: 16px;
+    border-width: 2px;
+    border-color: rgb(33,37,41);
+    background: rgb(33,37,41);
+    font-weight: 500;
+    height: 50px;
+    font-size: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-blog {
+    padding: 8px 30px;
+    border-radius: 16px;
+    border-width: 2px;
+    border-color: rgb(33,37,41);
+    background: rgb(33,37,41);
+    font-weight: 500;
+    height: 50px;
+    font-size: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.regenerate-btn svg {
+    font-size: 24px;
+}
+
+/* Desktop styles - side by side layout */
+@media (min-width: 1200px) {
+    .email-address-container {
+        flex-direction: row;
+        align-items: center;
+    }
+    
     .email-display {
-        padding: 8px 30px;
-        border: 2px solid rgb(215, 215, 215);
-        border-radius: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: white;
-        min-height: 50px;
+        width: 100%;
+        margin-right: 16px;
+        margin-bottom: 0;
     }
-
-    .email-text {
-        margin-bottom: 0px;
-        font-size: 20px;
-        flex: 1;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .copy-btn {
-        margin-left: 12px;
-        background: transparent;
-        border: none;
-        padding: 4px 8px;
-        color: var(--bs-primary);
-    }
-
+    
     .regenerate-btn {
-        padding: 8px 30px;
-        border-radius: 16px;
-        border-width: 2px;
-        border-color: rgb(33, 37, 41);
-        background: rgb(33, 37, 41);
-        font-weight: 500;
-        height: 50px;
-        font-size: 20px;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
+        min-width: 220px;
+        margin-bottom: 0;
     }
+}
 
-    .btn-blog {
-        padding: 8px 30px;
-        border-radius: 16px;
-        border-width: 2px;
-        border-color: rgb(33, 37, 41);
-        background: rgb(33, 37, 41);
-        font-weight: 500;
-        height: 50px;
-        font-size: 20px;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
+/* Mobile styles - stacked layout */
+@media (max-width: 1199px) {
+    .email-text {
+        white-space: normal;
+        text-overflow: clip;
+        word-break: break-all;
     }
+}
 
-    .regenerate-btn svg {
-        font-size: 24px;
+.copy-btn:hover,
+.regenerate-btn:hover {
+    opacity: 0.8;
+}
+/* Mobile styles for toast */
+@media (max-width: 768px) {
+    .toast-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
     }
-
-    /* Desktop styles - side by side layout */
-    @media (min-width: 1200px) {
-        .email-address-container {
-            flex-direction: row;
-            align-items: center;
-        }
-
-        .email-display {
-            width: 100%;
-            margin-right: 16px;
-            margin-bottom: 0;
-        }
-
-        .regenerate-btn {
-            min-width: 220px;
-            margin-bottom: 0;
-        }
+}
+/* Mobile styles for email list */
+@media (max-width: 768px) {
+    .email-item {
+        padding: 12px;
     }
-
-    /* Mobile styles - stacked layout */
-    @media (max-width: 1199px) {
-        .email-text {
-            white-space: normal;
-            text-overflow: clip;
-            word-break: break-all;
-        }
+    
+    .email-avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+        margin-right: 8px;
     }
-
-    .copy-btn:hover,
-    .regenerate-btn:hover {
-        opacity: 0.8;
+    
+    .email-sender {
+        font-size: 14px;
     }
-    /* Mobile styles for toast */
-    @media (max-width: 768px) {
-        .toast-container {
-            top: 10px;
-            right: 10px;
-            left: 10px;
-            max-width: none;
-        }
+    
+    .email-date {
+        font-size: 11px;
     }
-    /* Mobile styles for email list */
-    @media (max-width: 768px) {
-        .email-item {
-            padding: 12px;
-        }
-
-        .email-avatar {
-            width: 32px;
-            height: 32px;
-            font-size: 14px;
-            margin-right: 8px;
-        }
-
-        .email-sender {
-            font-size: 14px;
-        }
-
-        .email-date {
-            font-size: 11px;
-        }
-
-        .email-subject {
-            font-size: 14px;
-        }
-
-        .email-preview {
-            font-size: 12px;
-        }
+    
+    .email-subject {
+        font-size: 14px;
     }
+    
+    .email-preview {
+        font-size: 12px;
+    }
+}
 
-    /* Toast Notifications */
+ /* Toast Notifications */
     .toast-container {
         position: fixed;
         top: 20px;
@@ -1593,52 +1485,52 @@ function selectDomain(domain) {
         gap: 10px;
         max-width: 350px;
     }
-
+    
     .toast {
         background: white;
         padding: 1rem;
         border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         display: flex;
         align-items: flex-start;
         animation: slideIn 0.3s ease-out;
         max-width: 100%;
     }
-
+    
     .toast-success {
         border-left: 4px solid var(--bs-success);
     }
-
+    
     .toast-error {
         border-left: 4px solid var(--bs-danger);
     }
-
+    
     .toast-info {
         border-left: 4px solid var(--bs-info);
     }
-
+    
     .toast-icon {
         margin-right: 0.75rem;
         flex-shrink: 0;
     }
-
+    
     .toast-success .toast-icon {
         color: var(--bs-success);
     }
-
+    
     .toast-error .toast-icon {
         color: var(--bs-danger);
     }
-
+    
     .toast-info .toast-icon {
         color: var(--bs-info);
     }
-
+    
     .toast-content {
         flex: 1;
         min-width: 0;
     }
-
+    
     .toast-content h4 {
         margin: 0 0 0.25rem 0;
         font-size: 0.9rem;
@@ -1646,7 +1538,7 @@ function selectDomain(domain) {
         overflow: hidden;
         text-overflow: ellipsis;
     }
-
+    
     .toast-content p {
         margin: 0;
         font-size: 0.8rem;
@@ -1654,7 +1546,7 @@ function selectDomain(domain) {
         overflow: hidden;
         text-overflow: ellipsis;
     }
-
+    
     .toast-close {
         background: none;
         border: none;
@@ -1664,7 +1556,7 @@ function selectDomain(domain) {
         color: var(--bs-secondary);
         flex-shrink: 0;
     }
-
+    
     /* Modal */
     .modal-backdrop {
         position: fixed;
@@ -1679,7 +1571,7 @@ function selectDomain(domain) {
         z-index: 10001;
         padding: 20px;
     }
-
+    
     .modal {
         background: white;
         border-radius: 16px;
@@ -1688,19 +1580,19 @@ function selectDomain(domain) {
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         overflow: hidden;
     }
-
+    
     .modal-header {
         padding: 24px 24px 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-
+    
     .modal-header h3 {
         margin: 0;
         font-size: 1.5rem;
     }
-
+    
     .modal-close {
         background: none;
         border: none;
@@ -1708,30 +1600,30 @@ function selectDomain(domain) {
         cursor: pointer;
         color: var(--bs-secondary);
     }
-
+    
     .modal-body {
         padding: 24px;
     }
-
+    
     .modal-body p {
         margin-bottom: 16px;
     }
-
+    
     .modal-input {
         width: 100%;
         padding: 12px;
-        border: 2px solid rgb(215, 215, 215);
+        border: 2px solid rgb(215,215,215);
         border-radius: 8px;
         font-size: 16px;
     }
-
+    
     .modal-footer {
         padding: 0 24px 24px;
         display: flex;
         justify-content: flex-end;
         gap: 12px;
     }
-
+    
     .btn {
         padding: 10px 20px;
         border-radius: 8px;
@@ -1743,28 +1635,28 @@ function selectDomain(domain) {
         align-items: center;
         gap: 8px;
     }
-
+    
     .btn-primary {
-        background: rgb(33, 37, 41);
+        background: rgb(33,37,41);
         color: white;
     }
-
+    
     .btn-secondary {
         background: #f8f9fa;
         color: #212529;
         border: 1px solid #dee2e6;
     }
-
+    
     .btn-danger {
         background: #dc3545;
         color: white;
     }
-
+    
     .btn:disabled {
         opacity: 0.6;
         cursor: not-allowed;
     }
-
+    
     /* Away Banner */
     .away-banner {
         background: var(--bs-red);
@@ -1775,32 +1667,32 @@ function selectDomain(domain) {
         gap: 8px;
         color: white;
     }
-
+    
     /* Container */
     .container {
         max-width: 800px;
         margin: 0 auto;
     }
-
+    
     /* Header */
     h1 {
-        font-family: "Inter Tight", sans-serif;
+        font-family: 'Inter Tight', sans-serif;
         font-weight: 600;
         margin-bottom: 16px;
         text-align: left;
     }
-
+    
     h1 span {
         font-weight: normal !important;
         color: rgb(255, 255, 255);
     }
-
+    
     .lead {
         text-align: left;
         margin-bottom: 32px;
         font-size: 20px;
     }
-
+    
     /* Email Address Container */
     .email-address-container {
         display: flex;
@@ -1809,10 +1701,10 @@ function selectDomain(domain) {
         margin-top: 32px;
         margin-bottom: 16px;
     }
-
+    
     .email-display {
         padding: 8px 30px;
-        border: 2px solid rgb(215, 215, 215);
+        border: 2px solid rgb(215,215,215);
         border-radius: 16px;
         height: 50px;
         display: flex;
@@ -1820,7 +1712,7 @@ function selectDomain(domain) {
         justify-content: space-between;
         background: white;
     }
-
+    
     .email-display p {
         margin-bottom: 0;
         font-size: 20px;
@@ -1830,7 +1722,7 @@ function selectDomain(domain) {
         white-space: nowrap;
         text-align: left;
     }
-
+    
     .btn-copy {
         margin-left: 12px;
         background: transparent;
@@ -1839,7 +1731,7 @@ function selectDomain(domain) {
         color: var(--bs-primary);
         cursor: pointer;
     }
-
+    
     .email-action-buttons {
         display: flex;
         gap: 12px;
@@ -1848,7 +1740,7 @@ function selectDomain(domain) {
         width: 100%;
     }
 
-    .email-action-buttons .btn {
+        .email-action-buttons .btn {
         flex: 1;
         min-width: 140px;
         max-width: 220px;
@@ -1862,13 +1754,13 @@ function selectDomain(domain) {
         font-size: 16px;
         transition: all 0.2s ease;
     }
-    .email-action-buttons .btn-primary {
-        background: rgb(33, 37, 41);
+        .email-action-buttons .btn-primary {
+        background: rgb(33,37,41);
         color: white;
-        border: 2px solid rgb(33, 37, 41);
+        border: 2px solid rgb(33,37,41);
     }
 
-    .email-action-buttons .btn-secondary {
+        .email-action-buttons .btn-secondary {
         background: #f8f9fa;
         color: #212529;
         border: 2px solid #dee2e6;
@@ -1877,17 +1769,16 @@ function selectDomain(domain) {
         opacity: 0.9;
         transform: translateY(-2px);
     }
-    .email-action-buttons .btn:active {
+      .email-action-buttons .btn:active {
         transform: translateY(0);
     }
-    .email-action-buttons .btn:disabled {
+       .email-action-buttons .btn:disabled {
         opacity: 0.6;
         cursor: not-allowed;
         transform: none;
     }
     /* Loading and Status Indicators */
-    .loading-indicator,
-    .refresh-stopped {
+    .loading-indicator, .refresh-stopped {
         padding: 32px;
         margin-bottom: 32px;
         display: flex;
@@ -1895,56 +1786,51 @@ function selectDomain(domain) {
         justify-content: center;
         gap: 16px;
     }
-
+    
     .loading-indicator img {
         width: 32px;
         height: 32px;
     }
-
+    
     .refresh-stopped svg {
         color: var(--bs-red);
     }
-
-    .loading-indicator span,
-    .refresh-stopped span {
+    
+    .loading-indicator span, .refresh-stopped span {
         font-weight: 500;
         font-size: 20px;
     }
-
+    
     /* Spinner animation */
     .spinner {
         animation: spin 1s linear infinite;
     }
-
+    
     @keyframes spin {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
     }
-
+    
     /* Email Detail View */
     .email-detail {
-        border: 2px solid rgb(215, 215, 215);
+        border: 2px solid rgb(215,215,215);
         border-radius: 16px;
         margin-bottom: 32px;
         overflow: hidden;
     }
-
+    
     .email-header {
         padding: 24px;
-        border-bottom: 1px solid rgb(215, 215, 215);
+        border-bottom: 1px solid rgb(215,215,215);
     }
-
+    
     .email-actions {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
         margin-bottom: 16px;
     }
-
+    
     .btn-back {
         background: transparent;
         border: none;
@@ -1955,110 +1841,110 @@ function selectDomain(domain) {
         align-items: center;
         font-size: 14px;
     }
-
+    
     .action-buttons {
         display: flex;
         gap: 8px;
     }
-
+    
     .btn-action {
         padding: 4px 8px;
         border-radius: 8px;
         background: transparent;
-        border: 1px solid rgb(215, 215, 215);
+        border: 1px solid rgb(215,215,215);
         cursor: pointer;
     }
-
+    
     .btn-delete {
         color: var(--bs-red);
     }
-
+    
     .email-detail h2 {
         font-size: 24px;
         font-weight: 600;
         margin-bottom: 8px;
     }
-
+    
     .email-meta {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-
+    
     .sender {
         display: flex;
         align-items: center;
         font-weight: 500;
     }
-
+    
     .sender svg {
         margin-right: 8px;
-        color: rgb(255, 221, 51);
+        color: rgb(255,221,51);
     }
-
+    
     .email-date {
         color: var(--bs-secondary);
         font-size: 14px;
     }
-
+    
     .email-body {
         padding: 24px;
         overflow-y: auto;
         max-height: 400px;
         word-break: break-word;
     }
-
+    
     /* Empty Inbox */
     .empty-inbox {
         padding: 32px;
         border-radius: 16px;
         margin-bottom: 32px;
-        border: 2px dashed rgb(215, 215, 215);
+        border: 2px dashed rgb(215,215,215);
         text-align: center;
     }
-
+    
     .empty-inbox svg {
-        color: rgb(215, 215, 215);
+        color: rgb(215,215,215);
         margin-bottom: 16px;
     }
-
+    
     .empty-inbox p:first-of-type {
         font-size: 20px;
         margin-top: 16px;
         font-weight: 500;
         color: #6c757d;
     }
-
+    
     .empty-inbox p:last-of-type {
         color: #6c757d;
     }
-
+    
     /* Email List */
     .email-list-container {
-        border: 2px solid rgb(215, 215, 215);
+        border: 2px solid rgb(215,215,215);
         border-radius: 16px;
         margin-bottom: 32px;
         overflow: hidden;
     }
-
+    
     .list-header {
         padding: 16px;
         background: #f8f9fa;
-        border-bottom: 1px solid rgb(215, 215, 215);
+        border-bottom: 1px solid rgb(215,215,215);
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-
+    
     .list-header h3 {
         margin: 0;
         font-size: 18px;
         font-weight: 600;
     }
-
+    
     .btn-refresh {
         background: transparent;
-        border: 1px solid rgb(215, 215, 215);
+        border: 1px solid rgb(215,215,215);
         border-radius: 8px;
         padding: 4px 12px;
         cursor: pointer;
@@ -2067,39 +1953,39 @@ function selectDomain(domain) {
         font-size: 14px;
         gap: 6px;
     }
-
+    
     .email-items {
         max-height: 500px;
         overflow-y: auto;
     }
-
+    
     .email-item {
         padding: 16px;
-        border-bottom: 1px solid rgb(240, 240, 240);
+        border-bottom: 1px solid rgb(240,240,240);
         cursor: pointer;
         transition: background-color 0.2s;
         display: flex;
         align-items: flex-start;
     }
-
+    
     .email-item:hover {
         background-color: #f8f9fa;
     }
-
+    
     .email-item.unread {
         background-color: rgba(13, 110, 253, 0.05);
     }
-
+    
     .email-item.unread:hover {
         background-color: rgba(13, 110, 253, 0.08);
     }
-
+    
     .email-avatar {
         flex-shrink: 0;
         margin-right: 12px;
         position: relative;
     }
-
+    
     .avatar {
         width: 40px;
         height: 40px;
@@ -2111,7 +1997,7 @@ function selectDomain(domain) {
         font-weight: 600;
         color: #6c757d;
     }
-
+    
     .unread-indicator {
         position: absolute;
         top: -2px;
@@ -2122,19 +2008,19 @@ function selectDomain(domain) {
         background: var(--bs-primary);
         border: 2px solid white;
     }
-
+    
     .email-content {
         flex: 1;
         min-width: 0;
     }
-
+    
     .email-header {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
         margin-bottom: 4px;
     }
-
+    
     .email-sender {
         font-weight: 600;
         overflow: hidden;
@@ -2142,18 +2028,18 @@ function selectDomain(domain) {
         white-space: nowrap;
         margin-right: 12px;
     }
-
+    
     .email-item.unread .email-sender {
         font-weight: 700;
         color: var(--bs-dark);
     }
-
+    
     .email-date {
         color: var(--bs-secondary);
         font-size: 12px;
         flex-shrink: 0;
     }
-
+    
     .email-subject {
         font-weight: 600;
         margin: 0 0 4px 0;
@@ -2161,12 +2047,12 @@ function selectDomain(domain) {
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-
+    
     .email-item.unread .email-subject {
         font-weight: 700;
         color: var(--bs-dark);
     }
-
+    
     .email-preview {
         color: var(--bs-secondary);
         margin: 0;
@@ -2175,31 +2061,31 @@ function selectDomain(domain) {
         white-space: nowrap;
         font-size: 14px;
     }
-
+    
     /* Description */
     h2 {
-        font-family: "Inter Tight", sans-serif;
+        font-family: 'Inter Tight', sans-serif;
         font-weight: 600;
         margin-bottom: 16px;
         text-align: center;
     }
-
+    
     .description {
         margin-bottom: 32px;
         font-size: 20px;
         text-align: center;
     }
-
+    
     /* Footer */
     .stats {
         margin-bottom: 32px;
         font-size: 16px;
         text-align: left;
     }
-
+    
     .count {
-        color: rgb(255, 255, 255);
-        background: rgb(33, 37, 41);
+        color: rgb(255,255,255);
+        background: rgb(33,37,41);
         border-radius: 10px;
         padding: 4px 12px;
         font-size: 14px;
@@ -2207,23 +2093,23 @@ function selectDomain(domain) {
         margin-left: 2px;
         font-family: monospace;
     }
-
+    
     .footer-links {
         margin-bottom: 4px;
         font-size: 16px;
         text-align: left;
     }
-
+    
     .float-end {
         float: right;
     }
-
+    
     .copyright {
         margin-bottom: 4px;
         font-size: 16px;
         text-align: left;
     }
-
+    
     /* Animations */
     @keyframes slideIn {
         from {
@@ -2235,31 +2121,27 @@ function selectDomain(domain) {
             opacity: 1;
         }
     }
-
+    
     @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
-
+    
     @keyframes scaleIn {
-        from {
+        from { 
             opacity: 0;
             transform: scale(0.9);
         }
-        to {
+        to { 
             opacity: 1;
             transform: scale(1);
         }
     }
-    @media (min-width: 769px) and (max-width: 992px) {
+        @media (min-width: 769px) and (max-width: 992px) {
         .email-action-buttons {
             flex-direction: row;
         }
-
+        
         .email-action-buttons .btn {
             min-width: 160px;
         }
@@ -2270,79 +2152,79 @@ function selectDomain(domain) {
             flex-direction: row;
         }
     }
-
+    
     /* Responsive Design */
     @media (max-width: 768px) {
         .email-address-container {
             flex-direction: column;
             align-items: stretch;
         }
-
+        
         .email-display {
             width: 100%;
             margin-right: 0;
             min-width: unset;
         }
-
+        
         .email-action-buttons {
             flex-direction: column;
             align-items: center;
         }
-
+        
         .email-action-buttons .btn {
             width: 100%;
             max-width: 100%;
         }
-
+        
         .btn {
             min-width: 100%;
             justify-content: center;
         }
-
+        
         .email-items {
             max-height: 300px;
         }
-
+        
         .modal-backdrop {
             padding: 10px;
         }
-
+        
         .modal {
             width: 95%;
         }
-
+        
         .float-end {
             float: none;
             display: block;
             text-align: center;
             margin-top: 16px;
         }
-
+        
         .footer-links {
             text-align: center;
         }
-
+        
         .email-item {
             padding: 12px;
         }
-
+        
         .avatar {
             width: 32px;
             height: 32px;
         }
-
+        
         .email-sender {
             font-size: 14px;
         }
-
+        
         .email-date {
             font-size: 11px;
         }
-
+        
         .email-subject {
             font-size: 14px;
         }
-
+        
         .email-preview {
             font-size: 12px;
         }
