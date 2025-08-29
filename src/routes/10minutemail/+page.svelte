@@ -1,4 +1,4 @@
-<script>
+ <script>
 // @ts-nocheck
     import { onMount } from "svelte";
     import { generate } from "random-words";
@@ -694,78 +694,6 @@ function selectDomain(domain) {
 </section>
 
 <style>
-
-/* Domain Selector Dropdown */
-.domain-dropdown-container {
-    position: relative;
-    width: 100%;
-    margin-top: 16px;
-}
-
-.domain-dropdown {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    overflow: hidden;
-    animation: dropdownSlideIn 0.2s ease-out;
-}
-
-@keyframes dropdownSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.domain-option {
-    padding: 12px 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.domain-option:last-child {
-    border-bottom: none;
-}
-
-.domain-option:hover {
-    background-color: #f8f9fa;
-}
-
-.domain-option.active {
-    background-color: #e9ecef;
-    font-weight: 600;
-}
-
-.domain-name {
-    font-weight: 500;
-    color: #212529;
-}
-
-/* Remove blue border from buttons on focus */
-.btn:focus {
-    outline: none;
-    box-shadow: none;
-}
-
-/* Improve button hover effects */
-.btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.btn:active {
-    transform: translateY(0);
-}
-
 .custom-alias-container {
     margin-top: 16px;
     padding: 16px;
@@ -821,6 +749,9 @@ function selectDomain(domain) {
         text-align: center;
     }
 }
+
+
+
     .seo-content-section {
         background: linear-gradient(to bottom, #f8f9fa, #ffffff);
         border-radius: 12px;
