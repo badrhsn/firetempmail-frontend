@@ -7,7 +7,7 @@
         availableDomains, 
         selectedDomain, 
         updateEmailDomain
-    } from "../lib/stores";
+    } from "../../lib/stores";
     import Navigation from '$lib/components/Navigation.svelte';
     import { getPopularArticles } from '$lib/data/blogPosts';
     
