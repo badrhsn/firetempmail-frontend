@@ -444,6 +444,7 @@ function toggleCustomAlias() {
                         {/if}
                     </button>
                 </div>
+                
                 <div class="email-action-buttons">
     <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -459,6 +460,14 @@ function toggleCustomAlias() {
         Custom Alias
     </button>
     
+    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Change Domain
+    </button>
+    
     <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -467,30 +476,50 @@ function toggleCustomAlias() {
     </button>
 </div>
 
-{#if showCustomAliasInput}
-<div class="custom-alias-container">
-    <div class="alias-input-group">
-        <input 
-            type="text" 
-            bind:value={customAlias}
-            placeholder="Enter your custom alias"
-            class="alias-input"
-        />
-        <span class="domain-suffix">@firetempmail.com</span>
+<!-- Domain Selector Dropdown -->
+{#if showDomainSelector}
+    <div class="domain-dropdown-container">
+        <div class="domain-dropdown">
+            {#each availableDomains as domain}
+                <div 
+                    class="domain-option {currentDomain === domain ? 'active' : ''}" 
+                    on:click={() => selectDomain(domain)}
+                >
+                    <span class="domain-name">@{domain}</span>
+                    {#if currentDomain === domain}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    {/if}
+                </div>
+            {/each}
+        </div>
     </div>
-    {#if aliasError}
-        <div class="alias-error">{aliasError}</div>
-    {/if}
-    <button 
-        class="btn btn-primary" 
-        on:click={() => generateEmail(true, true)}
-        disabled={!customAlias}
-    >
-        Generate Custom Email
-    </button>
-</div>
 {/if}
+            
+            {#if showCustomAliasInput}
+            <div class="custom-alias-container">
+                <div class="alias-input-group">
+                    <input 
+                        type="text" 
+                        bind:value={customAlias}
+                        placeholder="Enter your custom alias"
+                        class="alias-input"
+                    />
+                    <span class="domain-suffix">@{currentDomain}</span>
+                </div>
+                {#if aliasError}
+                    <div class="alias-error">{aliasError}</div>
+                {/if}
+                <button 
+                    class="btn btn-primary" 
+                    on:click={() => generateEmail(true, true)}
+                    disabled={!customAlias}
+                >
+                    Generate Custom Email
+                </button>
             </div>
+            {/if}
             
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
@@ -669,6 +698,78 @@ function toggleCustomAlias() {
 </section>
 
 <style>
+
+/* Domain Selector Dropdown */
+.domain-dropdown-container {
+    position: relative;
+    width: 100%;
+    margin-top: 16px;
+}
+
+.domain-dropdown {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    animation: dropdownSlideIn 0.2s ease-out;
+}
+
+@keyframes dropdownSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.domain-option {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.domain-option:last-child {
+    border-bottom: none;
+}
+
+.domain-option:hover {
+    background-color: #f8f9fa;
+}
+
+.domain-option.active {
+    background-color: #e9ecef;
+    font-weight: 600;
+}
+
+.domain-name {
+    font-weight: 500;
+    color: #212529;
+}
+
+/* Remove blue border from buttons on focus */
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Improve button hover effects */
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
 .custom-alias-container {
     margin-top: 16px;
     padding: 16px;
@@ -724,9 +825,6 @@ function toggleCustomAlias() {
         text-align: center;
     }
 }
-
-
-
     .seo-content-section {
         background: linear-gradient(to bottom, #f8f9fa, #ffffff);
         border-radius: 12px;
