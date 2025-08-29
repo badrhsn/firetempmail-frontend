@@ -2,10 +2,19 @@
 // @ts-nocheck
     import { onMount } from "svelte";
     import { generate } from "random-words";
-    import { receivingEmail } from "../../lib/stores";
+    import { 
+        receivingEmail, 
+        availableDomains, 
+        selectedDomain, 
+        updateEmailDomain
+    } from "../lib/stores";
     import Navigation from '$lib/components/Navigation.svelte';
-
+    import { getPopularArticles } from '$lib/data/blogPosts';
+    
+    // These will reactively update when the stores change
     let address = $receivingEmail;
+    let currentDomain = $selectedDomain;
+    
     const url = "https://post.firetempmail.com";
     
     let copyrightYear = new Date().getFullYear();
@@ -14,22 +23,24 @@
     let toasts = [];
     let isCopying = false;
     let selectedEmail = null;
-    let viewMode = 'list'; // 'list' or 'detail'
-    let unreadEmails = new Set(); // Track unread emails
+    let viewMode = 'list';
+
+    let stopReloadOn = 20;
+    let reloadCounter = 0;
+    let reloadActive = true;
+  
+    let unreadEmails = new Set();
     let showForwardModal = false;
     let forwardToEmail = '';
     let emailToForward = null;
     let isLoading = false;
-
-    // automatically stop auto-refresh after 20 refreshes
-    let stopReloadOn = 20;
-    let reloadCounter = 0;
-    let reloadActive = true;
-    // Add these with your other variable declarations
+    
     let customAlias = '';
     let showCustomAliasInput = false;
     let aliasError = '';
-  
+    
+    let showDomainSelector = false;
+
     onMount(async function () {
         await loadEmails();
         if (address === null) {
@@ -46,7 +57,6 @@
             const data = await response.json();
             const newEmails = data.mails || [];
             
-            // Mark new emails as unread
             newEmails.forEach(email => {
                 const emailKey = email.recipient + "-" + email.suffix;
                 if (!emails.some(e => e.recipient + "-" + e.suffix === emailKey)) {
@@ -57,7 +67,6 @@
             emails = newEmails;
             stats = data.stats || {};
             
-            // Sort emails by date (newest first)
             emails.sort((a, b) => new Date(b.date) - new Date(a.date));
         } catch (error) {
             console.error("Failed to load emails:", error);
@@ -67,7 +76,6 @@
         }
     }
     
-    // Mark email as read when viewed
     function markAsRead(email) {
         if (!email) return;
         const emailKey = email.recipient + "-" + email.suffix;
@@ -75,52 +83,62 @@
         viewEmail(email);
     }
     
-// @ts-ignore
-async function generateEmail(reload, useCustomAlias = false) {
-    let alias;
-    
-    if (useCustomAlias && customAlias) {
-        // Validate custom alias
-        if (!isValidAlias(customAlias)) {
-            showToast("Error", "Alias can only contain letters, numbers, and hyphens", "error");
-            return;
+    async function generateEmail(reload, useCustomAlias = false) {
+        let alias;
+        
+        if (useCustomAlias && customAlias) {
+            if (!isValidAlias(customAlias)) {
+                showToast("Error", "Alias can only contain letters, numbers, and hyphens", "error");
+                return;
+            }
+            
+            alias = customAlias;
+        } else {
+            let words = generate(1);
+            alias = words[0] + Math.floor(Math.random() * 1000);
         }
         
-        alias = customAlias;
-    } else {
-        let words = generate(1);
-        alias = words[0] + Math.floor(Math.random() * 1000);
+        // This will automatically update the address reactive variable
+        receivingEmail.set(alias + "@" + currentDomain);
+
+        if (reload) {
+            window.location.reload();
+        } else {
+            customAlias = '';
+            showCustomAliasInput = false;
+        }
     }
     
-    receivingEmail.set(alias + "@firetempmail.com");
-
-    if (reload) {
-        // use this instead of window.location.reload(); to avoid resending POST requests
-        // @ts-ignore
-        window.location = window.location.href;
-    } else {
-        // Reset custom alias field
-        customAlias = '';
-        showCustomAliasInput = false;
+    function isValidAlias(alias) {
+        const aliasRegex = /^[a-zA-Z0-9-]+$/;
+        return aliasRegex.test(alias);
     }
-}
-function isValidAlias(alias) {
-    // Alias can contain letters, numbers, and hyphens only
-    const aliasRegex = /^[a-zA-Z0-9-]+$/;
-    return aliasRegex.test(alias);
-}
-function toggleCustomAlias() {
-    showCustomAliasInput = !showCustomAliasInput;
-    if (!showCustomAliasInput) {
-        customAlias = '';
-        aliasError = '';
+    
+    function toggleCustomAlias() {
+        showCustomAliasInput = !showCustomAliasInput;
+        if (!showCustomAliasInput) {
+            customAlias = '';
+            aliasError = '';
+        }
     }
-}
-  
-    async function manualReload() {
-window.location.reload();
+    
+    function toggleDomainSelector() {
+        showDomainSelector = !showDomainSelector;
     }
-  
+    
+function selectDomain(domain) {
+    updateEmailDomain(domain);
+    showDomainSelector = false;
+    
+    // Force UI update
+    address = $receivingEmail;
+    currentDomain = domain;
+}
+    
+    function manualReload() {
+        window.location.reload();
+    }
+    
     async function timedReload() {
         if (reloadCounter >= stopReloadOn) {
             reloadActive = false;
@@ -140,18 +158,13 @@ window.location.reload();
                 const data = await response.json();
                 
                 if (data.code === 200) {
-                    // Remove the deleted email from the local array
                     emails = emails.filter(e => e && e.recipient + "-" + e.suffix !== emailKey);
-                    
-                    // Remove from unread set if it was there
                     unreadEmails.delete(emailKey);
                     
-                    // Update stats
                     if (stats.count) {
                         stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
                     }
                     
-                    // If we're viewing the deleted email, go back to list
                     if (selectedEmail && selectedEmail.recipient + "-" + selectedEmail.suffix === emailKey) {
                         selectedEmail = null;
                         viewMode = 'list';
@@ -168,17 +181,12 @@ window.location.reload();
         }
     }
 
-    // Delete current email address and generate a new one
     function deleteEmailAddress() {
         if (confirm("Are you sure you want to delete this email address? All messages will be lost.")) {
-            // Clear current emails
             emails = [];
             unreadEmails.clear();
             stats = {};
-            
-            // Generate a new email
             generateEmail(true);
-            
             showToast("Success", "New email address generated", "success");
         }
     }
@@ -240,7 +248,6 @@ window.location.reload();
         const id = Date.now();
         toasts = [...toasts, { id, title, message, type }];
         
-        // Auto-remove after 3 seconds for success messages, 5 for others
         setTimeout(() => {
             toasts = toasts.filter(toast => toast.id !== id);
         }, type === "success" ? 3000 : 5000);
@@ -254,7 +261,6 @@ window.location.reload();
         selectedEmail = email;
         viewMode = 'detail';
         
-        // Mark as read when viewing
         if (email) {
             const emailKey = email.recipient + "-" + email.suffix;
             unreadEmails.delete(emailKey);
@@ -270,16 +276,12 @@ window.location.reload();
         const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
         
         if (diffDays === 0) {
-            // Today
             return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         } else if (diffDays === 1) {
-            // Yesterday
             return 'Yesterday';
         } else if (diffDays < 7) {
-            // Within the last week
             return date.toLocaleDateString([], { weekday: 'short' });
         } else {
-            // Older than a week
             return date.toLocaleDateString([], { month: 'short', day: 'numeric' });
         }
     }
@@ -287,10 +289,7 @@ window.location.reload();
     function getEmailPreview(content) {
         if (!content) return 'No content';
         
-        // Remove HTML tags for text preview
         const text = content.replace(/<[^>]*>/g, '');
-        
-        // Return first 100 characters with ellipsis if needed
         return text.length > 100 ? text.substring(0, 100) + '...' : text;
     }
 
@@ -299,9 +298,10 @@ window.location.reload();
         return unreadEmails.has(email.recipient + "-" + email.suffix);
     }
 
-    // automatic refresh every 20 seconds
-    const intervalID = setInterval(timedReload, 20000); 
+    const intervalID = setInterval(timedReload, 20000);  
 </script>
+
+
 <svelte:head>
     <title>Email Generator - Fire Temp Mail | Free Temporary Email Service</title>
     
@@ -450,6 +450,14 @@ window.location.reload();
         Custom Alias
     </button>
     
+    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Change Domain
+    </button>
+    
     <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -457,6 +465,27 @@ window.location.reload();
         Refresh Page
     </button>
 </div>
+
+<!-- Domain Selector Dropdown -->
+{#if showDomainSelector}
+    <div class="domain-dropdown-container">
+        <div class="domain-dropdown">
+            {#each availableDomains as domain}
+                <div 
+                    class="domain-option {currentDomain === domain ? 'active' : ''}" 
+                    on:click={() => selectDomain(domain)}
+                >
+                    <span class="domain-name">@{domain}</span>
+                    {#if currentDomain === domain}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    {/if}
+                </div>
+            {/each}
+        </div>
+    </div>
+{/if}
 
 {#if showCustomAliasInput}
 <div class="custom-alias-container">
