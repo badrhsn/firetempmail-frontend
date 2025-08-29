@@ -1027,7 +1027,7 @@ function selectDomain(domain) {
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
 
         <!-- Footer -->
         <div class="text-center p-4 p-lg-5">
@@ -1137,138 +1137,7 @@ function selectDomain(domain) {
 .btn:active {
     transform: translateY(0);
 }
-    /* Domain Selector Dropdown */
-.domain-dropdown-container {
-    position: relative;
-    width: 100%;
-    margin-top: 16px;
-}
-
-.domain-dropdown {
-    background: white;
-    border: 2px solid rgb(215,215,215);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    overflow: hidden;
-    animation: dropdownSlideIn 0.2s ease-out;
-}
-
-@keyframes dropdownSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.domain-option {
-    padding: 12px 16px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.domain-option:last-child {
-    border-bottom: none;
-}
-
-.domain-option:hover {
-    background-color: #f8f9fa;
-}
-
-.domain-option.active {
-    background-color: #e9ecef;
-    font-weight: 600;
-}
-
-.domain-name {
-    font-weight: 500;
-}
-    /* Domain Selector Modal */
-    .modal-backdrop {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 10001;
-        padding: 20px;
-    }
-
-    .modal {
-        background: white;
-        border-radius: 16px;
-        width: 100%;
-        max-width: 400px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        overflow: hidden;
-    }
-
-    .modal-header {
-        padding: 20px;
-        border-bottom: 1px solid #e0e0e0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .modal-header h3 {
-        margin: 0;
-        font-size: 1.25rem;
-        font-weight: 600;
-    }
-
-    .modal-close {
-        background: none;
-        border: none;
-        padding: 4px;
-        cursor: pointer;
-        color: #6c757d;
-    }
-
-    .modal-body {
-        padding: 20px;
-    }
-
-    .domain-options {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .domain-option {
-        padding: 12px 16px;
-        border: 2px solid #e9ecef;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .domain-option:hover {
-        background-color: #f8f9fa;
-    }
-
-    .domain-option.active {
-        background-color: #e8f4fd;
-    }
-
-    .domain-name {
-        font-weight: 500;
-    }
-
+  
     /* Responsive adjustments */
     @media (max-width: 768px) {
         .email-action-buttons {
