@@ -660,6 +660,121 @@ window.location.reload();
 </section>
 
 <style>
+/* Fixed container width for larger screens */
+.container {
+    max-width: 1200px; /* Increased from 800px */
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: 100%;
+}
+
+/* Email list container improvements */
+.email-list-container {
+    border: 2px solid rgb(215,215,215);
+    border-radius: 16px;
+    margin-bottom: 32px;
+    overflow: hidden;
+    width: 100%; /* Ensure full width */
+}
+
+/* Email items grid for better large screen layout */
+.email-items {
+    max-height: 500px;
+    overflow-y: auto;
+    display: block; /* Default to block layout */
+}
+
+/* Improved email item styling for better use of space */
+.email-item {
+    padding: 16px;
+    border-bottom: 1px solid rgb(240,240,240);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Better email content utilization */
+.email-content {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+}
+
+/* Improved responsive behavior for larger screens */
+@media (min-width: 1200px) {
+    .email-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+        max-height: none;
+    }
+    
+    .email-item {
+        border: 1px solid rgb(240,240,240);
+        border-radius: 8px;
+        margin-bottom: 0;
+        padding: 1.25rem;
+    }
+    
+    .email-item:hover {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transform: translateY(-2px);
+    }
+    
+    /* Improve email display on large screens */
+    .email-display {
+        max-width: 100%;
+    }
+    
+    /* Better action buttons layout */
+    .email-action-buttons {
+        justify-content: flex-start;
+    }
+}
+
+/* Maintain mobile styles */
+@media (max-width: 768px) {
+    .email-address-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .email-display {
+        width: 100%;
+        margin-right: 0;
+        min-width: unset;
+    }
+    
+    .email-action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .email-action-buttons .btn {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .btn {
+        min-width: 100%;
+        justify-content: center;
+    }
+    
+    .email-items {
+        max-height: 300px;
+        display: block; /* Stack on mobile */
+    }
+    
+    .email-item {
+        padding: 12px;
+    }
+}
+
+/* Rest of your existing CSS remains the same */
 .custom-alias-container {
     margin-top: 16px;
     padding: 16px;

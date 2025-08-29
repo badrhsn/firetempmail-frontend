@@ -1258,12 +1258,10 @@ function selectDomain(domain) {
     }
 
     .domain-option:hover {
-        border-color: #007bff;
         background-color: #f8f9fa;
     }
 
     .domain-option.active {
-        border-color: #007bff;
         background-color: #e8f4fd;
     }
 
