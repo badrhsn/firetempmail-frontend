@@ -127,16 +127,13 @@
     }
     
 function selectDomain(domain) {
-    console.log("Selecting domain:", domain);
-    console.log("Current address before:", address);
-    
+    // Force immediate update
     updateEmailDomain(domain);
     showDomainSelector = false;
     
-    // Check if the address updated
-    setTimeout(() => {
-        console.log("Current address after:", address);
-    }, 100);
+    // Manually update the address variable to ensure reactivity
+    $receivingEmail = $receivingEmail.split('@')[0] + '@' + domain;
+    $selectedDomain = domain;
 }
     
     function manualReload() {
