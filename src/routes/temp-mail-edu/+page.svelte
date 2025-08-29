@@ -383,6 +383,9 @@ function selectDomain(domain) {
             
             <!-- Email Address with Copy Button -->
             <div class="email-address-container">
+                <small class="text-red-600">
+                    ⚠️ Tip: please click "Change Domain" to use the EDU domain.
+                </small>
                 <div class="email-display">
                     <p>{address}</p>
                     <button 
