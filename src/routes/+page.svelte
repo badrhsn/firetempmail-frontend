@@ -369,7 +369,7 @@ function selectDomain(domain) {
             <!-- Email Address with Copy Button -->
             <div class="email-address-container">
                 <div class="email-display">
-                    <p>{address}</p>
+                    <p>{receivingEmail}</p>
                     <button 
                         on:click={copyToClipboard} 
                         class="btn-copy"
