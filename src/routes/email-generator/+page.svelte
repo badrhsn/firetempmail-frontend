@@ -487,29 +487,29 @@ function selectDomain(domain) {
     </div>
 {/if}
 
-{#if showCustomAliasInput}
-<div class="custom-alias-container">
-    <div class="alias-input-group">
-        <input 
-            type="text" 
-            bind:value={customAlias}
-            placeholder="Enter your custom alias"
-            class="alias-input"
-        />
-        <span class="domain-suffix">@firetempmail.com</span>
-    </div>
-    {#if aliasError}
-        <div class="alias-error">{aliasError}</div>
-    {/if}
-    <button 
-        class="btn btn-primary" 
-        on:click={() => generateEmail(true, true)}
-        disabled={!customAlias}
-    >
-        Generate Custom Email
-    </button>
-</div>
-{/if}
+            {#if showCustomAliasInput}
+            <div class="custom-alias-container">
+                <div class="alias-input-group">
+                    <input 
+                        type="text" 
+                        bind:value={customAlias}
+                        placeholder="Enter your custom alias"
+                        class="alias-input"
+                    />
+                    <span class="domain-suffix">@{currentDomain}</span>
+                </div>
+                {#if aliasError}
+                    <div class="alias-error">{aliasError}</div>
+                {/if}
+                <button 
+                    class="btn btn-primary" 
+                    on:click={() => generateEmail(true, true)}
+                    disabled={!customAlias}
+                >
+                    Generate Custom Email
+                </button>
+            </div>
+            {/if}
             </div>
             
             {#if reloadActive && !isLoading}
