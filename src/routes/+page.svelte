@@ -135,8 +135,9 @@ function selectDomain(domain) {
     currentDomain = domain;
 }
     
-    function manualReload() {
-        window.location.reload();
+    async function manualReload() {
+        await loadEmails();
+        //window.location.reload();
     }
     
     async function timedReload() {
