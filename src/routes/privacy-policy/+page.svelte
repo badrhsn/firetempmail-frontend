@@ -6,6 +6,8 @@
     <title>Privacy Policy - Fire Temp Mail</title>
     <meta name="description" content="Read the comprehensive Privacy Policy of Fire Temp Mail. Learn how we protect your data, handle temporary emails, and manage cookies, logs, and third-party services.">
     <meta name="robots" content="index, follow">
+        <link rel="canonical" href="https://firetempmail.com/privacy-policy" />
+
 </svelte:head>
 
 <section class="py-4 py-xl-5">
