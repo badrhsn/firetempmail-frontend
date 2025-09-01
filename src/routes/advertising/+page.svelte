@@ -4,6 +4,9 @@
 
 <svelte:head>
     <title>Advertising - Fire Temp Mail</title>
+    <link rel="canonical" href="https://firetempmail.com/advertising" />
+    <meta name="description" content="Explore advertising opportunities with Fire Temp Mail to reach a targeted audience." />
+    
 </svelte:head>
 
 <section class="py-4 py-xl-5">

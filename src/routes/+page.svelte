@@ -301,6 +301,16 @@ function selectDomain(domain) {
 
     const intervalID = setInterval(timedReload, 20000);  
 </script>
+<svelte:head>
+    <title>Fire Temp Mail | Free Disposable Temporary Email Generator</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Fire Temp Mail provides free disposable temporary email addresses to protect your privacy, block spam, and stay anonymous online. Instantly generate a secure temp email inbox today.">
+    <meta name="keywords" content="free, temporary, email, disposable, mail, email address">
+    <link rel="canonical" href="https://firetempmail.com">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+    
+</svelte:head>
 
 <!-- Toast Notifications -->
 <div class="toast-container">

@@ -14,6 +14,7 @@
 <svelte:head>
     <title>Blog - Fire Temp Mail | Temporary Email Insights</title>
     <meta name="description" content="Read our latest articles about email privacy, online security, and how to protect your digital identity with temporary email services." />
+    <link rel="canonical" href="https://firetempmail.com/blog" />
 </svelte:head>
 
 <section class="py-4 py-xl-5">
