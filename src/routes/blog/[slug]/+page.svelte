@@ -1,78 +1,27 @@
 <script>
-    import { onMount } from 'svelte';
-    import { getPostBySlug } from '$lib/data/blogPosts';
-    
-    let post = null;
-    let error = null;
-    let isLoading = true;
-    let scrollPercentage = 0;
-    let copyrightYear = new Date().getFullYear();
-    
-    // Share functions
-    function shareOnFacebook(post) {
-        const url = encodeURIComponent(window.location.href);
-        const text = encodeURIComponent(post.title);
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
-    }
-    
-    function shareOnTwitter(post) {
-        const url = encodeURIComponent(window.location.href);
-        const text = encodeURIComponent(post.title);
-        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
-    }
-    
-    function shareOnLinkedIn(post) {
-        const url = encodeURIComponent(window.location.href);
-        const title = encodeURIComponent(post.title);
-        const summary = encodeURIComponent(post.excerpt);
-        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}&summary=${summary}`, '_blank');
-    }
-    
-    onMount(() => {
-        try {
-            // Get the slug from the URL
-            const slug = window.location.pathname.split('/').pop();
-            console.log('Loading post for slug:', slug);
-            
-            post = getPostBySlug(slug);
-            console.log('Post found:', post);
-            
-            if (!post) {
-                error = 'Post not found';
-            }
-        } catch (e) {
-            error = e.message;
-            console.error('Error loading post:', e);
-        } finally {
-            isLoading = false;
-        }
-        
-        // Add scroll event listener for progress bar
-        const handleScroll = () => {
-            const windowHeight = window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight - windowHeight;
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            // Calculate scroll percentage
-            scrollPercentage = (scrollTop / documentHeight) * 100;
-            
-            // Ensure it stays between 0 and 100
-            scrollPercentage = Math.max(0, Math.min(100, scrollPercentage));
-        };
-        
-        window.addEventListener('scroll', handleScroll);
-        
-        // Cleanup event listener when component is destroyed
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    });
+  export let data;
+  let { post } = data;
+  let copyrightYear = new Date().getFullYear();
+  let scrollPercentage = 0;
+
+  // Scroll progress bar
+  function handleScroll() {
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight - windowHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    scrollPercentage = (scrollTop / documentHeight) * 100;
+    scrollPercentage = Math.max(0, Math.min(100, scrollPercentage));
+  }
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('scroll', handleScroll);
+  }
 </script>
 
 <svelte:head>
-    <title>{post ? post.title : 'Blog Post'} - Fire Temp Mail Blog</title>
-    <meta name="description" content={post ? post.excerpt : 'Blog post'} />
-    <link rel="canonical" href={post ? `https://firetempmail.com/blog/${post.slug}` : 'https://firetempmail.com/blog'} />
+  <title>{post.title} - Fire Temp Mail Blog</title>
+  <meta name="description" content={post.excerpt} />
+  <link rel="canonical" href={`https://firetempmail.com/blog/${post.slug}`} />
 </svelte:head>
 
 <!-- Reading Progress Bar -->
