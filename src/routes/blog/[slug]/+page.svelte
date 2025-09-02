@@ -1,23 +1,52 @@
 <script>
-    // Data is now passed from the server
-    export let data;
-    
-    // Client-side functionality
     import { onMount } from 'svelte';
+    import { getPostBySlug } from '$lib/data/blogPosts';
     
+    let post = null;
+    let error = null;
+    let isLoading = true;
     let scrollPercentage = 0;
     let copyrightYear = new Date().getFullYear();
     
-    // Share functions (unchanged)
+    // Share functions
     function shareOnFacebook(post) {
         const url = encodeURIComponent(window.location.href);
         const text = encodeURIComponent(post.title);
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
     }
     
-    // ... other share functions
+    function shareOnTwitter(post) {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent(post.title);
+        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+    }
+    
+    function shareOnLinkedIn(post) {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(post.title);
+        const summary = encodeURIComponent(post.excerpt);
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}&summary=${summary}`, '_blank');
+    }
     
     onMount(() => {
+        try {
+            // Get the slug from the URL
+            const slug = window.location.pathname.split('/').pop();
+            console.log('Loading post for slug:', slug);
+            
+            post = getPostBySlug(slug);
+            console.log('Post found:', post);
+            
+            if (!post) {
+                error = 'Post not found';
+            }
+        } catch (e) {
+            error = e.message;
+            console.error('Error loading post:', e);
+        } finally {
+            isLoading = false;
+        }
+        
         // Add scroll event listener for progress bar
         const handleScroll = () => {
             const windowHeight = window.innerHeight;
@@ -38,27 +67,12 @@
             window.removeEventListener('scroll', handleScroll);
         };
     });
-
-    
-    function shareOnTwitter(post) {
-        const url = encodeURIComponent(window.location.href);
-        const text = encodeURIComponent(post.title);
-        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
-    }
-    
-    function shareOnLinkedIn(post) {
-        const url = encodeURIComponent(window.location.href);
-        const title = encodeURIComponent(post.title);
-        const summary = encodeURIComponent(post.excerpt);
-        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}&summary=${summary}`, '_blank');
-    }
-    
 </script>
 
 <svelte:head>
-    <title>{data.post.title} - Fire Temp Mail Blog</title>
-    <meta name="description" content={data.post.excerpt} />
-    <link rel="canonical" href={`https://firetempmail.com/blog/${data.post.slug}`} />
+    <title>{post ? post.title : 'Blog Post'} - Fire Temp Mail Blog</title>
+    <meta name="description" content={post ? post.excerpt : 'Blog post'} />
+    <link rel="canonical" href={post ? `https://firetempmail.com/blog/${post.slug}` : 'https://firetempmail.com/blog'} />
 </svelte:head>
 
 <!-- Reading Progress Bar -->
@@ -66,66 +80,87 @@
     <div class="reading-progress" style={`width: ${scrollPercentage}%`}></div>
 </div>
 
-    <!-- Show actual post content when data is available -->
+{#if isLoading}
     <section class="py-4 py-xl-5">
-    <div class="container" style="max-width: 800px;">
-        <div class="text-center p-4 p-lg-5">
-            <!-- Back button -->
-            <div style="text-align: left; margin-bottom: 2rem;">
-                <a href="/blog" style="color: #007bff; text-decoration: none; display: inline-flex; align-items: center;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
-                        <path d="M19 12H5M5 12l6-6m-6 6l6 6"></path>
-                    </svg>
-                    Back to Blog
-                </a>
-            </div>
-            
-            <!-- Article Header -->
-            <div style="text-align: left; margin-bottom: 2rem;">
-                <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                    <span style="background: #e9ecef; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">
-                        {data.post.category}
-                    </span>
-                    <span style="margin: 0 0.5rem;">•</span>
-                    <span style="color: #6c757d; font-size: 0.9rem;">{data.post.date}</span>
-                    <span style="margin: 0 0.5rem;">•</span>
-                    <span style="color: #6c757d; font-size: 0.9rem;">{data.post.readTime}</span>
-                </div>
-                
-                <h1 style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 1rem;">
-                    {data.post.title}
-                </h1>
-                
-                <p style="font-size: 1.2rem; color: #6c757d; margin-bottom: 1.5rem;">
-                    {data.post.excerpt}
-                </p>
-                
-                <div style="display: flex; align-items: center;">
-                    <div style="width: 40px; height: 40px; background: #007bff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; color: white; font-weight: 600;">
-                        {data.post.author.charAt(0)}
-                    </div>
-                    <div>
-                        <div style="font-weight: 500;">{data.post.author}</div>
-                        <div style="color: #6c757d; font-size: 0.9rem;">Fire Temp Mail Team</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Article Content -->
-            <div style="text-align: left; line-height: 1.8;">
-                {@html data.post.content}
-            </div>
-            
-            <!-- Share buttons -->
-            <div style="text-align: left; margin: 2rem 0; padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
-                <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Share this article</h3>
-                <div style="display: flex; gap: 1rem;">
-                    <button on:click={() => shareOnFacebook(data.post)} style="padding: 0.5rem 1rem; background: #3b5998; color: white; border-radius: 4px; text-decoration: none; border: none; cursor: pointer;">Facebook</button>
-                    <button on:click={() => shareOnTwitter(data.post)} style="padding: 0.5rem 1rem; background: #1da1f2; color: white; border-radius: 4px; text-decoration: none; border: none; cursor: pointer;">Twitter</button>
-                    <button on:click={() => shareOnLinkedIn(data.post)} style="padding: 0.5rem 1rem; background: #0077b5; color: white; border-radius: 4px; text-decoration: none; border: none; cursor: pointer;">LinkedIn</button>
-                </div>
+        <div class="container" style="max-width: 800px;">
+            <div class="text-center p-4 p-lg-5">
+                <h1>Loading...</h1>
+                <p>Please wait while we load the post.</p>
+                <a href="/blog">← Back to Blog</a>
             </div>
         </div>
+    </section>
+{:else if error}
+    <section class="py-4 py-xl-5">
+        <div class="container" style="max-width: 800px;">
+            <div class="text-center p-4 p-lg-5">
+                <h1>Error</h1>
+                <p>{error}</p>
+                <a href="/blog">← Back to Blog</a>
+            </div>
+        </div>
+    </section>
+{:else if post}
+    <!-- Show actual post content when data is available -->
+    <section class="py-4 py-xl-5">
+        <div class="container" style="max-width: 800px;">
+            <div class="text-center p-4 p-lg-5">
+                <!-- Back button -->
+                <div style="text-align: left; margin-bottom: 2rem;">
+                    <a href="/blog" style="color: #007bff; text-decoration: none; display: inline-flex; align-items: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
+                            <path d="M19 12H5M5 12l6-6m-6 6l6 6"></path>
+                        </svg>
+                        Back to Blog
+                    </a>
+                </div>
+                
+                <!-- Article Header -->
+                <div style="text-align: left; margin-bottom: 2rem;">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <span style="background: #e9ecef; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">
+                            {post.category}
+                        </span>
+                        <span style="margin: 0 0.5rem;">•</span>
+                        <span style="color: #6c757d; font-size: 0.9rem;">{post.date}</span>
+                        <span style="margin: 0 0.5rem;">•</span>
+                        <span style="color: #6c757d; font-size: 0.9rem;">{post.readTime}</span>
+                    </div>
+                    
+                    <h1 style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 1rem;">
+                        {post.title}
+                    </h1>
+                    
+                    <p style="font-size: 1.2rem; color: #6c757d; margin-bottom: 1.5rem;">
+                        {post.excerpt}
+                    </p>
+                    
+                    <div style="display: flex; align-items: center;">
+                        <div style="width: 40px; height: 40px; background: #007bff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; color: white; font-weight: 600;">
+                            {post.author.charAt(0)}
+                        </div>
+                        <div>
+                            <div style="font-weight: 500;">{post.author}</div>
+                            <div style="color: #6c757d; font-size: 0.9rem;">Fire Temp Mail Team</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Article Content -->
+                <div style="text-align: left; line-height: 1.8;">
+                    {@html post.content}
+                </div>
+                
+                <!-- Share buttons -->
+                <div style="text-align: left; margin: 2rem 0; padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Share this article</h3>
+                    <div style="display: flex; gap: 1rem;">
+                        <button on:click={() => shareOnFacebook(post)} style="padding: 0.5rem 1rem; background: #3b5998; color: white; border-radius: 4px; text-decoration: none; border: none; cursor: pointer;">Facebook</button>
+                        <button on:click={() => shareOnTwitter(post)} style="padding: 0.5rem 1rem; background: #1da1f2; color: white; border-radius: 4px; text-decoration: none; border: none; cursor: pointer;">Twitter</button>
+                        <button on:click={() => shareOnLinkedIn(post)} style="padding: 0.5rem 1rem; background: #0077b5; color: white; border-radius: 4px; text-decoration: none; border: none; cursor: pointer;">LinkedIn</button>
+                    </div>
+                </div>
+            </div>
 
             <!-- Footer -->
             <div class="text-center p-4 p-lg-5">
@@ -147,6 +182,17 @@
             </div>
         </div>
     </section>
+{:else}
+    <section class="py-4 py-xl-5">
+        <div class="container" style="max-width: 800px;">
+            <div class="text-center p-4 p-lg-5">
+                <h1>Post Not Found</h1>
+                <p>The requested blog post could not be found.</p>
+                <a href="/blog">← Back to Blog</a>
+            </div>
+        </div>
+    </section>
+{/if}
 
 <style>
     .reading-progress-bar {
