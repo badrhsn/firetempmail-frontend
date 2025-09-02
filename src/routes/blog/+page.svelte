@@ -5,7 +5,6 @@
     let copyrightYear = new Date().getFullYear();
     $: posts = data.posts;
 </script>
-</script>
 
 <svelte:head>
     <title>Blog - Fire Temp Mail | Temporary Email Insights</title>
