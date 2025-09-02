@@ -1,14 +1,10 @@
 <script>
-    import { blogPosts, debugSlugs } from '$lib/data/blogPosts';
+    // This data is now passed from the server
+    export let data;
     
     let copyrightYear = new Date().getFullYear();
-    
-    // Debug on component mount
-    import { onMount } from 'svelte';
-    onMount(() => {
-        console.log('Blog page mounted');
-        debugSlugs();
-    });
+    $: posts = data.posts;
+</script>
 </script>
 
 <svelte:head>
@@ -32,7 +28,7 @@
             
             <!-- Blog Posts -->
             <div class="text-start">
-                {#each blogPosts as post}
+                {#each posts as post}
                     <article class="blog-post" style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid #eee;">
                         <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
                             <span style="background: #e9ecef; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">
