@@ -389,7 +389,7 @@ const blogPosts = [
         <p>Segment contacts by interest or behavior to send relevant content, increasing engagement and reducing spam complaints.</p>
 
         <h2>Building a Positive Sender Reputation</h2>
-        <img src="https://contenu.nyc3.digitaloceanspaces.com/journalist/cbdb0651-c858-42f7-9626-80abfd98a8ef/thumbnail.jpeg" alt="Secure inbox protected from incoming spam messages.">
+        <img src="https://contenu.nyc3.digitaloceanspaces.com/journalist/cbdb0651-c858-42f7-9626-80abfd98a8ef/thumbnail.jpeg" alt="Secure inbox protected from incoming spam messages." style="max-width: 500px;">
         <p>Sender reputation affects inbox placement. Consistent engagement improves reputation, while spam complaints harm it.</p>
         <h3>The Process of Warming Up a New Email Domain</h3>
         <p>Gradually increase sending volume to build trust with ISPs, monitoring engagement metrics throughout the process.</p>
@@ -405,7 +405,9 @@ const blogPosts = [
         <blockquote>ISPs use multiple signals to judge email legitimacy; building a good reputation ensures proper inbox delivery.</blockquote>
 
         <h2>Leveraging Technology for Advanced Spam Protection</h2>
-        <img src="https://contenu.nyc3.digitaloceanspaces.com/journalist/1bfd3070-3278-4269-9f38-baf442b2230f/thumbnail.jpeg" alt="Digital inbox protected by a shield from spam emails.">
+        <img src="https://contenu.nyc3.digitaloceanspaces.com/journalist/1bfd3070-3278-4269-9f38-baf442b2230f/thumbnail.jpeg" alt="Digital inbox protected by a shield from spam emails." style="
+    max-width: 500px;
+">
         <h3>The Role of Email Authentication Protocols</h3>
         <ul>
             <li><strong>SPF:</strong> Verifies sending server authorization.</li>
