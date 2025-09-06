@@ -10,7 +10,7 @@ export const availableDomains = [
 ];
 
 // Default domain
-export const defaultDomain = 'offredaily.sa.com';
+export const defaultDomain = 'ctm.edu.pl';
 
 // Store for selected domain
 export const selectedDomain = writable(
