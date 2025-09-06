@@ -303,9 +303,8 @@ function selectDomain(domain) {
 
 
 <svelte:head>
-    <title>Free Temp Mail EDU - Generate .EDU Temporary Emails | Fire Temp Mail</title>
-    
-    <meta name="description" content="Create free .EDU temporary emails instantly with Fire Temp Mail. Get disposable EDU and .COM temp mails for signups, trials, and more. Fast, secure & private." />
+    <title>Free Temp Mail EDU 📧 | Generate Disposable .EDU Emails Instantly</title>
+    <meta name="description" content="Create free .EDU temporary emails with Fire Temp Mail. Perfect for student discounts, free trials, signups & avoiding spam. Fast, secure & disposable inbox." />
     <meta name="keywords" content="temp mail edu, .edu temporary email, free edu mail, disposable edu email, temp mail .com, Fire Temp Mail" />
     <meta name="robots" content="index, follow" />
 
@@ -322,6 +321,47 @@ function selectDomain(domain) {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Free Temp Mail EDU - Generate .EDU Temporary Emails" />
     <meta name="twitter:description" content="Generate free .EDU temporary emails instantly with Fire Temp Mail. Private, fast & disposable email service." />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a .EDU temp mail?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A .EDU temp mail is a disposable email address ending with .edu, created for testing, student offers, or temporary registrations without using your real email."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does an EDU temp mail last?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fire Temp Mail EDU inboxes usually last 24–48 hours before being deleted automatically. You can generate a new one anytime."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it safe to use temp mail for signups?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, as long as you don’t use it for sensitive accounts like banking or personal identity. It’s safe for free trials, newsletters, and student discounts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use temp mail for Amazon, Netflix, or student discounts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Many users generate EDU emails for testing signups and student offers. However, long-term use isn’t guaranteed — inboxes are temporary."
+      }
+    }
+  ]
+}
+</script>
+
 </svelte:head>
 
 <!-- Toast Notifications -->
@@ -640,6 +680,40 @@ function selectDomain(domain) {
       <p class="description">
         Whether you need a <strong>free disposable .EDU mailbox</strong> for quick registration or a secure anonymous inbox for temporary use, Fire Temp Mail makes it fast and reliable. Start generating your <strong>EDU temp mail</strong> address today — completely free.
       </p>
+      <section class="mt-10 p-6 bg-gray-50 rounded-xl shadow-md">
+  <h2 class="text-xl font-semibold mb-4">Frequently Asked Questions about .EDU Temp Mail</h2>
+  
+  <div class="space-y-4">
+    <details class="p-3 bg-white rounded-md shadow-sm">
+      <summary class="cursor-pointer font-medium">What is a .EDU temp mail?</summary>
+      <p class="mt-2 text-gray-600">
+        A .EDU temp mail is a disposable email address ending with .edu, created for testing, student offers, or temporary registrations without using your real email.
+      </p>
+    </details>
+
+    <details class="p-3 bg-white rounded-md shadow-sm">
+      <summary class="cursor-pointer font-medium">How long does an EDU temp mail last?</summary>
+      <p class="mt-2 text-gray-600">
+        Fire Temp Mail EDU inboxes usually last <strong>24–48 hours</strong> before being deleted automatically. You can generate a new one anytime.
+      </p>
+    </details>
+
+    <details class="p-3 bg-white rounded-md shadow-sm">
+      <summary class="cursor-pointer font-medium">Is it safe to use temp mail for signups?</summary>
+      <p class="mt-2 text-gray-600">
+        Yes ✅, as long as you don’t use it for sensitive accounts like banking or personal identity. It’s safe for free trials, newsletters, and student discounts.
+      </p>
+    </details>
+
+    <details class="p-3 bg-white rounded-md shadow-sm">
+      <summary class="cursor-pointer font-medium">Can I use temp mail for Amazon, Netflix, or student discounts?</summary>
+      <p class="mt-2 text-gray-600">
+        Many users generate EDU emails for testing signups and student offers 🎓. However, long-term use isn’t guaranteed — inboxes are temporary.
+      </p>
+    </details>
+  </div>
+</section>
+
         </div>
 
         <!-- Footer -->
