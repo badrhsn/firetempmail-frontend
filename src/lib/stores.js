@@ -34,7 +34,7 @@ emailType.subscribe((val) => {
     }
 });
 
-// NEW: Multiple Gmail accounts for better scalability
+// Multiple Gmail accounts for better scalability
 export const gmailAccounts = writable([
     { base: 'firetemp', domain: 'gmail.com', lastUsed: 0 },
     { base: 'tempfire', domain: 'gmail.com', lastUsed: 0 },
@@ -48,7 +48,7 @@ export const gmailAccounts = writable([
     { base: 'safebox', domain: 'gmail.com', lastUsed: 0 }
 ]);
 
-// NEW: Get the next available Gmail account (round-robin selection)
+// Get the next available Gmail account (round-robin selection)
 export function getNextGmailAccount() {
     let selectedAccount = null;
     let selectedAccountIndex = 0;
@@ -184,7 +184,7 @@ export function generateNewRandomEmail() {
     }
 }
 
-// NEW: Function to add a Gmail account to the pool
+// Function to add a Gmail account to the pool
 export function addGmailAccount(base, domain = 'gmail.com') {
     gmailAccounts.update(accounts => {
         // Check if account already exists
@@ -196,7 +196,7 @@ export function addGmailAccount(base, domain = 'gmail.com') {
     });
 }
 
-// NEW: Function to remove a Gmail account from the pool
+// Function to remove a Gmail account from the pool
 export function removeGmailAccount(base, domain = 'gmail.com') {
     gmailAccounts.update(accounts => {
         return accounts.filter(acc => !(acc.base === base && acc.domain === domain));
