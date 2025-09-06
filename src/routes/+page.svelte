@@ -6,12 +6,7 @@
         receivingEmail, 
         availableDomains, 
         selectedDomain, 
-        updateEmailDomain,
-        emailType,
-        updateEmailType,
-        generateNewRandomEmail,
-        gmailAccounts,
-        getNextGmailAccount
+        updateEmailDomain
     } from "../lib/stores";
     import Navigation from '$lib/components/Navigation.svelte';
     import { getPopularArticles } from '$lib/data/blogPosts';
@@ -19,8 +14,6 @@
     // These will reactively update when the stores change
     let address = $receivingEmail;
     let currentDomain = $selectedDomain;
-    let currentEmailType = $emailType;
-    let availableGmailAccounts = $gmailAccounts; // NEW: Get available Gmail accounts
     
     const url = "https://post.firetempmail.com";
     
@@ -47,7 +40,6 @@
     let aliasError = '';
     
     let showDomainSelector = false;
-    let showGmailAccountsInfo = false; // NEW: Toggle for Gmail accounts info
 
     onMount(async function () {
         await loadEmails();
@@ -56,46 +48,6 @@
         }
     });
     
-    // MODIFIED: Generate email based on selected type
-    async function generateEmail(reload, useCustomAlias = false) {
-        let alias;
-        let fullAddress;
-        
-        if (currentEmailType === 'gmail') {
-            // Generate Gmail-style alias using the next available account
-            fullAddress = getNextGmailAccount();
-            receivingEmail.set(fullAddress);
-            
-            if (reload) {
-                window.location.reload();
-            }
-            return;
-        }
-        
-        // Original domain-based generation
-        if (useCustomAlias && customAlias) {
-            if (!isValidAlias(customAlias)) {
-                showToast("Error", "Alias can only contain letters, numbers, and hyphens", "error");
-                return;
-            }
-            
-            alias = customAlias;
-        } else {
-            let words = generate(1);
-            alias = words[0] + Math.floor(Math.random() * 1000);
-        }
-        
-        // This will automatically update the address reactive variable
-        receivingEmail.set(alias + "@" + currentDomain);
-
-        if (reload) {
-            window.location.reload();
-        } else {
-            customAlias = '';
-            showCustomAliasInput = false;
-        }
-    }
-
     async function loadEmails() {
         isLoading = true;
         try {
@@ -131,7 +83,31 @@
         viewEmail(email);
     }
     
+    async function generateEmail(reload, useCustomAlias = false) {
+        let alias;
+        
+        if (useCustomAlias && customAlias) {
+            if (!isValidAlias(customAlias)) {
+                showToast("Error", "Alias can only contain letters, numbers, and hyphens", "error");
+                return;
+            }
+            
+            alias = customAlias;
+        } else {
+            let words = generate(1);
+            alias = words[0] + Math.floor(Math.random() * 1000);
+        }
+        
+        // This will automatically update the address reactive variable
+        receivingEmail.set(alias + "@" + currentDomain);
 
+        if (reload) {
+            window.location.reload();
+        } else {
+            customAlias = '';
+            showCustomAliasInput = false;
+        }
+    }
     
     function isValidAlias(alias) {
         const aliasRegex = /^[a-zA-Z0-9-]+$/;
@@ -450,49 +426,49 @@ function selectDomain(domain) {
 </div>
 
 <!-- Domain Selector Dropdown -->
- <div class="email-type-selector">
-                <div class="btn-group" role="group" aria-label="Email type selection">
-                    <input type="radio" class="btn-check" name="email-type" id="email-type-domain" autocomplete="off" checked={currentEmailType === 'domain'} on:change={() => updateEmailType('domain')}>
-                    <label class="btn {currentEmailType === 'domain' ? 'btn-primary' : 'btn-outline-primary'}" for="email-type-domain">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 16l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8 11 18z" fill="currentColor"/>
-                        </svg>
-                        Custom Domains
-                    </label>
-
-                    <input type="radio" class="btn-check" name="email-type" id="email-type-gmail" autocomplete="off" checked={currentEmailType === 'gmail'} on:change={() => updateEmailType('gmail')}>
-                    <label class="btn {currentEmailType === 'gmail' ? 'btn-primary' : 'btn-outline-primary'}" for="email-type-gmail">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-5.727V12.91H24V5.457zM5.455 5.455C2.443 5.455 0 7.896 0 10.91v.728h7.636v3.636H0v5.091c0 3.012 2.443 5.455 5.455 5.455h13.09c3.013 0 5.455-2.443 5.455-5.455V10.91c0-3.013-2.442-5.455-5.454-5.455H5.454z" fill="currentColor"/>
-                        </svg>
-                        Gmail Style
-                    </label>
-                </div>
-                
-                {#if currentEmailType === 'gmail'}
-                <div class="gmail-info">
-                    <p class="small">
+{#if showDomainSelector}
+    <div class="domain-dropdown-container">
+        <div class="domain-dropdown">
+            {#each availableDomains as domain}
+                <div 
+                    class="domain-option {currentDomain === domain ? 'active' : ''}" 
+                    on:click={() => selectDomain(domain)}
+                >
+                    <span class="domain-name">@{domain}</span>
+                    {#if currentDomain === domain}
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Using {availableGmailAccounts.length} Gmail accounts for better reliability
-                        <button on:click={() => showGmailAccountsInfo = !showGmailAccountsInfo} class="btn-info-toggle">
-                            {showGmailAccountsInfo ? 'Hide' : 'Show'} details
-                        </button>
-                    </p>
-                    
-                    {#if showGmailAccountsInfo}
-                    <div class="gmail-accounts-list">
-                        <p><strong>Available Gmail Accounts:</strong></p>
-                        <ul>
-                            {#each availableGmailAccounts as account}
-                                <li>{account.base}@{account.domain} (+aliases and dots)</li>
-                            {/each}
-                        </ul>
-                    </div>
                     {/if}
                 </div>
+            {/each}
+        </div>
+    </div>
+{/if}
+            
+            {#if showCustomAliasInput}
+            <div class="custom-alias-container">
+                <div class="alias-input-group">
+                    <input 
+                        type="text" 
+                        bind:value={customAlias}
+                        placeholder="Enter your custom alias"
+                        class="alias-input"
+                    />
+                    <span class="domain-suffix">@{currentDomain}</span>
+                </div>
+                {#if aliasError}
+                    <div class="alias-error">{aliasError}</div>
                 {/if}
+                <button 
+                    class="btn btn-primary" 
+                    on:click={() => generateEmail(true, true)}
+                    disabled={!customAlias}
+                >
+                    Generate Custom Email
+                </button>
+            </div>
+            {/if}
             </div>
             
             {#if reloadActive && !isLoading}
@@ -965,46 +941,7 @@ function selectDomain(domain) {
 </section>
 
 <style>
-                .email-type-selector {
-                    margin-bottom: 1.5rem;
-                }
-                
-                .email-type-selector .btn-group {
-                    margin-bottom: 0.5rem;
-                }
-                
-                .gmail-info {
-                    margin-top: 0.5rem;
-                    color: #6c757d;
-                }
-                
-                .gmail-info svg {
-                    margin-right: 0.25rem;
-                    vertical-align: -2px;
-                }
-                
-                .btn-info-toggle {
-                    background: none;
-                    border: none;
-                    color: var(--bs-primary);
-                    text-decoration: underline;
-                    cursor: pointer;
-                    padding: 0;
-                    margin-left: 0.5rem;
-                }
-                
-                .gmail-accounts-list {
-                    margin-top: 0.5rem;
-                    padding: 0.5rem;
-                    background-color: #f8f9fa;
-                    border-radius: 0.25rem;
-                    font-size: 0.8rem;
-                }
-                
-                .gmail-accounts-list ul {
-                    margin: 0.5rem 0 0 0;
-                    padding-left: 1.5rem;
-                }
+
 /* Domain Selector Dropdown */
 .domain-dropdown-container {
     position: relative;
