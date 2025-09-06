@@ -306,7 +306,7 @@ const blogPosts = [
     "id": 7,
     "title": "How to Avoid Email Spam: Protect Your Inbox in 2025",
     "excerpt": "Learn how spam emails have evolved, recognize their signs, and implement strategies to keep your inbox secure. Discover advanced tips for individuals and businesses.",
-    "slug": "mastering-email-spam-prevention-2025",
+    "slug": "how-to-avoid-spam-emails",
     "date": "2025-09-03",
     "author": "Fire Temp Mail Team",
     "category": "Guides",
