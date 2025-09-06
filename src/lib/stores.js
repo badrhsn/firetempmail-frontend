@@ -2,73 +2,52 @@ import { writable } from "svelte/store"
 import { browser } from "$app/environment"
 import { generate } from "random-words";
 
-// Available domains for email generation
-export const availableDomains = [
-    'offredaily.sa.com', 
-    'ctm.edu.pl', 
-    'jobsdeforyou.sa.com',
+// Email type: 'custom' or 'gmail'
+export const emailType = writable(
+    browser && localStorage.getItem("emailType") || 'custom'
+);
+emailType.subscribe((val) => {
+    if (browser) {
+        localStorage.setItem("emailType", val);
+    }
+});
+
+// Gmail base addresses pool
+export const gmailBases = [
+    'firetempmail1@gmail.com',
+    'firetempmail2@gmail.com',
+    'firetempmail3@gmail.com',
+    'firetempmail4@gmail.com',
+    'firetempmail5@gmail.com',
+    'firetempmail6@gmail.com',
+    'firetempmail7@gmail.com',
+    'firetempmail8@gmail.com',
+    'firetempmail9@gmail.com',
+    'firetempmail10@gmail.com'
 ];
 
-// Default domain
-export const defaultDomain = 'ctm.edu.pl';
-
-// Store for selected domain
-export const selectedDomain = writable(
-    browser && localStorage.getItem("selectedDomain") || defaultDomain
+// Store for generated Gmail alias
+export const generatedGmail = writable(
+    browser && localStorage.getItem("generatedGmail") || ''
 );
-
-selectedDomain.subscribe((val) => {
+generatedGmail.subscribe((val) => {
     if (browser) {
-        localStorage.setItem("selectedDomain", val);
+        localStorage.setItem("generatedGmail", val);
     }
 });
 
-// Generate a random email address
-function generateRandomEmail(domain = defaultDomain) {
-    let words = generate({ exactly: 1, maxLength: 5 });
-    return words[0] + Math.floor(Math.random() * 1000) + "@" + domain;
+// Function to generate Gmail alias
+export function generateGmailAlias() {
+    const base = gmailBases[Math.floor(Math.random() * gmailBases.length)];
+    const alias = generate(1)[0] + Math.floor(Math.random() * 1000);
+    let username = base.split('@')[0];
+    if (username.length > 4) {
+        const pos = Math.floor(Math.random() * (username.length - 1)) + 1;
+        username = username.slice(0, pos) + '.' + username.slice(pos);
+    }
+    const gmailAlias = `${username}+${alias}@gmail.com`;
+    generatedGmail.set(gmailAlias);
+    return gmailAlias;
 }
 
-// Make the email address a store
-export const receivingEmail = writable(
-    browser && localStorage.getItem("receivingEmail") || generateRandomEmail(
-        browser && localStorage.getItem("selectedDomain") || defaultDomain
-    )
-);
-
-receivingEmail.subscribe((val) => {
-    if (browser) {
-        localStorage.setItem("receivingEmail", val);
-    }
-});
-
-// Function to update email with new domain
-export function updateEmailDomain(newDomain) {
-    if (browser) {
-        receivingEmail.update(currentEmail => {
-            if (currentEmail && currentEmail.includes('@')) {
-                const alias = currentEmail.split('@')[0];
-                const newEmail = alias + '@' + newDomain;
-                localStorage.setItem("receivingEmail", newEmail);
-                return newEmail;
-            }
-            const newEmail = generateRandomEmail(newDomain);
-            localStorage.setItem("receivingEmail", newEmail);
-            return newEmail;
-        });
-        
-        selectedDomain.set(newDomain);
-        localStorage.setItem("selectedDomain", newDomain);
-    }
-}
-
-// Function to generate completely new random email
-export function generateNewRandomEmail() {
-    if (browser) {
-        selectedDomain.update(currentDomain => {
-            const newEmail = generateRandomEmail(currentDomain);
-            receivingEmail.set(newEmail);
-            return currentDomain;
-        });
-    }
-}
+// ...existing code for custom email domains and receivingEmail...
