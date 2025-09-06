@@ -6,20 +6,14 @@
         receivingEmail, 
         availableDomains, 
         selectedDomain, 
-        updateEmailDomain,
-        emailType,
-        generatedGmail,
-        generateGmailAlias
+        updateEmailDomain
     } from "../lib/stores";
     import Navigation from '$lib/components/Navigation.svelte';
     import { getPopularArticles } from '$lib/data/blogPosts';
     
     // These will reactively update when the stores change
-    let type = $emailType;
-    let address = type === 'custom' ? $receivingEmail : $generatedGmail;
+    let address = $receivingEmail;
     let currentDomain = $selectedDomain;
-
-    $: address = type === 'custom' ? $receivingEmail : $generatedGmail;
     
     const url = "https://post.firetempmail.com";
     
@@ -379,18 +373,6 @@ function selectDomain(domain) {
                 Instantly generate a disposable Email Generator address. Keep your real email address private and your inbox clean from unwanted messages and spam.
             </p>
             
-            <!-- Email Type Selection -->
-            <div class="email-type-selector" style="margin-bottom: 24px;">
-                <label style="margin-right: 24px;">
-                    <input type="radio" name="emailType" value="custom" bind:group={type} on:change={() => emailType.set('custom')}>
-                    Custom Email
-                </label>
-                <label>
-                    <input type="radio" name="emailType" value="gmail" bind:group={type} on:change={() => { emailType.set('gmail'); generateGmailAlias(); }}>
-                    Gmail
-                </label>
-            </div>
-
             <!-- Email Address with Copy Button -->
             <div class="email-address-container">
                 <div class="email-display">
@@ -413,41 +395,35 @@ function selectDomain(domain) {
                 </div>
                 
                 <div class="email-action-buttons">
-                    {#if type === 'custom'}
-                        <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Random Alias
-                        </button>
-                        <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Custom Alias
-                        </button>
-                        <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Change Domain
-                        </button>
-                        <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Refresh Page
-                        </button>
-                    {:else}
-                        <button class="btn btn-primary" type="button" on:click={generateGmailAlias}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Generate Gmail Alias
-                        </button>
-                    {/if}
-                </div>
+    <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Random Alias
+    </button>
+    
+    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Custom Alias
+    </button>
+    
+    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Change Domain
+    </button>
+    
+    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Refresh Page
+    </button>
+</div>
 
 <!-- Domain Selector Dropdown -->
 {#if showDomainSelector}
