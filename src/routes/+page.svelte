@@ -6,7 +6,12 @@
         receivingEmail, 
         availableDomains, 
         selectedDomain, 
-        updateEmailDomain
+        updateEmailDomain,
+        emailType,
+        updateEmailType,
+        generateNewRandomEmail,
+        gmailAccounts,
+        getNextGmailAccount
     } from "../lib/stores";
     import Navigation from '$lib/components/Navigation.svelte';
     import { getPopularArticles } from '$lib/data/blogPosts';
@@ -14,6 +19,8 @@
     // These will reactively update when the stores change
     let address = $receivingEmail;
     let currentDomain = $selectedDomain;
+    let currentEmailType = $emailType;
+    let availableGmailAccounts = $gmailAccounts;
     
     const url = "https://post.firetempmail.com";
     
@@ -40,6 +47,7 @@
     let aliasError = '';
     
     let showDomainSelector = false;
+    let showGmailAccountsInfo = false;
 
     onMount(async function () {
         await loadEmails();
@@ -48,6 +56,12 @@
         }
     });
     
+    // NEW: Function to handle email type change
+    function handleEmailTypeChange(newType) {
+        updateEmailType(newType);
+        // Automatically generate a new email when switching types
+        generateEmail(true);
+    }
     async function loadEmails() {
         isLoading = true;
         try {
@@ -85,7 +99,20 @@
     
     async function generateEmail(reload, useCustomAlias = false) {
         let alias;
+        let fullAddress;
         
+        if (currentEmailType === 'gmail') {
+            // Generate Gmail-style alias using the next available account
+            fullAddress = getNextGmailAccount();
+            receivingEmail.set(fullAddress);
+            
+            if (reload) {
+                window.location.reload();
+            }
+            return;
+        }
+        
+        // Original domain-based generation
         if (useCustomAlias && customAlias) {
             if (!isValidAlias(customAlias)) {
                 showToast("Error", "Alias can only contain letters, numbers, and hyphens", "error");
@@ -426,25 +453,150 @@ function selectDomain(domain) {
 </div>
 
 <!-- Domain Selector Dropdown -->
-{#if showDomainSelector}
-    <div class="domain-dropdown-container">
-        <div class="domain-dropdown">
-            {#each availableDomains as domain}
-                <div 
-                    class="domain-option {currentDomain === domain ? 'active' : ''}" 
-                    on:click={() => selectDomain(domain)}
-                >
-                    <span class="domain-name">@{domain}</span>
-                    {#if currentDomain === domain}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
-                            <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+ <div class="email-type-selector">
+                <div class="btn-group" role="group" aria-label="Email type selection">
+                    <input type="radio" class="btn-check" name="email-type" id="email-type-domain" autocomplete="off" checked={currentEmailType === 'domain'} on:change={() => handleEmailTypeChange('domain')}>
+                    <label class="btn {currentEmailType === 'domain' ? 'btn-primary' : 'btn-outline-primary'}" for="email-type-domain">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 16l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8 11 18z" fill="currentColor"/>
                         </svg>
+                        Custom Domains
+                    </label>
+
+                    <input type="radio" class="btn-check" name="email-type" id="email-type-gmail" autocomplete="off" checked={currentEmailType === 'gmail'} on:change={() => handleEmailTypeChange('gmail')}>
+                    <label class="btn {currentEmailType === 'gmail' ? 'btn-primary' : 'btn-outline-primary'}" for="email-type-gmail">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-5.727V12.91H24V5.457zM5.455 5.455C2.443 5.455 0 7.896 0 10.91v.728h7.636v3.636H0v5.091c0 3.012 2.443 5.455 5.455 5.455h13.09c3.013 0 5.455-2.443 5.455-5.455V10.91c0-3.013-2.442-5.455-5.454-5.455H5.454z" fill="currentColor"/>
+                        </svg>
+                        Gmail Style
+                    </label>
+                </div>
+                
+                {#if currentEmailType === 'gmail'}
+                <div class="gmail-info">
+                    <p class="small">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Using {availableGmailAccounts.length} Gmail accounts for better reliability
+                        <button on:click={() => showGmailAccountsInfo = !showGmailAccountsInfo} class="btn-info-toggle">
+                            {showGmailAccountsInfo ? 'Hide' : 'Show'} details
+                        </button>
+                    </p>
+                    
+                    {#if showGmailAccountsInfo}
+                    <div class="gmail-accounts-list">
+                        <p><strong>Available Gmail Accounts:</strong></p>
+                        <ul>
+                            {#each availableGmailAccounts as account}
+                                <li>{account.base}@{account.domain} (+aliases and dots)</li>
+                            {/each}
+                        </ul>
+                    </div>
                     {/if}
                 </div>
-            {/each}
-        </div>
-    </div>
-{/if}
+                {/if}
+            </div>
+            
+            <!-- Email Address with Copy Button -->
+            <div class="email-address-container">
+                <div class="email-display">
+                    <p>{address}</p>
+                    <button 
+                        on:click={copyToClipboard} 
+                        class="btn-copy"
+                        title="Copy to clipboard"
+                    >
+                        {#if isCopying}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        {:else}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M14 20H18C19.1046 20 20 19.1046 20 18V14C20 12.8954 19.1046 12 18 12H14C12.8954 12 12 12.8954 12 14V18C12 19.1046 12.8954 20 14 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        {/if}
+                    </button>
+                </div>
+                
+                <div class="email-action-buttons">
+                    <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        {currentEmailType === 'gmail' ? 'New Gmail Alias' : 'Random Alias'}
+                    </button>
+                    
+                    {#if currentEmailType === 'domain'}
+                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Custom Alias
+                    </button>
+                    
+                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Change Domain
+                    </button>
+                    {/if}
+                    
+                    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Refresh Page
+                    </button>
+                </div>
+
+                <!-- Domain Selector Dropdown (only shown for domain type) -->
+                {#if showDomainSelector && currentEmailType === 'domain'}
+                <div class="domain-dropdown-container">
+                    <div class="domain-dropdown">
+                        {#each availableDomains as domain}
+                            <div 
+                                class="domain-option {currentDomain === domain ? 'active' : ''}" 
+                                on:click={() => selectDomain(domain)}
+                            >
+                                <span class="domain-name">@{domain}</span>
+                                {#if currentDomain === domain}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                        <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                {/if}
+                            </div>
+                        {/each}
+                    </div>
+                </div>
+                {/if}
+            
+                {#if showCustomAliasInput && currentEmailType === 'domain'}
+                <div class="custom-alias-container">
+                    <div class="alias-input-group">
+                        <input 
+                            type="text" 
+                            bind:value={customAlias}
+                            placeholder="Enter your custom alias"
+                            class="alias-input"
+                        />
+                        <span class="domain-suffix">@{currentDomain}</span>
+                    </div>
+                    {#if aliasError}
+                        <div class="alias-error">{aliasError}</div>
+                    {/if}
+                    <button 
+                        class="btn btn-primary" 
+                        on:click={() => generateEmail(true, true)}
+                        disabled={!customAlias}
+                    >
+                        Generate Custom Email
+                    </button>
+                </div>
+                {/if}
+            </div>
             
             {#if showCustomAliasInput}
             <div class="custom-alias-container">
@@ -941,7 +1093,46 @@ function selectDomain(domain) {
 </section>
 
 <style>
-
+.email-type-selector {
+                    margin-bottom: 1.5rem;
+                }
+                
+                .email-type-selector .btn-group {
+                    margin-bottom: 0.5rem;
+                }
+                
+                .gmail-info {
+                    margin-top: 0.5rem;
+                    color: #6c757d;
+                }
+                
+                .gmail-info svg {
+                    margin-right: 0.25rem;
+                    vertical-align: -2px;
+                }
+                
+                .btn-info-toggle {
+                    background: none;
+                    border: none;
+                    color: var(--bs-primary);
+                    text-decoration: underline;
+                    cursor: pointer;
+                    padding: 0;
+                    margin-left: 0.5rem;
+                }
+                
+                .gmail-accounts-list {
+                    margin-top: 0.5rem;
+                    padding: 0.5rem;
+                    background-color: #f8f9fa;
+                    border-radius: 0.25rem;
+                    font-size: 0.8rem;
+                }
+                
+                .gmail-accounts-list ul {
+                    margin: 0.5rem 0 0 0;
+                    padding-left: 1.5rem;
+                }
 /* Domain Selector Dropdown */
 .domain-dropdown-container {
     position: relative;
