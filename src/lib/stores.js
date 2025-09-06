@@ -1,4 +1,4 @@
-import { writable } from "svelte/store"
+import { writable, derived } from "svelte/store"
 import { browser } from "$app/environment"
 import { generate } from "random-words";
 
@@ -23,7 +23,18 @@ selectedDomain.subscribe((val) => {
     }
 });
 
-// Multiple Gmail accounts for better scalability
+// Store for email type (domain or gmail)
+export const emailType = writable(
+    browser && localStorage.getItem("emailType") || 'domain'
+);
+
+emailType.subscribe((val) => {
+    if (browser) {
+        localStorage.setItem("emailType", val);
+    }
+});
+
+// NEW: Multiple Gmail accounts for better scalability
 export const gmailAccounts = writable([
     { base: 'firetemp', domain: 'gmail.com', lastUsed: 0 },
     { base: 'tempfire', domain: 'gmail.com', lastUsed: 0 },
@@ -37,7 +48,7 @@ export const gmailAccounts = writable([
     { base: 'safebox', domain: 'gmail.com', lastUsed: 0 }
 ]);
 
-// Get the next available Gmail account (round-robin selection)
+// NEW: Get the next available Gmail account (round-robin selection)
 export function getNextGmailAccount() {
     let selectedAccount = null;
     let selectedAccountIndex = 0;
@@ -83,7 +94,11 @@ export function getNextGmailAccount() {
 }
 
 // Generate a random email address
-function generateRandomEmail(domain = defaultDomain) {
+function generateRandomEmail(domain = defaultDomain, type = 'domain') {
+    if (type === 'gmail') {
+        return getNextGmailAccount();
+    }
+    
     let words = generate({ exactly: 1, maxLength: 5 });
     return words[0] + Math.floor(Math.random() * 1000) + "@" + domain;
 }
@@ -91,7 +106,8 @@ function generateRandomEmail(domain = defaultDomain) {
 // Make the email address a store
 export const receivingEmail = writable(
     browser && localStorage.getItem("receivingEmail") || generateRandomEmail(
-        browser && localStorage.getItem("selectedDomain") || defaultDomain
+        browser && localStorage.getItem("selectedDomain") || defaultDomain,
+        browser && localStorage.getItem("emailType") || 'domain'
     )
 );
 
@@ -105,15 +121,22 @@ receivingEmail.subscribe((val) => {
 export function updateEmailDomain(newDomain) {
     if (browser) {
         receivingEmail.update(currentEmail => {
-            if (currentEmail && currentEmail.includes('@')) {
-                const alias = currentEmail.split('@')[0];
-                const newEmail = alias + '@' + newDomain;
-                localStorage.setItem("receivingEmail", newEmail);
-                return newEmail;
-            }
-            const newEmail = generateRandomEmail(newDomain);
-            localStorage.setItem("receivingEmail", newEmail);
-            return newEmail;
+            // Only update if we're using domain type
+            emailType.update(currentType => {
+                if (currentType === 'domain') {
+                    if (currentEmail && currentEmail.includes('@')) {
+                        const alias = currentEmail.split('@')[0];
+                        const newEmail = alias + '@' + newDomain;
+                        localStorage.setItem("receivingEmail", newEmail);
+                        return newEmail;
+                    }
+                    const newEmail = generateRandomEmail(newDomain, 'domain');
+                    localStorage.setItem("receivingEmail", newEmail);
+                    return newEmail;
+                }
+                return currentEmail;
+            });
+            return currentEmail;
         });
         
         selectedDomain.set(newDomain);
@@ -121,18 +144,47 @@ export function updateEmailDomain(newDomain) {
     }
 }
 
+// Function to update email type
+export function updateEmailType(newType) {
+    if (browser) {
+        emailType.set(newType);
+        localStorage.setItem("emailType", newType);
+        
+        // Generate a new email based on the selected type
+        if (newType === 'gmail') {
+            const newEmail = getNextGmailAccount();
+            receivingEmail.set(newEmail);
+            localStorage.setItem("receivingEmail", newEmail);
+        } else {
+            selectedDomain.update(currentDomain => {
+                const newEmail = generateRandomEmail(currentDomain, 'domain');
+                receivingEmail.set(newEmail);
+                return currentDomain;
+            });
+        }
+    }
+}
+
 // Function to generate completely new random email
 export function generateNewRandomEmail() {
     if (browser) {
-        selectedDomain.update(currentDomain => {
-            const newEmail = generateRandomEmail(currentDomain);
-            receivingEmail.set(newEmail);
-            return currentDomain;
+        emailType.update(currentType => {
+            if (currentType === 'gmail') {
+                const newEmail = getNextGmailAccount();
+                receivingEmail.set(newEmail);
+            } else {
+                selectedDomain.update(currentDomain => {
+                    const newEmail = generateRandomEmail(currentDomain, 'domain');
+                    receivingEmail.set(newEmail);
+                    return currentDomain;
+                });
+            }
+            return currentType;
         });
     }
 }
 
-// Function to add a Gmail account to the pool
+// NEW: Function to add a Gmail account to the pool
 export function addGmailAccount(base, domain = 'gmail.com') {
     gmailAccounts.update(accounts => {
         // Check if account already exists
@@ -144,7 +196,7 @@ export function addGmailAccount(base, domain = 'gmail.com') {
     });
 }
 
-// Function to remove a Gmail account from the pool
+// NEW: Function to remove a Gmail account from the pool
 export function removeGmailAccount(base, domain = 'gmail.com') {
     gmailAccounts.update(accounts => {
         return accounts.filter(acc => !(acc.base === base && acc.domain === domain));
