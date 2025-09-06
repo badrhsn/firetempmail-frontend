@@ -7,6 +7,8 @@
         availableDomains, 
         selectedDomain, 
         updateEmailDomain,
+        emailType,
+        updateEmailType,
         generateNewRandomEmail,
         gmailAccounts,
         getNextGmailAccount
@@ -17,10 +19,8 @@
     // These will reactively update when the stores change
     let address = $receivingEmail;
     let currentDomain = $selectedDomain;
-    let availableGmailAccounts = $gmailAccounts;
-    
-    // NEW: Simple toggle for Gmail style
-    let useGmailStyle = false;
+    let currentEmailType = $emailType;
+    let availableGmailAccounts = $gmailAccounts; // NEW: Get available Gmail accounts
     
     const url = "https://post.firetempmail.com";
     
@@ -47,7 +47,7 @@
     let aliasError = '';
     
     let showDomainSelector = false;
-    let showGmailAccountsInfo = false;
+    let showGmailAccountsInfo = false; // NEW: Toggle for Gmail accounts info
 
     onMount(async function () {
         await loadEmails();
@@ -56,12 +56,12 @@
         }
     });
     
-    // MODIFIED: Generate email based on toggle state
+    // MODIFIED: Generate email based on selected type
     async function generateEmail(reload, useCustomAlias = false) {
         let alias;
         let fullAddress;
         
-        if (useGmailStyle) {
+        if (currentEmailType === 'gmail') {
             // Generate Gmail-style alias using the next available account
             fullAddress = getNextGmailAccount();
             receivingEmail.set(fullAddress);
@@ -95,13 +95,7 @@
             showCustomAliasInput = false;
         }
     }
-    
-    // NEW: Toggle Gmail style on/off
-    function toggleGmailStyle() {
-        useGmailStyle = !useGmailStyle;
-        // Generate a new email with the new setting
-        generateEmail(true);
-    }
+
     async function loadEmails() {
         isLoading = true;
         try {
@@ -456,7 +450,7 @@ function selectDomain(domain) {
 </div>
 
 <!-- Domain Selector Dropdown -->
-                        <div class="email-type-selector">
+ <div class="email-type-selector">
                 <div class="btn-group" role="group" aria-label="Email type selection">
                     <input type="radio" class="btn-check" name="email-type" id="email-type-domain" autocomplete="off" checked={currentEmailType === 'domain'} on:change={() => updateEmailType('domain')}>
                     <label class="btn {currentEmailType === 'domain' ? 'btn-primary' : 'btn-outline-primary'}" for="email-type-domain">
@@ -500,6 +494,7 @@ function selectDomain(domain) {
                 </div>
                 {/if}
             </div>
+            
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
