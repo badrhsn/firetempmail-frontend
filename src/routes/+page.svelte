@@ -1032,7 +1032,7 @@ function selectDomain(domain) {
                 Copyright © {copyrightYear}
             </p>
         </div>
-    </div>
+    
 </section>
 
 <style>
