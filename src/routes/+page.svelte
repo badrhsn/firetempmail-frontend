@@ -13,14 +13,15 @@
     } from "../lib/stores";
     import Navigation from '$lib/components/Navigation.svelte';
     import { getPopularArticles } from '$lib/data/blogPosts';
+    import { browser } from '$app/environment';
     
     // These will reactively update when the stores change
     let address = $receivingEmail;
     let currentDomain = $selectedDomain;
     let availableGmailAccounts = $gmailAccounts;
     
-    // NEW: Email type selection with persistence
-    let emailType = (browser && localStorage.getItem("emailType")) || 'domain';
+    // Email type selection with safe localStorage access
+    let emailType = 'domain';
     
     const url = "https://post.firetempmail.com";
     
@@ -49,13 +50,25 @@
     let showDomainSelector = false;
 
     onMount(async function () {
+        // Safely get email type from localStorage
+        if (browser) {
+            try {
+                const savedType = localStorage.getItem("emailType");
+                if (savedType) {
+                    emailType = savedType;
+                }
+            } catch (e) {
+                console.error("Error accessing localStorage:", e);
+            }
+        }
+        
         await loadEmails();
         if (address === null) {
             generateEmail(false);
         }
     });
     
-    // NEW: Generate email based on selected type
+    // Generate email based on selected type
     async function generateEmail(reload, useCustomAlias = false) {
         let fullAddress;
         
@@ -93,12 +106,18 @@
         }
     }
     
-    // NEW: Handle email type change with persistence
+    // Handle email type change with safe localStorage access
     function handleEmailTypeChange(newType) {
         emailType = newType;
+        
         if (browser) {
-            localStorage.setItem("emailType", newType);
+            try {
+                localStorage.setItem("emailType", newType);
+            } catch (e) {
+                console.error("Error saving to localStorage:", e);
+            }
         }
+        
         generateEmail(true);
     }
     

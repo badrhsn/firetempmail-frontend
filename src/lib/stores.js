@@ -12,16 +12,27 @@ export const availableDomains = [
 // Default domain
 export const defaultDomain = 'offredaily.sa.com';
 
-// Store for selected domain
-export const selectedDomain = writable(
-    browser && localStorage.getItem("selectedDomain") || defaultDomain
-);
+// Store for selected domain with safe localStorage access
+export const selectedDomain = writable(defaultDomain);
 
-selectedDomain.subscribe((val) => {
-    if (browser) {
-        localStorage.setItem("selectedDomain", val);
+if (browser) {
+    try {
+        const savedDomain = localStorage.getItem("selectedDomain");
+        if (savedDomain) {
+            selectedDomain.set(savedDomain);
+        }
+    } catch (e) {
+        console.error("Error accessing localStorage:", e);
     }
-});
+    
+    selectedDomain.subscribe((val) => {
+        try {
+            localStorage.setItem("selectedDomain", val);
+        } catch (e) {
+            console.error("Error saving to localStorage:", e);
+        }
+    });
+}
 
 // Multiple Gmail accounts for better scalability
 export const gmailAccounts = writable([
@@ -91,48 +102,48 @@ function generateRandomEmail(domain = defaultDomain) {
     return words[0] + Math.floor(Math.random() * 1000) + "@" + domain;
 }
 
-// Make the email address a store
-export const receivingEmail = writable(
-    browser && localStorage.getItem("receivingEmail") || generateRandomEmail(
-        browser && localStorage.getItem("selectedDomain") || defaultDomain
-    )
-);
+// Make the email address a store with safe localStorage access
+export const receivingEmail = writable(generateRandomEmail(defaultDomain));
 
-receivingEmail.subscribe((val) => {
-    if (browser) {
-        localStorage.setItem("receivingEmail", val);
+if (browser) {
+    try {
+        const savedEmail = localStorage.getItem("receivingEmail");
+        if (savedEmail) {
+            receivingEmail.set(savedEmail);
+        }
+    } catch (e) {
+        console.error("Error accessing localStorage:", e);
     }
-});
+    
+    receivingEmail.subscribe((val) => {
+        try {
+            localStorage.setItem("receivingEmail", val);
+        } catch (e) {
+            console.error("Error saving to localStorage:", e);
+        }
+    });
+}
 
 // Function to update email with new domain
 export function updateEmailDomain(newDomain) {
-    if (browser) {
-        receivingEmail.update(currentEmail => {
-            if (currentEmail && currentEmail.includes('@')) {
-                const alias = currentEmail.split('@')[0];
-                const newEmail = alias + '@' + newDomain;
-                localStorage.setItem("receivingEmail", newEmail);
-                return newEmail;
-            }
-            const newEmail = generateRandomEmail(newDomain);
-            localStorage.setItem("receivingEmail", newEmail);
-            return newEmail;
-        });
-        
-        selectedDomain.set(newDomain);
-        localStorage.setItem("selectedDomain", newDomain);
-    }
+    receivingEmail.update(currentEmail => {
+        if (currentEmail && currentEmail.includes('@')) {
+            const alias = currentEmail.split('@')[0];
+            return alias + '@' + newDomain;
+        }
+        return generateRandomEmail(newDomain);
+    });
+    
+    selectedDomain.set(newDomain);
 }
 
 // Function to generate completely new random email
 export function generateNewRandomEmail() {
-    if (browser) {
-        selectedDomain.update(currentDomain => {
-            const newEmail = generateRandomEmail(currentDomain);
-            receivingEmail.set(newEmail);
-            return currentDomain;
-        });
-    }
+    selectedDomain.update(currentDomain => {
+        const newEmail = generateRandomEmail(currentDomain);
+        receivingEmail.set(newEmail);
+        return currentDomain;
+    });
 }
 
 // Function to add a Gmail account to the pool
