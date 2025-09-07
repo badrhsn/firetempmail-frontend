@@ -464,7 +464,7 @@ function selectDomain(domain) {
                                 checked={emailType === 'gmail'}
                                 on:change={() => handleEmailTypeChange('gmail')}
                             >
-                            <span class="radio-label">+Gmail</span>
+                            <span class="radio-label">Gmail</span>
                         </label>
                         
                         <label class="radio-option {emailType === 'googlemail' ? 'selected' : ''}">

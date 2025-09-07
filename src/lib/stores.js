@@ -36,16 +36,7 @@ if (browser) {
 
 // Multiple Gmail accounts for better scalability
 export const gmailAccounts = writable([
-    { base: 'firetemp', domain: 'gmail.com', lastUsed: 0 },
-    { base: 'tempfire', domain: 'gmail.com', lastUsed: 0 },
-    { base: 'burnermail', domain: 'gmail.com', lastUsed: 0 },
-    { base: 'disposableinbox', domain: 'gmail.com', lastUsed: 0 },
-    { base: 'tempinbox', domain: 'gmail.com', lastUsed: 0 },
-    { base: 'mailguard', domain: 'gmail.com', lastUsed: 0 },
-    { base: 'privacymail', domain: 'gmail.com', lastUsed: 0 },
-    { base: 'anoninbox', domain: 'gmail.com', lastUsed: 0 },
-    { base: 'shieldmail', domain: 'gmail.com', lastUsed: 0 },
-    { base: 'safebox', domain: 'gmail.com', lastUsed: 0 }
+    { base: 'kourichkhalid', domain: 'gmail.com', lastUsed: 0 },
 ]);
 
 // Get the next available Gmail account (round-robin selection)
