@@ -669,7 +669,11 @@ function selectDomain(domain) {
                     
                     <!-- Email Body -->
                     <div style="padding: 24px; overflow: auto; max-width: 100%; min-height: 200px;">
-                        {@html selectedEmail["content-html"] || selectedEmail["content-text"] || 'No content available'}
+                        {@html selectedEmail["content-html"] 
+    || selectedEmail["content-plain-formatted"] 
+    || selectedEmail["content-plain"] 
+    || 'No content available'}
+
                     </div>
                 </div>
             {:else}
