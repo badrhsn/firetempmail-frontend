@@ -19,8 +19,8 @@
     let currentDomain = $selectedDomain;
     let availableGmailAccounts = $gmailAccounts;
     
-    // NEW: Email type selection
-    let emailType = 'domain'; // 'domain', 'gmail', or 'googlemail'
+    // NEW: Email type selection with persistence
+    let emailType = (browser && localStorage.getItem("emailType")) || 'domain';
     
     const url = "https://post.firetempmail.com";
     
@@ -93,9 +93,12 @@
         }
     }
     
-    // NEW: Handle email type change
+    // NEW: Handle email type change with persistence
     function handleEmailTypeChange(newType) {
         emailType = newType;
+        if (browser) {
+            localStorage.setItem("emailType", newType);
+        }
         generateEmail(true);
     }
     
@@ -404,7 +407,7 @@ function selectDomain(domain) {
             
 
 <!-- Domain Selector Dropdown -->
-            <div class="email-address-container">
+                        <div class="email-address-container">
                 <div class="email-display">
                     <p>{address}</p>
                     <button 
@@ -424,10 +427,10 @@ function selectDomain(domain) {
                     </button>
                 </div>
                 
-                <!-- NEW: Radio Button Selector -->
+                <!-- Radio Button Selector -->
                 <div class="email-type-selector">
                     <div class="radio-group">
-                        <label class="radio-option">
+                        <label class="radio-option {emailType === 'domain' ? 'selected' : ''}">
                             <input 
                                 type="radio" 
                                 name="email-type" 
@@ -438,7 +441,7 @@ function selectDomain(domain) {
                             <span class="radio-label">Domain</span>
                         </label>
                         
-                        <label class="radio-option">
+                        <label class="radio-option {emailType === 'gmail' ? 'selected' : ''}">
                             <input 
                                 type="radio" 
                                 name="email-type" 
@@ -449,7 +452,7 @@ function selectDomain(domain) {
                             <span class="radio-label">+Gmail</span>
                         </label>
                         
-                        <label class="radio-option">
+                        <label class="radio-option {emailType === 'googlemail' ? 'selected' : ''}">
                             <input 
                                 type="radio" 
                                 name="email-type" 
@@ -539,31 +542,6 @@ function selectDomain(domain) {
                     </button>
                 </div>
                 {/if}
-            </div>
-            
-            {#if showCustomAliasInput}
-            <div class="custom-alias-container">
-                <div class="alias-input-group">
-                    <input 
-                        type="text" 
-                        bind:value={customAlias}
-                        placeholder="Enter your custom alias"
-                        class="alias-input"
-                    />
-                    <span class="domain-suffix">@{currentDomain}</span>
-                </div>
-                {#if aliasError}
-                    <div class="alias-error">{aliasError}</div>
-                {/if}
-                <button 
-                    class="btn btn-primary" 
-                    on:click={() => generateEmail(true, true)}
-                    disabled={!customAlias}
-                >
-                    Generate Custom Email
-                </button>
-            </div>
-            {/if}
             </div>
             
             {#if reloadActive && !isLoading}
