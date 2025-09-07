@@ -137,7 +137,6 @@
         viewEmail(email);
     }
     
-
     
     function isValidAlias(alias) {
         const aliasRegex = /^[a-zA-Z0-9-]+$/;
@@ -404,10 +403,7 @@ function selectDomain(domain) {
             </p>
             
             <!-- Email Address with Copy Button -->
-            
-
-<!-- Domain Selector Dropdown -->
-                        <div class="email-address-container">
+   <div class="email-address-container">
                 <div class="email-display">
                     <p>{address}</p>
                     <button 
@@ -1010,7 +1006,7 @@ function selectDomain(domain) {
                 Copyright © {copyrightYear}
             </p>
         </div>
-    
+    </div>
 </section>
 
 <style>
@@ -1039,11 +1035,16 @@ function selectDomain(domain) {
                     border-color: var(--bs-primary);
                 }
                 
+                .radio-option.selected {
+                    border-color: var(--bs-primary);
+                    background-color: rgba(var(--bs-primary-rgb), 0.1);
+                }
+                
                 .radio-option input[type="radio"] {
                     margin-right: 0.5rem;
                 }
                 
-                .radio-option input[type="radio"]:checked + .radio-label {
+                .radio-option.selected .radio-label {
                     color: var(--bs-primary);
                     font-weight: 600;
                 }
