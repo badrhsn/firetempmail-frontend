@@ -164,10 +164,18 @@
             <div class="faq-container text-start">
                 {#each faqItems as item, index}
                     <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <div class="faq-question" on:click={() => toggleFaq(index)} itemprop="name">
-                            {item.question}
-                            <span class="faq-icon">{item.open ? '−' : '+'}</span>
-                        </div>
+                        <button
+                            type="button"
+                            class="faq-question"
+                            aria-expanded={item.open}
+                            aria-controls={'faq-answer-'+index}
+                            on:click={() => toggleFaq(index)}
+                            on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), toggleFaq(index))}
+                            itemprop="name"
+                        >
+                            <span>{item.question}</span>
+                            <span class="faq-icon" aria-hidden="true">{item.open ? '−' : '+'}</span>
+                        </button>
                         {#if item.open}
                             <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                                 {@html item.answer}

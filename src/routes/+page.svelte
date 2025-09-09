@@ -429,21 +429,26 @@ function selectDomain(domain) {
 <!-- Domain Selector Dropdown -->
 {#if showDomainSelector}
     <div class="domain-dropdown-container">
-        <div class="domain-dropdown">
-            {#each availableDomains as domain}
-                <div 
-                    class="domain-option {currentDomain === domain ? 'active' : ''}" 
-                    on:click={() => selectDomain(domain)}
-                >
-                    <span class="domain-name">@{domain}</span>
-                    {#if currentDomain === domain}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
-                            <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    {/if}
-                </div>
-            {/each}
-        </div>
+        <div class="domain-dropdown" role="listbox" aria-label="Select email domain">
+                {#each availableDomains as domain}
+                    <button 
+                        type="button"
+                        class="domain-option {currentDomain === domain ? 'active' : ''}"
+                        role="option"
+                        aria-selected={currentDomain === domain}
+                        on:click={() => selectDomain(domain)}
+                        on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), selectDomain(domain))}
+                    >
+                        <span class="domain-name">@{domain}</span>
+                        {#if currentDomain === domain}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                                <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span class="visually-hidden">(selected)</span>
+                        {/if}
+                    </button>
+                {/each}
+            </div>
     </div>
 {/if}
             
@@ -1798,6 +1803,23 @@ function selectDomain(domain) {
     .empty-inbox p:last-of-type {
         color: #6c757d;
     }
+
+    /* Accessibility utility */
+    .visually-hidden {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0 0 0 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+    }
+
+    /* CLS mitigation: reserve vertical space */
+    section.py-4.py-xl-5 { min-height: 320px; }
+    .empty-inbox { min-height: 260px; }
     
     /* Email List */
     .email-list-container {

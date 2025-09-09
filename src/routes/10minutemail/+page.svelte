@@ -552,19 +552,24 @@ function selectDomain(domain) {
                 <!-- Domain Selector Dropdown (only shown for domain type) -->
                 {#if showDomainSelector && emailType === 'domain'}
                 <div class="domain-dropdown-container">
-                    <div class="domain-dropdown">
+                    <div class="domain-dropdown" role="listbox" aria-label="Select email domain">
                         {#each availableDomains as domain}
-                            <div 
-                                class="domain-option {currentDomain === domain ? 'active' : ''}" 
+                            <button
+                                type="button"
+                                class="domain-option {currentDomain === domain ? 'active' : ''}"
+                                role="option"
+                                aria-selected={currentDomain === domain}
                                 on:click={() => selectDomain(domain)}
+                                on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), selectDomain(domain))}
                             >
                                 <span class="domain-name">@{domain}</span>
                                 {#if currentDomain === domain}
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                         <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
+                                    <span class="visually-hidden">(selected)</span>
                                 {/if}
-                            </div>
+                            </button>
                         {/each}
                     </div>
                 </div>
