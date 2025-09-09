@@ -65,7 +65,7 @@
             });
             
             emails = newEmails;
-            stats = data.stats || {};
+            stats = data.stats;
             
             emails.sort((a, b) => new Date(b.date) - new Date(a.date));
         } catch (error) {
@@ -381,7 +381,6 @@ function selectDomain(domain) {
                         on:click={copyToClipboard} 
                         class="btn-copy"
                         title="Copy to clipboard"
-                        aria-label="Copy email address to clipboard"
                     >
                         {#if isCopying}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -396,21 +395,21 @@ function selectDomain(domain) {
                 </div>
                 
                 <div class="email-action-buttons">
-    <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)} aria-label="Generate a new random email alias">
+    <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         Random Alias
     </button>
     
-    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias" aria-label="Use a custom email alias">
+    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         Custom Alias
     </button>
     
-    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain" aria-label="Change email domain">
+    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -418,7 +417,7 @@ function selectDomain(domain) {
         Change Domain
     </button>
     
-    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page" aria-label="Refresh the email inbox">
+    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -429,26 +428,21 @@ function selectDomain(domain) {
 <!-- Domain Selector Dropdown -->
 {#if showDomainSelector}
     <div class="domain-dropdown-container">
-        <div class="domain-dropdown" role="listbox" aria-label="Select email domain">
-                {#each availableDomains as domain}
-                    <button 
-                        type="button"
-                        class="domain-option {currentDomain === domain ? 'active' : ''}"
-                        role="option"
-                        aria-selected={currentDomain === domain}
-                        on:click={() => selectDomain(domain)}
-                        on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), selectDomain(domain))}
-                    >
-                        <span class="domain-name">@{domain}</span>
-                        {#if currentDomain === domain}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                                <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <span class="visually-hidden">(selected)</span>
-                        {/if}
-                    </button>
-                {/each}
-            </div>
+        <div class="domain-dropdown">
+            {#each availableDomains as domain}
+                <div 
+                    class="domain-option {currentDomain === domain ? 'active' : ''}" 
+                    on:click={() => selectDomain(domain)}
+                >
+                    <span class="domain-name">@{domain}</span>
+                    {#if currentDomain === domain}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    {/if}
+                </div>
+            {/each}
+        </div>
     </div>
 {/if}
             
@@ -479,8 +473,8 @@ function selectDomain(domain) {
             
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
-                <div class="loading-indicator" style="min-height: 80px;">
-                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading" width="32" height="32">
+                <div class="loading-indicator">
+                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
                     <span>Waiting for incoming emails</span>
                 </div>
             {:else if !reloadActive}
@@ -919,7 +913,7 @@ function selectDomain(domain) {
                     class="font-monospace"
                     style="color: rgb(255,255,255);background: rgb(33,37,41);border-radius: 10px;padding: 4px 12px;font-size: 14px;margin-right: 2px;margin-left: 2px;"
                 >
-                    {stats.count || "0"}
+                    {stats.count}
                 </span>
                 &nbsp;emails so far.
             </p>
@@ -1803,23 +1797,6 @@ function selectDomain(domain) {
     .empty-inbox p:last-of-type {
         color: #6c757d;
     }
-
-    /* Accessibility utility */
-    .visually-hidden {
-        position: absolute !important;
-        width: 1px !important;
-        height: 1px !important;
-        padding: 0 !important;
-        margin: -1px !important;
-        overflow: hidden !important;
-        clip: rect(0 0 0 0) !important;
-        white-space: nowrap !important;
-        border: 0 !important;
-    }
-
-    /* CLS mitigation: reserve vertical space */
-    section.py-4.py-xl-5 { min-height: 320px; }
-    .empty-inbox { min-height: 260px; }
     
     /* Email List */
     .email-list-container {
