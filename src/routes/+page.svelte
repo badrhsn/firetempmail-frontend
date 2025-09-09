@@ -381,6 +381,7 @@ function selectDomain(domain) {
                         on:click={copyToClipboard} 
                         class="btn-copy"
                         title="Copy to clipboard"
+                        aria-label="Copy email address to clipboard"
                     >
                         {#if isCopying}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -395,21 +396,21 @@ function selectDomain(domain) {
                 </div>
                 
                 <div class="email-action-buttons">
-    <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
+    <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)} aria-label="Generate a new random email alias">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         Random Alias
     </button>
     
-    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
+    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias" aria-label="Use a custom email alias">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         Custom Alias
     </button>
     
-    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain" aria-label="Change email domain">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -417,7 +418,7 @@ function selectDomain(domain) {
         Change Domain
     </button>
     
-    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
+    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page" aria-label="Refresh the email inbox">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -474,7 +475,7 @@ function selectDomain(domain) {
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
-                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
+                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading" width="32" height="32" loading="lazy">
                     <span>Waiting for incoming emails</span>
                 </div>
             {:else if !reloadActive}

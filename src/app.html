@@ -12,9 +12,14 @@
 
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=cd822b7fd22c8a95a68470c795adea69">
+    <!-- Step 1: Preload fonts and add font-display:swap -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=inter:100,200,300,400,500,600,700,800,900|inter-tight:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900i" rel="stylesheet">
+    <link rel="preload" href="https://fonts.bunny.net/css?family=inter:100,200,300,400,500,600,700,800,900|inter-tight:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.bunny.net/css?family=inter:100,200,300,400,500,600,700,800,900|inter-tight:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900i&display=swap" rel="stylesheet"></noscript>
+
+    <!-- Step 2: Load non-critical CSS asynchronously -->
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=cd822b7fd22c8a95a68470c795adea69" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=cd822b7fd22c8a95a68470c795adea69"></noscript>
        
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-V7Y8WEB63T"></script>
@@ -26,6 +31,49 @@
     </script>
     
     <style>
+        /* Step 1: Inline critical CSS for above-the-fold content */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+            background: #f8f9fa;
+        }
+        .modern-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff4757 100%);
+            box-shadow: 0 8px 32px rgba(255, 107, 53, 0.2);
+        }
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #ffffff;
+        }
+        .logo-icon {
+            font-size: 36px;
+        }
+        .logo-text {
+            font-family: 'Inter Tight', sans-serif;
+            font-weight: 800;
+            font-size: 28px;
+            line-height: 1;
+            color: #fff;
+        }
         /* ===== MODERN HEADER STYLES ===== */
         .modern-header {
             position: sticky;
@@ -498,7 +546,7 @@
     </script>
 
     <!-- Original Scripts -->
-    <script src="/assets/js/jquery.min.js?h=6bcc3684f18aa21874fa709f122723cf"></script>
-    <script src="/assets/bootstrap/js/bootstrap.min.js?h=e55bde7d6e36ebf17ba0b8c1e80e4065"></script>
+    <script src="/assets/js/jquery.min.js?h=6bcc3684f18aa21874fa709f122723cf" defer></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js?h=e55bde7d6e36ebf17ba0b8c1e80e4065" defer></script>
 </body>
 </html>
