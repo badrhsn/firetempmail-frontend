@@ -474,8 +474,8 @@ function selectDomain(domain) {
             
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
-                <div class="loading-indicator">
-                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading" width="32" height="32" loading="lazy">
+                <div class="loading-indicator" style="min-height: 80px;">
+                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading" width="32" height="32">
                     <span>Waiting for incoming emails</span>
                 </div>
             {:else if !reloadActive}
