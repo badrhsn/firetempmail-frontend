@@ -1,28 +1,5 @@
-# Sitemap for better indexing
-Sitemap: https://firetempmail.com/sitemap.xml
-
-# Allow all bots to crawl the main site
 User-agent: *
+Disallow: /admin
 Allow: /
 
-# Allow all static assets
-Allow: /*.css$
-Allow: /*.js$
-Allow: /*.png$
-Allow: /*.jpg$
-Allow: /*.jpeg$
-Allow: /*.gif$
-Allow: /*.svg$
-Allow: /*.webp$
-Allow: /*.ico$
-
-# Block tracking parameters
-Disallow: /*?utm_*
-Disallow: /*&utm_*
-
-# Ensure Googlebot and Bingbot can crawl everything
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
+Sitemap: https://firetempmail.com/sitemap.xml
