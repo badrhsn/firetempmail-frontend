@@ -159,7 +159,7 @@
 
     
     function isValidAlias(alias) {
-        const aliasRegex = /^[a-zA-Z0-9-]$/;
+        const aliasRegex = /^[a-zA-Z0-9-+]+$/;
         return aliasRegex.test(alias);
     }
     
