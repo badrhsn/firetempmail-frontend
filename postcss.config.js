@@ -1,20 +1,14 @@
 
-import purgecss from '@fullhuman/postcss-purgecss';
+// PurgeCSS temporarily disabled to restore build stability.
+// Root cause previously: build step error "purgecss is not a function" likely due to ESM/CJS interop.
+// We'll re-enable with a dynamic import or alternative plugin after verifying production builds.
+// import purgecss from '@fullhuman/postcss-purgecss';
 
-const config = {
+export default {
   plugins: [
-    purgecss({
-      content: [
-        './src/**/*.svelte',
-        './src/app.html'
-      ],
-      safelist: {
-        standard: ['html', 'body', /data-bs-theme/],
-        // Add any classes that are added dynamically by JS here
-        // e.g. /active/
-      }
-    })
+    // purgecss({
+    //   content: ['./src/**/*.svelte', './src/app.html'],
+    //   safelist: { standard: ['html', 'body', /data-bs-theme/] }
+    // })
   ]
 };
-
-export default config;
