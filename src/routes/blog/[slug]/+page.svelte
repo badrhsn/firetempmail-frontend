@@ -1,35 +1,42 @@
 <script>
     import { onMount } from 'svelte';
+    import { page } from '$app/stores';
     import { getPostBySlug } from '$lib/data/blogPosts';
-    
+
     export let data;
-    let post = data.post;
+
+    let post = data?.post || null; // Start with SSR data if available
     let error = null;
-    let isLoading = true;
+    let isLoading = !post; // Only loading if no post was preloaded
     let scrollPercentage = 0;
     let copyrightYear = new Date().getFullYear();
-    
-    // Share functions
-    function shareOnFacebook(post) {
-        const url = encodeURIComponent(window.location.href);
-        const text = encodeURIComponent(post.title);
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
-    }
-    
-    function shareOnTwitter(post) {
-        const url = encodeURIComponent(window.location.href);
-        const text = encodeURIComponent(post.title);
-        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
-    }
-    
-    function shareOnLinkedIn(post) {
-        const url = encodeURIComponent(window.location.href);
-        const title = encodeURIComponent(post.title);
-        const summary = encodeURIComponent(post.excerpt);
-        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}&summary=${summary}`, '_blank');
-    }
-    
+
+    // Get slug from URL
+    let slug;
+    $: slug = $page.params.slug;
+
+    // Load post on mount if not already provided by SSR
     onMount(() => {
+        if (!post) {
+            try {
+                const fetchedPost = getPostBySlug(slug);
+                if (fetchedPost) {
+                    post = fetchedPost;
+                    isLoading = false;
+                } else {
+                    error = 'Post not found';
+                    isLoading = false;
+                }
+            } catch (err) {
+                console.error('Error loading post:', err);
+                error = 'Failed to load post';
+                isLoading = false;
+            }
+        } else {
+            isLoading = false;
+        }
+
+        // Scroll progress bar
         const handleScroll = () => {
             const windowHeight = window.innerHeight;
             const documentHeight = document.documentElement.scrollHeight - windowHeight;
@@ -42,13 +49,34 @@
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     });
+
+    // Share functions
+    function shareOnFacebook(post) {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent(post.title);
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
+    }
+
+    function shareOnTwitter(post) {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent(post.title);
+        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+    }
+
+    function shareOnLinkedIn(post) {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(post.title);
+        const summary = encodeURIComponent(post.excerpt);
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}&summary=${summary}`, '_blank');
+    }
 </script>
 
-
 <svelte:head>
-  <title>{post.title} - Fire Temp Mail Blog</title>
-  <meta name="description" content={post.excerpt} />
-  <link rel="canonical" href={`https://firetempmail.com/blog/${post.slug}`} />
+    {#if post}
+        <title>{post.title} - Fire Temp Mail Blog</title>
+        <meta name="description" content={post.excerpt} />
+        <link rel="canonical" href={`https://firetempmail.com/blog/${post.slug}`} />
+    {/if}
 </svelte:head>
 
 
