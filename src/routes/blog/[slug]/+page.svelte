@@ -2,7 +2,8 @@
     import { onMount } from 'svelte';
     import { getPostBySlug } from '$lib/data/blogPosts';
     
-    let post = null;
+    export let data;
+  const { post } = data;
     let error = null;
     let isLoading = true;
     let scrollPercentage = 0;
@@ -69,12 +70,11 @@
     });
 </script>
 
+
 <svelte:head>
-    <title>{post ? `${post.title} - Fire Temp Mail Blog` : 'Loading article...'}</title>
-    {#if post}
-        <meta name="description" content={post.excerpt} />
-        <link rel="canonical" href={`https://firetempmail.com/blog/${post.slug}`} />
-    {/if}
+  <title>{post.title} - Fire Temp Mail Blog</title>
+  <meta name="description" content={post.excerpt} />
+  <link rel="canonical" href={`https://firetempmail.com/blog/${post.slug}`} />
 </svelte:head>
 
 
