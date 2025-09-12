@@ -29,7 +29,6 @@
         window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}&summary=${summary}`, '_blank');
     }
     
-    import { onMount } from 'svelte';
     onMount(() => {
         const handleScroll = () => {
             const windowHeight = window.innerHeight;
