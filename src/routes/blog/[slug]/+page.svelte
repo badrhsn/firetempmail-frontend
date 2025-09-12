@@ -70,10 +70,13 @@
 </script>
 
 <svelte:head>
-    <title>{post ? post.title : 'Blog Post'} - Fire Temp Mail Blog</title>
-    <meta name="description" content={post ? post.excerpt : 'Blog post'} />
-    <link rel="canonical" href={post ? `https://firetempmail.com/blog/${post.slug}` : 'https://firetempmail.com/blog'} />
+    <title>{post ? `${post.title} - Fire Temp Mail Blog` : 'Loading article...'}</title>
+    {#if post}
+        <meta name="description" content={post.excerpt} />
+        <link rel="canonical" href={`https://firetempmail.com/blog/${post.slug}`} />
+    {/if}
 </svelte:head>
+
 
 <!-- Reading Progress Bar -->
 <div class="reading-progress-bar">
