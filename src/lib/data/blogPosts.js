@@ -641,7 +641,7 @@ const blogPosts = [
     <h2>Why <a href="https://firetempmail.com">Firetempmail.com</a> Stands Out</h2>
     
     <h3>No Sign-up, No Ads</h3>
-    <p>Unlike many disposable email providers, <a href="https://firetempmail.com/email-generator">Firetempmail.com</a> does not require account creation or bombard you with ads, ensuring a distraction-free experience.</p>
+    <p>Unlike many disposable email providers, <a href="https://firetempmail.com/burner-email">Firetempmail.com</a> does not require account creation or bombard you with ads, ensuring a distraction-free experience.</p>
 
     <h3>Strong Focus on Privacy</h3>
     <p>They do not store personal data, and your disposable emails are deleted after expiry, ensuring minimal data exposure.</p>
