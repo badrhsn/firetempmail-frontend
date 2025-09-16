@@ -303,15 +303,15 @@ const blogPosts = [
     `
     },
     {
-        "id": 7,
-        "title": "How to Avoid Email Spam: Protect Your Inbox in 2025",
-        "excerpt": "Learn how spam emails have evolved, recognize their signs, and implement strategies to keep your inbox secure. Discover advanced tips for individuals and businesses.",
-        "slug": "how-to-avoid-spam-emails",
-        "date": "2025-09-03",
-        "author": "Fire Temp Mail Team",
-        "category": "Guides",
-        "readTime": "15 min read",
-        "content": `
+        id: 7,
+        title: "How to Avoid Email Spam: Protect Your Inbox in 2025",
+        excerpt: "Learn how spam emails have evolved, recognize their signs, and implement strategies to keep your inbox secure. Discover advanced tips for individuals and businesses.",
+        slug: "how-to-avoid-spam-emails",
+        date: "2025-09-03",
+        author: "Fire Temp Mail Team",
+        category: "Guides",
+        readTime: "15 min read",
+        content: `
         <p>It feels like every day, a new email lands in my inbox that's clearly junk. From promises of riches to sketchy links, spam emails are a constant battle. This article explores how spam has evolved, what to watch out for, and practical steps to clean up your inbox, keeping your information safe and ensuring important messages get seen.</p>
 
         <h3>Key Takeaways</h3>
@@ -438,15 +438,15 @@ const blogPosts = [
         <h3 data-jl-question>What is 'warming up' a new email domain?</h3><p data-jl-answer>Gradually sending emails to build trust with ISPs and avoid being flagged as spam.</p>
     `
     }, {
-        "id": 8,
-        "title": "Use Temporary Email for Free Trials: Protect Your Privacy & Avoid Spam",
-        "excerpt": "Learn how temporary email addresses help you protect your privacy, eliminate unwanted spam, and maintain online anonymity when signing up for free trials online.",
-        "slug": "temporary-email-for-free-trials",
-        "date": "2025-09-16",
-        "author": "Fire Temp Mail Team",
-        "category": "Guides",
-        "readTime": "8 min read",
-        "content": `
+        id: 8,
+        title: "Use Temporary Email for Free Trials: Protect Your Privacy & Avoid Spam",
+        excerpt: "Learn how temporary email addresses help you protect your privacy, eliminate unwanted spam, and maintain online anonymity when signing up for free trials online.",
+        slug: "temporary-email-for-free-trials",
+        date: "2025-09-16",
+        author: "Fire Temp Mail Team",
+        category: "Guides",
+        readTime: "8 min read",
+        content: `
     <p>Trying to snag those free trials but tired of getting bombarded with spam emails afterward? That's where temporary email for free trials comes in handy. It's like a secret identity for your inbox, letting you explore online offers without cluttering up your main email or giving away your personal info.</p>
 
     <h3>Key Takeaways</h3>
