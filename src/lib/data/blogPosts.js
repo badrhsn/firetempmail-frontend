@@ -522,7 +522,7 @@ const blogPosts = [
     <p>Are you signing up for trials on your laptop, or are you doing it on your phone? It's worth checking if the temporary email service works well on different devices. Some services have mobile-friendly websites, while others might offer dedicated apps or browser extensions.</p>
 
     <h2>Advanced Uses for Temporary Email</h2>
-    
+    <img src="https://contenu.nyc3.cdn.digitaloceanspaces.com/journalist/5c1a00d1-56bb-40ab-b484-6c7f64160b5c/thumbnail.jpeg" alt="Digital envelope with clock face, suggesting temporary email." style="max-width: 500px;">
     <h3>Testing Online Products and Applications</h3>
     <p>Developers and testers use these disposable addresses all the time. It lets them create fake user accounts to see how the sign-up process flows, test email notifications, or even check how the system handles multiple users.</p>
     
@@ -533,7 +533,7 @@ const blogPosts = [
     <p>Loyalty programs are great, but they often come with a flood of marketing emails. If you want to snag those discounts or points without getting your primary inbox buried, a temporary email is perfect.</p>
 
     <h2>Key Features of Temporary Email Providers</h2>
-    
+        <img src="https://contenu.nyc3.cdn.digitaloceanspaces.com/journalist/c9c5c168-dafd-4ce5-97ac-fb5429b9bea9/thumbnail.jpeg" alt="Laptop screen with temporary email inbox" style="max-width: 500px;">
     <h3>Instant Email Reception</h3>
     <p>One of the most important things is how fast you get your emails. You need to be able to see verification messages or any other communication right away.</p>
     
