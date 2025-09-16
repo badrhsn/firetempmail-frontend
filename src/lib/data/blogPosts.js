@@ -1,15 +1,15 @@
 // src/lib/data/blogPosts.js
 const blogPosts = [
     {
-        id: 1,
-        title: "How to Use Temp Mail for Amazon Prime",
-        excerpt: "Learn how to use temporary email addresses for Amazon Prime sign-ups to protect your privacy and avoid spam.",
-        slug: "temp-mail-for-amazon-prime",
-        date: "2025-08-22",
-        author: "Fire Temp Mail Team",
-        category: "Guides",
-        readTime: "8 min read",
-        content: `
+        "id": 1,
+        "title": "How to Use Temp Mail for Amazon Prime",
+        "excerpt": "Learn how to use temporary email addresses for Amazon Prime sign-ups to protect your privacy and avoid spam.",
+        "slug": "temp-mail-for-amazon-prime",
+        "date": "2025-08-22",
+        "author": "Fire Temp Mail Team",
+        "category": "Guides",
+        "readTime": "8 min read",
+        "content": `
         <p>Using <strong>temp mail for Amazon Prime</strong> is one of the easiest ways to protect your real email inbox from spam. Many users want to enjoy Amazon Prime’s free trial without giving away their permanent address, and a <strong>temporary email service</strong> is the perfect solution.</p>
 
         <h2>Why Use Temp Mail for Amazon Prime?</h2>
@@ -55,15 +55,15 @@ const blogPosts = [
     `
     },
     {
-        id: 2,
-        title: "Best Temp Mail Service in Germany",
-        excerpt: "Discover why Fire Temp Mail is the best disposable email service in Germany for privacy, GDPR compliance, and spam protection.",
-        slug: "best-temp-mail-in-germany",
-        date: "2025-08-22",
-        author: "Fire Temp Mail Team",
-        category: "Privacy",
-        readTime: "8 min read",
-        content: `
+        "id": 2,
+        "title": "Best Temp Mail Service in Germany",
+        "excerpt": "Discover why Fire Temp Mail is the best disposable email service in Germany for privacy, GDPR compliance, and spam protection.",
+        "slug": "best-temp-mail-in-germany",
+        "date": "2025-08-22",
+        "author": "Fire Temp Mail Team",
+        "category": "Privacy",
+        "readTime": "8 min read",
+        "content": `
         <p>Looking for the <strong>best temp mail service in Germany</strong>? Fire Temp Mail provides disposable email addresses that protect your privacy, comply with GDPR, and help you avoid spam when browsing online.</p>
 
         <h2>Why Use Temp Mail in Germany?</h2>
@@ -102,15 +102,15 @@ const blogPosts = [
     `
     },
     {
-        id: 3,
-        title: "Temp Mail vs. Burner Email: What’s the Difference?",
-        excerpt: "Understand the differences between temp mail and burner email, and learn which one is right for your needs.",
-        slug: "temp-mail-vs-burner-email",
-        date: "2025-08-22",
-        author: "Fire Temp Mail Team",
-        category: "Guides",
-        readTime: "8 min read",
-        content: `
+        "id": 3,
+        "title": "Temp Mail vs. Burner Email: What’s the Difference?",
+        "excerpt": "Understand the differences between temp mail and burner email, and learn which one is right for your needs.",
+        "slug": "temp-mail-vs-burner-email",
+        "date": "2025-08-22",
+        "author": "Fire Temp Mail Team",
+        "category": "Guides",
+        "readTime": "8 min read",
+        "content": `
         <p><strong>Temp mail vs burner email</strong> is a common question in digital privacy. Both provide <strong>disposable email addresses</strong>, but they serve slightly different purposes. Let’s break down the differences so you can choose the right one.</p>
 
         <h2>What is Temp Mail?</h2>
@@ -137,15 +137,15 @@ const blogPosts = [
     `
     },
     {
-        id: 4,
-        title: "Why You Should Use Temporary Email Addresses",
-        excerpt: "Discover the benefits of using disposable email addresses for online registrations and how they protect your privacy.",
-        slug: "why-use-temporary-email",
-        date: "2023-11-10",
-        author: "Fire Temp Mail Team",
-        category: "Privacy",
-        readTime: "9 min read",
-        content: `
+        "id": 4,
+        "title": "Why You Should Use Temporary Email Addresses",
+        "excerpt": "Discover the benefits of using disposable email addresses for online registrations and how they protect your privacy.",
+        "slug": "why-use-temporary-email",
+        "date": "2023-11-10",
+        "author": "Fire Temp Mail Team",
+        "category": "Privacy",
+        "readTime": "9 min read",
+        "content": `
         <p><strong>Temporary email addresses</strong> are an essential tool in the digital era. They let you access services while protecting your real inbox from spam, ads, and potential security risks. Let’s explore why you should start using them today.</p>
 
         <h2>The Risks of Using Your Personal Email</h2>
@@ -185,15 +185,15 @@ const blogPosts = [
     `
     },
     {
-        id: 5,
-        title: "How to Avoid Email Spam and Protect Your Inbox",
-        excerpt: "Learn effective strategies to keep your inbox clean from unwanted emails and protect your personal information.",
-        slug: "how-to-avoid-email-spam",
-        date: "2023-11-12",
-        author: "Fire Temp Mail Team",
-        category: "Security",
-        readTime: "9 min read",
-        content: `
+        "id": 5,
+        "title": "How to Avoid Email Spam and Protect Your Inbox",
+        "excerpt": "Learn effective strategies to keep your inbox clean from unwanted emails and protect your personal information.",
+        "slug": "how-to-avoid-email-spam",
+        "date": "2023-11-12",
+        "author": "Fire Temp Mail Team",
+        "category": "Security",
+        "readTime": "9 min read",
+        "content": `
         <p><strong>Email spam</strong> isn’t just annoying—it can be dangerous. Spam emails waste your time, clutter your inbox, and sometimes contain phishing scams or malware. Here’s how to protect your <strong>personal inbox</strong> and reduce spam permanently.</p>
 
         <h2>What is Email Spam?</h2>
@@ -232,15 +232,15 @@ const blogPosts = [
         <p><strong>Email spam</strong> is an unavoidable part of digital life, but you don’t have to suffer from it. With <strong>temporary mail services</strong> like Fire Temp Mail, you can protect your inbox, avoid spam, and browse safely.</p>
     `
     }, {
-        id: 6,
-        title: "How to Recover a Temporary Email Address with Custom Alias",
-        excerpt: "Learn how Fire Temp Mail lets you recover deleted temporary email addresses by using the custom alias feature.",
-        slug: "how-to-recover-temp-mail-email-address",
-        date: "2025-08-20",
-        author: "Fire Temp Mail Team",
-        category: "Guides",
-        readTime: "10 min read",
-        content: `
+        "id": 6,
+        "title": "How to Recover a Temporary Email Address with Custom Alias",
+        "excerpt": "Learn how Fire Temp Mail lets you recover deleted temporary email addresses by using the custom alias feature.",
+        "slug": "how-to-recover-temp-mail-email-address",
+        "date": "2025-08-20",
+        "author": "Fire Temp Mail Team",
+        "category": "Guides",
+        "readTime": "10 min read",
+        "content": `
         <p>Most temporary email services generate disposable inboxes that vanish once you close the tab. But what if you want to <strong>recover your temp mail</strong> and access emails again? That’s where Fire Temp Mail’s <strong>Custom Alias feature</strong> comes in.</p>
 
         <h2>What is a Custom Alias?</h2>
@@ -303,15 +303,15 @@ const blogPosts = [
     `
     },
     {
-        id: 7,
-        title: "How to Avoid Email Spam: Protect Your Inbox in 2025",
-        excerpt: "Learn how spam emails have evolved, recognize their signs, and implement strategies to keep your inbox secure. Discover advanced tips for individuals and businesses.",
-        slug: "how-to-avoid-spam-emails",
-        date: "2025-09-03",
-        author: "Fire Temp Mail Team",
-        category: "Guides",
-        readTime: "15 min read",
-        content: `
+        "id": 7,
+        "title": "How to Avoid Email Spam: Protect Your Inbox in 2025",
+        "excerpt": "Learn how spam emails have evolved, recognize their signs, and implement strategies to keep your inbox secure. Discover advanced tips for individuals and businesses.",
+        "slug": "how-to-avoid-spam-emails",
+        "date": "2025-09-03",
+        "author": "Fire Temp Mail Team",
+        "category": "Guides",
+        "readTime": "15 min read",
+        "content": `
         <p>It feels like every day, a new email lands in my inbox that's clearly junk. From promises of riches to sketchy links, spam emails are a constant battle. This article explores how spam has evolved, what to watch out for, and practical steps to clean up your inbox, keeping your information safe and ensuring important messages get seen.</p>
 
         <h3>Key Takeaways</h3>
@@ -438,15 +438,15 @@ const blogPosts = [
         <h3 data-jl-question>What is 'warming up' a new email domain?</h3><p data-jl-answer>Gradually sending emails to build trust with ISPs and avoid being flagged as spam.</p>
     `
     }, {
-        id: 8,
-        title: "Use Temporary Email for Free Trials: Protect Your Privacy & Avoid Spam",
-        excerpt: "Learn how temporary email addresses help you protect your privacy, eliminate unwanted spam, and maintain online anonymity when signing up for free trials online.",
-        slug: "temporary-email-for-free-trials",
-        date: "2025-09-16",
-        author: "Fire Temp Mail Team",
-        category: "Guides",
-        readTime: "8 min read",
-        content: `
+        "id": 8,
+        "title": "Use Temporary Email for Free Trials: Protect Your Privacy & Avoid Spam",
+        "excerpt": "Learn how temporary email addresses help you protect your privacy, eliminate unwanted spam, and maintain online anonymity when signing up for free trials online.",
+        "slug": "temporary-email-for-free-trials",
+        "date": "2025-09-16",
+        "author": "Fire Temp Mail Team",
+        "category": "Guides",
+        "readTime": "8 min read",
+        "content": `
     <p>Trying to snag those free trials but tired of getting bombarded with spam emails afterward? That's where temporary email for free trials comes in handy. It's like a secret identity for your inbox, letting you explore online offers without cluttering up your main email or giving away your personal info.</p>
 
     <h3>Key Takeaways</h3>
