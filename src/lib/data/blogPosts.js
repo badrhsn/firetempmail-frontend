@@ -575,7 +575,7 @@ const blogPosts = [
     <h3 data-jl-question>What if I don't get the confirmation email?</h3>
     <p data-jl-answer>Sometimes, the email address might be blocked by the service you're signing up for. If you don't get the email you expected, you might need to try generating a new temporary email address and signing up again.</p>
   `
-    },
+    }
 
 ];
 
