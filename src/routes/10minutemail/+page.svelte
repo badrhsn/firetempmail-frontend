@@ -136,11 +136,8 @@ function normalizeGmailAddress(address) {
         isLoading = true;
         try {
             if (!address) return;
-            // Normalize Gmail address before querying (do NOT remove dots)
-            const queryAddress = address.includes("gmail.com")
-                ? normalizeGmailAddress(address)
-                : address;
-            const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(queryAddress)}`);
+            // Use address directly for API call (no normalization)
+            const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             
             const data = await response.json();
