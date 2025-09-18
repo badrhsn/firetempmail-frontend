@@ -40,25 +40,16 @@ export const gmailAccounts = writable([
     { base: 'wipetmpde', domain: 'gmail.com', lastUsed: 0 },
 ]);
 
-// Get the next available Gmail account (round-robin selection)
+// Get a random Gmail account from the available accounts
 export function getNextGmailAccount(type = 'gmail') {
     let generatedEmail = '';
     gmailAccounts.update(accounts => {
-        // Initialize to first account
-        let selectedAccount = { ...accounts[0] };
-        let selectedAccountIndex = 0;
-        let oldestUsage = accounts[0].lastUsed;
-
-        accounts.forEach((account, index) => {
-            if (account.lastUsed < oldestUsage) {
-                oldestUsage = account.lastUsed;
-                selectedAccount = { ...account };
-                selectedAccountIndex = index;
-            }
-        });
-
+        // Randomly select an account from the list
+        const randomIndex = Math.floor(Math.random() * accounts.length);
+        const selectedAccount = accounts[randomIndex];
+        
         // Update the last used time for the selected account
-        accounts[selectedAccountIndex].lastUsed = Date.now();
+        accounts[randomIndex].lastUsed = Date.now();
 
         // Generate a random string for the +alias
         const randomString = Math.random().toString(36).substring(2, 8);
