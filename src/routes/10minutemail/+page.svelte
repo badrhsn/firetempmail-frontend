@@ -16,8 +16,8 @@
     import { browser } from '$app/environment';
     
     // These will reactively update when the stores change
-    let address = $receivingEmail;
-    let currentDomain = $selectedDomain;
+    let address;
+    let currentDomain;
     let availableGmailAccounts = $gmailAccounts;
     
     // Email type selection with safe localStorage access
@@ -166,6 +166,15 @@ function normalizeGmailAddress(address) {
         }
     }
     
+    // Make address and currentDomain reactive to store changes
+    $: address = $receivingEmail;
+    $: currentDomain = $selectedDomain;
+
+    // Watch for address changes and reload emails
+    $: if (address) {
+        loadEmails();
+    }
+
     function markAsRead(email) {
         if (!email) return;
         const emailKey = email.recipient + "-" + email.suffix;
