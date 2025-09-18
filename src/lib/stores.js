@@ -42,13 +42,11 @@ export const gmailAccounts = writable([
 
 // Get the next available Gmail account (round-robin selection)
 export function getNextGmailAccount(type = 'gmail') {
-    let selectedAccount = null;
-    let selectedAccountIndex = 0;
-
+    let generatedEmail = '';
     gmailAccounts.update(accounts => {
         // Initialize to first account
-        selectedAccount = { ...accounts[0] };
-        selectedAccountIndex = 0;
+        let selectedAccount = { ...accounts[0] };
+        let selectedAccountIndex = 0;
         let oldestUsage = accounts[0].lastUsed;
 
         accounts.forEach((account, index) => {
@@ -61,34 +59,30 @@ export function getNextGmailAccount(type = 'gmail') {
 
         // Update the last used time for the selected account
         accounts[selectedAccountIndex].lastUsed = Date.now();
+
+        // Generate a random string for the +alias
+        const randomString = Math.random().toString(36).substring(2, 8);
+        // Determine the domain based on type
+        const domain = type === 'googlemail' ? 'googlemail.com' : 'gmail.com';
+
+        // 50% chance to use +alias, 50% chance to use dots
+        if (Math.random() > 0.5) {
+            generatedEmail = selectedAccount.base + '+' + randomString + '@' + domain;
+        } else {
+            let dottedUsername = '';
+            const usernameChars = selectedAccount.base.split('');
+            usernameChars.forEach((char, index) => {
+                dottedUsername += char;
+                if (index < usernameChars.length - 1 && Math.random() > 0.5) {
+                    dottedUsername += '.';
+                }
+            });
+            generatedEmail = dottedUsername + '@' + domain;
+        }
+
         return accounts;
     });
-    
-    // Generate a random string for the +alias
-    const randomString = Math.random().toString(36).substring(2, 8);
-    
-    // Determine the domain based on type
-    const domain = type === 'googlemail' ? 'googlemail.com' : 'gmail.com';
-    
-    // 50% chance to use +alias, 50% chance to use dots
-    if (Math.random() > 0.5) {
-        // Use +alias format
-        return selectedAccount.base + '+' + randomString + '@' + domain;
-    } else {
-        // Use dots format - insert random dots in the username
-        let dottedUsername = '';
-        const usernameChars = selectedAccount.base.split('');
-        
-        usernameChars.forEach((char, index) => {
-            dottedUsername += char;
-            // Add a dot after each character with 50% probability, except the last one
-            if (index < usernameChars.length - 1 && Math.random() > 0.5) {
-                dottedUsername += '.';
-            }
-        });
-        
-        return dottedUsername + '@' + domain;
-    }
+    return generatedEmail;
 }
 
 // Generate a random email address
