@@ -37,6 +37,7 @@ if (browser) {
 // Multiple Gmail accounts for better scalability
 export const gmailAccounts = writable([
     { base: 'kourichkhalid', domain: 'gmail.com', lastUsed: 0 },
+    { base: 'wipetmpde', domain: 'gmail.com', lastUsed: 0 },
 ]);
 
 // Get the next available Gmail account (round-robin selection)
