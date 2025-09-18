@@ -121,10 +121,27 @@
         generateEmail(true);
     }
     
+    // Add Gmail normalization function (same as backend)
+function normalizeGmailAddress(address) {
+    const [local, domain] = address.split("@");
+    if (!domain || domain.toLowerCase() !== "gmail.com")
+        return address.toLowerCase();
+    const [base, alias] = local.split("+");
+    const cleanBase = base.replace(/\./g, "");
+    return alias
+        ? `${cleanBase}+${alias}@gmail.com`
+        : `${cleanBase}@gmail.com`;
+}
+
     async function loadEmails() {
         isLoading = true;
         try {
-            const response = await fetch(`${url}/mail/get?address=${address}`);
+            if (!address) return;
+            // Normalize Gmail address before querying
+            const queryAddress = address.includes("gmail.com")
+                ? normalizeGmailAddress(address)
+                : address;
+            const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(queryAddress)}`);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             
             const data = await response.json();
