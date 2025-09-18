@@ -121,23 +121,22 @@
         generateEmail(true);
     }
     
-    // Add Gmail normalization function (same as backend)
+    // Gmail normalization: keep dots, only lowercase and keep alias
 function normalizeGmailAddress(address) {
     const [local, domain] = address.split("@");
     if (!domain || domain.toLowerCase() !== "gmail.com")
         return address.toLowerCase();
     const [base, alias] = local.split("+");
-    const cleanBase = base.replace(/\./g, "");
     return alias
-        ? `${cleanBase}+${alias}@gmail.com`
-        : `${cleanBase}@gmail.com`;
+        ? `${base}+${alias}@gmail.com`
+        : `${base}@gmail.com`;
 }
 
     async function loadEmails() {
         isLoading = true;
         try {
             if (!address) return;
-            // Normalize Gmail address before querying
+            // Normalize Gmail address before querying (do NOT remove dots)
             const queryAddress = address.includes("gmail.com")
                 ? normalizeGmailAddress(address)
                 : address;
