@@ -869,7 +869,78 @@ function selectDomain(domain) {
 </section>
 
 <style>
-
+                .email-type-selector {
+                    margin: 1rem 0;
+                }
+                
+                .radio-group {
+                    display: flex;
+                    justify-content: center;
+                    gap: 1rem;
+                    flex-wrap: wrap;
+                }
+                
+                .radio-option {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    padding: 0.5rem 1rem;
+                    border: 2px solid #e9ecef;
+                    border-radius: 8px;
+                    transition: all 0.3s ease;
+                }
+                
+                .radio-option:hover {
+                    border-color: var(--bs-primary);
+                }
+                
+                .radio-option.selected {
+                    border-color: var(--bs-primary);
+                    background-color: rgba(var(--bs-primary-rgb), 0.1);
+                }
+                
+                .radio-option input[type="radio"] {
+                    margin-right: 0.5rem;
+                }
+                
+                .radio-option.selected .radio-label {
+                    color: var(--bs-primary);
+                    font-weight: 600;
+                }
+                
+                .radio-label {
+                    font-weight: 500;
+                }
+                
+                /* Style the radio buttons */
+                input[type="radio"] {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    width: 16px;
+                    height: 16px;
+                    border: 2px solid #ccc;
+                    border-radius: 50%;
+                    outline: none;
+                    cursor: pointer;
+                    position: relative;
+                }
+                
+                input[type="radio"]:checked {
+                    border-color: var(--bs-primary);
+                }
+                
+                input[type="radio"]:checked::before {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 8px;
+                    height: 8px;
+                    background-color: var(--bs-primary);
+                    border-radius: 50%;
+                }
 /* Domain Selector Dropdown */
 .domain-dropdown-container {
     position: relative;
