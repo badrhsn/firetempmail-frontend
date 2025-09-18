@@ -44,18 +44,21 @@ export const gmailAccounts = writable([
 export function getNextGmailAccount(type = 'gmail') {
     let selectedAccount = null;
     let selectedAccountIndex = 0;
-    
+
     gmailAccounts.update(accounts => {
-        // Find the account that was used least recently
-        let oldestUsage = Date.now();
+        // Initialize to first account
+        selectedAccount = { ...accounts[0] };
+        selectedAccountIndex = 0;
+        let oldestUsage = accounts[0].lastUsed;
+
         accounts.forEach((account, index) => {
             if (account.lastUsed < oldestUsage) {
                 oldestUsage = account.lastUsed;
-                selectedAccount = {...account};
+                selectedAccount = { ...account };
                 selectedAccountIndex = index;
             }
         });
-        
+
         // Update the last used time for the selected account
         accounts[selectedAccountIndex].lastUsed = Date.now();
         return accounts;
