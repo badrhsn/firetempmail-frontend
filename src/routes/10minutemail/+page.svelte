@@ -49,7 +49,7 @@
     
     let showDomainSelector = false;
 
-    onMount(async function () {
+    onMount(function () {
         // Safely get email type from localStorage
         if (browser) {
             try {
@@ -62,7 +62,6 @@
             }
         }
         
-        await loadEmails();
         if (address === null) {
             generateEmail(false);
         }
