@@ -10,7 +10,7 @@
         generateNewRandomEmail,
         gmailAccounts,
         getNextGmailAccount
-    } from "../../lib/stores";
+    } from "../lib/stores";
     import Navigation from '$lib/components/Navigation.svelte';
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
