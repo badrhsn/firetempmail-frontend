@@ -815,191 +815,148 @@ FireTempMail stands out from other temporary email services because it uses real
         </div>
 
         <!-- Footer -->
-        <footer class="site-footer">
-            <div class="footer-top">
-                <div class="footer-grid">
-                    <!-- About -->
-                    <div class="footer-about">
-                        <div class="lang-row">
-                            <span class="lang-label">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                    <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2Z" stroke="currentColor" stroke-width="1.5"/>
-                                    <path d="M2 12h20M12 2c3.5 3 3.5 17 0 20M7 3.8c2.1 1.7 2.1 14.7 0 16.4M17 3.8c-2.1 1.7-2.1 14.7 0 16.4" stroke="currentColor" stroke-width="1.2"/>
-                                </svg>
-                                <strong>Languages</strong>
-                            </span>
-                            <button class="lang-current" type="button" aria-label="Current language">EN ▾</button>
-                        </div>
-
-                        <h3>About Fire Temp Mail</h3>
-                        <p>
-                            Privacy-first temporary inboxes and Gmail-style aliases for quick sign-ups and secure verifications.
-                            Keep your real email clean and safe from spam.
-                        </p>
-                        <p class="about-meta">
-                            Emails received:&nbsp;
-                            <span class="pill">{stats.count || '0'}</span>
-                        </p>
-                    </div>
-
-                    <!-- Quick Links -->
-                    <nav class="footer-links" aria-label="Quick Links">
-                        <h3>Quick Links</h3>
-                        <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/10minutemail">10 Minute Mail</a></li>
-                            <li><a href="/email-generator">Email Generator</a></li>
-                            <li><a href="/temp-mail-edu">Temp Mail EDU</a></li>
-                            <li><a href="/blog">Blog</a></li>
-                            <li><a href="/faq">FAQ</a></li>
-                            <li><a href="/privacy-policy">Privacy</a></li>
-                            <li><a href="/terms">Terms</a></li>
-                            <li><a href="/contact">Contact</a></li>
-                            <li><a href="/sitemap.xml">Sitemap</a></li>
-                        </ul>
-                    </nav>
-
-                    <!-- Donation (placeholder to be replaced by your widget) -->
-                    <div class="footer-donate">
-                        <div class="donate-icon" aria-hidden="true">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 21s-6-4.35-6-9a6 6 0 1 1 12 0c0 4.65-6 9-6 9Z" stroke="#ef4444" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <h3>Support the Project</h3>
-                        <p>Enjoying Fire Temp Mail? Help us keep it fast and free.</p>
-
-                        <!-- Replace this with your donation widget -->
-                        <div id="donation-widget" class="donation-placeholder" aria-label="Donation widget placeholder">
-                            <a class="donate-btn" href="/donate">Donate</a>
-                            <small class="donate-note">You can replace this with your own donation widget.</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="footer-divider" />
-
-            <div class="footer-bottom">
-                <div class="brand">
-                    <div class="brand-mark" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                            <path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                            <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
-                        </svg>
-                    </div>
-                    <span class="brand-name">Fire Temp Mail</span>
-                </div>
-
-                <div class="copyright">© {copyrightYear} Fire Temp Mail. All Rights Reserved.</div>
-
-                <ul class="social-list" aria-label="Social links">
-                    <li><a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="social social-fb">F</a></li>
-                    <li><a href="https://x.com" target="_blank" rel="noopener" aria-label="X" class="social social-x">X</a></li>
-                    <li><a href="https://pinterest.com" target="_blank" rel="noopener" aria-label="Pinterest" class="social social-pi">P</a></li>
-                    <li><a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="social social-ig">I</a></li>
-                    <li><a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube" class="social social-yt">Yt</a></li>
-                </ul>
-            </div>
-        </footer>
-
         <!-- Footer -->
-        <!-- Replace the old footer block below -->
-        <!-- OLD:
-        <div class="text-center p-4 p-lg-5">
-            ...existing code...
-        </div>
-        -->
-        <footer class="site-footer">
-            <div class="footer-top">
-                <div class="footer-grid">
-                    <!-- About -->
-                    <div class="footer-about">
-                        <div class="lang-row">
-                            <span class="lang-label">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                    <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2Z" stroke="currentColor" stroke-width="1.5"/>
-                                    <path d="M2 12h20M12 2c3.5 3 3.5 17 0 20M7 3.8c2.1 1.7 2.1 14.7 0 16.4M17 3.8c-2.1 1.7-2.1 14.7 0 16.4" stroke="currentColor" stroke-width="1.2"/>
-                                </svg>
-                                <strong>Languages</strong>
-                            </span>
-                            <button class="lang-current" type="button" aria-label="Current language">EN ▾</button>
-                        </div>
-
-                        <h3>About Fire Temp Mail</h3>
-                        <p>
-                            Privacy-first temporary inboxes and Gmail-style aliases for quick sign-ups and secure verifications.
-                            Keep your real email clean and safe from spam.
-                        </p>
-                        <p class="about-meta">
-                            Emails received:&nbsp;
-                            <span class="pill">{stats.count || '0'}</span>
-                        </p>
-                    </div>
-
-                    <!-- Quick Links -->
-                    <nav class="footer-links" aria-label="Quick Links">
-                        <h3>Quick Links</h3>
-                        <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/10minutemail">10 Minute Mail</a></li>
-                            <li><a href="/email-generator">Email Generator</a></li>
-                            <li><a href="/temp-mail-edu">Temp Mail EDU</a></li>
-                            <li><a href="/blog">Blog</a></li>
-                            <li><a href="/faq">FAQ</a></li>
-                            <li><a href="/privacy-policy">Privacy</a></li>
-                            <li><a href="/terms">Terms</a></li>
-                            <li><a href="/contact">Contact</a></li>
-                            <li><a href="/sitemap.xml">Sitemap</a></li>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h5 class="footer-title">About us</h5>
+                <p>The DupliChecker.com team comprises of experts in different fields, all with the same primary focus: helping our clients generate greater business by use of online services.</p>
+                <p><a href="#">For more: Free Tools</a></p>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <h5 class="footer-title">Quick Links</h5>
+                <div class="row">
+                    <div class="col-6">
+                        <ul class="footer-links">
+                            <li><a href="#">Plagiarism Checker</a></li>
+                            <li><a href="#">AI Detector</a></li>
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                            <li><a href="#">Banners</a></li>
+                            <li><a href="#">FAQs</a></li>
                         </ul>
-                    </nav>
-
-                    <!-- Donation (placeholder to be replaced by your widget) -->
-                    <div class="footer-donate">
-                        <div class="donate-icon" aria-hidden="true">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 21s-6-4.35-6-9a6 6 0 1 1 12 0c0 4.65-6 9-6 9Z" stroke="#ef4444" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                        </div>
-                        <h3>Support the Project</h3>
-                        <p>Enjoying Fire Temp Mail? Help us keep it fast and free.</p>
-
-                        <!-- Replace the block below with your donation widget -->
-                        <div id="donation-widget" class="donation-placeholder" aria-label="Donation widget placeholder">
-                            <a class="donate-btn" href="/donate">Donate</a>
-                            <small class="donate-note">You can replace this with your own donation widget.</small>
-                        </div>
+                    </div>
+                    <div class="col-6">
+                        <ul class="footer-links">
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Sitemap</a></li>
+                            <li><a href="#">Contact us</a></li>
+                            <li><a href="#">Privacy policy</a></li>
+                            <li><a href="#">Refund Policy</a></li>
+                            <li><a href="#">Term of Services</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
-
-            <hr class="footer-divider" />
-
-            <div class="footer-bottom">
-                <div class="brand">
-                    <div class="brand-mark" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                            <path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                            <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
-                        </svg>
+            
+            <div class="col-md-4 mb-4">
+                <h5 class="footer-title">Support Our Work</h5>
+                <div class="donation-section">
+                    <p>Help us continue providing free tools by making a donation.</p>
+                    <div class="d-flex">
+                        <input type="number" class="form-control me-2" placeholder="Amount" aria-label="Donation amount">
+                        <button class="donation-btn">Donate</button>
                     </div>
-                    <span class="brand-name">Fire Temp Mail</span>
+                    <div class="mt-3">
+                        <p class="mb-0">We've received <span class="counter">{stats.count || '0'}</span> donations so far.</p>
+                    </div>
                 </div>
-
-                <div class="copyright">© {copyrightYear} Fire Temp Mail. All Rights Reserved.</div>
-
-                <ul class="social-list" aria-label="Social links">
-                    <li><a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="social social-fb">F</a></li>
-                    <li><a href="https://x.com" target="_blank" rel="noopener" aria-label="X" class="social social-x">X</a></li>
-                    <li><a href="https://pinterest.com" target="_blank" rel="noopener" aria-label="Pinterest" class="social social-pi">P</a></li>
-                    <li><a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="social social-ig">I</a></li>
-                    <li><a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube" class="social social-yt">Yt</a></li>
-                </ul>
             </div>
-        </footer>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <p class="copyright">© {copyrightYear} Dupli Checker. All Rights Reserved.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <div class="social-icons">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-twitter"></i></a>
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
     </div>
 </section>
 
 <style>
+    /* Footer Styles */
+    .footer {
+        background-color: #2c3e50;
+        color: white;
+        padding: 40px 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .footer a {
+        color: #ecf0f1;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    .footer a:hover {
+        color: #3498db;
+    }
+    .footer-title {
+        font-weight: 700;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+    }
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        line-height: 2;
+    }
+    .footer-links li {
+        margin-bottom: 8px;
+    }
+    .divider {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin: 30px 0;
+    }
+    .donation-section {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+    .donation-btn {
+        background: #e74c3c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: background 0.3s;
+    }
+    .donation-btn:hover {
+        background: #c0392b;
+    }
+    .copyright {
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+    .social-icons {
+        font-size: 1.5rem;
+        margin-top: 15px;
+    }
+    .social-icons a {
+        margin-right: 15px;
+    }
+    .counter {
+        color: rgb(255,255,255);
+        background: rgb(33,37,41);
+        border-radius: 10px;
+        padding: 4px 12px;
+        font-size: 14px;
+        margin: 0 2px;
+        font-family: monospace;
+    }
                 .email-type-selector {
                     margin: 1rem 0;
                 }
@@ -1570,7 +1527,6 @@ FireTempMail stands out from other temporary email services because it uses real
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
-       
         display: flex;
         justify-content: center;
         align-items: center;
