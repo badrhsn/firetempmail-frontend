@@ -262,13 +262,13 @@ function selectDomain(domain) {
         if (!email || !email.recipient || !email.suffix) return;
         if (confirm("Do you really want to permanently delete this email?")) {
             try {
-                const normalizedKey = buildEmailKey(email);
-                let response = await fetch(`${url}/mail/delete?key=${encodeURIComponent(normalizedKey)}`);
+                const rawKey = buildRawKey(email); // try raw first (keeps mbox:/idx:)
+                let response = await fetch(`${url}/mail/delete?key=${encodeURIComponent(rawKey)}`);
                 let data = await response.json();
 
-                if (data.code !== 200) {
-                    const rawKey = buildRawKey(email);
-                    response = await fetch(`${url}/mail/delete?key=${encodeURIComponent(rawKey)}`);
+                if (data.code !== 200) {           // fallback to normalized for old rows
+                    const normalizedKey = buildEmailKey(email);
+                    response = await fetch(`${url}/mail/delete?key=${encodeURIComponent(normalizedKey)}`);
                     data = await response.json();
                 }
 
@@ -276,16 +276,11 @@ function selectDomain(domain) {
                     const k = buildEmailKey(email);
                     emails = emails.filter(e => buildEmailKey(e) !== k);
                     unreadEmails.delete(k);
-                    
-                    if (stats.count) {
-                        stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
-                    }
-                    
-                    if (selectedEmail && buildEmailKey(selectedEmail) === emailKey) {
+                    if (stats.count) stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
+                    if (selectedEmail && buildEmailKey(selectedEmail) === k) {
                         selectedEmail = null;
                         viewMode = 'list';
                     }
-                    
                     showToast("Success", "Email deleted successfully.", "success");
                 } else {
                     showToast("Error", `Failed to delete email: ${data.msg}`, "error");
@@ -315,26 +310,26 @@ function selectDomain(domain) {
 
     async function forwardEmail(email) {
         if (!email || !email.recipient || !email.suffix) return;
-        const forwardTo = prompt("Please enter the email address you want to forward this email to:", "");
+        let forwardTo = prompt("Please enter the email address you want to forward this email to:", "");
         if (!forwardTo) {
             showToast("Error", "No email address entered.", "error");
             return;
         }
         try {
-            const normalizedKey = buildEmailKey(email);
+            const rawKey = buildRawKey(email); // try raw first (keeps mbox:/idx:)
             let response = await fetch(`${url}/mail/forward`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ key: normalizedKey, forward: forwardTo }),
+                body: JSON.stringify({ key: rawKey, forward: forwardTo }),
             });
             let data = await response.json();
 
-            if (data.code !== 200) {
-                const rawKey = buildRawKey(email);
+            if (data.code !== 200) {          // fallback to normalized
+                const normalizedKey = buildEmailKey(email);
                 response = await fetch(`${url}/mail/forward`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ key: rawKey, forward: forwardTo }),
+                    body: JSON.stringify({ key: normalizedKey, forward: forwardTo }),
                 });
                 data = await response.json();
             }

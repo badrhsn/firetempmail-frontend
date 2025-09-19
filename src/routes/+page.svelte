@@ -267,24 +267,21 @@ function selectDomain(domain) {
         
         if (confirm("Do you really want to permanently delete this email?")) {
             try {
-                const normalizedKey = buildEmailKey(email);
-                let resp = await fetch(`${url}/mail/delete?key=${encodeURIComponent(normalizedKey)}`);
+                const rawKey = buildRawKey(email);            // try raw (keeps mbox:/idx:)
+                let resp = await fetch(`${url}/mail/delete?key=${encodeURIComponent(rawKey)}`);
                 let data = await resp.json();
 
-                // Fallback to raw key for the few stored with mbox:/idx: + encoded words
-                if (data.code !== 200) {
-                    const rawKey = buildRawKey(email);
-                    resp = await fetch(`${url}/mail/delete?key=${encodeURIComponent(rawKey)}`);
+                if (data.code !== 200) {                      // fallback to normalized
+                    const normalizedKey = buildEmailKey(email);
+                    resp = await fetch(`${url}/mail/delete?key=${encodeURIComponent(normalizedKey)}`);
                     data = await resp.json();
                 }
 
                 if (data.code === 200) {
-                    const k = buildEmailKey(email);
+                    const k = buildEmailKey(email);           // update UI using normalized key
                     emails = emails.filter(e => buildEmailKey(e) !== k);
                     unreadEmails.delete(k);
-                    if (stats.count) {
-                        stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
-                    }
+                    if (stats.count) stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
                     if (selectedEmail && buildEmailKey(selectedEmail) === k) {
                         selectedEmail = null;
                         viewMode = 'list';
@@ -318,33 +315,26 @@ function selectDomain(domain) {
 
     async function forwardEmail(email) {
         if (!email || !email.recipient || !email.suffix) return;
-        
         const forwardTo = prompt("Please enter the email address you want to forward this email to:", "");
-
-        if (forwardTo === null || forwardTo === "") {
+        if (!forwardTo) {
             showToast("Error", "No email address entered.", "error");
             return;
         }
-
         try {
-            const normalizedKey = buildEmailKey(email);
+            const rawKey = buildRawKey(email);               // try raw first (keeps mbox:/idx:)
             let resp = await fetch(`${url}/mail/forward`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ key: normalizedKey, forward: forwardTo }),
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ key: rawKey, forward: forwardTo }),
             });
             let data = await resp.json();
 
-            if (data.code !== 200) {
-                const rawKey = buildRawKey(email);
+            if (data.code !== 200) {                        // fallback to normalized
+                const normalizedKey = buildEmailKey(email);
                 resp = await fetch(`${url}/mail/forward`, {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ key: rawKey, forward: forwardTo }),
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ key: normalizedKey, forward: forwardTo }),
                 });
                 data = await resp.json();
             }
@@ -1485,188 +1475,6 @@ function selectDomain(domain) {
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         display: flex;
         align-items: flex-start;
-        border-left: 4px solid var(--bs-info);
-        animation: slideIn 0.3s ease-out;
-        max-width: 100%;
-    }
-    
-    @keyframes slideIn {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    .btn:hover {
-        opacity: 0.8;
-    }
-
-    .email-address-container {
-    margin-top: 32px;
-    margin-bottom: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.email-display {
-    padding: 8px 30px;
-    border: 2px solid rgb(215,215,215);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: white;
-    min-height: 50px;
-}
-
-.email-text {
-    margin-bottom: 0px;
-    font-size: 20px;
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.copy-btn {
-    margin-left: 12px;
-    background: transparent;
-    border: none;
-    padding: 4px 8px;
-    color: var(--bs-primary);
-}
-
-.regenerate-btn {
-    padding: 8px 30px;
-    border-radius: 16px;
-    border-width: 2px;
-    border-color: rgb(33,37,41);
-    background: rgb(33,37,41);
-    font-weight: 500;
-    height: 50px;
-    font-size: 20px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
-
-.btn-blog {
-    padding: 8px 30px;
-    border-radius: 16px;
-    border-width: 2px;
-    border-color: rgb(33,37,41);
-    background: rgb(33,37,41);
-    font-weight: 500;
-    height: 50px;
-    font-size: 20px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
-
-.regenerate-btn svg {
-    font-size: 24px;
-}
-
-/* Desktop styles - side by side layout */
-@media (min-width: 1200px) {
-    .email-address-container {
-        flex-direction: row;
-        align-items: center;
-    }
-    
-    .email-display {
-        width: 100%;
-        margin-right: 16px;
-        margin-bottom: 0;
-    }
-    
-    .regenerate-btn {
-        min-width: 220px;
-        margin-bottom: 0;
-    }
-}
-
-/* Mobile styles - stacked layout */
-@media (max-width: 1199px) {
-    .email-text {
-        white-space: normal;
-        text-overflow: clip;
-        word-break: break-all;
-    }
-}
-
-.copy-btn:hover,
-.regenerate-btn:hover {
-    opacity: 0.8;
-}
-/* Mobile styles for toast */
-@media (max-width: 768px) {
-    .toast-container {
-        top: 10px;
-        right: 10px;
-        left: 10px;
-        max-width: none;
-    }
-}
-/* Mobile styles for email list */
-@media (max-width: 768px) {
-    .email-item {
-        padding: 12px;
-    }
-    
-    .email-avatar {
-        width: 32px;
-        height: 32px;
-        font-size: 14px;
-        margin-right: 8px;
-    }
-    
-    .email-sender {
-        font-size: 14px;
-    }
-    
-    .email-date {
-        font-size: 11px;
-    }
-    
-    .email-subject {
-        font-size: 14px;
-    }
-    
-    .email-preview {
-        font-size: 12px;
-    }
-}
-
- /* Toast Notifications */
-    .toast-container {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 10000;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        max-width: 350px;
-    }
-    
-    .toast {
-        background: white;
-        padding: 1rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        display: flex;
-        align-items: flex-start;
         animation: slideIn 0.3s ease-out;
         max-width: 100%;
     }
@@ -2137,7 +1945,7 @@ function selectDomain(domain) {
         padding: 16px;
         border-bottom: 1px solid rgb(240,240,240);
         cursor: pointer;
-        transition: background-color 0.2s;
+        transition: background-color  0.2s;
         display: flex;
         align-items: flex-start;
     }
@@ -2212,6 +2020,198 @@ function selectDomain(domain) {
         color: var(--bs-secondary);
         font-size: 12px;
         flex-shrink: 0;
+    }
+    
+    .email-subject {
+        font-weight: 600;
+        margin: 0 0 4px 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .email-item.unread .email-subject {
+        font-weight: 700;
+        color: var(--bs-dark);
+    }
+    
+    .email-preview {
+        color: var(--bs-secondary);
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 14px;
+    }
+    
+    /* Description */
+    h2 {
+        font-family: 'Inter Tight', sans-serif;
+        font-weight: 600;
+        margin-bottom: 16px;
+        text-align: center;
+    }
+    
+    .description {
+        margin-bottom: 32px;
+        font-size: 20px;
+        text-align: center;
+    }
+    
+    /* Footer */
+    .stats {
+        margin-bottom: 32px;
+        font-size: 16px;
+        text-align: left;
+    }
+    
+    .count {
+        color: rgb(255,255,255);
+        background: rgb(33,37,41);
+        border-radius: 10px;
+        padding: 4px 12px;
+        font-size: 14px;
+        margin-right: 2px;
+        margin-left: 2px;
+        font-family: monospace;
+    }
+    
+    .footer-links {
+        margin-bottom: 4px;
+        font-size: 16px;
+        text-align: left;
+    }
+    
+    .float-end {
+        float: right;
+    }
+    
+    .copyright {
+        margin-bottom: 4px;
+        font-size: 16px;
+        text-align: left;
+    }
+    
+    /* Animations */
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes scaleIn {
+        from { 
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        to { 
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+        @media (min-width: 769px) and (max-width: 992px) {
+        .email-action-buttons {
+            flex-direction: row;
+        }
+        
+        .email-action-buttons .btn {
+            min-width: 160px;
+        }
+    }
+
+    @media (min-width: 993px) {
+        .email-action-buttons {
+            flex-direction: row;
+        }
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .email-address-container {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        .email-display {
+            width: 100%;
+            margin-right: 0;
+            min-width: unset;
+        }
+        
+        .email-action-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .email-action-buttons .btn {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .btn {
+            min-width: 100%;
+            justify-content: center;
+        }
+        
+        .email-items {
+            max-height: 300px;
+        }
+        
+        .modal-backdrop {
+            padding: 10px;
+        }
+        
+        .modal {
+            width: 95%;
+        }
+        
+        .float-end {
+            float: none;
+            display: block;
+            text-align: center;
+            margin-top: 16px;
+        }
+        
+        .footer-links {
+            text-align: center;
+        }
+        
+        .email-item {
+            padding: 12px;
+        }
+        
+        .avatar {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .email-sender {
+            font-size: 14px;
+        }
+        
+        .email-date {
+            font-size: 11px;
+        }
+        
+        .email-subject {
+            font-size: 14px;
+        }
+        
+        .email-preview {
+            font-size: 12px;
+        }
+    }
+</style>
     }
     
     .email-subject {
