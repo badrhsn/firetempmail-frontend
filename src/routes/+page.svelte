@@ -131,11 +131,55 @@ function normalizeGmailAddress(address) {
         : `${base}@gmail.com`;
 }
 
+// RFC 2047 decode + key helpers
+function decodeEncodedWords(str = '') {
+    // Supports Base64 (b) and Quoted-Printable (q) encoded-words
+    return str.replace(/=\?([^?]+)\?([bBqQ])\?([^?]+)\?=/g, (match, charset, enc, data) => {
+        try {
+            const cs = (charset || 'utf-8').toLowerCase();
+            const mode = enc.toLowerCase();
+            if (mode === 'b') {
+                const bin = atob(data.replace(/\s/g, ''));
+                const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
+                return new TextDecoder(cs).decode(bytes);
+            } else {
+                const qp = data
+                    .replace(/_/g, ' ')
+                    .replace(/=([0-9A-Fa-f]{2})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
+                const bytes = Uint8Array.from(qp, c => c.charCodeAt(0));
+                return new TextDecoder(cs).decode(bytes);
+            }
+        } catch {
+            return match;
+        }
+    });
+}
+function stripKnownPrefixes(str = '') {
+    // Handle stored prefixes like "mbox:" or "idx:"
+    return str.replace(/^(?:mbox:|idx:)\s*/i, '');
+}
+function extractEmailAddress(str = '') {
+    const m = str.match(/<([^>]+)>/);
+    if (m && m[1]) return m[1].trim();
+    const simple = str.trim().replace(/^"+|"+$/g, '');
+    if (/^[^\s@]+@[^\s@]+$/.test(simple)) return simple;
+    return simple;
+}
+function buildEmailKey(email) {
+    if (!email) return '';
+    const raw = email.recipient || '';
+    const recipient = extractEmailAddress(decodeEncodedWords(stripKnownPrefixes(raw)));
+    return `${recipient}-${email.suffix}`;
+}
+function buildRawKey(email) {
+    if (!email) return '';
+    return `${email.recipient}-${email.suffix}`;
+}
+
     async function loadEmails() {
         isLoading = true;
         try {
             if (!address) return;
-            // Use address directly for API call (no normalization)
             const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             
@@ -143,8 +187,8 @@ function normalizeGmailAddress(address) {
             const newEmails = data.mails || [];
             
             newEmails.forEach(email => {
-                const emailKey = email.recipient + "-" + email.suffix;
-                if (!emails.some(e => e.recipient + "-" + e.suffix === emailKey)) {
+                const emailKey = buildEmailKey(email);
+                if (!emails.some(e => buildEmailKey(e) === emailKey)) {
                     unreadEmails.add(emailKey);
                 }
             });
@@ -172,7 +216,7 @@ function normalizeGmailAddress(address) {
 
     function markAsRead(email) {
         if (!email) return;
-        const emailKey = email.recipient + "-" + email.suffix;
+        const emailKey = buildEmailKey(email);
         unreadEmails.delete(emailKey);
         viewEmail(email);
     }
@@ -223,23 +267,28 @@ function selectDomain(domain) {
         
         if (confirm("Do you really want to permanently delete this email?")) {
             try {
-                let emailKey = email.recipient + "-" + email.suffix;
-                const response = await fetch(`${url}/mail/delete?key=${emailKey}`);
-                const data = await response.json();
-                
+                const normalizedKey = buildEmailKey(email);
+                let resp = await fetch(`${url}/mail/delete?key=${encodeURIComponent(normalizedKey)}`);
+                let data = await resp.json();
+
+                // Fallback to raw key for the few stored with mbox:/idx: + encoded words
+                if (data.code !== 200) {
+                    const rawKey = buildRawKey(email);
+                    resp = await fetch(`${url}/mail/delete?key=${encodeURIComponent(rawKey)}`);
+                    data = await resp.json();
+                }
+
                 if (data.code === 200) {
-                    emails = emails.filter(e => e && e.recipient + "-" + e.suffix !== emailKey);
-                    unreadEmails.delete(emailKey);
-                    
+                    const k = buildEmailKey(email);
+                    emails = emails.filter(e => buildEmailKey(e) !== k);
+                    unreadEmails.delete(k);
                     if (stats.count) {
                         stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
                     }
-                    
-                    if (selectedEmail && selectedEmail.recipient + "-" + selectedEmail.suffix === emailKey) {
+                    if (selectedEmail && buildEmailKey(selectedEmail) === k) {
                         selectedEmail = null;
                         viewMode = 'list';
                     }
-                    
                     showToast("Success", "Email deleted successfully.", "success");
                 } else {
                     showToast("Error", `Failed to delete email: ${data.msg}`, "error");
@@ -270,8 +319,7 @@ function selectDomain(domain) {
     async function forwardEmail(email) {
         if (!email || !email.recipient || !email.suffix) return;
         
-        let emailKey = email.recipient + "-" + email.suffix;
-        let forwardTo = prompt("Please enter the email address you want to forward this email to:", "");
+        const forwardTo = prompt("Please enter the email address you want to forward this email to:", "");
 
         if (forwardTo === null || forwardTo === "") {
             showToast("Error", "No email address entered.", "error");
@@ -279,15 +327,28 @@ function selectDomain(domain) {
         }
 
         try {
-            const response = await fetch(`${url}/mail/forward`, {
+            const normalizedKey = buildEmailKey(email);
+            let resp = await fetch(`${url}/mail/forward`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ key: emailKey, forward: forwardTo }),
+                body: JSON.stringify({ key: normalizedKey, forward: forwardTo }),
             });
-            
-            const data = await response.json();
+            let data = await resp.json();
+
+            if (data.code !== 200) {
+                const rawKey = buildRawKey(email);
+                resp = await fetch(`${url}/mail/forward`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ key: rawKey, forward: forwardTo }),
+                });
+                data = await resp.json();
+            }
+
             if (data.code === 200) {
                 showToast("Success", "Email forwarded successfully!", "success");
             } else {
@@ -332,7 +393,7 @@ function selectDomain(domain) {
         viewMode = 'detail';
         
         if (email) {
-            const emailKey = email.recipient + "-" + email.suffix;
+            const emailKey = buildEmailKey(email);
             unreadEmails.delete(emailKey);
         }
     }
@@ -365,7 +426,7 @@ function selectDomain(domain) {
 
     function isUnread(email) {
         if (!email || !email.recipient || !email.suffix) return false;
-        return unreadEmails.has(email.recipient + "-" + email.suffix);
+        return unreadEmails.has(buildEmailKey(email));
     }
 
     const intervalID = setInterval(timedReload, 20000);  
@@ -692,7 +753,7 @@ function selectDomain(domain) {
                         
                         <!-- Email Items -->
                         <div class="email-items">
-                            {#each emails as email (email.recipient + '-' + email.suffix)}
+                            {#each emails as email (buildEmailKey(email))}
                                 {#if email && email.sender && email.recipient}
                                     <div 
                                         on:click={() => markAsRead(email)}
