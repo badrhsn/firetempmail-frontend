@@ -2211,9 +2211,7 @@ function selectDomain(domain) {
             font-size: 12px;
         }
     }
-</style>
-    }
-    
+        
     .email-subject {
         font-weight: 600;
         margin: 0 0 4px 0;
