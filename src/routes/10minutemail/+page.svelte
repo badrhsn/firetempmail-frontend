@@ -131,6 +131,48 @@ function normalizeGmailAddress(address) {
         : `${base}@gmail.com`;
 }
 
+// Helpers to normalize recipient -> address and build a stable key
+function decodeEncodedWords(str = '') {
+    return str.replace(/=\?([^?]+)\?([bBqQ])\?([^?]+)\?=/g, (match, charset, enc, data) => {
+        try {
+            const cs = (charset || 'utf-8').toLowerCase();
+            const mode = enc.toLowerCase();
+            if (mode === 'b') {
+                const bin = atob(data.replace(/\s/g, ''));
+                const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
+                return new TextDecoder(cs).decode(bytes);
+            } else if (mode === 'q') {
+                const qp = data.replace(/_/g, ' ').replace(/=([0-9A-Fa-f]{2})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
+                const bytes = Uint8Array.from(qp, c => c.charCodeAt(0));
+                return new TextDecoder(cs).decode(bytes);
+            }
+            return match;
+        } catch {
+            return match;
+        }
+    });
+}
+function stripKnownPrefixes(str = '') {
+    return str.replace(/^(?:idx:|mbox:)\s*/i, '');
+}
+function extractEmailAddress(str = '') {
+    const m = str.match(/<([^>]+)>/);
+    if (m && m[1]) return m[1].trim();
+    const simple = str.trim().replace(/^"+|"+$/g, '');
+    if (/^[^\s@]+@[^\s@]+$/.test(simple)) return simple;
+    return simple;
+}
+function buildEmailKey(email) {
+    if (!email) return '';
+    const raw = email.recipient || '';
+    const recipient = extractEmailAddress(decodeEncodedWords(stripKnownPrefixes(raw)));
+    return `${recipient}-${email.suffix}`;
+}
+function buildRawKey(email) {
+    if (!email) return '';
+    return `${email.recipient}-${email.suffix}`;
+}
+
     async function loadEmails() {
         isLoading = true;
         try {
@@ -141,14 +183,12 @@ function normalizeGmailAddress(address) {
             
             const data = await response.json();
             const newEmails = data.mails || [];
-            
             newEmails.forEach(email => {
-                const emailKey = email.recipient + "-" + email.suffix;
-                if (!emails.some(e => e.recipient + "-" + e.suffix === emailKey)) {
+                const emailKey = buildEmailKey(email);
+                if (!emails.some(e => buildEmailKey(e) === emailKey)) {
                     unreadEmails.add(emailKey);
                 }
             });
-            
             emails = newEmails;
             stats = data.stats || {};
             
@@ -172,7 +212,7 @@ function normalizeGmailAddress(address) {
 
     function markAsRead(email) {
         if (!email) return;
-        const emailKey = email.recipient + "-" + email.suffix;
+        const emailKey = buildEmailKey(email);
         unreadEmails.delete(emailKey);
         viewEmail(email);
     }
@@ -220,22 +260,28 @@ function selectDomain(domain) {
 
     async function deleteEmail(email) {
         if (!email || !email.recipient || !email.suffix) return;
-        
         if (confirm("Do you really want to permanently delete this email?")) {
             try {
-                let emailKey = email.recipient + "-" + email.suffix;
-                const response = await fetch(`${url}/mail/delete?key=${emailKey}`);
-                const data = await response.json();
-                
+                const normalizedKey = buildEmailKey(email);
+                let response = await fetch(`${url}/mail/delete?key=${encodeURIComponent(normalizedKey)}`);
+                let data = await response.json();
+
+                if (data.code !== 200) {
+                    const rawKey = buildRawKey(email);
+                    response = await fetch(`${url}/mail/delete?key=${encodeURIComponent(rawKey)}`);
+                    data = await response.json();
+                }
+
                 if (data.code === 200) {
-                    emails = emails.filter(e => e && e.recipient + "-" + e.suffix !== emailKey);
-                    unreadEmails.delete(emailKey);
+                    const k = buildEmailKey(email);
+                    emails = emails.filter(e => buildEmailKey(e) !== k);
+                    unreadEmails.delete(k);
                     
                     if (stats.count) {
                         stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
                     }
                     
-                    if (selectedEmail && selectedEmail.recipient + "-" + selectedEmail.suffix === emailKey) {
+                    if (selectedEmail && buildEmailKey(selectedEmail) === emailKey) {
                         selectedEmail = null;
                         viewMode = 'list';
                     }
@@ -269,25 +315,30 @@ function selectDomain(domain) {
 
     async function forwardEmail(email) {
         if (!email || !email.recipient || !email.suffix) return;
-        
-        let emailKey = email.recipient + "-" + email.suffix;
-        let forwardTo = prompt("Please enter the email address you want to forward this email to:", "");
-
-        if (forwardTo === null || forwardTo === "") {
+        const forwardTo = prompt("Please enter the email address you want to forward this email to:", "");
+        if (!forwardTo) {
             showToast("Error", "No email address entered.", "error");
             return;
         }
-
         try {
-            const response = await fetch(`${url}/mail/forward`, {
+            const normalizedKey = buildEmailKey(email);
+            let response = await fetch(`${url}/mail/forward`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ key: emailKey, forward: forwardTo }),
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ key: normalizedKey, forward: forwardTo }),
             });
-            
-            const data = await response.json();
+            let data = await response.json();
+
+            if (data.code !== 200) {
+                const rawKey = buildRawKey(email);
+                response = await fetch(`${url}/mail/forward`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ key: rawKey, forward: forwardTo }),
+                });
+                data = await response.json();
+            }
+
             if (data.code === 200) {
                 showToast("Success", "Email forwarded successfully!", "success");
             } else {
@@ -332,7 +383,7 @@ function selectDomain(domain) {
         viewMode = 'detail';
         
         if (email) {
-            const emailKey = email.recipient + "-" + email.suffix;
+            const emailKey = buildEmailKey(email);
             unreadEmails.delete(emailKey);
         }
     }
@@ -361,11 +412,6 @@ function selectDomain(domain) {
         
         const text = content.replace(/<[^>]*>/g, '');
         return text.length > 100 ? text.substring(0, 100) + '...' : text;
-    }
-
-    function isUnread(email) {
-        if (!email || !email.recipient || !email.suffix) return false;
-        return unreadEmails.has(email.recipient + "-" + email.suffix);
     }
 
     const intervalID = setInterval(timedReload, 20000);  
@@ -740,7 +786,7 @@ function selectDomain(domain) {
                         
                         <!-- Email Items -->
                         <div class="email-items">
-                            {#each emails as email (email.recipient + '-' + email.suffix)}
+                            {#each emails as email (buildEmailKey(email))}
                                 {#if email && email.sender && email.recipient}
                                     <div 
                                         on:click={() => markAsRead(email)}
@@ -805,7 +851,7 @@ function selectDomain(domain) {
     </p>
 
     <h3>Dealing with Spam</h3>
-    <p>
+    <p> 
         Spam consists of unsolicited, bulk emails often triggered by sign-ups, contests, or unsecured mailing lists. Beyond being irritating, spam can carry phishing attempts or malware. Using temporary addresses keeps these messages away from your primary inbox, improving security and clarity.
     </p>
 
