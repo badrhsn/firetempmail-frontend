@@ -381,7 +381,7 @@ function selectDomain(domain) {
         showCryptoModal = false;
     }
     
-    async function copyToClipboard(text) {
+    async function copyAddressToClipboard(text) {
         try {
             await navigator.clipboard.writeText(text);
             alert('Address copied to clipboard: ' + text);
@@ -921,19 +921,19 @@ FireTempMail stands out from other temporary email services because it uses real
         <div class="crypto-option">
             <h5><i class="fab fa-bitcoin crypto-icon"></i> BTC:</h5>
             <div class="crypto-address">1DirhWkrcDE8BNkzxajpfocKRcFYvNmfU2</div>
-            <button class="donation-btn" on:click={() => copyToClipboard('1DirhWkrcDE8BNkzxajpfocKRcFYvNmfU2')}>Copy Address</button>
+            <button class="donation-btn" on:click={() => copyAddressToClipboard('1DirhWkrcDE8BNkzxajpfocKRcFYvNmfU2')}>Copy Address</button>
         </div>
         
         <div class="crypto-option">
             <h5><i class="fab fa-ethereum crypto-icon"></i> ETH (ERC20):</h5>
             <div class="crypto-address">0x6f14413f09ae9e71fba76d52daf4f703816551b8</div>
-            <button class="donation-btn" on:click={() => copyToClipboard('0x6f14413f09ae9e71fba76d52daf4f703816551b8')}>Copy Address</button>
+            <button class="donation-btn" on:click={() => copyAddressToClipboard('0x6f14413f09ae9e71fba76d52daf4f703816551b8')}>Copy Address</button>
         </div>
         
         <div class="crypto-option">
             <h5><i class="fas fa-coins crypto-icon"></i> USDT (TRC20):</h5>
             <div class="crypto-address">TNRzZJGUgLkfmH1SDoFC5eGwKDQkKNMrPg</div>
-            <button class="donation-btn" on:click={() => copyToClipboard('TNRzZJGUgLkfmH1SDoFC5eGwKDQkKNMrPg')}>Copy Address</button>
+            <button class="donation-btn" on:click={() => copyAddressToClipboard('TNRzZJGUgLkfmH1SDoFC5eGwKDQkKNMrPg')}>Copy Address</button>
         </div>
     </div>
 </div>
