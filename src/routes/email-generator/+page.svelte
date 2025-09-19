@@ -769,10 +769,6 @@ function selectDomain(domain) {
                         Absolutely. This is the primary advantage over other services. Because we provide a real Gmail address, it is far less likely to be detected and blocked by major platforms that routinely filter out disposable email domains.
                     </p>
 
-                    <h3>How long does the temporary Gmail address last?</h3>
-                    <p>
-                        Your inbox and messages are available for a limited window. For a permanent solution, consider using Gmail's built-in plus addressing (e.g., <code>your.email+newsite@gmail.com</code>) directly.
-                    </p>
 
                     <h3>Is this service free?</h3>
                     <p>

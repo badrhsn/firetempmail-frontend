@@ -374,8 +374,8 @@ function selectDomain(domain) {
     <title>Fire Temp Mail | Free Disposable Temporary Email Generator</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Fire Temp Mail provides free disposable temporary email addresses to protect your privacy, block spam, and stay anonymous online. Instantly generate a secure temp email inbox today.">
-    <meta name="keywords" content="free, temporary, email, disposable, mail, email address">
+    <meta name="description" content="Fire Temp Mail provides free temporary email and Gmail-style aliases. Generate disposable Gmail temp mail addresses with plus-alias and dot variants, block spam, and keep your inbox private.">
+    <meta name="keywords" content="temporary gmail, gmail temp mail, disposable gmail, gmail alias generator, gmail dot trick, plus alias, googlemail, temp email, burner email">
     <link rel="canonical" href="https://firetempmail.com">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
     
@@ -730,6 +730,58 @@ function selectDomain(domain) {
                     </div>
                 {/if}
             {/if}
+
+            <!-- Insert: Gmail temp mail SEO block (place this before the "What is Disposable Temporary E-mail?" section) -->
+            <div class="seo-content-section">
+                <div class="container">
+                    <h2 class="section-title">Gmail Temp Mail Generator</h2>
+                    <div class="seo-rich-content">
+                        <p>
+                            Generate Gmail-style disposable addresses in seconds. Our Gmail temp mail supports
+                            plus-alias (name+tag@gmail.com) and dot variants (n.a.m.e@gmail.com) so it behaves like a
+                            real Gmail/Googlemail inbox on most websites—perfect for sign-ups, trials, and verifications.
+                        </p>
+
+                        <h3>How it works</h3>
+                        <p>
+                            Switch the selector above to <strong>Gmail</strong> or <strong>GoogleMail</strong>, then click
+                            <em>Generate New</em>. Fire Temp Mail rotates through real base accounts and creates
+                            <strong>Gmail aliases</strong> using the plus (+) and dot tricks to give you a private,
+                            disposable Gmail-style address.
+                        </p>
+
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <span class="feature-icon">→</span>
+                                <span>Disposable Gmail that receives mail instantly (no registration)</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">→</span>
+                                <span>Gmail alias generator with plus-tags and dot variations</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">→</span>
+                                <span>Works with gmail.com and googlemail.com patterns</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">→</span>
+                                <span>Reduce spam and keep your primary Gmail private</span>
+                            </div>
+                        </div>
+
+                        <h3>Best use cases</h3>
+                        <p>
+                            Use <strong>temporary Gmail</strong> for free trials, one‑time verifications, gated downloads,
+                            newsletters, and QA testing multiple accounts—then discard when done.
+                        </p>
+
+                        <p>
+                            Need a timed inbox? Try <a href="/10minutemail">10 Minute Mail</a>. Otherwise, switch to
+                            <strong>Gmail</strong> above and create a <strong>Gmail temp mail</strong> address now.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
             <h2
                 class="text-center"
@@ -2053,7 +2105,7 @@ function selectDomain(domain) {
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background: #e9ecef;
+                           background: #e9ecef;
         display: flex;
         align-items: center;
         justify-content: center;
