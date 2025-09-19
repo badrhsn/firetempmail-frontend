@@ -369,6 +369,27 @@ function selectDomain(domain) {
     }
 
     const intervalID = setInterval(timedReload, 20000);  
+
+
+        let showCryptoModal = false;
+    
+    function openCryptoModal() {
+        showCryptoModal = true;
+    }
+    
+    function closeCryptoModal() {
+        showCryptoModal = false;
+    }
+    
+    async function copyToClipboard(text) {
+        try {
+            await navigator.clipboard.writeText(text);
+            alert('Address copied to clipboard: ' + text);
+        } catch (error) {
+            alert('Failed to copy address');
+            console.error('Copy failed:', error);
+        }
+    }
 </script>
 <svelte:head>
     <title>10 Minute Mail - Fire Temp Mail</title>
@@ -816,13 +837,14 @@ FireTempMail stands out from other temporary email services because it uses real
 </div>
 </section>
         <!-- Footer -->
+<!-- Footer -->
 <footer class="footer">
     <div class="container">
         <div class="row">
             <div class="col-md-4 mb-4">
-                <h5 class="footer-title">About us</h5>
-                <p>The DupliChecker.com team comprises of experts in different fields, all with the same primary focus: helping our clients generate greater business by use of online services.</p>
-                <p><a href="#">For more: Free Tools</a></p>
+                <h5 class="footer-title">About FireTempMail</h5>
+                <p>FireTempMail provides free, temporary email addresses to protect your privacy online. Keep your personal inbox clean from spam and unwanted messages with our disposable email service.</p>
+                <p><a href="/">Explore more tools</a></p>
             </div>
             
             <div class="col-md-4 mb-4">
@@ -830,35 +852,39 @@ FireTempMail stands out from other temporary email services because it uses real
                 <div class="row">
                     <div class="col-6">
                         <ul class="footer-links">
-                            <li><a href="#">Plagiarism Checker</a></li>
-                            <li><a href="#">AI Detector</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                            <li><a href="#">Banners</a></li>
-                            <li><a href="#">FAQs</a></li>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/email-generator">Email Generator</a></li>
+                            <li><a href="/temp-mail-edu">Temp Mail EDU</a></li>
+                            <li><a href="/10minutemail">10 Minute Mail</a></li>
+                            <li><a href="/blog">Blog</a></li>
                         </ul>
                     </div>
                     <div class="col-6">
                         <ul class="footer-links">
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Sitemap</a></li>
-                            <li><a href="#">Contact us</a></li>
-                            <li><a href="#">Privacy policy</a></li>
-                            <li><a href="#">Refund Policy</a></li>
-                            <li><a href="#">Term of Services</a></li>
+                            <li><a href="/privacy-policy">Privacy Policy</a></li>
+                            <li><a href="/terms">Terms of Service</a></li>
+                            <li><a href="/faq">FAQ</a></li>
+                            <li><a href="/contact">Contact Us</a></li>
+                            <li><a href="/sitemap">Sitemap</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             
             <div class="col-md-4 mb-4">
-                <h5 class="footer-title">Support Our Work</h5>
+                <h5 class="footer-title">Support Our Service</h5>
                 <div class="donation-section">
-                    <p>Help us continue providing free tools by making a donation.</p>
-                    <div class="d-flex">
-                        <input type="number" class="form-control me-2" placeholder="Amount" aria-label="Donation amount">
-                        <button class="donation-btn">Donate</button>
+                    <p>Help us keep FireTempMail free by making a donation. Your support helps maintain and improve our service.</p>
+                    
+                    <div class="donation-options">
+                        <button class="donation-btn" on:click={() => window.open('https://paypal.com/donate?hosted_button_id=YOUR_BUTTON_ID', '_blank')}>
+                            <i class="fab fa-paypal"></i> PayPal
+                        </button>
+                        <button class="donation-btn" on:click={openCryptoModal}>
+                            <i class="fab fa-bitcoin"></i> Crypto
+                        </button>
                     </div>
+                    
                     <div class="mt-3">
                         <p class="mb-0">We've received <span class="counter">{stats.count || '0'}</span> donations so far.</p>
                     </div>
@@ -870,28 +896,55 @@ FireTempMail stands out from other temporary email services because it uses real
         
         <div class="row align-items-center">
             <div class="col-md-6">
-                <p class="copyright">© {copyrightYear} Dupli Checker. All Rights Reserved.</p>
+                <p class="copyright">© {copyrightYear} FireTempMail. All Rights Reserved.</p>
             </div>
             <div class="col-md-6 text-md-end">
                 <div class="social-icons">
-                    <a href="#"><i class="bi bi-facebook"></i></a>
-                    <a href="#"><i class="bi bi-twitter"></i></a>
-                    <a href="#"><i class="bi bi-linkedin"></i></a>
-                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
         </div>
     </div>
 </footer>
-    
+
+<!-- Crypto Donation Modal -->
+{#if showCryptoModal}
+<div class="crypto-modal" on:click|self={closeCryptoModal}>
+    <div class="crypto-modal-content">
+        <span class="close-modal" on:click={closeCryptoModal}>&times;</span>
+        <h3>Donate Crypto</h3>
+        <p>If you'd like to make a contribution, please help us by donating to our website.</p>
+        
+        <div class="crypto-option">
+            <h5><i class="fab fa-bitcoin crypto-icon"></i> BTC:</h5>
+            <div class="crypto-address">1DirhWkrcDE8BNkzxajpfocKRcFYvNmfU2</div>
+            <button class="donation-btn" on:click={() => copyToClipboard('1DirhWkrcDE8BNkzxajpfocKRcFYvNmfU2')}>Copy Address</button>
+        </div>
+        
+        <div class="crypto-option">
+            <h5><i class="fab fa-ethereum crypto-icon"></i> ETH (ERC20):</h5>
+            <div class="crypto-address">0x6f14413f09ae9e71fba76d52daf4f703816551b8</div>
+            <button class="donation-btn" on:click={() => copyToClipboard('0x6f14413f09ae9e71fba76d52daf4f703816551b8')}>Copy Address</button>
+        </div>
+        
+        <div class="crypto-option">
+            <h5><i class="fas fa-coins crypto-icon"></i> USDT (TRC20):</h5>
+            <div class="crypto-address">TNRzZJGUgLkfmH1SDoFC5eGwKDQkKNMrPg</div>
+            <button class="donation-btn" on:click={() => copyToClipboard('TNRzZJGUgLkfmH1SDoFC5eGwKDQkKNMrPg')}>Copy Address</button>
+        </div>
+    </div>
+</div>
+{/if}
 
 <style>
     /* Footer Styles */
     .footer {
         background-color: #2c3e50;
         color: white;
-        padding: 40px 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 40px 0 20px;
     }
     .footer a {
         color: #ecf0f1;
@@ -904,19 +957,20 @@ FireTempMail stands out from other temporary email services because it uses real
     .footer-title {
         font-weight: 700;
         margin-bottom: 20px;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+        color: #3498db;
     }
     .footer-links {
         list-style: none;
         padding: 0;
-        line-height: 2;
+        line-height: 2.2;
     }
     .footer-links li {
         margin-bottom: 8px;
     }
     .divider {
         border-top: 1px solid rgba(255, 255, 255, 0.1);
-        margin: 30px 0;
+        margin: 30px 0 20px;
     }
     .donation-section {
         background: rgba(255, 255, 255, 0.1);
@@ -924,17 +978,27 @@ FireTempMail stands out from other temporary email services because it uses real
         padding: 20px;
         margin-top: 20px;
     }
+    .donation-options {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 15px;
+    }
     .donation-btn {
-        background: #e74c3c;
+        background: transparent;
+        border: 2px solid #e74c3c;
         color: white;
-        border: none;
         padding: 10px 20px;
         border-radius: 5px;
         font-weight: 600;
-        transition: background 0.3s;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
     .donation-btn:hover {
-        background: #c0392b;
+        background: #e74c3c;
+        color: white;
     }
     .copyright {
         font-size: 0.9rem;
@@ -955,6 +1019,46 @@ FireTempMail stands out from other temporary email services because it uses real
         font-size: 14px;
         margin: 0 2px;
         font-family: monospace;
+    }
+    .crypto-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .crypto-modal-content {
+        background-color: #2c3e50;
+        padding: 30px;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 500px;
+        color: white;
+    }
+    .crypto-address {
+        background: rgba(255,255,255,0.1);
+        padding: 10px;
+        border-radius: 5px;
+        margin: 10px 0;
+        font-family: monospace;
+        word-break: break-all;
+    }
+    .close-modal {
+        float: right;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+    .crypto-option {
+        margin: 15px 0;
+    }
+    .crypto-icon {
+        font-size: 1.5rem;
+        margin-right: 10px;
     }
                 .email-type-selector {
                     margin: 1rem 0;
