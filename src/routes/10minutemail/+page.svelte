@@ -380,16 +380,6 @@ function selectDomain(domain) {
     function closeCryptoModal() {
         showCryptoModal = false;
     }
-    
-    async function copyAddressToClipboard(text) {
-        try {
-            await navigator.clipboard.writeText(text);
-            alert('Address copied to clipboard: ' + text);
-        } catch (error) {
-            alert('Failed to copy address');
-            console.error('Copy failed:', error);
-        }
-    }
 </script>
 <svelte:head>
     <title>10 Minute Mail - Fire Temp Mail</title>
@@ -796,43 +786,45 @@ function selectDomain(domain) {
 
             <!-- SEO article: Gmail-like generator (original content) -->
             <section aria-labelledby="instant-gmail-generator" class="seo-article">
-                <h2 id="instant-gmail-generator">Instant Disposable Gmail Generator</h2>
-                <p>
-                    Getting flooded with notifications, promos, and low‑value alerts in your Gmail inbox? Struggling to spot important messages among the noise? Fire Temp Mail gives you instant, disposable Gmail‑style addresses so you can sign up anywhere without cluttering your primary email.
-                </p>
-                <p>
-                    Enjoy a cleaner, safer inbox with no registrations, no trials, and no personal details required. Generate a working address in seconds and keep your core mailbox focused on what matters.
-                </p>
+    <h2 id="instant-gmail-generator">Instant Disposable Gmail Generator</h2>
+    <p>
+        Tired of a cluttered Gmail inbox filled with notifications, promotions, and low-priority emails? FireTempMail provides instant, disposable Gmail-style addresses so you can sign up for services and websites without overwhelming your primary email account.
+    </p>
+    <p>
+        Keep your main inbox clean and secure—no registrations, no trials, and no personal details required. Generate a fully functional temporary address in seconds and focus on the emails that truly matter.
+    </p>
 
-                <h2>Why Should I Use a Temporary Gmail Generator?</h2>
-                <p>
-                    Email is central to work, learning, and daily life—and most services demand an address to continue. Sharing your main inbox everywhere increases exposure to spam and data leaks. A temporary Gmail‑style address lets you access what you need while minimizing privacy risks and unwanted messages.
-                </p>
+    <h2>Why Use a Temporary Gmail Address?</h2>
+    <p>
+        Email is essential for work, school, and daily activities, and most online services require an address to proceed. Using your main inbox everywhere increases exposure to spam, phishing, and data leaks. A temporary Gmail-style address allows you to receive messages safely while protecting your privacy and avoiding unwanted clutter.
+    </p>
 
-                <h3>What is an Email Address?</h3>
-                <p>
-                    An email address identifies a mailbox used to send and receive messages across networks. Like a home address, it includes a name and a domain (e.g., .com, .org). While it stores all incoming mail, not every message is useful—many are redundant or irrelevant and can obscure the messages you actually need.
-                </p>
+    <h3>Understanding Email Addresses</h3>
+    <p>
+        An email address serves as a unique identifier for sending and receiving messages across networks. Like a home address, it includes a name and a domain (e.g., .com, .org). While it collects all incoming messages, many emails are irrelevant or repetitive, obscuring the messages you actually need.
+    </p>
 
-                <h3>Spam Messages</h3>
-                <p>
-                    Spam is unsolicited, bulk email often triggered by sign‑ups, giveaways, or poorly protected mailing lists. Besides being annoying, spam can be a vector for scams or phishing. Keeping those messages away from your primary inbox is essential for security and clarity.
-                </p>
+    <h3>Dealing with Spam</h3>
+    <p>
+        Spam consists of unsolicited, bulk emails often triggered by sign-ups, contests, or unsecured mailing lists. Beyond being irritating, spam can carry phishing attempts or malware. Using temporary addresses keeps these messages away from your primary inbox, improving security and clarity.
+    </p>
 
-                <h3>What should I do to protect my personal email online?</h3>
-                <p>
-                    with firetempmail, you can stop worrying about security issues. Our platform is simple and user-friendly, letting you instantly generate a custom Gmail address. You can pick from a wide range of ready-made Gmail addresses — all completely free. Prefer something unique? You can create your own Gmail address with a single click. Quick, easy, and convenient.    
-                </p>
-                <p>
-FireTempMail stands out from other temporary email services because it uses real Gmail addresses, not disposable ones. Many major platforms like Facebook, Google, Twitter, and Amazon automatically detect temporary or unauthorized email addresses, often blocking registrations or flagging accounts as suspicious. With FireTempMail, you can safely register on any platform without the risk of being flagged or banned, making it a secure and trusted solution for all your temporary email needs.
-                </p>
-                <h2>Advantages of Disposable Gmail address</h2>
-                <ul>
-                    <li><strong>Customizable Gmail Address:</strong> Create aliases using plus‑tags or dot variations to organize sign‑ups and filter replies with ease.</li>
-                    <li><strong>Hassle‑Free:</strong> One‑click address generation; start receiving instantly without extra steps or configuration.</li>
-                    <li><strong>No Registration required:</strong> No account creation, no personal data—just generate and use.</li>
-                </ul>
-            </section>
+    <h3>How to Protect Your Personal Email Online</h3>
+    <p>
+        FireTempMail makes online privacy simple and effective. Instantly generate custom Gmail addresses, choose from a wide selection of ready-made options for free, or create your own unique address with a single click. Fast, convenient, and user-friendly.
+    </p>
+    <p>
+        Unlike many disposable email services, FireTempMail uses **real Gmail addresses**, not temporary or throwaway accounts. Major platforms like Facebook, Google, Twitter, and Amazon often detect fake emails and may block registrations or flag accounts. With FireTempMail, you can register safely on any platform without the risk of being flagged, giving you a secure and trusted solution for temporary email needs.
+    </p>
+
+    <h2>Benefits of a Disposable Gmail Address</h2>
+    <ul>
+        <li><strong>Customizable Addresses:</strong> Use plus-tags or dot variations to organize sign-ups and easily filter replies.</li>
+        <li><strong>Instant and Hassle-Free:</strong> Generate a working address with a single click; start receiving emails immediately.</li>
+        <li><strong>No Registration Required:</strong> No account creation or personal information needed—just generate and use.</li>
+    </ul>
+</section>
+
         </div>
 </div>
 </section>
@@ -854,6 +846,7 @@ FireTempMail stands out from other temporary email services because it uses real
                         <ul class="footer-links">
                             <li><a href="/">Home</a></li>
                             <li><a href="/email-generator">Email Generator</a></li>
+                            <li><a href="/gmail-generator">Gmail Generator</a></li>
                             <li><a href="/temp-mail-edu">Temp Mail EDU</a></li>
                             <li><a href="/10minutemail">10 Minute Mail</a></li>
                             <li><a href="/blog">Blog</a></li>
@@ -865,7 +858,6 @@ FireTempMail stands out from other temporary email services because it uses real
                             <li><a href="/terms">Terms of Service</a></li>
                             <li><a href="/faq">FAQ</a></li>
                             <li><a href="/contact">Contact Us</a></li>
-                            <li><a href="/sitemap">Sitemap</a></li>
                         </ul>
                     </div>
                 </div>
@@ -886,7 +878,7 @@ FireTempMail stands out from other temporary email services because it uses real
                     </div>
                     
                     <div class="mt-3">
-                        <p class="mb-0">We've received <span class="counter">{stats.count || '0'}</span> donations so far.</p>
+                        <p class="mb-0">We've received <span class="counter">{stats.count || '0'}</span> emails so far.</p>
                     </div>
                 </div>
             </div>
@@ -921,19 +913,16 @@ FireTempMail stands out from other temporary email services because it uses real
         <div class="crypto-option">
             <h5><i class="fab fa-bitcoin crypto-icon"></i> BTC:</h5>
             <div class="crypto-address">1DirhWkrcDE8BNkzxajpfocKRcFYvNmfU2</div>
-            <button class="donation-btn" on:click={() => copyAddressToClipboard('1DirhWkrcDE8BNkzxajpfocKRcFYvNmfU2')}>Copy Address</button>
         </div>
         
         <div class="crypto-option">
             <h5><i class="fab fa-ethereum crypto-icon"></i> ETH (ERC20):</h5>
             <div class="crypto-address">0x6f14413f09ae9e71fba76d52daf4f703816551b8</div>
-            <button class="donation-btn" on:click={() => copyAddressToClipboard('0x6f14413f09ae9e71fba76d52daf4f703816551b8')}>Copy Address</button>
         </div>
         
         <div class="crypto-option">
             <h5><i class="fas fa-coins crypto-icon"></i> USDT (TRC20):</h5>
             <div class="crypto-address">TNRzZJGUgLkfmH1SDoFC5eGwKDQkKNMrPg</div>
-            <button class="donation-btn" on:click={() => copyAddressToClipboard('TNRzZJGUgLkfmH1SDoFC5eGwKDQkKNMrPg')}>Copy Address</button>
         </div>
     </div>
 </div>
