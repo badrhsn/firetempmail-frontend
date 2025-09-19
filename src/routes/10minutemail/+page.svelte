@@ -813,7 +813,7 @@ FireTempMail stands out from other temporary email services because it uses real
                 </ul>
             </section>
         </div>
-
+</div>
         <!-- Footer -->
         <!-- Footer -->
 <footer class="footer">
@@ -883,7 +883,7 @@ FireTempMail stands out from other temporary email services because it uses real
         </div>
     </div>
 </footer>
-    </div>
+    
 </section>
 
 <style>
