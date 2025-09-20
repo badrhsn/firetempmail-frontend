@@ -826,18 +826,11 @@ FireTempMail stands out from other temporary email services because it uses real
         </div>
 </div>
 </section>
-        <!-- Footer -->
-<!-- Footer -->
+     <!-- Footer -->
 <footer class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 mb-4">
-                <h5 class="footer-title">About FireTempMail</h5>
-                <p>FireTempMail provides free, temporary email addresses to protect your privacy online. Keep your personal inbox clean from spam and unwanted messages with our disposable email service.</p>
-                <p><a href="/">Explore more tools</a></p>
-            </div>
-            
-            <div class="col-md-4 mb-4">
+            <div class="col-md-8 mb-4 mb-md-0">
                 <h5 class="footer-title">Quick Links</h5>
                 <div class="row">
                     <div class="col-6">
@@ -861,22 +854,21 @@ FireTempMail stands out from other temporary email services because it uses real
                 </div>
             </div>
             
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4">
                 <h5 class="footer-title">Support Our Service</h5>
                 <div class="donation-section">
                     <p>Help us keep FireTempMail free by making a donation. Your support helps maintain and improve our service.</p>
                     
-                    <div class="donation-options">
-                        <button class="donation-btn" on:click={() => window.open('https://paypal.com/donate?hosted_button_id=YOUR_BUTTON_ID', '_blank')}>
-                            <i class="fab fa-paypal"></i> PayPal
-                        </button>
-                        <button class="donation-btn" on:click={openCryptoModal}>
-                            <i class="fab fa-bitcoin"></i> Crypto
-                        </button>
+                    <div class="kofi-qr">
+                        <a href="https://ko-fi.com/firetempmail" target="_blank">
+                            <img src="https://storage.ko-fi.com/cdn/useruploads/N4N61LJTEP/qrcode.png?v=2668fb77-3b3b-4039-abc5-e7004afdcebe&v=2&_gl=1*1bpnkx0*_gcl_au*Mzg2NjgyMDUuMTc1ODM3MTgzOA..*_ga*Nzg1NDU0NTQ2LjE3NTgzNzE4Mzk.*_ga_M13FZ7VQ2C*czE3NTgzNzE4MzgkbzEkZzEkdDE3NTgzNzI5MTkkajYwJGwwJGgw" 
+                                 alt="Support us on Ko-fi" class="img-fluid">
+                        </a>
+                        <p class="kofi-text">Scan to support us on Ko-fi</p>
                     </div>
                     
                     <div class="mt-3">
-                        <p class="mb-0">We've received <span class="counter">{stats.count || '0'}</span> emails so far.</p>
+                        <p class="mb-0">We've received <span class="counter">15,327</span> emails so far.</p>
                     </div>
                 </div>
             </div>
@@ -886,7 +878,7 @@ FireTempMail stands out from other temporary email services because it uses real
         
         <div class="row align-items-center">
             <div class="col-md-6">
-                <p class="copyright">© {copyrightYear} FireTempMail. All Rights Reserved.</p>
+                <p class="copyright">© 2024 FireTempMail. All Rights Reserved.</p>
             </div>
             <div class="col-md-6 text-md-end">
                 <div class="social-icons">
@@ -900,153 +892,83 @@ FireTempMail stands out from other temporary email services because it uses real
     </div>
 </footer>
 
-<!-- Crypto Donation Modal -->
-{#if showCryptoModal}
-<div class="crypto-modal" on:click|self={closeCryptoModal}>
-    <div class="crypto-modal-content">
-        <span class="close-modal" on:click={closeCryptoModal}>&times;</span>
-        <h3>Donate Crypto</h3>
-        <p>If you'd like to make a contribution, please help us by donating to our website.</p>
-        
-        <div class="crypto-option">
-            <h5><i class="fab fa-bitcoin crypto-icon"></i> BTC:</h5>
-            <div class="crypto-address">1DirhWkrcDE8BNkzxajpfocKRcFYvNmfU2</div>
-        </div>
-        
-        <div class="crypto-option">
-            <h5><i class="fab fa-ethereum crypto-icon"></i> ETH (ERC20):</h5>
-            <div class="crypto-address">0x6f14413f09ae9e71fba76d52daf4f703816551b8</div>
-        </div>
-        
-        <div class="crypto-option">
-            <h5><i class="fas fa-coins crypto-icon"></i> USDT (TRC20):</h5>
-            <div class="crypto-address">TNRzZJGUgLkfmH1SDoFC5eGwKDQkKNMrPg</div>
-        </div>
-    </div>
-</div>
-{/if}
-
 <style>
-    /* Footer Styles */
-    .footer {
-        background-color: #2c3e50;
-        color: white;
-        padding: 40px 0 20px;
-    }
-    .footer a {
-        color: #ecf0f1;
-        text-decoration: none;
-        transition: color 0.3s;
-    }
-    .footer a:hover {
-        color: #3498db;
-    }
-    .footer-title {
-        font-weight: 700;
-        margin-bottom: 20px;
-        font-size: 1.3rem;
-        color: #3498db;
-    }
-    .footer-links {
-        list-style: none;
-        padding: 0;
-        line-height: 2.2;
-    }
-    .footer-links li {
-        margin-bottom: 8px;
-    }
-    .divider {
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        margin: 30px 0 20px;
-    }
-    .donation-section {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        padding: 20px;
-        margin-top: 20px;
-    }
-    .donation-options {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-top: 15px;
-    }
-    .donation-btn {
-        background: transparent;
-        border: 2px solid #e74c3c;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 5px;
-        font-weight: 600;
-        transition: all 0.3s;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    .donation-btn:hover {
-        background: #e74c3c;
-        color: white;
-    }
-    .copyright {
-        font-size: 0.9rem;
-        opacity: 0.8;
-    }
-    .social-icons {
-        font-size: 1.5rem;
-        margin-top: 15px;
-    }
-    .social-icons a {
-        margin-right: 15px;
-    }
-    .counter {
-        color: rgb(255,255,255);
-        background: rgb(33,37,41);
-        border-radius: 10px;
-        padding: 4px 12px;
-        font-size: 14px;
-        margin: 0 2px;
-        font-family: monospace;
-    }
-    .crypto-modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.7);
-        z-index: 1000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .crypto-modal-content {
-        background-color: #2c3e50;
-        padding: 30px;
-        border-radius: 10px;
-        width: 90%;
-        max-width: 500px;
-        color: white;
-    }
-    .crypto-address {
-        background: rgba(255,255,255,0.1);
-        padding: 10px;
-        border-radius: 5px;
-        margin: 10px 0;
-        font-family: monospace;
-        word-break: break-all;
-    }
-    .close-modal {
-        float: right;
-        font-size: 1.5rem;
-        cursor: pointer;
-    }
-    .crypto-option {
-        margin: 15px 0;
-    }
-    .crypto-icon {
-        font-size: 1.5rem;
-        margin-right: 10px;
-    }
+           /* Footer Styles */
+        .footer {
+            background-color: #22242b;
+            color: #a7a7aa;
+            padding: 40px 0 20px;
+        }
+        .footer a {
+            color: #a7a7aa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer a:hover {
+            color: #3498db;
+        }
+        .footer-title {
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: #a7a7aa;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            line-height: 2.2;
+        }
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        .divider {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 30px 0 20px;
+        }
+        .donation-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .donation-options {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .kofi-qr {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .kofi-qr img {
+            max-width: 150px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .kofi-text {
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        .social-icons {
+            font-size: 1.5rem;
+            margin-top: 15px;
+        }
+        .social-icons a {
+            margin-right: 15px;
+        }
+        .counter {
+            color: rgb(255,255,255);
+            background: rgb(33,37,41);
+            border-radius: 10px;
+            padding: 4px 12px;
+            font-size: 14px;
+            margin: 0 2px;
+            font-family: monospace;
+        }
                 .email-type-selector {
                     margin: 1rem 0;
                 }
