@@ -875,7 +875,6 @@ function selectDomain(domain) {
         </div>
 </div>
 </section>
-        <!-- Footer -->
 <!-- Footer -->
 <footer class="footer">
     <div class="container">
@@ -885,9 +884,10 @@ function selectDomain(domain) {
                 <div class="row">
                     <div class="col-6">
                         <ul class="footer-links">
-                            <li><a href="/">Home</a></li>
                             <li><a href="/email-generator">Email Generator</a></li>
                             <li><a href="/gmail-generator">Gmail Generator</a></li>
+                            <li><a href="/temporary-gmail">Temporary Gmail</a></li>
+                            <li><a href="/temp-gmail">Temp Gmail</a></li>
                             <li><a href="/temp-mail-edu">Temp Mail EDU</a></li>
                             <li><a href="/10minutemail">10 Minute Mail</a></li>
                             <li><a href="/blog">Blog</a></li>
@@ -899,6 +899,7 @@ function selectDomain(domain) {
                             <li><a href="/terms">Terms of Service</a></li>
                             <li><a href="/faq">FAQ</a></li>
                             <li><a href="/contact">Contact Us</a></li>
+                            <li><a href="/blog">Blog</a></li>
                         </ul>
                     </div>
                 </div>

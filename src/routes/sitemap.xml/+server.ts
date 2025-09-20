@@ -10,6 +10,8 @@ export const GET: RequestHandler = async () => {
         { loc: `${siteUrl}/`, priority: '1.0', changefreq: 'daily', lastmod: '2025-08-27' },
         { loc: `${siteUrl}/email-generator`, priority: '0.9', changefreq: 'daily', lastmod: '2025-08-27' },
         { loc: `${siteUrl}/gmail-generator`, priority: '0.9', changefreq: 'daily', lastmod: '2025-09-18' },
+        { loc: `${siteUrl}/temp-gmail`, priority: '0.9', changefreq: 'daily', lastmod: '2025-09-20' },
+        { loc: `${siteUrl}/temporary-gmail`, priority: '0.9', changefreq: 'daily', lastmod: '2025-09-20' },
         { loc: `${siteUrl}/edu-email-generator`, priority: '0.9', changefreq: 'daily', lastmod: '2025-09-06' },
         { loc: `${siteUrl}/10minutemail`, priority: '0.9', changefreq: 'daily', lastmod: '2025-08-27' },
         { loc: `${siteUrl}/temp-mail-edu`, priority: '0.9', changefreq: 'daily', lastmod: '2025-08-29' },
