@@ -967,11 +967,11 @@ function selectDomain(domain) {
     /* Footer Styles */
     .footer {
         background-color: #2c3e50;
-        color: white;
+        color: #a7a7aa!important;
         padding: 40px 0 20px;
     }
     .footer a {
-        color: #ecf0f1;
+        color: #a7a7aa!important;
         text-decoration: none;
         transition: color 0.3s;
     }
@@ -1011,7 +1011,7 @@ function selectDomain(domain) {
     .donation-btn {
         background: transparent;
         border: 2px solid #e74c3c;
-        color: white;
+        color: #a7a7aa!important;
         padding: 10px 20px;
         border-radius: 5px;
         font-weight: 600;
@@ -1062,7 +1062,7 @@ function selectDomain(domain) {
         border-radius: 10px;
         width: 90%;
         max-width: 500px;
-        color: white;
+        color: #a7a7aa!important;
     }
     .crypto-address {
         background: rgba(255,255,255,0.1);
