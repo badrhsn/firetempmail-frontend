@@ -841,7 +841,6 @@ FireTempMail stands out from other temporary email services because it uses real
                             <li><a href="/temp-gmail">Temp Gmail</a></li>
                             <li><a href="/temp-mail-edu">Temp Mail EDU</a></li>
                             <li><a href="/10minutemail">10 Minute Mail</a></li>
-                            <li><a href="/blog">Blog</a></li>
                         </ul>
                     </div>
                     <div class="col-6">
