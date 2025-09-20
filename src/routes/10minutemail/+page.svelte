@@ -411,16 +411,9 @@ function selectDomain(domain) {
 
     const intervalID = setInterval(timedReload, 20000);  
 
-
-        let showCryptoModal = false;
-    
-    function openCryptoModal() {
-        showCryptoModal = true;
-    }
-    
-    function closeCryptoModal() {
-        showCryptoModal = false;
-    }
+    // Ko‑fi config (replace with your links)
+    const KO_FI_QR_URL = 'https://your-kofi-qrcode-image-link.png';
+    const KO_FI_LINK = 'https://ko-fi.com/your-page';
 </script>
 <svelte:head>
     <title>10 Minute Mail - Fire Temp Mail</title>
@@ -852,6 +845,13 @@ function selectDomain(domain) {
 
     <h3>How to Protect Your Personal Email Online</h3>
     <p>
+    <h3>Dealing with Spam</h3>
+    <p> 
+        Spam consists of unsolicited, bulk emails often triggered by sign-ups, contests, or unsecured mailing lists. Beyond being irritating, spam can carry phishing attempts or malware. Using temporary addresses keeps these messages away from your primary inbox, improving security and clarity.
+    </p>
+
+    <h3>How to Protect Your Personal Email Online</h3>
+    <p>
         FireTempMail makes online privacy simple and effective. Instantly generate custom Gmail addresses, choose from a wide selection of ready-made options for free, or create your own unique address with a single click. Fast, convenient, and user-friendly.
     </p>
     <p>
@@ -966,7 +966,7 @@ function selectDomain(domain) {
 <style>
     /* Footer Styles */
     .footer {
-        background-color: #2c3e50;
+        background-color: #22242b;
         color: #a7a7aa!important;
         padding: 40px 0 20px;
     }
@@ -982,7 +982,7 @@ function selectDomain(domain) {
         font-weight: 700;
         margin-bottom: 20px;
         font-size: 1.3rem;
-        color: #3498db;
+        color: #a7a7aa;
     }
     .footer-links {
         list-style: none;
