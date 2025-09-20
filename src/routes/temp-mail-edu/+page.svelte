@@ -878,7 +878,7 @@ function selectDomain(domain) {
                     </div>
                     
                     <div class="mt-3">
-                        <p class="mb-0">We've received <span class="counter">15,327</span> emails so far.</p>
+                        <p class="mb-0">We've received <span class="counter">{stats.count}</span> emails so far.</p>
                     </div>
                 </div>
             </div>
