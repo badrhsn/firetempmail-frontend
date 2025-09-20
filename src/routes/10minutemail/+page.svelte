@@ -874,13 +874,7 @@ function selectDomain(domain) {
 <footer class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 mb-4">
-                <h5 class="footer-title">About FireTempMail</h5>
-                <p>FireTempMail provides free, temporary email addresses to protect your privacy online. Keep your personal inbox clean from spam and unwanted messages with our disposable email service.</p>
-                <p><a href="/">Explore more tools</a></p>
-            </div>
-            
-            <div class="col-md-4 mb-4">
+            <div class="col-md-8 mb-8">
                 <h5 class="footer-title">Quick Links</h5>
                 <div class="row">
                     <div class="col-6">
