@@ -501,7 +501,7 @@ function selectDomain(domain) {
             <!-- Header -->
             <h1>
                 <span>📮&nbsp;</span>
-                Gmail Generator - Create Temporary Gmail Addresses
+                Temp Gmail - Create Temporary Gmail Addresses
             </h1>
             <p class="lead">
                 Instantly generate disposable Gmail addresses that look and function like real Gmail accounts. Protect your personal inbox from spam and unwanted messages.
