@@ -676,7 +676,7 @@ const blogPosts = [
     "id": 10,
     "title": "FireTempMail.com Temporary Gmail: Safe, Instant & Disposable",
     "excerpt": "Generate temporary Gmail addresses instantly with FireTempMail.com. Protect your primary inbox, avoid spam, and create disposable Gmail accounts for secure sign-ups and verifications.",
-    "slug": "firetempmail-temporary-gmail",
+    "slug": "temporary-gmail",
     "date": "2025-09-20",
     "author": "Fire Temp Mail Team",
     "category": "Guides",

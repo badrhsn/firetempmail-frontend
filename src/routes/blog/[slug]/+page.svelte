@@ -221,10 +221,7 @@
                         </a>
                         <p class="kofi-text">Scan to support us on Ko-fi</p>
                     </div>
-                    
-                    <div class="mt-3">
-                        <p class="mb-0">We've received <span class="counter">{stats.count}</span> emails so far.</p>
-                    </div>
+
                 </div>
             </div>
         </div>
