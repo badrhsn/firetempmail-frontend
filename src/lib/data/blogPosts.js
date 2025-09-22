@@ -763,7 +763,6 @@ const blogPosts = [
 <p>FireTempMail.com provides the ultimate solution for creating <strong>temporary Gmail accounts</strong> safely, quickly, and efficiently. Protect your main inbox, avoid spam, and enjoy secure online communication. Start generating your <strong>temporary Gmail addresses</strong> today and experience a cleaner, safer, and more organized inbox!</p>
 `
 },
-[
   {
     "id": 11,
     "title": "How to Use a Temporary Gmail Address Safely for Online Signups",
@@ -1246,8 +1245,6 @@ It's the gateway to the entire Google ecosystem. It's integrated with Google Dri
 <p>It transforms your primary email from a vulnerable public key into a fortified private sanctuary. It reduces noise, minimizes risk, and gives you tangible evidence of how your data is being treated. By using a tiered system and leveraging the power of disposable inboxes, you move from being a passive target to an active guardian of your digital identity. Start today—your future self will thank you for the clean, secure, and private inbox.</p>
 `
   }
-]
-
 ];
 
 // Simple function with debugging
