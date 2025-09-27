@@ -176,56 +176,6 @@ function buildRawKey(email) {
     return `${email.recipient}-${email.suffix}`;
 }
 
-    async function fetchMailboxVariants(baseAddress) {
-        const attempts = [];
-        attempts.push(baseAddress);
-        if (!baseAddress.includes('<')) {
-            const local = baseAddress.split('@')[0];
-            attempts.push(`${local} <${baseAddress}>`);
-        }
-        for (const variant of attempts) {
-            try {
-                const resp = await fetch(`${url}/mail/get?address=${encodeURIComponent(variant)}`);
-                if (!resp.ok) continue;
-                const data = await resp.json();
-                if (data?.mails?.length) return { data, variantUsed: variant };
-                if (variant === attempts.at(-1)) return { data: data || {}, variantUsed: variant };
-            } catch { /* continue */ }
-        }
-        return { data: { mails: [] }, variantUsed: baseAddress };
-    }
-
-// REPLACED original loadEmails
-async function loadEmails() {
-    isLoading = true;
-    try {
-        if (!address) return;
-        const { data, variantUsed } = await fetchMailboxVariants(address);
-
-        const newEmails = data.mails || [];
-        newEmails.forEach(email => {
-            const k = buildEmailKey(email);
-            if (!emails.some(e => buildEmailKey(e) === k)) {
-                unreadEmails.add(k);
-            }
-        });
-
-        emails = newEmails;
-        stats = data.stats || stats || {};
-        emails.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-        if (variantUsed !== address && variantUsed.includes('<')) {
-            // Optional toast (commented)
-            // showToast("Info", "Loaded mailbox via alternate key format", "info");
-        }
-    } catch (e) {
-        console.error("Failed to load emails:", e);
-        showToast("Error", "Failed to load emails. Please try again.", "error");
-    } finally {
-        isLoading = false;
-    }
-}
-    
     async function loadEmails() {
         isLoading = true;
         try {
@@ -1875,7 +1825,7 @@ function selectDomain(domain) {
     .email-action-buttons {
         display: flex;
         gap: 12px;
-               justify-content: center;
+        justify-content: center;
         flex-wrap: wrap;
         width: 100%;
     }
