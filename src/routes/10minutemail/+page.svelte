@@ -702,7 +702,7 @@ function canonicalRecipient(raw = '') {
 
             {#if viewMode === 'detail' && selectedEmail}
                 <!-- Email Detail View -->
-                                <div style="border: 2px solid rgb(215,215,215);border-radius: 16px;margin-bottom: 32px;overflow: hidden;">
+                <div style="border: 2px solid rgb(215,215,215);border-radius: 16px;margin-bottom: 32px;overflow: hidden;">
                     <!-- Email Header -->
                     <div style="padding: 24px; border-bottom: 1px solid rgb(215,215,215);">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
@@ -725,20 +725,29 @@ function canonicalRecipient(raw = '') {
                             <div style="display: flex; gap: 8px;">
                                 <button class="btn btn-primary" type="button" on:click={() => forwardEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-dark);">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
-                            
-                            <span style="color: var(--bs-secondary); font-size: 14px;">
-                                {selectedEmail.date ? new Date(selectedEmail.date).toLocaleString() : 'Unknown date'}
-                            </span>
+                                        <path d="M5 12H15M15 12L11 8M15 12L11 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Forward
+                                </button>
+                                <button class="btn btn-primary" type="button" on:click={() => deleteEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-dark);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                        <path d="M6 7H18M10 11V17M14 11V17M9 7L10 5H14L15 7M7 7V19C7 20.1 7.9 21 9 21H15C16.1 21 17 20.1 17 19V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Delete
+                                </button>
+                            </div>
                         </div>
+                        <span style="color: var(--bs-secondary); font-size: 14px;">
+                            {selectedEmail.date ? new Date(selectedEmail.date).toLocaleString() : 'Unknown date'}
+                        </span>
                     </div>
                     
                     <!-- Email Body -->
                     <div style="padding: 24px; overflow: auto; max-width: 100%; min-height: 200px;">
                         {@html selectedEmail["content-html"] 
-    || selectedEmail["content-plain-formatted"] 
-    || selectedEmail["content-plain"] 
-    || 'No content available'}
-
+                            || selectedEmail["content-plain-formatted"] 
+                            || selectedEmail["content-plain"] 
+                            || 'No content available'}
                     </div>
                 </div>
             {:else}
