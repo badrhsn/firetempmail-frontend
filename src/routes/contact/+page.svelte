@@ -1,5 +1,12 @@
 <script>
-    let copyrightYear = new Date().getFullYear();
+    let copyrightYear;
+    
+    // This will only run on the client side
+    import { onMount } from 'svelte';
+    
+    onMount(() => {
+        copyrightYear = new Date().getFullYear();
+    });
 </script>
 
 <svelte:head>
@@ -93,7 +100,7 @@
         
         <div class="row align-items-center">
             <div class="col-md-6">
-                <p class="copyright">© 2024 FireTempMail. All Rights Reserved.</p>
+                <p class="copyright">© {copyrightYear} FireTempMail. All Rights Reserved.</p>
             </div>
             <div class="col-md-6 text-md-end">
                 <div class="social-icons">
