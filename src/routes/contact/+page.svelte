@@ -1,14 +1,3 @@
-<script>
-    let copyrightYear;
-    
-    // This will only run on the client side
-    import { onMount } from 'svelte';
-    
-    onMount(() => {
-        copyrightYear = new Date().getFullYear();
-    });
-</script>
-
 <svelte:head>
     <title>Contact Us - Fire Temp Mail</title>
     <meta name="description" content="Get in touch with Fire Temp Mail. Contact our support, business, or report abuse via email. We're here to help!">
@@ -100,7 +89,7 @@
         
         <div class="row align-items-center">
             <div class="col-md-6">
-                <p class="copyright">© {copyrightYear} FireTempMail. All Rights Reserved.</p>
+                <p class="copyright">© 2024 FireTempMail. All Rights Reserved.</p>
             </div>
             <div class="col-md-6 text-md-end">
                 <div class="social-icons">
