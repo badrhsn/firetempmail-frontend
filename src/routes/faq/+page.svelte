@@ -185,11 +185,6 @@
                     <h3>Usage & Features</h3>
                     <p>How to use our service effectively</p>
                 </div>
-                <div class="category-card">
-                    <div class="category-icon">💸</div>
-                    <h3>Pricing & Plans</h3>
-                    <p>Free vs premium features</p>
-                </div>
             </div>
             
             <!-- FAQ Items -->
