@@ -131,115 +131,83 @@ function normalizeGmailAddress(address) {
         : `${base}@gmail.com`;
 }
 
-// RFC 2047 decode + key helpers
-function decodeEncodedWords(str = '') {
-    // Supports Base64 (b) and Quoted-Printable (q) encoded-words
-    return str.replace(/=\?([^?]+)\?([bBqQ])\?([^?]+)\?=/g, (match, charset, enc, data) => {
+    async function loadEmails() {
+        isLoading = true;
         try {
-            const cs = (charset || 'utf-8').toLowerCase();
-            const mode = enc.toLowerCase();
-            if (mode === 'b') {
-                const bin = atob(data.replace(/\s/g, ''));
-                const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
-                return new TextDecoder(cs).decode(bytes);
-            } else {
-                const qp = data
-                    .replace(/_/g, ' ')
-                    .replace(/=([0-9A-Fa-f]{2})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
-                const bytes = Uint8Array.from(qp, c => c.charCodeAt(0));
-                return new TextDecoder(cs).decode(bytes);
-            }
-        } catch {
-            return match;
-        }
-    });
-}
-function stripKnownPrefixes(str = '') {
-    // Handle stored prefixes like "mbox:" or "idx:"
-    return str.replace(/^(?:mbox:|idx:)\s*/i, '');
-}
-function extractEmailAddress(str = '') {
-    const m = str.match(/<([^>]+)>/);
-    if (m && m[1]) return m[1].trim();
-    const simple = str.trim().replace(/^"+|"+$/g, '');
-    if (/^[^\s@]+@[^\s@]+$/.test(simple)) return simple;
-    return simple;
-}
-function buildEmailKey(email) {
-    if (!email) return '';
-    const raw = email.recipient || '';
-    const recipient = extractEmailAddress(decodeEncodedWords(stripKnownPrefixes(raw)));
-    return `${recipient}-${email.suffix}`;
-}
-function buildRawKey(email) {
-    if (!email) return '';
-    return `${email.recipient}-${email.suffix}`;
-}
-
-// NEW: Try multiple mailbox key variants (plain + "local <plain>") if first returns empty
-async function fetchMailboxVariants(baseAddress) {
-    const attempts = [];
-    attempts.push(baseAddress);
-
-    if (!baseAddress.includes('<')) {
-        const local = baseAddress.split('@')[0];
-        attempts.push(`${local} <${baseAddress}>`);
-    }
-
-    for (const variant of attempts) {
-        try {
-            const resp = await fetch(`${url}/mail/get?address=${encodeURIComponent(variant)}`);
-            if (!resp.ok) continue;
-            const data = await resp.json();
-            if (data?.mails?.length) {
-                return { data, variantUsed: variant };
-            }
-            // if stats exist even with zero mails, still return at last attempt
-            if (variant === attempts.at(-1)) {
-                return { data: data || {}, variantUsed: variant };
-            }
-        } catch (e) {
-            // ignore and continue
+            if (!address) return;
+            // Use address directly for API call (no normalization)
+            const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            
+            const data = await response.json();
+            const newEmails = data.mails || [];
+            
+            newEmails.forEach(email => {
+                const emailKey = email.recipient + "-" + email.suffix;
+                if (!emails.some(e => e.recipient + "-" + e.suffix === emailKey)) {
+                    unreadEmails.add(emailKey);
+                }
+            });
+            
+            emails = newEmails;
+            stats = data.stats || {};
+            
+            emails.sort((a, b) => new Date(b.date) - new Date(a.date));
+        } catch (error) {
+            console.error("Failed to load emails:", error);
+            showToast("Error", "Failed to load emails. Please try again.", "error");
+        } finally {
+            isLoading = false;
         }
     }
-    return { data: { mails: [] }, variantUsed: baseAddress };
-}
+    
+    // Make address and currentDomain reactive to store changes
+    $: address = $receivingEmail;
+    $: currentDomain = $selectedDomain;
 
-// REPLACED: loadEmails with fallback-aware version
-async function loadEmails() {
-    isLoading = true;
-    try {
-        if (!address) return;
-
-        const { data, variantUsed } = await fetchMailboxVariants(address);
-
-        const newEmails = data.mails || [];
-        newEmails.forEach(email => {
-            const emailKey = buildEmailKey(email);
-            if (!emails.some(e => buildEmailKey(e) === emailKey)) {
-                unreadEmails.add(emailKey);
-            }
-        });
-
-        emails = newEmails;
-        stats = data.stats || stats || {};
-
-        emails.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-        // If fallback variant (with brackets) was needed, normalize address display once
-        if (variantUsed !== address && variantUsed.includes('<')) {
-            // Do NOT overwrite the store (keep original plain address for user),
-            // only adjust unread keys already derived from email objects.
-            // Optionally notify (commented out):
-            // showToast("Info", "Loaded mailbox using alternate key format", "info");
-        }
-    } catch (error) {
-        console.error("Failed to load emails:", error);
-        showToast("Error", "Failed to load emails. Please try again.", "error");
-    } finally {
-        isLoading = false;
+    // Watch for address changes and reload emails
+    $: if (address) {
+        loadEmails();
     }
+
+    function markAsRead(email) {
+        if (!email) return;
+        const emailKey = email.recipient + "-" + email.suffix;
+        unreadEmails.delete(emailKey);
+        viewEmail(email);
+    }
+    
+
+    
+    function isValidAlias(alias) {
+        const aliasRegex = /^[a-zA-Z0-9-]+$/;
+        return aliasRegex.test(alias);
+    }
+    
+    function toggleCustomAlias() {
+        showCustomAliasInput = !showCustomAliasInput;
+        if (!showCustomAliasInput) {
+            customAlias = '';
+            aliasError = '';
+        }
+    }
+    
+    function toggleDomainSelector() {
+        showDomainSelector = !showDomainSelector;
+    }
+    
+function selectDomain(domain) {
+    updateEmailDomain(domain);
+    showDomainSelector = false;
+    
+    // Force UI update
+    address = $receivingEmail;
+    currentDomain = domain;
 }
+    
+    function manualReload() {
+        window.location.reload();
+    }
     
     async function timedReload() {
         if (reloadCounter >= stopReloadOn) {
@@ -255,25 +223,23 @@ async function loadEmails() {
         
         if (confirm("Do you really want to permanently delete this email?")) {
             try {
-                const rawKey = buildRawKey(email);            // try raw (keeps mbox:/idx:)
-                let resp = await fetch(`${url}/mail/delete?key=${encodeURIComponent(rawKey)}`);
-                let data = await resp.json();
-
-                if (data.code !== 200) {                      // fallback to normalized
-                    const normalizedKey = buildEmailKey(email);
-                    resp = await fetch(`${url}/mail/delete?key=${encodeURIComponent(normalizedKey)}`);
-                    data = await resp.json();
-                }
-
+                let emailKey = email.recipient + "-" + email.suffix;
+                const response = await fetch(`${url}/mail/delete?key=${emailKey}`);
+                const data = await response.json();
+                
                 if (data.code === 200) {
-                    const k = buildEmailKey(email);           // update UI using normalized key
-                    emails = emails.filter(e => buildEmailKey(e) !== k);
-                    unreadEmails.delete(k);
-                    if (stats.count) stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
-                    if (selectedEmail && buildEmailKey(selectedEmail) === k) {
+                    emails = emails.filter(e => e && e.recipient + "-" + e.suffix !== emailKey);
+                    unreadEmails.delete(emailKey);
+                    
+                    if (stats.count) {
+                        stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
+                    }
+                    
+                    if (selectedEmail && selectedEmail.recipient + "-" + selectedEmail.suffix === emailKey) {
                         selectedEmail = null;
                         viewMode = 'list';
                     }
+                    
                     showToast("Success", "Email deleted successfully.", "success");
                 } else {
                     showToast("Error", `Failed to delete email: ${data.msg}`, "error");
@@ -303,30 +269,25 @@ async function loadEmails() {
 
     async function forwardEmail(email) {
         if (!email || !email.recipient || !email.suffix) return;
-        const forwardTo = prompt("Please enter the email address you want to forward this email to:", "");
-        if (!forwardTo) {
+        
+        let emailKey = email.recipient + "-" + email.suffix;
+        let forwardTo = prompt("Please enter the email address you want to forward this email to:", "");
+
+        if (forwardTo === null || forwardTo === "") {
             showToast("Error", "No email address entered.", "error");
             return;
         }
+
         try {
-            const rawKey = buildRawKey(email);               // try raw first (keeps mbox:/idx:)
-            let resp = await fetch(`${url}/mail/forward`, {
+            const response = await fetch(`${url}/mail/forward`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ key: rawKey, forward: forwardTo }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ key: emailKey, forward: forwardTo }),
             });
-            let data = await resp.json();
-
-            if (data.code !== 200) {                        // fallback to normalized
-                const normalizedKey = buildEmailKey(email);
-                resp = await fetch(`${url}/mail/forward`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ key: normalizedKey, forward: forwardTo }),
-                });
-                data = await resp.json();
-            }
-
+            
+            const data = await response.json();
             if (data.code === 200) {
                 showToast("Success", "Email forwarded successfully!", "success");
             } else {
@@ -371,7 +332,7 @@ async function loadEmails() {
         viewMode = 'detail';
         
         if (email) {
-            const emailKey = buildEmailKey(email);
+            const emailKey = email.recipient + "-" + email.suffix;
             unreadEmails.delete(emailKey);
         }
     }
@@ -404,34 +365,10 @@ async function loadEmails() {
 
     function isUnread(email) {
         if (!email || !email.recipient || !email.suffix) return false;
-        return unreadEmails.has(buildEmailKey(email));
+        return unreadEmails.has(email.recipient + "-" + email.suffix);
     }
 
     const intervalID = setInterval(timedReload, 20000);  
-/**
- * NOTE ABOUT MIXED KEYS (display-name <addr>):
- * Some stored KV keys like: "prize902 <prize902@offredaily.sa.com>-70eab437"
- * appear because the backend used the full raw "To:" header (display name + angle bracket address)
- * when composing mailbox / message keys instead of first normalizing to the bare addr-spec.
- * We added fetchMailboxVariants() to try both:
- *   1) plain: local@domain
- *   2) phrase form: local <local@domain>
- * Recommended backend fix:
- *   - Parse the address part inside < > if present.
- *   - Lowercase & trim -> use only addr-spec for keys.
- *   - Keep the original header in a separate field (raw_recipient) if needed.
- *   - Migrate existing keys by copying data from phrase-form to canonical form.
- */
-function canonicalRecipient(raw = '') {
-    // Mirror client normalization used for stable keys
-    const m = raw.match(/<([^>]+)>/);
-    const addr = (m && m[1]) ? m[1] : raw;
-    return addr.trim();
-}
-
-// (This helper is not yet used because backend still returns legacy keys;
-//  kept here as reference if you later want to pre-normalize before requests.)
-
 </script>
 <svelte:head>
     <title>10 Minute Mail - Fire Temp Mail</title>
