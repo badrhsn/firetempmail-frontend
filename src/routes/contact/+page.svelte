@@ -1,3 +1,8 @@
+<script>
+    let copyrightYear = new Date().getFullYear();
+    // This component is static; no server interaction => unlikely source of a 500 error.
+</script>
+
 <svelte:head>
     <title>Contact Us - Fire Temp Mail</title>
     <meta name="description" content="Get in touch with Fire Temp Mail. Contact our support, business, or report abuse via email. We're here to help!">
@@ -75,7 +80,7 @@
                     
                     <div class="kofi-qr">
                         <a href="https://ko-fi.com/firetempmail" target="_blank">
-                            <img src="https://storage.ko-fi.com/cdn/useruploads/N4N61LJTEP/qrcode.png?v=2668fb77-3b3b-4039-abc5-e7004afdcebe&v=2&_gl=1*1bpnkx0*_gcl_au*Mzg2NjgyMDUuMTc1ODM3MTgzOA..*_ga*Nzg1NDU0NTQ2LjE3NTgzNzE4Mzk.*_ga_M13FZ7VQ2C*czE3NTgzNzE4MzgkbzEkZzEkdDE3NTgzNzI5MTkkajYwJGwwJGgw" 
+                            <img src="https://storage.ko-fi.com/cdn/useruploads/N4N61LJTEP/qrcode.png?v=2668fb77-3b3b-4039-abc5-e7004afdcebe&amp;v=2&amp;_gl=1*1bpnkx0*_gcl_au*Mzg2NjgyMDUuMTc1ODM3MTgzOA..*_ga*Nzg1NDU0NTQ2LjE3NTgzNzE4Mzk.*_ga_M13FZ7VQ2C*czE3NTgzNzE4MzgkbzEkZzEkdDE3NTgzNzI5MTkkajYwJGwwJGgw" 
                                  alt="Support us on Ko-fi" class="img-fluid">
                         </a>
                         <p class="kofi-text">Scan to support us on Ko-fi</p>
@@ -89,7 +94,7 @@
         
         <div class="row align-items-center">
             <div class="col-md-6">
-                <p class="copyright">© 2024 FireTempMail. All Rights Reserved.</p>
+                <p class="copyright">© {copyrightYear} FireTempMail. All Rights Reserved.</p>
             </div>
             <div class="col-md-6 text-md-end">
                 <div class="social-icons">
