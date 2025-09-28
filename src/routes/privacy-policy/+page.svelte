@@ -155,9 +155,7 @@
                         <p class="kofi-text">Scan to support us on Ko-fi</p>
                     </div>
                     
-                    <div class="mt-3">
-                        <p class="mb-0">We've received <span class="counter">{stats.count}</span> emails so far.</p>
-                    </div>
+                   
                 </div>
             </div>
         </div>
@@ -166,7 +164,7 @@
         
         <div class="row align-items-center">
             <div class="col-md-6">
-                <p class="copyright">© 2024 FireTempMail. All Rights Reserved.</p>
+                <p class="copyright">© {copyrightYear} FireTempMail. All Rights Reserved.</p>
             </div>
             <div class="col-md-6 text-md-end">
                 <div class="social-icons">
