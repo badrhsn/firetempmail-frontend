@@ -408,6 +408,30 @@ async function loadEmails() {
     }
 
     const intervalID = setInterval(timedReload, 20000);  
+/**
+ * NOTE ABOUT MIXED KEYS (display-name <addr>):
+ * Some stored KV keys like: "prize902 <prize902@offredaily.sa.com>-70eab437"
+ * appear because the backend used the full raw "To:" header (display name + angle bracket address)
+ * when composing mailbox / message keys instead of first normalizing to the bare addr-spec.
+ * We added fetchMailboxVariants() to try both:
+ *   1) plain: local@domain
+ *   2) phrase form: local <local@domain>
+ * Recommended backend fix:
+ *   - Parse the address part inside < > if present.
+ *   - Lowercase & trim -> use only addr-spec for keys.
+ *   - Keep the original header in a separate field (raw_recipient) if needed.
+ *   - Migrate existing keys by copying data from phrase-form to canonical form.
+ */
+function canonicalRecipient(raw = '') {
+    // Mirror client normalization used for stable keys
+    const m = raw.match(/<([^>]+)>/);
+    const addr = (m && m[1]) ? m[1] : raw;
+    return addr.trim();
+}
+
+// (This helper is not yet used because backend still returns legacy keys;
+//  kept here as reference if you later want to pre-normalize before requests.)
+
 </script>
 <svelte:head>
     <title>10 Minute Mail - Fire Temp Mail</title>
@@ -701,30 +725,6 @@ async function loadEmails() {
                             <div style="display: flex; gap: 8px;">
                                 <button class="btn btn-primary" type="button" on:click={() => forwardEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-dark);">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                        <path d="M3 10H13C17.4183 10 21 13.5817 21 18V20M3 10L9 16M3 10L9 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                                
-                                <button class="btn btn-primary" type="button" on:click={() => deleteEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-red);">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                        <path d="M19 7L18.1327 19.1425C18.0579 20.1891 17.187 21 16.1378 21H7.86224C6.81296 21 5.94208 20.1891 5.86732 19.1425L5 7M10 11V17M14 11V17M15 7V4C15 3.44772 14.5523 3 14 3H10C9.44772 3 9 3.44772 9 4V7M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 8px;">
-                            {selectedEmail.subject || '(No Subject)'}
-                        </h2>
-                        
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div style="display: flex; align-items: center;">
-                                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="20" viewBox="0 0 24 24" width="20" fill="currentColor" style="margin-right: 8px; color: rgb(255,221,51);">
-                                    <g><rect fill="none" height="24" width="24"></rect></g>
-                                    <g><g><path d="M12,2C6.47,2,2,6.47,2,12s4.47,10,10,10s10-4.47,10-10S17.53,2,12,2z"></path></g></g>
-                                </svg>
-                                <span style="font-weight: 500;">{selectedEmail.sender || 'Unknown Sender'}</span>
-                            </div>
                             
                             <span style="color: var(--bs-secondary); font-size: 14px;">
                                 {selectedEmail.date ? new Date(selectedEmail.date).toLocaleString() : 'Unknown date'}
