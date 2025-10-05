@@ -37,7 +37,7 @@
                 <p>Fire Temp Mail employs multiple strategies to ensure your privacy:</p>
                 <ol>
                     <li>We don't require personal information to use our service</li>
-                    <li>All emails are automatically deleted after 24 hours</li>
+                    <li>All emails are automatically deleted after 2 hours</li>
                     <li>We use HTTPS encryption for all data transfers</li>
                     <li>Our service doesn't track your activity across websites</li>
                     <li>We don't sell or share your data with third parties</li>
