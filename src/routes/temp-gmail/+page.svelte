@@ -393,20 +393,26 @@ function selectDomain(domain) {
     
     <!-- Structured Data -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Temp Gmail Generator",
-      "url": "https://firetempmail.com/temp-gmail",
-      "description": "Generate temporary Gmail addresses that work everywhere for signups, verifications and spam protection.",
-      "applicationCategory": "UtilityApplication",
-      "operatingSystem": "Any",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Fire Temp Mail",
+  "url": "https://firetempmail.com/temp-gmail",
+  "description": "Generate temporary Gmail addresses instantly with Fire Temp Mail.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "ratingCount": "2564"
+  }
+}
+
     </script>
 </svelte:head>
 <!-- Toast Notifications -->

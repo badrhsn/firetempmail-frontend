@@ -392,22 +392,30 @@ function selectDomain(domain) {
     <link rel="canonical" href="https://firetempmail.com/temporary-gmail">
     
     <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Temporary Gmail Generator",
-      "url": "https://firetempmail.com/temp-gmail",
-      "description": "Instantly create temporary Gmail addresses that work for online signups, verifications, and spam-free browsing. Safe, fast, and free.",
-      "applicationCategory": "UtilityApplication",
-      "operatingSystem": "Any",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
-    </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Temporary Gmail Generator",
+  "url": "https://firetempmail.com/temp-gmail",
+  "description": "Instantly create temporary Gmail addresses for online signups, verifications, and spam-free browsing. Safe, fast, and free.",
+  "applicationCategory": "Utility",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires JavaScript and an internet connection.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Fire Temp Mail",
+    "url": "https://firetempmail.com"
+  }
+}
+</script>
+
 </svelte:head>
 <!-- Toast Notifications -->
 <div class="toast-container">
