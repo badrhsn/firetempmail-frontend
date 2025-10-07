@@ -393,26 +393,34 @@ function selectDomain(domain) {
     
     <!-- Structured Data -->
     <script type="application/ld+json">
-{
+    {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "WebApplication",
   "name": "Fire Temp Mail",
   "url": "https://firetempmail.com/temp-gmail",
-  "description": "Generate temporary Gmail addresses instantly with Fire Temp Mail.",
-  "applicationCategory": "UtilityApplication",
-  "operatingSystem": "Any",
+  "description": "Generate temporary Gmail addresses instantly with Fire Temp Mail – a fast, secure, and free disposable email generator for privacy-conscious users.",
+  "applicationCategory": "Utility",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires JavaScript and an internet connection.",
   "offers": {
     "@type": "Offer",
     "price": "0",
-    "priceCurrency": "USD"
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
   },
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.9",
-    "ratingCount": "2564"
+    "ratingCount": "2564",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Fire Temp Mail",
+    "url": "https://firetempmail.com"
   }
 }
-
     </script>
 </svelte:head>
 <!-- Toast Notifications -->
