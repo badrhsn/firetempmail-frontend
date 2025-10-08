@@ -396,24 +396,23 @@ function selectDomain(domain) {
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Temporary Gmail Generator",
-  "url": "https://firetempmail.com/temp-gmail",
-  "description": "Instantly create temporary Gmail addresses for online signups, verifications, and spam-free browsing. Safe, fast, and free.",
-  "applicationCategory": "Utility",
-  "operatingSystem": "Web",
-  "browserRequirements": "Requires JavaScript and an internet connection.",
+  "name": "Fire Temp Mail",
+  "url": "https://firetempmail.com/temporary-gmail",
+  "description": "Generate temporary Gmail addresses instantly with Fire Temp Mail.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
   "offers": {
     "@type": "Offer",
     "price": "0",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock"
+    "priceCurrency": "USD"
   },
-  "creator": {
-    "@type": "Organization",
-    "name": "Fire Temp Mail",
-    "url": "https://firetempmail.com"
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "ratingCount": "2564"
   }
 }
+
 </script>
 
 </svelte:head>
