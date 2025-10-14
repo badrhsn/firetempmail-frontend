@@ -1147,6 +1147,7 @@ function selectDomain(domain) {
                             <li><a href="/faq">FAQ</a></li>
                             <li><a href="/contact">Contact Us</a></li>
                             <li><a href="/blog">Blog</a></li>
+                            <li><a href="https://rapidapi.com/fire-temp-mail-fire-temp-mail-default/api/firetempmail-api">API</a></li>
                         </ul>
                     </div>
                 </div>

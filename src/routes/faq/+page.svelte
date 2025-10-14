@@ -2,10 +2,7 @@
     import { onMount } from 'svelte';
     
     let copyrightYear = 2024; // Default fallback
-    
-    onMount(() => {
-        copyrightYear = new Date().getFullYear();
-    });
+
     
     // FAQ data with structured content for SEO
     const faqItems = [
@@ -124,6 +121,25 @@
         });
         faqItems[index].open = !faqItems[index].open;
     }
+
+    let faqJsonLd;
+
+    // Generate valid JSON-LD once faqItems are ready
+    onMount(() => {
+        copyrightYear = new Date().getFullYear();
+        faqJsonLd = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqItems.map(item => ({
+                "@type": "Question",
+                "name": item.question,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": item.answer.replace(/<[^>]*>/g, '')
+                }
+            }))
+        };
+    });
 </script>
 
 <svelte:head>
@@ -140,22 +156,6 @@
     <meta property="og:type" content="website" />
     
     <!-- JSON-LD structured data for FAQ SEO -->
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-                ${faqItems.map(item => `{
-                    "@type": "Question",
-                    "name": "${item.question.replace(/"/g, '\\"')}",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "${item.answer.replace(/<[^>]*>/g, '').replace(/"/g, '\\"')}"
-                    }
-                }`).join(',')}
-            ]
-        }
-    </script>
 </svelte:head>
 
 <section class="py-4 py-xl-5">
