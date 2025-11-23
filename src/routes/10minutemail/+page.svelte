@@ -33,12 +33,13 @@
     let selectedEmail = null;
     let viewMode = 'list';
 
-    let stopReloadOn = 10; // Changed from 20 to 10 minutes
+    let stopReloadOn = 10;
     let reloadCounter = 0;
     let reloadActive = true;
     let isTabVisible = true;
     let lastEmailCount = 0;
   
+    let intervalID; // Declare once here
     let unreadEmails = new Set();
     let showForwardModal = false;
     let forwardToEmail = '';
@@ -412,7 +413,11 @@ function selectDomain(domain) {
         return unreadEmails.has(email.recipient + "-" + email.suffix);
     }
 
-    const intervalID = startPolling();
+    // Add buildEmailKey function
+    function buildEmailKey(email) {
+        if (!email || !email.recipient || !email.suffix) return '';
+        return `${email.recipient}-${email.suffix}`;
+    }
 </script>
 <svelte:head>
     <title>10 Minute Mail - Fire Temp Mail</title>

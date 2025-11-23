@@ -33,13 +33,25 @@
     let selectedEmail = null;
     let viewMode = 'list';
 
-    let stopReloadOn = 10; // Stop after 10 minutes (was 20)
+    let stopReloadOn = 10;
     let reloadCounter = 0;
     let reloadActive = true;
-    
-    let intervalID;
     let isTabVisible = true;
+    let lastEmailCount = 0;
+  
+    let intervalID; // Declare once
+    let unreadEmails = new Set();
+    let showForwardModal = false;
+    let forwardToEmail = '';
+    let emailToForward = null;
+    let isLoading = false;
     
+    let customAlias = '';
+    let showCustomAliasInput = false;
+    let aliasError = '';
+    
+    let showDomainSelector = false;
+
     onMount(function () {
         // Safely get email type from localStorage
         if (browser) {
@@ -129,16 +141,17 @@ function extractEmailAddress(str = '') {
     if (/^[^\s@]+@[^\s@]+$/.test(simple)) return simple;
     return simple;
 }
-function buildEmailKey(email) {
-    if (!email) return '';
-    const raw = email.recipient || '';
-    const recipient = extractEmailAddress(decodeEncodedWords(stripKnownPrefixes(raw)));
-    return `${recipient}-${email.suffix}`;
-}
-function buildRawKey(email) {
-    if (!email) return '';
-    return `${email.recipient}-${email.suffix}`;
-}
+    function buildEmailKey(email) {
+        if (!email) return '';
+        const raw = email.recipient || '';
+        const recipient = extractEmailAddress(decodeEncodedWords(stripKnownPrefixes(raw)));
+        return `${recipient}-${email.suffix}`;
+    }
+    
+    function buildRawKey(email) {
+        if (!email) return '';
+        return `${email.recipient}-${email.suffix}`;
+    }
 
     // Generate email based on selected type
     async function generateEmail(reload, useCustomAlias = false) {
@@ -434,8 +447,6 @@ function selectDomain(domain) {
         if (!email || !email.recipient || !email.suffix) return false;
         return unreadEmails.has(buildEmailKey(email));
     }
-
-    const intervalID = setInterval(timedReload, 20000);  
 </script>
 <svelte:head>
     <title>Fire Temp Mail | Free Disposable Temporary Email Generator</title>
@@ -2147,196 +2158,6 @@ function selectDomain(domain) {
         flex-shrink: 0;
     }
     
-    .email-subject {
-        font-weight: 600;
-        margin: 0 0 4px 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    
-    .email-item.unread .email-subject {
-        font-weight: 700;
-        color: var(--bs-dark);
-    }
-    
-    .email-preview {
-        color: var(--bs-secondary);
-        margin: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        font-size: 14px;
-    }
-    
-    /* Description */
-    h2 {
-        font-family: 'Inter Tight', sans-serif;
-        font-weight: 600;
-        margin-bottom: 16px;
-        text-align: center;
-    }
-    
-    .description {
-        margin-bottom: 32px;
-        font-size: 20px;
-        text-align: center;
-    }
-    
-    /* Footer */
-    .stats {
-        margin-bottom: 32px;
-        font-size: 16px;
-        text-align: left;
-    }
-    
-    .count {
-        color: rgb(255,255,255);
-        background: rgb(33,37,41);
-        border-radius: 10px;
-        padding: 4px 12px;
-        font-size: 14px;
-        margin-right: 2px;
-        margin-left: 2px;
-        font-family: monospace;
-    }
-    
-    .footer-links {
-        margin-bottom: 4px;
-        font-size: 16px;
-        text-align: left;
-    }
-    
-    .float-end {
-        float: right;
-    }
-    
-    .copyright {
-        margin-bottom: 4px;
-        font-size: 16px;
-        text-align: left;
-    }
-    
-    /* Animations */
-    @keyframes slideIn {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-    
-    @keyframes scaleIn {
-        from { 
-            opacity: 0;
-            transform: scale(0.9);
-        }
-        to { 
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-        @media (min-width: 769px) and (max-width: 992px) {
-        .email-action-buttons {
-            flex-direction: row;
-        }
-        
-        .email-action-buttons .btn {
-            min-width: 160px;
-        }
-    }
-
-    @media (min-width: 993px) {
-        .email-action-buttons {
-            flex-direction: row;
-        }
-    }
-    
-    /* Responsive Design */
-    @media (max-width: 768px) {
-        .email-address-container {
-            flex-direction: column;
-            align-items: stretch;
-        }
-        
-        .email-display {
-            width: 100%;
-            margin-right: 0;
-            min-width: unset;
-        }
-        
-        .email-action-buttons {
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .email-action-buttons .btn {
-            width: 100%;
-            max-width: 100%;
-        }
-        
-        .btn {
-            min-width: 100%;
-            justify-content: center;
-        }
-        
-        .email-items {
-            max-height: 300px;
-        }
-        
-        .modal-backdrop {
-            padding: 10px;
-        }
-        
-        .modal {
-            width: 95%;
-        }
-        
-        .float-end {
-            float: none;
-            display: block;
-            text-align: center;
-            margin-top: 16px;
-        }
-        
-        .footer-links {
-            text-align: center;
-        }
-        
-        .email-item {
-            padding: 12px;
-        }
-        
-        .avatar {
-            width: 32px;
-            height: 32px;
-        }
-        
-        .email-sender {
-            font-size: 14px;
-        }
-        
-        .email-date {
-            font-size: 11px;
-        }
-        
-        .email-subject {
-            font-size: 14px;
-        }
-        
-        .email-preview {
-            font-size: 12px;
-        }
-    }
-        
     .email-subject {
         font-weight: 600;
         margin: 0 0 4px 0;
