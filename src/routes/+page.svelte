@@ -309,16 +309,18 @@ function selectDomain(domain) {
         
         if (confirm("Do you really want to permanently delete this email?")) {
             try {
-                const rawKey = buildRawKey(email);            // try raw (keeps mbox:/idx:)
+                const rawKey = buildRawKey(email);
                 let resp = await fetch(`${url}/mail/delete?key=${encodeURIComponent(rawKey)}`);
                 let data = await resp.json();
-               const normalizedKey = buildEmailKey(email);
+
+                if (data.code !== 200) {
+                    const normalizedKey = buildEmailKey(email);
                     resp = await fetch(`${url}/mail/delete?key=${encodeURIComponent(normalizedKey)}`);
                     data = await resp.json();
                 }
 
                 if (data.code === 200) {
-                    const k = buildEmailKey(email);           // update UI using normalized key
+                    const k = buildEmailKey(email);
                     emails = emails.filter(e => buildEmailKey(e) !== k);
                     unreadEmails.delete(k);
                     if (stats.count) stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
