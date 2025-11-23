@@ -33,9 +33,11 @@
     let selectedEmail = null;
     let viewMode = 'list';
 
-    let stopReloadOn = 20;
+    let stopReloadOn = 10; // Changed from 20 to 10 minutes
     let reloadCounter = 0;
     let reloadActive = true;
+    let isTabVisible = true;
+    let lastEmailCount = 0;
   
     let unreadEmails = new Set();
     let showForwardModal = false;
@@ -62,10 +64,43 @@
             }
         }
         
+        // Add visibility change listener
+        if (browser) {
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+        }
+        
         if (address === null) {
             generateEmail(false);
         }
+        
+        return () => {
+            clearInterval(intervalID);
+            if (browser) {
+                document.removeEventListener('visibilitychange', handleVisibilityChange);
+            }
+        };
     });
+    
+    // Handle tab visibility
+    function handleVisibilityChange() {
+        isTabVisible = !document.hidden;
+        
+        if (isTabVisible) {
+            // Tab became visible - reload immediately
+            loadEmails();
+            // Restart polling
+            clearInterval(intervalID);
+            startPolling();
+        } else {
+            // Tab hidden - stop polling to save requests
+            clearInterval(intervalID);
+        }
+    }
+    
+    function startPolling() {
+        // Changed from 20 seconds to 60 seconds (3x reduction)
+        intervalID = setInterval(timedReload, 60000);
+    }
     
     // Generate email based on selected type
     async function generateEmail(reload, useCustomAlias = false) {
@@ -135,23 +170,27 @@ function normalizeGmailAddress(address) {
         isLoading = true;
         try {
             if (!address) return;
-            // Use address directly for API call (no normalization)
+            
             const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             
             const data = await response.json();
             const newEmails = data.mails || [];
             
-            newEmails.forEach(email => {
-                const emailKey = email.recipient + "-" + email.suffix;
-                if (!emails.some(e => e.recipient + "-" + e.suffix === emailKey)) {
-                    unreadEmails.add(emailKey);
-                }
-            });
+            // Only update if there are new emails
+            if (newEmails.length !== lastEmailCount) {
+                newEmails.forEach(email => {
+                    const emailKey = email.recipient + "-" + email.suffix;
+                    if (!emails.some(e => e.recipient + "-" + e.suffix === emailKey)) {
+                        unreadEmails.add(emailKey);
+                    }
+                });
+                
+                emails = newEmails;
+                lastEmailCount = newEmails.length;
+            }
             
-            emails = newEmails;
             stats = data.stats || {};
-            
             emails.sort((a, b) => new Date(b.date) - new Date(a.date));
         } catch (error) {
             console.error("Failed to load emails:", error);
@@ -210,10 +249,15 @@ function selectDomain(domain) {
     }
     
     async function timedReload() {
+        // Only reload if tab is visible
+        if (!isTabVisible) return;
+        
         if (reloadCounter >= stopReloadOn) {
             reloadActive = false;
             clearInterval(intervalID);
+            return;
         }
+        
         await loadEmails();
         reloadCounter += 1;
     }
@@ -368,7 +412,7 @@ function selectDomain(domain) {
         return unreadEmails.has(email.recipient + "-" + email.suffix);
     }
 
-    const intervalID = setInterval(timedReload, 20000);  
+    const intervalID = startPolling();
 </script>
 <svelte:head>
     <title>10 Minute Mail - Fire Temp Mail</title>
@@ -421,7 +465,7 @@ function selectDomain(domain) {
         <div class="modal-header">
             <h3>Forward Email</h3>
             <button on:click={() => showForwardModal = false} class="modal-close">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"></svg>
                     <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
@@ -621,11 +665,20 @@ function selectDomain(domain) {
                 {/if}
             </div>
             
-            {#if reloadActive && !isLoading}
+            {#if reloadActive && !isLoading && isTabVisible}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
                     <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
-                    <span>Waiting for incoming emails</span>
+                    <span>Waiting for incoming emails (checks every 60s)</span>
+                </div>
+            {:else if !isTabVisible}
+                <!-- Tab Hidden Message -->
+                <div class="refresh-stopped">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 5V3M12 21V19M5 12H3M21 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span>Paused (tab not visible)</span>
                 </div>
             {:else if !reloadActive}
                 <!-- Automatic refresh stopped -->
@@ -704,7 +757,7 @@ function selectDomain(domain) {
                         <!-- List Header -->
                         <div class="list-header">
                             <h3>Inbox ({emails.length})</h3>
-                            <button on:click={manualReload} class="btn-refresh">
+                            <button on:click={manualReload} class="btn-refresh"></button>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
                                     <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>

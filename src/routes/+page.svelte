@@ -33,22 +33,13 @@
     let selectedEmail = null;
     let viewMode = 'list';
 
-    let stopReloadOn = 20;
+    let stopReloadOn = 10; // Stop after 10 minutes (was 20)
     let reloadCounter = 0;
     let reloadActive = true;
-  
-    let unreadEmails = new Set();
-    let showForwardModal = false;
-    let forwardToEmail = '';
-    let emailToForward = null;
-    let isLoading = false;
     
-    let customAlias = '';
-    let showCustomAliasInput = false;
-    let aliasError = '';
+    let intervalID;
+    let isTabVisible = true;
     
-    let showDomainSelector = false;
-
     onMount(function () {
         // Safely get email type from localStorage
         if (browser) {
@@ -65,45 +56,18 @@
         if (address === null) {
             generateEmail(false);
         }
+        
+        // Start polling
+        startPolling();
+        
+        // Stop polling when tab is hidden
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        
+        return () => {
+            clearInterval(intervalID);
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
     });
-    
-    // Generate email based on selected type
-    async function generateEmail(reload, useCustomAlias = false) {
-        let fullAddress;
-        
-        if (emailType === 'gmail' || emailType === 'googlemail') {
-            // Generate Gmail-style alias
-            fullAddress = getNextGmailAccount(emailType);
-            receivingEmail.set(fullAddress);
-            
-            if (reload) {
-                window.location.reload();
-            }
-            return;
-        }
-        
-        // Domain-based generation
-        if (useCustomAlias && customAlias) {
-            if (!isValidAlias(customAlias)) {
-                showToast("Error", "Alias can only contain letters, numbers, and hyphens", "error");
-                return;
-            }
-            
-            fullAddress = customAlias + "@" + currentDomain;
-        } else {
-            let words = generate(1);
-            fullAddress = words[0] + Math.floor(Math.random() * 1000) + "@" + currentDomain;
-        }
-        
-        receivingEmail.set(fullAddress);
-
-        if (reload) {
-            window.location.reload();
-        } else {
-            customAlias = '';
-            showCustomAliasInput = false;
-        }
-    }
     
     // Handle email type change with safe localStorage access
     function handleEmailTypeChange(newType) {
@@ -176,27 +140,96 @@ function buildRawKey(email) {
     return `${email.recipient}-${email.suffix}`;
 }
 
+    // Generate email based on selected type
+    async function generateEmail(reload, useCustomAlias = false) {
+        let fullAddress;
+        
+        if (emailType === 'gmail' || emailType === 'googlemail') {
+            // Generate Gmail-style alias
+            fullAddress = getNextGmailAccount(emailType);
+            receivingEmail.set(fullAddress);
+            
+            if (reload) {
+                window.location.reload();
+            }
+            return;
+        }
+        
+        // Domain-based generation
+        if (useCustomAlias && customAlias) {
+            if (!isValidAlias(customAlias)) {
+                showToast("Error", "Alias can only contain letters, numbers, and hyphens", "error");
+                return;
+            }
+            
+            fullAddress = customAlias + "@" + currentDomain;
+        } else {
+            let words = generate(1);
+            fullAddress = words[0] + Math.floor(Math.random() * 1000) + "@" + currentDomain;
+        }
+        
+        receivingEmail.set(fullAddress);
+
+        if (reload) {
+            window.location.reload();
+        } else {
+            customAlias = '';
+            showCustomAliasInput = false;
+        }
+    }
+    
+    function handleVisibilityChange() {
+        isTabVisible = !document.hidden;
+        
+        if (isTabVisible) {
+            startPolling();
+            loadEmails(); // Immediate refresh when tab becomes visible
+        } else {
+            clearInterval(intervalID);
+        }
+    }
+
+    function startPolling() {
+        if (intervalID) clearInterval(intervalID);
+        // Changed from 20000 (20s) to 60000 (60s) - 3x reduction in requests
+        intervalID = setInterval(timedReload, 60000);
+    }
+    
+    async function timedReload() {
+        // Only reload if tab is visible
+        if (!isTabVisible) return;
+        
+        if (reloadCounter >= stopReloadOn) {
+            reloadActive = false;
+            clearInterval(intervalID);
+            return;
+        }
+        await loadEmails();
+        reloadCounter += 1;
+    }
+
     async function loadEmails() {
         isLoading = true;
         try {
             if (!address) return;
-            const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+            const resp = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
+            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
             
-            const data = await response.json();
+            const data = await resp.json();
             const newEmails = data.mails || [];
             
             newEmails.forEach(email => {
                 const emailKey = buildEmailKey(email);
-                if (!emails.some(e => buildEmailKey(e) === emailKey)) {
+                if (emailKey && !emails.some(e => buildEmailKey(e) === emailKey)) {
                     unreadEmails.add(emailKey);
                 }
             });
-            
+
             emails = newEmails;
             stats = data.stats || {};
-            
             emails.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
         } catch (error) {
             console.error("Failed to load emails:", error);
             showToast("Error", "Failed to load emails. Please try again.", "error");
@@ -205,15 +238,6 @@ function buildRawKey(email) {
         }
     }
     
-    // Make address and currentDomain reactive to store changes
-    $: address = $receivingEmail;
-    $: currentDomain = $selectedDomain;
-
-    // Watch for address changes and reload emails
-    $: if (address) {
-        loadEmails();
-    }
-
     function markAsRead(email) {
         if (!email) return;
         const emailKey = buildEmailKey(email);
@@ -253,14 +277,6 @@ function selectDomain(domain) {
         window.location.reload();
     }
     
-    async function timedReload() {
-        if (reloadCounter >= stopReloadOn) {
-            reloadActive = false;
-            clearInterval(intervalID);
-        }
-        await loadEmails();
-        reloadCounter += 1;
-    }
 
     async function deleteEmail(email) {
         if (!email || !email.recipient || !email.suffix) return;
