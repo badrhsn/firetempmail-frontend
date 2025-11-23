@@ -52,158 +52,6 @@
     
     let showDomainSelector = false;
 
-    onMount(function () {
-        // Safely get email type from localStorage
-        if (browser) {
-            try {
-                const savedType = localStorage.getItem("emailType");
-                if (savedType) {
-                    emailType = savedType;
-                }
-            } catch (e) {
-                console.error("Error accessing localStorage:", e);
-            }
-        }
-        
-        // Add visibility change listener
-        if (browser) {
-            document.addEventListener('visibilitychange', handleVisibilityChange);
-        }
-        
-        if (address === null) {
-            generateEmail(false);
-        }
-        
-        // Start polling
-        startPolling();
-        
-        return () => {
-            clearInterval(intervalID);
-            if (browser) {
-                document.removeEventListener('visibilitychange', handleVisibilityChange);
-            }
-        };
-    });
-    
-    // Handle tab visibility
-    function handleVisibilityChange() {
-        isTabVisible = !document.hidden;
-        
-        if (isTabVisible) {
-            // Tab became visible - reload immediately
-            loadEmails();
-            // Restart polling
-            clearInterval(intervalID);
-            startPolling();
-        } else {
-            // Tab hidden - stop polling to save requests
-            clearInterval(intervalID);
-        }
-    }
-    
-    function startPolling() {
-        // Changed from 20 seconds to 60 seconds (3x reduction)
-        intervalID = setInterval(timedReload, 60000);
-    }
-    
-    // Generate email based on selected type
-    async function generateEmail(reload, useCustomAlias = false) {
-        let fullAddress;
-        
-        if (emailType === 'gmail' || emailType === 'googlemail') {
-            // Generate Gmail-style alias
-            fullAddress = getNextGmailAccount(emailType);
-            receivingEmail.set(fullAddress);
-            
-            if (reload) {
-                window.location.reload();
-            }
-            return;
-        }
-        
-        // Domain-based generation
-        if (useCustomAlias && customAlias) {
-            if (!isValidAlias(customAlias)) {
-                showToast("Error", "Alias can only contain letters, numbers, and hyphens", "error");
-                return;
-            }
-            
-            fullAddress = customAlias + "@" + currentDomain;
-        } else {
-            let words = generate(1);
-            fullAddress = words[0] + Math.floor(Math.random() * 1000) + "@" + currentDomain;
-        }
-        
-        receivingEmail.set(fullAddress);
-
-        if (reload) {
-            window.location.reload();
-        } else {
-            customAlias = '';
-            showCustomAliasInput = false;
-        }
-    }
-    
-    // Handle email type change with safe localStorage access
-    function handleEmailTypeChange(newType) {
-        emailType = newType;
-        
-        if (browser) {
-            try {
-                localStorage.setItem("emailType", newType);
-            } catch (e) {
-                console.error("Error saving to localStorage:", e);
-            }
-        }
-        
-        generateEmail(true);
-    }
-    
-    // Gmail normalization: keep dots, only lowercase and keep alias
-function normalizeGmailAddress(address) {
-    const [local, domain] = address.split("@");
-    if (!domain || domain.toLowerCase() !== "gmail.com")
-        return address.toLowerCase();
-    const [base, alias] = local.split("+");
-    return alias
-        ? `${base}+${alias}@gmail.com`
-        : `${base}@gmail.com`;
-}
-
-    async function loadEmails() {
-        isLoading = true;
-        try {
-            if (!address) return;
-            
-            const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            
-            const data = await response.json();
-            const newEmails = data.mails || [];
-            
-            // Only update if there are new emails
-            if (newEmails.length !== lastEmailCount) {
-                newEmails.forEach(email => {
-                    const emailKey = email.recipient + "-" + email.suffix;
-                    if (!emails.some(e => e.recipient + "-" + e.suffix === emailKey)) {
-                        unreadEmails.add(emailKey);
-                    }
-                });
-                
-                emails = newEmails;
-                lastEmailCount = newEmails.length;
-            }
-            
-            stats = data.stats || {};
-            emails.sort((a, b) => new Date(b.date) - new Date(a.date));
-        } catch (error) {
-            console.error("Failed to load emails:", error);
-            showToast("Error", "Failed to load emails. Please try again.", "error");
-        } finally {
-            isLoading = false;
-        }
-    }
-    
     // Make address and currentDomain reactive to store changes
     $: address = $receivingEmail;
     $: currentDomain = $selectedDomain;
@@ -365,15 +213,6 @@ function normalizeGmailAddress(address) {
         }
     }
     
-    // Make address and currentDomain reactive to store changes
-    $: address = $receivingEmail;
-    $: currentDomain = $selectedDomain;
-
-    // Watch for address changes and reload emails
-    $: if (address) {
-        loadEmails();
-    }
-
     function markAsRead(email) {
         if (!email) return;
         const emailKey = email.recipient + "-" + email.suffix;
@@ -1763,6 +1602,167 @@ function selectDomain(domain) {
         z-index: 10001;
         padding: 20px;
     }
+    
+    .modal {
+        background: white;
+        border-radius: 16px;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+    }
+    
+    .modal-header {
+        padding: 24px 24px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .modal-header h3 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+    
+    .modal-close {
+        background: none;
+        border: none;
+        padding: 4px;
+        cursor: pointer;
+        color: var(--bs-secondary);
+    }
+    
+    .modal-body {
+        padding: 24px;
+    }
+    
+    .modal-body p {
+        margin-bottom: 16px;
+    }
+    
+    .modal-input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid rgb(215,215,215);
+        border-radius: 8px;
+        font-size: 16px;
+    }
+    
+    .modal-footer {
+        padding: 0 24px 24px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+        border: none;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .btn-primary {
+        background: rgb(33,37,41);
+        color: white;
+    }
+    
+    .btn-secondary {
+        background: #f8f9fa;
+        color: #212529;
+        border: 1px solid #dee2e6;
+    }
+    
+    .btn-danger {
+        background: #dc3545;
+        color: white;
+    }
+    
+    .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    
+    /* Away Banner */
+    .away-banner {
+        background: var(--bs-red);
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: white;
+    }
+    
+    /* Container */
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    /* Header */
+    h1 {
+        font-family: 'Inter Tight', sans-serif;
+        font-weight: 600;
+        margin-bottom: 16px;
+        text-align: left;
+    }
+    
+    h1 span {
+        font-weight: normal !important;
+        color: rgb(255, 255, 255);
+    }
+    
+    .lead {
+        text-align: left;
+        margin-bottom: 32px;
+        font-size: 20px;
+    }
+    
+    /* Email Address Container */
+    .email-address-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 32px;
+        margin-bottom: 16px;
+    }
+    
+    .email-display {
+        padding: 8px 30px;
+        border: 2px solid rgb(215,215,215);
+        border-radius: 16px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: white;
+    }
+    
+    .email-display p {
+        margin-bottom: 0;
+        font-size: 20px;
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: left;
+    }
+    
+    .btn-copy {
+        margin-left: 12px;
+        background: transparent;
+        border: none;
+        padding: 4px 8px;
+        color: var(--bs-primary);
+        cursor: pointer;
+    }
+    
     
     .modal {
         background: white;
