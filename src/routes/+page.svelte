@@ -15,11 +15,6 @@
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     
-    // These will reactively update when the stores change
-    let address;
-    let currentDomain;
-    let availableGmailAccounts = $gmailAccounts;
-    
     // Email type selection with safe localStorage access
     let emailType = 'domain';
     
@@ -52,12 +47,18 @@
     
     let showDomainSelector = false;
 
+    // Declare variables that will be set by reactive statements
+    let address = $receivingEmail;
+    let currentDomain = $selectedDomain;
+    let availableGmailAccounts = $gmailAccounts;
+    
     // Make address and currentDomain reactive to store changes
     $: address = $receivingEmail;
     $: currentDomain = $selectedDomain;
+    $: availableGmailAccounts = $gmailAccounts;
 
     // Watch for address changes and reload emails
-    $: if (address) {
+    $: if (address && browser) {
         loadEmails();
     }
 
@@ -74,7 +75,8 @@
             }
         }
         
-        if (address === null) {
+        // Generate email if not set
+        if (!address || address === undefined) {
             generateEmail(false);
         }
         
