@@ -39,7 +39,7 @@
     let isTabVisible = true;
     let lastEmailCount = 0;
   
-    let intervalID; // Declare once
+    let intervalID;
     let unreadEmails = new Set();
     let showForwardModal = false;
     let forwardToEmail = '';
@@ -51,6 +51,15 @@
     let aliasError = '';
     
     let showDomainSelector = false;
+
+    // Make address and currentDomain reactive to store changes
+    $: address = $receivingEmail;
+    $: currentDomain = $selectedDomain;
+
+    // Watch for address changes and reload emails
+    $: if (address) {
+        loadEmails();
+    }
 
     onMount(function () {
         // Safely get email type from localStorage
@@ -73,11 +82,15 @@
         startPolling();
         
         // Stop polling when tab is hidden
-        document.addEventListener('visibilitychange', handleVisibilityChange);
+        if (browser) {
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+        }
         
         return () => {
             clearInterval(intervalID);
-            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            if (browser) {
+                document.removeEventListener('visibilitychange', handleVisibilityChange);
+            }
         };
     });
     
@@ -299,9 +312,7 @@ function selectDomain(domain) {
                 const rawKey = buildRawKey(email);            // try raw (keeps mbox:/idx:)
                 let resp = await fetch(`${url}/mail/delete?key=${encodeURIComponent(rawKey)}`);
                 let data = await resp.json();
-
-                if (data.code !== 200) {                      // fallback to normalized
-                    const normalizedKey = buildEmailKey(email);
+               const normalizedKey = buildEmailKey(email);
                     resp = await fetch(`${url}/mail/delete?key=${encodeURIComponent(normalizedKey)}`);
                     data = await resp.json();
                 }
@@ -1874,7 +1885,7 @@ function selectDomain(domain) {
     }
         .email-action-buttons .btn-primary {
         background: rgb(33,37,41);
-        color: white;
+               color: white;
         border: 2px solid rgb(33,37,41);
     }
 

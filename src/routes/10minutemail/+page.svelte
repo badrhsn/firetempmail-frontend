@@ -39,7 +39,7 @@
     let isTabVisible = true;
     let lastEmailCount = 0;
   
-    let intervalID; // Declare once here
+    let intervalID;
     let unreadEmails = new Set();
     let showForwardModal = false;
     let forwardToEmail = '';
@@ -73,6 +73,170 @@
         if (address === null) {
             generateEmail(false);
         }
+        
+        // Start polling
+        startPolling();
+        
+        return () => {
+            clearInterval(intervalID);
+            if (browser) {
+                document.removeEventListener('visibilitychange', handleVisibilityChange);
+            }
+        };
+    });
+    
+    // Handle tab visibility
+    function handleVisibilityChange() {
+        isTabVisible = !document.hidden;
+        
+        if (isTabVisible) {
+            // Tab became visible - reload immediately
+            loadEmails();
+            // Restart polling
+            clearInterval(intervalID);
+            startPolling();
+        } else {
+            // Tab hidden - stop polling to save requests
+            clearInterval(intervalID);
+        }
+    }
+    
+    function startPolling() {
+        // Changed from 20 seconds to 60 seconds (3x reduction)
+        intervalID = setInterval(timedReload, 60000);
+    }
+    
+    // Generate email based on selected type
+    async function generateEmail(reload, useCustomAlias = false) {
+        let fullAddress;
+        
+        if (emailType === 'gmail' || emailType === 'googlemail') {
+            // Generate Gmail-style alias
+            fullAddress = getNextGmailAccount(emailType);
+            receivingEmail.set(fullAddress);
+            
+            if (reload) {
+                window.location.reload();
+            }
+            return;
+        }
+        
+        // Domain-based generation
+        if (useCustomAlias && customAlias) {
+            if (!isValidAlias(customAlias)) {
+                showToast("Error", "Alias can only contain letters, numbers, and hyphens", "error");
+                return;
+            }
+            
+            fullAddress = customAlias + "@" + currentDomain;
+        } else {
+            let words = generate(1);
+            fullAddress = words[0] + Math.floor(Math.random() * 1000) + "@" + currentDomain;
+        }
+        
+        receivingEmail.set(fullAddress);
+
+        if (reload) {
+            window.location.reload();
+        } else {
+            customAlias = '';
+            showCustomAliasInput = false;
+        }
+    }
+    
+    // Handle email type change with safe localStorage access
+    function handleEmailTypeChange(newType) {
+        emailType = newType;
+        
+        if (browser) {
+            try {
+                localStorage.setItem("emailType", newType);
+            } catch (e) {
+                console.error("Error saving to localStorage:", e);
+            }
+        }
+        
+        generateEmail(true);
+    }
+    
+    // Gmail normalization: keep dots, only lowercase and keep alias
+function normalizeGmailAddress(address) {
+    const [local, domain] = address.split("@");
+    if (!domain || domain.toLowerCase() !== "gmail.com")
+        return address.toLowerCase();
+    const [base, alias] = local.split("+");
+    return alias
+        ? `${base}+${alias}@gmail.com`
+        : `${base}@gmail.com`;
+}
+
+    async function loadEmails() {
+        isLoading = true;
+        try {
+            if (!address) return;
+            
+            const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            
+            const data = await response.json();
+            const newEmails = data.mails || [];
+            
+            // Only update if there are new emails
+            if (newEmails.length !== lastEmailCount) {
+                newEmails.forEach(email => {
+                    const emailKey = email.recipient + "-" + email.suffix;
+                    if (!emails.some(e => e.recipient + "-" + e.suffix === emailKey)) {
+                        unreadEmails.add(emailKey);
+                    }
+                });
+                
+                emails = newEmails;
+                lastEmailCount = newEmails.length;
+            }
+            
+            stats = data.stats || {};
+            emails.sort((a, b) => new Date(b.date) - new Date(a.date));
+        } catch (error) {
+            console.error("Failed to load emails:", error);
+            showToast("Error", "Failed to load emails. Please try again.", "error");
+        } finally {
+            isLoading = false;
+        }
+    }
+    
+    // Make address and currentDomain reactive to store changes
+    $: address = $receivingEmail;
+    $: currentDomain = $selectedDomain;
+
+    // Watch for address changes and reload emails
+    $: if (address) {
+        loadEmails();
+    }
+
+    onMount(function () {
+        // Safely get email type from localStorage
+        if (browser) {
+            try {
+                const savedType = localStorage.getItem("emailType");
+                if (savedType) {
+                    emailType = savedType;
+                }
+            } catch (e) {
+                console.error("Error accessing localStorage:", e);
+            }
+        }
+        
+        // Add visibility change listener
+        if (browser) {
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+        }
+        
+        if (address === null) {
+            generateEmail(false);
+        }
+        
+        // Start polling
+        startPolling();
         
         return () => {
             clearInterval(intervalID);
