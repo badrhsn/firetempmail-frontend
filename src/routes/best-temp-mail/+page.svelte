@@ -2025,7 +2025,7 @@ function selectDomain(domain) {
     }
     
     .email-content {
-               flex: 1;
+                      flex: 1;
         min-width: 0;
     }
     
