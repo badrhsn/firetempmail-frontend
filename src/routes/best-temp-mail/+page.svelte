@@ -396,12 +396,6 @@ function selectDomain(domain) {
         if (!email || !email.recipient || !email.suffix) return false;
         return unreadEmails.has(email.recipient + "-" + email.suffix);
     }
-
-    const intervalID = setInterval(timedReload, 20000);  
-
-    function handleVisibilityChange(){isTabVisible=!document.hidden;if(isTabVisible){loadEmails();clearInterval(intervalID);startPolling();}else clearInterval(intervalID);}
-    function startPolling(){if(intervalID)clearInterval(intervalID);intervalID=setInterval(timedReload,60000);}
-    onMount(()=>{if(browser)document.addEventListener('visibilitychange',handleVisibilityChange);if(!address)generateEmail&&generateEmail(false);startPolling();return()=>{clearInterval(intervalID);if(browser)document.removeEventListener('visibilitychange',handleVisibilityChange);};});
 </script>
 <svelte:head>
     <title>Best Temp Mail Services 2025 — FireTempMail Review & Guide</title>
@@ -2051,6 +2045,7 @@ function selectDomain(domain) {
     
     .email-date {
         color: var(--bs-secondary);
+
         font-size: 12px;
         flex-shrink: 0;
     }
