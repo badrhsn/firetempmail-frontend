@@ -11,18 +11,9 @@
         gmailAccounts,
         getNextGmailAccount
     } from "../../lib/stores";
-    import Navigation from '$lib/components/Navigation.svelte';
-    import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     
-    // These will reactively update when the stores change
-    let address = $receivingEmail;
-    let currentDomain = $selectedDomain;
-    let availableGmailAccounts = $gmailAccounts;
-    
-    // Email type selection with safe localStorage access
     let emailType = 'domain';
-    
     const url = "https://mail.firetempmail.com";
     
     let copyrightYear = new Date().getFullYear();
@@ -33,9 +24,14 @@
     let selectedEmail = null;
     let viewMode = 'list';
 
-    let stopReloadOn = 10, reloadCounter = 0, reloadActive = true, isTabVisible = true, lastEmailCount = 0, intervalID;
+    let stopReloadOn = 10;
+    let reloadCounter = 0;
+    let reloadActive = true;
+    let isTabVisible = true;
+    let lastEmailCount = 0;
+  
+    let intervalID;
     let unreadEmails = new Set();
-
     let showForwardModal = false;
     let forwardToEmail = '';
     let emailToForward = null;
@@ -44,30 +40,109 @@
     let customAlias = '';
     let showCustomAliasInput = false;
     let aliasError = '';
-    
     let showDomainSelector = false;
 
+    // Reactive variables - BEFORE onMount
+    let address = $receivingEmail;
+    let currentDomain = $selectedDomain;
+    let availableGmailAccounts = $gmailAccounts;
+    
+    $: address = $receivingEmail;
+    $: currentDomain = $selectedDomain;
+    $: availableGmailAccounts = $gmailAccounts;
+    $: if (address && browser) {
+        loadEmails();
+    }
+
     onMount(function () {
-        // Safely get email type from localStorage
         if (browser) {
             try {
                 const savedType = localStorage.getItem("emailType");
-                if (savedType) {
-                    emailType = savedType;
-                }
+                if (savedType) emailType = savedType;
             } catch (e) {
                 console.error("Error accessing localStorage:", e);
             }
+            document.addEventListener('visibilitychange', handleVisibilityChange);
         }
         
-        if (address === null) {
+        if (!address || address === undefined) {
             generateEmail(false);
         }
-
-        if(browser)document.addEventListener('visibilitychange',handleVisibilityChange);
-        if(!address)generateEmail&&generateEmail(false);
+        
         startPolling();
+        
+        return () => {
+            clearInterval(intervalID);
+            if (browser) {
+                document.removeEventListener('visibilitychange', handleVisibilityChange);
+            }
+        };
     });
+    
+    function handleVisibilityChange() {
+        isTabVisible = !document.hidden;
+        if (isTabVisible) {
+            loadEmails();
+            clearInterval(intervalID);
+            startPolling();
+        } else {
+            clearInterval(intervalID);
+        }
+    }
+    
+    function startPolling() {
+        if (intervalID) clearInterval(intervalID);
+        intervalID = setInterval(timedReload, 60000);
+    }
+    
+    async function loadEmails() {
+        isLoading = true;
+        try {
+            if (!address) return;
+            
+            const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            
+            const data = await response.json();
+            const newEmails = data.mails || [];
+            
+            if (newEmails.length !== lastEmailCount) {
+                newEmails.forEach(email => {
+                    const emailKey = buildEmailKey(email);
+                    if (emailKey && !emails.some(e => buildEmailKey(e) === emailKey)) {
+                        unreadEmails.add(emailKey);
+                    }
+                });
+                
+                emails = newEmails;
+                lastEmailCount = newEmails.length;
+            }
+            
+            stats = data.stats || {};
+            emails.sort((a, b) => new Date(b.date) - new Date(a.date));
+        } catch (error) {
+            console.error("Failed to load emails:", error);
+            showToast("Error", "Failed to load emails. Please try again.", "error");
+        } finally {
+            isLoading = false;
+        }
+    }
+    
+    async function timedReload() {
+        if (!isTabVisible) return;
+        if (reloadCounter >= stopReloadOn) {
+            reloadActive = false;
+            clearInterval(intervalID);
+            return;
+        }
+        await loadEmails();
+        reloadCounter += 1;
+    }
+    
+    function buildEmailKey(email) {
+        if (!email || !email.recipient || !email.suffix) return '';
+        return `${email.recipient}-${email.suffix}`;
+    }
     
     // Generate email based on selected type
     async function generateEmail(reload, useCustomAlias = false) {
