@@ -33,11 +33,14 @@
     let selectedEmail = null;
     let viewMode = 'list';
 
-    let stopReloadOn = 20;
+    let stopReloadOn = 10;
     let reloadCounter = 0;
     let reloadActive = true;
-  
+    let isTabVisible = true;
+    let lastEmailCount = 0;
+    let intervalID;
     let unreadEmails = new Set();
+
     let showForwardModal = false;
     let forwardToEmail = '';
     let emailToForward = null;
@@ -65,6 +68,9 @@
         if (address === null) {
             generateEmail(false);
         }
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        startPolling();
     });
     
     // Generate email based on selected type
@@ -379,6 +385,17 @@ function selectDomain(domain) {
     
     function closeCryptoModal() {
         showCryptoModal = false;
+    }
+
+    function handleVisibilityChange() {
+        isTabVisible = !document.hidden;
+        if (isTabVisible) { loadEmails(); clearInterval(intervalID); startPolling(); }
+        else clearInterval(intervalID);
+    }
+
+    function startPolling() {
+        if (intervalID) clearInterval(intervalID);
+        intervalID = setInterval(timedReload, 60000);
     }
 </script>
 <svelte:head>

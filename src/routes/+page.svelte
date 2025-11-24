@@ -11,13 +11,9 @@
         gmailAccounts,
         getNextGmailAccount
     } from "../lib/stores";
-    import Navigation from '$lib/components/Navigation.svelte';
-    import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     
-    // Email type selection with safe localStorage access
     let emailType = 'domain';
-    
     const url = "https://post.firetempmail.com";
     
     let copyrightYear = new Date().getFullYear();
@@ -44,49 +40,36 @@
     let customAlias = '';
     let showCustomAliasInput = false;
     let aliasError = '';
-    
     let showDomainSelector = false;
 
-    // Declare variables that will be set by reactive statements
+    // Reactive variables - BEFORE onMount
     let address = $receivingEmail;
     let currentDomain = $selectedDomain;
     let availableGmailAccounts = $gmailAccounts;
     
-    // Make address and currentDomain reactive to store changes
     $: address = $receivingEmail;
     $: currentDomain = $selectedDomain;
     $: availableGmailAccounts = $gmailAccounts;
-
-    // Watch for address changes and reload emails
     $: if (address && browser) {
         loadEmails();
     }
 
     onMount(function () {
-        // Safely get email type from localStorage
         if (browser) {
             try {
                 const savedType = localStorage.getItem("emailType");
-                if (savedType) {
-                    emailType = savedType;
-                }
+                if (savedType) emailType = savedType;
             } catch (e) {
                 console.error("Error accessing localStorage:", e);
             }
+            document.addEventListener('visibilitychange', handleVisibilityChange);
         }
         
-        // Generate email if not set
         if (!address || address === undefined) {
             generateEmail(false);
         }
         
-        // Start polling
         startPolling();
-        
-        // Stop polling when tab is hidden
-        if (browser) {
-            document.addEventListener('visibilitychange', handleVisibilityChange);
-        }
         
         return () => {
             clearInterval(intervalID);
@@ -96,19 +79,20 @@
         };
     });
     
-    // Handle email type change with safe localStorage access
-    function handleEmailTypeChange(newType) {
-        emailType = newType;
-        
-        if (browser) {
-            try {
-                localStorage.setItem("emailType", newType);
-            } catch (e) {
-                console.error("Error saving to localStorage:", e);
-            }
+    function handleVisibilityChange() {
+        isTabVisible = !document.hidden;
+        if (isTabVisible) {
+            loadEmails();
+            clearInterval(intervalID);
+            startPolling();
+        } else {
+            clearInterval(intervalID);
         }
-        
-        generateEmail(true);
+    }
+    
+    function startPolling() {
+        if (intervalID) clearInterval(intervalID);
+        intervalID = setInterval(timedReload, 60000);
     }
     
     // Gmail normalization: keep dots, only lowercase and keep alias
@@ -157,10 +141,8 @@ function extractEmailAddress(str = '') {
     return simple;
 }
     function buildEmailKey(email) {
-        if (!email) return '';
-        const raw = email.recipient || '';
-        const recipient = extractEmailAddress(decodeEncodedWords(stripKnownPrefixes(raw)));
-        return `${recipient}-${email.suffix}`;
+        if (!email || !email.recipient || !email.suffix) return '';
+        return `${email.recipient}-${email.suffix}`;
     }
     
     function buildRawKey(email) {
@@ -206,58 +188,45 @@ function extractEmailAddress(str = '') {
         }
     }
     
-    function handleVisibilityChange() {
-        isTabVisible = !document.hidden;
+    function handleEmailTypeChange(newType) {
+        emailType = newType;
         
-        if (isTabVisible) {
-            startPolling();
-            loadEmails(); // Immediate refresh when tab becomes visible
-        } else {
-            clearInterval(intervalID);
+        if (browser) {
+            try {
+                localStorage.setItem("emailType", newType);
+            } catch (e) {
+                console.error("Error saving to localStorage:", e);
+            }
         }
-    }
-
-    function startPolling() {
-        if (intervalID) clearInterval(intervalID);
-        // Changed from 20000 (20s) to 60000 (60s) - 3x reduction in requests
-        intervalID = setInterval(timedReload, 60000);
+        
+        generateEmail(true);
     }
     
-    async function timedReload() {
-        // Only reload if tab is visible
-        if (!isTabVisible) return;
-        
-        if (reloadCounter >= stopReloadOn) {
-            reloadActive = false;
-            clearInterval(intervalID);
-            return;
-        }
-        await loadEmails();
-        reloadCounter += 1;
-    }
-
     async function loadEmails() {
         isLoading = true;
         try {
             if (!address) return;
-
-            const resp = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
-            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
             
-            const data = await resp.json();
+            const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            
+            const data = await response.json();
             const newEmails = data.mails || [];
             
-            newEmails.forEach(email => {
-                const emailKey = buildEmailKey(email);
-                if (emailKey && !emails.some(e => buildEmailKey(e) === emailKey)) {
-                    unreadEmails.add(emailKey);
-                }
-            });
-
-            emails = newEmails;
+            if (newEmails.length !== lastEmailCount) {
+                newEmails.forEach(email => {
+                    const emailKey = buildEmailKey(email);
+                    if (emailKey && !emails.some(e => buildEmailKey(e) === emailKey)) {
+                        unreadEmails.add(emailKey);
+                    }
+                });
+                
+                emails = newEmails;
+                lastEmailCount = newEmails.length;
+            }
+            
             stats = data.stats || {};
             emails.sort((a, b) => new Date(b.date) - new Date(a.date));
-            
         } catch (error) {
             console.error("Failed to load emails:", error);
             showToast("Error", "Failed to load emails. Please try again.", "error");
@@ -266,70 +235,39 @@ function extractEmailAddress(str = '') {
         }
     }
     
-    function markAsRead(email) {
-        if (!email) return;
-        const emailKey = buildEmailKey(email);
-        unreadEmails.delete(emailKey);
-        viewEmail(email);
-    }
-    
-
-    
-    function isValidAlias(alias) {
-        const aliasRegex = /^[a-zA-Z0-9-]+$/;
-        return aliasRegex.test(alias);
-    }
-    
-    function toggleCustomAlias() {
-        showCustomAliasInput = !showCustomAliasInput;
-        if (!showCustomAliasInput) {
-            customAlias = '';
-            aliasError = '';
+    async function timedReload() {
+        if (!isTabVisible) return;
+        if (reloadCounter >= stopReloadOn) {
+            reloadActive = false;
+            clearInterval(intervalID);
+            return;
         }
+        await loadEmails();
+        reloadCounter += 1;
     }
     
-    function toggleDomainSelector() {
-        showDomainSelector = !showDomainSelector;
-    }
-    
-function selectDomain(domain) {
-    updateEmailDomain(domain);
-    showDomainSelector = false;
-    
-    // Force UI update
-    address = $receivingEmail;
-    currentDomain = domain;
-}
-    
-    function manualReload() {
-        window.location.reload();
-    }
-    
-
     async function deleteEmail(email) {
         if (!email || !email.recipient || !email.suffix) return;
         
         if (confirm("Do you really want to permanently delete this email?")) {
             try {
-                const rawKey = buildRawKey(email);
-                let resp = await fetch(`${url}/mail/delete?key=${encodeURIComponent(rawKey)}`);
-                let data = await resp.json();
-
-                if (data.code !== 200) {
-                    const normalizedKey = buildEmailKey(email);
-                    resp = await fetch(`${url}/mail/delete?key=${encodeURIComponent(normalizedKey)}`);
-                    data = await resp.json();
-                }
-
+                const emailKey = buildEmailKey(email);
+                const response = await fetch(`${url}/mail/delete?key=${encodeURIComponent(emailKey)}`);
+                const data = await response.json();
+                
                 if (data.code === 200) {
-                    const k = buildEmailKey(email);
-                    emails = emails.filter(e => buildEmailKey(e) !== k);
-                    unreadEmails.delete(k);
-                    if (stats.count) stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
-                    if (selectedEmail && buildEmailKey(selectedEmail) === k) {
+                    emails = emails.filter(e => buildEmailKey(e) !== emailKey);
+                    unreadEmails.delete(emailKey);
+                    
+                    if (stats.count) {
+                        stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
+                    }
+                    
+                    if (selectedEmail && buildEmailKey(selectedEmail) === emailKey) {
                         selectedEmail = null;
                         viewMode = 'list';
                     }
+                    
                     showToast("Success", "Email deleted successfully.", "success");
                 } else {
                     showToast("Error", `Failed to delete email: ${data.msg}`, "error");
@@ -340,7 +278,7 @@ function selectDomain(domain) {
             }
         }
     }
-
+    
     function deleteEmailAddress() {
         if (confirm("Are you sure you want to delete this email address? All messages will be lost.")) {
             emails = [];
@@ -1777,7 +1715,7 @@ function selectDomain(domain) {
     .btn-secondary {
         background: #f8f9fa;
         color: #212529;
-        border: 1px solid #dee2e6;
+        border: 2px solid #dee2e6;
     }
     
     .btn-danger {
@@ -1953,7 +1891,7 @@ function selectDomain(domain) {
     }
     
     .email-header {
-        padding: 24px;
+                      padding:  24px;
         border-bottom: 1px solid rgb(215,215,215);
     }
     

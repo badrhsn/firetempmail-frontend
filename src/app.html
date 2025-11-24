@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 <head>
@@ -445,11 +444,21 @@
             min-height: 100vh;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
+        
     </style>
+    
+    <!-- Maintenance Mode Toggle Script -->
+    <script>
+        // Set this to true to enable maintenance mode
+        window.MAINTENANCE_MODE = false;
+        
+        // Alternative: Check from environment or API
+        // window.MAINTENANCE_MODE = '%sveltekit.env.PUBLIC_MAINTENANCE_MODE%' === 'true';
+    </script>
 </head>
 
 <body>
-    <!-- Modern Header Section -->
+    <!-- Modern Header Section 
     <header class="modern-header">
         <div class="header-container">
             <a href="/" class="logo-container">
@@ -468,7 +477,7 @@
                 <a href="/blog" class="nav-link">Blog</a>
                 <a href="/contact" class="nav-link btn-contact">Contact</a>
                 
-                <!-- Mobile Menu Button -->
+                <!-- Mobile Menu Button 
                 <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -478,7 +487,7 @@
                 </button>
             </nav>
         </div>
-    </header>
+    </header>-->
     <div style="display: contents">%sveltekit.body%</div>
 
     <!-- Mobile Menu Overlay -->
@@ -546,5 +555,7 @@
     </script>
 
     <!-- Removed jQuery & Bootstrap JS to reduce blocking & payload (custom minimal JS used instead) -->
+    
+    
 </body>
 </html>

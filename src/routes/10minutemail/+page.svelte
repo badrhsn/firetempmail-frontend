@@ -18,6 +18,7 @@
     // Email type selection with safe localStorage access
     let emailType = 'domain';
     
+    // Keep your existing domain!
     const url = "https://post.firetempmail.com";
     
     let copyrightYear = new Date().getFullYear();

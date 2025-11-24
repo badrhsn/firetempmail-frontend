@@ -1,8 +1,57 @@
 <script>
 // @ts-nocheck
-    import { onMount } from "svelte";
-    import { generate } from "random-words";
-    import { 
+import { receivingEmail, selectedDomain, gmailAccounts } from "../../lib/stores";
+import { browser } from '$app/environment';
+import { onMount } from "svelte";
+
+let stopReloadOn=10,reloadCounter=0,reloadActive=true,isTabVisible=true,lastEmailCount=0,intervalID;
+let unreadEmails=new Set();
+
+let address=$receivingEmail;
+let currentDomain=$selectedDomain;
+let availableGmailAccounts=$gmailAccounts;
+
+$: address=$receivingEmail;
+$: currentDomain=$selectedDomain;
+$: availableGmailAccounts=$gmailAccounts;
+$: if(address && browser) loadEmails();
+
+const url="https://post.firetempmail.com";
+
+async function loadEmails(){
+	try{
+		if(!address)return;
+		const r=await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
+		if(!r.ok)throw new Error(r.status);
+		const data=await r.json();
+		const newEmails=data.mails||[];
+		if(newEmails.length!==lastEmailCount){
+			newEmails.forEach(m=>{
+				const k=buildEmailKey(m);
+				if(k && !emails.some(e=>buildEmailKey(e)===k)) unreadEmails.add(k);
+			});
+			emails=newEmails;
+			lastEmailCount=newEmails.length;
+			emails.sort((a,b)=>new Date(b.date)-new Date(a.date));
+		}
+		stats=data.stats||stats;
+	}catch(e){
+		showToast && showToast("Error","Failed to load emails.","error");
+	}
+}
+
+function buildEmailKey(m){return m&&m.recipient&&m.suffix?`${m.recipient}-${m.suffix}`:'';}
+
+function handleVisibilityChange(){isTabVisible=!document.hidden;if(isTabVisible){loadEmails();clearInterval(intervalID);startPolling();}else clearInterval(intervalID);}
+
+function startPolling(){if(intervalID)clearInterval(intervalID);intervalID=setInterval(timedReload,60000);}
+
+async function timedReload(){if(!isTabVisible)return;if(reloadCounter>=stopReloadOn){reloadActive=false;clearInterval(intervalID);return;}await loadEmails();reloadCounter++;}
+
+onMount(()=>{if(browser)document.addEventListener('visibilitychange',handleVisibilityChange);if(!address)generateEmail&&generateEmail(false);startPolling();return()=>{clearInterval(intervalID);if(browser)document.removeEventListener('visibilitychange',handleVisibilityChange);};});
+
+import { generate } from "random-words";
+import { 
         receivingEmail, 
         availableDomains, 
         selectedDomain, 
@@ -871,7 +920,7 @@ function selectDomain(domain) {
                     
                     <div class="kofi-qr">
                         <a href="https://ko-fi.com/firetempmail" target="_blank">
-                            <img src="https://storage.ko-fi.com/cdn/useruploads/N4N61LJTEP/qrcode.png?v=2668fb77-3b3b-4039-abc5-e7004afdcebe&v=2&_gl=1*1bpnkx0*_gcl_au*Mzg2NjgyMDUuMTc1ODM3MTgzOA..*_ga*Nzg1NDU0NTQ2LjE3NTgzNzE4Mzk.*_ga_M13FZ7VQ2C*czE3NTgzNzE4MzgkbzEkZzEkdDE3NTgzNzI5MTkkajYwJGwwJGgw" 
+                            <img src="https://storage.ko-fi.com/cdn/useruploads/N4N61LJTEP/qrcode.png?v=2668fb77-3b3b-4039-abc5-e7004afdcebe&v=2&_gl=1*1bpnkx0*_gcl_au*Mzg2NjgyMDUuMTc1ODM3MTgzOA..*_ga*Nzg1NDU0NTQ2LjE3NTgzNzE4Mzg.*_ga_M13FZ7VQ2C*czE3NTgzNzE4MzgkbzEkZzEkdDE3NTgzNzI5MTkkajYwJGwwJGgw" 
                                  alt="Support us on Ko-fi" class="img-fluid">
                         </a>
                         <p class="kofi-text">Scan to support us on Ko-fi</p>

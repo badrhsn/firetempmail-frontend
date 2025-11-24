@@ -33,21 +33,8 @@
     let selectedEmail = null;
     let viewMode = 'list';
 
-    let stopReloadOn = 20;
-    let reloadCounter = 0;
-    let reloadActive = true;
-  
-    let unreadEmails = new Set();
-    let showForwardModal = false;
-    let forwardToEmail = '';
-    let emailToForward = null;
-    let isLoading = false;
-    
-    let customAlias = '';
-    let showCustomAliasInput = false;
-    let aliasError = '';
-    
-    let showDomainSelector = false;
+    let stopReloadOn=10,reloadCounter=0,reloadActive=true,isTabVisible=true,lastEmailCount=0,intervalID;
+    let unreadEmails=new Set();
 
     onMount(function () {
         // Safely get email type from localStorage
@@ -65,6 +52,10 @@
         if (address === null) {
             generateEmail(false);
         }
+
+        if(browser)document.addEventListener('visibilitychange',handleVisibilityChange);
+        if(!address) generateEmail && generateEmail(false);
+        startPolling();
     });
     
     // Generate email based on selected type
@@ -132,7 +123,6 @@ function normalizeGmailAddress(address) {
 }
 
     async function loadEmails() {
-        isLoading = true;
         try {
             if (!address) return;
             // Use address directly for API call (no normalization)
@@ -156,8 +146,6 @@ function normalizeGmailAddress(address) {
         } catch (error) {
             console.error("Failed to load emails:", error);
             showToast("Error", "Failed to load emails. Please try again.", "error");
-        } finally {
-            isLoading = false;
         }
     }
     
@@ -380,6 +368,17 @@ function selectDomain(domain) {
     function closeCryptoModal() {
         showCryptoModal = false;
     }
+
+    function handleVisibilityChange(){
+	isTabVisible=!document.hidden;
+	if(isTabVisible){loadEmails();clearInterval(intervalID);startPolling();}
+	else clearInterval(intervalID);
+}
+
+function startPolling(){
+	if(intervalID)clearInterval(intervalID);
+	intervalID=setInterval(timedReload,60000);
+}
 </script>
 <svelte:head>
     <title>Temporary Gmail Generator – Create Disposable Gmail Addresses Instantly | Fire Temp Mail</title>

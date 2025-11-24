@@ -33,11 +33,14 @@
     let selectedEmail = null;
     let viewMode = 'list';
 
-    let stopReloadOn = 20;
+    let stopReloadOn = 10;
     let reloadCounter = 0;
     let reloadActive = true;
-  
+    let isTabVisible = true;
+    let lastEmailCount = 0;
+    let intervalID;
     let unreadEmails = new Set();
+    
     let showForwardModal = false;
     let forwardToEmail = '';
     let emailToForward = null;
@@ -65,6 +68,10 @@
         if (address === null) {
             generateEmail(false);
         }
+        
+        if (browser) document.addEventListener('visibilitychange', handleVisibilityChange);
+        if (!address) generateEmail && generateEmail(false);
+        startPolling();
     });
     
     // Generate email based on selected type
@@ -137,33 +144,37 @@ function normalizeGmailAddress(address) {
             if (!address) return;
             // Use address directly for API call (no normalization)
             const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            if (!response.ok) throw new Error(response.status);
             
             const data = await response.json();
             const newEmails = data.mails || [];
-            
-            newEmails.forEach(email => {
-                const emailKey = email.recipient + "-" + email.suffix;
-                if (!emails.some(e => e.recipient + "-" + e.suffix === emailKey)) {
-                    unreadEmails.add(emailKey);
-                }
-            });
-            
-            emails = newEmails;
-            stats = data.stats || {};
-            
-            emails.sort((a, b) => new Date(b.date) - new Date(a.date));
-        } catch (error) {
-            console.error("Failed to load emails:", error);
-            showToast("Error", "Failed to load emails. Please try again.", "error");
+            if (newEmails.length !== lastEmailCount) {
+                newEmails.forEach(m => {
+                    const k = buildEmailKey(m);
+                    if (k && !emails.some(e => buildEmailKey(e) === k)) unreadEmails.add(k);
+                });
+                emails = newEmails;
+                lastEmailCount = newEmails.length;
+                emails.sort((a,b)=>new Date(b.date)-new Date(a.date));
+            }
+            stats = data.stats || stats;
+        } catch(e) {
+            showToast && showToast("Error","Failed to load emails.","error");
         } finally {
             isLoading = false;
         }
     }
     
+    function buildEmailKey(m) {
+        if (!m || !m.recipient || !m.suffix) return '';
+        return `${m.recipient}-${m.suffix}`;
+    }
+
     // Make address and currentDomain reactive to store changes
     $: address = $receivingEmail;
     $: currentDomain = $selectedDomain;
+    $: availableGmailAccounts = $gmailAccounts;
+    $: if (address && browser) loadEmails();
 
     // Watch for address changes and reload emails
     $: if (address) {
@@ -210,12 +221,14 @@ function selectDomain(domain) {
     }
     
     async function timedReload() {
+        if (!isTabVisible) return;
         if (reloadCounter >= stopReloadOn) {
             reloadActive = false;
             clearInterval(intervalID);
+            return;
         }
         await loadEmails();
-        reloadCounter += 1;
+        reloadCounter++;
     }
 
     async function deleteEmail(email) {
@@ -379,6 +392,20 @@ function selectDomain(domain) {
     
     function closeCryptoModal() {
         showCryptoModal = false;
+    }
+
+    function handleVisibilityChange() {
+        isTabVisible = !document.hidden;
+        if (isTabVisible) {
+            loadEmails();
+            clearInterval(intervalID);
+            startPolling();
+        } else clearInterval(intervalID);
+    }
+
+    function startPolling() {
+        if (intervalID) clearInterval(intervalID);
+        intervalID = setInterval(timedReload, 60000);
     }
 </script>
 <svelte:head>
@@ -1286,7 +1313,6 @@ FireTempMail stands out from other temporary email services because it uses real
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         display: flex;
         align-items: flex-start;
-        border-left: 4px solid var(--bs-info);
         animation: slideIn 0.3s ease-out;
         max-width: 100%;
     }

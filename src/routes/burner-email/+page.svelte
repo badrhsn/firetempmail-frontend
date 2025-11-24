@@ -33,10 +33,12 @@
     let selectedEmail = null;
     let viewMode = 'list';
 
-    let stopReloadOn = 20;
+    let stopReloadOn = 10;
     let reloadCounter = 0;
     let reloadActive = true;
-  
+    let isTabVisible = true;
+    let lastEmailCount = 0;
+    let intervalID;
     let unreadEmails = new Set();
     let showForwardModal = false;
     let forwardToEmail = '';
@@ -62,10 +64,39 @@
             }
         }
         
-        if (address === null) {
+        if (!address || address === undefined) {
             generateEmail(false);
         }
+        
+        startPolling();
+        
+        if (browser) {
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+        }
+        
+        return () => {
+            clearInterval(intervalID);
+            if (browser) {
+                document.removeEventListener('visibilitychange', handleVisibilityChange);
+            }
+        };
     });
+    
+    function handleVisibilityChange() {
+        isTabVisible = !document.hidden;
+        if (isTabVisible) {
+            loadEmails();
+            clearInterval(intervalID);
+            startPolling();
+        } else {
+            clearInterval(intervalID);
+        }
+    }
+    
+    function startPolling() {
+        if (intervalID) clearInterval(intervalID);
+        intervalID = setInterval(timedReload, 60000);
+    }
     
     // Generate email based on selected type
     async function generateEmail(reload, useCustomAlias = false) {
@@ -142,17 +173,16 @@ function normalizeGmailAddress(address) {
             const data = await response.json();
             const newEmails = data.mails || [];
             
-            newEmails.forEach(email => {
-                const emailKey = email.recipient + "-" + email.suffix;
-                if (!emails.some(e => e.recipient + "-" + e.suffix === emailKey)) {
-                    unreadEmails.add(emailKey);
-                }
-            });
-            
-            emails = newEmails;
-            stats = data.stats || {};
-            
-            emails.sort((a, b) => new Date(b.date) - new Date(a.date));
+            if (newEmails.length !== lastEmailCount) {
+                newEmails.forEach(m => {
+                    const k = buildEmailKey(m);
+                    if (k && !emails.some(e => buildEmailKey(e) === k)) unreadEmails.add(k);
+                });
+                emails = newEmails;
+                lastEmailCount = newEmails.length;
+                emails.sort((a,b)=>new Date(b.date)-new Date(a.date));
+            }
+            stats = data.stats || stats;
         } catch (error) {
             console.error("Failed to load emails:", error);
             showToast("Error", "Failed to load emails. Please try again.", "error");
@@ -161,12 +191,19 @@ function normalizeGmailAddress(address) {
         }
     }
     
+    function buildEmailKey(m) {
+        if (!m || !m.recipient || !m.suffix) return '';
+        return `${m.recipient}-${m.suffix}`;
+    }
+
     // Make address and currentDomain reactive to store changes
     $: address = $receivingEmail;
     $: currentDomain = $selectedDomain;
+    $: availableGmailAccounts = $gmailAccounts;
+    $: if (address && browser) loadEmails();
 
     // Watch for address changes and reload emails
-    $: if (address) {
+    $: if (address && browser) {
         loadEmails();
     }
 
@@ -210,12 +247,14 @@ function selectDomain(domain) {
     }
     
     async function timedReload() {
+        if (!isTabVisible) return;
         if (reloadCounter >= stopReloadOn) {
             reloadActive = false;
             clearInterval(intervalID);
+            return;
         }
         await loadEmails();
-        reloadCounter += 1;
+        reloadCounter++;
     }
 
     async function deleteEmail(email) {

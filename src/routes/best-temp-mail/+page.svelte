@@ -16,8 +16,8 @@
     import { browser } from '$app/environment';
     
     // These will reactively update when the stores change
-    let address;
-    let currentDomain;
+    let address = $receivingEmail;
+    let currentDomain = $selectedDomain;
     let availableGmailAccounts = $gmailAccounts;
     
     // Email type selection with safe localStorage access
@@ -33,11 +33,9 @@
     let selectedEmail = null;
     let viewMode = 'list';
 
-    let stopReloadOn = 20;
-    let reloadCounter = 0;
-    let reloadActive = true;
-  
+    let stopReloadOn = 10, reloadCounter = 0, reloadActive = true, isTabVisible = true, lastEmailCount = 0, intervalID;
     let unreadEmails = new Set();
+
     let showForwardModal = false;
     let forwardToEmail = '';
     let emailToForward = null;
@@ -65,6 +63,10 @@
         if (address === null) {
             generateEmail(false);
         }
+
+        if(browser)document.addEventListener('visibilitychange',handleVisibilityChange);
+        if(!address)generateEmail&&generateEmail(false);
+        startPolling();
     });
     
     // Generate email based on selected type
@@ -164,11 +166,8 @@ function normalizeGmailAddress(address) {
     // Make address and currentDomain reactive to store changes
     $: address = $receivingEmail;
     $: currentDomain = $selectedDomain;
-
-    // Watch for address changes and reload emails
-    $: if (address) {
-        loadEmails();
-    }
+    $: availableGmailAccounts = $gmailAccounts;
+    $: if (address && browser) loadEmails();
 
     function markAsRead(email) {
         if (!email) return;
@@ -369,6 +368,10 @@ function selectDomain(domain) {
     }
 
     const intervalID = setInterval(timedReload, 20000);  
+
+    function handleVisibilityChange(){isTabVisible=!document.hidden;if(isTabVisible){loadEmails();clearInterval(intervalID);startPolling();}else clearInterval(intervalID);}
+    function startPolling(){if(intervalID)clearInterval(intervalID);intervalID=setInterval(timedReload,60000);}
+    onMount(()=>{if(browser)document.addEventListener('visibilitychange',handleVisibilityChange);if(!address)generateEmail&&generateEmail(false);startPolling();return()=>{clearInterval(intervalID);if(browser)document.removeEventListener('visibilitychange',handleVisibilityChange);};});
 </script>
 <svelte:head>
     <title>Best Temp Mail Services 2025 — FireTempMail Review & Guide</title>
@@ -869,7 +872,7 @@ function selectDomain(domain) {
                     
                     <div class="kofi-qr">
                         <a href="https://ko-fi.com/firetempmail" target="_blank">
-                            <img src="https://storage.ko-fi.com/cdn/useruploads/N4N61LJTEP/qrcode.png?v=2668fb77-3b3b-4039-abc5-e7004afdcebe&v=2&_gl=1*1bpnkx0*_gcl_au*Mzg2NjgyMDUuMTc1ODM3MTgzOA..*_ga*Nzg1NDU0NTQ2LjE3NTgzNzE4Mzk.*_ga_M13FZ7VQ2C*czE3NTgzNzE4MzgkbzEkZzEkdDE3NTgzNzI5MTkkajYwJGwwJGgw" 
+                            <img src="https://storage.ko-fi.com/cdn/useruploads/N4N61LJTEP/qrcode.png?v=2668fb77-3b3b-4039-abc5-e7004afdcebe&v=2&_gl=1*1bpnkx0*_gcl_au*Mzg2NjgyMDUuMTc1ODM3MTgzOA..*_ga*Nzg1NDU0NTQ2LjE3NTgzNzE4Mzg.*_ga_M13FZ7VQ2C*czE3NTgzNzE4MzgkbzEkZzEkdDE3NTgzNzI5MTkkajYwJGwwJGgw" 
                                  alt="Support us on Ko-fi" class="img-fluid">
                         </a>
                         <p class="kofi-text">Scan to support us on Ko-fi</p>

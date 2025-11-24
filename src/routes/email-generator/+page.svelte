@@ -33,6 +33,34 @@
     let selectedEmail = null;
     let viewMode = 'list';
 
+    // Reactive store bindings
+import { receivingEmail, selectedDomain, gmailAccounts } from "../../lib/stores";
+import { browser } from '$app/environment';
+
+// Polling/control state
+let stopReloadOn = 10;
+let reloadCounter = 0;
+let reloadActive = true;
+let isTabVisible = true;
+let lastEmailCount = 0;
+let intervalID;
+let unreadEmails = new Set();
+
+// Bind to stores
+let address = $receivingEmail;
+let currentDomain = $selectedDomain;
+let availableGmailAccounts = $gmailAccounts;
+
+$: address = $receivingEmail;
+$: currentDomain = $selectedDomain;
+$: availableGmailAccounts = $gmailAccounts;
+$: if (address && browser) {
+	loadEmails();
+}
+
+// Ensure url constant present
+const url = "https://post.firetempmail.com";
+
     let stopReloadOn = 20;
     let reloadCounter = 0;
     let reloadActive = true;
@@ -65,6 +93,9 @@
         if (address === null) {
             generateEmail(false);
         }
+        
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        startPolling();
     });
     
     // Generate email based on selected type
@@ -161,6 +192,39 @@ function normalizeGmailAddress(address) {
         }
     }
     
+    // Visibility handler
+function handleVisibilityChange() {
+	isTabVisible = !document.hidden;
+	if (isTabVisible) {
+		loadEmails();
+		clearInterval(intervalID);
+		startPolling();
+	} else {
+		clearInterval(intervalID);
+	}
+}
+
+function startPolling() {
+	if (intervalID) clearInterval(intervalID);
+	intervalID = setInterval(timedReload, 60000);
+}
+
+async function timedReload() {
+	if (!isTabVisible) return;
+	if (reloadCounter >= stopReloadOn) {
+		reloadActive = false;
+		clearInterval(intervalID);
+		return;
+	}
+	await loadEmails();
+	reloadCounter += 1;
+}
+
+function buildEmailKey(email) {
+	if (!email || !email.recipient || !email.suffix) return '';
+	return `${email.recipient}-${email.suffix}`;
+}
+
     // Make address and currentDomain reactive to store changes
     $: address = $receivingEmail;
     $: currentDomain = $selectedDomain;
