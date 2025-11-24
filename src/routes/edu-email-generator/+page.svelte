@@ -319,83 +319,617 @@ function normalizeGmailAddress(address) {
         if (!email || !email.recipient || !email.suffix) return false;
         return unreadEmails.has(email.recipient + "-" + email.suffix);
     }
+</script>
 
+<svelte:head>
+    <title>EDU Email Generator 🎓 | Free Disposable .EDU Emails Online</title>
+    <meta name="description" content="Generate free .EDU temporary emails instantly with our EDU Email Generator. Perfect for student discounts, trials, and signups — secure, fast, and disposable inbox service." />
+    <meta name="keywords" content="EDU email generator, free edu email, disposable edu email, edu temp mail, generate edu email, temporary edu inbox, student discounts email" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://firetempmail.com/edu-email-generator" />
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="EDU Email Generator – Create Free Disposable .EDU Emails" />
+    <meta property="og:description" content="Use the EDU Email Generator to instantly create free disposable .EDU emails for student discounts, trials, and signups. Fast, secure, and private inbox." />
+    <meta property="og:url" content="https://firetempmail.com/edu-email-generator" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="EDU Email Generator – Free Disposable .EDU Emails" />
+    <meta name="twitter:description" content="Generate free .EDU temporary emails instantly with our EDU Email Generator. Private, fast & disposable student email service." />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is an EDU Email Generator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An EDU Email Generator creates disposable email addresses ending in .edu. These are often used for testing, student offers, or temporary registrations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does a generated EDU email last?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Generated .EDU temporary emails usually last 24–48 hours before being deleted. You can generate a new EDU email at any time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it safe to use an EDU temp email?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, it’s safe for free trials, student discounts, and testing. However, don’t use EDU temp emails for banking or personal identity accounts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use an EDU Email Generator for student discounts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, many use disposable EDU emails for accessing student discounts or free trials. Keep in mind these inboxes are temporary."
+      }
+    }
+  ]
+}
+</script>
+</svelte:head>
+
+<!-- Toast Notifications -->
+<div class="toast-container">
+    {#each toasts as toast (toast.id)}
+        <div class="toast toast-{toast.type}">
+            <div class="toast-icon">
+                {#if toast.type === 'success'}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                {:else if toast.type === 'error'}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 9V11M12 15H12.01M5.07183 19H18.9282C20.4678 19 21.4301 17.3333 20.6603 16L13.7321 4C12.9623 2.66667 11.0378 2.66667 10.268 4L3.33978 16C2.56998 17.3333 3.53223 19 5.07183 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                {:else}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M13 16H12V12H11M12 8H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                {/if}
+            </div>
+            
+            <div class="toast-content">
+                <h4>{toast.title}</h4>
+                <p>{toast.message}</p>
+            </div>
+            
+            <button on:click={() => removeToast(toast.id)} class="toast-close">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    {/each}
+</div>
+
+
+<!-- Away Banner -->
+{#if !reloadActive}
+    <div class="away-banner">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Are you still there? Please reload the page to re-enable automatic refresh.</span>
+    </div>
+{/if}
+
+<section class="py-4 py-xl-5">
+    <div class="container">
+        <div class="text-center p-4 p-lg-5">
+            <!-- Header -->
+            <h1>
+                <span>📮&nbsp;</span>
+                🎓 Free EDU Email Generator – Create Disposable .EDU Inbox Instantly
+            </h1>
+            <p class="lead">
+        Generate <strong>.EDU emails</strong> with our free <strong>EDU Email Generator</strong>. Perfect for signups, trials, student discounts, and more — without exposing your real inbox to spam.
+            </p>
+            
+            <!-- Email Address with Copy Button -->
+            <div class="email-address-container">
+                <small class="text-red-600">
+                    ⚠️ Tip: please click "Change Domain" to use the EDU domain.
+                </small>
+                <div class="email-display">
+                    <p>{address}</p>
+                    <button 
+                        on:click={copyToClipboard} 
+                        class="btn-copy"
+                        title="Copy to clipboard"
+                    >
+                        {#if isCopying}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        {:else}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M14 20H18C19.1046 20 20 19.1046 20 18V14C20 12.8954 19.1046 12 18 12H14C12.8954 12 12 12.8954 12 14V18C12 19.1046 12.8954 20 14 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        {/if}
+                    </button>
+                </div>
+                <div class="email-type-selector">
+                    <div class="radio-group">
+                        <label class="radio-option {emailType === 'domain' ? 'selected' : ''}">
+                            <input 
+                                type="radio" 
+                                name="email-type" 
+                                value="domain" 
+                                checked={emailType === 'domain'}
+                                on:change={() => handleEmailTypeChange('domain')}
+                            >
+                            <span class="radio-label">Domain</span>
+                        </label>
+                        
+                        <label class="radio-option {emailType === 'gmail' ? 'selected' : ''}">
+                            <input 
+                                type="radio" 
+                                name="email-type" 
+                                value="gmail" 
+                                checked={emailType === 'gmail'}
+                                on:change={() => handleEmailTypeChange('gmail')}
+                            >
+                            <span class="radio-label">Gmail</span>
+                        </label>
+                        
+                        <label class="radio-option {emailType === 'googlemail' ? 'selected' : ''}">
+                            <input 
+                                type="radio" 
+                                name="email-type" 
+                                value="googlemail" 
+                                checked={emailType === 'googlemail'}
+                                on:change={() => handleEmailTypeChange('googlemail')}
+                            >
+                            <span class="radio-label">GoogleMail</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="email-action-buttons">
+                    <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Generate New
+                    </button>
+                    
+                    {#if emailType === 'domain'}
+                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Custom Alias
+                    </button>
+                    
+                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Change Domain
+                    </button>
+                    {/if}
+                    
+                    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Refresh Page
+                    </button>
+                </div>
+
+                <!-- Domain Selector Dropdown (only shown for domain type) -->
+                {#if showDomainSelector && emailType === 'domain'}
+                <div class="domain-dropdown-container">
+                    <div class="domain-dropdown" role="listbox" aria-label="Select email domain">
+                        {#each availableDomains as domain}
+                            <button
+                                type="button"
+                                class="domain-option {currentDomain === domain ? 'active' : ''}"
+                                role="option"
+                                aria-selected={currentDomain === domain}
+                                on:click={() => selectDomain(domain)}
+                                on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), selectDomain(domain))}
+                            >
+                                <span class="domain-name">@{domain}</span>
+                                {#if currentDomain === domain}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                        <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span class="visually-hidden">(selected)</span>
+                                {/if}
+                            </button>
+                        {/each}
+                    </div>
+                </div>
+                {/if}
+            
+                {#if showCustomAliasInput && emailType === 'domain'}
+                <div class="custom-alias-container">
+                    <div class="alias-input-group">
+                        <input 
+                            type="text" 
+                            bind:value={customAlias}
+                            placeholder="Enter your custom alias"
+                            class="alias-input"
+                        />
+                        <span class="domain-suffix">@{currentDomain}</span>
+                    </div>
+                    {#if aliasError}
+                        <div class="alias-error">{aliasError}</div>
+                    {/if}
+                    <button 
+                        class="btn btn-primary" 
+                        on:click={() => generateEmail(true, true)}
+                        disabled={!customAlias}
+                    >
+                        Generate Custom Email
+                    </button>
+                </div>
+                {/if}
+            </div>
+            
+            {#if reloadActive && !isLoading}
+                <!-- Loading Indicator -->
+                <div class="loading-indicator">
+                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
+                    <span>Waiting for incoming emails</span>
+                </div>
+            {:else if !reloadActive}
+                <!-- Automatic refresh stopped -->
+                <div class="refresh-stopped">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Automatic refresh stopped</span>
+                </div>
+            {/if}
+
+            {#if viewMode === 'detail' && selectedEmail}
+                <!-- Email Detail View -->
+                                <div style="border: 2px solid rgb(215,215,215);border-radius: 16px;margin-bottom: 32px;overflow: hidden;">
+                    <!-- Email Header -->
+                    <div style="padding: 24px; border-bottom: 1px solid rgb(215,215,215);">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                            <button on:click={() => { viewMode = 'list'; selectedEmail = null; }} style="
+                                background: transparent;
+                                border: none;
+                                padding: 4px 8px;
+                                cursor: pointer;
+                                color: var(--bs-primary);
+                                display: flex;
+                                align-items: center;
+                                font-size: 14px;
+                            ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+                                    <path d="M19 12H5M5 12L11 18M5 12L11 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Back to inbox
+                            </button>
+                            
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn btn-primary" type="button" on:click={() => forwardEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-dark);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                        <path d="M3 10H13C17.4183 10 21 13.5817 21 18V20M3 10L9 16M3 10L9 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                
+                                <button class="btn btn-primary" type="button" on:click={() => deleteEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-red);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                        <path d="M19 7L18.1327 19.1425C18.0579 20.1891 17.187 21 16.1378 21H7.86224C6.81296 21 5.94208 20.1891 5.86732 19.1425L5 7M10 11V17M14 11V17M15 7V4C15 3.44772 14.5523 3 14 3H10C9.44772 3 9 3.44772 9 4V7M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 8px;">
+                            {selectedEmail.subject || '(No Subject)'}
+                        </h2>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center;">
+                                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="20" viewBox="0 0 24 24" width="20" fill="currentColor" style="margin-right: 8px; color: rgb(255,221,51);">
+                                    <g><rect fill="none" height="24" width="24"></rect></g>
+                                    <g><g><path d="M12,2C6.47,2,2,6.47,2,12s4.47,10,10,10s10-4.47,10-10S17.53,2,12,2z"></path></g></g>
+                                </svg>
+                                <span style="font-weight: 500;">{selectedEmail.sender || 'Unknown Sender'}</span>
+                            </div>
+                            
+                            <span style="color: var(--bs-secondary); font-size: 14px;">
+                                {selectedEmail.date ? new Date(selectedEmail.date).toLocaleString() : 'Unknown date'}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Email Body -->
+                    <div style="padding: 24px; overflow: auto; max-width: 100%; min-height: 200px;">
+                        {@html selectedEmail["content-html"] 
+    || selectedEmail["content-plain-formatted"] 
+    || selectedEmail["content-plain"] 
+    || 'No content available'}
+
+                    </div>
+                </div>
+            {:else}
+                <!-- Email List View -->
+                {#if emails.length === 0}
+                    <!-- Empty State -->
+                    <div class="empty-inbox">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                        </svg>
+                        <p>Your inbox is empty</p>
+                        <p>Emails sent to your temporary address will appear here</p>
+                    </div>
+                {:else}
+                    <!-- Email List -->
+                    <div class="email-list-container">
+                        <!-- List Header -->
+                        <div class="list-header">
+                            <h3>Inbox ({emails.length})</h3>
+                            <button on:click={manualReload} class="btn-refresh">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Refresh
+                            </button>
+                        </div>
+                        
+                        <!-- Email Items -->
+                        <div class="email-items">
+                            {#each emails as email (email.recipient + '-' + email.suffix)}
+                                {#if email && email.sender && email.recipient}
+                                    <div 
+                                        on:click={() => markAsRead(email)}
+                                        on:keypress={(e) => e.key === 'Enter' || e.key === ' ' ? markAsRead(email) : null}
+                                        role="button"
+                                        tabindex="0"
+                                        class:unread={isUnread(email)}
+                                        class="email-item"
+                                    >
+                                        <div class="email-avatar">
+                                            <div class="avatar">
+                                                {email.sender ? email.sender.charAt(0).toUpperCase() : '?'}
+                                            </div>
+                                            {#if isUnread(email)}
+                                                <div class="unread-indicator"></div>
+                                            {/if}
+                                        </div>
+                                        
+                                        <div class="email-content">
+                                            <div class="email-header">
+                                                <span class="email-sender">{email.sender || 'Unknown Sender'}</span>
+                                                <span class="email-date">{formatDate(email.date)}</span>
+                                            </div>
+                                            
+                                            <p class="email-subject">{email.subject || '(No Subject)'}</p>
+                                            
+                                            <p class="email-preview">
+                                                {getEmailPreview(email["content-html"] || email["content-text"])}
+                                            </p>
+                                        </div>
+                                    </div>
+                                {/if}
+                            {/each}
+                        </div>
+                    </div>
+                {/if}
+            {/if}
+
+            <h2>.EDU Temporary Email Generator</h2>
+            <p class="description">
+  Whether you need a <strong>free disposable .EDU email</strong> for testing, a secure anonymous inbox for quick registrations, or access to <strong>student offers</strong>, Fire Temp Mail makes it simple and reliable. Start generating your <strong>EDU email address</strong> today — 100% free and private.
+            </p>
+
+<h3>Why use our EDU Email Generator?</h3>
+<ul class="text-start mx-auto" style="max-width: 720px;">
+  <li>🔒 Protect your real inbox from spam and unwanted subscriptions.</li>
+  <li>📩 Instantly receive account confirmations, OTPs, and trial codes.</li>
+  <li>🎓 Access <strong>student-only discounts</strong> and educational platforms securely.</li>
+  <li>⏳ Emails auto-expire after a short period — no manual cleanup needed.</li>
+</ul>
+
+      <p class="description">
+        Whether you need a <strong>free disposable .EDU mailbox</strong> for quick registration or a secure anonymous inbox for temporary use, Fire Temp Mail makes it fast and reliable. Start generating your <strong>EDU temp mail</strong> address today — completely free.
+      </p>
+<section class="mt-10 p-6 bg-gray-50 rounded-xl shadow-md">
+  <h2 class="text-xl font-semibold mb-4">Frequently Asked Questions about EDU Email Generator</h2>
+  
+  <div class="space-y-4">
+    <details class="p-3 bg-white rounded-md shadow-sm">
+      <summary class="cursor-pointer font-medium">What is an EDU Email Generator?</summary>
+      <p class="mt-2 text-gray-600">
+        An EDU Email Generator creates disposable email addresses ending in <code>.edu</code>. These temporary inboxes are often used for <strong>student discounts, free trials, or test registrations</strong> without using your main email.
+      </p>
+    </details>
+
+    <details class="p-3 bg-white rounded-md shadow-sm">
+      <summary class="cursor-pointer font-medium">How long does a generated EDU email last?</summary>
+      <p class="mt-2 text-gray-600">
+        EDU emails generated on Fire Temp Mail typically last <strong>24–48 hours</strong> before being deleted. You can generate a new one anytime.
+      </p>
+    </details>
+
+    <details class="p-3 bg-white rounded-md shadow-sm">
+      <summary class="cursor-pointer font-medium">Is it safe to use an EDU temp email for signups?</summary>
+      <p class="mt-2 text-gray-600">
+        ✅ Yes. It’s safe for newsletters, trial signups, and <strong>student promotions</strong>. However, do not use disposable EDU emails for banking or personal identity accounts.
+      </p>
+    </details>
+
+    <details class="p-3 bg-white rounded-md shadow-sm">
+      <summary class="cursor-pointer font-medium">Can I use the EDU Email Generator for Amazon, Netflix, or student discounts?</summary>
+      <p class="mt-2 text-gray-600">
+        Many users create EDU emails for testing, accessing <strong>student-only offers</strong>, or trying subscription platforms. Just remember: these inboxes are temporary and may not work for long-term accounts.
+      </p>
+    </details>
+  </div>
+</section>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mb-4 mb-md-0">
+                <h5 class="footer-title">Quick Links</h5>
+                <div class="row">
+                    <div class="col-6">
+                        <ul class="footer-links">
+                            <li><a href="/email-generator">Email Generator</a></li>
+                            <li><a href="/gmail-generator">Gmail Generator</a></li>
+                            <li><a href="/temporary-gmail">Temporary Gmail</a></li>
+                            <li><a href="/temp-gmail">Temp Gmail</a></li>
+                            <li><a href="/temp-mail-edu">Temp Mail EDU</a></li>
+                            <li><a href="/10minutemail">10 Minute Mail</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <ul class="footer-links">
+                            <li><a href="/privacy-policy">Privacy Policy</a></li>
+                            <li><a href="/terms">Terms of Service</a></li>
+                            <li><a href="/faq">FAQ</a></li>
+                            <li><a href="/contact">Contact Us</a></li>
+                            <li><a href="/blog">Blog</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <h5 class="footer-title">Support Our Service</h5>
+                <div class="donation-section">
+                    <p>Help us keep FireTempMail free by making a donation. Your support helps maintain and improve our service.</p>
+                    
+                    <div class="kofi-qr">
+                        <a href="https://ko-fi.com/firetempmail" target="_blank">
+                            <img src="https://storage.ko-fi.com/cdn/useruploads/N4N61LJTEP/qrcode.png?v=2668fb77-3b3b-4039-abc5-e7004afdcebe&v=2&_gl=1*1bpnkx0*_gcl_au*Mzg2NjgyMDUuMTc1ODM3MTgzOA..*_ga*Nzg1NDU0NTQ2LjE3NTgzNzE4Mzg.*_ga_M13FZ7VQ2C*czE3NTgzNzE4MzgkbzEkZzEkdDE3NTgzNzI5MTkkajYwJGwwJGgw" 
+                                 alt="Support us on Ko-fi" class="img-fluid">
+                        </a>
+                        <p class="kofi-text">Scan to support us on Ko-fi</p>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <p class="mb-0">We've received <span class="counter">{stats.count}</span> emails so far.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <p class="copyright">© 2024 FireTempMail. All Rights Reserved.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
     /* Footer Styles */
-        .footer {
-            background-color: #22242b;
-            color: #a7a7aa;
-            padding: 40px 0 20px;
-        }
-        .footer a {
-            color: #a7a7aa;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .footer a:hover {
-            color: #3498db;
-        }
-        .footer-title {
-            font-weight: 700;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-            color: #a7a7aa;
-        }
-        .footer-links {
-            list-style: none;
-            padding: 0;
-            line-height: 2.2;
-        }
-        .footer-links li {
-            margin-bottom: 8px;
-        }
-        .divider {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin: 30px 0 20px;
-        }
-        .donation-section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
-        }
-        .donation-options {
-            display: flex;
-            justify-content: center;
-            margin-top: 15px;
-        }
-        .kofi-qr {
-            text-align: center;
-            margin-top: 15px;
-        }
-        .kofi-qr img {
-            max-width: 150px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .kofi-text {
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
-        .copyright {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        .social-icons {
-            font-size: 1.5rem;
-            margin-top: 15px;
-        }
-        .social-icons a {
-            margin-right: 15px;
-        }
-        .counter {
-            color: rgb(255,255,255);
-            background: rgb(33,37,41);
-            border-radius: 10px;
-            padding: 4px 12px;
-            font-size: 14px;
-            margin: 0 2px;
-            font-family: monospace;
-        }
+    .footer {
+        background-color: #22242b;
+        color: #a7a7aa;
+        padding: 40px 0 20px;
+    }
+    .footer a {
+        color: #a7a7aa;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    .footer a:hover {
+        color: #3498db;
+    }
+    .footer-title {
+        font-weight: 700;
+        margin-bottom: 20px;
+        font-size: 1.3rem;
+        color: #a7a7aa;
+    }
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        line-height: 2.2;
+    }
+    .footer-links li {
+        margin-bottom: 8px;
+    }
+    .divider {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin: 30px 0 20px;
+    }
+    .donation-section {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+    .donation-options {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+    }
+    .kofi-qr {
+        text-align: center;
+        margin-top: 15px;
+    }
+    .kofi-qr img {
+        max-width: 150px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .kofi-text {
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+    .copyright {
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+    .social-icons {
+        font-size: 1.5rem;
+        margin-top: 15px;
+    }
+    .social-icons a {
+        margin-right: 15px;
+    }
+    .counter {
+        color: rgb(255,255,255);
+        background: rgb(33,37,41);
+        border-radius: 10px;
+        padding: 4px 12px;
+        font-size: 14px;
+        margin: 0 2px;
+        font-family: monospace;
+    }
                 .email-type-selector {
                     margin: 1rem 0;
                 }
@@ -1406,7 +1940,7 @@ function normalizeGmailAddress(address) {
         right: -2px;
         width: 12px;
         height: 12px;
-        border-radius: 50%;
+               border-radius: 50%;
         background: var(--bs-primary);
         border: 2px solid white;
     }
@@ -1632,535 +2166,3 @@ function normalizeGmailAddress(address) {
         }
     }
 </style>
-
-<svelte:head>
-    <title>EDU Email Generator 🎓 | Free Disposable .EDU Emails Online</title>
-    <meta name="description" content="Generate free .EDU temporary emails instantly with our EDU Email Generator. Perfect for student discounts, trials, and signups — secure, fast, and disposable inbox service." />
-    <meta name="keywords" content="EDU email generator, free edu email, disposable edu email, edu temp mail, generate edu email, temporary edu inbox, student discounts email" />
-    <meta name="robots" content="index, follow" />
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://firetempmail.com/edu-email-generator" />
-
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="EDU Email Generator – Create Free Disposable .EDU Emails" />
-    <meta property="og:description" content="Use the EDU Email Generator to instantly create free disposable .EDU emails for student discounts, trials, and signups. Fast, secure, and private inbox." />
-    <meta property="og:url" content="https://firetempmail.com/edu-email-generator" />
-    <meta property="og:type" content="website" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="EDU Email Generator – Free Disposable .EDU Emails" />
-    <meta name="twitter:description" content="Generate free .EDU temporary emails instantly with our EDU Email Generator. Private, fast & disposable student email service." />
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is an EDU Email Generator?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "An EDU Email Generator creates disposable email addresses ending in .edu. These are often used for testing, student offers, or temporary registrations."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How long does a generated EDU email last?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Generated .EDU temporary emails usually last 24–48 hours before being deleted. You can generate a new EDU email at any time."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is it safe to use an EDU temp email?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, it’s safe for free trials, student discounts, and testing. However, don’t use EDU temp emails for banking or personal identity accounts."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I use an EDU Email Generator for student discounts?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, many use disposable EDU emails for accessing student discounts or free trials. Keep in mind these inboxes are temporary."
-      }
-    }
-  ]
-}
-</script>
-</svelte:head>
-
-<!-- Toast Notifications -->
-<div class="toast-container">
-    {#each toasts as toast (toast.id)}
-        <div class="toast toast-{toast.type}">
-            <div class="toast-icon">
-                {#if toast.type === 'success'}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                        <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                {:else if toast.type === 'error'}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 9V11M12 15H12.01M5.07183 19H18.9282C20.4678 19 21.4301 17.3333 20.6603 16L13.7321 4C12.9623 2.66667 11.0378 2.66667 10.268 4L3.33978 16C2.56998 17.3333 3.53223 19 5.07183 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                {:else}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                        <path d="M13 16H12V12H11M12 8H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                {/if}
-            </div>
-            
-            <div class="toast-content">
-                <h4>{toast.title}</h4>
-                <p>{toast.message}</p>
-            </div>
-            
-            <button on:click={() => removeToast(toast.id)} class="toast-close">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
-                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-        </div>
-    {/each}
-</div>
-
-
-<!-- Away Banner -->
-{#if !reloadActive}
-    <div class="away-banner">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>Are you still there? Please reload the page to re-enable automatic refresh.</span>
-    </div>
-{/if}
-
-<section class="py-4 py-xl-5">
-    <div class="container">
-        <div class="text-center p-4 p-lg-5">
-            <!-- Header -->
-            <h1>
-                <span>📮&nbsp;</span>
-                🎓 Free EDU Email Generator – Create Disposable .EDU Inbox Instantly
-            </h1>
-            <p class="lead">
-        Generate <strong>.EDU emails</strong> with our free <strong>EDU Email Generator</strong>. Perfect for signups, trials, student discounts, and more — without exposing your real inbox to spam.
-            </p>
-            
-            <!-- Email Address with Copy Button -->
-            <div class="email-address-container">
-                <small class="text-red-600">
-                    ⚠️ Tip: please click "Change Domain" to use the EDU domain.
-                </small>
-                <div class="email-display">
-                    <p>{address}</p>
-                    <button 
-                        on:click={copyToClipboard} 
-                        class="btn-copy"
-                        title="Copy to clipboard"
-                    >
-                        {#if isCopying}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        {:else}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M8 16H6C4.89543 16 4 15.1046 4 14V6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6V8M14 20H18C19.1046 20 20 19.1046 20 18V14C20 12.8954 19.1046 12 18 12H14C12.8954 12 12 12.8954 12 14V18C12 19.1046 12.8954 20 14 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        {/if}
-                    </button>
-                </div>
-                <div class="email-type-selector">
-                    <div class="radio-group">
-                        <label class="radio-option {emailType === 'domain' ? 'selected' : ''}">
-                            <input 
-                                type="radio" 
-                                name="email-type" 
-                                value="domain" 
-                                checked={emailType === 'domain'}
-                                on:change={() => handleEmailTypeChange('domain')}
-                            >
-                            <span class="radio-label">Domain</span>
-                        </label>
-                        
-                        <label class="radio-option {emailType === 'gmail' ? 'selected' : ''}">
-                            <input 
-                                type="radio" 
-                                name="email-type" 
-                                value="gmail" 
-                                checked={emailType === 'gmail'}
-                                on:change={() => handleEmailTypeChange('gmail')}
-                            >
-                            <span class="radio-label">Gmail</span>
-                        </label>
-                        
-                        <label class="radio-option {emailType === 'googlemail' ? 'selected' : ''}">
-                            <input 
-                                type="radio" 
-                                name="email-type" 
-                                value="googlemail" 
-                                checked={emailType === 'googlemail'}
-                                on:change={() => handleEmailTypeChange('googlemail')}
-                            >
-                            <span class="radio-label">GoogleMail</span>
-                        </label>
-                    </div>
-                </div>
-                
-                <div class="email-action-buttons">
-                    <button class="btn btn-primary" type="button" on:click={() => generateEmail(true)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        Generate New
-                    </button>
-                    
-                    {#if emailType === 'domain'}
-                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        Custom Alias
-                    </button>
-                    
-                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        Change Domain
-                    </button>
-                    {/if}
-                    
-                    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        Refresh Page
-                    </button>
-                </div>
-
-                <!-- Domain Selector Dropdown (only shown for domain type) -->
-                {#if showDomainSelector && emailType === 'domain'}
-                <div class="domain-dropdown-container">
-                    <div class="domain-dropdown" role="listbox" aria-label="Select email domain">
-                        {#each availableDomains as domain}
-                            <button
-                                type="button"
-                                class="domain-option {currentDomain === domain ? 'active' : ''}"
-                                role="option"
-                                aria-selected={currentDomain === domain}
-                                on:click={() => selectDomain(domain)}
-                                on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), selectDomain(domain))}
-                            >
-                                <span class="domain-name">@{domain}</span>
-                                {#if currentDomain === domain}
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                        <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    <span class="visually-hidden">(selected)</span>
-                                {/if}
-                            </button>
-                        {/each}
-                    </div>
-                </div>
-                {/if}
-            
-                {#if showCustomAliasInput && emailType === 'domain'}
-                <div class="custom-alias-container">
-                    <div class="alias-input-group">
-                        <input 
-                            type="text" 
-                            bind:value={customAlias}
-                            placeholder="Enter your custom alias"
-                            class="alias-input"
-                        />
-                        <span class="domain-suffix">@{currentDomain}</span>
-                    </div>
-                    {#if aliasError}
-                        <div class="alias-error">{aliasError}</div>
-                    {/if}
-                    <button 
-                        class="btn btn-primary" 
-                        on:click={() => generateEmail(true, true)}
-                        disabled={!customAlias}
-                    >
-                        Generate Custom Email
-                    </button>
-                </div>
-                {/if}
-            </div>
-            
-            {#if reloadActive && !isLoading}
-                <!-- Loading Indicator -->
-                <div class="loading-indicator">
-                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
-                    <span>Waiting for incoming emails</span>
-                </div>
-            {:else if !reloadActive}
-                <!-- Automatic refresh stopped -->
-                <div class="refresh-stopped">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span>Automatic refresh stopped</span>
-                </div>
-            {/if}
-
-            {#if viewMode === 'detail' && selectedEmail}
-                <!-- Email Detail View -->
-                                <div style="border: 2px solid rgb(215,215,215);border-radius: 16px;margin-bottom: 32px;overflow: hidden;">
-                    <!-- Email Header -->
-                    <div style="padding: 24px; border-bottom: 1px solid rgb(215,215,215);">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
-                            <button on:click={() => { viewMode = 'list'; selectedEmail = null; }} style="
-                                background: transparent;
-                                border: none;
-                                padding: 4px 8px;
-                                cursor: pointer;
-                                color: var(--bs-primary);
-                                display: flex;
-                                align-items: center;
-                                font-size: 14px;
-                            ">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
-                                    <path d="M19 12H5M5 12L11 18M5 12L11 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                Back to inbox
-                            </button>
-                            
-                            <div style="display: flex; gap: 8px;">
-                                <button class="btn btn-primary" type="button" on:click={() => forwardEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-dark);">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                        <path d="M3 10H13C17.4183 10 21 13.5817 21 18V20M3 10L9 16M3 10L9 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                                
-                                <button class="btn btn-primary" type="button" on:click={() => deleteEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-red);">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                        <path d="M19 7L18.1327 19.1425C18.0579 20.1891 17.187 21 16.1378 21H7.86224C6.81296 21 5.94208 20.1891 5.86732 19.1425L5 7M10 11V17M14 11V17M15 7V4C15 3.44772 14.5523 3 14 3H10C9.44772 3 9 3.44772 9 4V7M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 8px;">
-                            {selectedEmail.subject || '(No Subject)'}
-                        </h2>
-                        
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div style="display: flex; align-items: center;">
-                                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="20" viewBox="0 0 24 24" width="20" fill="currentColor" style="margin-right: 8px; color: rgb(255,221,51);">
-                                    <g><rect fill="none" height="24" width="24"></rect></g>
-                                    <g><g><path d="M12,2C6.47,2,2,6.47,2,12s4.47,10,10,10s10-4.47,10-10S17.53,2,12,2z"></path></g></g>
-                                </svg>
-                                <span style="font-weight: 500;">{selectedEmail.sender || 'Unknown Sender'}</span>
-                            </div>
-                            
-                            <span style="color: var(--bs-secondary); font-size: 14px;">
-                                {selectedEmail.date ? new Date(selectedEmail.date).toLocaleString() : 'Unknown date'}
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <!-- Email Body -->
-                    <div style="padding: 24px; overflow: auto; max-width: 100%; min-height: 200px;">
-                        {@html selectedEmail["content-html"] 
-    || selectedEmail["content-plain-formatted"] 
-    || selectedEmail["content-plain"] 
-    || 'No content available'}
-
-                    </div>
-                </div>
-            {:else}
-                <!-- Email List View -->
-                {#if emails.length === 0}
-                    <!-- Empty State -->
-                    <div class="empty-inbox">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                        </svg>
-                        <p>Your inbox is empty</p>
-                        <p>Emails sent to your temporary address will appear here</p>
-                    </div>
-                {:else}
-                    <!-- Email List -->
-                    <div class="email-list-container">
-                        <!-- List Header -->
-                        <div class="list-header">
-                            <h3>Inbox ({emails.length})</h3>
-                            <button on:click={manualReload} class="btn-refresh">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                    <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                Refresh
-                            </button>
-                        </div>
-                        
-                        <!-- Email Items -->
-                        <div class="email-items">
-                            {#each emails as email (email.recipient + '-' + email.suffix)}
-                                {#if email && email.sender && email.recipient}
-                                    <div 
-                                        on:click={() => markAsRead(email)}
-                                        on:keypress={(e) => e.key === 'Enter' || e.key === ' ' ? markAsRead(email) : null}
-                                        role="button"
-                                        tabindex="0"
-                                        class:unread={isUnread(email)}
-                                        class="email-item"
-                                    >
-                                        <div class="email-avatar">
-                                            <div class="avatar">
-                                                {email.sender ? email.sender.charAt(0).toUpperCase() : '?'}
-                                            </div>
-                                            {#if isUnread(email)}
-                                                <div class="unread-indicator"></div>
-                                            {/if}
-                                        </div>
-                                        
-                                        <div class="email-content">
-                                            <div class="email-header">
-                                                <span class="email-sender">{email.sender || 'Unknown Sender'}</span>
-                                                <span class="email-date">{formatDate(email.date)}</span>
-                                            </div>
-                                            
-                                            <p class="email-subject">{email.subject || '(No Subject)'}</p>
-                                            
-                                            <p class="email-preview">
-                                                {getEmailPreview(email["content-html"] || email["content-text"])}
-                                            </p>
-                                        </div>
-                                    </div>
-                                {/if}
-                            {/each}
-                        </div>
-                    </div>
-                {/if}
-            {/if}
-
-            <h2>.EDU Temporary Email Generator</h2>
-            <p class="description">
-  Whether you need a <strong>free disposable .EDU email</strong> for testing, a secure anonymous inbox for quick registrations, or access to <strong>student offers</strong>, Fire Temp Mail makes it simple and reliable. Start generating your <strong>EDU email address</strong> today — 100% free and private.
-            </p>
-
-<h3>Why use our EDU Email Generator?</h3>
-<ul class="text-start mx-auto" style="max-width: 720px;">
-  <li>🔒 Protect your real inbox from spam and unwanted subscriptions.</li>
-  <li>📩 Instantly receive account confirmations, OTPs, and trial codes.</li>
-  <li>🎓 Access <strong>student-only discounts</strong> and educational platforms securely.</li>
-  <li>⏳ Emails auto-expire after a short period — no manual cleanup needed.</li>
-</ul>
-
-      <p class="description">
-        Whether you need a <strong>free disposable .EDU mailbox</strong> for quick registration or a secure anonymous inbox for temporary use, Fire Temp Mail makes it fast and reliable. Start generating your <strong>EDU temp mail</strong> address today — completely free.
-      </p>
-<section class="mt-10 p-6 bg-gray-50 rounded-xl shadow-md">
-  <h2 class="text-xl font-semibold mb-4">Frequently Asked Questions about EDU Email Generator</h2>
-  
-  <div class="space-y-4">
-    <details class="p-3 bg-white rounded-md shadow-sm">
-      <summary class="cursor-pointer font-medium">What is an EDU Email Generator?</summary>
-      <p class="mt-2 text-gray-600">
-        An EDU Email Generator creates disposable email addresses ending in <code>.edu</code>. These temporary inboxes are often used for <strong>student discounts, free trials, or test registrations</strong> without using your main email.
-      </p>
-    </details>
-
-    <details class="p-3 bg-white rounded-md shadow-sm">
-      <summary class="cursor-pointer font-medium">How long does a generated EDU email last?</summary>
-      <p class="mt-2 text-gray-600">
-        EDU emails generated on Fire Temp Mail typically last <strong>24–48 hours</strong> before being deleted. You can generate a new one anytime.
-      </p>
-    </details>
-
-    <details class="p-3 bg-white rounded-md shadow-sm">
-      <summary class="cursor-pointer font-medium">Is it safe to use an EDU temp email for signups?</summary>
-      <p class="mt-2 text-gray-600">
-        ✅ Yes. It’s safe for newsletters, trial signups, and <strong>student promotions</strong>. However, do not use disposable EDU emails for banking or personal identity accounts.
-      </p>
-    </details>
-
-    <details class="p-3 bg-white rounded-md shadow-sm">
-      <summary class="cursor-pointer font-medium">Can I use the EDU Email Generator for Amazon, Netflix, or student discounts?</summary>
-      <p class="mt-2 text-gray-600">
-        Many users create EDU emails for testing, accessing <strong>student-only offers</strong>, or trying subscription platforms. Just remember: these inboxes are temporary and may not work for long-term accounts.
-      </p>
-    </details>
-  </div>
-</section>
-
-        </div>
-
-    </div>
-</section>
-
-<!-- Footer -->
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 mb-4 mb-md-0">
-                <h5 class="footer-title">Quick Links</h5>
-                <div class="row">
-                    <div class="col-6">
-                        <ul class="footer-links">
-                            <li><a href="/email-generator">Email Generator</a></li>
-                            <li><a href="/gmail-generator">Gmail Generator</a></li>
-                            <li><a href="/temporary-gmail">Temporary Gmail</a></li>
-                            <li><a href="/temp-gmail">Temp Gmail</a></li>
-                            <li><a href="/temp-mail-edu">Temp Mail EDU</a></li>
-                            <li><a href="/10minutemail">10 Minute Mail</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="footer-links">
-                            <li><a href="/privacy-policy">Privacy Policy</a></li>
-                            <li><a href="/terms">Terms of Service</a></li>
-                            <li><a href="/faq">FAQ</a></li>
-                            <li><a href="/contact">Contact Us</a></li>
-                            <li><a href="/blog">Blog</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <h5 class="footer-title">Support Our Service</h5>
-                <div class="donation-section">
-                    <p>Help us keep FireTempMail free by making a donation. Your support helps maintain and improve our service.</p>
-                    
-                    <div class="kofi-qr">
-                        <a href="https://ko-fi.com/firetempmail" target="_blank">
-                            <img src="https://storage.ko-fi.com/cdn/useruploads/N4N61LJTEP/qrcode.png?v=2668fb77-3b3b-4039-abc5-e7004afdcebe&v=2&_gl=1*1bpnkx0*_gcl_au*Mzg2NjgyMDUuMTc1ODM3MTgzOA..*_ga*Nzg1NDU0NTQ2LjE3NTgzNzE4Mzg.*_ga_M13FZ7VQ2C*czE3NTgzNzE4MzgkbzEkZzEkdDE3NTgzNzI5MTkkajYwJGwwJGgw" 
-                                 alt="Support us on Ko-fi" class="img-fluid">
-                        </a>
-                        <p class="kofi-text">Scan to support us on Ko-fi</p>
-                    </div>
-                    
-                    <div class="mt-3">
-                        <p class="mb-0">We've received <span class="counter">{stats.count}</span> emails so far.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="divider"></div>
-        
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <p class="copyright">© 2024 FireTempMail. All Rights Reserved.</p>
-            </div>
-            <div class="col-md-6 text-md-end">
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
