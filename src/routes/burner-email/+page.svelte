@@ -407,7 +407,6 @@ function selectDomain(domain) {
         return unreadEmails.has(email.recipient + "-" + email.suffix);
     }
 
-    const intervalID = setInterval(timedReload, 20000);  
 </script>
 
 
