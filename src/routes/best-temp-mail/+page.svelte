@@ -23,7 +23,7 @@
     // Email type selection with safe localStorage access
     let emailType = 'domain';
     
-    const url = "https://post.firetempmail.com";
+    const url = "https://mail.firetempmail.com";
     
     let copyrightYear = new Date().getFullYear();
     let emails = [];

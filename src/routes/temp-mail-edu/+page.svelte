@@ -16,7 +16,7 @@ $: currentDomain=$selectedDomain;
 $: availableGmailAccounts=$gmailAccounts;
 $: if(address && browser) loadEmails();
 
-const url="https://post.firetempmail.com";
+const url="https://mail.firetempmail.com";
 
 async function loadEmails(){
 	try{

@@ -19,7 +19,7 @@
     let emailType = 'domain';
     
     // Keep your existing domain!
-    const url = "https://post.firetempmail.com";
+    const url = "https://mail.firetempmail.com";
     
     let copyrightYear = new Date().getFullYear();
     let emails = [];

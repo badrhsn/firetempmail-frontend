@@ -14,7 +14,7 @@
     import { browser } from '$app/environment';
     
     let emailType = 'domain';
-    const url = "https://post.firetempmail.com";
+    const url = "https://mail.firetempmail.com";
     
     let copyrightYear = new Date().getFullYear();
     let emails = [];
@@ -1891,7 +1891,7 @@ function extractEmailAddress(str = '') {
     }
     
     .email-header {
-                      padding:  24px;
+               padding:  24px;
         border-bottom: 1px solid rgb(215,215,215);
     }
     
