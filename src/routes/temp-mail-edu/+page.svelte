@@ -64,6 +64,7 @@ import {
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     
+    // Email type selection
     let emailType = 'domain';
     const url = "https://mail.firetempmail.com";
     
