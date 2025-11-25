@@ -11,17 +11,12 @@
         gmailAccounts,
         getNextGmailAccount
     } from "../../lib/stores";
-    import Navigation from '$lib/components/Navigation.svelte';
-    import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     
     // Email type selection
     let emailType = 'domain';
-    
-    // API URL - DECLARE ONLY ONCE
     const url = "https://mail.firetempmail.com";
     
-    // Other variables
     let copyrightYear = new Date().getFullYear();
     let emails = [];
     let stats = {};
@@ -30,22 +25,13 @@
     let selectedEmail = null;
     let viewMode = 'list';
 
-    // Reactive store bindings
-    let address = $receivingEmail;
-    let currentDomain = $selectedDomain;
-    let availableGmailAccounts = $gmailAccounts;
-
-    $: address = $receivingEmail;
-    $: currentDomain = $selectedDomain;
-    $: availableGmailAccounts = $gmailAccounts;
-    $: if (address && browser) {
-        loadEmails();
-    }
-
-    let stopReloadOn = 20;
+    let stopReloadOn = 10;
     let reloadCounter = 0;
     let reloadActive = true;
+    let isTabVisible = true;
+    let lastEmailCount = 0;
   
+    let intervalID;
     let unreadEmails = new Set();
     let showForwardModal = false;
     let forwardToEmail = '';
@@ -55,30 +41,110 @@
     let customAlias = '';
     let showCustomAliasInput = false;
     let aliasError = '';
-    
     let showDomainSelector = false;
 
+    // Reactive store bindings
+    let address = $receivingEmail;
+    let currentDomain = $selectedDomain;
+    let availableGmailAccounts = $gmailAccounts;
+    
+    $: address = $receivingEmail;
+    $: currentDomain = $selectedDomain;
+    $: availableGmailAccounts = $gmailAccounts;
+    $: if (address && browser) {
+        loadEmails();
+    }
+
     onMount(function () {
-        // Safely get email type from localStorage
         if (browser) {
             try {
                 const savedType = localStorage.getItem("emailType");
-                if (savedType) {
-                    emailType = savedType;
-                }
+                if (savedType) emailType = savedType;
             } catch (e) {
                 console.error("Error accessing localStorage:", e);
             }
+            document.addEventListener('visibilitychange', handleVisibilityChange);
         }
         
-        if (address === null) {
+        if (!address || address === undefined) {
             generateEmail(false);
         }
         
-        document.addEventListener('visibilitychange', handleVisibilityChange);
         startPolling();
+        
+        return () => {
+            clearInterval(intervalID);
+            if (browser) {
+                document.removeEventListener('visibilitychange', handleVisibilityChange);
+            }
+        };
     });
     
+    function handleVisibilityChange() {
+        isTabVisible = !document.hidden;
+        if (isTabVisible) {
+            loadEmails();
+            clearInterval(intervalID);
+            startPolling();
+        } else {
+            clearInterval(intervalID);
+        }
+    }
+    
+    function startPolling() {
+        if (intervalID) clearInterval(intervalID);
+        intervalID = setInterval(timedReload, 60000);
+    }
+    
+    async function loadEmails() {
+        isLoading = true;
+        try {
+            if (!address) return;
+            
+            const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            
+            const data = await response.json();
+            const newEmails = data.mails || [];
+            
+            if (newEmails.length !== lastEmailCount) {
+                newEmails.forEach(email => {
+                    const emailKey = buildEmailKey(email);
+                    if (emailKey && !emails.some(e => buildEmailKey(e) === emailKey)) {
+                        unreadEmails.add(emailKey);
+                    }
+                });
+                
+                emails = newEmails;
+                lastEmailCount = newEmails.length;
+            }
+            
+            stats = data.stats || {};
+            emails.sort((a, b) => new Date(b.date) - new Date(a.date));
+        } catch (error) {
+            console.error("Failed to load emails:", error);
+            showToast("Error", "Failed to load emails. Please try again.", "error");
+        } finally {
+            isLoading = false;
+        }
+    }
+    
+    async function timedReload() {
+        if (!isTabVisible) return;
+        if (reloadCounter >= stopReloadOn) {
+            reloadActive = false;
+            clearInterval(intervalID);
+            return;
+        }
+        await loadEmails();
+        reloadCounter += 1;
+    }
+    
+    function buildEmailKey(email) {
+        if (!email || !email.recipient || !email.suffix) return '';
+        return `${email.recipient}-${email.suffix}`;
+    }
+
     // Generate email based on selected type
     async function generateEmail(reload, useCustomAlias = false) {
         let fullAddress;
@@ -143,86 +209,12 @@ function normalizeGmailAddress(address) {
         : `${base}@gmail.com`;
 }
 
-    async function loadEmails() {
-        isLoading = true;
-        try {
-            if (!address) return;
-            // Use address directly for API call (no normalization)
-            const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            
-            const data = await response.json();
-            const newEmails = data.mails || [];
-            
-            newEmails.forEach(email => {
-                const emailKey = email.recipient + "-" + email.suffix;
-                if (!emails.some(e => e.recipient + "-" + e.suffix === emailKey)) {
-                    unreadEmails.add(emailKey);
-                }
-            });
-            
-            emails = newEmails;
-            stats = data.stats || {};
-            
-            emails.sort((a, b) => new Date(b.date) - new Date(a.date));
-        } catch (error) {
-            console.error("Failed to load emails:", error);
-            showToast("Error", "Failed to load emails. Please try again.", "error");
-        } finally {
-            isLoading = false;
-        }
-    }
-    
-    // Visibility handler
-function handleVisibilityChange() {
-	isTabVisible = !document.hidden;
-	if (isTabVisible) {
-		loadEmails();
-		clearInterval(intervalID);
-		startPolling();
-	} else {
-		clearInterval(intervalID);
-	}
-}
-
-function startPolling() {
-	if (intervalID) clearInterval(intervalID);
-	intervalID = setInterval(timedReload, 60000);
-}
-
-async function timedReload() {
-	if (!isTabVisible) return;
-	if (reloadCounter >= stopReloadOn) {
-		reloadActive = false;
-		clearInterval(intervalID);
-		return;
-	}
-	await loadEmails();
-	reloadCounter += 1;
-}
-
-function buildEmailKey(email) {
-	if (!email || !email.recipient || !email.suffix) return '';
-	return `${email.recipient}-${email.suffix}`;
-}
-
-    // Make address and currentDomain reactive to store changes
-    $: address = $receivingEmail;
-    $: currentDomain = $selectedDomain;
-
-    // Watch for address changes and reload emails
-    $: if (address) {
-        loadEmails();
-    }
-
     function markAsRead(email) {
         if (!email) return;
         const emailKey = email.recipient + "-" + email.suffix;
         unreadEmails.delete(emailKey);
         viewEmail(email);
     }
-    
-
     
     function isValidAlias(alias) {
         const aliasRegex = /^[a-zA-Z0-9-]+$/;
@@ -241,14 +233,12 @@ function buildEmailKey(email) {
         showDomainSelector = !showDomainSelector;
     }
     
-function selectDomain(domain) {
-    updateEmailDomain(domain);
-    showDomainSelector = false;
-    
-    // Force UI update
-    address = $receivingEmail;
-    currentDomain = domain;
-}
+    function selectDomain(domain) {
+        updateEmailDomain(domain);
+        showDomainSelector = false;
+        address = $receivingEmail;
+        currentDomain = domain;
+    }
     
     function manualReload() {
         window.location.reload();
@@ -404,7 +394,7 @@ function selectDomain(domain) {
         return unreadEmails.has(email.recipient + "-" + email.suffix);
     }
 
-    const intervalID = setInterval(timedReload, 20000);  
+    let intervalID = setInterval(timedReload, 20000);  
 </script>
 
 <svelte:head>
@@ -2015,7 +2005,7 @@ function selectDomain(domain) {
     }
     
     .email-item.unread .email-subject {
-        font-weight: 700;
+        font-weight:  700;
         color: var(--bs-dark);
     }
     
