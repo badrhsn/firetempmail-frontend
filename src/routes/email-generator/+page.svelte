@@ -17,6 +17,8 @@
     
     // Email type selection
     let emailType = 'domain';
+    
+    // API URL - DECLARE ONLY ONCE
     const url = "https://mail.firetempmail.com";
     
     // Other variables
@@ -39,9 +41,6 @@
     $: if (address && browser) {
         loadEmails();
     }
-
-    // Ensure url constant present
-    const url = "https://post.firetempmail.com";
 
     let stopReloadOn = 20;
     let reloadCounter = 0;
