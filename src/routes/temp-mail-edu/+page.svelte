@@ -108,7 +108,7 @@ async function loadEmails() {
         
         if (newEmails.length !== lastEmailCount) {
             newEmails.forEach(m => {
-                const k = buildEmailKey(m);
+                const k = buildEmailKey(m);  // ✅ FIX: Define k here
                 if (k && !emails.some(e => buildEmailKey(e) === k)) unreadEmails.add(k);
             });
             emails = newEmails;
@@ -1979,6 +1979,7 @@ function isUnread(email) {
     .email-item:hover {
         background-color: #f8f9fa;
     }
+    
     
     .email-item.unread {
         background-color: rgba(13, 110, 253, 0.05);
