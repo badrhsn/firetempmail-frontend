@@ -34,32 +34,19 @@
     let viewMode = 'list';
 
     // Reactive store bindings
-import { receivingEmail, selectedDomain, gmailAccounts } from "../../lib/stores";
-import { browser } from '$app/environment';
+    let address = $receivingEmail;
+    let currentDomain = $selectedDomain;
+    let availableGmailAccounts = $gmailAccounts;
 
-// Polling/control state
-let stopReloadOn = 10;
-let reloadCounter = 0;
-let reloadActive = true;
-let isTabVisible = true;
-let lastEmailCount = 0;
-let intervalID;
-let unreadEmails = new Set();
+    $: address = $receivingEmail;
+    $: currentDomain = $selectedDomain;
+    $: availableGmailAccounts = $gmailAccounts;
+    $: if (address && browser) {
+        loadEmails();
+    }
 
-// Bind to stores
-let address = $receivingEmail;
-let currentDomain = $selectedDomain;
-let availableGmailAccounts = $gmailAccounts;
-
-$: address = $receivingEmail;
-$: currentDomain = $selectedDomain;
-$: availableGmailAccounts = $gmailAccounts;
-$: if (address && browser) {
-	loadEmails();
-}
-
-// Ensure url constant present
-const url = "https://post.firetempmail.com";
+    // Ensure url constant present
+    const url = "https://post.firetempmail.com";
 
     let stopReloadOn = 20;
     let reloadCounter = 0;
@@ -880,7 +867,7 @@ function selectDomain(domain) {
                     
                     <div class="kofi-qr">
                         <a href="https://ko-fi.com/firetempmail" target="_blank">
-                            <img src="https://storage.ko-fi.com/cdn/useruploads/N4N61LJTEP/qrcode.png?v=2668fb77-3b3b-4039-abc5-e7004afdcebe&v=2&_gl=1*1bpnkx0*_gcl_au*Mzg2NjgyMDUuMTc1ODM3MTgzOA..*_ga*Nzg1NDU0NTQ2LjE3NTgzNzE4Mzk.*_ga_M13FZ7VQ2C*czE3NTgzNzE4MzgkbzEkZzEkdDE3NTgzNzI5MTkkajYwJGwwJGgw" 
+                            <img src="https://storage.ko-fi.com/cdn/useruploads/N4N61LJTEP/qrcode.png?v=2668fb77-3b3b-4039-abc5-e7004afdcebe&v=2&_gl=1*1bpnkx0*_gcl_au*Mzg2NjgyMDUuMTc1ODM3MTgzOA..*_ga*Nzg1NDU0NTQ2LjE3NTgzNzE4Mzg.*_ga_M13FZ7VQ2C*czE3NTgzNzE4MzgkbzEkZzEkdDE3NTgzNzI5MTkkajYwJGwwJGgw" 
                                  alt="Support us on Ko-fi" class="img-fluid">
                         </a>
                         <p class="kofi-text">Scan to support us on Ko-fi</p>
