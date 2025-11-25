@@ -2,6 +2,7 @@
 // @ts-nocheck
     import { onMount } from "svelte";
     import { generate } from "random-words";
+    import { getPopularArticles } from '$lib/data/blogPosts';
     import { 
         receivingEmail, 
         availableDomains, 
