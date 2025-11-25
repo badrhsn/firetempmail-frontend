@@ -11,7 +11,7 @@
         generateNewRandomEmail,
         gmailAccounts,
         getNextGmailAccount
-    } from "../../lib/stores";
+    } from "../lib/stores";
     import { browser } from '$app/environment';
     
     // Email type selection
