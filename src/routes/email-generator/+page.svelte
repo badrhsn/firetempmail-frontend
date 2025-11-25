@@ -394,7 +394,6 @@ function normalizeGmailAddress(address) {
         return unreadEmails.has(email.recipient + "-" + email.suffix);
     }
 
-    let intervalID = setInterval(timedReload, 20000);  
 </script>
 
 <svelte:head>
