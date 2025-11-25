@@ -16,10 +16,13 @@
     import { browser } from '$app/environment';
     
     // These will reactively update when the stores change
-    let address = $receivingEmail;
-    let currentDomain = $selectedDomain;
-    let availableGmailAccounts = $gmailAccounts;
-    
+    $: address = $receivingEmail;
+    $: currentDomain = $selectedDomain;
+    $: availableGmailAccounts = $gmailAccounts;
+    $: if (address && browser) {
+        loadEmails();
+    }
+
     // Email type selection with safe localStorage access
     let emailType = 'domain';
     
@@ -1941,7 +1944,7 @@ function normalizeGmailAddress(address) {
     
     .email-item {
         padding: 16px;
-        border-bottom: 1px solid rgb(240,240,240);
+        border-bottom:  1px solid rgb(240,240,240);
         cursor: pointer;
         transition: background-color 0.2s;
         display: flex;
@@ -1956,7 +1959,6 @@ function normalizeGmailAddress(address) {
         background-color: rgba(13, 110, 253, 0.05);
     }
     
-       
     .email-item.unread:hover {
         background-color: rgba(13, 110, 253, 0.08);
     }

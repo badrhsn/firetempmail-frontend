@@ -1981,6 +1981,8 @@ function isUnread(email) {
     }
     
     
+
+    
     .email-item.unread {
         background-color: rgba(13, 110, 253, 0.05);
     }
