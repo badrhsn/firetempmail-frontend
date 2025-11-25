@@ -15,9 +15,9 @@
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     
-    // These will reactively update when the stores change
-    let address;
-    let currentDomain;
+    // Initialize variables BEFORE reactive statements
+    let address = $receivingEmail;
+    let currentDomain = $selectedDomain;
     let availableGmailAccounts = $gmailAccounts;
     
     // Email type selection with safe localStorage access
@@ -35,6 +35,14 @@
 
     let stopReloadOn=10,reloadCounter=0,reloadActive=true,isTabVisible=true,lastEmailCount=0,intervalID;
     let unreadEmails=new Set();
+
+    // These will reactively update when the stores change
+    $: address = $receivingEmail;
+    $: currentDomain = $selectedDomain;
+    $: availableGmailAccounts = $gmailAccounts;
+    $: if (address && browser) {
+        loadEmails();
+    }
 
     onMount(function () {
         // Safely get email type from localStorage
@@ -56,6 +64,13 @@
         if(browser)document.addEventListener('visibilitychange',handleVisibilityChange);
         if(!address) generateEmail && generateEmail(false);
         startPolling();
+
+        return () => {
+            clearInterval(intervalID);
+            if (browser) {
+                document.removeEventListener('visibilitychange', handleVisibilityChange);
+            }
+        };
     });
     
     // Generate email based on selected type
@@ -149,15 +164,6 @@ function normalizeGmailAddress(address) {
         }
     }
     
-    // Make address and currentDomain reactive to store changes
-    $: address = $receivingEmail;
-    $: currentDomain = $selectedDomain;
-
-    // Watch for address changes and reload emails
-    $: if (address) {
-        loadEmails();
-    }
-
     function markAsRead(email) {
         if (!email) return;
         const emailKey = email.recipient + "-" + email.suffix;
@@ -1311,188 +1317,6 @@ function startPolling(){
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         display: flex;
         align-items: flex-start;
-        border-left: 4px solid var(--bs-info);
-        animation: slideIn 0.3s ease-out;
-        max-width: 100%;
-    }
-    
-    @keyframes slideIn {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    .btn:hover {
-        opacity: 0.8;
-    }
-
-    .email-address-container {
-    margin-top: 32px;
-    margin-bottom: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.email-display {
-    padding: 8px 30px;
-    border: 2px solid rgb(215,215,215);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: white;
-    min-height: 50px;
-}
-
-.email-text {
-    margin-bottom: 0px;
-    font-size: 20px;
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.copy-btn {
-    margin-left: 12px;
-    background: transparent;
-    border: none;
-    padding: 4px 8px;
-    color: var(--bs-primary);
-}
-
-.regenerate-btn {
-    padding: 8px 30px;
-    border-radius: 16px;
-    border-width: 2px;
-    border-color: rgb(33,37,41);
-    background: rgb(33,37,41);
-    font-weight: 500;
-    height: 50px;
-    font-size: 20px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
-
-.btn-blog {
-    padding: 8px 30px;
-    border-radius: 16px;
-    border-width: 2px;
-    border-color: rgb(33,37,41);
-    background: rgb(33,37,41);
-    font-weight: 500;
-    height: 50px;
-    font-size: 20px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
-
-.regenerate-btn svg {
-    font-size: 24px;
-}
-
-/* Desktop styles - side by side layout */
-@media (min-width: 1200px) {
-    .email-address-container {
-        flex-direction: row;
-        align-items: center;
-    }
-    
-    .email-display {
-        width: 100%;
-        margin-right: 16px;
-        margin-bottom: 0;
-    }
-    
-    .regenerate-btn {
-        min-width: 220px;
-        margin-bottom: 0;
-    }
-}
-
-/* Mobile styles - stacked layout */
-@media (max-width: 1199px) {
-    .email-text {
-        white-space: normal;
-        text-overflow: clip;
-        word-break: break-all;
-    }
-}
-
-.copy-btn:hover,
-.regenerate-btn:hover {
-    opacity: 0.8;
-}
-/* Mobile styles for toast */
-@media (max-width: 768px) {
-    .toast-container {
-        top: 10px;
-        right: 10px;
-        left: 10px;
-        max-width: none;
-    }
-}
-/* Mobile styles for email list */
-@media (max-width: 768px) {
-    .email-item {
-        padding: 12px;
-    }
-    
-    .email-avatar {
-        width: 32px;
-        height: 32px;
-        font-size: 14px;
-        margin-right: 8px;
-    }
-    
-    .email-sender {
-        font-size: 14px;
-    }
-    
-    .email-date {
-        font-size: 11px;
-    }
-    
-    .email-subject {
-        font-size: 14px;
-    }
-    
-    .email-preview {
-        font-size: 12px;
-    }
-}
-
- /* Toast Notifications */
-    .toast-container {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 10000;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        max-width: 350px;
-    }
-    
-    .toast {
-        background: white;
-        padding: 1rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        display: flex;
-        align-items: flex-start;
         animation: slideIn 0.3s ease-out;
         max-width: 100%;
     }
@@ -2165,6 +1989,7 @@ function startPolling(){
             margin-right: 0;
             min-width: unset;
         }
+        
         
         .email-action-buttons {
             flex-direction: column;

@@ -64,16 +64,10 @@ import {
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     
-    // These will reactively update when the stores change
-    let address;
-    let currentDomain;
-    let availableGmailAccounts = $gmailAccounts;
-    
-    // Email type selection with safe localStorage access
     let emailType = 'domain';
+    const url = "https://mail.firetempmail.com";
     
-    const url = "https://post.firetempmail.com";
-    
+    // All variable declarations
     let copyrightYear = new Date().getFullYear();
     let emails = [];
     let stats = {};
@@ -81,41 +75,34 @@ import {
     let isCopying = false;
     let selectedEmail = null;
     let viewMode = 'list';
-
-    let stopReloadOn = 20;
+    let stopReloadOn = 10;
     let reloadCounter = 0;
     let reloadActive = true;
-  
+    let isTabVisible = true;
+    let lastEmailCount = 0;
+    let intervalID;
     let unreadEmails = new Set();
     let showForwardModal = false;
     let forwardToEmail = '';
     let emailToForward = null;
     let isLoading = false;
-    
     let customAlias = '';
     let showCustomAliasInput = false;
     let aliasError = '';
-    
     let showDomainSelector = false;
 
-    onMount(function () {
-        // Safely get email type from localStorage
-        if (browser) {
-            try {
-                const savedType = localStorage.getItem("emailType");
-                if (savedType) {
-                    emailType = savedType;
-                }
-            } catch (e) {
-                console.error("Error accessing localStorage:", e);
-            }
-        }
-        
-        if (address === null) {
-            generateEmail(false);
-        }
-    });
+    // Reactive variables
+    let address = $receivingEmail;
+    let currentDomain = $selectedDomain;
+    let availableGmailAccounts = $gmailAccounts;
     
+    $: address = $receivingEmail;
+    $: currentDomain = $selectedDomain;
+    $: availableGmailAccounts = $gmailAccounts;
+    $: if (address && browser) {
+        loadEmails();
+    }
+
     // Generate email based on selected type
     async function generateEmail(reload, useCustomAlias = false) {
         let fullAddress;
