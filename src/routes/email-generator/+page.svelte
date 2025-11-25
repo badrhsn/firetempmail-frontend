@@ -254,15 +254,6 @@ function selectDomain(domain) {
         window.location.reload();
     }
     
-    async function timedReload() {
-        if (reloadCounter >= stopReloadOn) {
-            reloadActive = false;
-            clearInterval(intervalID);
-        }
-        await loadEmails();
-        reloadCounter += 1;
-    }
-
     async function deleteEmail(email) {
         if (!email || !email.recipient || !email.suffix) return;
         
