@@ -205,45 +205,6 @@ function normalizeGmailAddress(address) {
         : `${base}@gmail.com`;
 }
 
-async function loadEmails() {
-    isLoading = true;
-    try {
-        if (!address) return;
-        // Use address directly for API call (no normalization)
-        const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        
-        const data = await response.json();
-        const newEmails = data.mails || [];
-        
-        newEmails.forEach(email => {
-            const emailKey = email.recipient + "-" + email.suffix;
-            if (!emails.some(e => e.recipient + "-" + e.suffix === emailKey)) {
-                unreadEmails.add(emailKey);
-            }
-        });
-        
-        emails = newEmails;
-        stats = data.stats || {};
-        
-        emails.sort((a, b) => new Date(b.date) - new Date(a.date));
-    } catch (error) {
-        console.error("Failed to load emails:", error);
-        showToast("Error", "Failed to load emails. Please try again.", "error");
-    } finally {
-        isLoading = false;
-    }
-}
-
-// Make address and currentDomain reactive to store changes
-$: address = $receivingEmail;
-$: currentDomain = $selectedDomain;
-
-// Watch for address changes and reload emails
-$: if (address) {
-    loadEmails();
-}
-
 function markAsRead(email) {
     if (!email) return;
     const emailKey = email.recipient + "-" + email.suffix;
