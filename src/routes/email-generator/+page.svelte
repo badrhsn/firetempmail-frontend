@@ -15,16 +15,11 @@
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     
-    // These will reactively update when the stores change
-    let address;
-    let currentDomain;
-    let availableGmailAccounts = $gmailAccounts;
-    
-    // Email type selection with safe localStorage access
+    // Email type selection
     let emailType = 'domain';
-    
     const url = "https://mail.firetempmail.com";
     
+    // Other variables
     let copyrightYear = new Date().getFullYear();
     let emails = [];
     let stats = {};
@@ -2013,6 +2008,7 @@ function selectDomain(domain) {
         font-weight: 700;
         color: var(--bs-dark);
     }
+    
     
     .email-date {
         color: var(--bs-secondary);
