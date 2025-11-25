@@ -1,163 +1,200 @@
 <script>
 // @ts-nocheck
-import { receivingEmail, selectedDomain, gmailAccounts } from "../../lib/stores";
-import { browser } from '$app/environment';
 import { onMount } from "svelte";
-
-let stopReloadOn=10,reloadCounter=0,reloadActive=true,isTabVisible=true,lastEmailCount=0,intervalID;
-let unreadEmails=new Set();
-
-let address=$receivingEmail;
-let currentDomain=$selectedDomain;
-let availableGmailAccounts=$gmailAccounts;
-
-$: address=$receivingEmail;
-$: currentDomain=$selectedDomain;
-$: availableGmailAccounts=$gmailAccounts;
-$: if(address && browser) loadEmails();
-
-const url="https://mail.firetempmail.com";
-
-async function loadEmails(){
-	try{
-		if(!address)return;
-		const r=await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
-		if(!r.ok)throw new Error(r.status);
-		const data=await r.json();
-		const newEmails=data.mails||[];
-		if(newEmails.length!==lastEmailCount){
-			newEmails.forEach(m=>{
-				const k=buildEmailKey(m);
-				if(k && !emails.some(e=>buildEmailKey(e)===k)) unreadEmails.add(k);
-			});
-			emails=newEmails;
-			lastEmailCount=newEmails.length;
-			emails.sort((a,b)=>new Date(b.date)-new Date(a.date));
-		}
-		stats=data.stats||stats;
-	}catch(e){
-		showToast && showToast("Error","Failed to load emails.","error");
-	}
-}
-
-function buildEmailKey(m){return m&&m.recipient&&m.suffix?`${m.recipient}-${m.suffix}`:'';}
-
-function handleVisibilityChange(){isTabVisible=!document.hidden;if(isTabVisible){loadEmails();clearInterval(intervalID);startPolling();}else clearInterval(intervalID);}
-
-function startPolling(){if(intervalID)clearInterval(intervalID);intervalID=setInterval(timedReload,60000);}
-
-async function timedReload(){if(!isTabVisible)return;if(reloadCounter>=stopReloadOn){reloadActive=false;clearInterval(intervalID);return;}await loadEmails();reloadCounter++;}
-
-onMount(()=>{if(browser)document.addEventListener('visibilitychange',handleVisibilityChange);if(!address)generateEmail&&generateEmail(false);startPolling();return()=>{clearInterval(intervalID);if(browser)document.removeEventListener('visibilitychange',handleVisibilityChange);};});
-
 import { generate } from "random-words";
 import { 
-        receivingEmail, 
-        availableDomains, 
-        selectedDomain, 
-        updateEmailDomain,
-        generateNewRandomEmail,
-        gmailAccounts,
-        getNextGmailAccount
-    } from "../../lib/stores";
-    import Navigation from '$lib/components/Navigation.svelte';
-    import { getPopularArticles } from '$lib/data/blogPosts';
-    import { browser } from '$app/environment';
-    
-    // Email type selection
-    let emailType = 'domain';
-    const url = "https://mail.firetempmail.com";
-    
-    // All variable declarations
-    let copyrightYear = new Date().getFullYear();
-    let emails = [];
-    let stats = {};
-    let toasts = [];
-    let isCopying = false;
-    let selectedEmail = null;
-    let viewMode = 'list';
-    let stopReloadOn = 10;
-    let reloadCounter = 0;
-    let reloadActive = true;
-    let isTabVisible = true;
-    let lastEmailCount = 0;
-    let intervalID;
-    let unreadEmails = new Set();
-    let showForwardModal = false;
-    let forwardToEmail = '';
-    let emailToForward = null;
-    let isLoading = false;
-    let customAlias = '';
-    let showCustomAliasInput = false;
-    let aliasError = '';
-    let showDomainSelector = false;
+    receivingEmail, 
+    availableDomains, 
+    selectedDomain, 
+    updateEmailDomain,
+    generateNewRandomEmail,
+    gmailAccounts,
+    getNextGmailAccount
+} from "../../lib/stores";
+import Navigation from '$lib/components/Navigation.svelte';
+import { getPopularArticles } from '$lib/data/blogPosts';
+import { browser } from '$app/environment';
 
-    // Reactive variables
-    let address = $receivingEmail;
-    let currentDomain = $selectedDomain;
-    let availableGmailAccounts = $gmailAccounts;
-    
-    $: address = $receivingEmail;
-    $: currentDomain = $selectedDomain;
-    $: availableGmailAccounts = $gmailAccounts;
-    $: if (address && browser) {
-        loadEmails();
+// Email type selection
+let emailType = 'domain';
+const url = "https://mail.firetempmail.com";
+
+// All variable declarations
+let copyrightYear = new Date().getFullYear();
+let emails = [];
+let stats = {};
+let toasts = [];
+let isCopying = false;
+let selectedEmail = null;
+let viewMode = 'list';
+let stopReloadOn = 10;
+let reloadCounter = 0;
+let reloadActive = true;
+let isTabVisible = true;
+let lastEmailCount = 0;
+let intervalID;
+let unreadEmails = new Set();
+let showForwardModal = false;
+let forwardToEmail = '';
+let emailToForward = null;
+let isLoading = false;
+let customAlias = '';
+let showCustomAliasInput = false;
+let aliasError = '';
+let showDomainSelector = false;
+
+// Reactive variables
+let address = $receivingEmail;
+let currentDomain = $selectedDomain;
+let availableGmailAccounts = $gmailAccounts;
+
+$: address = $receivingEmail;
+$: currentDomain = $selectedDomain;
+$: availableGmailAccounts = $gmailAccounts;
+$: if (address && browser) {
+    loadEmails();
+}
+
+onMount(function () {
+    if (browser) {
+        try {
+            const savedType = localStorage.getItem("emailType");
+            if (savedType) emailType = savedType;
+        } catch (e) {
+            console.error("Error accessing localStorage:", e);
+        }
+        document.addEventListener('visibilitychange', handleVisibilityChange);
     }
+    
+    if (!address || address === undefined) {
+        generateEmail(false);
+    }
+    
+    startPolling();
+    
+    return () => {
+        clearInterval(intervalID);
+        if (browser) {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        }
+    };
+});
 
-    // Generate email based on selected type
-    async function generateEmail(reload, useCustomAlias = false) {
-        let fullAddress;
+function handleVisibilityChange() {
+    isTabVisible = !document.hidden;
+    if (isTabVisible) {
+        loadEmails();
+        clearInterval(intervalID);
+        startPolling();
+    } else {
+        clearInterval(intervalID);
+    }
+}
+
+function startPolling() {
+    if (intervalID) clearInterval(intervalID);
+    intervalID = setInterval(timedReload, 60000);
+}
+
+async function loadEmails() {
+    isLoading = true;
+    try {
+        if (!address) return;
+        const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         
-        if (emailType === 'gmail' || emailType === 'googlemail') {
-            // Generate Gmail-style alias
-            fullAddress = getNextGmailAccount(emailType);
-            receivingEmail.set(fullAddress);
-            
-            if (reload) {
-                window.location.reload();
-            }
+        const data = await response.json();
+        const newEmails = data.mails || [];
+        
+        if (newEmails.length !== lastEmailCount) {
+            newEmails.forEach(m => {
+                const k = buildEmailKey(m);
+                if (k && !emails.some(e => buildEmailKey(e) === k)) unreadEmails.add(k);
+            });
+            emails = newEmails;
+            lastEmailCount = newEmails.length;
+        }
+        
+        stats = data.stats || {};
+        emails.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } catch (error) {
+        console.error("Failed to load emails:", error);
+        showToast("Error", "Failed to load emails. Please try again.", "error");
+    } finally {
+        isLoading = false;
+    }
+}
+
+function buildEmailKey(m) {
+    return m && m.recipient && m.suffix ? `${m.recipient}-${m.suffix}` : '';
+}
+
+async function timedReload() {
+    if (!isTabVisible) return;
+    if (reloadCounter >= stopReloadOn) {
+        reloadActive = false;
+        clearInterval(intervalID);
+        return;
+    }
+    await loadEmails();
+    reloadCounter += 1;
+}
+
+
+// Generate email based on selected type
+async function generateEmail(reload, useCustomAlias = false) {
+    let fullAddress;
+    
+    if (emailType === 'gmail' || emailType === 'googlemail') {
+        // Generate Gmail-style alias
+        fullAddress = getNextGmailAccount(emailType);
+        receivingEmail.set(fullAddress);
+        
+        if (reload) {
+            window.location.reload();
+        }
+        return;
+    }
+    
+    // Domain-based generation
+    if (useCustomAlias && customAlias) {
+        if (!isValidAlias(customAlias)) {
+            showToast("Error", "Alias can only contain letters, numbers, and hyphens", "error");
             return;
         }
         
-        // Domain-based generation
-        if (useCustomAlias && customAlias) {
-            if (!isValidAlias(customAlias)) {
-                showToast("Error", "Alias can only contain letters, numbers, and hyphens", "error");
-                return;
-            }
-            
-            fullAddress = customAlias + "@" + currentDomain;
-        } else {
-            let words = generate(1);
-            fullAddress = words[0] + Math.floor(Math.random() * 1000) + "@" + currentDomain;
-        }
-        
-        receivingEmail.set(fullAddress);
+        fullAddress = customAlias + "@" + currentDomain;
+    } else {
+        let words = generate(1);
+        fullAddress = words[0] + Math.floor(Math.random() * 1000) + "@" + currentDomain;
+    }
+    
+    receivingEmail.set(fullAddress);
 
-        if (reload) {
-            window.location.reload();
-        } else {
-            customAlias = '';
-            showCustomAliasInput = false;
+    if (reload) {
+        window.location.reload();
+    } else {
+        customAlias = '';
+        showCustomAliasInput = false;
+    }
+}
+
+// Handle email type change with safe localStorage access
+function handleEmailTypeChange(newType) {
+    emailType = newType;
+    
+    if (browser) {
+        try {
+            localStorage.setItem("emailType", newType);
+        } catch (e) {
+            console.error("Error saving to localStorage:", e);
         }
     }
     
-    // Handle email type change with safe localStorage access
-    function handleEmailTypeChange(newType) {
-        emailType = newType;
-        
-        if (browser) {
-            try {
-                localStorage.setItem("emailType", newType);
-            } catch (e) {
-                console.error("Error saving to localStorage:", e);
-            }
-        }
-        
-        generateEmail(true);
-    }
-    
-    // Gmail normalization: keep dots, only lowercase and keep alias
+    generateEmail(true);
+}
+
+// Gmail normalization: keep dots, only lowercase and keep alias
 function normalizeGmailAddress(address) {
     const [local, domain] = address.split("@");
     if (!domain || domain.toLowerCase() !== "gmail.com")
@@ -168,71 +205,71 @@ function normalizeGmailAddress(address) {
         : `${base}@gmail.com`;
 }
 
-    async function loadEmails() {
-        isLoading = true;
-        try {
-            if (!address) return;
-            // Use address directly for API call (no normalization)
-            const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            
-            const data = await response.json();
-            const newEmails = data.mails || [];
-            
-            newEmails.forEach(email => {
-                const emailKey = email.recipient + "-" + email.suffix;
-                if (!emails.some(e => e.recipient + "-" + e.suffix === emailKey)) {
-                    unreadEmails.add(emailKey);
-                }
-            });
-            
-            emails = newEmails;
-            stats = data.stats || {};
-            
-            emails.sort((a, b) => new Date(b.date) - new Date(a.date));
-        } catch (error) {
-            console.error("Failed to load emails:", error);
-            showToast("Error", "Failed to load emails. Please try again.", "error");
-        } finally {
-            isLoading = false;
-        }
+async function loadEmails() {
+    isLoading = true;
+    try {
+        if (!address) return;
+        // Use address directly for API call (no normalization)
+        const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(address)}`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        
+        const data = await response.json();
+        const newEmails = data.mails || [];
+        
+        newEmails.forEach(email => {
+            const emailKey = email.recipient + "-" + email.suffix;
+            if (!emails.some(e => e.recipient + "-" + e.suffix === emailKey)) {
+                unreadEmails.add(emailKey);
+            }
+        });
+        
+        emails = newEmails;
+        stats = data.stats || {};
+        
+        emails.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } catch (error) {
+        console.error("Failed to load emails:", error);
+        showToast("Error", "Failed to load emails. Please try again.", "error");
+    } finally {
+        isLoading = false;
     }
-    
-    // Make address and currentDomain reactive to store changes
-    $: address = $receivingEmail;
-    $: currentDomain = $selectedDomain;
+}
 
-    // Watch for address changes and reload emails
-    $: if (address) {
-        loadEmails();
-    }
+// Make address and currentDomain reactive to store changes
+$: address = $receivingEmail;
+$: currentDomain = $selectedDomain;
 
-    function markAsRead(email) {
-        if (!email) return;
-        const emailKey = email.recipient + "-" + email.suffix;
-        unreadEmails.delete(emailKey);
-        viewEmail(email);
-    }
-    
+// Watch for address changes and reload emails
+$: if (address) {
+    loadEmails();
+}
 
-    
-    function isValidAlias(alias) {
-        const aliasRegex = /^[a-zA-Z0-9-]+$/;
-        return aliasRegex.test(alias);
+function markAsRead(email) {
+    if (!email) return;
+    const emailKey = email.recipient + "-" + email.suffix;
+    unreadEmails.delete(emailKey);
+    viewEmail(email);
+}
+
+
+
+function isValidAlias(alias) {
+    const aliasRegex = /^[a-zA-Z0-9-]+$/;
+    return aliasRegex.test(alias);
+}
+
+function toggleCustomAlias() {
+    showCustomAliasInput = !showCustomAliasInput;
+    if (!showCustomAliasInput) {
+        customAlias = '';
+        aliasError = '';
     }
-    
-    function toggleCustomAlias() {
-        showCustomAliasInput = !showCustomAliasInput;
-        if (!showCustomAliasInput) {
-            customAlias = '';
-            aliasError = '';
-        }
-    }
-    
-    function toggleDomainSelector() {
-        showDomainSelector = !showDomainSelector;
-    }
-    
+}
+
+function toggleDomainSelector() {
+    showDomainSelector = !showDomainSelector;
+}
+
 function selectDomain(domain) {
     updateEmailDomain(domain);
     showDomainSelector = false;
@@ -241,170 +278,160 @@ function selectDomain(domain) {
     address = $receivingEmail;
     currentDomain = domain;
 }
+
+function manualReload() {
+    window.location.reload();
+}
+
+async function deleteEmail(email) {
+    if (!email || !email.recipient || !email.suffix) return;
     
-    function manualReload() {
-        window.location.reload();
-    }
-    
-    async function timedReload() {
-        if (reloadCounter >= stopReloadOn) {
-            reloadActive = false;
-            clearInterval(intervalID);
-        }
-        await loadEmails();
-        reloadCounter += 1;
-    }
-
-    async function deleteEmail(email) {
-        if (!email || !email.recipient || !email.suffix) return;
-        
-        if (confirm("Do you really want to permanently delete this email?")) {
-            try {
-                let emailKey = email.recipient + "-" + email.suffix;
-                const response = await fetch(`${url}/mail/delete?key=${emailKey}`);
-                const data = await response.json();
-                
-                if (data.code === 200) {
-                    emails = emails.filter(e => e && e.recipient + "-" + e.suffix !== emailKey);
-                    unreadEmails.delete(emailKey);
-                    
-                    if (stats.count) {
-                        stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
-                    }
-                    
-                    if (selectedEmail && selectedEmail.recipient + "-" + selectedEmail.suffix === emailKey) {
-                        selectedEmail = null;
-                        viewMode = 'list';
-                    }
-                    
-                    showToast("Success", "Email deleted successfully.", "success");
-                } else {
-                    showToast("Error", `Failed to delete email: ${data.msg}`, "error");
-                }
-            } catch (error) {
-                console.error("Delete error:", error);
-                showToast("Error", "Failed to delete email. Please try again.", "error");
-            }
-        }
-    }
-
-    function deleteEmailAddress() {
-        if (confirm("Are you sure you want to delete this email address? All messages will be lost.")) {
-            emails = [];
-            unreadEmails.clear();
-            stats = {};
-            generateEmail(true);
-            showToast("Success", "New email address generated", "success");
-        }
-    }
-
-    function openForwardModal(email) {
-        emailToForward = email;
-        forwardToEmail = '';
-        showForwardModal = true;
-    }
-
-    async function forwardEmail(email) {
-        if (!email || !email.recipient || !email.suffix) return;
-        
-        let emailKey = email.recipient + "-" + email.suffix;
-        let forwardTo = prompt("Please enter the email address you want to forward this email to:", "");
-
-        if (forwardTo === null || forwardTo === "") {
-            showToast("Error", "No email address entered.", "error");
-            return;
-        }
-
+    if (confirm("Do you really want to permanently delete this email?")) {
         try {
-            const response = await fetch(`${url}/mail/forward`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ key: emailKey, forward: forwardTo }),
-            });
-            
+            let emailKey = email.recipient + "-" + email.suffix;
+            const response = await fetch(`${url}/mail/delete?key=${emailKey}`);
             const data = await response.json();
+            
             if (data.code === 200) {
-                showToast("Success", "Email forwarded successfully!", "success");
+                emails = emails.filter(e => e && e.recipient + "-" + e.suffix !== emailKey);
+                unreadEmails.delete(emailKey);
+                
+                if (stats.count) {
+                    stats.count = Math.max(0, parseInt(stats.count) - 1).toString();
+                }
+                
+                if (selectedEmail && selectedEmail.recipient + "-" + selectedEmail.suffix === emailKey) {
+                    selectedEmail = null;
+                    viewMode = 'list';
+                }
+                
+                showToast("Success", "Email deleted successfully.", "success");
             } else {
-                showToast("Error", `Failed to forward email: ${data.msg}`, "error");
+                showToast("Error", `Failed to delete email: ${data.msg}`, "error");
             }
         } catch (error) {
-            console.error("Forward error:", error);
-            showToast("Error", "Failed to forward email. Please try again.", "error");
+            console.error("Delete error:", error);
+            showToast("Error", "Failed to delete email. Please try again.", "error");
         }
     }
+}
 
-    async function copyToClipboard() {
-        if (!address) return;
-        
-        isCopying = true;
-        try {
-            await navigator.clipboard.writeText(address);
-            showToast("Success", "Email address copied to clipboard!", "success");
-        } catch (error) {
-            console.error("Copy failed:", error);
-            showToast("Error", "Failed to copy to clipboard.", "error");
-        } finally {
-            setTimeout(() => { isCopying = false; }, 1000);
-        }
+function deleteEmailAddress() {
+    if (confirm("Are you sure you want to delete this email address? All messages will be lost.")) {
+        emails = [];
+        unreadEmails.clear();
+        stats = {};
+        generateEmail(true);
+        showToast("Success", "New email address generated", "success");
+    }
+}
+
+function openForwardModal(email) {
+    emailToForward = email;
+    forwardToEmail = '';
+    showForwardModal = true;
+}
+
+async function forwardEmail(email) {
+    if (!email || !email.recipient || !email.suffix) return;
+    
+    let emailKey = email.recipient + "-" + email.suffix;
+    let forwardTo = prompt("Please enter the email address you want to forward this email to:", "");
+
+    if (forwardTo === null || forwardTo === "") {
+        showToast("Error", "No email address entered.", "error");
+        return;
     }
 
-    function showToast(title, message, type = "info") {
-        const id = Date.now();
-        toasts = [...toasts, { id, title, message, type }];
+    try {
+        const response = await fetch(`${url}/mail/forward`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ key: emailKey, forward: forwardTo }),
+        });
         
-        setTimeout(() => {
-            toasts = toasts.filter(toast => toast.id !== id);
-        }, type === "success" ? 3000 : 5000);
-    }
-
-    function removeToast(id) {
-        toasts = toasts.filter(toast => toast.id !== id);
-    }
-
-    function viewEmail(email) {
-        selectedEmail = email;
-        viewMode = 'detail';
-        
-        if (email) {
-            const emailKey = email.recipient + "-" + email.suffix;
-            unreadEmails.delete(emailKey);
-        }
-    }
-
-    function formatDate(dateString) {
-        if (!dateString) return 'Unknown date';
-        
-        const date = new Date(dateString);
-        const now = new Date();
-        const diffTime = Math.abs(now - date);
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-        
-        if (diffDays === 0) {
-            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        } else if (diffDays === 1) {
-            return 'Yesterday';
-        } else if (diffDays < 7) {
-            return date.toLocaleDateString([], { weekday: 'short' });
+        const data = await response.json();
+        if (data.code === 200) {
+            showToast("Success", "Email forwarded successfully!", "success");
         } else {
-            return date.toLocaleDateString([], { month: 'short', day: 'numeric' });
+            showToast("Error", `Failed to forward email: ${data.msg}`, "error");
         }
+    } catch (error) {
+        console.error("Forward error:", error);
+        showToast("Error", "Failed to forward email. Please try again.", "error");
     }
+}
 
-    function getEmailPreview(content) {
-        if (!content) return 'No content';
-        
-        const text = content.replace(/<[^>]*>/g, '');
-        return text.length > 100 ? text.substring(0, 100) + '...' : text;
+async function copyToClipboard() {
+    if (!address) return;
+    
+    isCopying = true;
+    try {
+        await navigator.clipboard.writeText(address);
+        showToast("Success", "Email address copied to clipboard!", "success");
+    } catch (error) {
+        console.error("Copy failed:", error);
+        showToast("Error", "Failed to copy to clipboard.", "error");
+    } finally {
+        setTimeout(() => { isCopying = false; }, 1000);
     }
+}
 
-    function isUnread(email) {
-        if (!email || !email.recipient || !email.suffix) return false;
-        return unreadEmails.has(email.recipient + "-" + email.suffix);
+function showToast(title, message, type = "info") {
+    const id = Date.now();
+    toasts = [...toasts, { id, title, message, type }];
+    
+    setTimeout(() => {
+        toasts = toasts.filter(toast => toast.id !== id);
+    }, type === "success" ? 3000 : 5000);
+}
+
+function removeToast(id) {
+    toasts = toasts.filter(toast => toast.id !== id);
+}
+
+function viewEmail(email) {
+    selectedEmail = email;
+    viewMode = 'detail';
+    
+    if (email) {
+        const emailKey = email.recipient + "-" + email.suffix;
+        unreadEmails.delete(emailKey);
     }
+}
 
+function formatDate(dateString) {
+    if (!dateString) return 'Unknown date';
+    
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now - date);
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays === 0) {
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    } else if (diffDays === 1) {
+        return 'Yesterday';
+    } else if (diffDays < 7) {
+        return date.toLocaleDateString([], { weekday: 'short' });
+    } else {
+        return date.toLocaleDateString([], { month: 'short', day: 'numeric' });
+    }
+}
+
+function getEmailPreview(content) {
+    if (!content) return 'No content';
+    
+    const text = content.replace(/<[^>]*>/g, '');
+    return text.length > 100 ? text.substring(0, 100) + '...' : text;
+}
+
+function isUnread(email) {
+    if (!email || !email.recipient || !email.suffix) return false;
+    return unreadEmails.has(email.recipient + "-" + email.suffix);
+}
 </script>
 
 <svelte:head>
