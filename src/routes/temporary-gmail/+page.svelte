@@ -25,6 +25,7 @@
     
     const url = "https://mail.firetempmail.com";
     
+    // All variable declarations
     let copyrightYear = new Date().getFullYear();
     let emails = [];
     let stats = {};
@@ -32,9 +33,22 @@
     let isCopying = false;
     let selectedEmail = null;
     let viewMode = 'list';
-
-    let stopReloadOn=10,reloadCounter=0,reloadActive=true,isTabVisible=true,lastEmailCount=0,intervalID;
-    let unreadEmails=new Set();
+    let stopReloadOn = 10;
+    let reloadCounter = 0;
+    let reloadActive = true;
+    let isTabVisible = true;
+    let lastEmailCount = 0;
+    let intervalID;
+    let unreadEmails = new Set();
+    
+    let showForwardModal = false;
+    let forwardToEmail = '';
+    let emailToForward = null;
+    let isLoading = false;
+    let customAlias = '';
+    let showCustomAliasInput = false;
+    let aliasError = '';
+    let showDomainSelector = false;
 
     // These will reactively update when the stores change
     $: address = $receivingEmail;
