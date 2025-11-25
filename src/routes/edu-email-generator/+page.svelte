@@ -36,6 +36,13 @@
     let stopReloadOn=10,reloadCounter=0,reloadActive=true,isTabVisible=true,lastEmailCount=0,intervalID;
     let unreadEmails=new Set();
 
+    // New variables and functions
+    let customAlias = '';
+    let showCustomAliasInput = false;
+    let aliasError = '';
+    let showDomainSelector = false;
+    let isLoading = false;
+
     onMount(function () {
         // Safely get email type from localStorage
         if (browser) {
@@ -319,6 +326,43 @@ function normalizeGmailAddress(address) {
         if (!email || !email.recipient || !email.suffix) return false;
         return unreadEmails.has(email.recipient + "-" + email.suffix);
     }
+
+    function isValidAlias(alias) {
+        const aliasRegex = /^[a-zA-Z0-9-]+$/;
+        return aliasRegex.test(alias);
+    }
+    
+    function toggleCustomAlias() {
+        showCustomAliasInput = !showCustomAliasInput;
+        if (!showCustomAliasInput) {
+            customAlias = '';
+            aliasError = '';
+        }
+    }
+    
+    function toggleDomainSelector() {
+        showDomainSelector = !showDomainSelector;
+    }
+    
+    function selectDomain(domain) {
+        updateEmailDomain(domain);
+        showDomainSelector = false;
+        
+        // Force UI update
+        address = $receivingEmail;
+        currentDomain = domain;
+    }
+    
+    function manualReload() {
+        window.location.reload();
+    }
+    
+    function markAsRead(email) {
+        if (!email) return;
+        const emailKey = email.recipient + "-" + email.suffix;
+        unreadEmails.delete(emailKey);
+        viewEmail(email);
+    }
 </script>
 
 <svelte:head>
@@ -374,7 +418,8 @@ function normalizeGmailAddress(address) {
       "@type": "Question",
       "name": "Can I use an EDU Email Generator for student discounts?",
       "acceptedAnswer": {
-        "@type": "Answer",
+        "@type",
+        "Answer",
         "text": "Yes, many use disposable EDU emails for accessing student discounts or free trials. Keep in mind these inboxes are temporary."
       }
     }
