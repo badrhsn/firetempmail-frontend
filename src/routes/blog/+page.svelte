@@ -1,7 +1,8 @@
 <script>
-    import { blogPosts, debugSlugs } from '$lib/data/blogPosts';
+    import { getAllPosts, debugSlugs } from '$lib/data/blogPosts';
     
     let copyrightYear = new Date().getFullYear();
+    let blogPosts = getAllPosts();
     
     // Debug on component mount
     import { onMount } from 'svelte';

@@ -459,14 +459,14 @@ function normalizeGmailAddress(address) {
     <div class="container">
         <div class="text-center p-4 p-lg-5">
             <!-- Header -->
-            <h1>
+             <h1>
                 <span>📮&nbsp;</span>
-                Fire Temp Mail – Your Free Temporary Disposable Email Generator
-            </h1>
+                Fire Temp Mail – Your Free Temporary Disposable Email Generato
+             </h1>
             <p class="lead">
                 Instantly generate a disposable Email Generator address. Keep your real email address private and your inbox clean from unwanted messages and spam.
-            </p>
-            
+
+            </p>            
             <!-- Email Address with Copy Button -->
             <div class="email-address-container">
                 <div class="email-display">
@@ -885,6 +885,39 @@ function normalizeGmailAddress(address) {
                 </div>
             </div>
 
+            <!-- Featured Service-Specific Guides -->
+            <div class="featured-guides-section">
+                <h2 class="text-center" style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 1.5rem;">
+                    📱 Platform-Specific Guides
+                </h2>
+                <p class="text-center" style="color: #6c757d; margin-bottom: 2rem; font-size: 1.1rem;">
+                    Learn how to use temporary email for popular platforms and protect your privacy
+                </p>
+                
+                <div class="guides-grid">
+                    <a href="/blog/how-to-use-temp-email-for-discord-verification" class="guide-card">
+                        <div class="guide-icon">💬</div>
+                        <h3>Discord Temp Mail</h3>
+                        <p>Create Discord accounts without exposing your personal email. Complete verification guide.</p>
+                        <span class="read-more">Read Guide →</span>
+                    </a>
+                    
+                    <a href="/blog/instagram-temp-mail-sign-up-without-personal-email" class="guide-card">
+                        <div class="guide-icon">📸</div>
+                        <h3>Instagram Temp Email</h3>
+                        <p>Sign up for Instagram using disposable email. Avoid spam and maintain multiple accounts.</p>
+                        <span class="read-more">Read Guide →</span>
+                    </a>
+                    
+                    <a href="/blog/tiktok-temporary-email-guide-avoid-spam-signups" class="guide-card">
+                        <div class="guide-icon">🎵</div>
+                        <h3>TikTok Temporary Email</h3>
+                        <p>Create TikTok accounts with temp mail. Keep your inbox clean from promotional emails.</p>
+                        <span class="read-more">Read Guide →</span>
+                    </a>
+                </div>
+            </div>
+
             <!-- Add this after the Popular Articles section on your main page -->
 
             <div class="seo-content-section">
@@ -1097,151 +1130,250 @@ function normalizeGmailAddress(address) {
     </div>
 </section>
 
-<!-- Footer -->
+<!-- Modern Footer -->
 <footer class="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 mb-4 mb-md-0">
-                <h5 class="footer-title">Quick Links</h5>
-                <div class="row">
-                    <div class="col-6">
-                        <ul class="footer-links">
-                            <li><a href="/email-generator">Email Generator</a></li>
-                            <li><a href="/gmail-generator">Gmail Generator</a></li>
-                            <li><a href="/temporary-gmail">Temporary Gmail</a></li>
-                            <li><a href="/temp-gmail">Temp Gmail</a></li>
-                            <li><a href="/temp-mail-edu">Temp Mail EDU</a></li>
-                            <li><a href="/10minutemail">10 Minute Mail</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="footer-links">
-                            <li><a href="/privacy-policy">Privacy Policy</a></li>
-                            <li><a href="/terms">Terms of Service</a></li>
-                            <li><a href="/faq">FAQ</a></li>
-                            <li><a href="/contact">Contact Us</a></li>
-                            <li><a href="/blog">Blog</a></li>
-                            <li><a href="https://rapidapi.com/fire-temp-mail-fire-temp-mail-default/api/firetempmail-api">API</a></li>
-                        </ul>
-                    </div>
+        <div class="footer-content">
+            <!-- Brand Section -->
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <span class="footer-logo-icon">🔥</span>
+                    <span class="footer-logo-text">Fire Temp Mail</span>
+                </div>
+                <p class="footer-description">Fast, secure, and private temporary email service. Keep your inbox clean and protect your privacy.</p>
+                <div class="footer-stats">
+                    <span class="stat-number">{stats.count || '0'}</span> emails delivered
                 </div>
             </div>
             
-            <div class="col-md-4">
-                <h5 class="footer-title">Support Our Service</h5>
-                <div class="donation-section">
-                    <p>Help us keep FireTempMail free by making a donation. Your support helps maintain and improve our service.</p>
-                    
-                    <div class="kofi-qr">
-                        <a href="https://ko-fi.com/firetempmail" target="_blank">
-                            <img src="https://storage.ko-fi.com/cdn/useruploads/N4N61LJTEP/qrcode.png?v=2668fb77-3b3b-4039-abc5-e7004afdcebe&v=2&_gl=1*1bpnkx0*_gcl_au*Mzg2NjgyMDUuMTc1ODM3MTgzOA..*_ga*Nzg1NDU0NTQ2LjE3NTgzNzE4Mzk.*_ga_M13FZ7VQ2C*czE3NTgzNzE4MzgkbzEkZzEkdDE3NTgzNzI5MTkkajYwJGwwJGgw" 
-                                 alt="Support us on Ko-fi" class="img-fluid">
-                        </a>
-                        <p class="kofi-text">Scan to support us on Ko-fi</p>
-                    </div>
-                    
-                    <div class="mt-3">
-                        <p class="mb-0">We've received <span class="counter">{stats.count}</span> emails so far.</p>
-                    </div>
+            <!-- Links Grid -->
+            <div class="footer-links-grid">
+                <div class="footer-column">
+                    <h6 class="footer-heading">Product</h6>
+                    <ul class="footer-links">
+                        <li><a href="/email-generator">Email Generator</a></li>
+                        <li><a href="/gmail-generator">Gmail Generator</a></li>
+                        <li><a href="/temp-mail-edu">Temp Mail EDU</a></li>
+                        <li><a href="/10minutemail">10 Minute Mail</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h6 class="footer-heading">Resources</h6>
+                    <ul class="footer-links">
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="https://rapidapi.com/fire-temp-mail-fire-temp-mail-default/api/firetempmail-api" target="_blank" rel="noopener">API</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h6 class="footer-heading">Legal</h6>
+                    <ul class="footer-links">
+                        <li><a href="/privacy-policy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
         
-        <div class="divider"></div>
-        
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <p class="copyright">© 2024 FireTempMail. All Rights Reserved.</p>
-            </div>
-            <div class="col-md-6 text-md-end">
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+            <p class="copyright">© 2025 FireTempMail. All Rights Reserved.</p>
+            <div class="footer-support">
+                <a href="https://ko-fi.com/firetempmail" target="_blank" rel="noopener" class="support-link">
+                    ☕ Support us on Ko-fi
+                </a>
             </div>
         </div>
     </div>
 </footer>
 
 <style>
-           /* Footer Styles */
+    /* ===== MODERN FOOTER STYLES ===== */
+    .footer {
+        background: #ffffff;
+        border-top: 1px solid #e2e8f0;
+        padding: 60px 0 30px;
+        margin-top: 80px;
+    }
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 60px;
+        margin-bottom: 40px;
+    }
+
+    /* Brand Section */
+    .footer-brand {
+        max-width: 400px;
+    }
+
+    .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    .footer-logo-icon {
+        font-size: 24px;
+    }
+
+    .footer-logo-text {
+        font-family: 'Inter Tight', sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        color: #1a1a1a;
+        letter-spacing: -0.3px;
+    }
+
+    .footer-description {
+        color: #718096;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .footer-stats {
+        display: inline-flex;
+        align-items: center;
+        background: #f7fafc;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #4a5568;
+    }
+
+    .stat-number {
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-right: 4px;
+    }
+
+    /* Links Grid */
+    .footer-links-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+    }
+
+    .footer-column {
+        min-width: 0;
+    }
+
+    .footer-heading {
+        font-weight: 600;
+        font-size: 13px;
+        color: #1a1a1a;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-links li {
+        margin-bottom: 10px;
+    }
+
+    .footer-links a {
+        color: #718096;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.2s ease;
+        display: inline-block;
+    }
+
+    .footer-links a:hover {
+        color: #1a1a1a;
+    }
+
+    /* Bottom Bar */
+    .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 30px;
+        border-top: 1px solid #e2e8f0;
+    }
+
+    .copyright {
+        font-size: 13px;
+        color: #a0aec0;
+        margin: 0;
+    }
+
+    .footer-support {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .support-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: #1a1a1a;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 8px 16px;
+        background: #f7fafc;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .support-link:hover {
+        background: #1a1a1a;
+        color: #ffffff;
+        transform: translateY(-1px);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+        .footer-content {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .footer-links-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+    }
+
+    @media (max-width: 640px) {
         .footer {
-            background-color: #22242b;
-            color: #a7a7aa;
             padding: 40px 0 20px;
         }
-        .footer a {
-            color: #a7a7aa;
-            text-decoration: none;
-            transition: color 0.3s;
+
+        .footer-content {
+            gap: 30px;
         }
-        .footer a:hover {
-            color: #3498db;
+
+        .footer-links-grid {
+            grid-template-columns: 1fr;
+            gap: 25px;
         }
-        .footer-title {
-            font-weight: 700;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-            color: #a7a7aa;
-        }
-        .footer-links {
-            list-style: none;
-            padding: 0;
-            line-height: 2.2;
-        }
-        .footer-links li {
-            margin-bottom: 8px;
-        }
-        .divider {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin: 30px 0 20px;
-        }
-        .donation-section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
-        }
-        .donation-options {
-            display: flex;
-            justify-content: center;
-            margin-top: 15px;
-        }
-        .kofi-qr {
+
+        .footer-bottom {
+            flex-direction: column;
+            gap: 16px;
             text-align: center;
-            margin-top: 15px;
         }
-        .kofi-qr img {
-            max-width: 150px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+        .footer-support {
+            flex-direction: column;
+            gap: 12px;
         }
-        .kofi-text {
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
-        .copyright {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        .social-icons {
-            font-size: 1.5rem;
-            margin-top: 15px;
-        }
-        .social-icons a {
-            margin-right: 15px;
-        }
-        .counter {
-            color: rgb(255,255,255);
-            background: rgb(33,37,41);
-            border-radius: 10px;
-            padding: 4px 12px;
-            font-size: 14px;
-            margin: 0 2px;
-            font-family: monospace;
-        }
+    }
                 .email-type-selector {
                     margin: 1rem 0;
                 }
@@ -1758,6 +1890,7 @@ function normalizeGmailAddress(address) {
         font-size: 20px;
     }
     
+    
     /* Email Address Container */
     .email-address-container {
         display: flex;
@@ -2202,6 +2335,83 @@ function normalizeGmailAddress(address) {
             transform: scale(1);
         }
     }
+
+    /* Featured Guides Section */
+    .featured-guides-section {
+        margin: 3rem 0;
+        padding: 2rem;
+        background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+        border-radius: 16px;
+    }
+
+    .guides-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .guide-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .guide-card:hover {
+        transform: translateY(-8px);
+        border-color: #667eea;
+        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+        text-decoration: none;
+    }
+
+    .guide-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .guide-card h3 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: #2c3e50;
+    }
+
+    .guide-card p {
+        color: #6c757d;
+        line-height: 1.6;
+        flex-grow: 1;
+        margin-bottom: 1rem;
+    }
+
+    .read-more {
+        color: #667eea;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        transition: transform 0.3s ease;
+    }
+
+    .guide-card:hover .read-more {
+        transform: translateX(5px);
+    }
+
+    @media (max-width: 768px) {
+        .guides-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .featured-guides-section {
+            padding: 1.5rem;
+        }
+    }
+
         @media (min-width: 769px) and (max-width: 992px) {
         .email-action-buttons {
             flex-direction: row;

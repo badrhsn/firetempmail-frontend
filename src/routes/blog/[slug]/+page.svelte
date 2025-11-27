@@ -338,11 +338,183 @@
         transition: width 0.2s ease-out;
         box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
     }
+
+    /* Blog Content Styling */
+    :global(.quick-answer-box) {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px 24px;
+        border-radius: 12px;
+        margin: 24px 0;
+        border-left: 5px solid #fff;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    :global(.quick-answer-box strong) {
+        font-size: 1.1rem;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    :global(.note-box) {
+        background: #e7f3ff;
+        border-left: 4px solid #2196F3;
+        padding: 16px 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+    }
+
+    :global(.note-box strong) {
+        color: #1976D2;
+        font-weight: 600;
+    }
+
+    :global(.warning-box) {
+        background: #fff3cd;
+        border-left: 4px solid #ff9800;
+        padding: 16px 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+    }
+
+    :global(.warning-box strong) {
+        color: #f57c00;
+        font-weight: 600;
+    }
+
+    :global(.cta-link) {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white !important;
+        padding: 12px 24px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: transform 0.2s, box-shadow 0.2s;
+        margin: 8px 0;
+    }
+
+    :global(.cta-link:hover) {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        color: white !important;
+    }
+
+    :global(article table) {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 24px 0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    :global(article thead) {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    :global(article th) {
+        padding: 14px 16px;
+        text-align: left;
+        font-weight: 600;
+    }
+
+    :global(article td) {
+        padding: 12px 16px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    :global(article tbody tr:nth-child(even)) {
+        background-color: #f8f9fa;
+    }
+
+    :global(article tbody tr:hover) {
+        background-color: #e7f3ff;
+    }
+
+    :global(article code) {
+        background: #f4f4f4;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9em;
+        color: #d73a49;
+    }
+
+    :global(article ul), :global(article ol) {
+        margin: 16px 0;
+        padding-left: 24px;
+        line-height: 1.8;
+    }
+
+    :global(article li) {
+        margin: 8px 0;
+    }
+
+    :global(article h2) {
+        margin-top: 32px;
+        margin-bottom: 16px;
+        color: #1a1a1a;
+        font-weight: 700;
+        font-size: 1.8rem;
+    }
+
+    :global(article h3) {
+        margin-top: 24px;
+        margin-bottom: 12px;
+        color: #333;
+        font-weight: 600;
+        font-size: 1.4rem;
+    }
+
+    :global(article h4) {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        color: #444;
+        font-weight: 600;
+        font-size: 1.2rem;
+    }
+
+    :global(article p) {
+        margin: 16px 0;
+        line-height: 1.8;
+        color: #333;
+    }
+
+    :global(article a) {
+        color: #667eea;
+        text-decoration: underline;
+        transition: color 0.2s;
+    }
+
+    :global(article a:hover) {
+        color: #764ba2;
+    }
     
     /* Responsive design */
     @media (max-width: 768px) {
         .reading-progress-bar {
             height: 3px;
+        }
+
+        :global(.quick-answer-box),
+        :global(.note-box),
+        :global(.warning-box) {
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        :global(article h2) {
+            font-size: 1.5rem;
+        }
+
+        :global(article h3) {
+            font-size: 1.2rem;
+        }
+
+        :global(article table) {
+            font-size: 0.9rem;
         }
     }
 </style>

@@ -30,7 +30,7 @@
     </script>
     
     <style>
-        /* Step 1: Inline critical CSS for above-the-fold content */
+        /* ===== MODERN MINIMAL HEADER ===== */
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
@@ -39,14 +39,23 @@
             line-height: 1.6;
             background: #f8f9fa;
         }
+
         .modern-header {
             position: sticky;
             top: 0;
             z-index: 1000;
             width: 100%;
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff4757 100%);
-            box-shadow: 0 8px 32px rgba(255, 107, 53, 0.2);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        .modern-header.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
         .header-container {
             max-width: 1280px;
             margin: 0 auto;
@@ -54,214 +63,99 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 80px;
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: #ffffff;
-        }
-        .logo-icon {
-            font-size: 36px;
-        }
-        .logo-text {
-            font-family: 'Inter Tight', sans-serif;
-            font-weight: 800;
-            font-size: 28px;
-            line-height: 1;
-            color: #fff;
-        }
-        /* ===== MODERN HEADER STYLES ===== */
-        .modern-header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            width: 100%;
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff4757 100%);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 8px 32px rgba(255, 107, 53, 0.2);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .modern-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        .header-container {
-            position: relative;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
+            height: 70px;
         }
 
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
-            color: #ffffff;
-            transition: all 0.3s ease;
-            position: relative;
+            transition: transform 0.2s ease;
         }
 
         .logo-container:hover {
-            transform: translateY(-2px);
-            color: #ffffff;
-            text-decoration: none;
+            transform: translateY(-1px);
         }
 
         .logo-icon {
-            font-size: 36px;
-            position: relative;
-            transition: all 0.3s ease;
-            filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.3));
-        }
-
-        .logo-icon::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .logo-container:hover .logo-icon::before {
-            opacity: 1;
-        }
-
-        .logo-container:hover .logo-icon {
-            transform: scale(1.1) rotate(5deg);
+            font-size: 28px;
+            line-height: 1;
         }
 
         .logo-text-container {
             display: flex;
             flex-direction: column;
+            gap: 2px;
         }
 
         .logo-text {
             font-family: 'Inter Tight', sans-serif;
-            font-weight: 800;
-            font-size: 28px;
+            font-weight: 700;
+            font-size: 20px;
             line-height: 1;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #1a1a1a;
+            letter-spacing: -0.5px;
         }
 
         .logo-tagline {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.9);
-            margin-top: 2px;
+            font-size: 11px;
+            color: #666;
             font-weight: 500;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            letter-spacing: 0.3px;
         }
 
         .header-nav {
             display: flex;
-            gap: 0.5rem;
+            gap: 4px;
             align-items: center;
         }
 
         .nav-link {
-            color: rgba(255, 255, 255, 0.95);
+            color: #4a5568;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            padding: 10px 16px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
             position: relative;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .nav-link:hover::before {
-            opacity: 1;
         }
 
         .nav-link:hover {
-            color: #ffffff;
+            color: #1a1a1a;
+            background: #f7fafc;
             text-decoration: none;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
         }
 
         .nav-link.btn-contact {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-            color: #ff6b35;
-            font-weight: 700;
-            padding: 12px 24px;
-            border-radius: 25px;
+            background: #1a1a1a;
+            color: #ffffff;
+            font-weight: 600;
+            padding: 8px 16px;
             margin-left: 8px;
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .nav-link.btn-contact::before {
-            display: none;
         }
 
         .nav-link.btn-contact:hover {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            color: #e55039;
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+            background: #2d3748;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
-            background: rgba(255, 255, 255, 0.15);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            padding: 10px;
-            border-radius: 12px;
+            background: transparent;
+            border: none;
+            color: #1a1a1a;
+            padding: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
         }
 
         .mobile-menu-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: scale(1.05);
+            background: #f7fafc;
+            border-radius: 8px;
         }
 
         .mobile-menu-btn svg {
@@ -276,9 +170,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             z-index: 9998;
             opacity: 0;
             visibility: hidden;
@@ -294,15 +188,15 @@
             position: fixed;
             top: 0;
             right: -100%;
-            width: 320px;
+            width: 300px;
+            max-width: 85vw;
             height: 100vh;
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff4757 100%);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: #ffffff;
             z-index: 9999;
-            padding: 2rem;
-            transition: right 0.3s ease;
-            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
         }
 
         .mobile-menu.active {
@@ -315,74 +209,54 @@
             align-items: center;
             margin-bottom: 2rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .mobile-menu-close {
-            background: rgba(255, 255, 255, 0.15);
+            background: #f7fafc;
             border: none;
-            color: #ffffff;
+            color: #1a1a1a;
             padding: 8px;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .mobile-menu-close:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: scale(1.1);
+            background: #e2e8f0;
         }
 
         .mobile-nav-links {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 4px;
         }
 
         .mobile-nav-link {
-            color: rgba(255, 255, 255, 0.95);
+            color: #4a5568;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
             font-size: 16px;
-            padding: 15px 20px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            padding: 14px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
         }
 
         .mobile-nav-link:hover {
-            color: #ffffff;
+            color: #1a1a1a;
+            background: #f7fafc;
             text-decoration: none;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(10px);
         }
 
         .mobile-contact-btn {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-            color: #ff6b35;
-            font-weight: 700;
+            background: #1a1a1a;
+            color: #ffffff !important;
+            font-weight: 600;
             margin-top: 1rem;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
         }
 
         .mobile-contact-btn:hover {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            color: #e55039;
-            transform: translateX(0) scale(1.02);
-        }
-
-        /* Gradient bottom border */
-        .modern-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(135deg, #22242b 0%, #6a645c 50%, #363840 100%)
+            background: #2d3748;
         }
 
         /* ===== RESPONSIVE DESIGN ===== */
@@ -399,23 +273,19 @@
         @media (max-width: 768px) {
             .header-container {
                 padding: 0 1rem;
-                height: 70px;
+                height: 64px;
             }
             
             .logo-text {
-                font-size: 24px;
+                font-size: 18px;
             }
             
             .logo-tagline {
-                font-size: 12px;
+                font-size: 10px;
             }
             
             .logo-icon {
-                font-size: 30px;
-            }
-
-            .mobile-menu {
-                width: 280px;
+                font-size: 24px;
             }
         }
 
@@ -425,26 +295,13 @@
             }
             
             .header-container {
-                height: 65px;
+                height: 60px;
+            }
+            
+            .logo-text {
+                font-size: 17px;
             }
         }
-
-        /* ===== BODY STYLES ===== */
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* Demo content styles */
-        .demo-content {
-            padding: 2rem;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-        
     </style>
     
     <!-- Maintenance Mode Toggle Script -->
@@ -497,10 +354,10 @@
     <div class="mobile-menu">
         <div class="mobile-menu-header">
             <div class="logo-container">
-                <div class="logo-icon" style="font-size: 24px;">🔥</div>
+                <div class="logo-icon" style="font-size: 22px;">🔥</div>
                 <div class="logo-text-container">
-                    <span class="logo-text" style="font-size: 20px;">Fire Temp Mail</span>
-                    <span class="logo-tagline" style="font-size: 11px;">Disposable Emails</span>
+                    <span class="logo-text" style="font-size: 18px;">Fire Temp Mail</span>
+                    <span class="logo-tagline" style="font-size: 10px;">Disposable Emails</span>
                 </div>
             </div>
             <button class="mobile-menu-close" onclick="closeMobileMenu()">
@@ -514,7 +371,7 @@
         <nav class="mobile-nav-links">
             <a href="/" class="mobile-nav-link">Home</a>
             <a href="/email-generator" class="mobile-nav-link">Email Generator</a>
-            <a href="/temp-mail-edu" class="mobile-nav-link">Temp Mail EDU</a>
+            <a href="/temp-mail-edu" class="mobile-nav-link">Edu Email</a>
             <a href="/10minutemail" class="mobile-nav-link">10 Minute Mail</a>
             <a href="/blog" class="mobile-nav-link">Blog</a>
             <a href="/contact" class="mobile-nav-link mobile-contact-btn">Contact</a>
