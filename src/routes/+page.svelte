@@ -461,7 +461,7 @@ function normalizeGmailAddress(address) {
             <!-- Header -->
              <h1>
                 <span>📮&nbsp;</span>
-                Fire Temp Mail – Your Free Temporary Disposable Email Generato
+                Fire Temp Mail – Your Free Temporary Disposable Email Generator
              </h1>
             <p class="lead">
                 Instantly generate a disposable Email Generator address. Keep your real email address private and your inbox clean from unwanted messages and spam.
@@ -2218,3 +2218,4 @@ function normalizeGmailAddress(address) {
         }
     }
 </style>
+
