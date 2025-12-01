@@ -117,6 +117,12 @@
                 <p class="page-subtitle">
                     {$_('faq.subtitle')}
                 </p>
+                
+                <div class="faq-intro">
+                    <p>Welcome to Fire Temp Mail's comprehensive FAQ section. Here you'll find answers to the most common questions about our free temporary email service. Whether you're new to disposable emails or a regular user, this guide will help you understand how to protect your privacy, avoid spam, and use our service effectively.</p>
+                    
+                    <p>Fire Temp Mail provides instant, anonymous temporary email addresses that help you maintain your privacy online. Our service is perfect for signing up for websites, testing services, avoiding spam, and keeping your personal inbox clean. No registration required – just generate an email and start receiving messages immediately.</p>
+                </div>
             </header>
             
             <!-- FAQ Categories -->
@@ -321,6 +327,26 @@
         max-width: 600px;
         margin: 0 auto;
         line-height: 1.6;
+    }
+    
+    .faq-intro {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: #f8f9fa;
+        border-radius: 12px;
+        border-left: 4px solid #3182ce;
+    }
+    
+    .faq-intro p {
+        color: #4a5568;
+        line-height: 1.8;
+        margin-bottom: 1rem;
+        text-align: left;
+    }
+    
+    .faq-intro p:last-child {
+        margin-bottom: 0;
     }
     
     /* FAQ Categories */
