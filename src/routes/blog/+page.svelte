@@ -1,4 +1,5 @@
 <script>
+    import { _ } from 'svelte-i18n';
     import { getAllPosts, debugSlugs } from '$lib/data/blogPosts';
     
     let copyrightYear = new Date().getFullYear();
@@ -24,11 +25,11 @@
             <!-- Header -->
             <h1 class="text-start" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
                 <span style="font-weight: normal !important; color: rgb(255, 255, 255);">📝&nbsp;</span>
-                Fire Temp Mail Blog
+                {$_('blog.title')}
             </h1>
             
             <p class="text-start" style="margin-bottom: 32px;font-size: 20px;">
-                Insights, tips, and news about email privacy, online security, and how to protect your digital identity.
+                {$_('blog.subtitle')}
             </p>
             
             <!-- Blog Posts -->
@@ -58,7 +59,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <span style="color: #6c757d; font-size: 0.9rem;">By {post.author}</span>
                             <a href="/blog/{post.slug}" class="btn btn-outline-primary">
-                                Read More →
+                                {$_('blog.readMore')} →
                             </a>
                         </div>
                     </article>

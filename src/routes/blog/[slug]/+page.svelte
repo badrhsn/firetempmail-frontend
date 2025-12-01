@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
     import { getPostBySlug } from '$lib/data/blogPosts';
+    import { _ } from 'svelte-i18n';
 
     export let data;
 
@@ -89,9 +90,9 @@
     <section class="py-4 py-xl-5">
         <div class="container" style="max-width: 800px;">
             <div class="text-center p-4 p-lg-5">
-                <h1>Loading...</h1>
-                <p>Please wait while we load the post.</p>
-                <a href="/blog">← Back to Blog</a>
+                <h1>{$_('blog.loading')}</h1>
+                <p>{$_('blog.pleaseWait')}</p>
+                <a href="/blog">← {$_('blog.backToBlog')}</a>
             </div>
         </div>
     </section>
@@ -99,9 +100,9 @@
     <section class="py-4 py-xl-5">
         <div class="container" style="max-width: 800px;">
             <div class="text-center p-4 p-lg-5">
-                <h1>Error</h1>
+                <h1>{$_('blog.error')}</h1>
                 <p>{error}</p>
-                <a href="/blog">← Back to Blog</a>
+                <a href="/blog">← {$_('blog.backToBlog')}</a>
             </div>
         </div>
     </section>
@@ -116,7 +117,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
                             <path d="M19 12H5M5 12l6-6m-6 6l6 6"></path>
                         </svg>
-                        Back to Blog
+                        {$_('blog.backToBlog')}
                     </a>
                 </div>
                 
@@ -158,7 +159,7 @@
                 
                 <!-- Share buttons -->
                 <div style="text-align: left; margin: 2rem 0; padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
-                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Share this article</h3>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">{$_('blog.shareArticle')}</h3>
                     <div style="display: flex; gap: 1rem;">
                         <button on:click={() => shareOnFacebook(post)} style="padding: 0.5rem 1rem; background: #3b5998; color: white; border-radius: 4px; text-decoration: none; border: none; cursor: pointer;">Facebook</button>
                         <button on:click={() => shareOnTwitter(post)} style="padding: 0.5rem 1rem; background: #1da1f2; color: white; border-radius: 4px; text-decoration: none; border: none; cursor: pointer;">Twitter</button>
@@ -172,9 +173,9 @@
     <section class="py-4 py-xl-5">
         <div class="container" style="max-width: 800px;">
             <div class="text-center p-4 p-lg-5">
-                <h1>Post Not Found</h1>
-                <p>The requested blog post could not be found.</p>
-                <a href="/blog">← Back to Blog</a>
+                <h1>{$_('blog.error')}</h1>
+                <p>{$_('blog.postNotFound')}</p>
+                <a href="/blog">← {$_('blog.backToBlog')}</a>
             </div>
         </div>
     </section>

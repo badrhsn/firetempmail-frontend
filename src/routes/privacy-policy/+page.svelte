@@ -1,10 +1,11 @@
 <script>
+    import { _ } from 'svelte-i18n';
     let copyrightYear = new Date().getFullYear();
 </script>
 
 <svelte:head>
-    <title>Privacy Policy - Fire Temp Mail</title>
-    <meta name="description" content="Read the comprehensive Privacy Policy of Fire Temp Mail. Learn how we protect your data, handle temporary emails, and manage cookies, logs, and third-party services.">
+    <title>{$_('privacy.metaTitle')}</title>
+    <meta name="description" content={$_('privacy.metaDescription')}>
     <meta name="robots" content="index, follow">
         <link rel="canonical" href="https://firetempmail.com/privacy-policy" />
 
@@ -15,168 +16,93 @@
         <div class="text-center p-4 p-lg-5">
             <h1 class="text-start" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
                 <span style="font-weight: normal !important; color: rgb(255, 255, 255);">📮&nbsp;</span>
-                Privacy Policy
+                {$_('privacy.title')}
             </h1>
             
             <div class="text-start">
-                <h2>Introduction</h2>
+                <h2>{$_('privacy.introduction.title')}</h2>
                 <p>
-                    Fire Temp Mail (“we,” “our,” or “us”) values your privacy. This Privacy Policy explains how we collect, use, store, and protect information when you access 
-                    <a href="https://firetempmail.com" style="color: inherit;">https://firetempmail.com</a> and our temporary email services, including both free and premium features.
+                    {@html $_('privacy.introduction.text')}
                 </p>
 
-                <h3>Information We Collect</h3>
-                <p>We strive to minimize the data we collect. Our service primarily handles:</p>
+                <h3>{$_('privacy.infoCollect.title')}</h3>
+                <p>{$_('privacy.infoCollect.intro')}</p>
                 <ul>
-                    <li>Email content received in your temporary inbox.</li>
-                    <li>Session data such as temporary email addresses, for service functionality.</li>
-                    <li>Technical logs: IP addresses, browser type, ISP, referring/exit pages, platform type, timestamp, and click counts — used only in aggregate for security and service maintenance.</li>
-                    <li>For Fire Temp Mail Premium: email addresses and payment information strictly for login, subscription management, and billing.</li>
+                    {#each $_('privacy.infoCollect.items') as item}
+                        <li>{item}</li>
+                    {/each}
                 </ul>
 
-                <h3>How We Use Your Information</h3>
-                <p>Collected information is used solely to operate, maintain, and improve our services. This includes:</p>
+                <h3>{$_('privacy.infoUse.title')}</h3>
+                <p>{$_('privacy.infoUse.intro')}</p>
                 <ul>
-                    <li>Delivering emails to your temporary inbox.</li>
-                    <li>Preventing abuse and maintaining service security.</li>
-                    <li>Managing premium subscriptions and payments.</li>
-                    <li>Analyzing aggregate usage patterns to enhance service performance.</li>
+                    {#each $_('privacy.infoUse.items') as item}
+                        <li>{item}</li>
+                    {/each}
                 </ul>
 
-                <h3>Data Retention</h3>
+                <h3>{$_('privacy.dataRetention.title')}</h3>
                 <p>
-                    All temporary emails in free accounts are deleted automatically within 2–24 hours, depending on system load. Premium accounts may retain emails for up to one month. 
-                    We do not recover deleted emails or domains once removed.
+                    {$_('privacy.dataRetention.text')}
                 </p>
 
-                <h3>Cookies & Tracking</h3>
+                <h3>{$_('privacy.cookies.title')}</h3>
                 <p>
-                    We use cookies only to maintain your session and temporary email address during active use. 
-                    We do not place advertising, analytics, or third-party tracking cookies on free accounts. Cookies may include:
+                    {$_('privacy.cookies.intro')}
                 </p>
                 <ul>
-                    <li>Session cookies to keep your temporary email active.</li>
-                    <li>Persistent cookies for Premium users to manage login sessions.</li>
+                    {#each $_('privacy.cookies.items') as item}
+                        <li>{item}</li>
+                    {/each}
                 </ul>
                 <p>
-                    Users can disable cookies in their browser; however, this may affect service functionality.
+                    {$_('privacy.cookies.note')}
                 </p>
 
-                <h3>Third-Party Services</h3>
+                <h3>{$_('privacy.thirdParty.title')}</h3>
                 <p>
-                    Fire Temp Mail integrates some third-party services (e.g., payment processors, ad networks, cloud infrastructure). 
-                    These services may collect non-identifiable information following their own privacy policies.  
-                    We do not sell or share your personal emails or identifying data with third parties for marketing purposes.
+                    {$_('privacy.thirdParty.text')}
                 </p>
 
-                <h3>Ads and Monetization</h3>
+                <h3>{$_('privacy.ads.title')}</h3>
                 <p>
-                    To support free usage, Fire Temp Mail may display ads served by third-party networks. These networks may use cookies or similar technologies to serve relevant ads. 
-                    Users can opt out of personalized advertising through ad settings provided by the ad networks.
+                    {$_('privacy.ads.text')}
                 </p>
 
-                <h3>Security Measures</h3>
+                <h3>{$_('privacy.security.title')}</h3>
                 <p>
-                    We implement reasonable technical and organizational measures to protect temporary emails and system integrity. 
-                    However, emails are not encrypted end-to-end. Users should avoid storing sensitive information via temporary addresses.
+                    {$_('privacy.security.text')}
                 </p>
 
-                <h3>Children’s Privacy</h3>
+                <h3>{$_('privacy.children.title')}</h3>
                 <p>
-                    Our services are not intended for children under 13. We do not knowingly collect personal information from children.
+                    {$_('privacy.children.text')}
                 </p>
 
-                <h3>User Rights</h3>
+                <h3>{$_('privacy.userRights.title')}</h3>
                 <p>
-                    Users may request deletion of Premium account data at any time. For free service users, all data is automatically deleted according to retention policies. 
-                    Users may contact support for questions or privacy requests.
+                    {$_('privacy.userRights.text')}
                 </p>
 
-                <h3>International Users</h3>
+                <h3>{$_('privacy.international.title')}</h3>
                 <p>
-                    By using our service, you consent to the transfer of your information to servers located in Morocco or other jurisdictions where we operate, in compliance with applicable privacy laws.
+                    {$_('privacy.international.text')}
                 </p>
 
-                <h3>Changes to Privacy Policy</h3>
+                <h3>{$_('privacy.changes.title')}</h3>
                 <p>
-                    We may update this Privacy Policy to reflect changes in our practices or legal requirements. 
-                    Updated policies will be posted on this page with the “effective date” revised. Continued use of the service constitutes acceptance of these changes.
+                    {$_('privacy.changes.text')}
                 </p>
 
-                <h3>Contact Us</h3>
+                <h3>{$_('privacy.contact.title')}</h3>
                 <p>
-                    For questions regarding this Privacy Policy or data handling practices, contact us at:<br/>
-                    Email: support@firetempmail.com
+                    {$_('privacy.contact.text')}<br/>
+                    {$_('privacy.contact.email')}
                 </p>
             </div>
         </div>
     </div>
 </section>
-
-<!-- Footer -->
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 mb-4 mb-md-0">
-                <h5 class="footer-title">Quick Links</h5>
-                <div class="row">
-                    <div class="col-6">
-                        <ul class="footer-links">
-                            <li><a href="/email-generator">Email Generator</a></li>
-                            <li><a href="/gmail-generator">Gmail Generator</a></li>
-                            <li><a href="/temporary-gmail">Temporary Gmail</a></li>
-                            <li><a href="/temp-gmail">Temp Gmail</a></li>
-                            <li><a href="/temp-mail-edu">Temp Mail EDU</a></li>
-                            <li><a href="/10minutemail">10 Minute Mail</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="footer-links">
-                            <li><a href="/privacy-policy">Privacy Policy</a></li>
-                            <li><a href="/terms">Terms of Service</a></li>
-                            <li><a href="/faq">FAQ</a></li>
-                            <li><a href="/contact">Contact Us</a></li>
-                            <li><a href="/blog">Blog</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <h5 class="footer-title">Support Our Service</h5>
-                <div class="donation-section">
-                    <p>Help us keep FireTempMail free by making a donation. Your support helps maintain and improve our service.</p>
-                    
-                    <div class="kofi-qr">
-                        <a href="https://ko-fi.com/firetempmail" target="_blank">
-                            <img src="https://storage.ko-fi.com/cdn/useruploads/N4N61LJTEP/qrcode.png?v=2668fb77-3b3b-4039-abc5-e7004afdcebe&v=2&_gl=1*1bpnkx0*_gcl_au*Mzg2NjgyMDUuMTc1ODM3MTgzOA..*_ga*Nzg1NDU0NTQ2LjE3NTgzNzE4Mzk.*_ga_M13FZ7VQ2C*czE3NTgzNzE4MzgkbzEkZzEkdDE3NTgzNzI5MTkkajYwJGwwJGgw" 
-                                 alt="Support us on Ko-fi" class="img-fluid">
-                        </a>
-                        <p class="kofi-text">Scan to support us on Ko-fi</p>
-                    </div>
-                    
-                   
-                </div>
-            </div>
-        </div>
-        
-        <div class="divider"></div>
-        
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <p class="copyright">© {copyrightYear} FireTempMail. All Rights Reserved.</p>
-            </div>
-            <div class="col-md-6 text-md-end">
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
 
 <style>
            /* Footer Styles */

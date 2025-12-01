@@ -1,0 +1,160 @@
+{
+  "nav": {
+    "home": "首页",
+    "blog": "博客",
+    "faq": "常见问题",
+    "contact": "联系我们",
+    "advertising": "广告"
+  },
+  "hero": {
+    "title": "Fire Temp Mail",
+    "subtitle": "临时邮箱服务",
+    "description": "使用一次性电子邮件地址保护您的隐私。无需注册。",
+    "getStarted": "开始使用"
+  },
+  "email": {
+    "type": {
+      "domain": "域名邮箱",
+      "gmail": "Gmail账户"
+    },
+    "yourEmail": "您的临时邮箱",
+    "copy": "复制",
+    "copied": "已复制！",
+    "refresh": "刷新",
+    "newEmail": "新邮箱",
+    "customAlias": "自定义别名",
+    "useCustomAlias": "使用自定义别名",
+    "enterAlias": "输入您的自定义别名",
+    "generate": "生成",
+    "cancel": "取消",
+    "selectDomain": "选择域名",
+    "inbox": "收件箱",
+    "noEmails": "暂无邮件。等待接收邮件中...",
+    "from": "发件人",
+    "subject": "主题",
+    "received": "收到时间",
+    "viewEmail": "查看邮件",
+    "backToInbox": "返回收件箱",
+    "forward": "转发",
+    "delete": "删除",
+    "forwardTo": "转发到",
+    "forwardButton": "转发邮件",
+    "enterEmail": "输入电子邮件地址",
+    "autoRefresh": "自动刷新",
+    "stopAfter": "停止于",
+    "reloads": "次刷新后"
+  },
+  "stats": {
+    "emailsCreated": "已创建邮箱",
+    "emailsReceived": "已接收邮件",
+    "activeUsers": "活跃用户"
+  },
+  "features": {
+    "title": "为什么选择 Fire Temp Mail？",
+    "instant": {
+      "title": "即时 & 匿名",
+      "description": "无需注册即可立即获得临时电子邮件地址"
+    },
+    "secure": {
+      "title": "安全 & 私密",
+      "description": "您的邮件会在短时间后自动删除"
+    },
+    "unlimited": {
+      "title": "无限使用",
+      "description": "创建任意数量的临时电子邮件地址"
+    }
+  },
+  "guides": {
+    "title": "热门平台指南",
+    "discord": "Discord",
+    "instagram": "Instagram",
+    "tiktok": "TikTok",
+    "readGuide": "阅读指南"
+  },
+  "footer": {
+    "product": "产品",
+    "resources": "资源",
+    "legal": "法律",
+    "tempMail": "临时邮箱",
+    "features": "功能",
+    "pricing": "价格",
+    "blog": "博客",
+    "faq": "常见问题",
+    "support": "支持",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "contact": "联系我们",
+    "buyCoffee": "请我喝咖啡",
+    "rights": "保留所有权利"
+  },
+  "toast": {
+    "emailCopied": "电子邮件地址已复制到剪贴板！",
+    "emailForwarded": "邮件转发成功！",
+    "emailDeleted": "邮件已删除！",
+    "error": "发生错误。请重试。",
+    "invalidEmail": "请输入有效的电子邮件地址",
+    "customAliasCreated": "自定义邮箱创建成功！",
+    "aliasInvalid": "别名必须为3-20个字符（仅限字母、数字和连字符）"
+  },
+  "common": {
+    "loading": "加载中...",
+    "close": "关闭",
+    "save": "保存",
+    "cancel": "取消",
+    "confirm": "确认",
+    "delete": "删除",
+    "edit": "编辑",
+    "view": "查看",
+    "back": "返回",
+    "next": "下一步",
+    "previous": "上一步",
+    "search": "搜索",
+    "filter": "筛选",
+    "sort": "排序",
+    "more": "更多"
+  },
+  "home": {
+    "title": "Fire Temp Mail – 您的免费临时一次性电子邮件生成器",
+    "subtitle": "立即生成一次性电子邮件地址。保护您的真实电子邮件地址的隐私，让您的收件箱远离不需要的消息和垃圾邮件。",
+    "gmailSection": {
+      "title": "Gmail 临时邮件生成器：立即获取免费临时 Gmail 地址",
+      "intro": "使用我们先进的 Gmail 临时邮件生成器在几秒钟内创建一个完全功能的临时 Gmail 地址。获取一个免费的一次性 Gmail 地址，其工作方式与真实的 Gmail 帐户完全相同 - 非常适合在任何网站上注册而不泄露您的个人电子邮件。",
+      "whyTitle": "为什么使用临时 Gmail 地址？",
+      "whyText": "保护您的主收件箱免受垃圾邮件、营销电子邮件和潜在数据泄露的侵害。我们的临时 Gmail 生成器为您的所有在线注册、验证和试用提供了一个私密、安全的替代方案。保持您的个人 Gmail 干净整洁，同时保持完全隐私。",
+      "features": {
+        "instant": "即时 Gmail 地址生成 - 无需注册",
+        "real": "可在所有平台和网站上使用的真实 Gmail 地址",
+        "free": "完全免费的临时 Gmail 服务，无隐藏费用",
+        "bypass": "非常适合绕过电子邮件验证阻止和限制"
+      },
+      "howTitle": "如何获取您的临时 Gmail",
+      "howText": "获取您的一次性 Gmail 地址很简单。只需选择 Gmail 选项并生成您的临时电子邮件。立即将其用于任何网站注册、应用验证或服务注册。您的消息将立即出现在您的私人收件箱中。",
+      "idealTitle": "适合您所有的在线需求",
+      "idealText": "我们的 Gmail 临时邮件服务非常适合免费试用、社交媒体注册、网站注册、应用验证、新闻通讯订阅和临时通信。完成后，只需丢弃地址 - 不留任何痕迹。",
+      "cta": "准备好保护您的隐私了吗？现在就生成您的免费临时 Gmail 地址，体验所有平台上安全、无垃圾邮件的注册。"
+    },
+    "whatIsTitle": "什么是一次性临时电子邮件？",
+    "whatIsText": "一次性电子邮件地址是一种免费的临时电子邮件服务，可创建短期收件箱以接收电子邮件。通常称为 tempmail、10minmail、一次性电子邮件或焚烧邮件，它可以帮助您避免垃圾邮件并保护您的主要电子邮件。您可以依靠 Fire Temp Mail 来保持您的个人收件箱安全、私密且无垃圾邮件，而不是暴露您的真实电子邮件帐户。",
+    "guidesTitle": "特定平台指南",
+    "guidesSubtitle": "了解如何为流行平台使用临时电子邮件并保护您的隐私",
+    "discordGuide": {
+      "title": "Discord 临时邮件",
+      "description": "在不暴露您的个人电子邮件的情况下创建 Discord 帐户。完整的验证指南。"
+    },
+    "instagramGuide": {
+      "title": "Instagram 临时电子邮件",
+      "description": "使用一次性电子邮件注册 Instagram。避免垃圾邮件并维护多个帐户。"
+    },
+    "tiktokGuide": {
+      "title": "TikTok 临时电子邮件",
+      "description": "使用临时邮件创建 TikTok 帐户。让您的收件箱远离促销电子邮件。"
+    }
+  },
+  "blog": {
+    "title": "Fire Temp Mail 博客",
+    "subtitle": "关于临时电子邮件和在线隐私的提示、指南和见解",
+    "readMore": "阅读更多",
+    "popular": "我们博客中的热门文章",
+    "visitBlog": "访问我们的博客"
+  }
+}

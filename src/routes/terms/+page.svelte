@@ -1,11 +1,12 @@
 <script>
+    import { _ } from 'svelte-i18n';
     let copyrightYear = new Date().getFullYear();
 </script>
 
 <svelte:head>
-    <title>Terms of Service - Fire Temp Mail | Temporary Email Service</title>
+    <title>{$_('terms.metaTitle')}</title>
     
-    <meta name="description" content="Read the Terms of Service for Fire Temp Mail. Learn about acceptable use, service availability, premium features, and your rights and responsibilities when using our temporary email service.">
+    <meta name="description" content={$_('terms.metaDescription')}>
     <meta name="keywords" content="Terms of Service, temp mail, disposable email, email privacy, email security, Fire Temp Mail">
     <meta name="robots" content="index, follow">
 
@@ -21,75 +22,54 @@
             <!-- Header -->
             <h1 class="text-start" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
                 <span style="font-weight: normal !important; color: rgb(255, 255, 255);">📮&nbsp;</span>
-                Terms of Service
+                {$_('terms.title')}
             </h1>
             
             <div class="text-start">
-                <h2>Introduction</h2>
+                <h2>{$_('terms.introduction.title')}</h2>
                 <p>
-                    Welcome to Fire Temp Mail (“we,” “our,” or “us”). By accessing or using our website 
-                    <a href="https://firetempmail.com">https://firetempmail.com</a> and related services, 
-                    you agree to comply with and be bound by the following Terms of Service (“Terms”). 
-                    These Terms govern your use of both our free temporary email service (“Free Service”) 
-                    and any enhanced features available under Fire Temp Mail Premium (“Premium Service”).
+                    {@html $_('terms.introduction.text')}
                 </p>
 
-                <h3>Privacy and Related Policies</h3>
+                <h3>{$_('terms.privacy.title')}</h3>
                 <p>
-                    We are committed to protecting your privacy. Please review our 
-                    <a href="/privacy-policy">Privacy Policy</a> to learn how we handle your data. 
-                    By using our service, you also agree to the terms described in that policy.
+                    {@html $_('terms.privacy.text')}
                 </p>
 
-                <h3>Service Description</h3>
+                <h3>{$_('terms.serviceDesc.title')}</h3>
                 <p>
-                    Fire Temp Mail provides disposable, temporary email addresses for the purpose of 
-                    protecting your real inbox from spam, newsletters, or unwanted messages. 
-                    Our Free Service allows you to instantly generate email addresses, receive incoming 
-                    messages, and discard them at will. The Premium Service provides additional features 
-                    such as extended email storage, multiple mailboxes, premium domains, and priority support.
+                    {$_('terms.serviceDesc.text')}
                 </p>
 
-                <h3>Acceptable Use</h3>
+                <h3>{$_('terms.acceptableUse.title')}</h3>
                 <p>
-                    You agree not to use Fire Temp Mail directly or indirectly for any unlawful, abusive, 
-                    or unauthorized purpose. This includes but is not limited to:
+                    {$_('terms.acceptableUse.intro')}
                 </p>
                 <ul>
-                    <li>Registering important accounts that require permanent or verifiable email access.</li>
-                    <li>Receiving, storing, or sharing sensitive or confidential information.</li>
-                    <li>Sending unsolicited emails, viruses, or malicious code.</li>
-                    <li>Engaging in fraud, harassment, or any activity that violates applicable laws.</li>
+                    {#each $_('terms.acceptableUse.items') as item}
+                        <li>{item}</li>
+                    {/each}
                 </ul>
 
-                <h3>Data Storage and Availability</h3>
+                <h3>{$_('terms.dataStorage.title')}</h3>
                 <p>
-                    Emails received through Fire Temp Mail are stored temporarily. Free accounts typically 
-                    store emails for a short duration (usually a few hours), after which messages are 
-                    automatically deleted. Premium accounts may store emails for a longer period, such 
-                    as up to one month. Once deleted, emails and domains cannot be restored under any 
-                    circumstances.
+                    {$_('terms.dataStorage.text1')}
                 </p>
                 <p>
-                    We make no guarantees regarding uptime or uninterrupted availability. Service may be 
-                    suspended for maintenance, updates, or unforeseen technical issues.
+                    {$_('terms.dataStorage.text2')}
                 </p>
 
-                <h3>Premium Features and Subscriptions</h3>
+                <h3>{$_('terms.premium.title')}</h3>
                 <p>
-                    The Premium Service is offered on a subscription basis and may include features such as:
+                    {$_('terms.premium.intro')}
                 </p>
                 <ul>
-                    <li>Multiple mailboxes for managing several addresses at once.</li>
-                    <li>Exclusive premium domains that are less likely to be blocked.</li>
-                    <li>Extended storage for messages beyond the Free Service limits.</li>
-                    <li>Ad-free experience for a cleaner interface.</li>
-                    <li>Priority customer support.</li>
+                    {#each $_('terms.premium.features') as feature}
+                        <li>{feature}</li>
+                    {/each}
                 </ul>
                 <p>
-                    Pricing, billing, and subscription terms will be presented at the time of purchase. 
-                    Subscriptions automatically renew unless auto-renew is disabled prior to the renewal date. 
-                    You may manage your subscription and cancel auto-renewal at any time in your account settings.
+                    {$_('terms.premium.billing')}
                 </p>
 
                 <h3>Limitations of Liability</h3>

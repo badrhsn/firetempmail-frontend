@@ -1,0 +1,466 @@
+{
+  "nav": {
+    "home": "Início",
+    "blog": "Blog",
+    "faq": "Perguntas Frequentes",
+    "contact": "Contato",
+    "advertising": "Publicidade"
+  },
+  "hero": {
+    "title": "Fire Temp Mail",
+    "subtitle": "Serviço de Email Temporário",
+    "description": "Proteja sua privacidade com endereços de e-mail descartáveis. Sem necessidade de registro.",
+    "getStarted": "Começar"
+  },
+  "email": {
+    "type": {
+      "domain": "Email de Domínio",
+      "gmail": "Conta Gmail"
+    },
+    "yourEmail": "Seu Email Temporário",
+    "copy": "Copiar",
+    "copied": "Copiado!",
+    "refresh": "Atualizar",
+    "newEmail": "Novo Email",
+    "customAlias": "Alias Personalizado",
+    "useCustomAlias": "Usar alias personalizado",
+    "enterAlias": "Digite seu alias personalizado",
+    "generate": "Gerar",
+    "cancel": "Cancelar",
+    "selectDomain": "Selecionar Domínio",
+    "inbox": "Caixa de Entrada",
+    "noEmails": "Ainda não há emails. Aguardando mensagens recebidas...",
+    "from": "De",
+    "subject": "Assunto",
+    "received": "Recebido",
+    "viewEmail": "Ver Email",
+    "backToInbox": "Voltar para Caixa de Entrada",
+    "forward": "Encaminhar",
+    "delete": "Excluir",
+    "forwardTo": "Encaminhar para",
+    "forwardButton": "Encaminhar Email",
+    "enterEmail": "Digite o endereço de e-mail",
+    "autoRefresh": "Atualização automática",
+    "stopAfter": "Parar após",
+    "reloads": "atualizações",
+    "awayQuestion": "Você ainda está aí?",
+    "awayMessage": "Recarregue a página para reativar a atualização automática.",
+    "noSubject": "(Sem assunto)",
+    "unknownSender": "Remetente desconhecido",
+    "unknownDate": "Data desconhecida",
+    "noContent": "Nenhum conteúdo disponível",
+    "emailsWillAppear": "Os e-mails enviados para seu endereço temporário aparecerão aqui"
+  },
+  "stats": {
+    "emailsCreated": "Emails Criados",
+    "emailsReceived": "Emails Recebidos",
+    "activeUsers": "Usuários Ativos"
+  },
+  "features": {
+    "title": "Por Que Escolher Fire Temp Mail?",
+    "instant": {
+      "title": "Instantâneo & Anônimo",
+      "description": "Obtenha um endereço de e-mail temporário instantaneamente sem nenhum registro"
+    },
+    "secure": {
+      "title": "Seguro & Privado",
+      "description": "Seus e-mails são excluídos automaticamente após um curto período"
+    },
+    "unlimited": {
+      "title": "Uso Ilimitado",
+      "description": "Crie quantos endereços de e-mail temporários você precisar"
+    }
+  },
+  "guides": {
+    "title": "Guias de Plataformas Populares",
+    "discord": "Discord",
+    "instagram": "Instagram",
+    "tiktok": "TikTok",
+    "readGuide": "Ler Guia"
+  },
+  "footer": {
+    "product": "Produto",
+    "resources": "Recursos",
+    "legal": "Legal",
+    "tempMail": "Temp Mail",
+    "features": "Recursos",
+    "pricing": "Preços",
+    "blog": "Blog",
+    "faq": "Perguntas Frequentes",
+    "support": "Suporte",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Serviço",
+    "contact": "Contato",
+    "buyCoffee": "Me pague um café",
+    "rights": "Todos os direitos reservados",
+    "emailGenerator": "Gerador de Email",
+    "gmailGenerator": "Gerador Gmail",
+    "tempMailEdu": "Email Temporário EDU",
+    "tenMinuteMail": "Email de 10 Minutos"
+  },
+  "toast": {
+    "emailCopied": "Endereço de e-mail copiado para a área de transferência!",
+    "emailForwarded": "E-mail encaminhado com sucesso!",
+    "emailDeleted": "E-mail excluído!",
+    "error": "Ocorreu um erro. Por favor, tente novamente.",
+    "invalidEmail": "Por favor, digite um endereço de e-mail válido",
+    "customAliasCreated": "E-mail personalizado criado com sucesso!",
+    "aliasInvalid": "O alias deve ter 3-20 caracteres (apenas letras, números e hífens)"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "close": "Fechar",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "view": "Ver",
+    "back": "Voltar",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "search": "Pesquisar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "more": "Mais"
+  },
+  "home": {
+    "title": "Fire Temp Mail – Seu gerador gratuito de e-mail temporário descartável",
+    "subtitle": "Gere instantaneamente um endereço de e-mail descartável. Mantenha seu endereço de e-mail real privado e sua caixa de entrada limpa de mensagens indesejadas e spam.",
+    "gmailSection": {
+      "title": "Gerador de Gmail Temporário: Obtenha um endereço Gmail temporário gratuito instantaneamente",
+      "intro": "Crie um endereço Gmail temporário totalmente funcional em segundos com nosso gerador avançado de Gmail temp mail. Obtenha um endereço Gmail descartável gratuito que funciona exatamente como uma conta Gmail real - perfeito para se inscrever em qualquer site sem revelar seu e-mail pessoal.",
+      "whyTitle": "Por que usar um endereço Gmail temporário?",
+      "whyText": "Proteja sua caixa de entrada principal de spam, e-mails de marketing e possíveis violações de dados. Nosso gerador temp Gmail fornece uma alternativa privada e segura para todos os seus registros online, verificações e testes. Mantenha seu Gmail pessoal limpo e organizado enquanto mantém total privacidade.",
+      "features": {
+        "instant": "Geração instantânea de endereço Gmail - sem registro necessário",
+        "real": "Endereços Gmail reais que funcionam em todas as plataformas e sites",
+        "free": "Serviço Gmail temporário completamente gratuito sem custos ocultos",
+        "bypass": "Perfeito para contornar bloqueios e restrições de verificação de e-mail"
+      },
+      "howTitle": "Como obter seu Gmail temporário",
+      "howText": "Obter seu endereço Gmail descartável é simples. Basta selecionar a opção Gmail e gerar seu e-mail temporário. Use-o imediatamente para qualquer registro de site, verificação de aplicativo ou inscrição em serviço. Suas mensagens aparecerão instantaneamente em sua caixa de entrada privada.",
+      "idealTitle": "Ideal para todas as suas necessidades online",
+      "idealText": "Nosso serviço Gmail temp mail é perfeito para testes gratuitos, inscrições em redes sociais, registros de sites, verificações de aplicativos, assinaturas de newsletters e comunicações temporárias. Quando terminar, simplesmente descarte o endereço - sem deixar rastros.",
+      "cta": "Pronto para proteger sua privacidade? Gere seu endereço Gmail temporário gratuito agora e experimente inscrições seguras e sem spam em todas as plataformas."
+    },
+    "whatIsTitle": "O que é um e-mail temporário descartável?",
+    "whatIsText": "Um endereço de e-mail descartável é um serviço de e-mail temporário gratuito que cria uma caixa de entrada de curto prazo para receber e-mails. Frequentemente chamado de tempmail, 10minmail, e-mail descartável ou burner mail, ajuda você a evitar spam e proteger seu e-mail principal. Em vez de expor suas contas de e-mail reais, você pode confiar no Fire Temp Mail para manter sua caixa de entrada pessoal segura, privada e livre de spam.",
+    "guidesTitle": "Guias específicos da plataforma",
+    "guidesSubtitle": "Aprenda a usar e-mail temporário para plataformas populares e proteja sua privacidade",
+    "discordGuide": {
+      "title": "Discord Temp Mail",
+      "description": "Crie contas Discord sem expor seu e-mail pessoal. Guia completo de verificação."
+    },
+    "instagramGuide": {
+      "title": "Instagram E-mail temporário",
+      "description": "Inscreva-se no Instagram usando e-mail descartável. Evite spam e mantenha múltiplas contas."
+    },
+    "tiktokGuide": {
+      "title": "TikTok E-mail temporário",
+      "description": "Crie contas TikTok com temp mail. Mantenha sua caixa de entrada limpa de e-mails promocionais."
+    },
+    "techTitle": "A tecnologia por trás dos endereços de e-mail descartáveis",
+    "techIntro": "No mundo digital de hoje, os endereços de e-mail tornaram-se nossos passaportes online - essenciais para comunicação de trabalho, conexões comerciais, interações sociais e acesso a serviços. Quase todos os aplicativos e serviços online exigem um endereço de e-mail para registro, assim como programas de fidelidade, concursos e ofertas especiais.",
+    "deasTitle": "O que são endereços de e-mail descartáveis?",
+    "deasText": "Endereços de e-mail descartáveis (DEAs) fornecem uma solução inovadora para manter a privacidade online enquanto acessa serviços digitais. Esses endereços temporários permitem que você:",
+    "deasFeatures": {
+      "register": "Registre-se em serviços sem revelar seu e-mail principal",
+      "protect": "Proteja sua identidade de violações de dados e listas de spam",
+      "control": "Mantenha controle sobre sua pegada digital",
+      "expire": "Expire automaticamente após um período definido"
+    },
+    "deasCompromise": "Quando um endereço descartável é comprometido ou começa a receber e-mails indesejados, você pode simplesmente retirá-lo sem afetar seus canais de comunicação principais.",
+    "usesTitle": "Usos práticos para endereços de e-mail temporários",
+    "uses": {
+      "trials": {
+        "title": "Testes gratuitos estendidos",
+        "text": "Muitos serviços de streaming como Netflix, Hulu e Amazon Prime oferecem testes de tempo limitado. Com e-mails descartáveis, você pode estender seus períodos de teste enquanto mantém acesso a esses serviços."
+      },
+      "retail": {
+        "title": "Ofertas de varejo sem spam",
+        "text": "As lojas frequentemente solicitam endereços de e-mail para ofertas especiais, o que muitas vezes leva a spam promocional. E-mails temporários permitem que você acesse esses benefícios sem sobrecarregar sua caixa de entrada principal."
+      },
+      "testing": {
+        "title": "Teste de aplicativos",
+        "text": "Desenvolvedores podem criar várias contas de teste usando e-mails descartáveis para avaliar minuciosamente seus aplicativos antes do lançamento público."
+      },
+      "multiple": {
+        "title": "Gerenciamento de múltiplas contas",
+        "text": "Quando os serviços exigem contas separadas para diferentes propósitos (como gerenciar vários perfis de mídia social), e-mails descartáveis fornecem a separação necessária sem criar novas contas permanentes."
+      },
+      "spam": {
+        "title": "Prevenção de spam",
+        "text": "Usar e-mails temporários para fóruns, grupos de discussão e formulários web reduz significativamente o spam em sua caixa de entrada principal."
+      }
+    },
+    "choosingTitle": "Escolhendo o serviço de e-mail descartável certo",
+    "choosingText": "Os melhores provedores de e-mail temporário oferecem:",
+    "choosingFeatures": {
+      "instant": "Geração instantânea de e-mail com um clique",
+      "privacy": "Sem registro ou coleta de informações pessoais",
+      "anonymous": "Anonimato completo para os usuários",
+      "unlimited": "Criação ilimitada de endereços de e-mail",
+      "inbox": "Funcionalidade de caixa de entrada temporária",
+      "interface": "Interface amigável ao usuário",
+      "custom": "Opções de endereço personalizáveis"
+    },
+    "effectiveTitle": "Como usar endereços de e-mail descartáveis efetivamente",
+    "effectiveText": "Enquanto alguns usuários criam contas secundárias com provedores tradicionais como Gmail, essa abordagem requer gerenciar várias caixas de entrada. Serviços profissionais de e-mail descartável como Fire Temp Mail oferecem uma solução mais eficiente, fornecendo endereços temporários que encaminham para seu e-mail principal enquanto mantém separação completa.",
+    "effectiveAdvanced": "A funcionalidade avançada permite filtrar mensagens - enviando e-mails suspeitos diretamente para o lixo enquanto entrega comunicações importantes para sua caixa de entrada principal. Se um endereço for comprometido, você pode simplesmente desativá-lo sem afetar suas outras contas.",
+    "conclusionTitle": "Conclusão: Melhore sua privacidade online",
+    "conclusionText": "Implementar um sistema de e-mail descartável é uma estratégia eficaz para participar de fóruns online, salas de chat, serviços de compartilhamento de arquivos e quadros de avisos enquanto protege sua identidade principal. Ao usar endereços temporários do Fire Temp Mail, você garante que suas informações pessoais permaneçam seguras e sua caixa de entrada fique livre de spam indesejado. Assuma o controle de sua privacidade digital hoje com nosso serviço de e-mail temporário seguro e anônimo projetado para manter suas atividades online separadas de seus canais de comunicação pessoal."
+  },
+  "blog": {
+    "title": "Blog Fire Temp Mail",
+    "subtitle": "Dicas, guias e informações sobre e-mail temporário e privacidade online",
+    "readMore": "Ler Mais",
+    "popular": "Artigos Populares do Nosso Blog",
+    "visitBlog": "Visite o Nosso Blog",
+    "category": "Categoria",
+    "readTime": "Tempo de Leitura",
+    "backToBlog": "Voltar ao Blog",
+    "shareArticle": "Partilhe este artigo",
+    "loading": "A carregar...",
+    "pleaseWait": "Por favor aguarde enquanto carregamos a publicação.",
+    "error": "Erro",
+    "postNotFound": "A publicação do blog solicitada não foi encontrada.",
+    "by": "Por"
+  },
+  "contact": {
+    "title": "Contacte-nos - Fire Temp Mail",
+    "metaDescription": "Entre em contacto com Fire Temp Mail. Contacte o nosso suporte, negócios ou reporte abuso por e-mail. Estamos aqui para ajudar!",
+    "getInTouch": "Entre em Contacto",
+    "loveToHear": "Adoraríamos ouvir de si! Aqui está como pode contactar-nos:",
+    "emailSupport": "Suporte por E-mail",
+    "generalInquiries": "Para consultas gerais e suporte:",
+    "businessInquiries": "Consultas Comerciais",
+    "businessText": "Para oportunidades comerciais e parcerias:",
+    "reportAbuse": "Reportar Abuso",
+    "reportAbuseText": "Para reportar abuso ou atividades ilegais:",
+    "responseTime": "Tempo de Resposta",
+    "responseText": "Normalmente respondemos a todos os e-mails dentro de 24-48 horas durante os dias úteis."
+  },
+  "advertising": {
+    "title": "Oportunidades de Publicidade",
+    "metaTitle": "Publicite com Fire Temp Mail",
+    "metaDescription": "Explore oportunidades de publicidade com Fire Temp Mail para alcançar um público-alvo.",
+    "opportunities": {
+      "title": "Oportunidades de Publicidade",
+      "text": "Fire Temp Mail oferece oportunidades únicas de publicidade para alcançar a nossa crescente base de utilizadores."
+    },
+    "audience": {
+      "title": "O Nosso Público",
+      "text": "Servimos milhares de utilizadores diários que são tecnologicamente experientes, conscientes da privacidade e ativamente envolvidos em atividades online que requerem verificação de e-mail."
+    },
+    "options": {
+      "title": "Opções de Publicidade",
+      "text": "Oferecemos várias opções de publicidade, incluindo banners publicitários, conteúdo patrocinado e colocações de e-mail dedicadas."
+    },
+    "policy": {
+      "title": "Política de Anúncios",
+      "text": "Mantemos uma política de anúncios rigorosa para garantir que os nossos utilizadores tenham uma experiência positiva. Não permitimos pop-ups intrusivos, vídeos com reprodução automática com som ou publicidade enganosa."
+    },
+    "getStarted": {
+      "title": "Começar",
+      "text": "Para tarifas de publicidade e disponibilidade, por favor contacte-nos em"
+    }
+  },
+  "faq": {
+    "metaTitle": "Perguntas Frequentes - Fire Temp Mail | Serviço de E-mail Temporário",
+    "metaDescription": "Obtenha respostas a perguntas comuns sobre o serviço de e-mail temporário do Fire Temp Mail. Aprenda a usar e-mails descartáveis para privacidade, segurança e proteção contra spam.",
+    "title": "Perguntas Frequentes",
+    "subtitle": "Encontre respostas a perguntas comuns sobre o nosso serviço de e-mail temporário seguro, concebido para proteger a sua privacidade.",
+    "categories": {
+      "privacy": {
+        "icon": "🔒",
+        "title": "Privacidade e Segurança",
+        "description": "Como protegemos os seus dados e identidade"
+      },
+      "usage": {
+        "icon": "⏱️",
+        "title": "Utilização e Funcionalidades",
+        "description": "Como usar o nosso serviço eficazmente"
+      }
+    },
+    "questions": {
+      "q1": {
+        "question": "O que é um endereço de e-mail temporário?",
+        "answer": "<p>Um endereço de e-mail temporário, também conhecido como e-mail descartável ou anónimo, é um endereço de e-mail de curto prazo que expira automaticamente após um período definido. Permite-lhe receber e-mails sem revelar o seu endereço de e-mail pessoal, protegendo a sua privacidade e mantendo a sua caixa de entrada principal livre de mensagens indesejadas e spam.</p><p>Serviços de e-mail temporário como Fire Temp Mail fornecem estes endereços instantaneamente sem necessitar de registo, tornando-os ideais para inscrições únicas, verificações online e proteção da sua identidade online.</p>"
+      },
+      "q2": {
+        "question": "Porque devo usar um serviço de e-mail temporário?",
+        "answer": "<p>Usar um serviço de e-mail temporário oferece vários benefícios importantes:</p><ul><li><strong>Proteção de Privacidade:</strong> Mantenha o seu endereço de e-mail pessoal privado ao inscrever-se em serviços</li><li><strong>Prevenção de Spam:</strong> Evite e-mails promocionais indesejados e newsletters</li><li><strong>Melhoria de Segurança:</strong> Reduza riscos de violações de dados ao usar endereços descartáveis</li><li><strong>Organização:</strong> Crie e-mails diferentes para diferentes propósitos (compras, fóruns, etc.)</li><li><strong>Conveniência:</strong> Sem registo necessário e acesso instantâneo a novos endereços de e-mail</li></ul>"
+      },
+      "q3": {
+        "question": "Como é que o Fire Temp Mail protege a minha privacidade?",
+        "answer": "<p>Fire Temp Mail emprega várias estratégias para garantir a sua privacidade:</p><ol><li>Não exigimos informações pessoais para usar o nosso serviço</li><li>Todos os e-mails são automaticamente eliminados após 2 horas</li><li>Usamos encriptação HTTPS para todas as transferências de dados</li><li>O nosso serviço não rastreia a sua atividade em sites</li><li>Não vendemos nem partilhamos os seus dados com terceiros</li></ol><p>Para segurança adicional, recomendamos não usar e-mail temporário para comunicações altamente sensíveis.</p>"
+      },
+      "q4": {
+        "question": "O Fire Temp Mail é completamente gratuito?",
+        "answer": "<p>Sim, o nosso serviço básico de e-mail temporário é completamente gratuito sem custos ocultos. Com o nosso plano gratuito, pode:</p><ul><li>Criar endereços de e-mail temporários ilimitados</li><li>Receber e-mails até 24 horas (extensível)</li><li>Ver e-mails na nossa interface limpa e sem anúncios</li><li>Usar o nosso serviço sem registo</li></ul><p>Também oferecemos um plano premium com funcionalidades adicionais como envio de e-mails, tempos de expiração mais longos e domínios personalizados para utilizadores com necessidades mais avançadas.</p>"
+      },
+      "q5": {
+        "question": "Quanto tempo duram os e-mails temporários?",
+        "answer": "<p>Por predefinição, os endereços Fire Temp Mail permanecem ativos por 24 horas. No entanto, pode estender este período:</p><ol><li>Endereços gratuitos básicos: 24 horas (extensível até 3 vezes)</li><li>Endereços estendidos: Até 72 horas com múltiplas extensões</li><li>Endereços premium: Durações personalizadas até 30 dias</li></ol><p>Após o período de expiração, todos os e-mails associados ao endereço são permanentemente eliminados dos nossos servidores.</p>"
+      },
+      "q6": {
+        "question": "Posso enviar e-mails de um endereço temporário?",
+        "answer": "<p>O nosso serviço básico foca-se em receber e-mails para proteger a sua privacidade. No entanto:</p><ul><li><strong>Nível gratuito:</strong> Apenas receber e-mails</li><li><strong>Nível premium:</strong> Enviar e-mails do seu endereço temporário</li><li><strong>Todos os níveis:</strong> Ver e gerir e-mails recebidos através da nossa interface segura</li></ul><p>A abordagem apenas de receção para contas gratuitas melhora a privacidade ao prevenir o uso indevido do nosso serviço para atividades de spam.</p>"
+      },
+      "q7": {
+        "question": "O que acontece aos e-mails após expirarem?",
+        "answer": "<p>Fire Temp Mail segue uma política rigorosa de retenção de dados:</p><ol><li>Os e-mails são automaticamente eliminados após o endereço expirar</li><li>Endereços expirados não podem ser recuperados</li><li>Não são mantidas cópias de segurança de conteúdo eliminado</li><li>O nosso sistema está concebido para apagar permanentemente todos os dados após a expiração</li></ol><p>Esta abordagem garante que a sua privacidade é protegida e que nenhuma informação sensível permanece nos nossos servidores mais tempo do que o necessário.</p>"
+      },
+      "q8": {
+        "question": "Posso usar e-mail temporário para contas importantes?",
+        "answer": "<p>Embora os e-mails temporários sejam excelentes para privacidade, recomendamos cautela:</p><ul><li><strong>Recomendado para:</strong> Inscrições únicas, newsletters, registos em fóruns e verificações temporárias</li><li><strong>Não recomendado para:</strong> Serviços bancários, serviços governamentais, contas de e-mail principais ou qualquer serviço que requeira acesso a longo prazo</li><li><strong>Considere:</strong> A natureza temporária significa que perderá o acesso se precisar de redefinir palavras-passe mais tarde</li></ul><p>Para contas importantes, recomendamos usar um endereço de e-mail permanente de um fornecedor de confiança.</p>"
+      }
+    }
+  },
+  "terms": {
+    "metaTitle": "Termos de Serviço - Fire Temp Mail | Serviço de E-mail Temporário",
+    "metaDescription": "Leia os Termos de Serviço do Fire Temp Mail. Saiba mais sobre uso aceitável, disponibilidade do serviço, funcionalidades premium e os seus direitos e responsabilidades ao usar o nosso serviço de e-mail temporário.",
+    "title": "Termos de Serviço",
+    "introduction": {
+      "title": "Introdução",
+      "text": "Bem-vindo ao Fire Temp Mail (\"nós\", \"nosso\" ou \"nos\"). Ao aceder ou usar o nosso website <a href=\"https://firetempmail.com\">https://firetempmail.com</a> e serviços relacionados, concorda em cumprir e estar vinculado aos seguintes Termos de Serviço (\"Termos\"). Estes Termos regem o seu uso tanto do nosso serviço de e-mail temporário gratuito (\"Serviço Gratuito\") como de quaisquer funcionalidades melhoradas disponíveis no Fire Temp Mail Premium (\"Serviço Premium\")."
+    },
+    "privacy": {
+      "title": "Privacidade e Políticas Relacionadas",
+      "text": "Estamos comprometidos em proteger a sua privacidade. Por favor, reveja a nossa <a href=\"/privacy-policy\">Política de Privacidade</a> para saber como tratamos os seus dados. Ao usar o nosso serviço, também concorda com os termos descritos nessa política."
+    },
+    "serviceDesc": {
+      "title": "Descrição do Serviço",
+      "text": "Fire Temp Mail fornece endereços de e-mail descartáveis e temporários com o propósito de proteger a sua caixa de entrada real de spam, newsletters ou mensagens indesejadas. O nosso Serviço Gratuito permite-lhe gerar instantaneamente endereços de e-mail, receber mensagens recebidas e descartá-las à vontade. O Serviço Premium fornece funcionalidades adicionais como armazenamento estendido de e-mails, múltiplas caixas de correio, domínios premium e suporte prioritário."
+    },
+    "acceptableUse": {
+      "title": "Uso Aceitável",
+      "intro": "Concorda em não usar Fire Temp Mail direta ou indiretamente para qualquer propósito ilegal, abusivo ou não autorizado. Isto inclui, mas não se limita a:",
+      "items": [
+        "Registar contas importantes que requerem acesso de e-mail permanente ou verificável.",
+        "Receber, armazenar ou partilhar informações sensíveis ou confidenciais.",
+        "Enviar e-mails não solicitados, vírus ou código malicioso.",
+        "Participar em fraude, assédio ou qualquer atividade que viole as leis aplicáveis."
+      ]
+    },
+    "dataStorage": {
+      "title": "Armazenamento de Dados e Disponibilidade",
+      "text1": "E-mails recebidos através do Fire Temp Mail são armazenados temporariamente. Contas gratuitas geralmente armazenam e-mails por uma curta duração (geralmente algumas horas), após o qual as mensagens são automaticamente eliminadas. Contas premium podem armazenar e-mails por um período mais longo, como até um mês. Uma vez eliminados, e-mails e domínios não podem ser restaurados sob quaisquer circunstâncias.",
+      "text2": "Não garantimos tempo de atividade ou disponibilidade ininterrupta. O serviço pode ser suspenso para manutenção, atualizações ou problemas técnicos imprevistos."
+    },
+    "premium": {
+      "title": "Funcionalidades Premium e Subscrições",
+      "intro": "O Serviço Premium é oferecido numa base de subscrição e pode incluir funcionalidades como:",
+      "features": [
+        "Múltiplas caixas de correio para gerir vários endereços de uma vez.",
+        "Domínios premium exclusivos com menor probabilidade de serem bloqueados.",
+        "Armazenamento estendido para mensagens além dos limites do Serviço Gratuito.",
+        "Experiência sem anúncios para uma interface mais limpa.",
+        "Suporte ao cliente prioritário."
+      ],
+      "billing": "Preços, faturação e termos de subscrição serão apresentados no momento da compra. As subscrições renovam-se automaticamente a menos que a renovação automática seja desativada antes da data de renovação. Pode gerir a sua subscrição e cancelar a renovação automática a qualquer momento nas definições da sua conta."
+    },
+    "liability": {
+      "title": "Limitações de Responsabilidade",
+      "intro": "Fire Temp Mail é fornecido \"como está\" sem garantias de qualquer tipo. Não garantimos que:",
+      "items": [
+        "E-mails serão sempre entregues, armazenados ou acessíveis.",
+        "Domínios permanecerão inalterados ou disponíveis indefinidamente.",
+        "Mensagens permanecerão inalteradas ou livres de malware."
+      ],
+      "disclaimer": "Concorda em isentar-nos de quaisquer danos, perdas ou reclamações decorrentes do seu uso do serviço, incluindo perda de e-mails ou consequências de confiar em endereços temporários."
+    },
+    "changes": {
+      "title": "Alterações aos Termos",
+      "text": "Reservamo-nos o direito de atualizar ou rever estes Termos a qualquer momento. Alterações materiais serão publicadas nesta página com uma data de \"última atualização\" revista. O uso continuado do serviço após as alterações indica aceitação dos Termos atualizados."
+    },
+    "contact": {
+      "title": "Informações de Contacto",
+      "text": "Se tiver alguma questão sobre estes Termos, por favor contacte-nos em:",
+      "email": "E-mail: support@firetempmail.com"
+    }
+  },
+  "privacy": {
+    "metaTitle": "Política de Privacidade - Fire Temp Mail",
+    "metaDescription": "Leia a Política de Privacidade abrangente do Fire Temp Mail. Saiba como protegemos os seus dados, tratamos e-mails temporários e gerimos cookies, registos e serviços de terceiros.",
+    "title": "Política de Privacidade",
+    "introduction": {
+      "title": "Introdução",
+      "text": "Fire Temp Mail (\"nós\", \"nosso\" ou \"nos\") valoriza a sua privacidade. Esta Política de Privacidade explica como recolhemos, usamos, armazenamos e protegemos informações quando acede a <a href=\"https://firetempmail.com\" style=\"color: inherit;\">https://firetempmail.com</a> e aos nossos serviços de e-mail temporário, incluindo funcionalidades gratuitas e premium."
+    },
+    "infoCollect": {
+      "title": "Informações que Recolhemos",
+      "intro": "Esforçamo-nos por minimizar os dados que recolhemos. O nosso serviço trata principalmente:",
+      "items": [
+        "Conteúdo de e-mail recebido na sua caixa de entrada temporária.",
+        "Dados de sessão como endereços de e-mail temporários, para funcionalidade do serviço.",
+        "Registos técnicos: endereços IP, tipo de navegador, ISP, páginas de referência/saída, tipo de plataforma, timestamp e contagens de cliques — usados apenas em agregado para segurança e manutenção do serviço.",
+        "Para Fire Temp Mail Premium: endereços de e-mail e informações de pagamento estritamente para login, gestão de subscrição e faturação."
+      ]
+    },
+    "infoUse": {
+      "title": "Como Usamos as Suas Informações",
+      "intro": "As informações recolhidas são usadas exclusivamente para operar, manter e melhorar os nossos serviços. Isto inclui:",
+      "items": [
+        "Entregar e-mails à sua caixa de entrada temporária.",
+        "Prevenir abuso e manter a segurança do serviço.",
+        "Gerir subscrições premium e pagamentos.",
+        "Analisar padrões de uso agregados para melhorar o desempenho do serviço."
+      ]
+    },
+    "dataRetention": {
+      "title": "Retenção de Dados",
+      "text": "Todos os e-mails temporários em contas gratuitas são eliminados automaticamente dentro de 2-24 horas, dependendo da carga do sistema. Contas premium podem reter e-mails até um mês. Não recuperamos e-mails ou domínios eliminados uma vez removidos."
+    },
+    "cookies": {
+      "title": "Cookies e Rastreamento",
+      "intro": "Usamos cookies apenas para manter a sua sessão e endereço de e-mail temporário durante o uso ativo. Não colocamos cookies de publicidade, análise ou rastreamento de terceiros em contas gratuitas. Os cookies podem incluir:",
+      "items": [
+        "Cookies de sessão para manter o seu e-mail temporário ativo.",
+        "Cookies persistentes para utilizadores Premium para gerir sessões de login."
+      ],
+      "note": "Os utilizadores podem desativar cookies no seu navegador; no entanto, isso pode afetar a funcionalidade do serviço."
+    },
+    "thirdParty": {
+      "title": "Serviços de Terceiros",
+      "text": "Fire Temp Mail integra alguns serviços de terceiros (por exemplo, processadores de pagamento, redes de publicidade, infraestrutura de nuvem). Estes serviços podem recolher informações não identificáveis seguindo as suas próprias políticas de privacidade. Não vendemos nem partilhamos os seus e-mails pessoais ou dados identificáveis com terceiros para fins de marketing."
+    },
+    "ads": {
+      "title": "Anúncios e Monetização",
+      "text": "Para suportar o uso gratuito, Fire Temp Mail pode exibir anúncios servidos por redes de terceiros. Estas redes podem usar cookies ou tecnologias semelhantes para servir anúncios relevantes. Os utilizadores podem optar por não receber publicidade personalizada através das configurações de anúncios fornecidas pelas redes de publicidade."
+    },
+    "security": {
+      "title": "Medidas de Segurança",
+      "text": "Implementamos medidas técnicas e organizacionais razoáveis para proteger e-mails temporários e integridade do sistema. No entanto, os e-mails não são encriptados ponta-a-ponta. Os utilizadores devem evitar armazenar informações sensíveis através de endereços temporários."
+    },
+    "children": {
+      "title": "Privacidade de Crianças",
+      "text": "Os nossos serviços não são destinados a crianças com menos de 13 anos. Não recolhemos intencionalmente informações pessoais de crianças."
+    },
+    "userRights": {
+      "title": "Direitos do Utilizador",
+      "text": "Os utilizadores podem solicitar a eliminação de dados de conta Premium a qualquer momento. Para utilizadores do serviço gratuito, todos os dados são automaticamente eliminados de acordo com as políticas de retenção. Os utilizadores podem contactar o suporte para questões ou pedidos de privacidade."
+    },
+    "international": {
+      "title": "Utilizadores Internacionais",
+      "text": "Ao usar o nosso serviço, consente a transferência das suas informações para servidores localizados em Marrocos ou outras jurisdições onde operamos, em conformidade com as leis de privacidade aplicáveis."
+    },
+    "changes": {
+      "title": "Alterações à Política de Privacidade",
+      "text": "Podemos atualizar esta Política de Privacidade para refletir mudanças nas nossas práticas ou requisitos legais. Políticas atualizadas serão publicadas nesta página com a \"data efetiva\" revista. O uso continuado do serviço constitui aceitação destas alterações."
+    },
+    "contact": {
+      "title": "Contacte-nos",
+      "text": "Para questões sobre esta Política de Privacidade ou práticas de tratamento de dados, contacte-nos em:",
+      "email": "E-mail: support@firetempmail.com"
+    },
+    "footer": {
+      "quickLinks": "Links Rápidos",
+      "supportService": "Apoie o Nosso Serviço",
+      "supportText": "Ajude-nos a manter o FireTempMail gratuito fazendo uma doação. O seu apoio ajuda a manter e melhorar o nosso serviço.",
+      "scanSupport": "Digitalize para nos apoiar no Ko-fi",
+      "copyright": "FireTempMail. Todos os Direitos Reservados."
+    }
+  }
+}

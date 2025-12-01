@@ -1,5 +1,6 @@
 <script>
     import { onMount } from 'svelte';
+    import { _ } from 'svelte-i18n';
     import { receivingEmail } from '$lib/stores';
     
     let copyrightYear = new Date().getFullYear();
@@ -42,39 +43,39 @@
                     <span class="footer-logo-icon">🔥</span>
                     <span class="footer-logo-text">Fire Temp Mail</span>
                 </div>
-                <p class="footer-description">Fast, secure, and private temporary email service. Keep your inbox clean and protect your privacy.</p>
+                <p class="footer-description">{$_('hero.description')}</p>
                 <div class="footer-stats">
-                    <span class="stat-number">{stats.count || '0'}</span> emails delivered
+                    <span class="stat-number">{stats.count || '0'}</span> {$_('stats.emailsReceived').toLowerCase()}
                 </div>
             </div>
             
             <!-- Links Grid -->
             <div class="footer-links-grid">
                 <div class="footer-column">
-                    <h6 class="footer-heading">Product</h6>
+                    <h6 class="footer-heading">{$_('footer.product')}</h6>
                     <ul class="footer-links">
-                        <li><a href="/email-generator">Email Generator</a></li>
-                        <li><a href="/gmail-generator">Gmail Generator</a></li>
-                        <li><a href="/temp-mail-edu">Temp Mail EDU</a></li>
-                        <li><a href="/10minutemail">10 Minute Mail</a></li>
+                        <li><a href="/email-generator">{$_('footer.emailGenerator')}</a></li>
+                        <li><a href="/gmail-generator">{$_('footer.gmailGenerator')}</a></li>
+                        <li><a href="/temp-mail-edu">{$_('footer.tempMailEdu')}</a></li>
+                        <li><a href="/10minutemail">{$_('footer.tenMinuteMail')}</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
-                    <h6 class="footer-heading">Resources</h6>
+                    <h6 class="footer-heading">{$_('footer.resources')}</h6>
                     <ul class="footer-links">
-                        <li><a href="/blog">Blog</a></li>
-                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/blog">{$_('footer.blog')}</a></li>
+                        <li><a href="/faq">{$_('footer.faq')}</a></li>
                         <li><a href="https://rapidapi.com/fire-temp-mail-fire-temp-mail-default/api/firetempmail-api" target="_blank" rel="noopener">API</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
-                    <h6 class="footer-heading">Legal</h6>
+                    <h6 class="footer-heading">{$_('footer.legal')}</h6>
                     <ul class="footer-links">
-                        <li><a href="/privacy-policy">Privacy Policy</a></li>
-                        <li><a href="/terms">Terms of Service</a></li>
-                        <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="/privacy-policy">{$_('footer.privacy')}</a></li>
+                        <li><a href="/terms">{$_('footer.terms')}</a></li>
+                        <li><a href="/contact">{$_('footer.contact')}</a></li>
                     </ul>
                 </div>
             </div>
@@ -82,10 +83,10 @@
         
         <!-- Bottom Bar -->
         <div class="footer-bottom">
-            <p class="copyright">© {copyrightYear} FireTempMail. All Rights Reserved.</p>
+            <p class="copyright">© {copyrightYear} FireTempMail. {$_('footer.rights')}</p>
             <div class="footer-support">
                 <a href="https://ko-fi.com/firetempmail" target="_blank" rel="noopener" class="support-link">
-                    ☕ Support us on Ko-fi
+                    ☕ {$_('footer.buyCoffee')}
                 </a>
             </div>
         </div>

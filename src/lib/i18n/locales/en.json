@@ -1,0 +1,466 @@
+{
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "advertising": "Advertising"
+  },
+  "hero": {
+    "title": "Fire Temp Mail",
+    "subtitle": "Temporary Email Service",
+    "description": "Protect your privacy with disposable email addresses. No registration required.",
+    "getStarted": "Get Started"
+  },
+  "email": {
+    "type": {
+      "domain": "Domain Email",
+      "gmail": "Gmail Account"
+    },
+    "yourEmail": "Your Temporary Email",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "refresh": "Refresh",
+    "newEmail": "New Email",
+    "customAlias": "Custom Alias",
+    "useCustomAlias": "Use custom alias",
+    "enterAlias": "Enter your custom alias",
+    "generate": "Generate",
+    "cancel": "Cancel",
+    "selectDomain": "Select Domain",
+    "inbox": "Inbox",
+    "noEmails": "No emails yet. Waiting for incoming messages...",
+    "emailsWillAppear": "Emails sent to your temporary address will appear here",
+    "from": "From",
+    "subject": "Subject",
+    "received": "Received",
+    "viewEmail": "View Email",
+    "backToInbox": "Back to Inbox",
+    "forward": "Forward",
+    "delete": "Delete",
+    "forwardTo": "Forward to",
+    "forwardButton": "Forward Email",
+    "enterEmail": "Enter email address",
+    "autoRefresh": "Auto-refresh",
+    "stopAfter": "Stop after",
+    "reloads": "reloads",
+    "awayQuestion": "Are you still there?",
+    "awayMessage": "Please reload the page to re-enable automatic refresh.",
+    "noSubject": "(No Subject)",
+    "unknownSender": "Unknown Sender",
+    "unknownDate": "Unknown date",
+    "noContent": "No content available"
+  },
+  "stats": {
+    "emailsCreated": "Emails Created",
+    "emailsReceived": "Emails Received",
+    "activeUsers": "Active Users"
+  },
+  "features": {
+    "title": "Why Choose Fire Temp Mail?",
+    "instant": {
+      "title": "Instant & Anonymous",
+      "description": "Get a temporary email address instantly without any registration"
+    },
+    "secure": {
+      "title": "Secure & Private",
+      "description": "Your emails are automatically deleted after a short period"
+    },
+    "unlimited": {
+      "title": "Unlimited Use",
+      "description": "Create as many temporary email addresses as you need"
+    }
+  },
+  "guides": {
+    "title": "Popular Platform Guides",
+    "discord": "Discord",
+    "instagram": "Instagram",
+    "tiktok": "TikTok",
+    "readGuide": "Read Guide"
+  },
+  "footer": {
+    "product": "Product",
+    "resources": "Resources",
+    "legal": "Legal",
+    "tempMail": "Temp Mail",
+    "features": "Features",
+    "pricing": "Pricing",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "support": "Support",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact",
+    "buyCoffee": "Buy me a coffee",
+    "rights": "All rights reserved",
+    "emailGenerator": "Email Generator",
+    "gmailGenerator": "Gmail Generator",
+    "tempMailEdu": "Temp Mail EDU",
+    "tenMinuteMail": "10 Minute Mail"
+  },
+  "toast": {
+    "emailCopied": "Email address copied to clipboard!",
+    "emailForwarded": "Email forwarded successfully!",
+    "emailDeleted": "Email deleted!",
+    "error": "An error occurred. Please try again.",
+    "invalidEmail": "Please enter a valid email address",
+    "customAliasCreated": "Custom email created successfully!",
+    "aliasInvalid": "Alias must be 3-20 characters (letters, numbers, hyphens only)"
+  },
+  "common": {
+    "loading": "Loading...",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "more": "More"
+  },
+  "home": {
+    "title": "Fire Temp Mail – Your Free Temporary Disposable Email Generator",
+    "subtitle": "Instantly generate a disposable Email Generator address. Keep your real email address private and your inbox clean from unwanted messages and spam.",
+    "gmailSection": {
+      "title": "Gmail Temp Mail Generator: Get a Free Temporary Gmail Address Instantly",
+      "intro": "Create a fully functional temporary Gmail address in seconds with our advanced Gmail temp mail generator. Get a free, disposable Gmail address that works exactly like a real Gmail account—perfect for signing up on any website without revealing your personal email.",
+      "whyTitle": "Why Use a Temporary Gmail Address?",
+      "whyText": "Protect your primary inbox from spam, marketing emails, and potential data breaches. Our temp Gmail generator provides a private, secure alternative for all your online sign-ups, verifications, and trials. Keep your personal Gmail clean and organized while maintaining full privacy.",
+      "features": {
+        "instant": "Instant Gmail address generation - no registration required",
+        "real": "Real Gmail addresses that work on all platforms and websites",
+        "free": "Completely free temporary Gmail service with no hidden costs",
+        "bypass": "Perfect for bypassing email verification blocks and restrictions"
+      },
+      "howTitle": "How to Get Your Temporary Gmail",
+      "howText": "Getting your disposable Gmail address is simple. Just select the Gmail option and generate your temporary email. Use it immediately for any website registration, app verification, or service sign-up. Your messages will appear instantly in your private inbox.",
+      "idealTitle": "Ideal For All Your Online Needs",
+      "idealText": "Our Gmail temp mail service is perfect for free trials, social media sign-ups, website registrations, app verifications, newsletter subscriptions, and temporary communications. When you're done, simply discard the address—no traces left behind.",
+      "cta": "Ready to protect your privacy? Generate your free temporary Gmail address now and experience secure, spam-free sign-ups across all platforms."
+    },
+    "whatIsTitle": "What is Disposable Temporary E-mail?",
+    "whatIsText": "A disposable email address is a free temporary email service that creates a short-term inbox for receiving emails. Often called tempmail, 10minmail, throwaway email, or burner mail, it helps you avoid spam and protect your primary email. Instead of exposing your real email accounts, you can rely on Fire Temp Mail to keep your personal inbox safe, private, and spam-free.",
+    "guidesTitle": "Platform-Specific Guides",
+    "guidesSubtitle": "Learn how to use temporary email for popular platforms and protect your privacy",
+    "discordGuide": {
+      "title": "Discord Temp Mail",
+      "description": "Create Discord accounts without exposing your personal email. Complete verification guide."
+    },
+    "instagramGuide": {
+      "title": "Instagram Temp Email",
+      "description": "Sign up for Instagram using disposable email. Avoid spam and maintain multiple accounts."
+    },
+    "tiktokGuide": {
+      "title": "TikTok Temporary Email",
+      "description": "Create TikTok accounts with temp mail. Keep your inbox clean from promotional emails."
+    },
+    "techTitle": "The Technology Behind Disposable Email Addresses",
+    "techIntro": "In today's digital world, email addresses have become our online passports—essential for work communication, business connections, social interactions, and accessing services. Nearly all applications and online services require an email address for registration, as do loyalty programs, contests, and special offers.",
+    "deasTitle": "What Are Disposable Email Addresses?",
+    "deasText": "Disposable Email Addresses (DEAs) provide an innovative solution for maintaining online privacy while accessing digital services. These temporary addresses allow you to:",
+    "deasFeatures": {
+      "register": "Register for services without revealing your primary email",
+      "protect": "Protect your identity from data breaches and spam lists",
+      "control": "Maintain control over your digital footprint",
+      "expire": "Automatically expire after a set period"
+    },
+    "deasCompromise": "When a disposable address is compromised or begins receiving unwanted emails, you can simply retire it without affecting your primary communication channels.",
+    "usesTitle": "Practical Uses for Temporary Email Addresses",
+    "uses": {
+      "trials": {
+        "title": "Extended Free Trials",
+        "text": "Many streaming services like Netflix, Hulu, and Amazon Prime offer limited-time trials. With disposable emails, you can extend your trial periods while maintaining access to these services."
+      },
+      "retail": {
+        "title": "Retail Offers Without Spam",
+        "text": "Stores frequently request email addresses for special offers, which often leads to promotional spam. Temporary emails let you access these benefits without cluttering your primary inbox."
+      },
+      "testing": {
+        "title": "Application Testing",
+        "text": "Developers can create multiple test accounts using disposable emails to thoroughly evaluate their applications before public release."
+      },
+      "multiple": {
+        "title": "Multiple Account Management",
+        "text": "When services require separate accounts for different purposes (like managing multiple social media profiles), disposable emails provide the necessary separation without creating permanent new accounts."
+      },
+      "spam": {
+        "title": "Spam Prevention",
+        "text": "Using temporary emails for forums, discussion groups, and web forms significantly reduces spam in your primary inbox."
+      }
+    },
+    "choosingTitle": "Choosing the Right Disposable Email Service",
+    "choosingText": "The best temporary email providers offer:",
+    "choosingFeatures": {
+      "instant": "Instant email generation with one click",
+      "privacy": "No registration or personal information collection",
+      "anonymous": "Complete anonymity for users",
+      "unlimited": "Unlimited email address creation",
+      "inbox": "Temporary inbox functionality",
+      "interface": "User-friendly interface",
+      "custom": "Customizable address options"
+    },
+    "effectiveTitle": "How to Use Disposable Email Addresses Effectively",
+    "effectiveText": "While some users create secondary accounts with traditional providers like Gmail, this approach requires managing multiple inboxes. Professional disposable email services like Fire Temp Mail offer a more efficient solution by providing temporary addresses that forward to your primary email while maintaining complete separation.",
+    "effectiveAdvanced": "The advanced functionality allows you to filter messages—sending suspicious emails directly to trash while delivering important communications to your main inbox. If an address becomes compromised, you can simply disable it without affecting your other accounts.",
+    "conclusionTitle": "Conclusion: Enhance Your Online Privacy",
+    "conclusionText": "Implementing a disposable email system is an effective strategy for participating in online forums, chat rooms, file-sharing services, and bulletin boards while protecting your primary identity. By using temporary addresses from Fire Temp Mail, you ensure your personal information remains secure and your inbox stays free from unwanted spam. Take control of your digital privacy today with our secure, anonymous temporary email service designed to keep your online activities separate from your personal communication channels."
+  },
+  "blog": {
+    "title": "Fire Temp Mail Blog",
+    "subtitle": "Tips, guides, and insights about temporary email and online privacy",
+    "readMore": "Read More",
+    "popular": "Popular Articles from Our Blog",
+    "visitBlog": "Visit Our Blog",
+    "category": "Category",
+    "readTime": "Read Time",
+    "backToBlog": "Back to Blog",
+    "shareArticle": "Share this article",
+    "loading": "Loading...",
+    "pleaseWait": "Please wait while we load the post.",
+    "error": "Error",
+    "postNotFound": "The requested blog post could not be found.",
+    "by": "By"
+  },
+  "contact": {
+    "title": "Contact Us - Fire Temp Mail",
+    "metaDescription": "Get in touch with Fire Temp Mail. Contact our support, business, or report abuse via email. We're here to help!",
+    "getInTouch": "Get in Touch",
+    "loveToHear": "We'd love to hear from you! Here's how you can reach us:",
+    "emailSupport": "Email Support",
+    "generalInquiries": "For general inquiries and support:",
+    "businessInquiries": "Business Inquiries",
+    "businessText": "For business and partnership opportunities:",
+    "reportAbuse": "Report Abuse",
+    "reportAbuseText": "To report abuse or illegal activities:",
+    "responseTime": "Response Time",
+    "responseText": "We typically respond to all emails within 24-48 hours during business days."
+  },
+  "terms": {
+    "metaTitle": "Terms of Service - Fire Temp Mail | Temporary Email Service",
+    "metaDescription": "Read the Terms of Service for Fire Temp Mail. Learn about acceptable use, service availability, premium features, and your rights and responsibilities when using our temporary email service.",
+    "title": "Terms of Service",
+    "introduction": {
+      "title": "Introduction",
+      "text": "Welcome to Fire Temp Mail (\"we,\" \"our,\" or \"us\"). By accessing or using our website <a href=\"https://firetempmail.com\">https://firetempmail.com</a> and related services, you agree to comply with and be bound by the following Terms of Service (\"Terms\"). These Terms govern your use of both our free temporary email service (\"Free Service\") and any enhanced features available under Fire Temp Mail Premium (\"Premium Service\")."
+    },
+    "privacy": {
+      "title": "Privacy and Related Policies",
+      "text": "We are committed to protecting your privacy. Please review our <a href=\"/privacy-policy\">Privacy Policy</a> to learn how we handle your data. By using our service, you also agree to the terms described in that policy."
+    },
+    "serviceDesc": {
+      "title": "Service Description",
+      "text": "Fire Temp Mail provides disposable, temporary email addresses for the purpose of protecting your real inbox from spam, newsletters, or unwanted messages. Our Free Service allows you to instantly generate email addresses, receive incoming messages, and discard them at will. The Premium Service provides additional features such as extended email storage, multiple mailboxes, premium domains, and priority support."
+    },
+    "acceptableUse": {
+      "title": "Acceptable Use",
+      "intro": "You agree not to use Fire Temp Mail directly or indirectly for any unlawful, abusive, or unauthorized purpose. This includes but is not limited to:",
+      "items": [
+        "Registering important accounts that require permanent or verifiable email access.",
+        "Receiving, storing, or sharing sensitive or confidential information.",
+        "Sending unsolicited emails, viruses, or malicious code.",
+        "Engaging in fraud, harassment, or any activity that violates applicable laws."
+      ]
+    },
+    "dataStorage": {
+      "title": "Data Storage and Availability",
+      "text1": "Emails received through Fire Temp Mail are stored temporarily. Free accounts typically store emails for a short duration (usually a few hours), after which messages are automatically deleted. Premium accounts may store emails for a longer period, such as up to one month. Once deleted, emails and domains cannot be restored under any circumstances.",
+      "text2": "We make no guarantees regarding uptime or uninterrupted availability. Service may be suspended for maintenance, updates, or unforeseen technical issues."
+    },
+    "premium": {
+      "title": "Premium Features and Subscriptions",
+      "intro": "The Premium Service is offered on a subscription basis and may include features such as:",
+      "features": [
+        "Multiple mailboxes for managing several addresses at once.",
+        "Exclusive premium domains that are less likely to be blocked.",
+        "Extended storage for messages beyond the Free Service limits.",
+        "Ad-free experience for a cleaner interface.",
+        "Priority customer support."
+      ],
+      "billing": "Pricing, billing, and subscription terms will be presented at the time of purchase. Subscriptions automatically renew unless auto-renew is disabled prior to the renewal date. You may manage your subscription and cancel auto-renewal at any time in your account settings."
+    },
+    "liability": {
+      "title": "Limitations of Liability",
+      "intro": "Fire Temp Mail is provided \"as is\" without warranties of any kind. We do not guarantee that:",
+      "items": [
+        "Emails will always be delivered, stored, or accessible.",
+        "Domains will remain unchanged or available indefinitely.",
+        "Messages will remain unaltered or free from malware."
+      ],
+      "disclaimer": "You agree to hold us harmless from any damages, losses, or claims arising out of your use of the service, including loss of emails or consequences of relying on temporary addresses."
+    },
+    "changes": {
+      "title": "Changes to Terms",
+      "text": "We reserve the right to update or revise these Terms at any time. Material changes will be posted on this page with a revised \"last updated\" date. Continued use of the service after changes indicates acceptance of the updated Terms."
+    },
+    "contact": {
+      "title": "Contact Information",
+      "text": "If you have any questions about these Terms, please contact us at:",
+      "email": "Email: support@firetempmail.com"
+    }
+  },
+  "privacy": {
+    "metaTitle": "Privacy Policy - Fire Temp Mail",
+    "metaDescription": "Read the comprehensive Privacy Policy of Fire Temp Mail. Learn how we protect your data, handle temporary emails, and manage cookies, logs, and third-party services.",
+    "title": "Privacy Policy",
+    "introduction": {
+      "title": "Introduction",
+      "text": "Fire Temp Mail (\"we,\" \"our,\" or \"us\") values your privacy. This Privacy Policy explains how we collect, use, store, and protect information when you access <a href=\"https://firetempmail.com\" style=\"color: inherit;\">https://firetempmail.com</a> and our temporary email services, including both free and premium features."
+    },
+    "infoCollect": {
+      "title": "Information We Collect",
+      "intro": "We strive to minimize the data we collect. Our service primarily handles:",
+      "items": [
+        "Email content received in your temporary inbox.",
+        "Session data such as temporary email addresses, for service functionality.",
+        "Technical logs: IP addresses, browser type, ISP, referring/exit pages, platform type, timestamp, and click counts — used only in aggregate for security and service maintenance.",
+        "For Fire Temp Mail Premium: email addresses and payment information strictly for login, subscription management, and billing."
+      ]
+    },
+    "infoUse": {
+      "title": "How We Use Your Information",
+      "intro": "Collected information is used solely to operate, maintain, and improve our services. This includes:",
+      "items": [
+        "Delivering emails to your temporary inbox.",
+        "Preventing abuse and maintaining service security.",
+        "Managing premium subscriptions and payments.",
+        "Analyzing aggregate usage patterns to enhance service performance."
+      ]
+    },
+    "dataRetention": {
+      "title": "Data Retention",
+      "text": "All temporary emails in free accounts are deleted automatically within 2–24 hours, depending on system load. Premium accounts may retain emails for up to one month. We do not recover deleted emails or domains once removed."
+    },
+    "cookies": {
+      "title": "Cookies & Tracking",
+      "intro": "We use cookies only to maintain your session and temporary email address during active use. We do not place advertising, analytics, or third-party tracking cookies on free accounts. Cookies may include:",
+      "items": [
+        "Session cookies to keep your temporary email active.",
+        "Persistent cookies for Premium users to manage login sessions."
+      ],
+      "note": "Users can disable cookies in their browser; however, this may affect service functionality."
+    },
+    "thirdParty": {
+      "title": "Third-Party Services",
+      "text": "Fire Temp Mail integrates some third-party services (e.g., payment processors, ad networks, cloud infrastructure). These services may collect non-identifiable information following their own privacy policies. We do not sell or share your personal emails or identifying data with third parties for marketing purposes."
+    },
+    "ads": {
+      "title": "Ads and Monetization",
+      "text": "To support free usage, Fire Temp Mail may display ads served by third-party networks. These networks may use cookies or similar technologies to serve relevant ads. Users can opt out of personalized advertising through ad settings provided by the ad networks."
+    },
+    "security": {
+      "title": "Security Measures",
+      "text": "We implement reasonable technical and organizational measures to protect temporary emails and system integrity. However, emails are not encrypted end-to-end. Users should avoid storing sensitive information via temporary addresses."
+    },
+    "children": {
+      "title": "Children's Privacy",
+      "text": "Our services are not intended for children under 13. We do not knowingly collect personal information from children."
+    },
+    "userRights": {
+      "title": "User Rights",
+      "text": "Users may request deletion of Premium account data at any time. For free service users, all data is automatically deleted according to retention policies. Users may contact support for questions or privacy requests."
+    },
+    "international": {
+      "title": "International Users",
+      "text": "By using our service, you consent to the transfer of your information to servers located in Morocco or other jurisdictions where we operate, in compliance with applicable privacy laws."
+    },
+    "changes": {
+      "title": "Changes to Privacy Policy",
+      "text": "We may update this Privacy Policy to reflect changes in our practices or legal requirements. Updated policies will be posted on this page with the \"effective date\" revised. Continued use of the service constitutes acceptance of these changes."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "text": "For questions regarding this Privacy Policy or data handling practices, contact us at:",
+      "email": "Email: support@firetempmail.com"
+    },
+    "footer": {
+      "quickLinks": "Quick Links",
+      "supportService": "Support Our Service",
+      "supportText": "Help us keep FireTempMail free by making a donation. Your support helps maintain and improve our service.",
+      "scanSupport": "Scan to support us on Ko-fi",
+      "copyright": "FireTempMail. All Rights Reserved."
+    }
+  },
+  "faq": {
+    "metaTitle": "Frequently Asked Questions - Fire Temp Mail | Temporary Email Service",
+    "metaDescription": "Get answers to common questions about Fire Temp Mail's temporary email service. Learn how to use disposable emails for privacy, security, and spam protection.",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to common questions about our secure temporary email service designed to protect your privacy.",
+    "categories": {
+      "privacy": {
+        "icon": "🔒",
+        "title": "Privacy & Security",
+        "description": "How we protect your data and identity"
+      },
+      "usage": {
+        "icon": "⏱️",
+        "title": "Usage & Features",
+        "description": "How to use our service effectively"
+      }
+    },
+    "questions": {
+      "q1": {
+        "question": "What is a temporary email address?",
+        "answer": "<p>A temporary email address, also known as a disposable or anonymous email, is a short-term email address that automatically expires after a set period. It allows you to receive emails without revealing your personal email address, protecting your privacy and keeping your primary inbox free from spam.</p><p>Temporary email services like Fire Temp Mail provide these addresses instantly without requiring registration, making them ideal for one-time signups, online verifications, and protecting your identity online.</p>"
+      },
+      "q2": {
+        "question": "Why should I use a temporary email service?",
+        "answer": "<p>Using a temporary email service offers several important benefits:</p><ul><li><strong>Privacy Protection:</strong> Keep your personal email address private when signing up for services</li><li><strong>Spam Prevention:</strong> Avoid unwanted promotional emails and newsletters</li><li><strong>Security Enhancement:</strong> Reduce risks from data breaches by using disposable addresses</li><li><strong>Organization:</strong> Create different emails for different purposes (shopping, forums, etc.)</li><li><strong>Convenience:</strong> No registration required and instant access to new email addresses</li></ul>"
+      },
+      "q3": {
+        "question": "How does Fire Temp Mail protect my privacy?",
+        "answer": "<p>Fire Temp Mail employs multiple strategies to ensure your privacy:</p><ol><li>We don't require personal information to use our service</li><li>All emails are automatically deleted after 2 hours</li><li>We use HTTPS encryption for all data transfers</li><li>Our service doesn't track your activity across websites</li><li>We don't sell or share your data with third parties</li></ol><p>For additional security, we recommend not using temporary email for highly sensitive communications.</p>"
+      },
+      "q4": {
+        "question": "Is Fire Temp Mail completely free to use?",
+        "answer": "<p>Yes, our basic temporary email service is completely free with no hidden costs. With our free plan, you can:</p><ul><li>Create unlimited temporary email addresses</li><li>Receive emails for up to 24 hours (extendable)</li><li>View emails in our clean, ad-free interface</li><li>Use our service without registration</li></ul><p>We also offer a premium plan with additional features like sending emails, longer expiration times, and custom domains for users with more advanced needs.</p>"
+      },
+      "q5": {
+        "question": "How long do temporary emails last?",
+        "answer": "<p>By default, Fire Temp Mail addresses remain active for 24 hours. However, you can extend this period:</p><ol><li>Basic free addresses: 24 hours (extendable up to 3 times)</li><li>Extended addresses: Up to 72 hours with multiple extensions</li><li>Premium addresses: Custom durations up to 30 days</li></ol><p>After the expiration period, all emails associated with the address are permanently deleted from our servers.</p>"
+      },
+      "q6": {
+        "question": "Can I send emails from a temporary address?",
+        "answer": "<p>Our basic service focuses on receiving emails to protect your privacy. However:</p><ul><li><strong>Free tier:</strong> Receive emails only</li><li><strong>Premium tier:</strong> Send emails from your temporary address</li><li><strong>All tiers:</strong> View and manage received emails through our secure interface</li></ul><p>The receiving-only approach for free accounts enhances privacy by preventing misuse of our service for spam activities.</p>"
+      },
+      "q7": {
+        "question": "What happens to emails after they expire?",
+        "answer": "<p>Fire Temp Mail follows a strict data retention policy:</p><ol><li>Emails are automatically deleted after the address expires</li><li>Expired addresses cannot be recovered</li><li>No backups are maintained of deleted content</li><li>Our system is designed to permanently erase all data upon expiration</li></ol><p>This approach ensures your privacy is protected and that no sensitive information remains on our servers longer than necessary.</p>"
+      },
+      "q8": {
+        "question": "Can I use temporary email for important accounts?",
+        "answer": "<p>While temporary emails are excellent for privacy, we recommend caution:</p><ul><li><strong>Recommended for:</strong> One-time signups, newsletters, forum registrations, and temporary verifications</li><li><strong>Not recommended for:</strong> Banking, government services, primary email accounts, or any service requiring long-term access</li><li><strong>Consider:</strong> The temporary nature means you'll lose access if you need to reset passwords later</li></ul><p>For important accounts, we recommend using a permanent email address from a reputable provider.</p>"
+      }
+    }
+  },
+  "advertising": {
+    "metaTitle": "Advertising - Fire Temp Mail",
+    "metaDescription": "Explore advertising opportunities with Fire Temp Mail to reach a targeted audience.",
+    "title": "Advertising",
+    "opportunities": {
+      "title": "Advertising Opportunities",
+      "text": "Fire Temp Mail offers unique advertising opportunities to reach our growing user base."
+    },
+    "audience": {
+      "title": "Our Audience",
+      "text": "We serve thousands of users daily who are tech-savvy, privacy-conscious, and actively engaged in online activities requiring email verification."
+    },
+    "options": {
+      "title": "Advertising Options",
+      "text": "We offer several advertising options including banner ads, sponsored content, and dedicated email placements."
+    },
+    "policy": {
+      "title": "Ad Policy",
+      "text": "We maintain a strict ad policy to ensure our users have a positive experience. We don't allow intrusive pop-ups, auto-play videos with sound, or misleading advertisements."
+    },
+    "getStarted": {
+      "title": "Get Started",
+      "text": "For advertising rates and availability, please contact us at"
+    }
+  }
+}

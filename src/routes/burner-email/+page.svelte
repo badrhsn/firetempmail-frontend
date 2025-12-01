@@ -2,6 +2,7 @@
 // @ts-nocheck
     import { onMount } from "svelte";
     import { generate } from "random-words";
+    import { _ } from 'svelte-i18n';
     import { 
         receivingEmail, 
         availableDomains, 
@@ -881,72 +882,6 @@ function selectDomain(domain) {
        
     </div>
 </section>
-<!-- Footer -->
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 mb-4 mb-md-0">
-                <h5 class="footer-title">Quick Links</h5>
-                <div class="row">
-                    <div class="col-6">
-                        <ul class="footer-links">
-                            <li><a href="/email-generator">Email Generator</a></li>
-                            <li><a href="/gmail-generator">Gmail Generator</a></li>
-                            <li><a href="/temporary-gmail">Temporary Gmail</a></li>
-                            <li><a href="/temp-gmail">Temp Gmail</a></li>
-                            <li><a href="/temp-mail-edu">Temp Mail EDU</a></li>
-                            <li><a href="/10minutemail">10 Minute Mail</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="footer-links">
-                            <li><a href="/privacy-policy">Privacy Policy</a></li>
-                            <li><a href="/terms">Terms of Service</a></li>
-                            <li><a href="/faq">FAQ</a></li>
-                            <li><a href="/contact">Contact Us</a></li>
-                            <li><a href="/blog">Blog</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <h5 class="footer-title">Support Our Service</h5>
-                <div class="donation-section">
-                    <p>Help us keep FireTempMail free by making a donation. Your support helps maintain and improve our service.</p>
-                    
-                    <div class="kofi-qr">
-                        <a href="https://ko-fi.com/firetempmail" target="_blank">
-                            <img src="https://storage.ko-fi.com/cdn/useruploads/N4N61LJTEP/qrcode.png?v=2668fb77-3b3b-4039-abc5-e7004afdcebe&v=2&_gl=1*1bpnkx0*_gcl_au*Mzg2NjgyMDUuMTc1ODM3MTgzOA..*_ga*Nzg1NDU0NTQ2LjE3NTgzNzE4Mzk.*_ga_M13FZ7VQ2C*czE3NTgzNzE4MzgkbzEkZzEkdDE3NTgzNzI5MTkkajYwJGwwJGgw" 
-                                 alt="Support us on Ko-fi" class="img-fluid">
-                        </a>
-                        <p class="kofi-text">Scan to support us on Ko-fi</p>
-                    </div>
-                    
-                    <div class="mt-3">
-                        <p class="mb-0">We've received <span class="counter">{stats.count}</span> emails so far.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="divider"></div>
-        
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <p class="copyright">© 2024 FireTempMail. All Rights Reserved.</p>
-            </div>
-            <div class="col-md-6 text-md-end">
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
 
 <style>
            /* Footer Styles */

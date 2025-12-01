@@ -1,10 +1,11 @@
 <script>
+    import { _ } from 'svelte-i18n';
     let copyrightYear = new Date().getFullYear();
 </script>
 
 <svelte:head>
-    <title>Contact Us - Fire Temp Mail</title>
-    <meta name="description" content="Get in touch with Fire Temp Mail. Contact our support, business, or report abuse via email. We're here to help!">
+    <title>{$_('contact.title')}</title>
+    <meta name="description" content={$_('contact.metaDescription')}>
     <meta name="keywords" content="contact, support, email, Fire Temp Mail, temp mail, report abuse, business inquiry">
     <meta name="author" content="Fire Temp Mail">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,24 +21,24 @@
             <!-- Header -->
             <h1 class="text-start" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
                 <span style="font-weight: normal !important; color: rgb(255, 255, 255);">📮&nbsp;</span>
-                Contact Us
+                {$_('nav.contact')}
             </h1>
             
             <div class="text-start">
-                <h2>Get in Touch</h2>
-                <p>We'd love to hear from you! Here's how you can reach us:</p>
+                <h2>{$_('contact.getInTouch')}</h2>
+                <p>{$_('contact.loveToHear')}</p>
                 
-                <h3>Email Support</h3>
-                <p>For general inquiries and support: <a href="mailto:support@firetempmail.com">support@firetempmail.com</a></p>
+                <h3>{$_('contact.emailSupport')}</h3>
+                <p>{$_('contact.generalInquiries')} <a href="mailto:support@firetempmail.com">support@firetempmail.com</a></p>
                 
-                <h3>Business Inquiries</h3>
-                <p>For business and partnership opportunities: <a href="mailto:business@firetempmail.com">business@firetempmail.com</a></p>
+                <h3>{$_('contact.businessInquiries')}</h3>
+                <p>{$_('contact.businessText')} <a href="mailto:business@firetempmail.com">business@firetempmail.com</a></p>
                 
-                <h3>Report Abuse</h3>
-                <p>To report abuse or illegal activities: <a href="mailto:abuse@firetempmail.com">abuse@firetempmail.com</a></p>
+                <h3>{$_('contact.reportAbuse')}</h3>
+                <p>{$_('contact.reportAbuseText')} <a href="mailto:abuse@firetempmail.com">abuse@firetempmail.com</a></p>
                 
-                <h3>Response Time</h3>
-                <p>We typically respond to all emails within 24-48 hours during business days.</p>
+                <h3>{$_('contact.responseTime')}</h3>
+                <p>{$_('contact.responseText')}</p>
             </div>
         </div>
     </div>

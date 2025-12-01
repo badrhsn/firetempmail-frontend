@@ -1,0 +1,466 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "advertising": "Publicité"
+  },
+  "hero": {
+    "title": "Fire Temp Mail",
+    "subtitle": "Service d'Email Temporaire",
+    "description": "Protégez votre vie privée avec des adresses e-mail jetables. Aucune inscription requise.",
+    "getStarted": "Commencer"
+  },
+  "email": {
+    "type": {
+      "domain": "Email de Domaine",
+      "gmail": "Compte Gmail"
+    },
+    "yourEmail": "Votre Email Temporaire",
+    "copy": "Copier",
+    "copied": "Copié!",
+    "refresh": "Actualiser",
+    "newEmail": "Nouvel Email",
+    "customAlias": "Alias Personnalisé",
+    "useCustomAlias": "Utiliser un alias personnalisé",
+    "enterAlias": "Entrez votre alias personnalisé",
+    "generate": "Générer",
+    "cancel": "Annuler",
+    "selectDomain": "Sélectionner le Domaine",
+    "inbox": "Boîte de Réception",
+    "noEmails": "Aucun email pour le moment. En attente de messages entrants...",
+    "from": "De",
+    "subject": "Objet",
+    "received": "Reçu",
+    "viewEmail": "Voir l'Email",
+    "backToInbox": "Retour à la Boîte",
+    "forward": "Transférer",
+    "delete": "Supprimer",
+    "forwardTo": "Transférer à",
+    "forwardButton": "Transférer l'Email",
+    "enterEmail": "Entrez l'adresse e-mail",
+    "autoRefresh": "Actualisation automatique",
+    "stopAfter": "Arrêter après",
+    "reloads": "actualisations",
+    "awayQuestion": "Êtes-vous toujours là ?",
+    "awayMessage": "Veuillez recharger la page pour réactiver l'actualisation automatique.",
+    "noSubject": "(Pas de sujet)",
+    "unknownSender": "Expéditeur inconnu",
+    "unknownDate": "Date inconnue",
+    "noContent": "Aucun contenu disponible",
+    "emailsWillAppear": "Les e-mails envoyés à votre adresse temporaire apparaîtront ici"
+  },
+  "stats": {
+    "emailsCreated": "Emails Créés",
+    "emailsReceived": "Emails Reçus",
+    "activeUsers": "Utilisateurs Actifs"
+  },
+  "features": {
+    "title": "Pourquoi Choisir Fire Temp Mail?",
+    "instant": {
+      "title": "Instantané & Anonyme",
+      "description": "Obtenez une adresse e-mail temporaire instantanément sans aucune inscription"
+    },
+    "secure": {
+      "title": "Sécurisé & Privé",
+      "description": "Vos emails sont automatiquement supprimés après une courte période"
+    },
+    "unlimited": {
+      "title": "Utilisation Illimitée",
+      "description": "Créez autant d'adresses e-mail temporaires que vous le souhaitez"
+    }
+  },
+  "guides": {
+    "title": "Guides de Plateformes Populaires",
+    "discord": "Discord",
+    "instagram": "Instagram",
+    "tiktok": "TikTok",
+    "readGuide": "Lire le Guide"
+  },
+  "footer": {
+    "product": "Produit",
+    "resources": "Ressources",
+    "legal": "Légal",
+    "tempMail": "Temp Mail",
+    "features": "Fonctionnalités",
+    "pricing": "Tarifs",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "support": "Support",
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation",
+    "contact": "Contact",
+    "buyCoffee": "Offrez-moi un café",
+    "rights": "Tous droits réservés",
+    "emailGenerator": "Générateur d'Email",
+    "gmailGenerator": "Générateur Gmail",
+    "tempMailEdu": "Email Temporaire EDU",
+    "tenMinuteMail": "Mail de 10 Minutes"
+  },
+  "toast": {
+    "emailCopied": "Adresse e-mail copiée dans le presse-papiers!",
+    "emailForwarded": "Email transféré avec succès!",
+    "emailDeleted": "Email supprimé!",
+    "error": "Une erreur s'est produite. Veuillez réessayer.",
+    "invalidEmail": "Veuillez entrer une adresse e-mail valide",
+    "customAliasCreated": "Email personnalisé créé avec succès!",
+    "aliasInvalid": "L'alias doit contenir 3 à 20 caractères (lettres, chiffres et tirets uniquement)"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "close": "Fermer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Voir",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "more": "Plus"
+  },
+  "home": {
+    "title": "Fire Temp Mail – Votre générateur gratuit d'e-mail temporaire jetable",
+    "subtitle": "Générez instantanément une adresse e-mail jetable. Gardez votre vraie adresse e-mail privée et votre boîte de réception propre des messages indésirables et du spam.",
+    "gmailSection": {
+      "title": "Générateur Gmail Temp Mail : Obtenez instantanément une adresse Gmail temporaire gratuite",
+      "intro": "Créez une adresse Gmail temporaire entièrement fonctionnelle en quelques secondes avec notre générateur Gmail temp mail avancé. Obtenez une adresse Gmail jetable gratuite qui fonctionne exactement comme un vrai compte Gmail - parfait pour s'inscrire sur n'importe quel site Web sans révéler votre e-mail personnel.",
+      "whyTitle": "Pourquoi utiliser une adresse Gmail temporaire ?",
+      "whyText": "Protégez votre boîte de réception principale du spam, des e-mails marketing et des violations de données potentielles. Notre générateur temp Gmail fournit une alternative privée et sécurisée pour toutes vos inscriptions en ligne, vérifications et essais. Gardez votre Gmail personnel propre et organisé tout en maintenant une confidentialité totale.",
+      "features": {
+        "instant": "Génération instantanée d'adresse Gmail - aucune inscription requise",
+        "real": "Vraies adresses Gmail qui fonctionnent sur toutes les plateformes et sites Web",
+        "free": "Service Gmail temporaire entièrement gratuit sans frais cachés",
+        "bypass": "Parfait pour contourner les blocages et restrictions de vérification par e-mail"
+      },
+      "howTitle": "Comment obtenir votre Gmail temporaire",
+      "howText": "Obtenir votre adresse Gmail jetable est simple. Sélectionnez simplement l'option Gmail et générez votre e-mail temporaire. Utilisez-le immédiatement pour toute inscription sur un site Web, vérification d'application ou inscription à un service. Vos messages apparaîtront instantanément dans votre boîte de réception privée.",
+      "idealTitle": "Idéal pour tous vos besoins en ligne",
+      "idealText": "Notre service Gmail temp mail est parfait pour les essais gratuits, les inscriptions aux réseaux sociaux, les inscriptions sur les sites Web, les vérifications d'applications, les abonnements aux newsletters et les communications temporaires. Lorsque vous avez terminé, jetez simplement l'adresse - aucune trace laissée.",
+      "cta": "Prêt à protéger votre vie privée ? Générez votre adresse Gmail temporaire gratuite maintenant et profitez d'inscriptions sécurisées et sans spam sur toutes les plateformes."
+    },
+    "whatIsTitle": "Qu'est-ce qu'un e-mail temporaire jetable ?",
+    "whatIsText": "Une adresse e-mail jetable est un service d'e-mail temporaire gratuit qui crée une boîte de réception à court terme pour recevoir des e-mails. Souvent appelée tempmail, 10minmail, e-mail jetable ou burner mail, elle vous aide à éviter le spam et à protéger votre e-mail principal. Au lieu d'exposer vos vrais comptes e-mail, vous pouvez compter sur Fire Temp Mail pour garder votre boîte de réception personnelle sûre, privée et sans spam.",
+    "guidesTitle": "Guides spécifiques aux plateformes",
+    "guidesSubtitle": "Apprenez à utiliser l'e-mail temporaire pour les plateformes populaires et protégez votre vie privée",
+    "discordGuide": {
+      "title": "Discord Temp Mail",
+      "description": "Créez des comptes Discord sans exposer votre e-mail personnel. Guide de vérification complet."
+    },
+    "instagramGuide": {
+      "title": "Instagram E-mail temporaire",
+      "description": "Inscrivez-vous sur Instagram en utilisant un e-mail jetable. Évitez le spam et gérez plusieurs comptes."
+    },
+    "tiktokGuide": {
+      "title": "TikTok E-mail temporaire",
+      "description": "Créez des comptes TikTok avec temp mail. Gardez votre boîte de réception propre des e-mails promotionnels."
+    },
+    "techTitle": "La technologie derrière les adresses e-mail jetables",
+    "techIntro": "Dans le monde numérique d'aujourd'hui, les adresses e-mail sont devenues nos passeports en ligne - essentielles pour la communication professionnelle, les connexions d'affaires, les interactions sociales et l'accès aux services. Presque toutes les applications et services en ligne nécessitent une adresse e-mail pour l'inscription, tout comme les programmes de fidélité, les concours et les offres spéciales.",
+    "deasTitle": "Que sont les adresses e-mail jetables ?",
+    "deasText": "Les adresses e-mail jetables (DEA) fournissent une solution innovante pour maintenir la confidentialité en ligne tout en accédant aux services numériques. Ces adresses temporaires vous permettent de :",
+    "deasFeatures": {
+      "register": "Vous inscrire à des services sans révéler votre e-mail principal",
+      "protect": "Protéger votre identité des violations de données et des listes de spam",
+      "control": "Maintenir le contrôle sur votre empreinte numérique",
+      "expire": "Expirer automatiquement après une période définie"
+    },
+    "deasCompromise": "Lorsqu'une adresse jetable est compromise ou commence à recevoir des e-mails indésirables, vous pouvez simplement la retirer sans affecter vos canaux de communication principaux.",
+    "usesTitle": "Utilisations pratiques des adresses e-mail temporaires",
+    "uses": {
+      "trials": {
+        "title": "Essais gratuits prolongés",
+        "text": "De nombreux services de streaming comme Netflix, Hulu et Amazon Prime offrent des essais à durée limitée. Avec des e-mails jetables, vous pouvez prolonger vos périodes d'essai tout en maintenant l'accès à ces services."
+      },
+      "retail": {
+        "title": "Offres de vente au détail sans spam",
+        "text": "Les magasins demandent fréquemment des adresses e-mail pour des offres spéciales, ce qui conduit souvent à du spam promotionnel. Les e-mails temporaires vous permettent d'accéder à ces avantages sans encombrer votre boîte de réception principale."
+      },
+      "testing": {
+        "title": "Test d'applications",
+        "text": "Les développeurs peuvent créer plusieurs comptes de test en utilisant des e-mails jetables pour évaluer minutieusement leurs applications avant leur publication."
+      },
+      "multiple": {
+        "title": "Gestion de plusieurs comptes",
+        "text": "Lorsque les services nécessitent des comptes séparés pour différents objectifs (comme la gestion de plusieurs profils de réseaux sociaux), les e-mails jetables fournissent la séparation nécessaire sans créer de nouveaux comptes permanents."
+      },
+      "spam": {
+        "title": "Prévention du spam",
+        "text": "L'utilisation d'e-mails temporaires pour les forums, les groupes de discussion et les formulaires Web réduit considérablement le spam dans votre boîte de réception principale."
+      }
+    },
+    "choosingTitle": "Choisir le bon service d'e-mail jetable",
+    "choosingText": "Les meilleurs fournisseurs d'e-mails temporaires offrent :",
+    "choosingFeatures": {
+      "instant": "Génération instantanée d'e-mail en un clic",
+      "privacy": "Aucune inscription ni collecte d'informations personnelles",
+      "anonymous": "Anonymat complet pour les utilisateurs",
+      "unlimited": "Création illimitée d'adresses e-mail",
+      "inbox": "Fonctionnalité de boîte de réception temporaire",
+      "interface": "Interface conviviale",
+      "custom": "Options d'adresse personnalisables"
+    },
+    "effectiveTitle": "Comment utiliser efficacement les adresses e-mail jetables",
+    "effectiveText": "Alors que certains utilisateurs créent des comptes secondaires avec des fournisseurs traditionnels comme Gmail, cette approche nécessite la gestion de plusieurs boîtes de réception. Les services professionnels d'e-mail jetable comme Fire Temp Mail offrent une solution plus efficace en fournissant des adresses temporaires qui transfèrent vers votre e-mail principal tout en maintenant une séparation complète.",
+    "effectiveAdvanced": "La fonctionnalité avancée vous permet de filtrer les messages - envoyer les e-mails suspects directement à la corbeille tout en livrant les communications importantes à votre boîte de réception principale. Si une adresse est compromise, vous pouvez simplement la désactiver sans affecter vos autres comptes.",
+    "conclusionTitle": "Conclusion : Améliorez votre confidentialité en ligne",
+    "conclusionText": "La mise en place d'un système d'e-mail jetable est une stratégie efficace pour participer aux forums en ligne, aux salons de discussion, aux services de partage de fichiers et aux babillards tout en protégeant votre identité principale. En utilisant des adresses temporaires de Fire Temp Mail, vous vous assurez que vos informations personnelles restent sécurisées et que votre boîte de réception reste exempte de spam indésirable. Prenez le contrôle de votre vie privée numérique dès aujourd'hui avec notre service d'e-mail temporaire sécurisé et anonyme conçu pour garder vos activités en ligne séparées de vos canaux de communication personnels."
+  },
+  "blog": {
+    "title": "Blog Fire Temp Mail",
+    "subtitle": "Conseils, guides et informations sur les e-mails temporaires et la confidentialité en ligne",
+    "readMore": "Lire Plus",
+    "popular": "Articles Populaires de Notre Blog",
+    "visitBlog": "Visitez Notre Blog",
+    "category": "Catégorie",
+    "readTime": "Temps de Lecture",
+    "backToBlog": "Retour au Blog",
+    "shareArticle": "Partagez cet article",
+    "loading": "Chargement...",
+    "pleaseWait": "Veuillez patienter pendant que nous chargeons l'article.",
+    "error": "Erreur",
+    "postNotFound": "L'article de blog demandé est introuvable.",
+    "by": "Par"
+  },
+  "contact": {
+    "title": "Contactez-nous - Fire Temp Mail",
+    "metaDescription": "Contactez Fire Temp Mail. Contactez notre support, nos affaires ou signalez un abus par e-mail. Nous sommes là pour vous aider !",
+    "getInTouch": "Entrer en Contact",
+    "loveToHear": "Nous aimerions avoir de vos nouvelles ! Voici comment nous contacter :",
+    "emailSupport": "Support par E-mail",
+    "generalInquiries": "Pour les demandes générales et le support :",
+    "businessInquiries": "Demandes Commerciales",
+    "businessText": "Pour les opportunités commerciales et les partenariats :",
+    "reportAbuse": "Signaler un Abus",
+    "reportAbuseText": "Pour signaler un abus ou des activités illégales :",
+    "responseTime": "Temps de Réponse",
+    "responseText": "Nous répondons généralement à tous les e-mails dans les 24 à 48 heures pendant les jours ouvrables."
+  },
+  "advertising": {
+    "title": "Opportunités Publicitaires",
+    "metaTitle": "Publicité avec Fire Temp Mail",
+    "metaDescription": "Explorez les opportunités publicitaires avec Fire Temp Mail pour atteindre un public ciblé.",
+    "opportunities": {
+      "title": "Opportunités Publicitaires",
+      "text": "Fire Temp Mail offre des opportunités publicitaires uniques pour atteindre notre base d'utilisateurs croissante."
+    },
+    "audience": {
+      "title": "Notre Audience",
+      "text": "Nous servons des milliers d'utilisateurs quotidiens qui sont technophiles, soucieux de la confidentialité et activement engagés dans des activités en ligne nécessitant une vérification par e-mail."
+    },
+    "options": {
+      "title": "Options Publicitaires",
+      "text": "Nous proposons plusieurs options publicitaires, notamment des bannières publicitaires, du contenu sponsorisé et des placements d'e-mails dédiés."
+    },
+    "policy": {
+      "title": "Politique Publicitaire",
+      "text": "Nous maintenons une politique publicitaire stricte pour garantir que nos utilisateurs aient une expérience positive. Nous n'autorisons pas les pop-ups intrusifs, les vidéos à lecture automatique avec son ou les publicités trompeuses."
+    },
+    "getStarted": {
+      "title": "Commencer",
+      "text": "Pour les tarifs publicitaires et la disponibilité, veuillez nous contacter à"
+    }
+  },
+  "faq": {
+    "metaTitle": "Questions Fréquemment Posées - Fire Temp Mail | Service d'E-mail Temporaire",
+    "metaDescription": "Obtenez des réponses aux questions courantes sur le service d'e-mail temporaire de Fire Temp Mail. Apprenez à utiliser les e-mails jetables pour la confidentialité, la sécurité et la protection contre le spam.",
+    "title": "Questions Fréquemment Posées",
+    "subtitle": "Trouvez des réponses aux questions courantes sur notre service d'e-mail temporaire sécurisé conçu pour protéger votre vie privée.",
+    "categories": {
+      "privacy": {
+        "icon": "🔒",
+        "title": "Confidentialité et Sécurité",
+        "description": "Comment nous protégeons vos données et votre identité"
+      },
+      "usage": {
+        "icon": "⏱️",
+        "title": "Utilisation et Fonctionnalités",
+        "description": "Comment utiliser efficacement notre service"
+      }
+    },
+    "questions": {
+      "q1": {
+        "question": "Qu'est-ce qu'une adresse e-mail temporaire ?",
+        "answer": "<p>Une adresse e-mail temporaire, également appelée e-mail jetable ou anonyme, est une adresse e-mail à court terme qui expire automatiquement après une période définie. Elle vous permet de recevoir des e-mails sans révéler votre adresse e-mail personnelle, protégeant votre vie privée et gardant votre boîte de réception principale libre de messages indésirables et de spam.</p><p>Les services d'e-mail temporaire comme Fire Temp Mail fournissent ces adresses instantanément sans nécessiter d'inscription, ce qui les rend idéales pour les inscriptions uniques, les vérifications en ligne et la protection de votre identité en ligne.</p>"
+      },
+      "q2": {
+        "question": "Pourquoi devrais-je utiliser un service d'e-mail temporaire ?",
+        "answer": "<p>L'utilisation d'un service d'e-mail temporaire offre plusieurs avantages importants :</p><ul><li><strong>Protection de la Vie Privée :</strong> Gardez votre adresse e-mail personnelle privée lors de l'inscription aux services</li><li><strong>Prévention du Spam :</strong> Évitez les e-mails promotionnels indésirables et les newsletters</li><li><strong>Amélioration de la Sécurité :</strong> Réduisez les risques liés aux violations de données en utilisant des adresses jetables</li><li><strong>Organisation :</strong> Créez différents e-mails pour différents objectifs (achats, forums, etc.)</li><li><strong>Commodité :</strong> Aucune inscription requise et accès instantané aux nouvelles adresses e-mail</li></ul>"
+      },
+      "q3": {
+        "question": "Comment Fire Temp Mail protège-t-il ma vie privée ?",
+        "answer": "<p>Fire Temp Mail emploie plusieurs stratégies pour assurer votre confidentialité :</p><ol><li>Nous n'exigeons pas d'informations personnelles pour utiliser notre service</li><li>Tous les e-mails sont automatiquement supprimés après 2 heures</li><li>Nous utilisons le cryptage HTTPS pour tous les transferts de données</li><li>Notre service ne suit pas votre activité sur les sites Web</li><li>Nous ne vendons ni ne partageons vos données avec des tiers</li></ol><p>Pour plus de sécurité, nous recommandons de ne pas utiliser l'e-mail temporaire pour des communications hautement sensibles.</p>"
+      },
+      "q4": {
+        "question": "Fire Temp Mail est-il entièrement gratuit ?",
+        "answer": "<p>Oui, notre service d'e-mail temporaire de base est entièrement gratuit sans frais cachés. Avec notre plan gratuit, vous pouvez :</p><ul><li>Créer des adresses e-mail temporaires illimitées</li><li>Recevoir des e-mails jusqu'à 24 heures (extensible)</li><li>Voir les e-mails dans notre interface propre et sans publicité</li><li>Utiliser notre service sans inscription</li></ul><p>Nous proposons également un plan premium avec des fonctionnalités supplémentaires telles que l'envoi d'e-mails, des délais d'expiration plus longs et des domaines personnalisés pour les utilisateurs ayant des besoins plus avancés.</p>"
+      },
+      "q5": {
+        "question": "Combien de temps durent les e-mails temporaires ?",
+        "answer": "<p>Par défaut, les adresses Fire Temp Mail restent actives pendant 24 heures. Cependant, vous pouvez prolonger cette période :</p><ol><li>Adresses gratuites de base : 24 heures (extensibles jusqu'à 3 fois)</li><li>Adresses étendues : Jusqu'à 72 heures avec plusieurs extensions</li><li>Adresses premium : Durées personnalisées jusqu'à 30 jours</li></ol><p>Après la période d'expiration, tous les e-mails associés à l'adresse sont définitivement supprimés de nos serveurs.</p>"
+      },
+      "q6": {
+        "question": "Puis-je envoyer des e-mails depuis une adresse temporaire ?",
+        "answer": "<p>Notre service de base se concentre sur la réception d'e-mails pour protéger votre vie privée. Cependant :</p><ul><li><strong>Niveau gratuit :</strong> Réception d'e-mails uniquement</li><li><strong>Niveau premium :</strong> Envoi d'e-mails depuis votre adresse temporaire</li><li><strong>Tous les niveaux :</strong> Afficher et gérer les e-mails reçus via notre interface sécurisée</li></ul><p>L'approche de réception uniquement pour les comptes gratuits améliore la confidentialité en empêchant l'utilisation abusive de notre service pour des activités de spam.</p>"
+      },
+      "q7": {
+        "question": "Qu'arrive-t-il aux e-mails après leur expiration ?",
+        "answer": "<p>Fire Temp Mail suit une politique stricte de conservation des données :</p><ol><li>Les e-mails sont automatiquement supprimés après l'expiration de l'adresse</li><li>Les adresses expirées ne peuvent pas être récupérées</li><li>Aucune sauvegarde du contenu supprimé n'est conservée</li><li>Notre système est conçu pour effacer définitivement toutes les données à l'expiration</li></ol><p>Cette approche garantit que votre vie privée est protégée et qu'aucune information sensible ne reste sur nos serveurs plus longtemps que nécessaire.</p>"
+      },
+      "q8": {
+        "question": "Puis-je utiliser l'e-mail temporaire pour des comptes importants ?",
+        "answer": "<p>Bien que les e-mails temporaires soient excellents pour la confidentialité, nous recommandons la prudence :</p><ul><li><strong>Recommandé pour :</strong> Inscriptions uniques, newsletters, inscriptions sur forums et vérifications temporaires</li><li><strong>Non recommandé pour :</strong> Services bancaires, services gouvernementaux, comptes e-mail principaux ou tout service nécessitant un accès à long terme</li><li><strong>Considérez :</strong> La nature temporaire signifie que vous perdrez l'accès si vous devez réinitialiser les mots de passe plus tard</li></ul><p>Pour les comptes importants, nous recommandons d'utiliser une adresse e-mail permanente d'un fournisseur de confiance.</p>"
+      }
+    }
+  },
+  "terms": {
+    "metaTitle": "Conditions d'Utilisation - Fire Temp Mail | Service d'E-mail Temporaire",
+    "metaDescription": "Lisez les Conditions d'Utilisation de Fire Temp Mail. Découvrez l'utilisation acceptable, la disponibilité du service, les fonctionnalités premium et vos droits et responsabilités lors de l'utilisation de notre service d'e-mail temporaire.",
+    "title": "Conditions d'Utilisation",
+    "introduction": {
+      "title": "Introduction",
+      "text": "Bienvenue sur Fire Temp Mail (\"nous\", \"notre\" ou \"nos\"). En accédant ou en utilisant notre site Web <a href=\"https://firetempmail.com\">https://firetempmail.com</a> et les services associés, vous acceptez de vous conformer et d'être lié par les Conditions d'Utilisation suivantes (\"Conditions\"). Ces Conditions régissent votre utilisation de notre service d'e-mail temporaire gratuit (\"Service Gratuit\") et de toutes les fonctionnalités améliorées disponibles dans Fire Temp Mail Premium (\"Service Premium\")."
+    },
+    "privacy": {
+      "title": "Confidentialité et Politiques Connexes",
+      "text": "Nous nous engageons à protéger votre vie privée. Veuillez consulter notre <a href=\"/privacy-policy\">Politique de Confidentialité</a> pour savoir comment nous gérons vos données. En utilisant notre service, vous acceptez également les conditions décrites dans cette politique."
+    },
+    "serviceDesc": {
+      "title": "Description du Service",
+      "text": "Fire Temp Mail fournit des adresses e-mail jetables et temporaires dans le but de protéger votre boîte de réception réelle du spam, des newsletters ou des messages indésirables. Notre Service Gratuit vous permet de générer instantanément des adresses e-mail, de recevoir des messages entrants et de les jeter à volonté. Le Service Premium offre des fonctionnalités supplémentaires telles que le stockage étendu d'e-mails, plusieurs boîtes aux lettres, des domaines premium et un support prioritaire."
+    },
+    "acceptableUse": {
+      "title": "Utilisation Acceptable",
+      "intro": "Vous acceptez de ne pas utiliser Fire Temp Mail directement ou indirectement à des fins illégales, abusives ou non autorisées. Cela inclut, sans s'y limiter :",
+      "items": [
+        "L'enregistrement de comptes importants nécessitant un accès e-mail permanent ou vérifiable.",
+        "La réception, le stockage ou le partage d'informations sensibles ou confidentielles.",
+        "L'envoi d'e-mails non sollicités, de virus ou de code malveillant.",
+        "La participation à la fraude, au harcèlement ou à toute activité violant les lois applicables."
+      ]
+    },
+    "dataStorage": {
+      "title": "Stockage des Données et Disponibilité",
+      "text1": "Les e-mails reçus via Fire Temp Mail sont stockés temporairement. Les comptes gratuits stockent généralement les e-mails pendant une courte durée (généralement quelques heures), après quoi les messages sont automatiquement supprimés. Les comptes premium peuvent stocker les e-mails pendant une période plus longue, par exemple jusqu'à un mois. Une fois supprimés, les e-mails et les domaines ne peuvent être restaurés en aucune circonstance.",
+      "text2": "Nous ne garantissons pas le temps de disponibilité ou la disponibilité ininterrompue. Le service peut être suspendu pour maintenance, mises à jour ou problèmes techniques imprévus."
+    },
+    "premium": {
+      "title": "Fonctionnalités Premium et Abonnements",
+      "intro": "Le Service Premium est proposé sur la base d'un abonnement et peut inclure des fonctionnalités telles que :",
+      "features": [
+        "Plusieurs boîtes aux lettres pour gérer plusieurs adresses à la fois.",
+        "Des domaines premium exclusifs moins susceptibles d'être bloqués.",
+        "Un stockage étendu pour les messages au-delà des limites du Service Gratuit.",
+        "Une expérience sans publicité pour une interface plus propre.",
+        "Un support client prioritaire."
+      ],
+      "billing": "Les prix, la facturation et les conditions d'abonnement seront présentés au moment de l'achat. Les abonnements se renouvellent automatiquement à moins que le renouvellement automatique ne soit désactivé avant la date de renouvellement. Vous pouvez gérer votre abonnement et annuler le renouvellement automatique à tout moment dans les paramètres de votre compte."
+    },
+    "liability": {
+      "title": "Limitations de Responsabilité",
+      "intro": "Fire Temp Mail est fourni \"tel quel\" sans garanties d'aucune sorte. Nous ne garantissons pas que :",
+      "items": [
+        "Les e-mails seront toujours livrés, stockés ou accessibles.",
+        "Les domaines resteront inchangés ou disponibles indéfiniment.",
+        "Les messages resteront inaltérés ou exempts de logiciels malveillants."
+      ],
+      "disclaimer": "Vous acceptez de nous dégager de toute responsabilité pour tout dommage, perte ou réclamation découlant de votre utilisation du service, y compris la perte d'e-mails ou les conséquences de la confiance accordée aux adresses temporaires."
+    },
+    "changes": {
+      "title": "Modifications des Conditions",
+      "text": "Nous nous réservons le droit de mettre à jour ou de réviser ces Conditions à tout moment. Les changements importants seront publiés sur cette page avec une date de \"dernière mise à jour\" révisée. L'utilisation continue du service après les modifications indique l'acceptation des Conditions mises à jour."
+    },
+    "contact": {
+      "title": "Informations de Contact",
+      "text": "Si vous avez des questions concernant ces Conditions, veuillez nous contacter à :",
+      "email": "E-mail : support@firetempmail.com"
+    }
+  },
+  "privacy": {
+    "metaTitle": "Politique de Confidentialité - Fire Temp Mail",
+    "metaDescription": "Lisez la Politique de Confidentialité complète de Fire Temp Mail. Découvrez comment nous protégeons vos données, gérons les e-mails temporaires et gérons les cookies, les journaux et les services tiers.",
+    "title": "Politique de Confidentialité",
+    "introduction": {
+      "title": "Introduction",
+      "text": "Fire Temp Mail (\"nous\", \"notre\" ou \"nos\") valorise votre vie privée. Cette Politique de Confidentialité explique comment nous collectons, utilisons, stockons et protégeons les informations lorsque vous accédez à <a href=\"https://firetempmail.com\" style=\"color: inherit;\">https://firetempmail.com</a> et nos services d'e-mail temporaire, y compris les fonctionnalités gratuites et premium."
+    },
+    "infoCollect": {
+      "title": "Informations que Nous Collectons",
+      "intro": "Nous nous efforçons de minimiser les données que nous collectons. Notre service traite principalement :",
+      "items": [
+        "Le contenu des e-mails reçus dans votre boîte de réception temporaire.",
+        "Les données de session telles que les adresses e-mail temporaires, pour la fonctionnalité du service.",
+        "Les journaux techniques : adresses IP, type de navigateur, FAI, pages de référence/sortie, type de plateforme, horodatage et nombre de clics — utilisés uniquement de manière agrégée pour la sécurité et la maintenance du service.",
+        "Pour Fire Temp Mail Premium : adresses e-mail et informations de paiement strictement pour la connexion, la gestion des abonnements et la facturation."
+      ]
+    },
+    "infoUse": {
+      "title": "Comment Nous Utilisons Vos Informations",
+      "intro": "Les informations collectées sont utilisées uniquement pour exploiter, maintenir et améliorer nos services. Cela comprend :",
+      "items": [
+        "La livraison d'e-mails à votre boîte de réception temporaire.",
+        "La prévention des abus et le maintien de la sécurité du service.",
+        "La gestion des abonnements premium et des paiements.",
+        "L'analyse des modèles d'utilisation agrégés pour améliorer les performances du service."
+      ]
+    },
+    "dataRetention": {
+      "title": "Conservation des Données",
+      "text": "Tous les e-mails temporaires dans les comptes gratuits sont automatiquement supprimés dans les 2 à 24 heures, selon la charge du système. Les comptes premium peuvent conserver les e-mails jusqu'à un mois. Nous ne récupérons pas les e-mails ou domaines supprimés une fois retirés."
+    },
+    "cookies": {
+      "title": "Cookies et Suivi",
+      "intro": "Nous utilisons des cookies uniquement pour maintenir votre session et votre adresse e-mail temporaire pendant l'utilisation active. Nous ne plaçons pas de cookies publicitaires, analytiques ou de suivi tiers sur les comptes gratuits. Les cookies peuvent inclure :",
+      "items": [
+        "Des cookies de session pour garder votre e-mail temporaire actif.",
+        "Des cookies persistants pour les utilisateurs Premium pour gérer les sessions de connexion."
+      ],
+      "note": "Les utilisateurs peuvent désactiver les cookies dans leur navigateur ; cependant, cela peut affecter la fonctionnalité du service."
+    },
+    "thirdParty": {
+      "title": "Services Tiers",
+      "text": "Fire Temp Mail intègre certains services tiers (par exemple, processeurs de paiement, réseaux publicitaires, infrastructure cloud). Ces services peuvent collecter des informations non identifiables conformément à leurs propres politiques de confidentialité. Nous ne vendons ni ne partageons vos e-mails personnels ou données identifiables avec des tiers à des fins de marketing."
+    },
+    "ads": {
+      "title": "Publicités et Monétisation",
+      "text": "Pour soutenir l'utilisation gratuite, Fire Temp Mail peut afficher des publicités diffusées par des réseaux tiers. Ces réseaux peuvent utiliser des cookies ou des technologies similaires pour diffuser des publicités pertinentes. Les utilisateurs peuvent se désinscrire de la publicité personnalisée via les paramètres publicitaires fournis par les réseaux publicitaires."
+    },
+    "security": {
+      "title": "Mesures de Sécurité",
+      "text": "Nous mettons en œuvre des mesures techniques et organisationnelles raisonnables pour protéger les e-mails temporaires et l'intégrité du système. Cependant, les e-mails ne sont pas chiffrés de bout en bout. Les utilisateurs doivent éviter de stocker des informations sensibles via des adresses temporaires."
+    },
+    "children": {
+      "title": "Confidentialité des Enfants",
+      "text": "Nos services ne sont pas destinés aux enfants de moins de 13 ans. Nous ne collectons pas sciemment d'informations personnelles auprès d'enfants."
+    },
+    "userRights": {
+      "title": "Droits des Utilisateurs",
+      "text": "Les utilisateurs peuvent demander la suppression des données de compte Premium à tout moment. Pour les utilisateurs du service gratuit, toutes les données sont automatiquement supprimées conformément aux politiques de conservation. Les utilisateurs peuvent contacter le support pour des questions ou des demandes de confidentialité."
+    },
+    "international": {
+      "title": "Utilisateurs Internationaux",
+      "text": "En utilisant notre service, vous consentez au transfert de vos informations vers des serveurs situés au Maroc ou d'autres juridictions où nous opérons, conformément aux lois applicables en matière de confidentialité."
+    },
+    "changes": {
+      "title": "Modifications de la Politique de Confidentialité",
+      "text": "Nous pouvons mettre à jour cette Politique de Confidentialité pour refléter les changements dans nos pratiques ou exigences légales. Les politiques mises à jour seront publiées sur cette page avec la \"date d'entrée en vigueur\" révisée. L'utilisation continue du service constitue l'acceptation de ces modifications."
+    },
+    "contact": {
+      "title": "Contactez-Nous",
+      "text": "Pour des questions concernant cette Politique de Confidentialité ou les pratiques de gestion des données, contactez-nous à :",
+      "email": "E-mail : support@firetempmail.com"
+    },
+    "footer": {
+      "quickLinks": "Liens Rapides",
+      "supportService": "Soutenez Notre Service",
+      "supportText": "Aidez-nous à garder FireTempMail gratuit en faisant un don. Votre soutien aide à maintenir et à améliorer notre service.",
+      "scanSupport": "Scannez pour nous soutenir sur Ko-fi",
+      "copyright": "FireTempMail. Tous Droits Réservés."
+    }
+  }
+}

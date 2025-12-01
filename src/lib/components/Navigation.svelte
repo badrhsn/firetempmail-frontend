@@ -1,10 +1,14 @@
+<script>
+    import { _ } from 'svelte-i18n';
+</script>
+
 <nav class="site-navigation">
-    <a href="/">Home</a>
-    <a href="/privacy">Privacy</a>
-    <a href="/terms">Terms</a>
-    <a href="/faq">FAQ</a>
-    <a href="/contact">Contact</a>
-    <a href="/advertising">Advertising</a>
+    <a href="/">{$_('nav.home')}</a>
+    <a href="/privacy-policy">{$_('footer.privacy')}</a>
+    <a href="/terms">{$_('footer.terms')}</a>
+    <a href="/faq">{$_('nav.faq')}</a>
+    <a href="/contact">{$_('nav.contact')}</a>
+    <a href="/advertising">{$_('nav.advertising')}</a>
 </nav>
 
 <style>

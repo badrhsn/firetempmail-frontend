@@ -2,6 +2,7 @@
 // @ts-nocheck
     import { onMount } from "svelte";
     import { generate } from "random-words";
+    import { _ } from 'svelte-i18n';
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { 
         receivingEmail, 
@@ -248,7 +249,7 @@ function normalizeGmailAddress(address) {
     async function deleteEmail(email) {
         if (!email || !email.recipient || !email.suffix) return;
         
-        if (confirm("Do you really want to permanently delete this email?")) {
+        if (confirm($_('email.delete') + '?')) {
             try {
                 let emailKey = email.recipient + "-" + email.suffix;
                 const response = await fetch(`${url}/mail/delete?key=${emailKey}`);
@@ -267,7 +268,7 @@ function normalizeGmailAddress(address) {
                         viewMode = 'list';
                     }
                     
-                    showToast("Success", "Email deleted successfully.", "success");
+                    showToast("Success", $_('toast.emailDeleted'), "success");
                 } else {
                     showToast("Error", `Failed to delete email: ${data.msg}`, "error");
                 }
@@ -284,7 +285,7 @@ function normalizeGmailAddress(address) {
             unreadEmails.clear();
             stats = {};
             generateEmail(true);
-            showToast("Success", "New email address generated", "success");
+            showToast("Success", $_('email.newEmail'), "success");
         }
     }
 
@@ -332,7 +333,7 @@ function normalizeGmailAddress(address) {
         isCopying = true;
         try {
             await navigator.clipboard.writeText(address);
-            showToast("Success", "Email address copied to clipboard!", "success");
+            showToast("Success", $_('toast.emailCopied'), "success");
         } catch (error) {
             console.error("Copy failed:", error);
             showToast("Error", "Failed to copy to clipboard.", "error");
@@ -448,9 +449,9 @@ function normalizeGmailAddress(address) {
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none">
                     <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                Are you still there?
+                {$_('email.awayQuestion')}
             </span>
-            Please reload the page to re-enable automatic refresh.
+            {$_('email.awayMessage')}
         </p>
     </div>
 {/if}
@@ -461,11 +462,10 @@ function normalizeGmailAddress(address) {
             <!-- Header -->
              <h1>
                 <span>📮&nbsp;</span>
-                Fire Temp Mail – Your Free Temporary Disposable Email Generato
+                {$_('home.title')}
              </h1>
             <p class="lead">
-                Instantly generate a disposable Email Generator address. Keep your real email address private and your inbox clean from unwanted messages and spam.
-
+                {$_('home.subtitle')}
             </p>            
             <!-- Email Address with Copy Button -->
             <div class="email-address-container">
@@ -530,31 +530,31 @@ function normalizeGmailAddress(address) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Generate New
+                        {$_('email.newEmail')}
                     </button>
                     
                     {#if emailType === 'domain'}
-                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
+                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title={$_('email.useCustomAlias')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Custom Alias
+                        {$_('email.customAlias')}
                     </button>
                     
-                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title={$_('email.selectDomain')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Change Domain
+                        {$_('email.selectDomain')}
                     </button>
                     {/if}
                     
-                    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
+                    <button class="btn btn-secondary" on:click={manualReload} title={$_('email.refresh')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Refresh Page
+                        {$_('email.refresh')}
                     </button>
                 </div>
 
@@ -590,7 +590,7 @@ function normalizeGmailAddress(address) {
                         <input 
                             type="text" 
                             bind:value={customAlias}
-                            placeholder="Enter your custom alias"
+                            placeholder={$_('email.enterAlias')}
                             class="alias-input"
                         />
                         <span class="domain-suffix">@{currentDomain}</span>
@@ -603,7 +603,7 @@ function normalizeGmailAddress(address) {
                         on:click={() => generateEmail(true, true)}
                         disabled={!customAlias}
                     >
-                        Generate Custom Email
+                        {$_('email.generate')}
                     </button>
                 </div>
                 {/if}
@@ -613,7 +613,7 @@ function normalizeGmailAddress(address) {
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
                     <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
-                    <span>Waiting for incoming emails</span>
+                    <span>{$_('common.loading')}</span>
                 </div>
             {:else if !reloadActive}
                 <!-- Automatic refresh stopped -->
@@ -621,7 +621,7 @@ function normalizeGmailAddress(address) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>Automatic refresh stopped</span>
+                    <span>{$_('email.autoRefresh')} {$_('email.stopAfter')}</span>
                 </div>
             {/if}
 
@@ -644,7 +644,7 @@ function normalizeGmailAddress(address) {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
                                     <path d="M19 12H5M5 12L11 18M5 12L11 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                Back to inbox
+                                {$_('email.backToInbox')}
                             </button>
                             
                             <div style="display: flex; gap: 8px;">
@@ -663,7 +663,7 @@ function normalizeGmailAddress(address) {
                         </div>
                         
                         <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 8px;">
-                            {selectedEmail.subject || '(No Subject)'}
+                            {selectedEmail.subject || $_('email.noSubject')}
                         </h2>
                         
                         <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -672,11 +672,11 @@ function normalizeGmailAddress(address) {
                                     <g><rect fill="none" height="24" width="24"></rect></g>
                                     <g><g><path d="M12,2C6.47,2,2,6.47,2,12s4.47,10,10,10s10-4.47,10-10S17.53,2,12,2z"></path></g></g>
                                 </svg>
-                                <span style="font-weight: 500;">{selectedEmail.sender || 'Unknown Sender'}</span>
+                                <span style="font-weight: 500;">{selectedEmail.sender || $_('email.unknownSender')}</span>
                             </div>
                             
                             <span style="color: var(--bs-secondary); font-size: 14px;">
-                                {selectedEmail.date ? new Date(selectedEmail.date).toLocaleString() : 'Unknown date'}
+                                {selectedEmail.date ? new Date(selectedEmail.date).toLocaleString() : $_('email.unknownDate')}
                             </span>
                         </div>
                     </div>
@@ -686,7 +686,7 @@ function normalizeGmailAddress(address) {
                         {@html selectedEmail["content-html"] 
     || selectedEmail["content-plain-formatted"] 
     || selectedEmail["content-plain"] 
-    || 'No content available'}
+    || $_('email.noContent')}
 
                     </div>
                 </div>
@@ -698,20 +698,20 @@ function normalizeGmailAddress(address) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                             <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                         </svg>
-                        <p>Your inbox is empty</p>
-                        <p>Emails sent to your temporary address will appear here</p>
+                        <p>{$_('email.noEmails')}</p>
+                        <p>{$_('email.emailsWillAppear')}</p>
                     </div>
                 {:else}
                     <!-- Email List -->
                     <div class="email-list-container">
                         <!-- List Header -->
                         <div class="list-header">
-                            <h3>Inbox ({emails.length})</h3>
+                            <h3>{$_('email.inbox')} ({emails.length})</h3>
                             <button on:click={manualReload} class="btn-refresh">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
                                     <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                Refresh
+                                {$_('email.refresh')}
                             </button>
                         </div>
                         
@@ -738,11 +738,11 @@ function normalizeGmailAddress(address) {
                                         
                                         <div class="email-content">
                                             <div class="email-header">
-                                                <span class="email-sender">{email.sender || 'Unknown Sender'}</span>
+                                                <span class="email-sender">{email.sender || $_('email.unknownSender')}</span>
                                                 <span class="email-date">{formatDate(email.date)}</span>
                                             </div>
                                             
-                                            <p class="email-subject">{email.subject || '(No Subject)'}</p>
+                                            <p class="email-subject">{email.subject || $_('email.noSubject')}</p>
                                             
                                             <p class="email-preview">
                                                 {getEmailPreview(email["content-html"] || email["content-text"])}
@@ -759,48 +759,48 @@ function normalizeGmailAddress(address) {
             <!-- Insert: Gmail temp mail SEO block (place this before the "What is Disposable Temporary E-mail?" section) -->
            <div class="seo-content-section">
     <div class="container">
-        <h1 class="section-title">Gmail Temp Mail Generator: Get a Free Temporary Gmail Address Instantly</h1>
+        <h1 class="section-title">{$_('home.gmailSection.title')}</h1>
         <div class="seo-rich-content">
             <p>
-                Create a fully functional <strong>temporary Gmail address</strong> in seconds with our advanced Gmail temp mail generator. Get a free, disposable Gmail address that works exactly like a real Gmail account—perfect for signing up on any website without revealing your personal email.
+                {$_('home.gmailSection.intro')}
             </p>
 
-            <h2>Why Use a Temporary Gmail Address?</h2>
+            <h2>{$_('home.gmailSection.whyTitle')}</h2>
             <p>
-                Protect your primary inbox from spam, marketing emails, and potential data breaches. Our <strong>temp Gmail generator</strong> provides a private, secure alternative for all your online sign-ups, verifications, and trials. Keep your personal Gmail clean and organized while maintaining full privacy.
+                {$_('home.gmailSection.whyText')}
             </p>
 
             <div class="feature-list">
                 <div class="feature-item">
                     <span class="feature-icon">✓</span>
-                    <span>Instant Gmail address generation - no registration required</span>
+                    <span>{$_('home.gmailSection.features.instant')}</span>
                 </div>
                 <div class="feature-item">
                     <span class="feature-icon">✓</span>
-                    <span>Real Gmail addresses that work on all platforms and websites</span>
+                    <span>{$_('home.gmailSection.features.real')}</span>
                 </div>
                 <div class="feature-item">
                     <span class="feature-icon">✓</span>
-                    <span>Completely free temporary Gmail service with no hidden costs</span>
+                    <span>{$_('home.gmailSection.features.free')}</span>
                 </div>
                 <div class="feature-item">
                     <span class="feature-icon">✓</span>
-                    <span>Perfect for bypassing email verification blocks and restrictions</span>
+                    <span>{$_('home.gmailSection.features.bypass')}</span>
                 </div>
             </div>
 
-            <h2>How to Get Your Temporary Gmail</h2>
+            <h2>{$_('home.gmailSection.howTitle')}</h2>
             <p>
-                Getting your disposable Gmail address is simple. Just select the Gmail option and generate your temporary email. Use it immediately for any website registration, app verification, or service sign-up. Your messages will appear instantly in your private inbox.
+                {$_('home.gmailSection.howText')}
             </p>
 
-            <h2>Ideal For All Your Online Needs</h2>
+            <h2>{$_('home.gmailSection.idealTitle')}</h2>
             <p>
-                Our <strong>Gmail temp mail</strong> service is perfect for free trials, social media sign-ups, website registrations, app verifications, newsletter subscriptions, and temporary communications. When you're done, simply discard the address—no traces left behind.
+                {$_('home.gmailSection.idealText')}
             </p>
 
             <p>
-                <strong>Ready to protect your privacy?</strong> Generate your free temporary Gmail address now and experience secure, spam-free sign-ups across all platforms.
+                {$_('home.gmailSection.cta')}
             </p>
         </div>
     </div>
@@ -810,19 +810,10 @@ function normalizeGmailAddress(address) {
                 class="text-center"
                 style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;"
             >
-                What is Disposable Temporary E-mail?
+                {$_('home.whatIsTitle')}
             </h2>
             <p class="text-center" style="margin-bottom: 32px;font-size: 18px;">
-                A <strong>disposable email address</strong> is a free
-                <strong>temporary email service</strong>
-                that creates a short-term inbox for receiving emails. Often
-                called <em>tempmail</em>, <em>10minmail</em>,
-                <em>throwaway email</em>, or <em>burner mail</em>, it helps you
-                <strong>avoid spam</strong>
-                and protect your <strong>primary email</strong>. Instead of
-                exposing your real <strong>email accounts</strong>, you can rely
-                on Fire Temp Mail to keep your <strong>personal inbox</strong> safe,
-                private, and spam-free.
+                {$_('home.whatIsText')}
             </p>
             <!-- Add this after the "What is Disposable Temporary E-mail?" section -->
 
@@ -834,7 +825,7 @@ function normalizeGmailAddress(address) {
                     class="text-center"
                     style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 2rem;"
                 >
-                    Popular Articles from Our Blog
+                    {$_('blog.popular')}
                 </h2>
 
                 <div
@@ -881,39 +872,39 @@ function normalizeGmailAddress(address) {
                 </div>
 
                 <div style="text-align: center; margin-top: 2rem;">
-                    <a href="/blog" class="btn btn-blog"> Visit Our Blog </a>
+                    <a href="/blog" class="btn btn-blog"> {$_('blog.visitBlog')} </a>
                 </div>
             </div>
 
             <!-- Featured Service-Specific Guides -->
             <div class="featured-guides-section">
                 <h2 class="text-center" style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 1.5rem;">
-                    📱 Platform-Specific Guides
+                    📱 {$_('home.guidesTitle')}
                 </h2>
                 <p class="text-center" style="color: #6c757d; margin-bottom: 2rem; font-size: 1.1rem;">
-                    Learn how to use temporary email for popular platforms and protect your privacy
+                    {$_('home.guidesSubtitle')}
                 </p>
                 
                 <div class="guides-grid">
                     <a href="/blog/how-to-use-temp-email-for-discord-verification" class="guide-card">
                         <div class="guide-icon">💬</div>
-                        <h3>Discord Temp Mail</h3>
-                        <p>Create Discord accounts without exposing your personal email. Complete verification guide.</p>
-                        <span class="read-more">Read Guide →</span>
+                        <h3>{$_('home.discordGuide.title')}</h3>
+                        <p>{$_('home.discordGuide.description')}</p>
+                        <span class="read-more">{$_('guides.readGuide')} →</span>
                     </a>
                     
                     <a href="/blog/instagram-temp-mail-sign-up-without-personal-email" class="guide-card">
                         <div class="guide-icon">📸</div>
-                        <h3>Instagram Temp Email</h3>
-                        <p>Sign up for Instagram using disposable email. Avoid spam and maintain multiple accounts.</p>
-                        <span class="read-more">Read Guide →</span>
+                        <h3>{$_('home.instagramGuide.title')}</h3>
+                        <p>{$_('home.instagramGuide.description')}</p>
+                        <span class="read-more">{$_('guides.readGuide')} →</span>
                     </a>
                     
                     <a href="/blog/tiktok-temporary-email-guide-avoid-spam-signups" class="guide-card">
                         <div class="guide-icon">🎵</div>
-                        <h3>TikTok Temporary Email</h3>
-                        <p>Create TikTok accounts with temp mail. Keep your inbox clean from promotional emails.</p>
-                        <span class="read-more">Read Guide →</span>
+                        <h3>{$_('home.tiktokGuide.title')}</h3>
+                        <p>{$_('home.tiktokGuide.description')}</p>
+                        <span class="read-more">{$_('guides.readGuide')} →</span>
                     </a>
                 </div>
             </div>
@@ -923,202 +914,130 @@ function normalizeGmailAddress(address) {
             <div class="seo-content-section">
                 <div class="container">
                     <h2 class="section-title">
-                        The Technology Behind Disposable Email Addresses
+                        {$_('home.techTitle')}
                     </h2>
 
                     <div class="seo-rich-content">
                         <p>
-                            In today's digital world, email addresses have
-                            become our online passports—essential for work
-                            communication, business connections, social
-                            interactions, and accessing services. Nearly all
-                            applications and online services require an email
-                            address for registration, as do loyalty programs,
-                            contests, and special offers.
+                            {$_('home.techIntro')}
                         </p>
 
-                        <h3>What Are Disposable Email Addresses?</h3>
+                        <h3>{$_('home.deasTitle')}</h3>
                         <p>
-                            Disposable Email Addresses (DEAs) provide an
-                            innovative solution for maintaining online privacy
-                            while accessing digital services. These temporary
-                            addresses allow you to:
+                            {$_('home.deasText')}
                         </p>
 
                         <div class="feature-list">
                             <div class="feature-item">
                                 <span class="feature-icon">→</span>
-                                <span
-                                    >Register for services without revealing
-                                    your primary email</span
-                                >
+                                <span>{$_('home.deasFeatures.register')}</span>
                             </div>
                             <div class="feature-item">
                                 <span class="feature-icon">→</span>
-                                <span
-                                    >Protect your identity from data breaches
-                                    and spam lists</span
-                                >
+                                <span>{$_('home.deasFeatures.protect')}</span>
                             </div>
                             <div class="feature-item">
                                 <span class="feature-icon">→</span>
-                                <span
-                                    >Maintain control over your digital
-                                    footprint</span
-                                >
+                                <span>{$_('home.deasFeatures.control')}</span>
                             </div>
                             <div class="feature-item">
                                 <span class="feature-icon">→</span>
-                                <span
-                                    >Automatically expire after a set period</span
-                                >
+                                <span>{$_('home.deasFeatures.expire')}</span>
                             </div>
                         </div>
 
                         <p>
-                            When a disposable address is compromised or begins
-                            receiving unwanted emails, you can simply retire it
-                            without affecting your primary communication
-                            channels.
+                            {$_('home.deasCompromise')}
                         </p>
 
-                        <h3>Practical Uses for Temporary Email Addresses</h3>
+                        <h3>{$_('home.usesTitle')}</h3>
 
                         <div class="use-cases">
                             <div class="use-case">
-                                <h4>Extended Free Trials</h4>
+                                <h4>{$_('home.uses.trials.title')}</h4>
                                 <p>
-                                    Many streaming services like Netflix, Hulu,
-                                    and Amazon Prime offer limited-time trials.
-                                    With disposable emails, you can extend your
-                                    trial periods while maintaining access to
-                                    these services.
+                                    {$_('home.uses.trials.text')}
                                 </p>
                             </div>
 
                             <div class="use-case">
-                                <h4>Retail Offers Without Spam</h4>
+                                <h4>{$_('home.uses.retail.title')}</h4>
                                 <p>
-                                    Stores frequently request email addresses
-                                    for special offers, which often leads to
-                                    promotional spam. Temporary emails let you
-                                    access these benefits without cluttering
-                                    your primary inbox.
+                                    {$_('home.uses.retail.text')}
                                 </p>
                             </div>
 
                             <div class="use-case">
-                                <h4>Application Testing</h4>
+                                <h4>{$_('home.uses.testing.title')}</h4>
                                 <p>
-                                    Developers can create multiple test accounts
-                                    using disposable emails to thoroughly
-                                    evaluate their applications before public
-                                    release.
+                                    {$_('home.uses.testing.text')}
                                 </p>
                             </div>
 
                             <div class="use-case">
-                                <h4>Multiple Account Management</h4>
+                                <h4>{$_('home.uses.multiple.title')}</h4>
                                 <p>
-                                    When services require separate accounts for
-                                    different purposes (like managing multiple
-                                    social media profiles), disposable emails
-                                    provide the necessary separation without
-                                    creating permanent new accounts.
+                                    {$_('home.uses.multiple.text')}
                                 </p>
                             </div>
 
                             <div class="use-case">
-                                <h4>Spam Prevention</h4>
+                                <h4>{$_('home.uses.spam.title')}</h4>
                                 <p>
-                                    Using temporary emails for forums,
-                                    discussion groups, and web forms
-                                    significantly reduces spam in your primary
-                                    inbox.
+                                    {$_('home.uses.spam.text')}
                                 </p>
                             </div>
                         </div>
 
-                        <h3>Choosing the Right Disposable Email Service</h3>
-                        <p>The best temporary email providers offer:</p>
+                        <h3>{$_('home.choosingTitle')}</h3>
+                        <p>{$_('home.choosingText')}</p>
 
                         <div class="feature-list">
                             <div class="feature-item">
                                 <span class="feature-icon">→</span>
-                                <span
-                                    >Instant email generation with a single
-                                    click</span
-                                >
+                                <span>{$_('home.choosingFeatures.instant')}</span>
                             </div>
                             <div class="feature-item">
                                 <span class="feature-icon">→</span>
-                                <span
-                                    >No registration requirements or personal
-                                    information collection</span
-                                >
+                                <span>{$_('home.choosingFeatures.privacy')}</span>
                             </div>
                             <div class="feature-item">
                                 <span class="feature-icon">→</span>
-                                <span>Complete anonymity for users</span>
+                                <span>{$_('home.choosingFeatures.anonymous')}</span>
                             </div>
                             <div class="feature-item">
                                 <span class="feature-icon">→</span>
-                                <span>Unlimited email address creation</span>
+                                <span>{$_('home.choosingFeatures.unlimited')}</span>
                             </div>
                             <div class="feature-item">
                                 <span class="feature-icon">→</span>
-                                <span>Temporary inbox functionality</span>
+                                <span>{$_('home.choosingFeatures.inbox')}</span>
                             </div>
                             <div class="feature-item">
                                 <span class="feature-icon">→</span>
-                                <span>User-friendly interface</span>
+                                <span>{$_('home.choosingFeatures.interface')}</span>
                             </div>
                             <div class="feature-item">
                                 <span class="feature-icon">→</span>
-                                <span>Customizable address options</span>
+                                <span>{$_('home.choosingFeatures.custom')}</span>
                             </div>
                         </div>
 
                         <h3>
-                            How to Use Disposable Email Addresses Effectively
+                            {$_('home.effectiveTitle')}
                         </h3>
                         <p>
-                            While some users create secondary accounts with
-                            traditional providers like Gmail, this approach
-                            requires managing multiple inboxes. Professional
-                            disposable email services like Fire Temp Mail offer
-                            a more efficient solution by providing temporary
-                            addresses that forward to your primary email while
-                            maintaining complete separation.
+                            {$_('home.effectiveText')}
                         </p>
 
                         <p>
-                            The advanced functionality allows you to filter
-                            messages—sending suspicious emails directly to trash
-                            while delivering important communications to your
-                            main inbox. If an address becomes compromised, you
-                            can simply disable it without affecting your other
-                            accounts.
+                            {$_('home.effectiveAdvanced')}
                         </p>
 
                         <div class="conclusion-box">
-                            <h4>Conclusion: Enhance Your Online Privacy</h4>
+                            <h4>{$_('home.conclusionTitle')}</h4>
                             <p>
-                                Implementing a disposable email system is an
-                                effective strategy for participating in online
-                                forums, chat rooms, file-sharing services, and
-                                bulletin boards while protecting your primary
-                                identity. By using temporary addresses from Fire
-                                Temp Mail, you ensure your personal information
-                                remains secure and your inbox stays free from
-                                unwanted spam.
-                            </p>
-
-                            <p>
-                                Take control of your digital privacy today with
-                                our secure, anonymous temporary email service
-                                designed to keep your online activities separate
-                                from your personal communication channels.
+                                {$_('home.conclusionText')}
                             </p>
                         </div>
                     </div>

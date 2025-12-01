@@ -1,117 +1,63 @@
 <script>
     import { onMount } from 'svelte';
+    import { _, isLoading } from 'svelte-i18n';
     
     let copyrightYear = 2024; // Default fallback
+    let faqItems = [];
 
+    $: if (!$isLoading && $_) {
+        faqItems = [
+            {
+                question: $_('faq.questions.q1.question'),
+                answer: $_('faq.questions.q1.answer'),
+                icon: "📧",
+                open: false
+            },
+            {
+                question: $_('faq.questions.q2.question'),
+                answer: $_('faq.questions.q2.answer'),
+                icon: "🛡️",
+                open: false
+            },
+            {
+                question: $_('faq.questions.q3.question'),
+                answer: $_('faq.questions.q3.answer'),
+                icon: "🔒",
+                open: false
+            },
+            {
+                question: $_('faq.questions.q4.question'),
+                answer: $_('faq.questions.q4.answer'),
+                icon: "💸",
+                open: false
+            },
+            {
+                question: $_('faq.questions.q5.question'),
+                answer: $_('faq.questions.q5.answer'),
+                icon: "⏱️",
+                open: false
+            },
+            {
+                question: $_('faq.questions.q6.question'),
+                answer: $_('faq.questions.q6.answer'),
+                icon: "📤",
+                open: false
+            },
+            {
+                question: $_('faq.questions.q7.question'),
+                answer: $_('faq.questions.q7.answer'),
+                icon: "🗑️",
+                open: false
+            },
+            {
+                question: $_('faq.questions.q8.question'),
+                answer: $_('faq.questions.q8.answer'),
+                icon: "⚠️",
+                open: false
+            }
+        ];
+    }
     
-    // FAQ data with structured content for SEO
-    const faqItems = [
-        {
-            question: "What is a temporary email address?",
-            answer: `
-                <p>A temporary email address, also known as a disposable or anonymous email, is a short-term email address that automatically expires after a set period. It allows you to receive emails without revealing your personal email address, protecting your privacy and keeping your primary inbox free from spam.</p>
-                <p>Temporary email services like Fire Temp Mail provide these addresses instantly without requiring registration, making them ideal for one-time signups, online verifications, and protecting your identity online.</p>
-            `,
-            icon: "📧"
-        },
-        {
-            question: "Why should I use a temporary email service?",
-            answer: `
-                <p>Using a temporary email service offers several important benefits:</p>
-                <ul>
-                    <li><strong>Privacy Protection:</strong> Keep your personal email address private when signing up for services</li>
-                    <li><strong>Spam Prevention:</strong> Avoid unwanted promotional emails and newsletters</li>
-                    <li><strong>Security Enhancement:</strong> Reduce risks from data breaches by using disposable addresses</li>
-                    <li><strong>Organization:</strong> Create different emails for different purposes (shopping, forums, etc.)</li>
-                    <li><strong>Convenience:</strong> No registration required and instant access to new email addresses</li>
-                </ul>
-            `,
-            icon: "🛡️"
-        },
-        {
-            question: "How does Fire Temp Mail protect my privacy?",
-            answer: `
-                <p>Fire Temp Mail employs multiple strategies to ensure your privacy:</p>
-                <ol>
-                    <li>We don't require personal information to use our service</li>
-                    <li>All emails are automatically deleted after 2 hours</li>
-                    <li>We use HTTPS encryption for all data transfers</li>
-                    <li>Our service doesn't track your activity across websites</li>
-                    <li>We don't sell or share your data with third parties</li>
-                </ol>
-                <p>For additional security, we recommend not using temporary email for highly sensitive communications.</p>
-            `,
-            icon: "🔒"
-        },
-        {
-            question: "Is Fire Temp Mail completely free to use?",
-            answer: `
-                <p>Yes, our basic temporary email service is completely free with no hidden costs. With our free plan, you can:</p>
-                <ul>
-                    <li>Create unlimited temporary email addresses</li>
-                    <li>Receive emails for up to 24 hours (extendable)</li>
-                    <li>View emails in our clean, ad-free interface</li>
-                    <li>Use our service without registration</li>
-                </ul>
-                <p>We also offer a premium plan with additional features like sending emails, longer expiration times, and custom domains for users with more advanced needs.</p>
-            `,
-            icon: "💸"
-        },
-        {
-            question: "How long do temporary emails last?",
-            answer: `
-                <p>By default, Fire Temp Mail addresses remain active for 24 hours. However, you can extend this period:</p>
-                <ol>
-                    <li>Basic free addresses: 24 hours (extendable up to 3 times)</li>
-                    <li>Extended addresses: Up to 72 hours with multiple extensions</li>
-                    <li>Premium addresses: Custom durations up to 30 days</li>
-                </ol>
-                <p>After the expiration period, all emails associated with the address are permanently deleted from our servers.</p>
-            `,
-            icon: "⏱️"
-        },
-        {
-            question: "Can I send emails from a temporary address?",
-            answer: `
-                <p>Our basic service focuses on receiving emails to protect your privacy. However:</p>
-                <ul>
-                    <li><strong>Free tier:</strong> Receive emails only</li>
-                    <li><strong>Premium tier:</strong> Send emails from your temporary address</li>
-                    <li><strong>All tiers:</strong> View and manage received emails through our secure interface</li>
-                </ul>
-                <p>The receiving-only approach for free accounts enhances privacy by preventing misuse of our service for spam activities.</p>
-            `,
-            icon: "📤"
-        },
-        {
-            question: "What happens to emails after they expire?",
-            answer: `
-                <p>Fire Temp Mail follows a strict data retention policy:</p>
-                <ol>
-                    <li>Emails are automatically deleted after the address expires</li>
-                    <li>Expired addresses cannot be recovered</li>
-                    <li>No backups are maintained of deleted content</li>
-                    <li>Our system is designed to permanently erase all data upon expiration</li>
-                </ol>
-                <p>This approach ensures your privacy is protected and that no sensitive information remains on our servers longer than necessary.</p>
-            `,
-            icon: "🗑️"
-        },
-        {
-            question: "Can I use temporary email for important accounts?",
-            answer: `
-                <p>While temporary emails are excellent for privacy, we recommend caution:</p>
-                <ul>
-                    <li><strong>Recommended for:</strong> One-time signups, newsletters, forum registrations, and temporary verifications</li>
-                    <li><strong>Not recommended for:</strong> Banking, government services, primary email accounts, or any service requiring long-term access</li>
-                    <li><strong>Consider:</strong> The temporary nature means you'll lose access if you need to reset passwords later</li>
-                </ul>
-                <p>For important accounts, we recommend using a permanent email address from a reputable provider.</p>
-            `,
-            icon: "⚠️"
-        }
-    ];
-
     // Function to toggle FAQ items
     function toggleFaq(index) {
         faqItems.forEach((item, i) => {
@@ -143,8 +89,8 @@
 </script>
 
 <svelte:head>
-    <title>Frequently Asked Questions - Fire Temp Mail | Temporary Email Service</title>
-    <meta name="description" content="Get answers to common questions about Fire Temp Mail's temporary email service. Learn how to use disposable emails for privacy, security, and spam protection." />
+    <title>{$_('faq.metaTitle')}</title>
+    <meta name="description" content={$_('faq.metaDescription')} />
     <meta name="keywords" content="temporary email, disposable email, FAQ, email privacy, spam protection, anonymous email, burner email, email security" />
     
     <!-- Canonical URL -->
@@ -165,25 +111,25 @@
             <header class="page-header">
                 <h1 class="text-center">
                     <span class="header-icon">❓</span>
-                    Frequently Asked Questions
+                    {$_('faq.title')}
                 </h1>
                 
                 <p class="page-subtitle">
-                    Find answers to common questions about our secure temporary email service designed to protect your privacy.
+                    {$_('faq.subtitle')}
                 </p>
             </header>
             
             <!-- FAQ Categories -->
             <div class="faq-categories">
                 <div class="category-card">
-                    <div class="category-icon">🔒</div>
-                    <h3>Privacy & Security</h3>
-                    <p>How we protect your data and identity</p>
+                    <div class="category-icon">{$_('faq.categories.privacy.icon')}</div>
+                    <h3>{$_('faq.categories.privacy.title')}</h3>
+                    <p>{$_('faq.categories.privacy.description')}</p>
                 </div>
                 <div class="category-card">
-                    <div class="category-icon">⏱️</div>
-                    <h3>Usage & Features</h3>
-                    <p>How to use our service effectively</p>
+                    <div class="category-icon">{$_('faq.categories.usage.icon')}</div>
+                    <h3>{$_('faq.categories.usage.title')}</h3>
+                    <p>{$_('faq.categories.usage.description')}</p>
                 </div>
             </div>
             
@@ -282,69 +228,6 @@
         </div>
     </div>
 </section>
-
-<!-- Footer -->
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 mb-4 mb-md-0">
-                <h5 class="footer-title">Quick Links</h5>
-                <div class="row">
-                    <div class="col-6">
-                        <ul class="footer-links">
-                            <li><a href="/email-generator">Email Generator</a></li>
-                            <li><a href="/gmail-generator">Gmail Generator</a></li>
-                            <li><a href="/temporary-gmail">Temporary Gmail</a></li>
-                            <li><a href="/temp-gmail">Temp Gmail</a></li>
-                            <li><a href="/temp-mail-edu">Temp Mail EDU</a></li>
-                            <li><a href="/10minutemail">10 Minute Mail</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="footer-links">
-                            <li><a href="/privacy-policy">Privacy Policy</a></li>
-                            <li><a href="/terms">Terms of Service</a></li>
-                            <li><a href="/faq">FAQ</a></li>
-                            <li><a href="/contact">Contact Us</a></li>
-                            <li><a href="/blog">Blog</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <h5 class="footer-title">Support Our Service</h5>
-                <div class="donation-section">
-                    <p>Help us keep FireTempMail free by making a donation. Your support helps maintain and improve our service.</p>
-                    
-                    <div class="kofi-qr">
-                        <a href="https://ko-fi.com/firetempmail" target="_blank">
-                            <img src="https://storage.ko-fi.com/cdn/useruploads/N4N61LJTEP/qrcode.png?v=2668fb77-3b3b-4039-abc5-e7004afdcebe&v=2&_gl=1*1bpnkx0*_gcl_au*Mzg2NjgyMDUuMTc1ODM3MTgzOA..*_ga*Nzg1NDU0NTQ2LjE3NTgzNzE4Mzk.*_ga_M13FZ7VQ2C*czE3NTgzNzE4MzgkbzEkZzEkdDE3NTgzNzI5MTkkajYwJGwwJGgw" 
-                                 alt="Support us on Ko-fi" class="img-fluid">
-                        </a>
-                        <p class="kofi-text">Scan to support us on Ko-fi</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="divider"></div>
-        
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <p class="copyright">© {copyrightYear} FireTempMail. All Rights Reserved.</p>
-            </div>
-            <div class="col-md-6 text-md-end">
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
 
 <style>
     /* Footer Styles */

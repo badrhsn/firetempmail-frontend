@@ -1,11 +1,12 @@
 <script>
+    import { _ } from 'svelte-i18n';
     let copyrightYear = new Date().getFullYear();
 </script>
 
 <svelte:head>
-    <title>Advertising - Fire Temp Mail</title>
+    <title>{$_('advertising.metaTitle')}</title>
     <link rel="canonical" href="https://firetempmail.com/advertising" />
-    <meta name="description" content="Explore advertising opportunities with Fire Temp Mail to reach a targeted audience." />
+    <meta name="description" content={$_('advertising.metaDescription')} />
     
 </svelte:head>
 
@@ -15,24 +16,24 @@
             <!-- Header -->
             <h1 class="text-start" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
                 <span style="font-weight: normal !important; color: rgb(255, 255, 255);">📮&nbsp;</span>
-                Advertising
+                {$_('nav.advertising')}
             </h1>
             
             <div class="text-start">
-                <h2>Advertising Opportunities</h2>
-                <p>Fire Temp Mail offers unique advertising opportunities to reach our growing user base.</p>
+                <h2>{$_('advertising.opportunities.title')}</h2>
+                <p>{$_('advertising.opportunities.text')}</p>
                 
-                <h3>Our Audience</h3>
-                <p>We serve thousands of users daily who are tech-savvy, privacy-conscious, and actively engaged in online activities requiring email verification.</p>
+                <h3>{$_('advertising.audience.title')}</h3>
+                <p>{$_('advertising.audience.text')}</p>
                 
-                <h3>Advertising Options</h3>
-                <p>We offer several advertising options including banner ads, sponsored content, and dedicated email placements.</p>
+                <h3>{$_('advertising.options.title')}</h3>
+                <p>{$_('advertising.options.text')}</p>
                 
-                <h3>Ad Policy</h3>
-                <p>We maintain a strict ad policy to ensure our users have a positive experience. We don't allow intrusive pop-ups, auto-play videos with sound, or misleading advertisements.</p>
+                <h3>{$_('advertising.policy.title')}</h3>
+                <p>{$_('advertising.policy.text')}</p>
                 
-                <h3>Get Started</h3>
-                <p>For advertising rates and availability, please contact us at <a href="mailto:ads@firetempmail.com">ads@firetempmail.com</a></p>
+                <h3>{$_('advertising.getStarted.title')}</h3>
+                <p>{$_('advertising.getStarted.text')} <a href="mailto:ads@firetempmail.com">ads@firetempmail.com</a></p>
             </div>
         </div>
 
