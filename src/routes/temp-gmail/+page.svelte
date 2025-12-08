@@ -404,8 +404,8 @@ function selectDomain(domain) {
     <meta name="author" content="Fire Temp Mail">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://firetempmail.com/temp-gmail">
+    <!-- Canonical URL - Points to homepage to avoid duplicate content -->
+    <link rel="canonical" href="https://firetempmail.com/">
     
     <!-- Structured Data -->
     <script type="application/ld+json">
