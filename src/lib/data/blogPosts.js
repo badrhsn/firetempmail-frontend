@@ -674,7 +674,7 @@ const blogPosts = [
     },
     {
     "id": 10,
-    "title": "FireTempMail.com Temporary Gmail: Safe, Instant & Disposable",
+    "title": "Temporary Gmail: Safe & Disposable",
     "excerpt": "Generate temporary Gmail addresses instantly with FireTempMail.com. Protect your primary inbox, avoid spam, and create disposable Gmail accounts for secure sign-ups and verifications.",
     "slug": "temporary-gmail",
     "date": "2025-09-20",
@@ -765,7 +765,7 @@ const blogPosts = [
 },
   {
     "id": 11,
-    "title": "How to Use a Temporary Gmail Address Safely for Online Signups",
+    "title": "Use Temporary Gmail Safely for Signups",
     "excerpt": "A complete guide to using disposable email addresses for signups. Learn best practices for protecting your primary Gmail from spam, phishing, and data breaches without relying on alias tricks.",
     "slug": "how-to-use-temp-gmail-safely-signups",
     "date": "2025-09-21",
@@ -841,7 +841,7 @@ For a one-time verification, you can simply close the tab. The inbox will expire
   },
   {
     "id": 12,
-    "title": "The Best Temporary Mail & Gmail Alternatives for Secure Signups in 2025",
+    "title": "Best Temp Mail & Gmail Alternatives 2025",
     "excerpt": "Exploring the top temporary email services that serve as effective Gmail alternatives. Compare features, privacy policies, and reliability of the best disposable inbox providers this year.",
     "slug": "best-temp-mail-gmail-alternatives",
     "date": "2025-09-21",
@@ -1166,7 +1166,7 @@ It's the gateway to the entire Google ecosystem. It's integrated with Google Dri
   },
   {
     "id": 15,
-    "title": "How to Protect Your Online Privacy with Temporary Gmail Addresses",
+    "title": "Protect Privacy with Temporary Gmail",
     "excerpt": "Your definitive guide to using disposable email addresses as a privacy shield. Learn strategies to prevent spam, avoid data breaches, and control your digital identity with temporary inboxes.",
     "slug": "protect-privacy-with-temporary-gmail",
     "date": "2025-09-21",
@@ -1247,7 +1247,7 @@ It's the gateway to the entire Google ecosystem. It's integrated with Google Dri
   },
   {
     "id": 16,
-    "title": "How to Use Temporary Email for Discord Verification (2025)",
+    "title": "Temp Email for Discord Verification 2025",
     "excerpt": "Create a Discord account using temporary email from FireTempMail. Protect your inbox from spam while getting instant Discord verification. Step-by-step guide with troubleshooting tips.",
     "slug": "how-to-use-temp-email-for-discord-verification",
     "date": "2025-11-27",

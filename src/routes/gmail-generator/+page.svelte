@@ -408,7 +408,7 @@ function selectDomain(domain) {
     }
 </script>
 <svelte:head>
-    <title>Temp Gmail - Create Temporary Gmail Addresses | Temporary Disposable Gmail | Temp Mail | Email Generator</title>
+    <title>Temp Gmail Generator | Disposable Email</title>
     <meta name="description" content="Generate temporary Gmail addresses instantly. Protect your personal inbox from spam with Fire Temp Mail's disposable Gmail generator service.">
     <meta name="keywords" content="temp gmail, temporary gmail, gmail generator, disposable gmail, fake gmail, Fire Temp Mail">
     <meta name="author" content="Fire Temp Mail">
