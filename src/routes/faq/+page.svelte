@@ -220,6 +220,50 @@
                 </div>
             </div>
             
+            <!-- Surfshark Alert Privacy Widget -->
+            <div class="privacy-widget">
+                <div class="widget-content">
+                    <div class="widget-header">
+                        <div class="widget-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Complete Privacy Protection</h3>
+                    </div>
+                    <p class="widget-description">
+                        You're already protecting your email with Fire Temp Mail. Take your privacy further with <strong>Surfshark Alert</strong> – monitor if your personal data has been leaked in data breaches.
+                    </p>
+                    <ul class="widget-features">
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Real-time breach monitoring
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Instant breach alerts
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Protect your identity
+                        </li>
+                    </ul>
+                    <a href="https://get.surfshark.net/SH4nX" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="widget-cta">
+                        Check Your Data Security →
+                    </a>
+                </div>
+            </div>
+            
             <!-- Contact Section -->
             <div class="contact-section">
                 <div class="contact-content">
@@ -658,6 +702,126 @@
         
         .contact-section {
             padding: 1.5rem;
+        }
+    }
+    
+    /* Privacy Widget - Surfshark Alert */
+    .privacy-widget {
+        margin: 3rem 0;
+        padding: 2rem;
+        background: linear-gradient(135deg, #f8fafc 0%, #e9f4fb 100%);
+        border: 2px solid #bee3f8;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    .widget-content {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .widget-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .widget-icon {
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(135deg, #4a90e2 0%, #2b7bc7 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        flex-shrink: 0;
+    }
+    
+    .widget-header h3 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1a202c;
+    }
+    
+    .widget-description {
+        color: #4a5568;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+    
+    .widget-features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 2rem 0;
+    }
+    
+    .widget-features li {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 0;
+        color: #2d3748;
+        font-weight: 500;
+    }
+    
+    .widget-features li svg {
+        color: #48bb78;
+        flex-shrink: 0;
+    }
+    
+    .widget-cta {
+        display: inline-block;
+        width: 100%;
+        padding: 1rem 2rem;
+        background: linear-gradient(135deg, #4a90e2 0%, #2b7bc7 100%);
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+    }
+    
+    .widget-cta:hover {
+        background: linear-gradient(135deg, #357abd 0%, #1f5a99 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+        text-decoration: none;
+        color: white;
+    }
+    
+    @media (max-width: 768px) {
+        .privacy-widget {
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .widget-header {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .widget-header h3 {
+            font-size: 1.25rem;
+        }
+        
+        .widget-icon {
+            width: 48px;
+            height: 48px;
+        }
+        
+        .widget-description {
+            font-size: 0.95rem;
+        }
+        
+        .widget-features li {
+            font-size: 0.9rem;
         }
     }
 </style>
