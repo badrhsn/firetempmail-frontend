@@ -2,10 +2,14 @@
     import { onMount } from 'svelte';
     import Footer from '$lib/components/Footer.svelte';
     import LanguageSelector from '$lib/components/LanguageSelector.svelte';
+    import BannerTop from '$lib/components/BannerTop.svelte';
+    import { onDestroy } from 'svelte';
+    import { allBanners, setBanner, rotateBanners } from '$lib/stores/banners';
     import '$lib/i18n';
     import { isLoading } from 'svelte-i18n';
     
     // Wait for i18n to load
+    let rotationId;
     onMount(() => {
         // Check for stored language preference
         if (typeof window !== 'undefined') {
@@ -16,10 +20,27 @@
                 });
             }
         }
+
+        // Initialize active banners from the allBanners store
+        const unsubscribe = allBanners.subscribe(list => {
+            list.forEach(b => {
+                if (b && b.isActive) setBanner(b.position, b.content);
+            });
+        });
+
+        // optional rotation (30s)
+        rotationId = rotateBanners(30000);
+
+        onDestroy(() => {
+            unsubscribe();
+            if (rotationId) clearInterval(rotationId);
+        });
     });
 </script>
 
 {#if !$isLoading}
+    <!-- Global banner (top only) -->
+    <BannerTop />
     <!-- Language Selector Fixed Position -->
     <div class="language-selector-wrapper">
         <LanguageSelector />
@@ -68,6 +89,35 @@
         .language-selector-wrapper {
             top: 70px;
             right: 1rem;
+        }
+    }
+
+    /* Reduce space between top banner and first page title */
+    :global(h1:first-of-type) {
+        margin-top: 0;
+    }
+
+    /* When the top banner is present, remove top padding from the first content section
+       so the banner sits flush with the page title. Use the general sibling selector
+       to handle intervening elements (language selector, wrappers). */
+    :global(.top-banner-container) ~ :global(section:first-of-type),
+    :global(.top-banner-container) ~ :global(section:first-of-type) .container,
+    :global(.top-banner-container) ~ :global(section:first-of-type) .text-center {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    /* Also reduce large top padding utilities on the first section if present */
+    :global(section.py-4:first-of-type),
+    :global(section.py-xl-5:first-of-type) {
+        padding-top: 0 !important;
+    }
+
+    /* Override Bootstrap's .p-lg-5 which adds 3rem padding at >=992px.
+       Remove that padding to eliminate the large gap between banner and content. */
+    @media (min-width: 992px) {
+        :global(.p-lg-5) {
+            padding: 0 !important;
         }
     }
 </style>

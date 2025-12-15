@@ -144,3 +144,6 @@ export function removeGmailAccount(base, domain = 'gmail.com') {
         return accounts.filter(acc => !(acc.base === base && acc.domain === domain));
     });
 }
+
+// Indicates whether the current page's emails have finished loading
+export const emailsLoaded = writable(false);
