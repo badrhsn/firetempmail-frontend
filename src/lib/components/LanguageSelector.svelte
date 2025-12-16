@@ -30,23 +30,25 @@
 <svelte:window on:click={handleClickOutside} />
 
 <div class="language-selector">
-    <button class="lang-button" on:click={toggleDropdown}>
+    <button class="lang-button compact" aria-label="Change language" on:click={toggleDropdown}>
         <span class="flag">{currentLang.flag}</span>
-        <span class="lang-code">{currentLang.code.toUpperCase()}</span>
-        <span class="arrow">{showDropdown ? '▲' : '▼'}</span>
+        <span class="caret">{showDropdown ? '▴' : '▾'}</span>
     </button>
     
     {#if showDropdown}
         <div class="dropdown">
             {#each languages as lang}
-                <button
+                <div
+                    role="button"
+                    tabindex="0"
                     class="dropdown-item"
                     class:active={$locale === lang.code}
                     on:click={() => changeLanguage(lang.code)}
+                    on:keydown={(e) => e.key === 'Enter' && changeLanguage(lang.code)}
                 >
                     <span class="flag">{lang.flag}</span>
                     <span class="name">{lang.name}</span>
-                </button>
+                </div>
             {/each}
         </div>
     {/if}
@@ -59,65 +61,66 @@
     }
 
     .lang-button {
-        display: flex;
+        display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
-        background: #fff;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
+        gap: 0.25rem;
+        padding: 0.25rem 0.4rem;
+        background: transparent;
+        border: none;
+        border-radius: 6px;
         cursor: pointer;
         font-size: 0.9rem;
-        transition: all 0.2s;
+        transition: opacity 0.15s;
     }
 
     .lang-button:hover {
-        border-color: #000;
-        background: #f8f8f8;
+        opacity: 0.9;
     }
+
+    .lang-button.compact { padding: 0.1rem; }
 
     .flag {
         font-size: 1.2rem;
+        line-height: 1;
+        display: inline-block;
     }
 
-    .lang-code {
-        font-weight: 600;
-        color: #000;
-    }
-
-    .arrow {
-        font-size: 0.7rem;
+    .caret {
+        font-size: 0.6rem;
         color: #666;
-        margin-left: 0.25rem;
+        margin-left: 0.15rem;
+        line-height: 1;
     }
 
     .dropdown {
         position: absolute;
-        top: calc(100% + 0.5rem);
+        top: calc(100% + 0.25rem);
         right: 0;
-        min-width: 200px;
+        min-width: 160px;
         background: #fff;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border: 1px solid #eaeaea;
+        border-radius: 6px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
         overflow: hidden;
+        padding: 0.25rem 0;
     }
 
     .dropdown-item {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        gap: 0.5rem;
         width: 100%;
-        padding: 0.75rem 1rem;
+        padding: 0.4rem 0.6rem;
         background: none;
         border: none;
         text-align: left;
         cursor: pointer;
-        transition: background 0.2s;
+        transition: background 0.12s;
+        font-size: 0.9rem;
     }
 
     .dropdown-item:hover {
-        background: #f8f8f8;
+        background: #f7f7f7;
     }
 
     .dropdown-item.active {
@@ -130,17 +133,11 @@
     }
 
     @media (max-width: 768px) {
-        .lang-button {
-            padding: 0.4rem 0.8rem;
-        }
-
-        .lang-code {
-            display: none;
-        }
-
         .dropdown {
             right: auto;
             left: 0;
         }
+        .dropdown { min-width: 140px; }
+        .flag { font-size: 1.1rem; }
     }
 </style>

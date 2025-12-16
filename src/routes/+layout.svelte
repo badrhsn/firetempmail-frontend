@@ -10,6 +10,7 @@
     
     // Wait for i18n to load
     let rotationId;
+    let languageSelectorInstance;
     onMount(() => {
         // Check for stored language preference
         if (typeof window !== 'undefined') {
@@ -31,9 +32,18 @@
         // optional rotation (30s)
         rotationId = rotateBanners(30000);
 
+        // Mount the LanguageSelector into the static header placeholder (if present)
+        if (typeof window !== 'undefined') {
+            const root = document.getElementById('language-selector-root');
+            if (root) {
+                languageSelectorInstance = new LanguageSelector({ target: root });
+            }
+        }
+
         onDestroy(() => {
             unsubscribe();
             if (rotationId) clearInterval(rotationId);
+            if (languageSelectorInstance) languageSelectorInstance.$destroy();
         });
     });
 </script>
@@ -41,10 +51,6 @@
 {#if !$isLoading}
     <!-- Global banner (top only) -->
     <BannerTop />
-    <!-- Language Selector Fixed Position -->
-    <div class="language-selector-wrapper">
-        <LanguageSelector />
-    </div>
     
     <slot />
     
