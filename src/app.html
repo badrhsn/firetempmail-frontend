@@ -31,15 +31,30 @@
             margin-bottom: 2rem;
         }
     </style>
-       
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V7Y8WEB63T"></script>
+    
+    <!-- Google Consent Mode v2 -->
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
+        
+        // Default consent state (denied until user consents)
+        gtag('consent', 'default', {
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'analytics_storage': 'denied'
+        });
+    </script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V7Y8WEB63T"></script>
+    <script>
         gtag('js', new Date());
         gtag('config', 'G-V7Y8WEB63T');
     </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5990181789401140" crossorigin="anonymous"></script>
     
     <!-- Maintenance Mode Toggle Script -->
     <script>
