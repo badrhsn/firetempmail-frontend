@@ -66,7 +66,6 @@
                     <ul class="footer-links">
                         <li><a href="/blog">{$_('footer.blog')}</a></li>
                         <li><a href="/faq">{$_('footer.faq')}</a></li>
-                        <li><a href="https://rapidapi.com/fire-temp-mail-fire-temp-mail-default/api/firetempmail-api" target="_blank" rel="noopener">API</a></li>
                     </ul>
                 </div>
                 

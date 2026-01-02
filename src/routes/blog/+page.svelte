@@ -1,91 +1,562 @@
 <script>
-    import { _ } from 'svelte-i18n';
-    import { getAllPosts, debugSlugs } from '$lib/data/blogPosts';
+    import { getAllPosts } from '$lib/data/blogPosts';
     
+    // Posts per page
+    const POSTS_PER_PAGE = 9;
+    
+    // Reactive variables
     let copyrightYear = new Date().getFullYear();
     let blogPosts = getAllPosts();
+    let currentPage = 1;
     
-    // Debug on component mount
-    import { onMount } from 'svelte';
-    onMount(() => {
-        console.log('Blog page mounted');
-        debugSlugs();
-    });
-</script>
-
-<svelte:head>
-    <title>Blog - Fire Temp Mail | Temporary Email Insights</title>
-    <meta name="description" content="Read our latest articles about email privacy, online security, and how to protect your digital identity with temporary email services." />
-    <link rel="canonical" href="https://firetempmail.com/blog" />
-</svelte:head>
-
-<section class="py-4 py-xl-5">
-    <div class="container" style="max-width: 800px;">
-        <div class="text-center p-4 p-lg-5">
-            <!-- Header -->
-            <h1 class="text-start" style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;">
-                <span style="font-weight: normal !important; color: rgb(255, 255, 255);">📝&nbsp;</span>
-                {$_('blog.title')}
-            </h1>
-            
-            <p class="text-start" style="margin-bottom: 32px;font-size: 20px;">
-                {$_('blog.subtitle')}
-            </p>
-            
-            <!-- Blog Posts -->
-            <div class="text-start">
-                {#each blogPosts as post}
-                    <article class="blog-post" style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid #eee;">
-                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
-                            <span style="background: #e9ecef; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">
-                                {post.category}
-                            </span>
-                            <span style="margin: 0 0.5rem;">•</span>
-                            <span style="color: #6c757d; font-size: 0.9rem;">{post.date}</span>
-                            <span style="margin: 0 0.5rem;">•</span>
-                            <span style="color: #6c757d; font-size: 0.9rem;">{post.readTime}</span>
-                        </div>
-                        
-                        <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">
-                            <a href="/blog/{post.slug}" style="color: inherit; text-decoration: none;">
-                                {post.title}
-                            </a>
-                        </h2>
-                        
-                        <p style="font-size: 1.1rem; color: #6c757d; margin-bottom: 1.5rem;">
-                            {post.excerpt}
-                        </p>
-                        
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="color: #6c757d; font-size: 0.9rem;">By {post.author}</span>
-                            <a href="/blog/{post.slug}" class="btn btn-outline-primary">
-                                {$_('blog.readMore')} →
-                            </a>
-                        </div>
-                    </article>
-                {/each}
-            </div>
-        </div>
-    </div>
-</section>
-
-<style>
-    .blog-post:hover {
-        background-color: #f8f9fa;
-        transition: background-color 0.2s ease;
-        border-radius: 8px;
-        padding: 1.5rem !important;
-        margin-left: -1.5rem;
-        margin-right: -1.5rem;
+    // Get categories
+    const categories = (() => {
+        const categoriesSet = new Set();
+        blogPosts.forEach(post => {
+            categoriesSet.add(post.category);
+        });
+        
+        const allCategories = Array.from(categoriesSet).map(cat => ({
+            id: cat.toLowerCase().replace(/\s+/g, '-'),
+            name: cat,
+            count: blogPosts.filter(p => p.category === cat).length
+        }));
+        
+        return [
+            { id: 'all', name: 'All', count: blogPosts.length },
+            ...allCategories
+        ];
+    })();
+    
+    // Category filter
+    let selectedCategory = 'all';
+    
+    // Filter posts
+    const filteredPosts = selectedCategory === 'all'
+        ? blogPosts
+        : blogPosts.filter(post => 
+            post.category.toLowerCase().replace(/\s+/g, '-') === selectedCategory
+        );
+    
+    // Pagination calculations
+    const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+    const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+    const endIndex = startIndex + POSTS_PER_PAGE;
+    const currentPosts = filteredPosts.slice(startIndex, endIndex);
+    
+    // Format date
+    const formatDate = (dateString) => {
+        try {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+        } catch {
+            return dateString;
+        }
+    };
+    
+    // Navigation functions
+    function goToPage(page) {
+        currentPage = page;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
-    .btn-outline-primary {
+    function nextPage() {
+        if (currentPage < totalPages) {
+            goToPage(currentPage + 1);
+        }
+    }
+    
+    function prevPage() {
+        if (currentPage > 1) {
+            goToPage(currentPage - 1);
+        }
+    }
+    
+    // Handle category change
+    function handleCategoryChange(categoryId) {
+        selectedCategory = categoryId;
+        currentPage = 1; // Reset to first page when category changes
+    }
+</script>
+
+<!-- Header -->
+<header class="blog-header">
+    <h1>Blog</h1>
+    <p>Email privacy & security insights</p>
+</header>
+
+<!-- Main Content -->
+<main class="blog-main">
+    <!-- Category Filters -->
+    <div class="filters">
+        <div class="filters-inner">
+            {#each categories as category}
+                <button 
+                    class="filter-btn {selectedCategory === category.id ? 'active' : ''}" 
+                    on:click={() => handleCategoryChange(category.id)}
+                >
+                    {category.name}
+                    <span class="count">({category.count})</span>
+                </button>
+            {/each}
+        </div>
+    </div>
+
+    <!-- Posts Grid -->
+    <div class="posts-grid">
+        {#each currentPosts as post}
+            <article class="post-card">
+                <div class="card-content">
+                    <div class="card-header">
+                        <span class="category">{post.category}</span>
+                        <span class="date">{formatDate(post.date)}</span>
+                    </div>
+                    
+                    <h3>
+                        <a href="/blog/{post.slug}">{post.title}</a>
+                    </h3>
+                    
+                    <p class="excerpt">{post.excerpt}</p>
+                    
+                    <div class="card-footer">
+                        <span class="author">{post.author}</span>
+                        <span class="read-time">• {post.readTime} read</span>
+                    </div>
+                </div>
+            </article>
+        {/each}
+    </div>
+
+    <!-- Pagination -->
+    {#if totalPages > 1}
+        <div class="pagination">
+            <button 
+                class="pagination-btn prev" 
+                on:click={prevPage}
+                disabled={currentPage === 1}
+            >
+                ← Previous
+            </button>
+            
+            <div class="page-numbers">
+                {#each Array.from({ length: totalPages }, (_, i) => i + 1) as pageNumber}
+                    {#if pageNumber === 1 || pageNumber === totalPages || 
+                        (pageNumber >= currentPage - 1 && pageNumber <= currentPage + 1)}
+                        <button 
+                            class="page-number {currentPage === pageNumber ? 'active' : ''}" 
+                            on:click={() => goToPage(pageNumber)}
+                        >
+                            {pageNumber}
+                        </button>
+                    {:else if pageNumber === currentPage - 2 || pageNumber === currentPage + 2}
+                        <span class="ellipsis">...</span>
+                    {/if}
+                {/each}
+            </div>
+            
+            <button 
+                class="pagination-btn next" 
+                on:click={nextPage}
+                disabled={currentPage === totalPages}
+            >
+                Next →
+            </button>
+        </div>
+        
+        <div class="pagination-info">
+            Showing {startIndex + 1}-{Math.min(endIndex, filteredPosts.length)} of {filteredPosts.length} articles
+        </div>
+    {/if}
+    
+    {#if currentPosts.length === 0}
+        <div class="empty-state">
+            <p>No articles found in this category</p>
+            <button on:click={() => handleCategoryChange('all')} class="reset-btn">
+                View all articles
+            </button>
+        </div>
+    {/if}
+</main>
+
+<!-- Newsletter -->
+<aside class="newsletter">
+    <div class="newsletter-content">
+        <h3>Stay Updated</h3>
+        <p>Get privacy tips and security insights delivered to your inbox</p>
+        <form class="subscribe-form">
+            <input type="email" placeholder="Email address" required />
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
+</aside>
+
+<style>
+    /* Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    /* Header */
+    .blog-header {
+        padding: 60px 0 40px;
+        text-align: center;
+        border-bottom: 1px solid #f0f0f0;
+        margin-bottom: 40px;
+    }
+    
+    .blog-header h1 {
+        font-size: 48px;
+        font-weight: 400;
+        margin-bottom: 12px;
+        color: #222;
+    }
+    
+    .blog-header p {
+        font-size: 18px;
+        color: #666;
+        font-weight: 300;
+    }
+    
+    /* Main Content */
+    .blog-main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    /* Filters */
+    .filters {
+        margin-bottom: 40px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .filters-inner {
+        display: flex;
+        gap: 12px;
+        padding-bottom: 8px;
+        min-width: min-content;
+    }
+    
+    .filter-btn {
+        padding: 10px 20px;
+        border: 1px solid #e0e0e0;
+        background: white;
+        border-radius: 25px;
+        font-size: 14px;
+        color: #666;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    
+    .filter-btn:hover {
         border-color: #007bff;
         color: #007bff;
     }
     
-    .btn-outline-primary:hover {
-        background-color: #007bff;
+    .filter-btn.active {
+        background: #007bff;
+        border-color: #007bff;
         color: white;
+    }
+    
+    .filter-btn.active .count {
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .count {
+        font-size: 12px;
+        color: #999;
+    }
+    
+    /* Posts Grid */
+    .posts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+    }
+    
+    @media (max-width: 768px) {
+        .posts-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+    }
+    
+    /* Post Cards */
+    .post-card {
+        border: 1px solid #eee;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.2s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .post-card:hover {
+        border-color: #007bff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+    }
+    
+    .card-content {
+        padding: 24px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        font-size: 13px;
+    }
+    
+    .category {
+        color: #007bff;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 12px;
+    }
+    
+    .date {
+        color: #888;
+    }
+    
+    .post-card h3 {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 1.4;
+        margin-bottom: 12px;
+        color: #222;
+    }
+    
+    .post-card h3 a {
+        color: inherit;
+        text-decoration: none;
+    }
+    
+    .post-card h3 a:hover {
+        color: #007bff;
+    }
+    
+    .excerpt {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        flex: 1;
+        font-size: 15px;
+    }
+    
+    .card-footer {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: #888;
+        padding-top: 16px;
+        border-top: 1px solid #f0f0f0;
+        margin-top: auto;
+    }
+    
+    .author {
+        font-weight: 500;
+        color: #666;
+    }
+    
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .pagination-btn {
+        padding: 10px 20px;
+        border: 1px solid #e0e0e0;
+        background: white;
+        border-radius: 6px;
+        font-size: 14px;
+        color: #333;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        min-width: 100px;
+    }
+    
+    .pagination-btn:hover:not(:disabled) {
+        border-color: #007bff;
+        color: #007bff;
+    }
+    
+    .pagination-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    
+    .page-numbers {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+    
+    .page-number {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #e0e0e0;
+        background: white;
+        border-radius: 6px;
+        font-size: 14px;
+        color: #666;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .page-number:hover {
+        border-color: #007bff;
+        color: #007bff;
+    }
+    
+    .page-number.active {
+        background: #007bff;
+        border-color: #007bff;
+        color: white;
+    }
+    
+    .ellipsis {
+        color: #999;
+        padding: 0 4px;
+        user-select: none;
+    }
+    
+    .pagination-info {
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        margin-bottom: 60px;
+    }
+    
+    /* Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #666;
+    }
+    
+    .empty-state p {
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+    
+    .reset-btn {
+        padding: 12px 24px;
+        border: 1px solid #007bff;
+        background: white;
+        color: #007bff;
+        border-radius: 6px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .reset-btn:hover {
+        background: #f8f9fa;
+    }
+    
+    /* Newsletter */
+    .newsletter {
+        padding: 60px 20px;
+        background: #f8f9fa;
+        border-top: 1px solid #e0e0e0;
+        margin-top: 40px;
+    }
+    
+    .newsletter-content {
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .newsletter h3 {
+        font-size: 24px;
+        margin-bottom: 12px;
+        color: #222;
+    }
+    
+    .newsletter p {
+        color: #666;
+        margin-bottom: 24px;
+        line-height: 1.5;
+    }
+    
+    .subscribe-form {
+        display: flex;
+        gap: 10px;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .subscribe-form input {
+        flex: 1;
+        padding: 12px 16px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: border-color 0.2s ease;
+    }
+    
+    .subscribe-form input:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+    
+    .subscribe-form button {
+        padding: 12px 24px;
+        border: none;
+        background: #007bff;
+        color: white;
+        border-radius: 6px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+    }
+    
+    .subscribe-form button:hover {
+        background: #0056b3;
+    }
+    
+    @media (max-width: 480px) {
+        .subscribe-form {
+            flex-direction: column;
+        }
+        
+        .pagination {
+            gap: 10px;
+        }
+        
+        .pagination-btn {
+            min-width: auto;
+            padding: 10px 16px;
+        }
     }
 </style>
