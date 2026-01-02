@@ -73,10 +73,12 @@
 </script>
 
 <svelte:head>
+    <title>{post ? `${post.title} - Fire Temp Mail Blog` : 'Blog Post - Fire Temp Mail'}</title>
     {#if post}
-        <title>{post.title} - Fire Temp Mail Blog</title>
         <meta name="description" content={post.excerpt} />
         <link rel="canonical" href={`https://firetempmail.com/blog/${post.slug}`} />
+    {:else}
+        <meta name="description" content="Read about temporary email, privacy, and online security on the Fire Temp Mail blog." />
     {/if}
 </svelte:head>
 

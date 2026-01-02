@@ -4,8 +4,8 @@
 </script>
 
 <svelte:head>
-    <title>{$_('contact.title')}</title>
-    <meta name="description" content={$_('contact.metaDescription')}>
+    <title>Contact Us - Fire Temp Mail</title>
+    <meta name="description" content="Get in touch with Fire Temp Mail. Contact our support, business, or report abuse via email. We're here to help!">
     <meta name="keywords" content="contact, support, email, Fire Temp Mail, temp mail, report abuse, business inquiry">
     <meta name="author" content="Fire Temp Mail">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

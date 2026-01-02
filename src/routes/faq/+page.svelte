@@ -89,8 +89,8 @@
 </script>
 
 <svelte:head>
-    <title>{$_('faq.metaTitle')}</title>
-    <meta name="description" content={$_('faq.metaDescription')} />
+    <title>Frequently Asked Questions - Fire Temp Mail | Temporary Email Service</title>
+    <meta name="description" content="Get answers to common questions about Fire Temp Mail's temporary email service. Learn how to use disposable emails for privacy, security, and spam protection." />
     <meta name="keywords" content="temporary email, disposable email, FAQ, email privacy, spam protection, anonymous email, burner email, email security" />
     
     <!-- Canonical URL -->

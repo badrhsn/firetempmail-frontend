@@ -83,6 +83,14 @@
     }
 </script>
 
+<svelte:head>
+    <title>Blog - Fire Temp Mail | Email Privacy & Security Insights</title>
+    <meta name="description" content="Learn about temporary email services, email privacy, spam protection, and online security. Expert guides and tips for protecting your digital identity with Fire Temp Mail.">
+    <meta name="keywords" content="temp mail blog, disposable email, email privacy, online security, spam protection, temporary email guides">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://firetempmail.com/blog">
+</svelte:head>
+
 <!-- Header -->
 <header class="blog-header">
     <h1>Blog</h1>
