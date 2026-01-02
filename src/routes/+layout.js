@@ -1,4 +1,4 @@
-// Enable server-side rendering and prerendering for all pages
+// Enable SSR globally, but let individual pages opt into prerendering
 export const ssr = true;
 export const csr = true;
-export const prerender = true;
+// Remove prerender = true to let pages decide individually
