@@ -49,8 +49,8 @@
 </script>
 
 {#if !$isLoading}
-    <!-- Global banner (top only) 
-    <BannerTop />-->
+     <!--Global banner (top only) -->
+    <BannerTop />
     
     <slot />
     
