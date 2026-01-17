@@ -12,19 +12,19 @@ export const allBanners = writable([
   {
     id: 1,
     position: bannerPositions.TOP,
-    title: 'Win Mystery Travel Box',
-    content: `<a href='https://www.rivoweb.com/26NZT9X2/7HZ6995M/?source_id=firetempmail' target='_blank' rel='noopener noreferrer nofollow' style='display:block;text-decoration:none;color:inherit;'>\
-      <div class="email-container" style="box-sizing:border-box;width:728px;height:120px;display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:linear-gradient(180deg,#3a8dee,#cfe3ff);font-family:Arial, Helvetica, sans-serif;color:#000;">\
-        <div style='display:flex;align-items:center;gap:12px;min-width:260px;'>\
-          <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Booking.com_Logo.svg/1200px-Booking.com_Logo.svg.png' alt='Booking' style='height:56px;display:block;'/>\
-          <div style='line-height:1;display:flex;flex-direction:column;'>\
-            <div style='font-weight:700;color:#002b5b;font-size:14px;text-transform:uppercase'>WIN A</div>\
-            <div style='font-size:20px;font-weight:900;font-style:italic;color:#000;letter-spacing:0.3px;margin-top:2px;'>MYSTERY TRAVEL BOX</div>\
-            <div style='font-size:12px;color:#333;margin-top:4px;font-style:italic;'>Enter for your chance to win — it's free</div>\
-          </div>\
+    title: 'Win iPhone 17 Gift Card',
+    content: `<a href='https://dimentionful.com/?a=5354&oc=24810&c=64703&m=7&s1=fire' target='_blank' rel='noopener noreferrer nofollow' style='display:block;text-decoration:none;color:inherit;'>\
+      <div style="box-sizing:border-box;width:728px;height:120px;font-family:Arial, Helvetica, sans-serif;display:flex;border-radius:4px;overflow:hidden;">\
+        <div style="background:#000;flex:0 0 400px;display:flex;align-items:center;justify-content:center;padding:8px;">\
+          <img src='https://i.gyazo.com/84bd3d442f1bfaeebb6e75eca21d0b9d.png' alt='iPhone 17' style='max-width:100%;max-height:100%;object-fit:contain;'/>\
         </div>\
-        <div style='display:flex;align-items:center;gap:12px;'>\
-          <img src='https://goimgweb.com/file_a103313c-e05e-4a73-b764-059b83d3f074.png' alt='Mystery Travel Box' style='height:72px;display:block;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.12);'/>\
+        <div style="background:#e8e7e5;flex:1;padding:8px 12px;display:flex;flex-direction:column;justify-content:center;">\
+          <div style="font-size:9px;color:#666;margin-bottom:6px;font-style:italic;line-height:1.2;">Offer not sponsored-endorsed by this brand.</div>\
+          <div style="font-size:13px;font-weight:700;color:#000;line-height:1.3;">\
+            Shop, Play & Earn Rewards! 🎉<br/>\
+            Get Up To $1000 Towards the new iPhone 17🎁\
+          </div>\
+          <div style="font-size:11px;font-weight:600;color:#000;margin-top:4px;">Be quick because supplies are limited!</div>\
         </div>\
       </div>\
     </a>`,
