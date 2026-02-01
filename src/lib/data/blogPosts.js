@@ -3348,7 +3348,7 @@ It's the gateway to the entire Google ecosystem. It's integrated with Google Dri
   },
   {
     "id": 32,
-    "title": "Bypass Verification with Temp Emails (TikTok, Discord)",
+    "title": "Bypass TikTok Discord Email Verification",
     "excerpt": "Learn how to use temporary emails to bypass verification on TikTok, Discord, Instagram, and other platforms. Complete guide to temp mail for social media in 2025.",
     "slug": "bypass-verification-temp-emails",
     "date": "2025-12-20",
