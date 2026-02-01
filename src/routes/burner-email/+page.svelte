@@ -16,6 +16,9 @@
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     
+    // Import page data for SEO
+    export let data;
+    
     // These will reactively update when the stores change
     let address;
     let currentDomain;
@@ -412,11 +415,11 @@ function selectDomain(domain) {
 
 
 <svelte:head>
-    <title>Burner Email 🔥 | Free Temporary Disposable Inbox</title>
-    <meta name="description" content="Create a free burner email instantly. Get a temporary disposable inbox to protect your real email, avoid spam, and sign up anonymously." />
-    <meta name="keywords" content="burner email, disposable email, temporary inbox, temp mail, free temporary email, anonymous email, spam-free inbox" />
+    <title>{data?.seo?.title || 'Burner Email 🔥 | Free Temporary Disposable Inbox'}</title>
+    <meta name="description" content={data?.seo?.description || 'Create a free burner email instantly. Get a temporary disposable inbox to protect your real email, avoid spam, and sign up anonymously.'} />
+    <meta name="keywords" content={data?.seo?.keywords || 'burner email, disposable email, temporary inbox, temp mail'} />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://firetempmail.com/burner-email" />
+    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/burner-email'} />
 
     <!-- Open Graph / Social -->
     <meta property="og:title" content="Burner Email – Free Temporary Disposable Inbox" />

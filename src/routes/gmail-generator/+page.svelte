@@ -16,6 +16,9 @@
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     
+    // Import page data for SEO
+    export let data;
+    
     // These will reactively update when the stores change
     let address;
     let currentDomain;
@@ -408,14 +411,14 @@ function selectDomain(domain) {
     }
 </script>
 <svelte:head>
-    <title>Temp Gmail Generator | Disposable Email</title>
-    <meta name="description" content="Generate temporary Gmail addresses instantly. Protect your personal inbox from spam with Fire Temp Mail's disposable Gmail generator service.">
-    <meta name="keywords" content="temp gmail, temporary gmail, gmail generator, disposable gmail, fake gmail, Fire Temp Mail">
+    <title>{data?.seo?.title || 'Gmail Generator - Create Temporary Gmail Addresses | Fire Temp Mail'}</title>
+    <meta name="description" content={data?.seo?.description || 'Generate temporary Gmail addresses instantly. Protect your personal inbox from spam with Fire Temp Mail\'s disposable Gmail generator service.'}>
+    <meta name="keywords" content={data?.seo?.keywords || 'gmail generator, temporary gmail, disposable gmail'}>
     <meta name="author" content="Fire Temp Mail">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://firetempmail.com/gmail-generator">
+    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/gmail-generator'}>
 </svelte:head>
 <!-- Toast Notifications -->
 <div class="toast-container">

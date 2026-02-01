@@ -16,6 +16,9 @@
     } from "../lib/stores";
     import { browser } from '$app/environment';
     
+    // Import page data for SEO
+    export let data;
+    
     // Email type selection
     let emailType = 'domain';
     const url = "https://mail.firetempmail.com";
@@ -400,10 +403,10 @@ function normalizeGmailAddress(address) {
     }
 </script>
 <svelte:head>
-    <title>Fire Temp Mail | Free Disposable Temporary Email Generator</title>
+    <title>{data?.seo?.title || 'Fire Temp Mail | Free Disposable Temporary Email Generator'}</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Fire Temp Mail provides free temporary email and Gmail-style aliases. Generate disposable Gmail temp mail addresses with plus-alias and dot variants, block spam, and keep your inbox private.">
+    <meta name="description" content={data?.seo?.description || "Fire Temp Mail provides free temporary email and Gmail-style aliases. Generate disposable Gmail temp mail addresses with plus-alias and dot variants, block spam, and keep your inbox private."}>
     <meta name="keywords" content="temporary gmail, gmail temp mail, disposable gmail, gmail alias generator, gmail dot trick, plus alias, googlemail, temp email, burner email">
     <link rel="canonical" href="https://firetempmail.com">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">

@@ -17,6 +17,9 @@
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     
+    // Import page data for SEO
+    export let data;
+    
     // These will reactively update when the stores change
     let address;
     let currentDomain;
@@ -401,14 +404,14 @@ function selectDomain(domain) {
     }
 </script>
 <svelte:head>
-    <title>Temp Gmail Generator - Create Disposable Gmail Addresses Instantly | Fire Temp Mail</title>
-    <meta name="description" content="Instantly generate temporary Gmail addresses with our advanced Gmailnator alternative. Create disposable emails that work everywhere for signups, verifications & spam protection.">
-    <meta name="keywords" content="temp gmail, temporary gmail, gmailnator, emailnator, gmail generator, gmail nator, gmailinator, temp mail gmail, 10 minute gmail, disposable gmail, fake gmail, Fire Temp Mail">
+    <title>{data?.seo?.title || 'Temp Gmail Generator - Create Disposable Gmail Addresses Instantly | Fire Temp Mail'}</title>
+    <meta name="description" content={data?.seo?.description || 'Instantly generate temporary Gmail addresses with our advanced Gmailnator alternative. Create disposable emails that work everywhere for signups, verifications & spam protection.'}>
+    <meta name="keywords" content={data?.seo?.keywords || 'temp gmail, temporary gmail, gmailnator, emailnator, gmail generator'}>
     <meta name="author" content="Fire Temp Mail">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Canonical URL - Points to homepage to avoid duplicate content -->
-    <link rel="canonical" href="https://firetempmail.com/">
+    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/'}>
     
     <!-- Structured Data -->
     <script type="application/ld+json">

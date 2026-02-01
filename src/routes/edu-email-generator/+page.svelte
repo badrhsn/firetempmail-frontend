@@ -16,6 +16,9 @@
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     
+    // Import page data for SEO
+    export let data;
+    
     // These will reactively update when the stores change
     $: address = $receivingEmail;
     $: currentDomain = $selectedDomain;
@@ -370,13 +373,13 @@ function normalizeGmailAddress(address) {
 </script>
 
 <svelte:head>
-    <title>EDU Email Generator 🎓 | Free Disposable .EDU Emails Online</title>
-    <meta name="description" content="Generate free .EDU temporary emails instantly with our EDU Email Generator. Perfect for student discounts, trials, and signups — secure, fast, and disposable inbox service." />
-    <meta name="keywords" content="EDU email generator, free edu email, disposable edu email, edu temp mail, generate edu email, temporary edu inbox, student discounts email" />
+    <title>{data?.seo?.title || 'EDU Email Generator 🎓 | Free Disposable .EDU Emails Online'}</title>
+    <meta name="description" content={data?.seo?.description || 'Generate free .EDU temporary emails instantly with our EDU Email Generator. Perfect for student discounts, trials, and signups — secure, fast, and disposable inbox service.'} />
+    <meta name="keywords" content={data?.seo?.keywords || 'EDU email generator, free edu email, disposable edu email, edu temp mail'} />
     <meta name="robots" content="index, follow" />
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://firetempmail.com/edu-email-generator" />
+    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/edu-email-generator'} />
 
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="EDU Email Generator – Create Free Disposable .EDU Emails" />

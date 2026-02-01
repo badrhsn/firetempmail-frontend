@@ -1,12 +1,16 @@
 <script>
     import { _ } from 'svelte-i18n';
+    
+    // Import page data for SEO
+    export let data;
+    
     let copyrightYear = new Date().getFullYear();
 </script>
 
 <svelte:head>
-    <title>{$_('advertising.metaTitle')}</title>
-    <link rel="canonical" href="https://firetempmail.com/advertising" />
-    <meta name="description" content={$_('advertising.metaDescription')} />
+    <title>{data?.seo?.title || $_('advertising.metaTitle')}</title>
+    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/advertising'} />
+    <meta name="description" content={data?.seo?.description || $_('advertising.metaDescription')} />
     
 </svelte:head>
 

@@ -1,17 +1,21 @@
 <script>
     import { _ } from 'svelte-i18n';
+    
+    // Import page data for SEO
+    export let data;
+    
     let copyrightYear = new Date().getFullYear();
 </script>
 
 <svelte:head>
-    <title>Contact Us - Fire Temp Mail</title>
-    <meta name="description" content="Get in touch with Fire Temp Mail. Contact our support, business, or report abuse via email. We're here to help!">
-    <meta name="keywords" content="contact, support, email, Fire Temp Mail, temp mail, report abuse, business inquiry">
+    <title>{data?.seo?.title || 'Contact Us - Fire Temp Mail'}</title>
+    <meta name="description" content={data?.seo?.description || 'Get in touch with Fire Temp Mail. Contact our support, business, or report abuse via email. We\'re here to help!'}>
+    <meta name="keywords" content={data?.seo?.keywords || 'contact, support, email, Fire Temp Mail'}>
     <meta name="author" content="Fire Temp Mail">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://firetempmail.com/contact">
+    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/contact'}>
 </svelte:head>
 
 

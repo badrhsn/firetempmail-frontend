@@ -15,6 +15,9 @@ import Navigation from '$lib/components/Navigation.svelte';
 import { getPopularArticles } from '$lib/data/blogPosts';
 import { browser } from '$app/environment';
 
+// Import page data for SEO
+export let data;
+
 // Email type selection
 let emailType = 'domain';
 const url = "https://mail.firetempmail.com";
@@ -396,13 +399,13 @@ function isUnread(email) {
 </script>
 
 <svelte:head>
-    <title>Free Temp Mail EDU 📧 | Generate Disposable .EDU Emails Instantly</title>
-    <meta name="description" content="Create free .EDU temporary emails with Fire Temp Mail. Perfect for student discounts, free trials, signups & avoiding spam. Fast, secure & disposable inbox." />
-    <meta name="keywords" content="temp mail edu, .edu temporary email, free edu mail, disposable edu email, temp mail .com, Fire Temp Mail" />
+    <title>{data?.seo?.title || 'Free Temp Mail EDU 📧 | Generate Disposable .EDU Emails Instantly'}</title>
+    <meta name="description" content={data?.seo?.description || 'Create free .EDU temporary emails with Fire Temp Mail. Perfect for student discounts, free trials, signups & avoiding spam. Fast, secure & disposable inbox.'} />
+    <meta name="keywords" content={data?.seo?.keywords || 'temp mail edu, .edu temporary email, free edu mail, disposable edu email'} />
     <meta name="robots" content="index, follow" />
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://firetempmail.com/temp-mail-edu" />
+    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/temp-mail-edu'} />
 
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="Free Temp Mail EDU - Generate .EDU Temporary Emails" />

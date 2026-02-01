@@ -1,14 +1,18 @@
 <script>
     import { _ } from 'svelte-i18n';
+    
+    // Import page data for SEO
+    export let data;
+    
     let copyrightYear = new Date().getFullYear();
 </script>
 
 <svelte:head>
-    <title>Terms of Service - Fire Temp Mail</title>
-    <meta name="description" content="Terms of Service for Fire Temp Mail. By using our temporary email services, you agree to these terms and conditions.">
-    <meta name="keywords" content="Terms of Service, temp mail, disposable email, email privacy, email security, Fire Temp Mail">
+    <title>{data?.seo?.title || 'Terms of Service - Fire Temp Mail'}</title>
+    <meta name="description" content={data?.seo?.description || 'Terms of Service for Fire Temp Mail. By using our temporary email services, you agree to these terms and conditions.'}>
+    <meta name="keywords" content={data?.seo?.keywords || 'Terms of Service, temp mail, disposable email'}>
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://firetempmail.com/terms" />
+    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/terms'} />
 </svelte:head>
 
 <section class="py-4 py-xl-5">

@@ -16,6 +16,9 @@
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     
+    // Import page data for SEO
+    export let data;
+    
     // Email type selection with safe localStorage access
     let emailType = 'domain';
     
@@ -427,14 +430,14 @@ function selectDomain(domain) {
     }
 </script>
 <svelte:head>
-    <title>10 Minute Mail - Fire Temp Mail</title>
-    <meta name="description" content="Get a free, disposable 10 Minute Mail address instantly. Protect your personal inbox from spam with Fire Temp Mail's temporary email service.">
-    <meta name="keywords" content="10 Minute Mail, disposable email, temporary email, Fire Temp Mail, temp mail, free email">
+    <title>{data?.seo?.title || '10 Minute Mail - Fire Temp Mail'}</title>
+    <meta name="description" content={data?.seo?.description || 'Get a free, disposable 10 Minute Mail address instantly. Protect your personal inbox from spam with Fire Temp Mail\'s temporary email service.'}>
+    <meta name="keywords" content={data?.seo?.keywords || '10 Minute Mail, disposable email, temporary email, Fire Temp Mail'}>
     <meta name="author" content="Fire Temp Mail">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://firetempmail.com/10minutemail">
+    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/10minutemail'}>
 </svelte:head>
 <!-- Toast Notifications -->
 <div class="toast-container">

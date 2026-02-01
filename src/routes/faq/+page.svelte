@@ -2,6 +2,9 @@
     import { onMount } from 'svelte';
     import { _, isLoading } from 'svelte-i18n';
     
+    // Import page data for SEO
+    export let data;
+    
     let copyrightYear = 2024; // Default fallback
     let faqItems = [];
 
@@ -89,12 +92,12 @@
 </script>
 
 <svelte:head>
-    <title>Frequently Asked Questions - Fire Temp Mail | Temporary Email Service</title>
-    <meta name="description" content="Get answers to common questions about Fire Temp Mail's temporary email service. Learn how to use disposable emails for privacy, security, and spam protection." />
-    <meta name="keywords" content="temporary email, disposable email, FAQ, email privacy, spam protection, anonymous email, burner email, email security" />
+    <title>{data?.seo?.title || 'Frequently Asked Questions - Fire Temp Mail | Temporary Email Service'}</title>
+    <meta name="description" content={data?.seo?.description || 'Get answers to common questions about Fire Temp Mail\'s temporary email service. Learn how to use disposable emails for privacy, security, and spam protection.'} />
+    <meta name="keywords" content={data?.seo?.keywords || 'temporary email, disposable email, FAQ, email privacy'} />
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://firetempmail.com/faq" />
+    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/faq'} />
     
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="Frequently Asked Questions - Fire Temp Mail" />

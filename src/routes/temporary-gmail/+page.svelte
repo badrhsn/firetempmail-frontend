@@ -16,6 +16,9 @@
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     
+    // Import page data for SEO
+    export let data;
+    
     // Initialize variables BEFORE reactive statements
     let address = $receivingEmail;
     let currentDomain = $selectedDomain;
@@ -400,14 +403,14 @@ function startPolling(){
 }
 </script>
 <svelte:head>
-    <title>Temporary Gmail Generator – Create Disposable Gmail Addresses Instantly | Fire Temp Mail</title>
-    <meta name="description" content="Generate temporary Gmail addresses instantly with Fire Temp Mail. Create disposable Gmail accounts for signups, verifications, and spam-free browsing safely and easily.">
-    <meta name="keywords" content="temporary Gmail, temp Gmail, disposable Gmail, Gmail generator, Gmail alias, fake Gmail, Fire Temp Mail, 10 minute Gmail, Gmailnator alternative, temp mail Gmail, emailnator, Gmailinator">
+    <title>{data?.seo?.title || 'Temporary Gmail Generator – Create Disposable Gmail Addresses Instantly | Fire Temp Mail'}</title>
+    <meta name="description" content={data?.seo?.description || 'Generate temporary Gmail addresses instantly with Fire Temp Mail. Create disposable Gmail accounts for signups, verifications, and spam-free browsing safely and easily.'}>
+    <meta name="keywords" content={data?.seo?.keywords || 'temporary Gmail, temp Gmail, disposable Gmail, Gmail generator, Gmail alias'}>
     <meta name="author" content="Fire Temp Mail">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://firetempmail.com/temporary-gmail">
+    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/temporary-gmail'}>
     
     <!-- Structured Data -->
 <script type="application/ld+json">

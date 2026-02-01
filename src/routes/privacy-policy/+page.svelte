@@ -1,13 +1,17 @@
 <script>
     import { _ } from 'svelte-i18n';
+    
+    // Import page data for SEO
+    export let data;
+    
     let copyrightYear = new Date().getFullYear();
 </script>
 
 <svelte:head>
-    <title>Privacy Policy - Fire Temp Mail</title>
-    <meta name="description" content="Fire Temp Mail's Privacy Policy explains how we collect, use, and protect your information when you use our temporary email services.">
+    <title>{data?.seo?.title || 'Privacy Policy - Fire Temp Mail'}</title>
+    <meta name="description" content={data?.seo?.description || 'Fire Temp Mail\'s Privacy Policy explains how we collect, use, and protect your information when you use our temporary email services.'}>
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://firetempmail.com/privacy-policy" />
+    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/privacy-policy'} />
 </svelte:head>
 
 <section class="py-4 py-xl-5">

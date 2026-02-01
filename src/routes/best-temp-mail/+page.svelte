@@ -14,6 +14,9 @@
     } from "../../lib/stores";
     import { browser } from '$app/environment';
     
+    // Import page data for SEO
+    export let data;
+    
     let emailType = 'domain';
     const url = "https://mail.firetempmail.com";
     
@@ -399,14 +402,14 @@ function selectDomain(domain) {
     }
 </script>
 <svelte:head>
-    <title>Best Temp Mail Services 2025 — FireTempMail Review & Guide</title>
-    <meta name="description" content="Looking for the best temporary email? Compare speed, privacy, .edu options and API access. Try FireTempMail — fast, private, no signup.">
-    <meta name="keywords" content="best temp mail, 10 Minute Mail, disposable email, temporary email, Fire Temp Mail, temp mail, free email">
+    <title>{data?.seo?.title || 'Best Temp Mail Services 2025 — FireTempMail Review & Guide'}</title>
+    <meta name="description" content={data?.seo?.description || 'Looking for the best temporary email? Compare speed, privacy, .edu options and API access. Try FireTempMail — fast, private, no signup.'}>
+    <meta name="keywords" content={data?.seo?.keywords || 'best temp mail, temporary email, disposable email, Fire Temp Mail'}>
     <meta name="author" content="Fire Temp Mail">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://firetempmail.com/best-temp-mail">
+    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/best-temp-mail'}>
 </svelte:head>
 <!-- Toast Notifications -->
 <div class="toast-container">

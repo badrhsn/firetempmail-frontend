@@ -14,6 +14,9 @@
     } from "../../lib/stores";
     import { browser } from '$app/environment';
     
+    // Import page data for SEO
+    export let data;
+    
     // Email type selection
     let emailType = 'domain';
     const url = "https://mail.firetempmail.com";
@@ -398,14 +401,14 @@ function normalizeGmailAddress(address) {
 </script>
 
 <svelte:head>
-    <title>Email Generator - Fire Temp Mail | Free Temporary Email Service</title>
+    <title>{data?.seo?.title || 'Email Generator - Fire Temp Mail | Free Temporary Email Service'}</title>
     
-    <meta name="description" content="Generate a free temporary disposable email address instantly with Fire Temp Mail. Keep your real inbox safe from spam while receiving emails anonymously.">
-    <meta name="keywords" content="temporary email, disposable email, temp mail, free email generator, Fire Temp Mail, anonymous email">
+    <meta name="description" content={data?.seo?.description || 'Generate a free temporary disposable email address instantly with Fire Temp Mail. Keep your real inbox safe from spam while receiving emails anonymously.'}>
+    <meta name="keywords" content={data?.seo?.keywords || 'temporary email, disposable email, temp mail, free email generator'}>
     <meta name="robots" content="index, follow">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://firetempmail.com/email-generator" />
+    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/email-generator'} />
 
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="Email Generator - Fire Temp Mail" />
