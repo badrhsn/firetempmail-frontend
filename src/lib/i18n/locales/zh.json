@@ -85,7 +85,14 @@
     "terms": "服务条款",
     "contact": "联系我们",
     "buyCoffee": "请我喝咖啡",
-    "rights": "保留所有权利"
+    "rights": "保留所有权利",
+    "fireMail": "Fire Mail",
+    "gmailnatorAlternative": "Gmailnator替代品",
+    "temporaryEmailGenerator": "临时电子邮件生成器",
+    "emailGenerator": "电子邮件生成器",
+    "gmailGenerator": "Gmail生成器",
+    "tempMailEdu": "临时邮件EDU",
+    "tenMinuteMail": "10分钟邮件"
   },
   "toast": {
     "emailCopied": "电子邮件地址已复制到剪贴板！",

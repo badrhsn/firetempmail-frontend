@@ -54,6 +54,9 @@
                 <div class="footer-column">
                     <h6 class="footer-heading">{$_('footer.product')}</h6>
                     <ul class="footer-links">
+                        <li><a href="/fire-mail">{$_('footer.fireMail')}</a></li>
+                        <li><a href="/gmailnator-alternative">{$_('footer.gmailnatorAlternative')}</a></li>
+                        <li><a href="/temporary-email-generator">{$_('footer.temporaryEmailGenerator')}</a></li>
                         <li><a href="/email-generator">{$_('footer.emailGenerator')}</a></li>
                         <li><a href="/gmail-generator">{$_('footer.gmailGenerator')}</a></li>
                         <li><a href="/temp-mail-edu">{$_('footer.tempMailEdu')}</a></li>
