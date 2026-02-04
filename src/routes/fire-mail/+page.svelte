@@ -537,7 +537,7 @@ function selectDomain(domain) {
             <!-- Header -->
             <h1>
                 <span>✉️&nbsp;</span>
-                Fire Mail - Free Temporary Email Service (2026)
+                Fire Mail - Free Temporary Email Service
             </h1>
             <p class="lead">
                 Fire Mail provides instant, free temporary email addresses for ultimate privacy protection. Generate disposable emails in seconds without registration. Perfect for signups, verifications, and spam protection.
