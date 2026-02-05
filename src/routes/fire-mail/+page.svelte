@@ -411,7 +411,7 @@ function selectDomain(domain) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Canonical URL - Points to homepage to avoid duplicate content -->
-    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/'}>
+    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/fire-mail'}>
     
     <!-- Structured Data -->
     <script type="application/ld+json">
