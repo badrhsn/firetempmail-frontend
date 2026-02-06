@@ -785,139 +785,55 @@ function normalizeGmailAddress(address) {
                 {/if}
             {/if}
 
-            <!-- Student Discount & EDU Email Content -->
-            <section aria-labelledby="edu-discounts" class="seo-article" style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
-                <h2 id="edu-discounts">Major Student Discounts & .EDU Email Benefits</h2>
-                <p class="description">
-                    Student discounts can save you thousands of dollars per year on software, streaming services, and learning resources. While Fire Temp Mail provides temporary email addresses for testing and privacy, a legitimate .EDU email from your school unlocks significant savings across major platforms.
-                </p>
+            <h2>.EDU Temporary Email Generator</h2>
+            <p class="description">
+  Whether you need a <strong>free disposable .EDU email</strong> for testing, a secure anonymous inbox for quick registrations, or access to <strong>student offers</strong>, Fire Temp Mail makes it simple and reliable. Start generating your <strong>EDU email address</strong> today — 100% free and private.
+            </p>
 
-                <h3>🎓 Top Student Discounts Requiring .EDU Verification</h3>
-                
-                <div style="margin: 2rem 0;">
-                    <h4>Spotify Premium Student - $5.99/month (50% off)</h4>
-                    <p><strong>Regular Price:</strong> $10.99/month | <strong>Student Savings:</strong> $60/year</p>
-                    <p>Includes Hulu (with ads) and SHOWTIME at no additional cost. Verified through SheerID with your .EDU email. Must re-verify every 12 months.</p>
-                </div>
+<h3>Why use our EDU Email Generator?</h3>
+<ul class="text-start mx-auto" style="max-width: 720px;">
+  <li>🔒 Protect your real inbox from spam and unwanted subscriptions.</li>
+  <li>📩 Instantly receive account confirmations, OTPs, and trial codes.</li>
+  <li>🎓 Access <strong>student-only discounts</strong> and educational platforms securely.</li>
+  <li>⏳ Emails auto-expire after a short period — no manual cleanup needed.</li>
+</ul>
 
-                <div style="margin: 2rem 0;">
-                    <h4>Amazon Prime Student - $7.49/month</h4>
-                    <p><strong>Regular Price:</strong> $14.99/month | <strong>Student Savings:</strong> $90/year + 6-month FREE trial</p>
-                    <p>Full Prime benefits: Free 2-day shipping, Prime Video, Prime Music, unlimited photo storage, exclusive deals, and student-only promotions.</p>
-                </div>
+      <p class="description">
+        Whether you need a <strong>free disposable .EDU mailbox</strong> for quick registration or a secure anonymous inbox for temporary use, Fire Temp Mail makes it fast and reliable. Start generating your <strong>EDU temp mail</strong> address today — completely free.
+      </p>
+<section class="mt-10 p-6 bg-gray-50 rounded-xl shadow-md">
+  <h2 class="text-xl font-semibold mb-4">Frequently Asked Questions about EDU Email Generator</h2>
+  
+  <div class="space-y-4">
+    <details class="p-3 bg-white rounded-md shadow-sm">
+      <summary class="cursor-pointer font-medium">What is an EDU Email Generator?</summary>
+      <p class="mt-2 text-gray-600">
+        An EDU Email Generator creates disposable email addresses ending in <code>.edu</code>. These temporary inboxes are often used for <strong>student discounts, free trials, or test registrations</strong> without using your main email.
+      </p>
+    </details>
 
-                <div style="margin: 2rem 0;">
-                    <h4>Adobe Creative Cloud - 60% off</h4>
-                    <p><strong>Regular Price:</strong> $59.99/month | <strong>Student Price:</strong> $19.99/month | <strong>Savings:</strong> $480/year</p>
-                    <p>Full access to Photoshop, Illustrator, Premiere Pro, After Effects, and 20+ creative apps. Perfect for design students and content creators.</p>
-                </div>
+    <details class="p-3 bg-white rounded-md shadow-sm">
+      <summary class="cursor-pointer font-medium">How long does a generated EDU email last?</summary>
+      <p class="mt-2 text-gray-600">
+        EDU emails generated on Fire Temp Mail typically last <strong>24–48 hours</strong> before being deleted. You can generate a new one anytime.
+      </p>
+    </details>
 
-                <div style="margin: 2rem 0;">
-                    <h4>GitHub Student Developer Pack - FREE (Value: $200,000+)</h4>
-                    <p>The ultimate developer toolkit for students. Includes free access to:</p>
-                    <ul style="line-height: 1.8; margin-top: 1rem;">
-                        <li>GitHub Pro (unlimited private repositories)</li>
-                        <li>JetBrains All Products Pack ($649/year value)</li>
-                        <li>Microsoft Azure ($100 free credits)</li>
-                        <li>DigitalOcean ($200 credit)</li>
-                        <li>Heroku (free dyno hours)</li>
-                        <li>Canva Pro, Name.com domain, Bootstrap Studio, and 100+ more tools</li>
-                    </ul>
-                </div>
+    <details class="p-3 bg-white rounded-md shadow-sm">
+      <summary class="cursor-pointer font-medium">Is it safe to use an EDU temp email for signups?</summary>
+      <p class="mt-2 text-gray-600">
+        ✅ Yes. It’s safe for newsletters, trial signups, and <strong>student promotions</strong>. However, do not use disposable EDU emails for banking or personal identity accounts.
+      </p>
+    </details>
 
-                <div style="margin: 2rem 0;">
-                    <h4>Other Major Student Discounts</h4>
-                    <ul style="line-height: 1.8;">
-                        <li><strong>YouTube Premium Student:</strong> $7.99/month (regular $13.99) - Ad-free YouTube + YouTube Music</li>
-                        <li><strong>Apple Music Student:</strong> $5.99/month (regular $10.99) - Includes Apple TV+ for free</li>
-                        <li><strong>Microsoft Office 365:</strong> FREE for students - Word, Excel, PowerPoint, OneNote, Teams</li>
-                        <li><strong>Notion:</strong> FREE Plus plan ($8/month value) - Notes, databases, wikis, calendars</li>
-                        <li><strong>Autodesk (AutoCAD, Maya, 3ds Max):</strong> FREE 1-year license ($1,785 value)</li>
-                        <li><strong>Figma:</strong> FREE for students - Professional UI/UX design tool</li>
-                    </ul>
-                </div>
-
-                <h3>📚 Academic Resources Requiring .EDU Email</h3>
-                <p>Beyond consumer discounts, your .EDU email grants access to valuable academic databases and research tools:</p>
-                <ul style="line-height: 1.8; margin: 1rem 0;">
-                    <li><strong>JSTOR:</strong> Access to 12+ million academic journal articles, books, and primary sources</li>
-                    <li><strong>IEEE Xplore:</strong> Engineering and technology research papers</li>
-                    <li><strong>PubMed Central:</strong> Free access to biomedical and life sciences literature</li>
-                    <li><strong>Coursera:</strong> Financial aid available for verified students, many courses free to audit</li>
-                    <li><strong>LinkedIn Learning:</strong> Free access through many .EDU institutions</li>
-                </ul>
-
-                <h3>🔐 How Student Verification Works</h3>
-                <p>Most major platforms use third-party verification services to confirm your student status:</p>
-                <ul style="line-height: 1.8; margin: 1rem 0;">
-                    <li><strong>SheerID:</strong> Used by Spotify, Amazon, Adobe, Nike, Apple. Verifies enrollment through official school records.</li>
-                    <li><strong>UNiDAYS:</strong> Global student verification platform requiring .EDU email + proof of enrollment (student ID, transcript).</li>
-                    <li><strong>Direct .EDU Verification:</strong> Some services (GitHub, Microsoft) accept any active .EDU email address as proof.</li>
-                </ul>
-                <p><strong>Important:</strong> Most services require ACTIVE enrollment verification, not just a .EDU email. You may need to provide additional documentation like:</p>
-                <ul style="line-height: 1.8; margin: 1rem 0;">
-                    <li>Current semester class schedule</li>
-                    <li>Student ID with expiration date</li>
-                    <li>Official enrollment letter from registrar</li>
-                    <li>Recent tuition payment receipt</li>
-                </ul>
-
-                <h3>⚠️ Can Fire Temp Mail Generate "Real" .EDU Emails?</h3>
-                <p><strong>No.</strong> Let's be completely honest about what Fire Temp Mail can and cannot do:</p>
-                <ul style="line-height: 1.8; margin: 1rem 0; color: #ff6b6b;">
-                    <li>❌ We CANNOT generate legitimate .EDU email addresses</li>
-                    <li>❌ Our temporary emails will NOT pass student verification services like SheerID or UNiDAYS</li>
-                    <li>❌ You CANNOT use Fire Temp Mail to fraudulently claim student discounts</li>
-                    <li>❌ .EDU domains are restricted and controlled by accredited educational institutions only</li>
-                </ul>
-                <p><strong>What Fire Temp Mail IS for:</strong> Testing, privacy protection, avoiding spam, temporary registrations on non-critical websites. Our service uses domains like @firetempmail.com, NOT .EDU domains.</p>
-
-                <h3>📖 Ethical Considerations & Legal Warnings</h3>
-                <p style="color: #ffa502; font-weight: 600;">Attempting to fraudulently obtain student discounts is illegal and can result in:</p>
-                <ul style="line-height: 1.8; margin: 1rem 0;">
-                    <li>🚫 Account suspension or permanent ban from platforms (Spotify, Amazon, Adobe, etc.)</li>
-                    <li>⚖️ Legal action for fraud or identity theft</li>
-                    <li>💳 Financial penalties and requirement to pay back discounted rates</li>
-                    <li>🎓 Academic consequences if using another student's credentials</li>
-                </ul>
-                <p><strong>The right way to get student discounts:</strong></p>
-                <ol style="line-height: 1.8; margin: 1rem 0;">
-                    <li>Enroll in an accredited college or university (community college counts!)</li>
-                    <li>Use your official .EDU email from your school's registrar</li>
-                    <li>Provide legitimate enrollment verification when requested</li>
-                    <li>Re-verify annually as most services require proof of continued enrollment</li>
-                </ol>
-
-                <h3>🎯 Legitimate Ways to Get Student Discounts (Without College)</h3>
-                <p>If you're not currently enrolled but want to save money, consider these legal alternatives:</p>
-                <ul style="line-height: 1.8; margin: 1rem 0;">
-                    <li><strong>Community College Enrollment:</strong> Take a single class (~$200-500) to gain legitimate student status and .EDU email. Savings on Adobe alone ($480/year) make this profitable.</li>
-                    <li><strong>Free Audit Courses:</strong> Some universities offer free non-credit auditing with .EDU email access</li>
-                    <li><strong>Teacher/Educator Discounts:</strong> Many platforms offer similar discounts to teachers (Adobe, Apple, Microsoft)</li>
-                    <li><strong>Military Discounts:</strong> Active duty and veterans get discounts comparable to student rates</li>
-                    <li><strong>Non-Profit Worker Discounts:</strong> TechSoup, Microsoft, Adobe offer discounts to 501(c)(3) employees</li>
-                </ul>
-
-                <h3>⏰ What to Do Before You Graduate</h3>
-                <p>Your .EDU email typically remains active for 1-2 years after graduation, but eventually expires. Before losing access:</p>
-                <ul style="line-height: 1.8; margin: 1rem 0;">
-                    <li>✅ Download all important documents, transcripts, and records</li>
-                    <li>✅ Update email addresses on important accounts (banking, healthcare, professional networks)</li>
-                    <li>✅ Export contacts from your university email</li>
-                    <li>✅ Set up email forwarding to your personal address (if school allows)</li>
-                    <li>✅ Use your final year to maximize student discounts while you still qualify</li>
-                </ul>
-
-                <h3>💡 Fire Temp Mail: What It's Actually Good For</h3>
-                <p>While we can't help with student discounts, Fire Temp Mail is perfect for:</p>
-                <ul style="line-height: 1.8; margin: 1rem 0;">
-                    <li>✅ Testing software development email flows (verification emails, password resets)</li>
-                    <li>✅ Signing up for newsletters or free trials without spam to your main inbox</li>
-                    <li>✅ Quick registrations on forums, contests, or giveaways</li>
-                    <li>✅ Protecting your privacy when downloading free resources</li>
-                    <li>✅ Developer/QA testing of email-based features</li>
-                </ul>
-            </section>
+    <details class="p-3 bg-white rounded-md shadow-sm">
+      <summary class="cursor-pointer font-medium">Can I use the EDU Email Generator for Amazon, Netflix, or student discounts?</summary>
+      <p class="mt-2 text-gray-600">
+        Many users create EDU emails for testing, accessing <strong>student-only offers</strong>, or trying subscription platforms. Just remember: these inboxes are temporary and may not work for long-term accounts.
+      </p>
+    </details>
+  </div>
+</section>
 
         </div>
 

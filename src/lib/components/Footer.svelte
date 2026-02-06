@@ -54,19 +54,18 @@
                 <div class="footer-column">
                     <h6 class="footer-heading">{$_('footer.product')}</h6>
                     <ul class="footer-links">
-                        <li><a href="/fire-mail">{$_('footer.fireMail')}</a></li>
-                        <li><a href="/gmailnator-alternative">{$_('footer.gmailnatorAlternative')}</a></li>
-                        <li><a href="/temporary-email-generator">{$_('footer.temporaryEmailGenerator')}</a></li>
+                        <li><a href="/temp-gmail">Temp Gmail</a></li>
                         <li><a href="/email-generator">{$_('footer.emailGenerator')}</a></li>
-                        <li><a href="/gmail-generator">{$_('footer.gmailGenerator')}</a></li>
-                        <li><a href="/temp-mail-edu">{$_('footer.tempMailEdu')}</a></li>
-                        <li><a href="/10minutemail">{$_('footer.tenMinuteMail')}</a></li>
+                        <li><a href="/edu-email-generator">EDU Email Generator</a></li>
+                        <li><a href="/burner-email">Burner Email</a></li>
+                        <li><a href="/best-temp-mail">Best Temp Mail</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h6 class="footer-heading">{$_('footer.resources')}</h6>
                     <ul class="footer-links">
+                        <li><a href="/about">About Us</a></li>
                         <li><a href="/blog">{$_('footer.blog')}</a></li>
                         <li><a href="/faq">{$_('footer.faq')}</a></li>
                     </ul>
@@ -87,9 +86,7 @@
         <div class="footer-bottom">
             <p class="copyright">© {copyrightYear} FireTempMail. {$_('footer.rights')}</p>
             <div class="footer-support">
-                <a href="https://ko-fi.com/firetempmail" target="_blank" rel="noopener" class="support-link">
-                    ☕ {$_('footer.buyCoffee')}
-                </a>
+                
             </div>
         </div>
     </div>

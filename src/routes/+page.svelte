@@ -917,6 +917,191 @@ function normalizeGmailAddress(address) {
                 </div>
             </div>
 
+            <!-- How It Works Section - NEW -->
+            <div class="how-it-works-section">
+                <div class="container">
+                    <h2 class="section-title">🚀 How Fire Temp Mail Works - Step by Step</h2>
+                    <p class="section-subtitle">Get your temporary email in seconds with our simple, no-registration process</p>
+                    
+                    <div class="steps-grid">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <div class="step-icon">⚡</div>
+                            <h3>Instant Email Generation</h3>
+                            <p>The moment you visit Fire Temp Mail, we automatically generate a fresh temporary email address for you. No sign-up forms, no personal information required, no waiting—just instant access.</p>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <div class="step-icon">📋</div>
+                            <h3>Copy Your Temporary Email</h3>
+                            <p>Click the copy button to save your disposable email address to your clipboard. You can use this email anywhere you need to provide an email address for signups, downloads, or verifications.</p>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <div class="step-icon">📧</div>
+                            <h3>Receive Emails Instantly</h3>
+                            <p>All emails sent to your temporary address appear in your inbox within seconds. View, read, and forward them as needed. The inbox updates automatically in real-time.</p>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">4</div>
+                            <div class="step-icon">🗑️</div>
+                            <h3>Auto-Deletion for Privacy</h3>
+                            <p>Your temporary emails are automatically deleted after 24 hours, leaving no trace. Your privacy is protected by design—no logs, no tracking, no permanent storage.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real Use Cases Section - NEW -->
+            <div class="use-cases-section">
+                <div class="container">
+                    <h2 class="section-title">💡 When to Use Fire Temp Mail: Real-World Examples</h2>
+                    <p class="section-subtitle">See how our users protect their privacy in everyday situations</p>
+                    
+                    <div class="use-cases-grid">
+                        <div class="use-case-card">
+                            <div class="use-case-icon">🎮</div>
+                            <h3>Gaming Platform Signups</h3>
+                            <p><strong>Scenario:</strong> You want to try a new online game but don't want gaming newsletters cluttering your inbox.</p>
+                            <p><strong>Solution:</strong> Use Fire Temp Mail for the signup, verify your gaming account, and keep your real email spam-free. Perfect for trying multiple game platforms without commitment.</p>
+                        </div>
+                        
+                        <div class="use-case-card">
+                            <div class="use-case-icon">📥</div>
+                            <h3>Downloading Free Resources</h3>
+                            <p><strong>Scenario:</strong> A website offers a free eBook, template, or software download but requires email registration.</p>
+                            <p><strong>Solution:</strong> Use a temporary email to get the download link without joining their mailing list. Get your resource and move on without future marketing emails.</p>
+                        </div>
+                        
+                        <div class="use-case-card">
+                            <div class="use-case-icon">🛍️</div>
+                            <h3>One-Time Shopping Discounts</h3>
+                            <p><strong>Scenario:</strong> An online store offers 10% off for first-time email subscribers, but you don't want daily promotional emails.</p>
+                            <p><strong>Solution:</strong> Get your discount code with a disposable email. Enjoy the savings without the spam.</p>
+                        </div>
+                        
+                        <div class="use-case-card">
+                            <div class="use-case-icon">💻</div>
+                            <h3>Developer Testing & QA</h3>
+                            <p><strong>Scenario:</strong> You're testing email functionality in your app and need multiple email addresses for different test scenarios.</p>
+                            <p><strong>Solution:</strong> Generate unlimited temporary emails for testing user registration, email verification, notification systems, and password recovery—all without managing real accounts.</p>
+                        </div>
+                        
+                        <div class="use-case-card">
+                            <div class="use-case-icon">📱</div>
+                            <h3>Social Media Trial Accounts</h3>
+                            <p><strong>Scenario:</strong> You want to check out a social platform before committing with your real email.</p>
+                            <p><strong>Solution:</strong> Create a trial account with a temporary email. If you like the platform, you can always create a permanent account later with your real email.</p>
+                        </div>
+                        
+                        <div class="use-case-card">
+                            <div class="use-case-icon">🎁</div>
+                            <h3>Contest & Giveaway Entries</h3>
+                            <p><strong>Scenario:</strong> You want to enter online contests but worry about spam from contest sponsors.</p>
+                            <p><strong>Solution:</strong> Use Fire Temp Mail for contest entries. If you win, you'll get the notification; if not, no spam follows you.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security & Privacy Section - NEW -->
+            <div class="security-section">
+                <div class="container">
+                    <h2 class="section-title">🔒 How We Protect Your Privacy & Security</h2>
+                    <p class="section-subtitle">Your anonymity is our top priority. Here's how we keep you safe.</p>
+                    
+                    <div class="security-grid">
+                        <div class="security-feature">
+                            <div class="security-icon">🔒</div>
+                            <h3>Zero Data Logging</h3>
+                            <p>We don't log IP addresses, track user behavior, or store personal information. Your usage is completely anonymous. We have no way to trace temporary emails back to individual users.</p>
+                        </div>
+                        
+                        <div class="security-feature">
+                            <div class="security-icon">⏰</div>
+                            <h3>Automatic Deletion</h3>
+                            <p>All emails are automatically deleted after 24 hours maximum. No permanent storage means no data breaches. Even if someone wanted to access your old emails, they're already gone.</p>
+                        </div>
+                        
+                        <div class="security-feature">
+                            <div class="security-icon">🚫</div>
+                            <h3>No Registration Required</h3>
+                            <p>We never ask for your name, email, phone number, or any personal information. Just instant access to temporary email addresses. No account means no data to compromise.</p>
+                        </div>
+                        
+                        <div class="security-feature">
+                            <div class="security-icon">🛡️</div>
+                            <h3>Spam & Malware Filtering</h3>
+                            <p>Basic spam protection filters out malicious emails while allowing legitimate messages through. Suspicious attachments and phishing attempts are automatically blocked.</p>
+                        </div>
+                        
+                        <div class="security-feature">
+                            <div class="security-icon">🔐</div>
+                            <h3>HTTPS Encryption</h3>
+                            <p>All connections to Fire Temp Mail use HTTPS encryption. Your communication with our servers is secure and cannot be intercepted by third parties.</p>
+                        </div>
+                        
+                        <div class="security-feature">
+                            <div class="security-icon">👁️</div>
+                            <h3>No Third-Party Tracking</h3>
+                            <p>We don't use intrusive tracking cookies or share data with advertisers. Your browsing remains private while using our service.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Limitations Section - NEW (CRITICAL FOR TRUST) -->
+            <div class="limitations-section">
+                <div class="container">
+                    <h2 class="section-title">⚠️ Important: What Fire Temp Mail Is NOT For</h2>
+                    <p class="section-subtitle">Be honest with yourself: temporary emails have limitations. Here's what you need to know.</p>
+                    
+                    <div class="limitations-content">
+                        <div class="limitation-warning major">
+                            <div class="warning-icon">❌</div>
+                            <h3>Never Use Temporary Emails For:</h3>
+                            <ul class="limitations-list">
+                                <li><strong>Banking or Financial Accounts:</strong> You need permanent access to these accounts. Password resets and security notifications won't reach you if the email is deleted.</li>
+                                <li><strong>Primary Social Media:</strong> Facebook, Instagram, Twitter, LinkedIn—use your real email. You'll need it for account recovery.</li>
+                                <li><strong>Work or School Email:</strong> Important communications need to be permanent and reliable.</li>
+                                <li><strong>Government Services:</strong> Tax filings, benefits, official documents—these require permanent email addresses.</li>
+                                <li><strong>Healthcare Portals:</strong> Medical information and appointment reminders are too important for temporary emails.</li>
+                                <li><strong>E-commerce Accounts:</strong> If you plan to make purchases or track orders, use your real email for order confirmations and customer support.</li>
+                            </ul>
+                            <p class="why-not"><strong>Why Not?</strong> Temporary emails are deleted automatically after 24 hours. If you need to recover your account, reset your password, or access important notifications later, you won't receive those emails. Use Fire Temp Mail only for non-critical, temporary needs.</p>
+                        </div>
+                        
+                        <div class="limitation-info">
+                            <h3>📧 Other Important Limitations:</h3>
+                            <ul>
+                                <li><strong>Cannot Send Emails:</strong> Fire Temp Mail is receive-only. You can read incoming emails but cannot send replies or compose new messages.</li>
+                                <li><strong>24-Hour Lifetime:</strong> Emails are kept for 24 hours maximum. After that, they're permanently deleted with no way to recover them.</li>
+                                <li><strong>No Attachments Security:</strong> While we filter malware, we cannot guarantee 100% safety. Don't open suspicious attachments.</li>
+                                <li><strong>Some Sites Block Temp Emails:</strong> Services like PayPal, banks, and some social platforms detect and block temporary email domains.</li>
+                                <li><strong>No Email Forwarding:</strong> You can view emails in our interface, but cannot automatically forward them to your real email.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="good-uses">
+                            <h3>✅ Fire Temp Mail IS Perfect For:</h3>
+                            <ul>
+                                <li>Free trial signups (streaming services, software)</li>
+                                <li>Downloading resources (eBooks, templates, guides)</li>
+                                <li>Newsletter signups you're unsure about</li>
+                                <li>Forum and community registrations</li>
+                                <li>Contest and giveaway entries</li>
+                                <li>Testing and development work</li>
+                                <li>One-time verifications</li>
+                                <li>Privacy protection on untrusted websites</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Add this after the Popular Articles section on your main page -->
 
             <div class="seo-content-section">
@@ -2050,6 +2235,297 @@ function normalizeGmailAddress(address) {
         .featured-guides-section {
             padding: 1.5rem;
         }
+    }
+
+    /* How It Works Section Styles */
+    .how-it-works-section {
+        padding: 4rem 2rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .step-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .step-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .step-number {
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #fff;
+        color: #667eea;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .step-icon {
+        font-size: 3rem;
+        margin: 1rem 0;
+    }
+
+    .step-card h3 {
+        font-size: 1.3rem;
+        margin: 1rem 0;
+        font-weight: 600;
+    }
+
+    .step-card p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        opacity: 0.9;
+    }
+
+    /* Use Cases Section Styles */
+    .use-cases-section {
+        padding: 4rem 2rem;
+        background: #f8f9fa;
+    }
+
+    .use-cases-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .use-case-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        transition: all 0.3s ease;
+        border-left: 4px solid #667eea;
+    }
+
+    .use-case-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .use-case-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .use-case-card h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #2c3e50;
+    }
+
+    .use-case-card p {
+        color: #6c757d;
+        line-height: 1.7;
+        margin-bottom: 0.75rem;
+    }
+
+    .use-case-card p strong {
+        color: #667eea;
+        font-weight: 600;
+    }
+
+    /* Security Section Styles */
+    .security-section {
+        padding: 4rem 2rem;
+        background: #2c3e50;
+        color: white;
+    }
+
+    .security-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .security-feature {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 2rem;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .security-feature:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-3px);
+    }
+
+    .security-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .security-feature h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+
+    .security-feature p {
+        line-height: 1.6;
+        opacity: 0.9;
+        font-size: 0.95rem;
+    }
+
+    /* Limitations Section Styles */
+    .limitations-section {
+        padding: 4rem 2rem;
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        color: white;
+    }
+
+    .limitations-content {
+        margin-top: 3rem;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .limitation-warning {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 2.5rem;
+        border-radius: 16px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        margin-bottom: 2rem;
+    }
+
+    .limitation-warning.major {
+        border: 3px solid #fff;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .warning-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .limitation-warning h3,
+    .limitation-info h3,
+    .good-uses h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+    }
+
+    .limitations-list {
+        list-style: none;
+        padding: 0;
+        margin: 1.5rem 0;
+    }
+
+    .limitations-list li {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        border-left: 4px solid #fff;
+        line-height: 1.7;
+    }
+
+    .limitations-list li strong {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+
+    .why-not {
+        margin-top: 1.5rem;
+        padding: 1.5rem;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        line-height: 1.7;
+        font-size: 1rem;
+    }
+
+    .why-not strong {
+        font-size: 1.1rem;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .limitation-info,
+    .good-uses {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+    }
+
+    .limitation-info ul,
+    .good-uses ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 1rem;
+    }
+
+    .limitation-info ul li,
+    .good-uses ul li {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        line-height: 1.6;
+    }
+
+    .limitation-info ul li:last-child,
+    .good-uses ul li:last-child {
+        border-bottom: none;
+    }
+
+    .limitation-info ul li strong,
+    .good-uses ul li strong {
+        font-weight: 600;
+    }
+
+    .good-uses {
+        background: rgba(255, 255, 255, 0.15);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* Shared Styles for All New Sections */
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+        font-size: 1.1rem;
+        text-align: center;
+        opacity: 0.9;
+        max-width: 700px;
+        margin: 0 auto;
     }
 
         @media (min-width: 769px) and (max-width: 992px) {
