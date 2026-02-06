@@ -404,14 +404,14 @@ function selectDomain(domain) {
     }
 </script>
 <svelte:head>
-    <title>{data?.seo?.title || 'Temp Gmail Generator - Create Disposable Gmail Addresses Instantly | Fire Temp Mail'}</title>
+    <title>{data?.seo?.title || 'Temp Gmail Create Disposable Gmail Addresses Instantly'}</title>
     <meta name="description" content={data?.seo?.description || 'Instantly generate temporary Gmail addresses with our advanced Gmailnator alternative. Create disposable emails that work everywhere for signups, verifications & spam protection.'}>
     <meta name="keywords" content={data?.seo?.keywords || 'temp gmail, temporary gmail, gmailnator, emailnator, gmail generator'}>
     <meta name="author" content="Fire Temp Mail">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Canonical URL - Points to homepage to avoid duplicate content -->
-    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/'}>
+    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/temp-gmail'}>
     
     <!-- Structured Data -->
     <script type="application/ld+json">
