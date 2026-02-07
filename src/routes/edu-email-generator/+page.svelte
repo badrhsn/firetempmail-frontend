@@ -485,8 +485,8 @@ function normalizeGmailAddress(address) {
         <div class="text-center p-4 p-lg-5">
             <!-- Header -->
             <h1>
-                <span>📮&nbsp;</span>
-                🎓 Free EDU Email Generator – Create Disposable .EDU Inbox Instantly
+                <span>🎓&nbsp;</span>
+                Free EDU Email Generator – Create Disposable .EDU Inbox Instantly
             </h1>
             <p class="lead">
         Generate <strong>.EDU emails</strong> with our free <strong>EDU Email Generator</strong>. Perfect for signups, trials, student discounts, and more — without exposing your real inbox to spam.
