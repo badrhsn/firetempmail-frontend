@@ -425,8 +425,7 @@ function normalizeGmailAddress(address) {
       "@type": "Question",
       "name": "Can I use an EDU Email Generator for student discounts?",
       "acceptedAnswer": {
-        "@type",
-        "Answer",
+        "@type": "Answer",
         "text": "Yes, many use disposable EDU emails for accessing student discounts or free trials. Keep in mind these inboxes are temporary."
       }
     }
