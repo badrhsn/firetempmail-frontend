@@ -15,6 +15,7 @@
     import Navigation from '$lib/components/Navigation.svelte';
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
+    import Hreflang from '$lib/components/Hreflang.svelte';
     
     // Import page data for SEO
     export let data;
@@ -413,11 +414,10 @@ function selectDomain(domain) {
 
 </script>
 
-
+<Hreflang path="/burner-email" />
 <svelte:head>
-    <title>{data?.seo?.title || 'Burner Email 🔥 | Free Temporary Disposable Inbox'}</title>
+    <title>{data?.seo?.title || 'Burner Email | Free Temporary Disposable Inbox'}</title>
     <meta name="description" content={data?.seo?.description || 'Create a free burner email instantly. Get a temporary disposable inbox to protect your real email, avoid spam, and sign up anonymously.'} />
-    <meta name="keywords" content={data?.seo?.keywords || 'burner email, disposable email, temporary inbox, temp mail'} />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/burner-email'} />
 
@@ -426,11 +426,35 @@ function selectDomain(domain) {
     <meta property="og:description" content="Generate a free burner email instantly. Protect your inbox from spam, sign up anonymously, and get a disposable email in seconds." />
     <meta property="og:url" content="https://firetempmail.com/burner-email" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fire Temp Mail" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Burner Email – Free Temporary Disposable Inbox" />
     <meta name="twitter:description" content="Generate a free burner email instantly. Perfect for anonymous signups, spam protection, and temporary emails." />
+
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+    <!-- WebApplication Schema -->
+    {@html '<script type="application/ld+json">' + JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Fire Temp Mail - Burner Email",
+      "url": "https://firetempmail.com/burner-email",
+      "description": "Create free burner email addresses. Temporary disposable inbox for privacy.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "Fire Temp Mail",
+        "url": "https://firetempmail.com"
+      }
+    }) + '</script>'}
 
     <!-- FAQ Structured Data -->
     <script type="application/ld+json">
@@ -481,8 +505,17 @@ function selectDomain(domain) {
       ]
     }
     </script>
-</svelte:head>
 
+    <!-- BreadcrumbList Schema -->
+    {@html '<script type="application/ld+json">' + JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Burner Email", "item": "https://firetempmail.com/burner-email" }
+      ]
+    }) + '</script>'}
+</svelte:head>
 
 <!-- Toast Notifications -->
 <div class="toast-container">
@@ -547,7 +580,7 @@ function selectDomain(domain) {
                     <button 
                         on:click={copyToClipboard} 
                         class="btn-copy"
-                        title="Copy to clipboard"
+                        title={$_('email.copyToClipboard')}
                     >
                         {#if isCopying}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -602,31 +635,31 @@ function selectDomain(domain) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Generate New
+                        {$_('email.generateNew')}
                     </button>
                     
                     {#if emailType === 'domain'}
-                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
+                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title={$_('email.useCustomAlias2')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Custom Alias
+                        {$_('email.useCustomAlias2')}
                     </button>
                     
-                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title={$_('email.changeDomain')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Change Domain
+                        {$_('email.changeDomain')}
                     </button>
                     {/if}
                     
-                    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
+                    <button class="btn btn-secondary" on:click={manualReload} title={$_('email.refreshPage')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Refresh Page
+                        {$_('email.refreshPage')}
                     </button>
                 </div>
 
@@ -675,7 +708,7 @@ function selectDomain(domain) {
                         on:click={() => generateEmail(true, true)}
                         disabled={!customAlias}
                     >
-                        Generate Custom Email
+                        {$_('email.generateCustomEmail')}
                     </button>
                 </div>
                 {/if}
@@ -686,8 +719,8 @@ function selectDomain(domain) {
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
-                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
-                    <span>Waiting for incoming emails</span>
+                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading emails" loading="lazy">
+                    <span>{$_('email.waitingForEmails')}</span>
                 </div>
             {:else if !reloadActive}
                 <!-- Automatic refresh stopped -->
@@ -695,7 +728,7 @@ function selectDomain(domain) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>Automatic refresh stopped</span>
+                    <span>{$_('email.refreshStopped')}</span>
                 </div>
             {/if}
 
@@ -772,7 +805,7 @@ function selectDomain(domain) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                             <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                         </svg>
-                        <p>Your inbox is empty</p>
+                        <p>{$_('email.inboxEmpty')}</p>
                         <p>Emails sent to your temporary address will appear here</p>
                     </div>
                 {:else}
@@ -883,159 +916,75 @@ function selectDomain(domain) {
 
 <!-- Burner Email Content Section -->
 <section aria-labelledby="burner-email-guide" class="seo-article" style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
-    <h2 id="burner-email-guide">What is a Burner Email & Why You Need One</h2>
+    <h2 id="burner-email-guide">{$_('burnerEmailPage.seoTitle')}</h2>
     <p class="description">
-        A burner email is a disposable, temporary email address designed to be used once and discarded. Unlike traditional email accounts that tie you to real identity, burner emails provide complete anonymity and privacy—perfect for protecting your primary inbox from spam, tracking, and unwanted marketing.
+        {$_('burnerEmailPage.seoP1')}
     </p>
 
-    <h3>What Exactly is a Burner Email?</h3>
+    <h3>{$_('burnerEmailPage.howTitle')}</h3>
     <p>
-        A burner email is a disposable email address that you create, use for a specific purpose (usually one-time signup or verification), and then abandon. Think of it like a temporary phone number that expires—it provides separation between your real identity and your online activity.
+        {$_('burnerEmailPage.howP1')}
     </p>
     <p>
-        Unlike Gmail or Outlook accounts, burner emails are designed to be anonymous and temporary. They don't require personal information, no password recovery options, and no account history. Once you're done using it, the email expires and any messages disappear forever.
+        {$_('burnerEmailPage.seoP2')}
     </p>
 
-    <h3>Common Uses for Burner Emails</h3>
+    <h3>{$_('burnerEmailPage.usesTitle')}</h3>
     <ul style="line-height: 1.8; margin: 1.5rem 0;">
-        <li><strong>One-time signups:</strong> Create accounts on websites you'll never visit again</li>
-        <li><strong>Free trials:</strong> Test premium services without providing your real email</li>
-        <li><strong>Online shopping:</strong> Register for accounts to checkout without spam later</li>
-        <li><strong>Contest entries:</strong> Join giveaways and sweepstakes anonymously</li>
-        <li><strong>Forum registrations:</strong> Participate in discussions without tracking</li>
-        <li><strong>Newsletter opt-ins:</strong> Receive promotional emails without cluttering your main inbox</li>
-        <li><strong>Download pages:</strong> Access free resources without providing real contact info</li>
-        <li><strong>Testing & QA:</strong> Developers and testers use burner emails for software testing</li>
+        <li>{$_('burnerEmailPage.howL1')}</li>
+        <li>{$_('burnerEmailPage.howL2')}</li>
+        <li>{$_('burnerEmailPage.howL3')}</li>
+        <li>{$_('burnerEmailPage.howL4')}</li>
+        <li>{$_('burnerEmailPage.howL5')}</li>
     </ul>
 
-    <h3>Burner Email vs. Temp Mail vs. Disposable Email: What's the Difference?</h3>
-    <p>These terms are largely interchangeable, though there are subtle differences:</p>
+    <h3>{$_('burnerEmailPage.vsTitle')}</h3>
+    <p>{$_('burnerEmailPage.vsP1')}</p>
+    <p>{$_('burnerEmailPage.vsP2')}</p>
+    <p>{$_('burnerEmailPage.vsP3')}</p>
+
+    <h3>{$_('burnerEmailPage.benefitsTitle')}</h3>
     <ul style="line-height: 1.8; margin: 1.5rem 0;">
-        <li><strong>Temp Mail:</strong> Generic term for any email that expires after 24-48 hours (Fire Temp Mail is this)</li>
-        <li><strong>Burner Email:</strong> Emphasizes the "use once and discard" nature; may expire faster or immediately after use</li>
-        <li><strong>Disposable Email:</strong> Broader category including temporary and anonymous emails</li>
-        <li><strong>Throwaway Email:</strong> Similar to burner—emphasizes intentional discarding</li>
-    </ul>
-    <p><strong>In practice:</strong> All of these services (including Fire Temp Mail) provide disposable, anonymous email addresses that auto-delete after a set time.</p>
-
-    <h3>Why Use Burner Emails Instead of Your Real Email?</h3>
-    
-    <h4>🔐 Privacy & Anonymity</h4>
-    <p>
-        Your real email address is your digital identity. Sharing it everywhere ties all your online activity together and makes you a target for:
-    </p>
-    <ul style="line-height: 1.8; margin: 1rem 0;">
-        <li>Email scraping by data brokers</li>
-        <li>Phishing and spear-phishing attacks</li>
-        <li>Account takeover attempts</li>
-        <li>Targeted spam campaigns</li>
-        <li>Data breaches affecting multiple services</li>
-    </ul>
-    <p>Burner emails sever that connection—your real identity stays hidden.</p>
-
-    <h4>📧 Spam Prevention</h4>
-    <p>
-        Websites sell email lists to marketing companies. Use your real email on a shopping site today, and you'll be on 50 marketing mailing lists tomorrow. Burner emails accept all the promotional spam, then auto-delete it after 24 hours. Your primary inbox stays clean.
-    </p>
-
-    <h4>🛡️ Security & Breach Protection</h4>
-    <p>
-        When websites get hacked, attackers steal email databases. If that email is your real address, hackers can use it to:
-    </p>
-    <ul style="line-height: 1.8; margin: 1rem 0;">
-        <li>Attempt password resets on other accounts</li>
-        <li>Target you with focused phishing emails</li>
-        <li>Sell your email to identity thieves</li>
-        <li>Merge data from multiple breaches to build your profile</li>
-    </ul>
-    <p>Burner emails limit the damage. If that burner email is breached, it auto-deletes in 24 hours and the attacker gains nothing.</p>
-
-    <h4>🔍 Stop Tracking & Profiling</h4>
-    <p>
-        Every website you sign up for tracks your email. They build profiles linking your email to your interests, purchases, and behavior. Using burner emails prevents this tracking by compartmentalizing your activity.
-    </p>
-
-    <h3>How Does Fire Temp Mail Work for Burner Emails?</h3>
-    <ol style="line-height: 1.8; margin: 1.5rem 0;">
-        <li><strong>Generate:</strong> Click a button, instantly get a unique email address (e.g., abc123@firetempmail.com)</li>
-        <li><strong>Use:</strong> Copy the email and use it to sign up anywhere</li>
-        <li><strong>Receive:</strong> Incoming emails appear in your inbox in real-time (usually within seconds)</li>
-        <li><strong>Auto-delete:</strong> After 24 hours, the email address and all messages permanently disappear</li>
-        <li><strong>Repeat:</strong> Generate a new burner email whenever you need one</li>
-    </ol>
-    <p><strong>No setup, no password, no account needed.</strong> It's completely anonymous.</p>
-
-    <h3>Burner Email Use Cases in Detail</h3>
-
-    <h4>Scenario 1: Testing a New Online Store</h4>
-    <p>
-        You want to try a new e-commerce site. You're not sure if they're trustworthy yet. Generate a burner email, use it to create an account and make a test purchase. If they spam you or get hacked, the burner email expires in 24 hours and you're unaffected. Your real email never gets their email list.
-    </p>
-
-    <h4>Scenario 2: Free Trial with "No Credit Card Required" Fine Print</h4>
-    <p>
-        "Free 30-day trial—no credit card required!" sounds great until you realize they'll auto-charge you after the trial. Use a burner email to sign up, complete the trial, and let the email expire. When they try to charge, they have no valid contact information.
-    </p>
-
-    <h4>Scenario 3: Contest Entry</h4>
-    <p>
-        Entering an online contest usually requires an email, but "Winners will be contacted via email—other entrants may receive promotional content." Use a burner email. If you don't win, that burner email gets deleted and you're not on their mailing list forever.
-    </p>
-
-    <h4>Scenario 4: Downloading a "Free Ebook" or Whitepaper</h4>
-    <p>
-        Many websites gate free content behind email signup: "Enter your email to download our free guide." In reality, they're building a sales list and will bombard you with email marketing. Use a burner email instead.
-    </p>
-
-    <h4>Scenario 5: Software Testing (Developers)</h4>
-    <p>
-        QA engineers need fresh email addresses to test email verification, password resets, and notification systems. Burner emails let them generate unlimited test accounts without managing real email accounts.
-    </p>
-
-    <h3>What Burner Emails CANNOT Do</h3>
-    <p>Burner emails are great for one-time use, but they have important limitations:</p>
-    <ul style="line-height: 1.8; margin: 1.5rem 0;">
-        <li>❌ <strong>Account Recovery:</strong> No password recovery. If you forget your password on an account created with a burner email, you're locked out forever (the email no longer exists)</li>
-        <li>❌ <strong>Long-term Accounts:</strong> Don't use burner emails for accounts you'll need to access later (email, social media, banking)</li>
-        <li>❌ <strong>Sensitive Services:</strong> Never use for banking, healthcare, government services, or tax filing</li>
-        <li>❌ <strong>Trusted Services:</strong> Use your real email for accounts from companies you trust and frequent</li>
+        <li>{$_('burnerEmailPage.ben1')}</li>
+        <li>{$_('burnerEmailPage.ben2')}</li>
+        <li>{$_('burnerEmailPage.ben3')}</li>
+        <li>{$_('burnerEmailPage.ben4')}</li>
+        <li>{$_('burnerEmailPage.ben5')}</li>
     </ul>
 
-    <h3>Email Privacy Best Practices</h3>
-    <p>Combine burner emails with other privacy strategies for maximum protection:</p>
-    <ul style="line-height: 1.8; margin: 1.5rem 0;">
-        <li>✅ <strong>Burner emails for:</strong> One-time signups, free trials, contests, testing</li>
-        <li>✅ <strong>Real email for:</strong> Banking, healthcare, work, accounts you access regularly</li>
-        <li>✅ <strong>Email aliases for:</strong> Medium-trust websites (use Gmail plus-addressing: user+sitename@gmail.com)</li>
-        <li>✅ <strong>VPN + Burner:</strong> Combine with VPN for maximum anonymity</li>
-        <li>✅ <strong>Check for breaches:</strong> Use haveibeenpwned.com to monitor if your emails appear in data breaches</li>
-    </ul>
-
-    <h3>Burner Email FAQs</h3>
-    
-    <p><strong>Q: Is it illegal to use a burner email?</strong></p>
-    <p>A: Absolutely not. Burner emails are legal in virtually all jurisdictions. Many legitimate companies (like Apple, Microsoft, Google) offer email aliasing features for this exact purpose. However, don't use burner emails for:</p>
-    <ul style="line-height: 1.8; margin: 0.5rem 0;">
-        <li>Fraud or deception (lying on loan applications, fraudulent reviews)</li>
-        <li>Evading law enforcement or court orders</li>
-        <li>Violating terms of service (buying multiple free trials with burner emails)</li>
-    </ul>
-
-    <p><strong>Q: Can I reply to emails sent to a burner address?</strong></p>
-    <p>A: With Fire Temp Mail, you can READ incoming emails but typically cannot send replies. This is intentional—burner emails are for receiving verification codes and messages, not for correspondence. If you need to reply, use your real email instead.</p>
-
-    <p><strong>Q: How long do burner emails last?</strong></p>
-    <p>A: Fire Temp Mail emails auto-delete after 24 hours. After that, the email address and all messages are permanently gone. You can generate a new one anytime.</p>
-
-    <p><strong>Q: Can websites detect that I'm using a burner email?</strong></p>
-    <p>A: Technically, some websites can identify burner email domains (like @firetempmail.com). However, blocking burner emails is uncommon because many legitimate users rely on them. Our domains are real and functional, so most websites accept them without issues.</p>
-
-    <h3>Start Using Burner Emails Today</h3>
+    <h3>{$_('burnerEmailPage.use1Title')}</h3>
     <p>
-        Protect your primary email inbox and privacy by compartmentalizing your online activity. Generate a disposable burner email instantly—no signup, no password, completely anonymous.
+        {$_('burnerEmailPage.use1P')}
     </p>
+
+    <h3>{$_('burnerEmailPage.use2Title')}</h3>
     <p>
-        <strong>Perfect for:</strong> One-time signups, free trials, contest entries, online shopping, data privacy-conscious users, and anyone who values online privacy.
+        {$_('burnerEmailPage.use2P')}
+    </p>
+
+    <h3>{$_('burnerEmailPage.use3Title')}</h3>
+    <p>
+        {$_('burnerEmailPage.use3P')}
+    </p>
+
+    <h3>{$_('burnerEmailPage.use4Title')}</h3>
+    <p>
+        {$_('burnerEmailPage.use4P')}
+    </p>
+
+    <h3>{$_('burnerEmailPage.use5Title')}</h3>
+    <p>
+        {$_('burnerEmailPage.use5P')}
+    </p>
+
+    <h3>{$_('burnerEmailPage.use6Title')}</h3>
+    <p>
+        {$_('burnerEmailPage.use6P')}
+    </p>
+
+    <h3>{$_('burnerEmailPage.use7Title')}</h3>
+    <p>
+        {$_('burnerEmailPage.use7P')}
     </p>
 </section>
 

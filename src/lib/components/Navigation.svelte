@@ -1,14 +1,19 @@
 <script>
     import { _ } from 'svelte-i18n';
+    import { page } from '$app/stores';
+    import { getLangFromPath, localePath } from '$lib/i18n/lang.js';
+
+    $: currentLang = getLangFromPath($page.url.pathname);
+    $: lp = (/** @type {string} */ path) => localePath(path, currentLang);
 </script>
 
 <nav class="site-navigation">
-    <a href="/">{$_('nav.home')}</a>
-    <a href="/privacy-policy">{$_('footer.privacy')}</a>
-    <a href="/terms">{$_('footer.terms')}</a>
-    <a href="/faq">{$_('nav.faq')}</a>
-    <a href="/contact">{$_('nav.contact')}</a>
-    <a href="/advertising">{$_('nav.advertising')}</a>
+    <a href={lp('/')}>{$_('nav.home')}</a>
+    <a href={lp('/privacy-policy')}>{$_('footer.privacy')}</a>
+    <a href={lp('/terms')}>{$_('footer.terms')}</a>
+    <a href={lp('/faq')}>{$_('nav.faq')}</a>
+    <a href={lp('/contact')}>{$_('nav.contact')}</a>
+    <a href={lp('/advertising')}>{$_('nav.advertising')}</a>
 </nav>
 
 <style>

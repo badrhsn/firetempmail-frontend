@@ -16,6 +16,7 @@
     import Navigation from '$lib/components/Navigation.svelte';
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
+    import Hreflang from '$lib/components/Hreflang.svelte';
     
     // Import page data for SEO
     export let data;
@@ -403,26 +404,38 @@ function selectDomain(domain) {
         intervalID = setInterval(timedReload, 60000);
     }
 </script>
+<Hreflang path="/temp-gmail" />
 <svelte:head>
     <title>{data?.seo?.title || 'Temp Gmail Create Disposable Gmail Addresses Instantly'}</title>
-    <meta name="description" content={data?.seo?.description || 'Instantly generate temporary Gmail addresses with our advanced Gmailnator alternative. Create disposable emails that work everywhere for signups, verifications & spam protection.'}>
-    <meta name="keywords" content={data?.seo?.keywords || 'temp gmail, temporary gmail, gmailnator, emailnator, gmail generator'}>
+    <meta name="description" content={data?.seo?.description || 'Generate temporary Gmail addresses instantly. Create disposable emails for signups, verifications & spam protection.'}>
     <meta name="author" content="Fire Temp Mail">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={data?.seo?.title || 'Temp Gmail - Create Disposable Gmail Addresses Instantly'} />
+    <meta property="og:description" content={data?.seo?.description || 'Instantly generate temporary Gmail addresses. Create disposable emails that work everywhere for signups, verifications & spam protection.'} />
+    <meta property="og:url" content="https://firetempmail.com/temp-gmail" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fire Temp Mail" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Temp Gmail - Disposable Gmail Addresses" />
+    <meta name="twitter:description" content="Generate temporary Gmail addresses instantly. Free, secure, and disposable." />
     
-    <!-- Canonical URL - Points to homepage to avoid duplicate content -->
+    <!-- Canonical URL -->
     <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/temp-gmail'}>
-    
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Fire Temp Mail",
+  "name": "Fire Temp Mail - Temp Gmail Generator",
   "url": "https://firetempmail.com/temp-gmail",
   "description": "Generate temporary Gmail addresses instantly with Fire Temp Mail – a fast, secure, and free disposable email generator for privacy-conscious users.",
-  "applicationCategory": "Utility",
-  "operatingSystem": "Web",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All",
   "browserRequirements": "Requires JavaScript and an internet connection.",
   "offers": {
     "@type": "Offer",
@@ -430,18 +443,23 @@ function selectDomain(domain) {
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock"
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "ratingCount": "2564",
-    "bestRating": "5",
-    "worstRating": "1"
-  },
   "creator": {
     "@type": "Organization",
     "name": "Fire Temp Mail",
-    "url": "https://firetempmail.com"
+    "url": "https://firetempmail.com",
+    "logo": "https://firetempmail.com/favicon.ico"
   }
+}
+    </script>
+    <!-- BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Temp Gmail", "item": "https://firetempmail.com/temp-gmail" }
+  ]
 }
     </script>
 </svelte:head>
@@ -537,11 +555,10 @@ function selectDomain(domain) {
             <!-- Header -->
             <h1>
                 <span>📮&nbsp;</span>
-                Temp Gmail - Create Temporary Gmail Addresses
+                {$_('tempGmailPage.h1')}
             </h1>
             <p class="lead">
-                Instantly generate disposable Gmail addresses that look and function like real Gmail accounts. Protect your personal inbox from spam and unwanted messages.
-            </p>
+                {$_('tempGmailPage.lead')}</p>
             
             <!-- Email Address with Copy Button -->
             <div class="email-address-container">
@@ -550,7 +567,7 @@ function selectDomain(domain) {
                     <button 
                         on:click={copyToClipboard} 
                         class="btn-copy"
-                        title="Copy to clipboard"
+                        title={$_('email.copyToClipboard')}
                     >
                         {#if isCopying}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -607,31 +624,31 @@ function selectDomain(domain) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Generate New
+                        {$_('email.generateNew')}
                     </button>
                     
                     {#if emailType === 'domain'}
-                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
+                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title={$_('email.useCustomAlias2')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Custom Alias
+                        {$_('email.useCustomAlias2')}
                     </button>
                     
-                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title={$_('email.changeDomain')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Change Domain
+                        {$_('email.changeDomain')}
                     </button>
                     {/if}
                     
-                    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
+                    <button class="btn btn-secondary" on:click={manualReload} title={$_('email.refreshPage')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Refresh Page
+                        {$_('email.refreshPage')}
                     </button>
                 </div>
 
@@ -682,7 +699,7 @@ function selectDomain(domain) {
                         on:click={() => generateEmail(true, true)}
                         disabled={!customAlias}
                     >
-                        Generate Custom Email
+                        {$_('email.generateCustomEmail')}
                     </button>
                 </div>
                 {/if}
@@ -691,8 +708,8 @@ function selectDomain(domain) {
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
-                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
-                    <span>Waiting for incoming emails</span>
+                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading emails" loading="lazy">
+                    <span>{$_('email.waitingForEmails')}</span>
                 </div>
             {:else if !reloadActive}
                 <!-- Automatic refresh stopped -->
@@ -700,7 +717,7 @@ function selectDomain(domain) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>Automatic refresh stopped</span>
+                    <span>{$_('email.refreshStopped')}</span>
                 </div>
             {/if}
 
@@ -777,7 +794,7 @@ function selectDomain(domain) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                             <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                         </svg>
-                        <p>Your inbox is empty</p>
+                        <p>{$_('email.inboxEmpty')}</p>
                         <p>Emails sent to your temporary address will appear here</p>
                     </div>
                 {:else}
@@ -842,168 +859,112 @@ function selectDomain(domain) {
 
 <!-- SEO article: Gmail-SPECIFIC features (unique content) -->
 <section aria-labelledby="gmail-tricks" class="seo-article">
-    <h2 id="gmail-tricks">Gmail's Hidden Privacy Features: Plus-Addressing & The Dot Trick</h2>
-    <p>
-        Did you know your Gmail account can generate <strong>unlimited email addresses</strong> without creating new accounts? Gmail has two powerful built-in features that most users don't know about: <strong>plus-addressing (aliasing)</strong> and the <strong>dot trick (period placement)</strong>. Fire Temp Mail helps you leverage these Gmail-specific features to protect your privacy and organize your inbox.
-    </p>
-    <p>
-        These aren't "disposable" emails from a third-party service—they're legitimate variations of your <em>actual Gmail address</em> that deliver directly to your existing inbox while letting you track, filter, and organize messages by source.
-    </p>
+    <h2 id="gmail-tricks">{$_('tempGmailPage.seoTitle1')}</h2>
+    <p>{$_('tempGmailPage.seoP1')}</p>
+    <p>{$_('tempGmailPage.seoP2')}</p>
 
-    <h2>Understanding Gmail Plus-Addressing (The "+" Trick)</h2>
-    <p>
-        Gmail ignores everything after a plus sign (+) in your email address. If your email is <code>john.smith@gmail.com</code>, all of these deliver to the same inbox:
-    </p>
+    <h2>{$_('tempGmailPage.plusTitle')}</h2>
+    <p>{$_('tempGmailPage.plusP1')}</p>
     
     <ul class="gmail-examples">
-        <li><code>john.smith+shopping@gmail.com</code> — For online shopping sites</li>
-        <li><code>john.smith+newsletters@gmail.com</code> — For newsletter subscriptions</li>
-        <li><code>john.smith+facebook@gmail.com</code> — For Facebook signup</li>
-        <li><code>john.smith+netflix@gmail.com</code> — For Netflix trial</li>
-        <li><code>john.smith+spam@gmail.com</code> — For untrusted sites</li>
+        <li>{$_('tempGmailPage.plusL1')}</li>
+        <li>{$_('tempGmailPage.plusL2')}</li>
+        <li>{$_('tempGmailPage.plusL3')}</li>
+        <li>{$_('tempGmailPage.plusL4')}</li>
+        <li>{$_('tempGmailPage.plusL5')}</li>
     </ul>
 
-    <h3>Why Plus-Addressing Is Powerful</h3>
-    <p>
-        <strong>1. Track Email Sellers:</strong> If you sign up for a service with <code>yourname+serviceX@gmail.com</code> and start receiving spam at that address, you know exactly who sold your email to marketers.
-    </p>
-    <p>
-        <strong>2. Automatic Filtering:</strong> Create Gmail filters based on the "+" tag to automatically organize emails into folders, apply labels, or even auto-delete spam from specific sources.
-    </p>
-    <p>
-        <strong>3. Organize Signups:</strong> Use different tags for different categories: <code>+work</code>, <code>+personal</code>, <code>+trials</code>, <code>+shopping</code>. Instantly see what category each email belongs to.
-    </p>
-    <p>
-        <strong>4. Bypass "One Email Per Account" Restrictions:</strong> Some services (forums, contests, trials) only allow one account per email. Use plus-addressing to create "multiple" addresses: <code>you+account1@gmail.com</code>, <code>you+account2@gmail.com</code>, etc.
-    </p>
+    <h3>{$_('tempGmailPage.whyPlusTitle')}</h3>
+    <p>{$_('tempGmailPage.whyPlusP1')}</p>
+    <p>{$_('tempGmailPage.whyPlusP2')}</p>
+    <p>{$_('tempGmailPage.whyPlusP3')}</p>
+    <p>{$_('tempGmailPage.whyPlusP4')}</p>
 
-    <h2>The Gmail Dot Trick: Period Placement Doesn't Matter</h2>
-    <p>
-        Gmail completely ignores periods (dots) in the username portion of your email address. That means <code>johnsmith@gmail.com</code>, <code>john.smith@gmail.com</code>, <code>j.o.h.n.s.m.i.t.h@gmail.com</code>, and <code>joh.nsm.ith@gmail.com</code> all deliver to the exact same inbox.
-    </p>
+    <h2>{$_('tempGmailPage.dotTitle')}</h2>
+    <p>{$_('tempGmailPage.dotP1')}</p>
     
-    <h3>How to Use the Dot Trick</h3>
-    <p>
-        <strong>Multiple Account Signups:</strong> If a website only allows one email per person, you can register multiple accounts using different dot placements. The site sees them as different emails, but Gmail sees them all as yours.
-    </p>
-    <p>
-        <strong>Example:</strong> If your email is <code>johnsmith@gmail.com</code>:
-    </p>
-    <ul class="gmail-examples">
-        <li><code>johnsmith@gmail.com</code> — Account 1</li>
-        <li><code>john.smith@gmail.com</code> — Account 2</li>
-        <li><code>j.ohnsmith@gmail.com</code> — Account 3</li>
-        <li><code>john.s.mith@gmail.com</code> — Account 4</li>
-    </ul>
-    <p>
-        <strong>Note:</strong> Some websites have caught onto this trick and now treat dotted/non-dotted versions as the same email. But it still works on many platforms.
-    </p>
+    <h3>{$_('tempGmailPage.dotUseTitle')}</h3>
+    <p>{$_('tempGmailPage.dotUseP1')}</p>
 
-    <h2>Combining Plus-Addressing AND the Dot Trick</h2>
-    <p>
-        For maximum flexibility, combine both features: <code>j.o.h.n.smith+netflix@gmail.com</code>. This creates virtually unlimited unique addresses that all route to your single Gmail inbox while providing maximum tracking and filtering capabilities.
-    </p>
+    <h2>{$_('tempGmailPage.combineTitle')}</h2>
+    <p>{$_('tempGmailPage.combineP1')}</p>
     
-    <h3>Real-World Example: Tracking Data Breaches</h3>
-    <p>
-        Let's say you sign up for "ShoppingAppX" using <code>yourname+shoppingappx@gmail.com</code>. Six months later, you receive spam at that exact address. Now you know ShoppingAppX either:
-    </p>
+    <h3>{$_('tempGmailPage.breachTitle')}</h3>
+    <p>{$_('tempGmailPage.breachP1')}</p>
     <ul>
-        <li>Sold your email to marketers</li>
-        <li>Had a data breach</li>
-        <li>Shares emails with "partners"</li>
+        <li>{$_('tempGmailPage.breachL1')}</li>
+        <li>{$_('tempGmailPage.breachL2')}</li>
+        <li>{$_('tempGmailPage.breachL3')}</li>
     </ul>
-    <p>
-        You can now create a Gmail filter to automatically delete everything sent to <code>yourname+shoppingappx@gmail.com</code>, effectively blocking that source of spam without affecting your other emails.
-    </p>
+    <p>{$_('tempGmailPage.breachP2')}</p>
 
-    <h2>How to Set Up Gmail Filters for Plus-Addressing</h2>
-    <p>
-        Once you start using plus-addressing, organize incoming emails automatically:
-    </p>
+    <h2>{$_('tempGmailPage.filterTitle')}</h2>
+    <p>{$_('tempGmailPage.filterP1')}</p>
     
     <ol class="gmail-steps">
-        <li><strong>Open Gmail Settings:</strong> Click the gear icon → "See all settings"</li>
-        <li><strong>Go to "Filters and Blocked Addresses":</strong> Click "Create a new filter"</li>
-        <li><strong>Add Filter Rule:</strong> In the "To" field, enter <code>yourname+shopping@gmail.com</code></li>
-        <li><strong>Choose Action:</strong> Apply label "Shopping", skip inbox, mark as read, forward, or delete</li>
-        <li><strong>Save Filter:</strong> Click "Create filter" and you're done</li>
+        <li>{$_('tempGmailPage.filterL1')}</li>
+        <li>{$_('tempGmailPage.filterL2')}</li>
+        <li>{$_('tempGmailPage.filterL3')}</li>
+        <li>{$_('tempGmailPage.filterL4')}</li>
+        <li>{$_('tempGmailPage.filterL5')}</li>
     </ol>
-    <p>
-        Now every email sent to that address automatically gets organized according to your rules.
-    </p>
+    <p>{$_('tempGmailPage.filterP2')}</p>
 
-    <h2>Limitations of Gmail's Built-In Features</h2>
-    <p>
-        While powerful, Gmail's plus-addressing and dot trick have some limitations:
-    </p>
+    <h2>{$_('tempGmailPage.limitTitle')}</h2>
+    <p>{$_('tempGmailPage.limitP1')}</p>
     
     <ul class="limitations">
-        <li><strong>Not Truly Anonymous:</strong> Your base Gmail address is still visible. If <code>john.smith@gmail.com</code> is your real email, anyone can remove the "+tag" to find your actual address.</li>
-        <li><strong>Some Sites Block Plus Signs:</strong> A few websites reject email addresses containing "+" symbols, thinking they're invalid or suspicious.</li>
-        <li><strong>No Protection from Google:</strong> Google (the owner of Gmail) still sees all your activity. These tricks don't protect you from Google's data collection.</li>
-        <li><strong>Can't Delete Individual Aliases:</strong> Unlike true disposable emails, you can't "burn" an alias if it gets compromised—you can only filter it out.</li>
-        <li><strong>Not for High-Risk Signups:</strong> Since your real Gmail is still technically exposed, don't use these tricks for untrusted or risky websites. Use Fire Temp Mail's fully disposable addresses instead.</li>
+        <li>{$_('tempGmailPage.limitL1')}</li>
+        <li>{$_('tempGmailPage.limitL2')}</li>
+        <li>{$_('tempGmailPage.limitL3')}</li>
+        <li>{$_('tempGmailPage.limitL4')}</li>
+        <li>{$_('tempGmailPage.limitL5')}</li>
     </ul>
 
-    <h2>When to Use Gmail Tricks vs. Truly Disposable Emails</h2>
-    <p>
-        <strong>Use Gmail Plus-Addressing/Dot Trick When:</strong>
-    </p>
+    <h2>{$_('tempGmailPage.vsTitle')}</h2>
+    <p><strong>{$_('tempGmailPage.useGmailTitle')}</strong></p>
     <ul class="when-to-use">
-        <li>You want emails delivered to your main inbox</li>
-        <li>You need to track which services share/sell your email</li>
-        <li>You want to organize emails from different sources</li>
-        <li>The service is relatively trustworthy but spammy</li>
-        <li>You might need long-term access to the account</li>
+        <li>{$_('tempGmailPage.useGmailL1')}</li>
+        <li>{$_('tempGmailPage.useGmailL2')}</li>
+        <li>{$_('tempGmailPage.useGmailL3')}</li>
+        <li>{$_('tempGmailPage.useGmailL4')}</li>
+        <li>{$_('tempGmailPage.useGmailL5')}</li>
     </ul>
     
-    <p>
-        <strong>Use Fire Temp Mail's Fully Disposable Emails When:</strong>
-    </p>
+    <p><strong>{$_('tempGmailPage.useDispTitle')}</strong></p>
     <ul class="when-to-use">
-        <li>You need complete anonymity (no link to your real email)</li>
-        <li>Signing up for untrusted or risky websites</li>
-        <li>One-time verifications you'll never need again</li>
-        <li>Testing during development without cluttering your real inbox</li>
-        <li>Services that might spam heavily or sell data aggressively</li>
+        <li>{$_('tempGmailPage.useDispL1')}</li>
+        <li>{$_('tempGmailPage.useDispL2')}</li>
+        <li>{$_('tempGmailPage.useDispL3')}</li>
+        <li>{$_('tempGmailPage.useDispL4')}</li>
+        <li>{$_('tempGmailPage.useDispL5')}</li>
     </ul>
 
-    <h2>Gmail-Specific Privacy Tips & Advanced Techniques</h2>
+    <h2>{$_('tempGmailPage.tipsTitle')}</h2>
     
-    <h3>1. Create a "Burner" Gmail Filter System</h3>
-    <p>
-        Set up a dedicated filter for all plus-addressed emails:
-    </p>
+    <h3>{$_('tempGmailPage.tip1Title')}</h3>
+    <p>{$_('tempGmailPage.tip1P1')}</p>
     <ul>
-        <li>Filter condition: <code>to:yourname+*@gmail.com</code></li>
-        <li>Action: Apply label "Tracked Signups" and skip inbox</li>
-        <li>Result: All plus-addressed emails bypass your main inbox, keeping it clean</li>
+        <li>{$_('tempGmailPage.tip1L1')}</li>
+        <li>{$_('tempGmailPage.tip1L2')}</li>
+        <li>{$_('tempGmailPage.tip1L3')}</li>
     </ul>
     
-    <h3>2. Use Systematic Naming Conventions</h3>
-    <p>
-        Develop a consistent tagging system:
-    </p>
+    <h3>{$_('tempGmailPage.tip2Title')}</h3>
+    <p>{$_('tempGmailPage.tip2P1')}</p>
     <ul class="gmail-examples">
-        <li><code>+shop-[sitename]</code> — Shopping sites (e.g., <code>+shop-amazon</code>)</li>
-        <li><code>+news-[topic]</code> — Newsletters (e.g., <code>+news-tech</code>)</li>
-        <li><code>+trial-[service]</code> — Free trials (e.g., <code>+trial-netflix</code>)</li>
-        <li><code>+social-[platform]</code> — Social media (e.g., <code>+social-twitter</code>)</li>
+        <li>{$_('tempGmailPage.tip2L1')}</li>
+        <li>{$_('tempGmailPage.tip2L2')}</li>
+        <li>{$_('tempGmailPage.tip2L3')}</li>
+        <li>{$_('tempGmailPage.tip2L4')}</li>
     </ul>
     
-    <h3>3. Track Down Data Breach Sources</h3>
-    <p>
-        When you receive spam or phishing emails, check the "To" field. If it shows <code>yourname+specificsite@gmail.com</code>, you've identified the source of the leak or data breach.
-    </p>
+    <h3>{$_('tempGmailPage.tip3Title')}</h3>
+    <p>{$_('tempGmailPage.tip3P1')}</p>
 
-    <h2>Start Using Gmail's Privacy Features Today</h2>
-    <p>
-        Gmail's plus-addressing and dot trick are completely free, built-in features that work right now with your existing Gmail account. No signup, no third-party service, no risk. Start protecting your privacy and organizing your inbox by leveraging these powerful Gmail-specific capabilities.
-    </p>
-    <p>
-        <strong>For situations requiring full anonymity:</strong> Use Fire Temp Mail's truly disposable temporary email addresses on the homepage. For everything else, use Gmail's built-in privacy features explained here.
-    </p>
+    <h2>{$_('tempGmailPage.ctaTitle')}</h2>
+    <p>{$_('tempGmailPage.ctaP1')}</p>
+    <p>{$_('tempGmailPage.ctaP2')}</p>
 </section>
         </div>
 </div>

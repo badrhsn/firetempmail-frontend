@@ -16,6 +16,7 @@
     import Navigation from '$lib/components/Navigation.svelte';
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
+    import Hreflang from '$lib/components/Hreflang.svelte';
     
     // Import page data for SEO
     export let data;
@@ -403,12 +404,11 @@ function selectDomain(domain) {
         intervalID = setInterval(timedReload, 60000);
     }
 </script>
+<Hreflang path="/temporary-email-generator" />
 <svelte:head>
     <title>{data?.seo?.title || 'Temp Gmail Generator - Create Disposable Gmail Addresses Instantly | Fire Temp Mail'}</title>
-    <meta name="description" content={data?.seo?.description || 'Instantly generate temporary Gmail addresses with our advanced Gmailnator alternative. Create disposable emails that work everywhere for signups, verifications & spam protection.'}>
-    <meta name="keywords" content={data?.seo?.keywords || 'temp gmail, temporary gmail, gmailnator, emailnator, gmail generator'}>
+    <meta name="description" content={data?.seo?.description || 'Generate temporary email addresses instantly. Create disposable emails in seconds for signups, verifications & privacy protection.'}>
     <meta name="author" content="Fire Temp Mail">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Canonical URL - Points to homepage to avoid duplicate content -->
     <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/temporary-email-generator'}>
@@ -421,7 +421,7 @@ function selectDomain(domain) {
   "name": "Fire Temp Mail",
   "url": "https://firetempmail.com/temporary-email-generator",
   "description": "Advanced temporary email generator for creating instant disposable email addresses. Generate fake emails in seconds for signups, verifications & privacy protection.",
-  "applicationCategory": "Utility",
+  "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Web",
   "browserRequirements": "Requires JavaScript and an internet connection.",
   "offers": {
@@ -430,13 +430,6 @@ function selectDomain(domain) {
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock"
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "ratingCount": "2564",
-    "bestRating": "5",
-    "worstRating": "1"
-  },
   "creator": {
     "@type": "Organization",
     "name": "Fire Temp Mail",
@@ -444,6 +437,30 @@ function selectDomain(domain) {
   }
 }
     </script>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Temporary Email Generator - Create Disposable Emails Instantly | Fire Temp Mail" />
+    <meta property="og:description" content="Advanced temporary email generator for creating instant disposable email addresses. Generate emails in seconds for signups, verifications & privacy protection." />
+    <meta property="og:url" content="https://firetempmail.com/temporary-email-generator" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fire Temp Mail" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Temporary Email Generator - Fire Temp Mail" />
+    <meta name="twitter:description" content="Advanced temporary email generator for creating instant disposable email addresses." />
+
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+    <!-- BreadcrumbList Schema -->
+    {@html '<script type="application/ld+json">' + JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Temporary Email Generator", "item": "https://firetempmail.com/temporary-email-generator" }
+      ]
+    }) + '</script>'}
 </svelte:head>
 <!-- Toast Notifications -->
 <div class="toast-container">
@@ -537,11 +554,10 @@ function selectDomain(domain) {
             <!-- Header -->
             <h1>
                 <span>✉️&nbsp;</span>
-                Temporary Email Generator - Create Disposable Emails Instantly
+                {$_('temporaryEmailGenPage.h1')}
             </h1>
             <p class="lead">
-                Advanced temporary email generator for creating instant disposable email addresses. Generate fake emails in seconds for signups, verifications & privacy protection. No registration required.
-            </p>
+                {$_('temporaryEmailGenPage.lead')}</p>
             
             <!-- Email Address with Copy Button -->
             <div class="email-address-container">
@@ -550,7 +566,7 @@ function selectDomain(domain) {
                     <button 
                         on:click={copyToClipboard} 
                         class="btn-copy"
-                        title="Copy to clipboard"
+                        title={$_('email.copyToClipboard')}
                     >
                         {#if isCopying}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -607,31 +623,31 @@ function selectDomain(domain) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Generate New
+                        {$_('email.generateNew')}
                     </button>
                     
                     {#if emailType === 'domain'}
-                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
+                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title={$_('email.useCustomAlias2')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Custom Alias
+                        {$_('email.useCustomAlias2')}
                     </button>
                     
-                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title={$_('email.changeDomain')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Change Domain
+                        {$_('email.changeDomain')}
                     </button>
                     {/if}
                     
-                    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
+                    <button class="btn btn-secondary" on:click={manualReload} title={$_('email.refreshPage')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Refresh Page
+                        {$_('email.refreshPage')}
                     </button>
                 </div>
 
@@ -682,7 +698,7 @@ function selectDomain(domain) {
                         on:click={() => generateEmail(true, true)}
                         disabled={!customAlias}
                     >
-                        Generate Custom Email
+                        {$_('email.generateCustomEmail')}
                     </button>
                 </div>
                 {/if}
@@ -691,8 +707,8 @@ function selectDomain(domain) {
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
-                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
-                    <span>Waiting for incoming emails</span>
+                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading emails" loading="lazy">
+                    <span>{$_('email.waitingForEmails')}</span>
                 </div>
             {:else if !reloadActive}
                 <!-- Automatic refresh stopped -->
@@ -700,7 +716,7 @@ function selectDomain(domain) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>Automatic refresh stopped</span>
+                    <span>{$_('email.refreshStopped')}</span>
                 </div>
             {/if}
 
@@ -777,7 +793,7 @@ function selectDomain(domain) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                             <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                         </svg>
-                        <p>Your inbox is empty</p>
+                        <p>{$_('email.inboxEmpty')}</p>
                         <p>Emails sent to your temporary address will appear here</p>
                     </div>
                 {:else}
@@ -841,105 +857,10 @@ function selectDomain(domain) {
 </p>
 
 <!-- SEO article: Temporary Email Generator (optimized content) -->
-<section aria-labelledby="temp-email-generator" class="seo-article">
-    <h2 id="temp-email-generator">The Ultimate Temporary Email Generator for 2026</h2>
-    <p>
-        Need a quick disposable email address? Our temporary email generator creates instant throwaway email addresses in seconds. Whether you need a fake email for signups, a burner email for testing, or a temporary inbox for privacy protection, our generator provides unlimited disposable email addresses without any registration.
-    </p>
-    <p>
-        Generate working temporary email addresses instantly—no sign-up, no personal details, and no limitations. Our email generator creates disposable addresses that work with all major platforms while keeping your primary inbox clean and spam-free.
-    </p>
-
-    <h2>Why Use Our Temporary Email Generator?</h2>
-    <p>
-        In today's digital landscape, email addresses are required everywhere. But giving out your real email leads to spam, tracking, and privacy concerns. Our temporary email generator solves these problems:
-    </p>
-    
-    <h3>Instant Email Generation</h3>
-    <p>
-        Our temporary email generator creates disposable email addresses in milliseconds. One click and you have a fully functional throwaway email ready to receive messages. It's the fastest way to generate temporary emails for any purpose.
-    </p>
-
-    <h3>Multiple Domain Options</h3>
-    <p>
-        Unlike basic email generators, ours offers multiple domain choices including Gmail-style addresses. Generate temporary emails with @gmail.com, @googlemail.com, or choose from our other disposable email domains for maximum flexibility.
-    </p>
-
-    <h3>No Registration Email Generator</h3>
-    <p>
-        Our temporary email generator requires zero registration. No sign-up forms, no personal information, no email verification—just instant access to disposable email addresses whenever you need them.
-    </p>
-
-    <h2>How Our Temporary Email Generator Works</h2>
-    <p>
-        Our email generator uses advanced technology to create instant disposable email addresses:
-    </p>
-    
-    <h3>One-Click Generation</h3>
-    <p>
-        Visit the page and instantly receive a temporary email address. Our generator creates disposable emails faster than any other service—no waiting, no complicated steps, just instant throwaway email addresses.
-    </p>
-
-    <h3>Real-Time Inbox Access</h3>
-    <p>
-        All emails sent to your generated temporary address appear instantly in your disposable inbox. Our email generator provides real-time message delivery so you can complete verifications and signups immediately.
-    </p>
-
-    <h3>Custom Email Generation</h3>
-    <p>
-        Want a specific temporary email address? Our generator supports custom aliases, letting you create memorable disposable email addresses that are easy to remember during the session.
-    </p>
-
-    <h2>Key Features of Our Email Generator</h2>
-    <ul>
-        <li><strong>Unlimited Generation</strong> - Generate as many temporary email addresses as you need, no limits or quotas on our email generator.</li>
-        <li><strong>Works Everywhere</strong> - Our generated disposable emails work with Facebook, Instagram, Amazon, Netflix, and all major platforms.</li>
-        <li><strong>Multiple Formats</strong> - Choose between standard temp mail domains or Gmail-style addresses from our flexible email generator.</li>
-        <li><strong>Instant Creation</strong> - Fastest temporary email generator available—addresses created in under 1 second.</li>
-        <li><strong>Complete Privacy</strong> - Zero tracking, no logs, no data collection. Our email generator protects your anonymity.</li>
-        <li><strong>Custom Aliases</strong> - Generate temporary emails with custom names for easy organization and recall.</li>
-        <li><strong>Auto-Refresh</strong> - Automatic inbox checking ensures you never miss emails sent to your generated address.</li>
-    </ul>
-
-    <h2>When to Use a Temporary Email Generator</h2>
-    <p>
-        Our disposable email generator is perfect for countless situations:
-    </p>
-    
-    <h3>Online Account Creation</h3>
-    <p>
-        Use our temporary email generator when signing up for websites, apps, or services you don't fully trust. Generate a disposable email address to protect your real inbox from potential spam.
-    </p>
-
-    <h3>Free Trial Signups</h3>
-    <p>
-        Access free trials without using your real email. Our email generator creates throwaway addresses perfect for trying services without commitment or spam consequences.
-    </p>
-
-    <h3>Testing and Development</h3>
-    <p>
-        Developers love our email generator for testing registration flows and email functionality. Generate unlimited test email addresses without creating real accounts.
-    </p>
-
-    <h2>Best Temporary Email Generator Features</h2>
-    <p>
-        What makes our email generator the best choice for disposable emails:
-    </p>
-    
-    <ul>
-        <li><strong>Fastest Generation Speed</strong> - Create temporary emails instantly, faster than any competing email generator</li>
-        <li><strong>Highest Success Rate</strong> - Our generated addresses work where others fail, with 95%+ platform acceptance</li>
-        <li><strong>Most Reliable</strong> - 99.9% uptime ensures our email generator is always available when you need it</li>
-        <li><strong>Best Privacy</strong> - Zero data retention, complete anonymity with our disposable email generator</li>
-        <li><strong>Most Options</strong> - More domain choices than any other temporary email generator</li>
-        <li><strong>Easiest to Use</strong> - Simplest interface of any email generator, no learning curve required</li>
-    </ul>
-
-    <h2>Start Generating Temporary Emails Now</h2>
-    <p>
-        Protect your privacy and keep your inbox clean with our temporary email generator. Whether you need a quick disposable email for a one-time signup, a fake email generator for testing, or a reliable throwaway email service, we've got you covered. Generate your first temporary email address instantly and experience the freedom of anonymous browsing!
-    </p>
-</section>
+            <section aria-labelledby="temp-email-gen-seo" class="seo-article" style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
+                <h2 id="temp-email-gen-seo">{$_('temporaryEmailGenPage.seoTitle')}</h2>
+                <p>{$_('temporaryEmailGenPage.seoP1')}</p>
+            </section>
         </div>
 </div>
 </section>

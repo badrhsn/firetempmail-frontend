@@ -1,23 +1,41 @@
 <script>
-    import { locale, locales } from 'svelte-i18n';
+    import { locale } from 'svelte-i18n';
     import { languages } from '$lib/i18n';
+    import { defaultLocale, getLangFromPath, getCanonicalPath } from '$lib/i18n/lang.js';
     
     let showDropdown = false;
     
     function changeLanguage(lang) {
-        locale.set(lang);
         showDropdown = false;
-        // Store preference in localStorage
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('preferred-language', lang);
+        if (typeof window === 'undefined') return;
+        
+        // Store preference
+        localStorage.setItem('preferred-language', lang);
+        
+        // Update the lang cookie so hooks.server.js won't re-redirect
+        document.cookie = `lang=${lang};path=/;max-age=${60*60*24*365};samesite=lax;secure`;
+        
+        // Get the canonical (English) path from current URL
+        const currentPath = getCanonicalPath(window.location.pathname);
+        
+        // Build the new URL
+        let newPath;
+        if (lang === defaultLocale) {
+            // English: go to root path (no prefix)
+            newPath = currentPath || '/';
+        } else {
+            // Other languages: add /lang prefix
+            newPath = currentPath === '/' ? `/${lang}` : `/${lang}${currentPath}`;
         }
+        
+        // Navigate to the new URL
+        window.location.href = newPath;
     }
     
     function toggleDropdown() {
         showDropdown = !showDropdown;
     }
     
-    // Close dropdown when clicking outside
     function handleClickOutside(event) {
         if (!event.target.closest('.language-selector')) {
             showDropdown = false;

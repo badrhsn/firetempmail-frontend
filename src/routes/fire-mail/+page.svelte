@@ -16,6 +16,7 @@
     import Navigation from '$lib/components/Navigation.svelte';
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
+    import Hreflang from '$lib/components/Hreflang.svelte';
     
     // Import page data for SEO
     export let data;
@@ -403,12 +404,11 @@ function selectDomain(domain) {
         intervalID = setInterval(timedReload, 60000);
     }
 </script>
+<Hreflang path="/fire-mail" />
 <svelte:head>
     <title>{data?.seo?.title || 'Temp Gmail Generator - Create Disposable Gmail Addresses Instantly | Fire Temp Mail'}</title>
-    <meta name="description" content={data?.seo?.description || 'Instantly generate temporary Gmail addresses with our advanced Gmailnator alternative. Create disposable emails that work everywhere for signups, verifications & spam protection.'}>
-    <meta name="keywords" content={data?.seo?.keywords || 'temp gmail, temporary gmail, gmailnator, emailnator, gmail generator'}>
+    <meta name="description" content={data?.seo?.description || 'Fire Mail — generate temporary email addresses instantly. Fast, secure, and free disposable email for signups & spam protection.'}>
     <meta name="author" content="Fire Temp Mail">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Canonical URL - Points to homepage to avoid duplicate content -->
     <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/fire-mail'}>
@@ -421,7 +421,7 @@ function selectDomain(domain) {
   "name": "Fire Temp Mail",
   "url": "https://firetempmail.com/fire-mail",
   "description": "Fire Mail - Generate temporary email addresses instantly with Fire Temp Mail – a fast, secure, and free disposable email generator for privacy-conscious users.",
-  "applicationCategory": "Utility",
+  "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Web",
   "browserRequirements": "Requires JavaScript and an internet connection.",
   "offers": {
@@ -430,13 +430,6 @@ function selectDomain(domain) {
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock"
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "ratingCount": "2564",
-    "bestRating": "5",
-    "worstRating": "1"
-  },
   "creator": {
     "@type": "Organization",
     "name": "Fire Temp Mail",
@@ -444,6 +437,30 @@ function selectDomain(domain) {
   }
 }
     </script>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Fire Mail - Instant Temporary Email Addresses | Fire Temp Mail" />
+    <meta property="og:description" content="Fire Mail - Generate temporary email addresses instantly with Fire Temp Mail. Fast, secure, and free disposable email generator." />
+    <meta property="og:url" content="https://firetempmail.com/fire-mail" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fire Temp Mail" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Fire Mail - Fire Temp Mail" />
+    <meta name="twitter:description" content="Generate temporary email addresses instantly with Fire Temp Mail. Fast, secure, and free." />
+
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+    <!-- BreadcrumbList Schema -->
+    {@html '<script type="application/ld+json">' + JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Fire Mail", "item": "https://firetempmail.com/fire-mail" }
+      ]
+    }) + '</script>'}
 </svelte:head>
 <!-- Toast Notifications -->
 <div class="toast-container">
@@ -537,11 +554,10 @@ function selectDomain(domain) {
             <!-- Header -->
             <h1>
                 <span>✉️&nbsp;</span>
-                Fire Mail - Free Temporary Email Service
+                {$_('fireMailPage.h1')}
             </h1>
             <p class="lead">
-                Fire Mail provides instant, free temporary email addresses for ultimate privacy protection. Generate disposable emails in seconds without registration. Perfect for signups, verifications, and spam protection.
-            </p>
+                {$_('fireMailPage.lead')}</p>
             
             <!-- Email Address with Copy Button -->
             <div class="email-address-container">
@@ -550,7 +566,7 @@ function selectDomain(domain) {
                     <button 
                         on:click={copyToClipboard} 
                         class="btn-copy"
-                        title="Copy to clipboard"
+                        title={$_('email.copyToClipboard')}
                     >
                         {#if isCopying}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -607,31 +623,31 @@ function selectDomain(domain) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Generate New
+                        {$_('email.generateNew')}
                     </button>
                     
                     {#if emailType === 'domain'}
-                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
+                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title={$_('email.useCustomAlias2')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Custom Alias
+                        {$_('email.useCustomAlias2')}
                     </button>
                     
-                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title={$_('email.changeDomain')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Change Domain
+                        {$_('email.changeDomain')}
                     </button>
                     {/if}
                     
-                    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
+                    <button class="btn btn-secondary" on:click={manualReload} title={$_('email.refreshPage')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Refresh Page
+                        {$_('email.refreshPage')}
                     </button>
                 </div>
 
@@ -682,7 +698,7 @@ function selectDomain(domain) {
                         on:click={() => generateEmail(true, true)}
                         disabled={!customAlias}
                     >
-                        Generate Custom Email
+                        {$_('email.generateCustomEmail')}
                     </button>
                 </div>
                 {/if}
@@ -691,8 +707,8 @@ function selectDomain(domain) {
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
-                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
-                    <span>Waiting for incoming emails</span>
+                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading emails" loading="lazy">
+                    <span>{$_('email.waitingForEmails')}</span>
                 </div>
             {:else if !reloadActive}
                 <!-- Automatic refresh stopped -->
@@ -700,7 +716,7 @@ function selectDomain(domain) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>Automatic refresh stopped</span>
+                    <span>{$_('email.refreshStopped')}</span>
                 </div>
             {/if}
 
@@ -777,7 +793,7 @@ function selectDomain(domain) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                             <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                         </svg>
-                        <p>Your inbox is empty</p>
+                        <p>{$_('email.inboxEmpty')}</p>
                         <p>Emails sent to your temporary address will appear here</p>
                     </div>
                 {:else}
@@ -841,105 +857,10 @@ function selectDomain(domain) {
 </p>
 
 <!-- SEO article: Fire Mail service (optimized content) -->
-<section aria-labelledby="fire-mail-service" class="seo-article">
-    <h2 id="fire-mail-service">What is Fire Mail? Your Privacy Protection Solution</h2>
-    <p>
-        Tired of inbox clutter from endless notifications, promotions, and spam? Fire Mail offers the ultimate solution with instant, disposable email addresses that protect your privacy. Unlike other temporary email services, Fire Mail addresses work seamlessly with major platforms including Facebook, Google, Twitter, Amazon, and more.
-    </p>
-    <p>
-        Generate a working temporary email address in seconds—no registration, no personal details, and no risk of being flagged or banned. Keep your primary inbox clean and focused on what truly matters while maintaining complete privacy and security with Fire Mail.
-    </p>
-
-    <h2>Why Choose Fire Mail for Temporary Emails?</h2>
-    <p>
-        In today's digital world, your email is constantly exposed to data breaches, spam lists, and marketing campaigns. Sharing your primary email everywhere increases security risks and inbox clutter. Fire Mail provides the perfect solution:
-    </p>
-    
-    <h3>100% Free & No Registration Required</h3>
-    <p>
-        Fire Mail is completely free to use with no hidden costs or registration required. Simply visit the site and instantly get a temporary email address ready to receive messages. No sign-up forms, no personal information needed—just immediate access to disposable email protection.
-    </p>
-
-    <h3>Complete Privacy Protection</h3>
-    <p>
-        Every time you use your real email address online, you expose personal information to potential data breaches. Fire Mail's temporary email addresses shield your identity and primary inbox from unwanted exposure, keeping your personal information secure and private.
-    </p>
-
-    <h3>Instant Temporary Email Creation</h3>
-    <p>
-        Need a quick email for verification? Fire Mail provides immediate temporary email addresses that last exactly as long as you need them—perfect for quick sign-ups, one-time verifications, and temporary access without the limitations of other services.
-    </p>
-
-    <h2>How Does Fire Mail Work?</h2>
-    <p>
-        Fire Mail makes temporary email simple and effective. Our system creates authentic disposable email addresses with full functionality:
-    </p>
-    
-    <h3>Multiple Domain Options</h3>
-    <p>
-        Fire Mail provides various email domains to choose from, giving you flexibility and ensuring your temporary addresses work with any platform. Select from our available domains or use Gmail-style addresses for maximum compatibility.
-    </p>
-
-    <h3>Instant Inbox Access</h3>
-    <p>
-        Once generated, your Fire Mail temporary address immediately begins receiving messages. Access your inbox through our secure platform to view verification emails, signup confirmations, or any other correspondence in real-time.
-    </p>
-
-    <h3>No Registration Required</h3>
-    <p>
-        Fire Mail is completely anonymous—no account creation, no personal information, no tracking. Simply generate and use temporary email addresses whenever you need them, maintaining complete privacy throughout the process.
-    </p>
-
-    <h2>Key Advantages of Fire Mail</h2>
-    <ul>
-        <li><strong>100% Free Forever</strong> - Fire Mail is completely free with no hidden fees, no premium upgrades, and no payment required ever.</li>
-        <li><strong>Works Everywhere</strong> - Our addresses work seamlessly with Facebook, Google, Twitter, Amazon, and other major platforms that typically block disposable emails.</li>
-        <li><strong>Customizable Addresses</strong> - Create custom aliases and choose from multiple domains to organize your sign-ups and filter messages efficiently.</li>
-        <li><strong>Instant Generation</strong> - One-click address creation with immediate functionality—no waiting, no setup required.</li>
-        <li><strong>Complete Anonymity</strong> - No registration, no personal data collection, and no tracking of your activity with Fire Mail.</li>
-        <li><strong>Spam Protection</strong> - Shield your primary inbox from marketing emails, newsletters, and potential spam campaigns.</li>
-        <li><strong>Security Enhancement</strong> - Reduce your exposure to data breaches and phishing attempts by using Fire Mail for questionable sites.</li>
-    </ul>
-
-    <h2>Perfect Solution for Multiple Use Cases</h2>
-    <p>
-        Fire Mail serves various needs beyond basic email verification:
-    </p>
-    
-    <h3>Website Testing & Development</h3>
-    <p>
-        Developers and QA testers can generate multiple Fire Mail addresses to test registration flows, email templates, and notification systems without cluttering personal inboxes.
-    </p>
-
-    <h3>Limited-Time Offers & Trials</h3>
-    <p>
-        Sign up for free trials, one-time discounts, or temporary access to content with Fire Mail without worrying about cancellation reminders or ongoing marketing emails.
-    </p>
-
-    <h3>Online Shopping & E-commerce</h3>
-    <p>
-        Make online purchases using Fire Mail without exposing your primary email to retail marketing campaigns and potential data breaches from less secure shopping platforms.
-    </p>
-
-    <h2>Why Fire Mail is Better Than Other Temp Mail Services</h2>
-    <p>
-        While other temporary email services exist, Fire Mail provides distinct advantages:
-    </p>
-    
-    <ul>
-        <li><strong>Superior Deliverability</strong> - Fire Mail addresses have higher success rates with platforms that typically block disposable emails</li>
-        <li><strong>Enhanced Privacy</strong> - We don't store or log your email content, ensuring complete privacy</li>
-        <li><strong>Better User Experience</strong> - Clean, intuitive interface with faster generation and message retrieval</li>
-        <li><strong>Extended Accessibility</strong> - Longer inbox availability compared to standard 10-minute mail services</li>
-        <li><strong>Mobile Optimization</strong> - Fully responsive design that works perfectly on all devices</li>
-        <li><strong>Always Free</strong> - No premium tier, no paywalls—Fire Mail is 100% free forever</li>
-    </ul>
-
-    <h2>Start Using Fire Mail Today</h2>
-    <p>
-        Don't risk your privacy and inbox cleanliness with your real email address. Fire Mail provides reliable, free temporary email addresses that protect your identity and keep your primary inbox spam-free. Experience the freedom of signing up for services without consequences—generate your first Fire Mail address now!
-    </p>
-</section>
+            <section aria-labelledby="fire-mail-seo" class="seo-article" style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
+                <h2 id="fire-mail-seo">{$_('fireMailPage.seoTitle')}</h2>
+                <p>{$_('fireMailPage.seoP1')}</p>
+            </section>
         </div>
 </div>
 </section>

@@ -42,7 +42,36 @@
     "enterEmail": "输入电子邮件地址",
     "autoRefresh": "自动刷新",
     "stopAfter": "停止于",
-    "reloads": "次刷新后"
+    "reloads": "次刷新后",
+    "awayMessage": "您已离开一段时间。您的临时邮箱可能已过期。",
+    "awayQuestion": "生成一个新的？",
+    "emailsWillAppear": "收到的邮件将显示在这里",
+    "noContent": "无内容",
+    "noSubject": "无主题",
+    "unknownDate": "未知日期",
+    "unknownSender": "未知发件人",
+    "generateNew": "生成新邮箱",
+    "changeDomain": "更换域名",
+    "refreshPage": "刷新页面",
+    "generateCustomEmail": "生成自定义邮箱",
+    "waitingForEmails": "等待接收邮件",
+    "refreshStopped": "自动刷新已停止",
+    "inboxEmpty": "您的收件箱为空",
+    "domain": "域名",
+    "gmail": "Gmail",
+    "googlemail": "GoogleMail",
+    "copyToClipboard": "复制到剪贴板",
+    "useCustomAlias2": "使用自定义别名",
+    "changeDomain2": "更换域名",
+    "refreshPage2": "刷新页面",
+    "scenario": "场景：",
+    "solution": "解决方案：",
+    "challenge": "挑战：",
+    "testingWorkflow": "测试工作流：",
+    "testScenarios": "测试场景：",
+    "perfectFor": "适用于：",
+    "important": "重要提示：",
+    "neverUse": "切勿将临时邮箱用于："
   },
   "stats": {
     "emailsCreated": "已创建邮箱",
@@ -118,7 +147,9 @@
     "search": "搜索",
     "filter": "筛选",
     "sort": "排序",
-    "more": "更多"
+    "more": "更多",
+    "scenario": "场景",
+    "solution": "解决方案"
   },
   "home": {
     "title": "Fire Temp Mail – 您的免费临时一次性电子邮件生成器",
@@ -155,6 +186,169 @@
     "tiktokGuide": {
       "title": "TikTok 临时电子邮件",
       "description": "使用临时邮件创建 TikTok 帐户。让您的收件箱远离促销电子邮件。"
+    },
+    "choosingFeatures": {
+      "anonymous": "匿名使用 – 无需注册，无需个人数据",
+      "custom": "自定义别名 – 创建易记的临时地址",
+      "inbox": "智能收件箱 – 自动刷新的收件箱，实时接收邮件",
+      "instant": "即时生成 – 不到2秒即可获得可用的邮箱",
+      "interface": "简洁界面 – 简单、少广告的设计，专注于可用性",
+      "privacy": "隐私优先 – 不追踪，不记录，不出售数据",
+      "unlimited": "无限邮箱 – 按需创建任意数量的临时地址"
+    },
+    "choosingText": "以下是 Fire Temp Mail 成为临时邮箱最佳选择的原因：",
+    "choosingTitle": "为什么选择 Fire Temp Mail",
+    "conclusionText": "Fire Temp Mail 是您对抗垃圾邮件、数据泄露和不需要的营销邮件的第一道防线。立即开始保护您的真实收件箱。",
+    "conclusionTitle": "立即保护您的收件箱",
+    "deasCompromise": "一次性电子邮件地址在便利性和隐私之间取得了完美的平衡。",
+    "deasFeatures": {
+      "control": "完全控制哪些服务能获取您的真实邮箱",
+      "expire": "自动过期意味着不会留下永久的数字足迹",
+      "protect": "保护您的主收件箱免受垃圾邮件和数据泄露",
+      "register": "无需注册 – 即时且匿名"
+    },
+    "deasText": "一次性电子邮件地址（DEA）是专为短期使用而设计的临时匿名电子邮件地址。",
+    "deasTitle": "什么是一次性电子邮件地址？",
+    "effectiveAdvanced": "高级用户会将临时邮箱与 VPN 服务和隐私浏览器结合使用，以获得最大程度的匿名性。",
+    "effectiveText": "遵循这些最佳实践，充分利用临时邮箱服务。",
+    "effectiveTitle": "如何有效使用临时邮箱",
+    "techIntro": "Fire Temp Mail 使用现代云基础设施提供快速、可靠的临时邮箱服务。",
+    "techTitle": "Fire Temp Mail 背后的技术",
+    "uses": {
+      "multiple": {
+        "text": "需要测试多个账户？按需生成任意数量的临时邮箱。",
+        "title": "多账户测试"
+      },
+      "retail": {
+        "text": "在线购物？使用临时邮箱获取折扣码，避免无休止的营销邮件。",
+        "title": "网上购物与零售"
+      },
+      "spam": {
+        "text": "注册新服务？使用临时邮箱避免垃圾邮件进入您的真实收件箱。",
+        "title": "避免垃圾邮件"
+      },
+      "testing": {
+        "text": "开发人员和QA测试人员使用临时邮箱测试邮件功能，无需创建真实账户。",
+        "title": "软件测试"
+      },
+      "trials": {
+        "text": "使用临时邮箱无风险试用高级服务。无需承诺，无垃圾邮件。",
+        "title": "免费试用注册"
+      }
+    },
+    "usesTitle": "临时邮箱的常见用途",
+    "howItWorks": {
+      "title": "🚀 Fire Temp Mail 工作原理 - 分步指南",
+      "subtitle": "通过我们简单的免注册流程，在几秒内获取您的临时邮箱",
+      "step1Title": "即时生成邮箱",
+      "step1Text": "您访问 Fire Temp Mail 的那一刻，我们会自动为您生成一个全新的临时邮箱地址。无需注册表单、无需个人信息、无需等待——即时访问。",
+      "step2Title": "复制您的临时邮箱",
+      "step2Text": "点击复制按钮将您的一次性邮箱地址保存到剪贴板。您可以在任何需要提供邮箱进行注册、下载或验证的地方使用此邮箱。",
+      "step3Title": "即时接收邮件",
+      "step3Text": "发送到您临时地址的所有邮件将在几秒内出现在收件箱中。根据需要查看、阅读和转发。收件箱实时自动更新。",
+      "step4Title": "自动删除保护隐私",
+      "step4Text": "您的临时邮件在24小时后自动删除，不留任何痕迹。您的隐私从设计上得到保护——无日志、无追踪、无永久存储。"
+    },
+    "useCases": {
+      "title": "💡 何时使用 Fire Temp Mail：真实案例",
+      "subtitle": "了解我们的用户如何在日常生活中保护他们的隐私",
+      "gaming": {
+        "title": "游戏平台注册",
+        "scenario": "您想尝试一款新的在线游戏，但不想让游戏通讯塞满您的收件箱。",
+        "solution": "使用 Fire Temp Mail 注册，验证您的游戏账户，保持真实邮箱远离垃圾邮件。非常适合无负担地尝试多个游戏平台。"
+      },
+      "downloads": {
+        "title": "下载免费资源",
+        "scenario": "网站提供免费电子书、模板或软件下载，但需要邮箱注册。",
+        "solution": "使用临时邮箱获取下载链接，无需加入他们的邮件列表。获取资源后继续前进，无需担心未来的营销邮件。"
+      },
+      "shopping": {
+        "title": "一次性购物折扣",
+        "scenario": "一家网店为首次邮箱订阅者提供9折优惠，但您不想收到每日促销邮件。",
+        "solution": "用一次性邮箱获取折扣码。享受优惠，远离垃圾邮件。"
+      },
+      "developer": {
+        "title": "开发测试与质量保证",
+        "scenario": "您正在测试应用中的邮件功能，需要多个邮箱地址用于不同的测试场景。",
+        "solution": "生成无限临时邮箱，用于测试用户注册、邮箱验证、通知系统和密码恢复——无需管理真实账户。"
+      },
+      "social": {
+        "title": "社交媒体试用账户",
+        "scenario": "您想在使用真实邮箱之前先了解一个社交平台。",
+        "solution": "用临时邮箱创建试用账户。如果喜欢该平台，您随时可以稍后用真实邮箱创建永久账户。"
+      },
+      "contests": {
+        "title": "参加竞赛和抽奖",
+        "scenario": "您想参加在线竞赛，但担心来自赞助商的垃圾邮件。",
+        "solution": "使用 Fire Temp Mail 参加竞赛。如果获奖，您会收到通知；如果没有，不会有垃圾邮件跟随您。"
+      }
+    },
+    "security": {
+      "title": "🔒 我们如何保护您的隐私和安全",
+      "subtitle": "您的匿名性是我们的首要任务。以下是我们如何保障您的安全。",
+      "zeroLog": {
+        "title": "零数据记录",
+        "text": "我们不记录IP地址、不追踪用户行为、不存储个人信息。您的使用完全匿名。我们无法将临时邮箱追溯到个人用户。"
+      },
+      "autoDeletion": {
+        "title": "自动删除",
+        "text": "所有邮件在最多24小时后自动删除。没有永久存储意味着没有数据泄露。即使有人想访问您的旧邮件，它们已经不存在了。"
+      },
+      "noRegistration": {
+        "title": "无需注册",
+        "text": "我们从不要求您的姓名、邮箱、电话号码或任何个人信息。只需即时访问临时邮箱地址。没有账户意味着没有可泄露的数据。"
+      },
+      "spamFilter": {
+        "title": "垃圾邮件和恶意软件过滤",
+        "text": "基本的垃圾邮件保护过滤恶意邮件，同时允许合法消息通过。可疑附件和网络钓鱼尝试被自动拦截。"
+      },
+      "encryption": {
+        "title": "HTTPS加密",
+        "text": "所有与 Fire Temp Mail 的连接都使用HTTPS加密。您与我们服务器的通信是安全的，不会被第三方拦截。"
+      },
+      "noTracking": {
+        "title": "无第三方追踪",
+        "text": "我们不使用侵入性追踪Cookie，也不与广告商共享数据。使用我们的服务时，您的浏览保持私密。"
+      }
+    },
+    "limitations": {
+      "title": "⚠️ 重要：Fire Temp Mail 不适用于什么",
+      "subtitle": "对自己诚实：临时邮箱有局限性。以下是您需要了解的。",
+      "neverUseTitle": "永远不要将临时邮箱用于：",
+      "banking": "银行或金融账户：",
+      "bankingText": "您需要永久访问这些账户。如果邮箱被删除，密码重置和安全通知将无法送达。",
+      "socialMedia": "主要社交媒体：",
+      "socialMediaText": "Facebook、Instagram、Twitter、LinkedIn——使用您的真实邮箱。您需要它来恢复账户。",
+      "workSchool": "工作或学校邮箱：",
+      "workSchoolText": "重要的通信需要是永久和可靠的。",
+      "government": "政府服务：",
+      "governmentText": "报税、福利、官方文件——这些需要永久的邮箱地址。",
+      "healthcare": "医疗门户：",
+      "healthcareText": "医疗信息和预约提醒对临时邮箱来说太重要了。",
+      "ecommerce": "电商账户：",
+      "ecommerceText": "如果您计划购物或跟踪订单，请使用真实邮箱获取订单确认和客户支持。",
+      "whyNot": "为什么不行？",
+      "whyNotText": "临时邮箱在24小时后自动删除。如果您需要恢复账户、重置密码或稍后访问重要通知，您将收不到这些邮件。仅将 Fire Temp Mail 用于非关键的临时需求。",
+      "otherLimitations": "📧 其他重要限制：",
+      "cannotSend": "无法发送邮件：",
+      "cannotSendText": "Fire Temp Mail 仅支持接收。您可以阅读收到的邮件，但无法发送回复或撰写新消息。",
+      "lifetime": "24小时生命周期：",
+      "lifetimeText": "邮件最多保留24小时。之后将被永久删除，无法恢复。",
+      "attachments": "无附件安全保障：",
+      "attachmentsText": "虽然我们过滤恶意软件，但无法保证100%安全。不要打开可疑附件。",
+      "blocked": "部分网站屏蔽临时邮箱：",
+      "blockedText": "PayPal、银行和一些社交平台等服务会检测并屏蔽临时邮箱域名。",
+      "noForwarding": "无邮件转发：",
+      "noForwardingText": "您可以在我们的界面中查看邮件，但无法自动转发到您的真实邮箱。",
+      "perfectForTitle": "✅ Fire Temp Mail 完美适用于：",
+      "perfectFor1": "免费试用注册（流媒体服务、软件）",
+      "perfectFor2": "下载资源（电子书、模板、指南）",
+      "perfectFor3": "您不确定的新闻通讯订阅",
+      "perfectFor4": "论坛和社区注册",
+      "perfectFor5": "参加竞赛和抽奖",
+      "perfectFor6": "测试和开发工作",
+      "perfectFor7": "一次性验证",
+      "perfectFor8": "在不受信任的网站上保护隐私"
     }
   },
   "blog": {
@@ -162,6 +356,538 @@
     "subtitle": "关于临时电子邮件和在线隐私的提示、指南和见解",
     "readMore": "阅读更多",
     "popular": "我们博客中的热门文章",
-    "visitBlog": "访问我们的博客"
+    "visitBlog": "访问我们的博客",
+    "backToBlog": "返回博客",
+    "by": "作者",
+    "category": "分类",
+    "error": "错误",
+    "loading": "加载中...",
+    "pleaseWait": "文章正在加载，请稍候。",
+    "postNotFound": "未找到请求的博客文章。",
+    "readTime": "阅读时长",
+    "shareArticle": "分享这篇文章"
+  },
+  "advertising": {
+    "audience": {
+      "text": "我们每天服务数千名精通技术、注重隐私的用户，他们积极寻求保护在线身份的解决方案。",
+      "title": "我们的受众"
+    },
+    "getStarted": {
+      "text": "如需了解广告费率和投放详情，请联系我们：",
+      "title": "立即开始"
+    },
+    "metaDescription": "在 Fire Temp Mail 上投放广告——触达注重隐私的用户群体",
+    "metaTitle": "广告投放 – Fire Temp Mail",
+    "opportunities": {
+      "text": "Fire Temp Mail 提供独特的广告机会，帮助您触达注重隐私和安全的受众。",
+      "title": "广告机会"
+    },
+    "options": {
+      "text": "我们提供多种广告选项，包括横幅广告、赞助内容和合作伙伴关系。",
+      "title": "广告选项"
+    },
+    "policy": {
+      "text": "我们实行严格的广告政策，以确保用户获得良好的体验。",
+      "title": "广告政策"
+    },
+    "title": "与我们合作"
+  },
+  "contact": {
+    "businessInquiries": "商务咨询",
+    "businessText": "如需商业合作与伙伴关系：",
+    "emailSupport": "邮件支持",
+    "generalInquiries": "一般咨询和支持：",
+    "getInTouch": "联系我们",
+    "loveToHear": "我们很乐意听到您的声音！以下是联系方式：",
+    "metaDescription": "联系 Fire Temp Mail——获取支持并联系我们的团队",
+    "reportAbuse": "举报滥用",
+    "reportAbuseText": "如需举报滥用或违法行为：",
+    "responseText": "我们通常在工作日内的24-48小时内回复所有消息。",
+    "responseTime": "响应时间",
+    "title": "联系我们"
+  },
+  "faq": {
+    "categories": {
+      "privacy": {
+        "description": "我们如何保护您的数据和身份",
+        "icon": "🔒",
+        "title": "隐私与安全"
+      },
+      "usage": {
+        "description": "如何有效使用我们的服务",
+        "icon": "⏱️",
+        "title": "使用与功能"
+      }
+    },
+    "metaDescription": "常见问题 – 关于 Fire Temp Mail 临时邮箱服务的常见问题",
+    "metaTitle": "常见问题 – Fire Temp Mail",
+    "questions": {
+      "q1": {
+        "answer": "Fire Temp Mail 提供临时的一次性电子邮件地址，您可以使用它接收邮件而不暴露您的个人电子邮件。只需访问我们的网站即可立即获得一个电子邮件地址。",
+        "question": "什么是 Fire Temp Mail？"
+      },
+      "q2": {
+        "answer": "临时邮箱有效期最长为24小时。之后，邮箱地址和所有收到的消息将被永久删除。",
+        "question": "临时邮箱能使用多长时间？"
+      },
+      "q3": {
+        "answer": "是的，Fire Temp Mail 完全免费使用。无需注册，无需信用卡，没有任何隐藏费用。",
+        "question": "Fire Temp Mail 是免费的吗？"
+      },
+      "q4": {
+        "answer": "是的，您可以在您的临时邮箱地址上接收邮件。邮件会实时显示在您的收件箱中。",
+        "question": "可以接收邮件吗？"
+      },
+      "q5": {
+        "answer": "我们非常重视隐私。我们不存储个人数据，不需要注册，所有邮件都会自动删除。",
+        "question": "我的隐私受到保护吗？"
+      },
+      "q6": {
+        "answer": "是的，您可以为临时邮箱地址创建自定义别名，而不使用随机生成的地址。",
+        "question": "我可以选择自己的邮箱地址吗？"
+      },
+      "q7": {
+        "answer": "是的，我们提供多个邮箱域名供选择，包括 Gmail 风格的地址。",
+        "question": "支持多个域名吗？"
+      },
+      "q8": {
+        "answer": "不可以，临时邮箱仅用于接收邮件。您不能从临时地址发送邮件。",
+        "question": "可以发送邮件吗？"
+      }
+    },
+    "subtitle": "查找有关我们临时邮箱服务的常见问题解答",
+    "title": "常见问题"
+  },
+  "privacy": {
+    "ads": {
+      "text": "我们可能会展示第三方广告。这些广告合作伙伴可能会使用 Cookie 来投放相关广告。",
+      "title": "广告"
+    },
+    "changes": {
+      "text": "我们可能会不时更新本隐私政策。更改将发布在此页面上。",
+      "title": "政策变更"
+    },
+    "children": {
+      "text": "我们的服务不面向13岁以下儿童。我们不会故意收集儿童的数据。",
+      "title": "儿童隐私"
+    },
+    "contact": {
+      "email": "邮箱：support@firetempmail.com",
+      "text": "如果您对本隐私政策有任何疑问，请联系我们：",
+      "title": "联系我们"
+    },
+    "cookies": {
+      "intro": "我们仅使用 Cookie 来维护您的会话和临时邮箱偏好设置。",
+      "items": [
+        "用于保持临时邮箱活跃的会话 Cookie。",
+        "用于高级用户管理登录会话的持久 Cookie。"
+      ],
+      "note": "用户可以在浏览器中禁用 Cookie；但这可能会影响服务功能。",
+      "title": "Cookie"
+    },
+    "dataRetention": {
+      "text": "临时邮件和消息会在24小时后自动删除。我们不会在此期限之后保留邮件数据。",
+      "title": "数据保留"
+    },
+    "footer": {
+      "copyright": "FireTempMail。保留所有权利。",
+      "quickLinks": "快速链接",
+      "scanSupport": "扫描二维码在 Ko-fi 上支持我们",
+      "supportService": "支持我们的服务",
+      "supportText": "通过捐赠帮助我们保持 FireTempMail 免费。您的支持帮助我们继续运营。"
+    },
+    "infoCollect": {
+      "intro": "我们努力将收集的数据降到最少。我们的服务主要在不需要您个人信息的情况下运行。",
+      "items": [
+        "IP 地址（用于速率限制和防止滥用）",
+        "浏览器类型和版本",
+        "生成的临时邮箱地址",
+        "收到的邮件（24小时后自动删除）"
+      ],
+      "title": "我们收集的信息"
+    },
+    "infoUse": {
+      "intro": "收集的信息仅用于运营、维护和改进我们的服务。",
+      "items": [
+        "提供和维护临时邮箱服务",
+        "防止滥用并确保服务稳定性",
+        "改善用户体验和服务性能"
+      ],
+      "title": "我们如何使用信息"
+    },
+    "international": {
+      "text": "您的信息可能会在您所在国家/地区以外的地方进行处理。我们确保采取适当的保护措施。",
+      "title": "国际数据传输"
+    },
+    "introduction": {
+      "text": "Fire Temp Mail 致力于保护您的隐私。本政策说明我们如何处理您的信息。",
+      "title": "简介"
+    },
+    "metaDescription": "隐私政策 – 了解 Fire Temp Mail 如何保护您的数据",
+    "metaTitle": "隐私政策 – Fire Temp Mail",
+    "security": {
+      "text": "我们采取适当的技术措施来防止未经授权访问您的数据。",
+      "title": "数据安全"
+    },
+    "thirdParty": {
+      "text": "除本政策所述情况外，我们不会出售、交易或与第三方分享您的个人信息。",
+      "title": "第三方共享"
+    },
+    "title": "隐私政策",
+    "userRights": {
+      "text": "您有权访问、更正或删除您的个人数据。请联系我们以行使这些权利。",
+      "title": "您的权利"
+    }
+  },
+  "terms": {
+    "acceptableUse": {
+      "intro": "您同意不直接或间接将 Fire Temp Mail 用于任何非法目的。",
+      "items": [
+        "发送垃圾邮件或未经请求的消息",
+        "从事违法活动",
+        "骚扰或威胁他人",
+        "传播恶意软件或有害内容",
+        "侵犯知识产权"
+      ],
+      "title": "可接受的使用"
+    },
+    "changes": {
+      "text": "我们可能会不时更新这些条款。继续使用本服务即表示接受更新后的条款。",
+      "title": "条款变更"
+    },
+    "contact": {
+      "email": "邮箱：support@firetempmail.com",
+      "text": "如果您对这些条款有任何疑问，请联系我们：",
+      "title": "联系方式"
+    },
+    "dataStorage": {
+      "text1": "通过 Fire Temp Mail 收到的消息会临时存储，并在设定期限后自动删除。",
+      "text2": "我们不保证服务的正常运行时间或不间断可用性。",
+      "title": "数据存储"
+    },
+    "introduction": {
+      "text": "使用 Fire Temp Mail 即表示您同意这些服务条款。请仔细阅读。",
+      "title": "简介"
+    },
+    "liability": {
+      "disclaimer": "您同意免除因使用本服务而产生的任何损害、损失或索赔。",
+      "intro": "Fire Temp Mail 按「原样」提供，不提供任何形式的保证。",
+      "items": [
+        "消息将始终被送达、存储或可访问。",
+        "域名将保持不变或无限期可用。",
+        "消息将保持未修改状态或不含恶意软件。"
+      ],
+      "title": "责任限制"
+    },
+    "metaDescription": "服务条款 – 阅读 Fire Temp Mail 的条款和条件",
+    "metaTitle": "服务条款 – Fire Temp Mail",
+    "premium": {
+      "billing": "高级服务推出时，定价、计费和订阅条款将清楚展示。",
+      "features": [
+        "多个邮箱可同时管理多个地址。",
+        "专属高级域名，不易被封锁。",
+        "超出免费服务限制的延长消息存储。",
+        "无广告体验，界面更加简洁。",
+        "优先客户支持。"
+      ],
+      "intro": "高级服务按订阅制提供，可能包含额外功能。",
+      "title": "高级服务"
+    },
+    "privacy": {
+      "text": "您对 Fire Temp Mail 的使用同样受我们的隐私政策约束。",
+      "title": "隐私"
+    },
+    "serviceDesc": {
+      "text": "Fire Temp Mail 提供临时的一次性电子邮件地址以保护您的隐私。",
+      "title": "服务说明"
+    },
+    "title": "服务条款"
+  },
+  "emailGeneratorPage": {
+    "h1": "Fire Temp Mail – 免费临时邮箱生成器",
+    "lead": "即时生成临时电子邮件地址。保护您的真实收件箱隐私，远离垃圾邮件和不需要的邮件。",
+    "seoTitle": "开发者和QA测试专用邮箱生成器",
+    "seoDesc": "专为软件开发者、QA工程师和自动化测试人员设计的专业临时邮箱生成器。",
+    "whyTitle": "为什么开发者需要临时邮箱来进行测试",
+    "whyP1": "测试依赖邮件的功能至关重要但十分繁琐。您需要验证用户注册、确认链接、密码重置流程和通知系统——但创建大量真实邮箱账户既缓慢又不可持续。",
+    "whyP2": "Fire Temp Mail 提供专为软件测试设计的即时一次性电子邮件地址。生成无限量的临时邮箱来测试您应用程序的邮件流程。",
+    "painPointsTitle": "开发者常见痛点（已解决）",
+    "pp1": "手动创建 Gmail/Outlook 测试账户 → 即时生成无限量邮箱",
+    "pp2": "管理多个测试账户的密码 → 无需任何凭证",
+    "pp3": "清理过期的测试数据 → 24小时后自动删除",
+    "pp4": "邮件提供商阻止自动注册 → 真实域名，适用于所有场景",
+    "pp5": "测试多用户场景 → 按需获取无限唯一地址",
+    "pp6": "CI/CD 流水线需要新邮箱 → 零配置邮箱生成",
+    "uc1Title": "1. 用户注册和邮箱验证测试",
+    "uc1P1": "您的应用程序在注册时需要邮箱验证。您需要测试验证邮件是否送达、链接是否正常工作、令牌是否过期以及边界情况是否得到处理。",
+    "uc1P2": "生成临时邮箱 → 在您的应用中注册 → 检查收件箱中的验证邮件 → 提取验证链接/代码 → 完成验证 → 测试边界情况。",
+    "uc2Title": "2. 密码重置流程测试",
+    "uc2P1": "通过使用临时邮箱创建测试账户、触发忘记密码流程并即时接收重置邮件，来全面测试密码重置功能。",
+    "uc2P2": "有效的重置请求、过期令牌、多次重置尝试、无效邮箱地址、速率限制以及跨账户安全性。",
+    "uc3Title": "3. 多用户和基于角色的测试",
+    "uc3P1": "测试具有不同用户角色（管理员、版主、用户）或多租户系统的应用程序需要多个唯一的邮箱地址。",
+    "uc4Title": "4. 邮件通知系统测试",
+    "uc4P1": "如果您的应用发送事务性邮件（订单确认、提醒、通知），请使用临时邮箱来验证邮件是否在正确的事件中触发。",
+    "uc5Title": "5. 自动化测试和 CI/CD 集成",
+    "uc5P1": "您的 CI/CD 流水线运行包含邮件工作流的自动化端到端测试。每次测试运行都需要新的唯一邮箱地址。",
+    "uc5P2": "以编程方式生成临时邮箱或使用一致的命名模式为每次测试运行创建唯一地址。非常适合 Playwright、Cypress 和 Selenium 测试套件。",
+    "uc6Title": "6. 第三方邮件服务集成测试",
+    "uc6P1": "测试与 SendGrid、Mailgun、AWS SES、Postmark 或其他邮件服务提供商的集成需要真实的收件人地址来验证邮件是否成功投递。",
+    "featuresTitle": "开发者功能",
+    "f1": "零配置：无需 API 密钥，无需认证，无需创建账户。访问页面，获取邮箱地址，开始测试。",
+    "f2": "实时邮件接收：邮件在几秒钟内出现在您的收件箱中。无轮询延迟，无批量处理。",
+    "f3": "完整邮件访问：查看完整的邮件内容，包括 HTML 正文、纯文本、邮件头、发件人信息和附件。",
+    "f4": "自定义别名组织：使用与特定测试用例关联的描述性邮箱地址。",
+    "f5": "自动清理：邮件在24小时后自动删除。无需手动清理，无凭证管理，无维护开销。",
+    "securityTitle": "开发者安全提醒",
+    "securityWarn": "临时邮箱是公开的且不安全。请仅用于开发环境和使用测试数据及隔离测试数据库的QA测试。",
+    "securityNever": "切勿将临时邮箱用于：生产系统、真实用户数据、支付测试、敏感信息或生产数据库凭证。",
+    "startTitle": "立即开始测试",
+    "startP1": "停止浪费时间管理测试邮箱账户。即时生成无限量的临时邮箱，专注于真正重要的事情——构建和测试出色的软件。",
+    "startP2": "前端开发者、后端工程师、QA测试人员、DevOps工程师、自动化专家以及所有构建邮件相关功能的人员。"
+  },
+  "tempGmailPage": {
+    "h1": "Temp Gmail – 创建临时 Gmail 地址",
+    "lead": "即时创建看起来和工作方式都像真实 Gmail 账户的临时 Gmail 地址。保护您的个人收件箱免受垃圾邮件侵扰。",
+    "seoTitle1": "Gmail 的隐藏隐私功能：加号地址和点号技巧",
+    "seoP1": "您知道吗？您的 Gmail 账户可以在不创建新账户的情况下生成无限量的邮箱地址。Gmail 有两个大多数用户不知道的强大内置功能。",
+    "seoP2": "这些不是第三方服务提供的「临时邮箱」——它们是您实际 Gmail 地址的合法变体，直接投递到您现有的收件箱。",
+    "plusTitle": "了解 Gmail 加号地址（「+」技巧）",
+    "plusP1": "Gmail 会忽略邮箱地址中加号（+）之后的所有内容。",
+    "plusL1": "john.smith+shopping@gmail.com — 用于网上购物网站",
+    "plusL2": "john.smith+newsletters@gmail.com — 用于新闻通讯订阅",
+    "plusL3": "john.smith+facebook@gmail.com — 用于 Facebook 注册",
+    "plusL4": "john.smith+netflix@gmail.com — 用于 Netflix 试用",
+    "plusL5": "john.smith+spam@gmail.com — 用于不信任的网站",
+    "whyPlusTitle": "为什么加号地址功能强大",
+    "whyPlusP1": "1. 追踪邮箱泄露者：如果您使用 yourname+serviceX@gmail.com 注册并开始收到垃圾邮件，您就能确切知道是谁泄露了您的邮箱。",
+    "whyPlusP2": "2. 自动过滤：根据「+」标签创建 Gmail 过滤器，将邮件自动分类到不同文件夹。",
+    "whyPlusP3": "3. 组织注册：为不同的类别使用不同的标签：+work、+personal、+testing、+shopping。",
+    "whyPlusP4": "4. 绕过「每个邮箱只能注册一个账户」的限制：一些服务只允许每个邮箱注册一个账户。",
+    "dotTitle": "Gmail 的点号技巧：点号位置无所谓",
+    "dotP1": "Gmail 完全忽略邮箱地址用户名部分中的点号。",
+    "dotUseTitle": "如何使用点号技巧",
+    "dotUseP1": "多账户注册：如果网站只允许每人一个邮箱，您可以使用不同的点号位置来注册多个账户。",
+    "combineTitle": "组合使用加号地址和点号技巧",
+    "combineP1": "为了获得最大灵活性，可以组合使用两种功能：j.o.h.n.smith+netflix@gmail.com。这样可以创建几乎无限量的唯一地址，全部投递到同一个 Gmail 收件箱。",
+    "breachTitle": "真实案例：追踪数据泄露",
+    "breachP1": "假设您使用 yourname+shoppingappx@gmail.com 注册了「ShoppingAppX」。六个月后，您在该邮箱地址上收到了垃圾邮件。",
+    "breachL1": "将您的邮箱出售给营销商",
+    "breachL2": "遭受了数据泄露",
+    "breachL3": "与「合作伙伴」共享邮箱",
+    "breachP2": "现在您可以创建一个 Gmail 过滤器，自动删除发送到该地址的所有邮件，从而有效阻止垃圾邮件来源。",
+    "filterTitle": "如何为加号地址设置 Gmail 过滤器",
+    "filterP1": "开始使用加号地址后，自动整理您的收件箱：",
+    "filterL1": "打开 Gmail 设置：点击齿轮图标 → 「查看所有设置」",
+    "filterL2": "转到「过滤器和屏蔽的地址」：点击「创建新的过滤器」",
+    "filterL3": "添加过滤规则：在「收件人」字段中输入 yourname+shopping@gmail.com",
+    "filterL4": "选择操作：应用标签、跳过收件箱、标记为已读、转发或删除",
+    "filterL5": "保存过滤器：点击「创建过滤器」即可完成",
+    "filterP2": "现在发送到该地址的每封邮件都会根据您的规则自动整理。",
+    "limitTitle": "Gmail 内置功能的局限性",
+    "limitP1": "虽然功能强大，但加号地址和点号技巧有一些局限性：",
+    "limitL1": "不是真正匿名的：您的基本 Gmail 地址仍然可见。",
+    "limitL2": "某些网站屏蔽 +：一些网站会拒绝包含「+」符号的邮箱地址。",
+    "limitL3": "无法免受 Google 追踪：Google 仍然可以看到您的所有活动。",
+    "limitL4": "无法删除单个别名：不像真正的临时邮箱那样。",
+    "limitL5": "不适合高风险注册：因为真实 Gmail 在技术上仍然暴露。请使用 Fire Temp Mail 代替。",
+    "vsTitle": "何时使用 Gmail 技巧 vs. 真正的临时邮箱",
+    "useGmailTitle": "在以下情况使用 Gmail 加号地址/点号技巧：",
+    "useGmailL1": "您希望在主收件箱中接收邮件",
+    "useGmailL2": "您需要追踪哪些服务共享/出售了您的邮箱",
+    "useGmailL3": "您想要整理来自不同来源的邮件",
+    "useGmailL4": "该服务相对可信但会产生垃圾邮件",
+    "useGmailL5": "您可能需要长期访问该账户",
+    "useDispTitle": "在以下情况使用 Fire Temp Mail 的完全一次性邮箱：",
+    "useDispL1": "您需要完全匿名（与真实邮箱无任何关联）",
+    "useDispL2": "注册不信任或有风险的网站",
+    "useDispL3": "不再需要的一次性验证",
+    "useDispL4": "开发过程中的测试，不会填满您的真实收件箱",
+    "useDispL5": "可能产生大量垃圾邮件或大量出售数据的服务",
+    "tipsTitle": "Gmail 专属隐私技巧和高级技术",
+    "tip1Title": "1. 在 Gmail 中创建「一次性」过滤系统",
+    "tip1P1": "为所有加号地址邮件创建自定义过滤器：",
+    "tip1L1": "过滤条件：to:yourname+*@gmail.com",
+    "tip1L2": "操作：应用「已追踪注册」标签并跳过收件箱",
+    "tip1L3": "结果：所有加号地址邮件绕过主收件箱，保持收件箱整洁",
+    "tip2Title": "2. 使用系统化命名规范",
+    "tip2P1": "建立一致的标签系统：",
+    "tip2L1": "+shop-[网站名称] — 购物网站",
+    "tip2L2": "+news-[主题] — 新闻通讯",
+    "tip2L3": "+trial-[服务名] — 免费试用",
+    "tip2L4": "+social-[平台名] — 社交网络",
+    "tip3Title": "3. 追踪数据泄露来源",
+    "tip3P1": "当您收到垃圾邮件或钓鱼邮件时，检查「收件人」字段。如果显示 yourname+specific_site@gmail.com，您就已确定泄露来源。",
+    "ctaTitle": "立即开始使用 Gmail 隐私功能",
+    "ctaP1": "Gmail 加号地址和点号技巧是免费的内置功能，现在就可以在您现有的 Gmail 账户上使用。无需注册，无需第三方服务，零风险。",
+    "ctaP2": "对于需要完全匿名的情况：请从首页使用 Fire Temp Mail 的真正一次性邮箱地址。"
+  },
+  "burnerEmailPage": {
+    "h1": "免费一次性邮箱生成器 – 即时创建匿名邮箱地址",
+    "lead": "即时创建匿名邮箱地址。完美保护您的真实在线身份——无需注册，无需个人数据。",
+    "seoTitle": "什么是一次性邮箱，为什么您需要一个？",
+    "seoP1": "一次性邮箱（Burner Email）是一种临时邮箱地址，允许您在不暴露真实身份的情况下发送或接收邮件。",
+    "seoP2": "「Burner」一词源自「一次性手机」——用于临时通讯的不可追踪的预付费手机。",
+    "howTitle": "一次性邮箱如何工作",
+    "howP1": "像 Fire Temp Mail 这样的一次性邮箱服务会在您访问网站的瞬间创建一个随机邮箱地址。无需创建账户或提供个人信息。",
+    "howL1": "即时创建：访问网站即可立即获得一个随机的匿名邮箱地址。",
+    "howL2": "接收邮件：使用该地址注册服务或接收验证码。",
+    "howL3": "无身份关联：该地址与您的真实姓名、手机号或永久邮箱没有任何关联。",
+    "howL4": "自动过期：短时间后（通常为24小时），地址和所有消息将被永久删除。",
+    "howL5": "无限地址：按需创建任意数量的一次性地址。每个地址完全独立。",
+    "usesTitle": "一次性邮箱的主要使用场景",
+    "use1Title": "1. 网站和服务注册",
+    "use1P": "大多数网站都需要邮箱才能创建账户。一次性邮箱可让您在不暴露真实收件箱的情况下注册。",
+    "use2Title": "2. 免费试用注册",
+    "use2P": "许多服务提供限时免费试用但需要邮箱。使用一次性邮箱即可无风险试用。",
+    "use3Title": "3. 网上购物和优惠券",
+    "use3P": "零售网站通常需要邮箱才能结账或解锁折扣。一次性邮箱可以防止购物后的垃圾邮件。",
+    "use4Title": "4. 公共 Wi-Fi 登录",
+    "use4P": "咖啡厅、机场和酒店通常需要邮箱才能访问其 Wi-Fi 网络。",
+    "use5Title": "5. 下载资源",
+    "use5P": "电子书、白皮书、模板和其他可下载资源通常需要邮箱才能访问。",
+    "use6Title": "6. 论坛和社区注册",
+    "use6P": "论坛和讨论社区通常需要邮箱才能创建账户。使用一次性邮箱可以匿名参与。",
+    "use7Title": "7. 开发和QA测试",
+    "use7P": "开发人员和测试人员经常需要新的邮箱地址来测试注册流程和验证系统。",
+    "benefitsTitle": "使用一次性邮箱的好处",
+    "ben1": "隐私保护：您的真实邮箱保持隐藏。没有人能追踪到您。",
+    "ben2": "垃圾邮件防护：所有垃圾邮件都发送到一次性地址，保持您的真实收件箱干净。",
+    "ben3": "数据泄露安全：如果您注册的服务被黑客攻击，您的真实邮箱不会出现在泄露数据中。",
+    "ben4": "无需账户管理：不需要记住密码。无需维护额外的账户。",
+    "ben5": "即时且免费：无需注册。无需付费。只需访问、生成和使用。",
+    "vsTitle": "一次性邮箱 vs. 常规邮箱 vs. 邮箱别名",
+    "vsP1": "常规邮箱（Gmail、Outlook）：永久的，与您的身份绑定，用于长期通讯。",
+    "vsP2": "邮箱别名（+标签、点号）：您真实邮箱的变体，投递到您的收件箱。有用但不能隐藏您的真实地址。",
+    "vsP3": "一次性邮箱（Fire Temp Mail）：与您的真实身份完全分离。临时的、匿名的、自动销毁的。"
+  },
+  "eduEmailPage": {
+    "h1": "免费 EDU 邮箱生成器 – 即时创建临时 .EDU 邮箱",
+    "lead": "使用我们免费的 EDU 邮箱生成器生成 .EDU 邮箱。非常适合注册、测试和学生折扣。",
+    "seoTitle": "最佳学生折扣和 .EDU 邮箱福利",
+    "seoP1": "学生折扣每年可以在软件、流媒体和学习资源上为您节省数千美元。",
+    "discountsTitle": "需要 .EDU 验证的热门学生折扣",
+    "spotifyTitle": "Spotify Premium 学生版 - $5.99/月（五折优惠）",
+    "spotifyP1": "原价：$10.99/月 | 学生节省：$60/年",
+    "spotifyP2": "包含 Hulu（含广告版）和 SHOWTIME，无需额外费用。",
+    "amazonTitle": "Amazon Prime 学生版 - $7.49/月",
+    "amazonP1": "原价：$14.99/月 | 学生节省：$90/年 + 6个月免费试用",
+    "amazonP2": "全部 Prime 福利：两天免费配送、Prime Video、Prime Music、无限照片存储等。",
+    "adobeTitle": "Adobe Creative Cloud - 六折优惠",
+    "adobeP1": "原价：$59.99/月 | 学生价：$19.99/月 | 节省：$480/年",
+    "adobeP2": "全套软件：Photoshop、Illustrator、Premiere Pro、After Effects、InDesign 等20多款应用。",
+    "appleTitle": "Apple Music 学生版 - $5.99/月",
+    "appleP1": "原价：$10.99/月 | 学生节省：$60/年",
+    "appleP2": "完整的 Apple Music 曲库加上免费的 Apple TV+ 订阅。",
+    "githubTitle": "GitHub 学生开发者包 - 免费",
+    "githubP1": "常规费用：$200+/年的工具 | 学生价：完全免费",
+    "githubP2": "GitHub Pro、免费域名、云服务额度、CI/CD 工具，以及20多种开发者工具和服务。"
+  },
+  "bestTempMailPage": {
+    "h1": "最佳临时邮箱 – 排名第一的免费临时邮箱服务",
+    "lead": "最好的在线临时邮箱服务。即时创建一次性邮箱地址——无需注册。私密、快速且免费。",
+    "seoTitle": "为什么 Fire Temp Mail 是最佳临时邮箱服务",
+    "seoP1": "市面上有数十种临时邮箱服务，选择正确的很重要。Fire Temp Mail 脱颖而出成为最佳选择。",
+    "comparison": "与其他服务的功能对比",
+    "whyBestTitle": "是什么让我们成为最佳",
+    "whyBestP1": "Fire Temp Mail 以其他服务无法比拟的方式将速度、隐私和简洁性完美结合。",
+    "feature1": "即时创建：无需等待，无需注册。访问页面即可立即使用临时邮箱。",
+    "feature2": "多域名选择：可从多个不同的邮箱域名中选择。",
+    "feature3": "Gmail 风格地址：获取看起来像 Gmail 的临时地址，适用于所有平台。",
+    "feature4": "自定义别名：创建自定义临时地址以便于组织管理。",
+    "feature5": "自动刷新收件箱：新消息自动显示。",
+    "feature6": "隐私优先：不追踪、不记录、不收集数据。"
+  },
+  "gmailGeneratorPage": {
+    "h1": "免费 Gmail 生成器 – 即时创建临时 Gmail 地址",
+    "lead": "使用我们的 Gmail 生成器生成免费的临时 Gmail 地址。即时访问临时 Gmail 收件箱——无需注册。",
+    "seoTitle": "Gmail 生成器的工作原理",
+    "seoP1": "我们的 Gmail 生成器创建临时的 Gmail 风格地址，工作方式与真实 Gmail 账户完全相同。",
+    "howItWorksTitle": "工作原理",
+    "howItWorksP1": "1. 访问 Fire Temp Mail 并选择 Gmail 选项。2. 即时创建临时 Gmail 风格地址。3. 将其用于任何在线注册。4. 实时接收邮件。5. 地址在24小时后自动过期。"
+  },
+  "temporaryGmailPage": {
+    "h1": "临时 Gmail – 免费一次性 Gmail 地址",
+    "lead": "获取免费的临时 Gmail 地址，像真实 Gmail 账户一样工作。非常适合注册、验证以及保持收件箱无垃圾邮件。",
+    "seoTitle": "临时 Gmail 地址详解",
+    "seoP1": "临时 Gmail 地址是一种短期邮箱，外观和功能与真实 Gmail 账户相同。",
+    "benefitsTitle": "临时 Gmail 的优势",
+    "benefitsP1": "保护您的真实 Gmail 免受垃圾邮件侵扰，避免数据泄露，并匿名注册。全程无需注册。"
+  },
+  "tempMailEduPage": {
+    "h1": "Temp Mail EDU – 免费临时 .EDU 邮箱生成器",
+    "lead": "即时生成临时 .EDU 邮箱地址。访问学生折扣、教育资源和在线工具。",
+    "seoTitle": "将临时邮箱用于教育目的",
+    "seoP1": "临时 .EDU 邮箱可以帮助您访问教育资源和测试学生验证系统。"
+  },
+  "tenMinuteMailPage": {
+    "h1": "10分钟邮箱 – 快速过期的临时邮箱",
+    "lead": "需要一个快速的一次性邮箱？10分钟邮箱即时提供临时地址，自动销毁。",
+    "seoTitle": "什么是10分钟邮箱以及它如何工作？",
+    "seoP1": "10分钟邮箱是一种临时邮箱服务，提供仅持续10分钟的邮箱地址。获取一次性邮箱的最快方式。",
+    "howTitle": "10分钟邮箱如何工作",
+    "howP1": "访问页面即可获得即时邮箱。将其用于注册或验证。地址和消息在10分钟后永久删除。",
+    "whyTitle": "为什么使用10分钟邮箱？",
+    "whyP1": "有时候您不需要邮箱太久。快速注册、一次性验证和下载受限内容是完美的使用场景。",
+    "vsTitle": "10分钟邮箱 vs. 常规临时邮箱",
+    "vsP1": "10分钟邮箱适合超快速使用。常规临时邮箱（如 Fire Temp Mail）持续时间更长（最长24小时），适合测试和开发。"
+  },
+  "temporaryEmailGenPage": {
+    "h1": "临时邮箱生成器 – 免费创建一次性邮箱地址",
+    "lead": "即时生成临时邮箱地址。我们的生成器提供免费的一次性邮箱以保护您的隐私。",
+    "seoTitle": "临时邮箱生成器的工作原理",
+    "seoP1": "临时邮箱生成器按需创建匿名的短期邮箱地址。它们像常规邮箱一样工作，但会自动过期。"
+  },
+  "fireMailPage": {
+    "h1": "Fire Mail – 快速免费的临时邮箱服务",
+    "lead": "Fire Mail 提供即时临时邮箱地址，完全保护您的在线隐私。无需注册，无需个人数据——纯粹的加密临时邮箱。",
+    "seoTitle": "为什么选择 Fire Mail 作为临时邮箱",
+    "seoP1": "Fire Mail 专为速度、隐私和可靠性而构建。我们的服务提供即时临时地址，实时更新和自动清理。"
+  },
+  "gmailnatorPage": {
+    "h1": "Gmailnator 替代品 – 免费临时 Gmail 生成器",
+    "lead": "寻找 Gmailnator 的替代品？Fire Temp Mail 提供相同的功能，更好的隐私保护和更快的性能。",
+    "seoTitle": "2024年最佳 Gmailnator 替代品",
+    "seoP1": "Gmailnator 是一个广受欢迎的创建临时 Gmail 地址的服务。Fire Temp Mail 提供相同的功能，并且可靠性更高、隐私保护更好。"
+  },
+  "about": {
+    "metaTitle": "关于 Fire Temp Mail - 我们的使命与故事",
+    "metaDescription": "了解 Fire Temp Mail——保护您在线隐私的免费临时邮箱服务。",
+    "title": "关于 Fire Temp Mail",
+    "subtitle": "用一封临时邮件，保护您的数字隐私",
+    "missionTitle": "我们的使命",
+    "missionP1": "Fire Temp Mail 的创建是为了解决一个简单但关键的问题：在线隐私的侵蚀。每天，数百万人被迫交出个人邮箱地址来访问各种服务。",
+    "missionP2": "我们认为您的邮箱地址是私密的。您不应该为了使用互联网服务而牺牲隐私。这就是我们创建 Fire Temp Mail 的原因。",
+    "whatWeDoTitle": "我们做什么",
+    "whatWeDoP1": "Fire Temp Mail 提供即时、匿名、一次性的邮箱地址，任何人都可以使用——无需注册。",
+    "whatWeDo1": "即时创建邮箱——只需访问即可获得一个可用的邮箱地址",
+    "whatWeDo2": "实时收件箱——在浏览器中即时接收邮件",
+    "whatWeDo3": "多域名支持——可从多个可用的邮箱域名中选择",
+    "whatWeDo4": "自定义别名——创建个性化的临时地址",
+    "whatWeDo5": "Gmail 风格地址——获取看起来像 Gmail 的临时地址",
+    "whatWeDo6": "自动删除——消息自动清理，确保完全隐私",
+    "whyTitle": "为什么选择 Fire Temp Mail？",
+    "whyP1": "在数据泄露、垃圾邮件和不需要的营销成为日常问题的世界里，Fire Temp Mail 提供一个简单而强大的解决方案。",
+    "why1": "永久免费——没有隐藏费用、订阅或高级限制",
+    "why2": "无需注册——无需账户即可立即使用",
+    "why3": "隐私优先——我们不追踪、不出售、不利用您的数据",
+    "why4": "公开透明——简单直接的服务，没有任何套路",
+    "why5": "快速可靠——基于现代基础设施构建，追求极致速度",
+    "valuesTitle": "我们的价值观",
+    "value1Title": "隐私至上",
+    "value1Text": "我们认为隐私是一项基本权利。我们的服务从底层设计就致力于保护您的隐私。",
+    "value2Title": "简洁至上",
+    "value2Text": "获取临时邮箱应该毫不费力。访问我们的网站，获取邮箱，使用它。就这么简单。",
+    "value3Title": "透明",
+    "value3Text": "没有隐藏议程。我们坦诚地说明服务的工作方式和维护方式。",
+    "value4Title": "可及性",
+    "value4Text": "每个人都值得拥有隐私。这就是为什么 Fire Temp Mail 对所有人免费开放，无论身在何处。",
+    "futureTitle": "展望未来",
+    "futureP1": "我们不断改进 Fire Temp Mail，以更好地服务用户。我们的发展路线图包括增强安全性、更多域名和更好的移动体验。",
+    "futureP2": "感谢您信任 Fire Temp Mail 来保护您的隐私。我们一起共建更安全、更私密的互联网。",
+    "contactTitle": "联系我们",
+    "contactP1": "有问题、反馈，或者只是想打个招呼？我们很乐意听到您的声音。",
+    "contactEmail": "发邮件给我们：",
+    "contactLink": "或访问我们的联系页面"
   }
 }

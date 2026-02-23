@@ -16,6 +16,7 @@
     import Navigation from '$lib/components/Navigation.svelte';
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
+    import Hreflang from '$lib/components/Hreflang.svelte';
     
     // Import page data for SEO
     export let data;
@@ -403,12 +404,11 @@ function selectDomain(domain) {
         intervalID = setInterval(timedReload, 60000);
     }
 </script>
+<Hreflang path="/gmailnator-alternative" />
 <svelte:head>
     <title>{data?.seo?.title || 'Temp Gmail Generator - Create Disposable Gmail Addresses Instantly | Fire Temp Mail'}</title>
-    <meta name="description" content={data?.seo?.description || 'Instantly generate temporary Gmail addresses with our advanced Gmailnator alternative. Create disposable emails that work everywhere for signups, verifications & spam protection.'}>
-    <meta name="keywords" content={data?.seo?.keywords || 'temp gmail, temporary gmail, gmailnator, emailnator, gmail generator'}>
+    <meta name="description" content={data?.seo?.description || 'Best Gmailnator alternative — generate temporary Gmail addresses instantly. Free disposable emails for signups & spam protection.'}>
     <meta name="author" content="Fire Temp Mail">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Canonical URL - Points to homepage to avoid duplicate content -->
     <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/gmailnator-alternative'}>
@@ -421,7 +421,7 @@ function selectDomain(domain) {
   "name": "Fire Temp Mail",
   "url": "https://firetempmail.com/gmailnator-alternative",
   "description": "Best Gmailnator alternative for generating temporary Gmail addresses instantly – a fast, secure, and free disposable email generator that works better than Gmailnator.",
-  "applicationCategory": "Utility",
+  "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Web",
   "browserRequirements": "Requires JavaScript and an internet connection.",
   "offers": {
@@ -430,13 +430,6 @@ function selectDomain(domain) {
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock"
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "ratingCount": "2564",
-    "bestRating": "5",
-    "worstRating": "1"
-  },
   "creator": {
     "@type": "Organization",
     "name": "Fire Temp Mail",
@@ -444,6 +437,30 @@ function selectDomain(domain) {
   }
 }
     </script>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Best Gmailnator Alternative - Temporary Gmail Generator | Fire Temp Mail" />
+    <meta property="og:description" content="Best Gmailnator alternative for generating temporary Gmail addresses instantly. Fast, secure, and free disposable email generator." />
+    <meta property="og:url" content="https://firetempmail.com/gmailnator-alternative" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fire Temp Mail" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Gmailnator Alternative - Fire Temp Mail" />
+    <meta name="twitter:description" content="Best Gmailnator alternative for generating temporary Gmail addresses instantly." />
+
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+    <!-- BreadcrumbList Schema -->
+    {@html '<script type="application/ld+json">' + JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Gmailnator Alternative", "item": "https://firetempmail.com/gmailnator-alternative" }
+      ]
+    }) + '</script>'}
 </svelte:head>
 <!-- Toast Notifications -->
 <div class="toast-container">
@@ -537,11 +554,10 @@ function selectDomain(domain) {
             <!-- Header -->
             <h1>
                 <span>✉️&nbsp;</span>
-                Best Gmailnator Alternative - Free Temporary Gmail Generator
+                {$_('gmailnatorPage.h1')}
             </h1>
             <p class="lead">
-                The ultimate Gmailnator alternative for creating temporary Gmail addresses. More reliable than Gmailnator, Emailnator, and Gmail Generator. Generate disposable Gmail emails instantly without registration.
-            </p>
+                {$_('gmailnatorPage.lead')}</p>
             
             <!-- Email Address with Copy Button -->
             <div class="email-address-container">
@@ -550,7 +566,7 @@ function selectDomain(domain) {
                     <button 
                         on:click={copyToClipboard} 
                         class="btn-copy"
-                        title="Copy to clipboard"
+                        title={$_('email.copyToClipboard')}
                     >
                         {#if isCopying}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -607,31 +623,31 @@ function selectDomain(domain) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Generate New
+                        {$_('email.generateNew')}
                     </button>
                     
                     {#if emailType === 'domain'}
-                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
+                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title={$_('email.useCustomAlias2')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Custom Alias
+                        {$_('email.useCustomAlias2')}
                     </button>
                     
-                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title={$_('email.changeDomain')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Change Domain
+                        {$_('email.changeDomain')}
                     </button>
                     {/if}
                     
-                    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
+                    <button class="btn btn-secondary" on:click={manualReload} title={$_('email.refreshPage')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Refresh Page
+                        {$_('email.refreshPage')}
                     </button>
                 </div>
 
@@ -682,7 +698,7 @@ function selectDomain(domain) {
                         on:click={() => generateEmail(true, true)}
                         disabled={!customAlias}
                     >
-                        Generate Custom Email
+                        {$_('email.generateCustomEmail')}
                     </button>
                 </div>
                 {/if}
@@ -691,8 +707,8 @@ function selectDomain(domain) {
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
-                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
-                    <span>Waiting for incoming emails</span>
+                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading emails" loading="lazy">
+                    <span>{$_('email.waitingForEmails')}</span>
                 </div>
             {:else if !reloadActive}
                 <!-- Automatic refresh stopped -->
@@ -700,7 +716,7 @@ function selectDomain(domain) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>Automatic refresh stopped</span>
+                    <span>{$_('email.refreshStopped')}</span>
                 </div>
             {/if}
 
@@ -777,7 +793,7 @@ function selectDomain(domain) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                             <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                         </svg>
-                        <p>Your inbox is empty</p>
+                        <p>{$_('email.inboxEmpty')}</p>
                         <p>Emails sent to your temporary address will appear here</p>
                     </div>
                 {:else}
@@ -841,105 +857,10 @@ function selectDomain(domain) {
 </p>
 
 <!-- SEO article: Gmailnator Alternative (optimized content) -->
-<section aria-labelledby="gmailnator-alternative-main" class="seo-article">
-    <h2 id="gmailnator-alternative-main">Why You Need a Gmailnator Alternative in 2026</h2>
-    <p>
-        Are you frustrated with Gmailnator not working or being blocked by websites? Fire Temp Mail is the superior Gmailnator alternative that provides instant, disposable Gmail-style addresses that work with major platforms. Unlike Gmailnator, Emailnator, or Gmailinator, our service offers better reliability and wider platform compatibility.
-    </p>
-    <p>
-        Generate working temporary Gmail addresses in seconds—no registration, no Gmailnator limitations, and no risk of being blocked. Fire Temp Mail is the best alternative to Gmailnator, offering enhanced features and better deliverability for all your temporary email needs.
-    </p>
-
-    <h2>Why Fire Temp Mail is Better Than Gmailnator</h2>
-    <p>
-        Gmailnator was once popular, but many users now face issues with blocked addresses and platform detection. Fire Temp Mail solves these problems and offers a superior Gmailnator alternative:
-    </p>
-    
-    <h3>Higher Success Rate Than Gmailnator</h3>
-    <p>
-        Unlike Gmailnator addresses that are often blocked, Fire Temp Mail creates temporary Gmail addresses with industry-leading deliverability. Our addresses work where Gmailnator fails, giving you reliable access to any service that requires email verification.
-    </p>
-
-    <h3>No Gmailnator Downtime Issues</h3>
-    <p>
-        Gmailnator users often experience downtime and service interruptions. Fire Temp Mail provides reliable 24/7 uptime, ensuring you always have access to your temporary Gmail addresses when you need them.
-    </p>
-
-    <h3>Better Than Emailnator and Gmail Generator</h3>
-    <p>
-        Fire Temp Mail outperforms not just Gmailnator, but also Emailnator, Gmail Generator (Gmail Nator), and Gmailinator. Our service offers faster generation, better inbox access, and more reliable message delivery than any alternative.
-    </p>
-
-    <h2>How Fire Temp Mail Works as a Gmailnator Alternative</h2>
-    <p>
-        Fire Temp Mail improves on Gmailnator's concept with enhanced features and reliability:
-    </p>
-    
-    <h3>Multiple Gmail-Style Options</h3>
-    <p>
-        Unlike Gmailnator's limited options, Fire Temp Mail offers both standard domain addresses and authentic Gmail-style addresses (@gmail.com and @googlemail.com), giving you maximum flexibility and compatibility.
-    </p>
-
-    <h3>Faster Than Gmailnator</h3>
-    <p>
-        Fire Temp Mail generates temporary Gmail addresses instantly. No waiting, no loading screens—just immediate access to your disposable email inbox, faster than Gmailnator ever was.
-    </p>
-
-    <h3>No Registration Like Gmailnator</h3>
-    <p>
-        Just like Gmailnator, Fire Temp Mail requires no registration or personal information. But unlike Gmailnator, we offer better reliability and platform compatibility without sacrificing anonymity.
-    </p>
-
-    <h2>Key Advantages Over Gmailnator, Emailnator & Gmail Generator</h2>
-    <ul>
-        <li><strong>Better Platform Compatibility</strong> - Works with Facebook, Google, Twitter, Amazon, and other platforms that now block Gmailnator addresses.</li>
-        <li><strong>No Downtime</strong> - 24/7 availability unlike Gmailnator's frequent service interruptions.</li>
-        <li><strong>Faster Generation</strong> - Instant address creation, faster than Gmailnator, Emailnator, or any Gmail Generator.</li>
-        <li><strong>Multiple Domain Options</strong> - Choose from various domains including real @gmail.com addresses, more options than Gmailnator.</li>
-        <li><strong>Better Privacy</strong> - Enhanced security and no data logging, superior to Gmailnator's privacy policies.</li>
-        <li><strong>Custom Aliases</strong> - Create custom temporary email aliases, a feature Gmailnator lacks.</li>
-        <li><strong>Mobile Friendly</strong> - Fully responsive design that works better on mobile than Gmailnator.</li>
-    </ul>
-
-    <h2>Use Cases: Why People Switch from Gmailnator to Fire Temp Mail</h2>
-    <p>
-        Former Gmailnator users choose Fire Temp Mail for various reasons:
-    </p>
-    
-    <h3>Social Media Signups</h3>
-    <p>
-        Fire Temp Mail works reliably with Facebook, Instagram, Twitter, and TikTok—platforms where Gmailnator addresses are now frequently blocked or rejected.
-    </p>
-
-    <h3>E-commerce and Online Shopping</h3>
-    <p>
-        Create accounts on Amazon, eBay, and other shopping sites without the risk of Gmailnator addresses being flagged as suspicious or spam.
-    </p>
-
-    <h3>Free Trial Access</h3>
-    <p>
-        Sign up for free trials and promotional offers using our temporary Gmail addresses that work more reliably than Gmailnator for accessing premium content.
-    </p>
-
-    <h2>Gmailnator vs Fire Temp Mail: The Clear Winner</h2>
-    <p>
-        Here's why Fire Temp Mail is the best Gmailnator alternative in 2026:
-    </p>
-    
-    <ul>
-        <li><strong>Success Rate</strong> - 95%+ vs Gmailnator's declining acceptance rate</li>
-        <li><strong>Uptime</strong> - 99.9% availability vs Gmailnator's frequent downtime</li>
-        <li><strong>Speed</strong> - Instant generation vs Gmailnator's slower performance</li>
-        <li><strong>Features</strong> - Custom aliases, multiple domains vs Gmailnator's basic options</li>
-        <li><strong>Privacy</strong> - Zero logging vs Gmailnator's questionable data practices</li>
-        <li><strong>Support</strong> - Active development vs Gmailnator's stagnant updates</li>
-    </ul>
-
-    <h2>Make the Switch from Gmailnator Today</h2>
-    <p>
-        Don't struggle with Gmailnator's limitations and downtime. Fire Temp Mail is the superior alternative that actually works in 2026. Whether you're looking for a Gmailnator alternative, Emailnator replacement, or better Gmail Generator, Fire Temp Mail delivers reliability, speed, and privacy. Generate your first temporary Gmail address now and experience the difference!
-    </p>
-</section>
+            <section aria-labelledby="gmailnator-seo" class="seo-article" style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
+                <h2 id="gmailnator-seo">{$_('gmailnatorPage.seoTitle')}</h2>
+                <p>{$_('gmailnatorPage.seoP1')}</p>
+            </section>
         </div>
 </div>
 </section>

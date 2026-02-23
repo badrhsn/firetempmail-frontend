@@ -1,5 +1,6 @@
 <script>
-  import OriginalTemporaryGmailPage from '../../temporary-gmail/+page.svelte';
+  import Page from '../../temporary-gmail/+page.svelte';
+  export let data;
 </script>
 
-<OriginalTemporaryGmailPage />
+<Page {data} />

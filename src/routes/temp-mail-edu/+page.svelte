@@ -1,6 +1,7 @@
 <script>
 // @ts-nocheck
 import { onMount } from "svelte";
+    import { _ } from 'svelte-i18n';
 import { generate } from "random-words";
 import { 
     receivingEmail, 
@@ -14,6 +15,7 @@ import {
 import Navigation from '$lib/components/Navigation.svelte';
 import { getPopularArticles } from '$lib/data/blogPosts';
 import { browser } from '$app/environment';
+import Hreflang from '$lib/components/Hreflang.svelte';
 
 // Import page data for SEO
 export let data;
@@ -398,10 +400,10 @@ function isUnread(email) {
 }
 </script>
 
+<Hreflang path="/temp-mail-edu" />
 <svelte:head>
-    <title>{data?.seo?.title || 'Free Temp Mail EDU 📧 | Generate Disposable .EDU Emails Instantly'}</title>
+    <title>{data?.seo?.title || 'Free Temp Mail EDU | Generate Disposable .EDU Emails Instantly'}</title>
     <meta name="description" content={data?.seo?.description || 'Create free .EDU temporary emails with Fire Temp Mail. Perfect for student discounts, free trials, signups & avoiding spam. Fast, secure & disposable inbox.'} />
-    <meta name="keywords" content={data?.seo?.keywords || 'temp mail edu, .edu temporary email, free edu mail, disposable edu email'} />
     <meta name="robots" content="index, follow" />
 
     <!-- Canonical URL -->
@@ -412,12 +414,45 @@ function isUnread(email) {
     <meta property="og:description" content="Get free .EDU temporary emails with Fire Temp Mail. Secure disposable EDU and .COM temp mails for signups, trials, and more." />
     <meta property="og:url" content="https://firetempmail.com/temp-mail-edu" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fire Temp Mail" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Free Temp Mail EDU - Generate .EDU Temporary Emails" />
     <meta name="twitter:description" content="Generate free .EDU temporary emails instantly with Fire Temp Mail. Private, fast & disposable email service." />
 
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+    <!-- WebApplication Schema -->
+    {@html '<script type="application/ld+json">' + JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Fire Temp Mail - Temp Mail EDU",
+      "url": "https://firetempmail.com/temp-mail-edu",
+      "description": "Generate free .EDU temporary emails for student discounts and trials.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "Fire Temp Mail",
+        "url": "https://firetempmail.com"
+      }
+    }) + '</script>'}
+
+    <!-- BreadcrumbList Schema -->
+    {@html '<script type="application/ld+json">' + JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Temp Mail EDU", "item": "https://firetempmail.com/temp-mail-edu" }
+      ]
+    }) + '</script>'}
 </svelte:head>
 
 <!-- Toast Notifications -->
@@ -471,7 +506,7 @@ function isUnread(email) {
             <!-- Header -->
             <h1>
                 <span>📮&nbsp;</span>
-                Free EDU Temp Mail – Generate .EDU Temporary Email Addresses
+                {$_('tempMailEduPage.h1')}
             </h1>
             <p class="lead">
         Create disposable <strong>.EDU temp emails</strong> instantly with Fire Temp Mail. Use EDU or .COM temporary mailboxes for signups, trials, student discounts, and more — without exposing your real inbox to spam.
@@ -487,7 +522,7 @@ function isUnread(email) {
                     <button 
                         on:click={copyToClipboard} 
                         class="btn-copy"
-                        title="Copy to clipboard"
+                        title={$_('email.copyToClipboard')}
                     >
                         {#if isCopying}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -542,31 +577,31 @@ function isUnread(email) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Generate New
+                        {$_('email.generateNew')}
                     </button>
                     
                     {#if emailType === 'domain'}
-                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
+                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title={$_('email.useCustomAlias2')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Custom Alias
+                        {$_('email.useCustomAlias2')}
                     </button>
                     
-                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title={$_('email.changeDomain')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Change Domain
+                        {$_('email.changeDomain')}
                     </button>
                     {/if}
                     
-                    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
+                    <button class="btn btn-secondary" on:click={manualReload} title={$_('email.refreshPage')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Refresh Page
+                        {$_('email.refreshPage')}
                     </button>
                 </div>
 
@@ -615,7 +650,7 @@ function isUnread(email) {
                         on:click={() => generateEmail(true, true)}
                         disabled={!customAlias}
                     >
-                        Generate Custom Email
+                        {$_('email.generateCustomEmail')}
                     </button>
                 </div>
                 {/if}
@@ -626,8 +661,8 @@ function isUnread(email) {
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
-                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
-                    <span>Waiting for incoming emails</span>
+                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading emails" loading="lazy">
+                    <span>{$_('email.waitingForEmails')}</span>
                 </div>
             {:else if !reloadActive}
                 <!-- Automatic refresh stopped -->
@@ -635,7 +670,7 @@ function isUnread(email) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>Automatic refresh stopped</span>
+                    <span>{$_('email.refreshStopped')}</span>
                 </div>
             {/if}
 
@@ -712,7 +747,7 @@ function isUnread(email) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                             <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                         </svg>
-                        <p>Your inbox is empty</p>
+                        <p>{$_('email.inboxEmpty')}</p>
                         <p>Emails sent to your temporary address will appear here</p>
                     </div>
                 {:else}
@@ -770,55 +805,10 @@ function isUnread(email) {
                 {/if}
             {/if}
 
-            <h2>.EDU Temporary Email Generator</h2>
-            <p class="description">
-        Fire Temp Mail offers a free <strong>EDU temp mail generator</strong> that creates disposable <code>@edu</code> and <code>@.com</code> email addresses. These addresses work like real inboxes — receive messages, confirmations, and verification emails instantly, but without tying them to your personal account. Perfect for testing, one-time registrations, and accessing platforms that require <strong>.edu emails</strong>.
-            </p>
-
-            <h3>Why use EDU Temp Mail?</h3>
-      <ul class="text-start mx-auto" style="max-width: 720px;">
-        <li>🔒 Keep your real inbox private and spam-free.</li>
-        <li>📩 Instantly receive account confirmations and trial codes.</li>
-        <li>🎓 Access student offers and educational platforms securely.</li>
-        <li>⏳ Emails auto-expire — no cleanup required.</li>
-      </ul>
-
-      <p class="description">
-        Whether you need a <strong>free disposable .EDU mailbox</strong> for quick registration or a secure anonymous inbox for temporary use, Fire Temp Mail makes it fast and reliable. Start generating your <strong>EDU temp mail</strong> address today — completely free.
-      </p>
-      <section class="mt-10 p-6 bg-gray-50 rounded-xl shadow-md">
-  <h2 class="text-xl font-semibold mb-4">Frequently Asked Questions about .EDU Temp Mail</h2>
-  
-  <div class="space-y-4">
-    <details class="p-3 bg-white rounded-md shadow-sm">
-      <summary class="cursor-pointer font-medium">What is a .EDU temp mail?</summary>
-      <p class="mt-2 text-gray-600">
-        A .EDU temp mail is a disposable email address ending with .edu, created for testing, student offers, or temporary registrations without using your real email.
-      </p>
-    </details>
-
-    <details class="p-3 bg-white rounded-md shadow-sm">
-      <summary class="cursor-pointer font-medium">How long does an EDU temp mail last?</summary>
-      <p class="mt-2 text-gray-600">
-        Fire Temp Mail EDU inboxes usually last <strong>24–48 hours</strong> before being deleted automatically. You can generate a new one anytime.
-      </p>
-    </details>
-
-    <details class="p-3 bg-white rounded-md shadow-sm">
-      <summary class="cursor-pointer font-medium">Is it safe to use temp mail for signups?</summary>
-      <p class="mt-2 text-gray-600">
-        Yes ✅, as long as you don’t use it for sensitive accounts like banking or personal identity. It’s safe for free trials, newsletters, and student discounts.
-      </p>
-    </details>
-
-    <details class="p-3 bg-white rounded-md shadow-sm">
-      <summary class="cursor-pointer font-medium">Can I use temp mail for Amazon, Netflix, or student discounts?</summary>
-      <p class="mt-2 text-gray-600">
-        Many users generate EDU emails for testing signups and student offers 🎓. However, long-term use isn’t guaranteed — inboxes are temporary.
-      </p>
-    </details>
-  </div>
-</section>
+            <div class="seo-article">
+              <h2>{$_('tempMailEduPage.seoTitle')}</h2>
+              <p class="description">{$_('tempMailEduPage.seoP1')}</p>
+            </div>
 
         </div>
 

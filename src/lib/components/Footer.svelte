@@ -1,10 +1,16 @@
 <script>
     import { onMount } from 'svelte';
     import { _ } from 'svelte-i18n';
+    import { page } from '$app/stores';
     import { receivingEmail } from '$lib/stores';
+    import { getLangFromPath, localePath } from '$lib/i18n/lang.js';
     
     let copyrightYear = new Date().getFullYear();
     let stats = { count: '0' };
+    
+    // Reactive language prefix based on current URL
+    $: currentLang = getLangFromPath($page.url.pathname);
+    $: lp = (/** @type {string} */ path) => localePath(path, currentLang);
     
     // Fetch stats when component mounts
     async function fetchStats() {
@@ -54,29 +60,29 @@
                 <div class="footer-column">
                     <h6 class="footer-heading">{$_('footer.product')}</h6>
                     <ul class="footer-links">
-                        <li><a href="/temp-gmail">Temp Gmail</a></li>
-                        <li><a href="/email-generator">{$_('footer.emailGenerator')}</a></li>
-                        <li><a href="/edu-email-generator">EDU Email Generator</a></li>
-                        <li><a href="/burner-email">Burner Email</a></li>
-                        <li><a href="/best-temp-mail">Best Temp Mail</a></li>
+                        <li><a href={lp('/temp-gmail')}>Temp Gmail</a></li>
+                        <li><a href={lp('/email-generator')}>{$_('footer.emailGenerator')}</a></li>
+                        <li><a href={lp('/edu-email-generator')}>EDU Email Generator</a></li>
+                        <li><a href={lp('/burner-email')}>Burner Email</a></li>
+                        <li><a href={lp('/best-temp-mail')}>Best Temp Mail</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h6 class="footer-heading">{$_('footer.resources')}</h6>
                     <ul class="footer-links">
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/blog">{$_('footer.blog')}</a></li>
-                        <li><a href="/faq">{$_('footer.faq')}</a></li>
+                        <li><a href={lp('/about')}>About Us</a></li>
+                        <li><a href={lp('/blog')}>{$_('footer.blog')}</a></li>
+                        <li><a href={lp('/faq')}>{$_('footer.faq')}</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h6 class="footer-heading">{$_('footer.legal')}</h6>
                     <ul class="footer-links">
-                        <li><a href="/privacy-policy">{$_('footer.privacy')}</a></li>
-                        <li><a href="/terms">{$_('footer.terms')}</a></li>
-                        <li><a href="/contact">{$_('footer.contact')}</a></li>
+                        <li><a href={lp('/privacy-policy')}>{$_('footer.privacy')}</a></li>
+                        <li><a href={lp('/terms')}>{$_('footer.terms')}</a></li>
+                        <li><a href={lp('/contact')}>{$_('footer.contact')}</a></li>
                     </ul>
                 </div>
             </div>

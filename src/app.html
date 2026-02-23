@@ -69,8 +69,9 @@
             
             <nav class="header-nav">
                 <a href="/" class="nav-link">Home</a>
-                <a href="/temp-mail-edu" class="nav-link">Edu email Generator</a>
+                <a href="/email-generator" class="nav-link">Email Generator</a>
                 <a href="/temp-gmail" class="nav-link">Temp Gmail</a>
+                <a href="/edu-email-generator" class="nav-link">EDU Email</a>
                 <a href="/blog" class="nav-link">Blog</a>
                 
                 <!-- Language selector will be injected here by Svelte component -->
@@ -113,8 +114,11 @@
         <nav class="mobile-nav-links">
             <a href="/" class="mobile-nav-link">Home</a>
             <a href="/email-generator" class="mobile-nav-link">Email Generator</a>
-            <a href="/temp-mail-edu" class="mobile-nav-link">Edu Email</a>
-            <a href="/10minutemail" class="mobile-nav-link">10 Minute Mail</a>
+            <a href="/temp-gmail" class="mobile-nav-link">Temp Gmail</a>
+            <a href="/edu-email-generator" class="mobile-nav-link">EDU Email</a>
+            <a href="/burner-email" class="mobile-nav-link">Burner Email</a>
+            <a href="/best-temp-mail" class="mobile-nav-link">Best Temp Mail</a>
+            <a href="/faq" class="mobile-nav-link">FAQ</a>
             <a href="/blog" class="mobile-nav-link">Blog</a>
         </nav>
     </div>
@@ -150,6 +154,21 @@
                 closeMobileMenu();
             }
         });
+
+        // i18n: Prefix header/mobile nav links with current language
+        (function() {
+            var langs = ['es','de','fr','pt','ar','ru','zh'];
+            var seg = window.location.pathname.split('/')[1];
+            var lang = langs.indexOf(seg) !== -1 ? seg : '';
+            if (!lang) return; // English = root, no prefix needed
+            var prefix = '/' + lang;
+            document.querySelectorAll('.header-nav .nav-link, .mobile-nav-links .mobile-nav-link, .logo-container').forEach(function(el) {
+                var href = el.getAttribute('href');
+                if (href && href.startsWith('/') && !href.startsWith(prefix)) {
+                    el.setAttribute('href', href === '/' ? prefix : prefix + href);
+                }
+            });
+        })();
     </script>
 
     <!-- Removed jQuery & Bootstrap JS to reduce blocking & payload (custom minimal JS used instead) -->

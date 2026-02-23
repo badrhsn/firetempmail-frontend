@@ -8,20 +8,9 @@
     import '$lib/i18n';
     import { isLoading } from 'svelte-i18n';
     
-    // Wait for i18n to load
     let rotationId;
     let languageSelectorInstance;
     onMount(() => {
-        // Check for stored language preference
-        if (typeof window !== 'undefined') {
-            const savedLang = localStorage.getItem('preferred-language');
-            if (savedLang) {
-                import('svelte-i18n').then(({ locale }) => {
-                    locale.set(savedLang);
-                });
-            }
-        }
-
         // Initialize active banners from the allBanners store
         const unsubscribe = allBanners.subscribe(list => {
             list.forEach(b => {

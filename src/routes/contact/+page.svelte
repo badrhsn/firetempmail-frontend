@@ -1,5 +1,6 @@
 <script>
     import { _ } from 'svelte-i18n';
+    import Hreflang from '$lib/components/Hreflang.svelte';
     
     // Import page data for SEO
     export let data;
@@ -7,15 +8,38 @@
     let copyrightYear = new Date().getFullYear();
 </script>
 
+<Hreflang path="/contact" />
 <svelte:head>
     <title>{data?.seo?.title || 'Contact Us - Fire Temp Mail'}</title>
     <meta name="description" content={data?.seo?.description || 'Get in touch with Fire Temp Mail. Contact our support, business, or report abuse via email. We\'re here to help!'}>
-    <meta name="keywords" content={data?.seo?.keywords || 'contact, support, email, Fire Temp Mail'}>
     <meta name="author" content="Fire Temp Mail">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Canonical URL -->
     <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/contact'}>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Contact Us - Fire Temp Mail" />
+    <meta property="og:description" content="Get in touch with Fire Temp Mail. Contact our support, business, or report abuse via email. We're here to help!" />
+    <meta property="og:url" content="https://firetempmail.com/contact" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fire Temp Mail" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Contact Us - Fire Temp Mail" />
+    <meta name="twitter:description" content="Get in touch with Fire Temp Mail. Contact our support, business, or report abuse via email." />
+
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+    <!-- BreadcrumbList Schema -->
+    {@html '<script type="application/ld+json">' + JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://firetempmail.com/contact" }
+      ]
+    }) + '</script>'}
 </svelte:head>
 
 

@@ -1,6 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { _, isLoading } from 'svelte-i18n';
+    import Hreflang from '$lib/components/Hreflang.svelte';
     
     // Import page data for SEO
     export let data;
@@ -91,18 +92,36 @@
     });
 </script>
 
+<Hreflang path="/faq" />
 <svelte:head>
     <title>{data?.seo?.title || 'Frequently Asked Questions - Fire Temp Mail | Temporary Email Service'}</title>
-    <meta name="description" content={data?.seo?.description || 'Get answers to common questions about Fire Temp Mail\'s temporary email service. Learn how to use disposable emails for privacy, security, and spam protection.'} />
-    <meta name="keywords" content={data?.seo?.keywords || 'temporary email, disposable email, FAQ, email privacy'} />
+    <meta name="description" content={data?.seo?.description || 'Answers to common questions about Fire Temp Mail temporary email service. Learn about disposable emails, privacy, and spam protection.'} />
     
     <!-- Canonical URL -->
     <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/faq'} />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
     
-    <!-- Open Graph / Social Media Meta Tags -->
+    <!-- Open Graph -->
     <meta property="og:title" content="Frequently Asked Questions - Fire Temp Mail" />
     <meta property="og:description" content="Get answers to common questions about Fire Temp Mail's temporary email service for privacy and security." />
+    <meta property="og:url" content="https://firetempmail.com/faq" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fire Temp Mail" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="FAQ - Fire Temp Mail" />
+    <meta name="twitter:description" content="Common questions about temporary email services, privacy, and spam protection." />
+
+    <!-- BreadcrumbList Schema -->
+    {@html '<script type="application/ld+json">' + JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
+        { "@type": "ListItem", "position": 2, "name": "FAQ", "item": "https://firetempmail.com/faq" }
+      ]
+    }) + '</script>'}
     
     <!-- JSON-LD structured data for FAQ SEO -->
 </svelte:head>

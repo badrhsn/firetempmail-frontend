@@ -13,6 +13,7 @@
         getNextGmailAccount
     } from "../../lib/stores";
     import { browser } from '$app/environment';
+    import Hreflang from '$lib/components/Hreflang.svelte';
     
     // Import page data for SEO
     export let data;
@@ -401,15 +402,59 @@ function selectDomain(domain) {
         return unreadEmails.has(email.recipient + "-" + email.suffix);
     }
 </script>
+<Hreflang path="/best-temp-mail" />
 <svelte:head>
     <title>{data?.seo?.title || 'Best Temp Mail Services 2025 — FireTempMail Review & Guide'}</title>
     <meta name="description" content={data?.seo?.description || 'Looking for the best temporary email? Compare speed, privacy, .edu options and API access. Try FireTempMail — fast, private, no signup.'}>
-    <meta name="keywords" content={data?.seo?.keywords || 'best temp mail, temporary email, disposable email, Fire Temp Mail'}>
     <meta name="author" content="Fire Temp Mail">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Canonical URL -->
     <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/best-temp-mail'}>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Best Temp Mail Services 2025 — FireTempMail Review & Guide" />
+    <meta property="og:description" content="Looking for the best temporary email? Compare speed, privacy, .edu options and API access. Try FireTempMail — fast, private, no signup." />
+    <meta property="og:url" content="https://firetempmail.com/best-temp-mail" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fire Temp Mail" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Best Temp Mail Services - Fire Temp Mail" />
+    <meta name="twitter:description" content="Compare the best temporary email services. Try FireTempMail — fast, private, no signup." />
+
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+    <!-- WebApplication Schema -->
+    {@html '<script type="application/ld+json">' + JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Fire Temp Mail - Best Temp Mail",
+      "url": "https://firetempmail.com/best-temp-mail",
+      "description": "Compare and use the best temporary email services. Fast, private, no signup.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "Fire Temp Mail",
+        "url": "https://firetempmail.com"
+      }
+    }) + '</script>'}
+
+    <!-- BreadcrumbList Schema -->
+    {@html '<script type="application/ld+json">' + JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Best Temp Mail", "item": "https://firetempmail.com/best-temp-mail" }
+      ]
+    }) + '</script>'}
 </svelte:head>
 <!-- Toast Notifications -->
 <div class="toast-container">
@@ -503,7 +548,7 @@ function selectDomain(domain) {
             <!-- Header -->
            <h1>
             <span>🔥&nbsp;</span>
-            Best Temporary Email Service – Create Your Free Disposable Inbox Instantly
+            {$_('bestTempMailPage.h1')}
             </h1>
             <p class="lead">
             Protect your privacy with <strong>FireTempMail</strong> — the fastest and most secure way to get a free temporary email address. 
@@ -518,7 +563,7 @@ function selectDomain(domain) {
                     <button 
                         on:click={copyToClipboard} 
                         class="btn-copy"
-                        title="Copy to clipboard"
+                        title={$_('email.copyToClipboard')}
                     >
                         {#if isCopying}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -575,31 +620,31 @@ function selectDomain(domain) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Generate New
+                        {$_('email.generateNew')}
                     </button>
                     
                     {#if emailType === 'domain'}
-                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
+                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title={$_('email.useCustomAlias2')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Custom Alias
+                        {$_('email.useCustomAlias2')}
                     </button>
                     
-                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title={$_('email.changeDomain')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Change Domain
+                        {$_('email.changeDomain')}
                     </button>
                     {/if}
                     
-                    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
+                    <button class="btn btn-secondary" on:click={manualReload} title={$_('email.refreshPage')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Refresh Page
+                        {$_('email.refreshPage')}
                     </button>
                 </div>
 
@@ -648,7 +693,7 @@ function selectDomain(domain) {
                         on:click={() => generateEmail(true, true)}
                         disabled={!customAlias}
                     >
-                        Generate Custom Email
+                        {$_('email.generateCustomEmail')}
                     </button>
                 </div>
                 {/if}
@@ -659,8 +704,8 @@ function selectDomain(domain) {
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
-                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
-                    <span>Waiting for incoming emails</span>
+                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading emails" loading="lazy">
+                    <span>{$_('email.waitingForEmails')}</span>
                 </div>
             {:else if !reloadActive}
                 <!-- Automatic refresh stopped -->
@@ -668,7 +713,7 @@ function selectDomain(domain) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>Automatic refresh stopped</span>
+                    <span>{$_('email.refreshStopped')}</span>
                 </div>
             {/if}
 
@@ -730,7 +775,7 @@ function selectDomain(domain) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                             <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                         </svg>
-                        <p>Your inbox is empty</p>
+                        <p>{$_('email.inboxEmpty')}</p>
                         <p>Emails sent to your temporary address will appear here</p>
                     </div>
                 {:else}
@@ -796,70 +841,22 @@ function selectDomain(domain) {
     Unlike limited-time options like 10 Minute Mail, FireTempMail stays active as long as you need it.
 </p>
 
-<section aria-labelledby="best-temp-mail-generator" class="seo-article">
-    <h2 id="best-temp-mail-generator">Instant Temporary Email Generator</h2>
-    <p>
-        With FireTempMail, you can generate a working temporary email address in seconds — 
-        no registration, no downloads, and no personal details required. 
-        It’s the fastest and most reliable disposable email solution for keeping your online activity private.
-    </p>
-    <p>
-        Receive real emails instantly, view messages in your browser, and delete them when done. 
-        FireTempMail ensures privacy while giving you full control over your temporary inbox.
-    </p>
+<section aria-labelledby="best-temp-mail-generator" class="seo-article" style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
+    <h2 id="best-temp-mail-generator">{$_('bestTempMailPage.seoTitle')}</h2>
+    <p>{$_('bestTempMailPage.seoP1')}</p>
 
-    <h2>Why FireTempMail Is the Best Temp Mail Service</h2>
-    <p>
-        Most temp mail sites limit how long your inbox lasts or get blocked by popular platforms. 
-        FireTempMail is built for stability, compatibility, and speed — 
-        ensuring your temporary email works with all major sites including Google, Facebook, Amazon, and Twitter.
-    </p>
-
-    <h3>How Temporary Email Works</h3>
-    <p>
-        Temporary emails are automatically generated inboxes that exist for a short time. 
-        They let you receive messages and verification codes without exposing your personal address. 
-        Once you’re done, the inbox is deleted, keeping your online identity private.
-    </p>
-
-    <h3>Stay Safe from Spam and Phishing</h3>
-    <p>
-        Every time you share your real email, you risk receiving spam or even phishing attempts. 
-        Using FireTempMail prevents spam from ever reaching your main inbox — 
-        your personal data stays protected and your email remains clean.
-    </p>
-
-    <h3>Protect Your Privacy Online</h3>
-    <p>
-        FireTempMail is designed for privacy-first users. 
-        We don’t store personal data, require sign-ups, or use trackers. 
-        Once you close your session, your inbox and emails are automatically erased.
-    </p>
-
-    <h2>How to Use FireTempMail</h2>
-    <ul>
-        <li><strong>Step 1:</strong> Click “Generate Email” to create your disposable address.</li>
-        <li><strong>Step 2:</strong> Use it to register, test, or verify any website or app.</li>
-        <li><strong>Step 3:</strong> Check your inbox instantly for messages or codes.</li>
-        <li><strong>Step 4:</strong> Delete or refresh when done — no trace left behind.</li>
+    <h3>{$_('bestTempMailPage.whyBestTitle')}</h3>
+    <p>{$_('bestTempMailPage.whyBestP1')}</p>
+    <ul style="line-height: 1.8; margin: 1.5rem 0;">
+        <li>{$_('bestTempMailPage.feature1')}</li>
+        <li>{$_('bestTempMailPage.feature2')}</li>
+        <li>{$_('bestTempMailPage.feature3')}</li>
+        <li>{$_('bestTempMailPage.feature4')}</li>
+        <li>{$_('bestTempMailPage.feature5')}</li>
+        <li>{$_('bestTempMailPage.feature6')}</li>
     </ul>
 
-    <h2>Key Benefits of FireTempMail</h2>
-    <ul>
-        <li><strong>Instant Creation:</strong> One-click generation for quick access.</li>
-        <li><strong>Real-Time Delivery:</strong> Receive messages immediately.</li>
-        <li><strong>Full Privacy:</strong> No signup, no logs, no tracking.</li>
-        <li><strong>Always Available:</strong> Works anytime, anywhere, on all devices.</li>
-        <li><strong>Secure & Trusted:</strong> Built for users who care about privacy and control.</li>
-    </ul>
-
-    <h2>Why It’s Better Than Other Temp Mail Services</h2>
-    <p>
-        Unlike other temporary email providers, FireTempMail offers a clean, modern interface, 
-        reliable delivery, and longer inbox lifetimes. 
-        Whether you’re testing software, signing up for trials, or protecting your identity, 
-        it’s the best choice for anonymous communication online.
-    </p>
+    <h3>{$_('bestTempMailPage.comparison')}</h3>
 </section>
 
 

@@ -1,8 +1,9 @@
 <script>
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
-    import { getPostBySlug } from '$lib/data/blogPosts';
+    import { getPostBySlug, getAllPosts } from '$lib/data/blogPosts';
     import { _ } from 'svelte-i18n';
+    import Hreflang from '$lib/components/Hreflang.svelte';
 
     export let data;
 
@@ -11,10 +12,20 @@
     let isLoading = !post; // Only loading if no post was preloaded
     let scrollPercentage = 0;
     let copyrightYear = new Date().getFullYear();
+    let relatedPosts = [];
 
     // Get slug from URL
     let slug;
     $: slug = $page.params.slug;
+
+    function getRelatedPosts(currentPost) {
+        if (!currentPost) return [];
+        const allPosts = getAllPosts();
+        return allPosts
+            .filter(p => p.slug !== currentPost.slug)
+            .filter(p => p.category === currentPost.category)
+            .slice(0, 3);
+    }
 
     // Load post on mount if not already provided by SSR
     onMount(() => {
@@ -23,6 +34,7 @@
                 const fetchedPost = getPostBySlug(slug);
                 if (fetchedPost) {
                     post = fetchedPost;
+                    relatedPosts = getRelatedPosts(post);
                     isLoading = false;
                 } else {
                     error = 'Post not found';
@@ -34,6 +46,7 @@
                 isLoading = false;
             }
         } else {
+            relatedPosts = getRelatedPosts(post);
             isLoading = false;
         }
 
@@ -72,11 +85,71 @@
     }
 </script>
 
+{#if post}<Hreflang path={'/blog/' + post.slug} />{/if}
 <svelte:head>
     <title>{post ? `${post.title} - Fire Temp Mail Blog` : 'Blog Post - Fire Temp Mail'}</title>
     {#if post}
         <meta name="description" content={post.excerpt} />
         <link rel="canonical" href={`https://firetempmail.com/blog/${post.slug}`} />
+
+        <!-- Open Graph -->
+        <meta property="og:title" content={`${post.title} - Fire Temp Mail Blog`} />
+        <meta property="og:description" content={post.excerpt} />
+        <meta property="og:url" content={`https://firetempmail.com/blog/${post.slug}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Fire Temp Mail" />
+        <meta property="article:published_time" content={post.date} />
+        <meta property="article:author" content="Fire Temp Mail Team" />
+        <meta property="article:section" content={post.category} />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.excerpt} />
+
+        <!-- Sitemap -->
+        <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+        <!-- BlogPosting Schema -->
+        {@html `<script type="application/ld+json">${JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "description": post.excerpt,
+            "datePublished": post.date,
+            "dateModified": post.date,
+            "author": {
+                "@type": "Person",
+                "name": post.author || "Fire Temp Mail Team",
+                "url": "https://firetempmail.com/about"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://firetempmail.com/#organization",
+                "name": "Fire Temp Mail",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://firetempmail.com/favicon.ico"
+                }
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": `https://firetempmail.com/blog/${post.slug}`
+            },
+            "articleSection": post.category,
+            "wordCount": post.content ? post.content.replace(/<[^>]*>/g, '').split(/\s+/).length : 0
+        })}</script>`}
+
+        <!-- BreadcrumbList Schema -->
+        {@html `<script type="application/ld+json">${JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
+                { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://firetempmail.com/blog" },
+                { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://firetempmail.com/blog/${post.slug}` }
+            ]
+        })}</script>`}
     {:else}
         <meta name="description" content="Read about temporary email, privacy, and online security on the Fire Temp Mail blog." />
     {/if}
@@ -109,6 +182,17 @@
         </div>
     </section>
 {:else if post}
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="Breadcrumb" style="max-width: 800px; margin: 1rem auto; padding: 0 1rem;">
+        <ol style="display: flex; list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: #6c757d;">
+            <li><a href="/" style="color: #007bff; text-decoration: none;">Home</a></li>
+            <li style="margin: 0 0.5rem;">/</li>
+            <li><a href="/blog" style="color: #007bff; text-decoration: none;">Blog</a></li>
+            <li style="margin: 0 0.5rem;">/</li>
+            <li style="color: #333;">{post.title}</li>
+        </ol>
+    </nav>
+
     <!-- Show actual post content when data is available -->
     <section class="py-4 py-xl-5">
         <div class="container" style="max-width: 800px;">
@@ -148,8 +232,8 @@
                             {post.author.charAt(0)}
                         </div>
                         <div>
-                            <div style="font-weight: 500;">{post.author}</div>
-                            <div style="color: #6c757d; font-size: 0.9rem;">Fire Temp Mail Team</div>
+                            <a href="/about" style="font-weight: 500; color: inherit; text-decoration: none;">{post.author}</a>
+                            <div style="color: #6c757d; font-size: 0.9rem;">Privacy & Security Expert at Fire Temp Mail</div>
                         </div>
                     </div>
                 </div>
@@ -168,6 +252,22 @@
                         <button on:click={() => shareOnLinkedIn(post)} style="padding: 0.5rem 1rem; background: #0077b5; color: white; border-radius: 4px; text-decoration: none; border: none; cursor: pointer;">LinkedIn</button>
                     </div>
                 </div>
+
+                <!-- Related Articles -->
+                {#if relatedPosts.length > 0}
+                <div style="text-align: left; margin: 2rem 0; padding: 1.5rem; border-top: 1px solid #e9ecef;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem;">Related Articles</h3>
+                    <div style="display: grid; gap: 1rem;">
+                        {#each relatedPosts as related}
+                            <a href="/blog/{related.slug}" style="display: block; padding: 1rem; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: inherit; transition: background 0.2s;">
+                                <div style="font-weight: 600; color: #333; margin-bottom: 0.25rem;">{related.title}</div>
+                                <div style="font-size: 0.85rem; color: #6c757d;">{related.excerpt}</div>
+                                <div style="font-size: 0.8rem; color: #999; margin-top: 0.5rem;">{related.category} · {related.readTime}</div>
+                            </a>
+                        {/each}
+                    </div>
+                </div>
+                {/if}
             </div>
         </div>
     </section>

@@ -1,5 +1,6 @@
 <script>
     import { _ } from 'svelte-i18n';
+    import Hreflang from '$lib/components/Hreflang.svelte';
     
     // Import page data for SEO
     export let data;
@@ -7,10 +8,35 @@
     let copyrightYear = new Date().getFullYear();
 </script>
 
+<Hreflang path="/advertising" />
 <svelte:head>
     <title>{data?.seo?.title || $_('advertising.metaTitle')}</title>
     <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/advertising'} />
     <meta name="description" content={data?.seo?.description || $_('advertising.metaDescription')} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Advertising Opportunities - Fire Temp Mail" />
+    <meta property="og:description" content="Advertise with Fire Temp Mail. Reach privacy-conscious users through our advertising opportunities and grow your brand." />
+    <meta property="og:url" content="https://firetempmail.com/advertising" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fire Temp Mail" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Advertising - Fire Temp Mail" />
+    <meta name="twitter:description" content="Advertise with Fire Temp Mail. Reach privacy-conscious users through our advertising opportunities." />
+
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+    <!-- BreadcrumbList Schema -->
+    {@html '<script type="application/ld+json">' + JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Advertising", "item": "https://firetempmail.com/advertising" }
+      ]
+    }) + '</script>'}
     
 </svelte:head>
 

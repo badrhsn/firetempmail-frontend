@@ -3,7 +3,7 @@ export async function load() {
     return {
         seo: {
             title: 'Fire Temp Mail | Free Disposable Temporary Email Generator',
-            description: 'Fire Temp Mail provides free temporary email and Gmail-style aliases. Generate disposable Gmail temp mail addresses with plus-alias and dot variants, block spam, and keep your inbox private.'
+            description: 'Free temporary email generator — create disposable Gmail-style addresses instantly. Block spam and protect your inbox privacy.'
         }
     };
 }

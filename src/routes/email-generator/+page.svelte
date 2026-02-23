@@ -13,6 +13,7 @@
         getNextGmailAccount
     } from "../../lib/stores";
     import { browser } from '$app/environment';
+    import Hreflang from '$lib/components/Hreflang.svelte';
     
     // Import page data for SEO
     export let data;
@@ -400,11 +401,11 @@ function normalizeGmailAddress(address) {
 
 </script>
 
+<Hreflang path="/email-generator" />
 <svelte:head>
     <title>{data?.seo?.title || 'Email Generator - Fire Temp Mail | Free Temporary Email Service'}</title>
     
     <meta name="description" content={data?.seo?.description || 'Generate a free temporary disposable email address instantly with Fire Temp Mail. Keep your real inbox safe from spam while receiving emails anonymously.'}>
-    <meta name="keywords" content={data?.seo?.keywords || 'temporary email, disposable email, temp mail, free email generator'}>
     <meta name="robots" content="index, follow">
 
     <!-- Canonical URL -->
@@ -413,7 +414,47 @@ function normalizeGmailAddress(address) {
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="Email Generator - Fire Temp Mail" />
     <meta property="og:description" content="Instantly generate a disposable email address with Fire Temp Mail. Keep your real inbox private and spam-free." />
+    <meta property="og:url" content="https://firetempmail.com/email-generator" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fire Temp Mail" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Email Generator - Fire Temp Mail" />
+    <meta name="twitter:description" content="Instantly generate a disposable email address with Fire Temp Mail. Keep your real inbox private and spam-free." />
+
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+    <!-- WebApplication Schema -->
+    {@html '<script type="application/ld+json">' + JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Fire Temp Mail - Email Generator",
+      "url": "https://firetempmail.com/email-generator",
+      "description": "Free temporary email generator. Create disposable email addresses instantly.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "Fire Temp Mail",
+        "url": "https://firetempmail.com"
+      }
+    }) + '</script>'}
+
+    <!-- BreadcrumbList Schema -->
+    {@html '<script type="application/ld+json">' + JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Email Generator", "item": "https://firetempmail.com/email-generator" }
+      ]
+    }) + '</script>'}
 </svelte:head>
 <!-- Toast Notifications -->
 <div class="toast-container">
@@ -466,11 +507,10 @@ function normalizeGmailAddress(address) {
             <!-- Header -->
             <h1>
                 <span>📮&nbsp;</span>
-                Fire Temp Mail – Your Free Temporary Disposable Email Generator
+                {$_('emailGeneratorPage.h1')}
             </h1>
             <p class="lead">
-                Instantly generate a disposable Email Generator address. Keep your real email address private and your inbox clean from unwanted messages and spam.
-            </p>
+                {$_('emailGeneratorPage.lead')}</p>
             
             <!-- Email Address with Copy Button -->
             <div class="email-address-container">
@@ -479,7 +519,7 @@ function normalizeGmailAddress(address) {
                     <button 
                         on:click={copyToClipboard} 
                         class="btn-copy"
-                        title="Copy to clipboard"
+                        title={$_('email.copyToClipboard')}
                     >
                         {#if isCopying}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -534,31 +574,31 @@ function normalizeGmailAddress(address) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Generate New
+                        {$_('email.generateNew')}
                     </button>
                     
                     {#if emailType === 'domain'}
-                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
+                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title={$_('email.useCustomAlias2')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Custom Alias
+                        {$_('email.useCustomAlias2')}
                     </button>
                     
-                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title={$_('email.changeDomain')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Change Domain
+                        {$_('email.changeDomain')}
                     </button>
                     {/if}
                     
-                    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
+                    <button class="btn btn-secondary" on:click={manualReload} title={$_('email.refreshPage')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Refresh Page
+                        {$_('email.refreshPage')}
                     </button>
                 </div>
 
@@ -607,7 +647,7 @@ function normalizeGmailAddress(address) {
                         on:click={() => generateEmail(true, true)}
                         disabled={!customAlias}
                     >
-                        Generate Custom Email
+                        {$_('email.generateCustomEmail')}
                     </button>
                 </div>
                 {/if}
@@ -618,8 +658,8 @@ function normalizeGmailAddress(address) {
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
-                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
-                    <span>Waiting for incoming emails</span>
+                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading emails" loading="lazy">
+                    <span>{$_('email.waitingForEmails')}</span>
                 </div>
             {:else if !reloadActive}
                 <!-- Automatic refresh stopped -->
@@ -627,7 +667,7 @@ function normalizeGmailAddress(address) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>Automatic refresh stopped</span>
+                    <span>{$_('email.refreshStopped')}</span>
                 </div>
             {/if}
 
@@ -704,7 +744,7 @@ function normalizeGmailAddress(address) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                             <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                         </svg>
-                        <p>Your inbox is empty</p>
+                        <p>{$_('email.inboxEmpty')}</p>
                         <p>Emails sent to your temporary address will appear here</p>
                     </div>
                 {:else}
@@ -765,105 +805,74 @@ function normalizeGmailAddress(address) {
 
             <!-- Developer & QA Testing Content -->
             <section aria-labelledby="developer-testing" class="seo-article" style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
-                <h2 id="developer-testing">Email Generator for Developers & QA Testing</h2>
-                <p class="description">
-                    Professional temporary email generator designed specifically for software developers, QA engineers, and automation testers. Generate unlimited disposable email addresses to test registration flows, email verification systems, password resets, and notification logic—without managing test accounts or cluttering personal inboxes.
-                </p>
+                <h2 id="developer-testing">{$_('emailGeneratorPage.seoTitle')}</h2>
+                <p class="description">{$_('emailGeneratorPage.seoDesc')}</p>
 
-                <h3>Why Developers Need Disposable Emails for Testing</h3>
-                <p>
-                    Testing email-dependent features is essential but painful. You need to verify user registration, email confirmation links, password reset flows, and notification systems—but creating dozens of real email accounts is slow, unsustainable, and clutters your inbox.
-                </p>
-                <p>
-                    Fire Temp Mail provides instant, disposable email addresses specifically designed for software testing. Generate unlimited temporary emails to test your app's email workflows without managing test accounts or dealing with email provider restrictions.
-                </p>
+                <h3>{$_('emailGeneratorPage.whyTitle')}</h3>
+                <p>{$_('emailGeneratorPage.whyP1')}</p>
+                <p>{$_('emailGeneratorPage.whyP2')}</p>
 
-                <h3>Common Developer Pain Points (Solved)</h3>
+                <h3>{$_('emailGeneratorPage.painPointsTitle')}</h3>
                 <ul style="line-height: 1.8; margin: 1.5rem 0;">
-                    <li>✗ Creating test Gmail/Outlook accounts manually → <strong>✓ Generate unlimited emails instantly</strong></li>
-                    <li>✗ Managing passwords for multiple test accounts → <strong>✓ No credentials needed</strong></li>
-                    <li>✗ Cleaning up old test data → <strong>✓ Auto-deletion after 24 hours</strong></li>
-                    <li>✗ Email providers blocking automated signups → <strong>✓ Real domains that work everywhere</strong></li>
-                    <li>✗ Testing multi-user scenarios → <strong>✓ Unlimited unique addresses on demand</strong></li>
-                    <li>✗ CI/CD pipelines needing fresh emails → <strong>✓ Zero-setup generation</strong></li>
+                    <li>{$_('emailGeneratorPage.pp1')}</li>
+                    <li>{$_('emailGeneratorPage.pp2')}</li>
+                    <li>{$_('emailGeneratorPage.pp3')}</li>
+                    <li>{$_('emailGeneratorPage.pp4')}</li>
+                    <li>{$_('emailGeneratorPage.pp5')}</li>
+                    <li>{$_('emailGeneratorPage.pp6')}</li>
                 </ul>
 
                 <div style="margin: 2.5rem 0;">
-                    <h4>1. Testing User Registration & Email Verification</h4>
-                    <p>
-                        <strong>Scenario:</strong> Your app requires email verification during signup. You need to test that verification emails arrive, links work correctly, tokens expire properly, and edge cases are handled.
-                    </p>
-                    <p>
-                        <strong>Testing workflow:</strong> Generate temporary email → Register in your app → Check inbox for verification email (arrives in seconds) → Extract verification link/token → Complete verification → Test edge cases (expired tokens, duplicate verifications).
-                    </p>
+                    <h4>{$_('emailGeneratorPage.uc1Title')}</h4>
+                    <p><strong>{$_('email.scenario')}</strong> {$_('emailGeneratorPage.uc1P1')}</p>
+                    <p><strong>{$_('email.testingWorkflow')}</strong> {$_('emailGeneratorPage.uc1P2')}</p>
                 </div>
 
                 <div style="margin: 2.5rem 0;">
-                    <h4>2. Password Reset Flow Testing</h4>
-                    <p>
-                        Thoroughly test your password reset functionality by generating test accounts with temporary emails, triggering the forgot password flow, receiving reset emails instantly, and verifying token security and expiration logic.
-                    </p>
-                    <p><strong>Test scenarios:</strong> Valid reset requests, expired tokens, multiple reset attempts, invalid email addresses, rate limiting, and cross-account security.</p>
+                    <h4>{$_('emailGeneratorPage.uc2Title')}</h4>
+                    <p>{$_('emailGeneratorPage.uc2P1')}</p>
+                    <p><strong>{$_('email.testScenarios')}</strong> {$_('emailGeneratorPage.uc2P2')}</p>
                 </div>
 
                 <div style="margin: 2.5rem 0;">
-                    <h4>3. Multi-User & Role-Based Testing</h4>
-                    <p>
-                        Testing apps with different user roles (admin, moderator, user) or multi-tenant systems requires multiple unique email addresses. Generate distinct temporary emails for each test user without the overhead of managing real accounts.
-                    </p>
+                    <h4>{$_('emailGeneratorPage.uc3Title')}</h4>
+                    <p>{$_('emailGeneratorPage.uc3P1')}</p>
                 </div>
 
                 <div style="margin: 2.5rem 0;">
-                    <h4>4. Email Notification System Testing</h4>
-                    <p>
-                        If your application sends transactional emails (order confirmations, alerts, reminders, status updates), use temporary emails to verify that emails are triggered by correct events, personalization renders properly, HTML/CSS formatting displays correctly, and links work as expected.
-                    </p>
+                    <h4>{$_('emailGeneratorPage.uc4Title')}</h4>
+                    <p>{$_('emailGeneratorPage.uc4P1')}</p>
                 </div>
 
                 <div style="margin: 2.5rem 0;">
-                    <h4>5. Automated Testing & CI/CD Integration</h4>
-                    <p>
-                        <strong>Challenge:</strong> Your CI/CD pipeline runs automated E2E tests that involve email-based workflows. Each test run needs fresh, unique email addresses.
-                    </p>
-                    <p>
-                        <strong>Solution:</strong> Generate temporary emails programmatically or use consistent naming patterns to create unique addresses for each test execution without manual intervention. Perfect for Playwright, Cypress, or Selenium test suites.
-                    </p>
+                    <h4>{$_('emailGeneratorPage.uc5Title')}</h4>
+                    <p><strong>{$_('email.challenge')}</strong> {$_('emailGeneratorPage.uc5P1')}</p>
+                    <p><strong>{$_('email.solution')}</strong> {$_('emailGeneratorPage.uc5P2')}</p>
                 </div>
 
                 <div style="margin: 2.5rem 0;">
-                    <h4>6. Third-Party Email Service Integration Testing</h4>
-                    <p>
-                        Testing integrations with SendGrid, Mailgun, AWS SES, Postmark, or other email service providers requires real recipient addresses to verify successful email delivery, webhook events, bounce handling logic, template rendering, and SPF/DKIM authentication.
-                    </p>
+                    <h4>{$_('emailGeneratorPage.uc6Title')}</h4>
+                    <p>{$_('emailGeneratorPage.uc6P1')}</p>
                 </div>
 
-                <h3>Developer-Friendly Features</h3>
-                
-                <p><strong>✅ Zero Setup Required:</strong> No API keys, no authentication, no account creation. Visit the page, get an email address, start testing.</p>
-                
-                <p><strong>✅ Real-Time Email Reception:</strong> Emails appear in the inbox within seconds. No polling delays, no batch processing.</p>
-                
-                <p><strong>✅ Full Email Access:</strong> View complete email content including HTML body, plain text alternative, email headers, sender information, and attachments.</p>
-                
-                <p><strong>✅ Custom Aliases for Organization:</strong> Use descriptive email addresses that map to specific test cases.</p>
-                
-                <p><strong>✅ Automatic Cleanup:</strong> Emails auto-delete after 24 hours. No manual cleanup, no credential management, no maintenance overhead.</p>
+                <h3>{$_('emailGeneratorPage.featuresTitle')}</h3>
+                <p>{$_('emailGeneratorPage.f1')}</p>
+                <p>{$_('emailGeneratorPage.f2')}</p>
+                <p>{$_('emailGeneratorPage.f3')}</p>
+                <p>{$_('emailGeneratorPage.f4')}</p>
+                <p>{$_('emailGeneratorPage.f5')}</p>
 
-                <h3>Security Reminder for Developers</h3>
+                <h3>{$_('emailGeneratorPage.securityTitle')}</h3>
                 <p style="padding: 1.5rem; background: rgba(255,107,107,0.1); border-left: 4px solid #ff6b6b; border-radius: 8px; margin: 2rem 0;">
-                    ⚠️ <strong>IMPORTANT:</strong> Temporary emails are public and insecure. Use them ONLY for development environments, staging/QA with test data, isolated test databases, and integration testing with mock/test APIs.
+                    ⚠️ <strong>{$_('email.important')}</strong> {$_('emailGeneratorPage.securityWarn')}
                 </p>
                 <p style="padding: 1.5rem; background: rgba(255,107,107,0.1); border-left: 4px solid #ff6b6b; border-radius: 8px; margin: 1rem 0;">
-                    ❌ <strong>NEVER use temporary emails for:</strong> Production systems, real user data, payment testing (even in sandbox), sensitive information, or production database credentials.
+                    ❌ <strong>{$_('email.neverUse')}</strong> {$_('emailGeneratorPage.securityNever')}
                 </p>
 
-                <h3>Start Testing Now</h3>
-                <p>
-                    Stop wasting time managing test email accounts. Generate unlimited temporary emails instantly and focus on what matters—building and testing great software. No signup, no cost, no hassle.
-                </p>
-                <p>
-                    <strong>Perfect for:</strong> Frontend developers, backend engineers, QA testers, DevOps engineers, automation specialists, and anyone building email-dependent features.
-                </p>
+                <h3>{$_('emailGeneratorPage.startTitle')}</h3>
+                <p>{$_('emailGeneratorPage.startP1')}</p>
+                <p><strong>{$_('email.perfectFor')}</strong> {$_('emailGeneratorPage.startP2')}</p>
             </section>
 
         </div>

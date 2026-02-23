@@ -1,5 +1,6 @@
 <script>
-  import OriginalGmailGeneratorPage from '../../gmail-generator/+page.svelte';
+  import Page from '../../gmail-generator/+page.svelte';
+  export let data;
 </script>
 
-<OriginalGmailGeneratorPage />
+<Page {data} />

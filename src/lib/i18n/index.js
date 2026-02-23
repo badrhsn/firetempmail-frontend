@@ -1,4 +1,4 @@
-import { register, init, getLocaleFromNavigator } from 'svelte-i18n';
+import { register, init } from 'svelte-i18n';
 
 // Register all locales
 register('en', () => import('./locales/en.json'));
@@ -10,10 +10,10 @@ register('ar', () => import('./locales/ar.json'));
 register('ru', () => import('./locales/ru.json'));
 register('zh', () => import('./locales/zh.json'));
 
-// Initialize i18n
+// Initialize i18n — locale is driven by URL path, not browser detection
 init({
     fallbackLocale: 'en',
-    initialLocale: getLocaleFromNavigator(),
+    initialLocale: 'en',
 });
 
 // Available languages for the selector

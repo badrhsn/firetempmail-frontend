@@ -4,6 +4,7 @@
     import { generate } from "random-words";
     import { _ } from 'svelte-i18n';
     import { getPopularArticles } from '$lib/data/blogPosts';
+    import Hreflang from '$lib/components/Hreflang.svelte';
     import {
         receivingEmail, 
         availableDomains, 
@@ -402,15 +403,74 @@ function normalizeGmailAddress(address) {
         return unreadEmails.has(email.recipient + "-" + email.suffix);
     }
 </script>
+<Hreflang path="/" />
 <svelte:head>
     <title>{data?.seo?.title || 'Fire Temp Mail | Free Disposable Temporary Email Generator'}</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content={data?.seo?.description || "Fire Temp Mail provides free temporary email and Gmail-style aliases. Generate disposable Gmail temp mail addresses with plus-alias and dot variants, block spam, and keep your inbox private."}>
-    <meta name="keywords" content="temporary gmail, gmail temp mail, disposable gmail, gmail alias generator, gmail dot trick, plus alias, googlemail, temp email, burner email">
+    <meta name="description" content={data?.seo?.description || "Free temporary email generator — create disposable Gmail-style addresses instantly. Block spam and protect your inbox privacy."}>
     <link rel="canonical" href="https://firetempmail.com">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-    
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Fire Temp Mail | Free Disposable Temporary Email Generator" />
+    <meta property="og:description" content="Generate free temporary email addresses instantly. Protect your inbox from spam with disposable emails — no signup required." />
+    <meta property="og:url" content="https://firetempmail.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fire Temp Mail" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Fire Temp Mail — Free Disposable Email Generator" />
+    <meta name="twitter:description" content="Create temporary email addresses instantly. Free, secure, and no signup required." />
+
+    <!-- WebSite + Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://firetempmail.com/#website",
+          "url": "https://firetempmail.com",
+          "name": "Fire Temp Mail",
+          "description": "Free temporary email generator — create disposable Gmail-style addresses instantly.",
+          "publisher": { "@id": "https://firetempmail.com/#organization" },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://firetempmail.com/blog?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://firetempmail.com/#organization",
+          "name": "Fire Temp Mail",
+          "url": "https://firetempmail.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://firetempmail.com/favicon.ico"
+          },
+          "sameAs": []
+        },
+        {
+          "@type": "WebApplication",
+          "name": "Fire Temp Mail",
+          "url": "https://firetempmail.com",
+          "description": "Generate free disposable temporary email addresses instantly. Protect your inbox from spam.",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          },
+          "creator": { "@id": "https://firetempmail.com/#organization" }
+        }
+      ]
+    }
+    </script>
 </svelte:head>
 
 <!-- Toast Notifications -->
@@ -620,7 +680,7 @@ function normalizeGmailAddress(address) {
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
-                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
+                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading emails" loading="lazy">
                     <span>{$_('common.loading')}</span>
                 </div>
             {:else if !reloadActive}
@@ -767,7 +827,7 @@ function normalizeGmailAddress(address) {
             <!-- Insert: Gmail temp mail SEO block (place this before the "What is Disposable Temporary E-mail?" section) -->
            <div class="seo-content-section">
     <div class="container">
-        <h1 class="section-title">{$_('home.gmailSection.title')}</h1>
+        <h2 class="section-title">{$_('home.gmailSection.title')}</h2>
         <div class="seo-rich-content">
             <p>
                 {$_('home.gmailSection.intro')}
@@ -920,36 +980,36 @@ function normalizeGmailAddress(address) {
             <!-- How It Works Section - NEW -->
             <div class="how-it-works-section">
                 <div class="container">
-                    <h2 class="section-title">🚀 How Fire Temp Mail Works - Step by Step</h2>
-                    <p class="section-subtitle">Get your temporary email in seconds with our simple, no-registration process</p>
+                    <h2 class="section-title">{$_('home.howItWorks.title')}</h2>
+                    <p class="section-subtitle">{$_('home.howItWorks.subtitle')}</p>
                     
                     <div class="steps-grid">
                         <div class="step-card">
                             <div class="step-number">1</div>
                             <div class="step-icon">⚡</div>
-                            <h3>Instant Email Generation</h3>
-                            <p>The moment you visit Fire Temp Mail, we automatically generate a fresh temporary email address for you. No sign-up forms, no personal information required, no waiting—just instant access.</p>
+                            <h3>{$_('home.howItWorks.step1Title')}</h3>
+                            <p>{$_('home.howItWorks.step1Text')}</p>
                         </div>
                         
                         <div class="step-card">
                             <div class="step-number">2</div>
                             <div class="step-icon">📋</div>
-                            <h3>Copy Your Temporary Email</h3>
-                            <p>Click the copy button to save your disposable email address to your clipboard. You can use this email anywhere you need to provide an email address for signups, downloads, or verifications.</p>
+                            <h3>{$_('home.howItWorks.step2Title')}</h3>
+                            <p>{$_('home.howItWorks.step2Text')}</p>
                         </div>
                         
                         <div class="step-card">
                             <div class="step-number">3</div>
                             <div class="step-icon">📧</div>
-                            <h3>Receive Emails Instantly</h3>
-                            <p>All emails sent to your temporary address appear in your inbox within seconds. View, read, and forward them as needed. The inbox updates automatically in real-time.</p>
+                            <h3>{$_('home.howItWorks.step3Title')}</h3>
+                            <p>{$_('home.howItWorks.step3Text')}</p>
                         </div>
                         
                         <div class="step-card">
                             <div class="step-number">4</div>
                             <div class="step-icon">🗑️</div>
-                            <h3>Auto-Deletion for Privacy</h3>
-                            <p>Your temporary emails are automatically deleted after 24 hours, leaving no trace. Your privacy is protected by design—no logs, no tracking, no permanent storage.</p>
+                            <h3>{$_('home.howItWorks.step4Title')}</h3>
+                            <p>{$_('home.howItWorks.step4Text')}</p>
                         </div>
                     </div>
                 </div>
@@ -958,50 +1018,50 @@ function normalizeGmailAddress(address) {
             <!-- Real Use Cases Section - NEW -->
             <div class="use-cases-section">
                 <div class="container">
-                    <h2 class="section-title">💡 When to Use Fire Temp Mail: Real-World Examples</h2>
-                    <p class="section-subtitle">See how our users protect their privacy in everyday situations</p>
+                    <h2 class="section-title">{$_('home.useCases.title')}</h2>
+                    <p class="section-subtitle">{$_('home.useCases.subtitle')}</p>
                     
                     <div class="use-cases-grid">
                         <div class="use-case-card">
                             <div class="use-case-icon">🎮</div>
-                            <h3>Gaming Platform Signups</h3>
-                            <p><strong>Scenario:</strong> You want to try a new online game but don't want gaming newsletters cluttering your inbox.</p>
-                            <p><strong>Solution:</strong> Use Fire Temp Mail for the signup, verify your gaming account, and keep your real email spam-free. Perfect for trying multiple game platforms without commitment.</p>
+                            <h3>{$_('home.useCases.gaming.title')}</h3>
+                            <p><strong>{$_('common.scenario')}:</strong> {$_('home.useCases.gaming.scenario')}</p>
+                            <p><strong>{$_('common.solution')}:</strong> {$_('home.useCases.gaming.solution')}</p>
                         </div>
                         
                         <div class="use-case-card">
                             <div class="use-case-icon">📥</div>
-                            <h3>Downloading Free Resources</h3>
-                            <p><strong>Scenario:</strong> A website offers a free eBook, template, or software download but requires email registration.</p>
-                            <p><strong>Solution:</strong> Use a temporary email to get the download link without joining their mailing list. Get your resource and move on without future marketing emails.</p>
+                            <h3>{$_('home.useCases.downloads.title')}</h3>
+                            <p><strong>{$_('common.scenario')}:</strong> {$_('home.useCases.downloads.scenario')}</p>
+                            <p><strong>{$_('common.solution')}:</strong> {$_('home.useCases.downloads.solution')}</p>
                         </div>
                         
                         <div class="use-case-card">
                             <div class="use-case-icon">🛍️</div>
-                            <h3>One-Time Shopping Discounts</h3>
-                            <p><strong>Scenario:</strong> An online store offers 10% off for first-time email subscribers, but you don't want daily promotional emails.</p>
-                            <p><strong>Solution:</strong> Get your discount code with a disposable email. Enjoy the savings without the spam.</p>
+                            <h3>{$_('home.useCases.shopping.title')}</h3>
+                            <p><strong>{$_('common.scenario')}:</strong> {$_('home.useCases.shopping.scenario')}</p>
+                            <p><strong>{$_('common.solution')}:</strong> {$_('home.useCases.shopping.solution')}</p>
                         </div>
                         
                         <div class="use-case-card">
                             <div class="use-case-icon">💻</div>
-                            <h3>Developer Testing & QA</h3>
-                            <p><strong>Scenario:</strong> You're testing email functionality in your app and need multiple email addresses for different test scenarios.</p>
-                            <p><strong>Solution:</strong> Generate unlimited temporary emails for testing user registration, email verification, notification systems, and password recovery—all without managing real accounts.</p>
+                            <h3>{$_('home.useCases.developer.title')}</h3>
+                            <p><strong>{$_('common.scenario')}:</strong> {$_('home.useCases.developer.scenario')}</p>
+                            <p><strong>{$_('common.solution')}:</strong> {$_('home.useCases.developer.solution')}</p>
                         </div>
                         
                         <div class="use-case-card">
                             <div class="use-case-icon">📱</div>
-                            <h3>Social Media Trial Accounts</h3>
-                            <p><strong>Scenario:</strong> You want to check out a social platform before committing with your real email.</p>
-                            <p><strong>Solution:</strong> Create a trial account with a temporary email. If you like the platform, you can always create a permanent account later with your real email.</p>
+                            <h3>{$_('home.useCases.social.title')}</h3>
+                            <p><strong>{$_('common.scenario')}:</strong> {$_('home.useCases.social.scenario')}</p>
+                            <p><strong>{$_('common.solution')}:</strong> {$_('home.useCases.social.solution')}</p>
                         </div>
                         
                         <div class="use-case-card">
                             <div class="use-case-icon">🎁</div>
-                            <h3>Contest & Giveaway Entries</h3>
-                            <p><strong>Scenario:</strong> You want to enter online contests but worry about spam from contest sponsors.</p>
-                            <p><strong>Solution:</strong> Use Fire Temp Mail for contest entries. If you win, you'll get the notification; if not, no spam follows you.</p>
+                            <h3>{$_('home.useCases.contests.title')}</h3>
+                            <p><strong>{$_('common.scenario')}:</strong> {$_('home.useCases.contests.scenario')}</p>
+                            <p><strong>{$_('common.solution')}:</strong> {$_('home.useCases.contests.solution')}</p>
                         </div>
                     </div>
                 </div>
@@ -1010,44 +1070,44 @@ function normalizeGmailAddress(address) {
             <!-- Security & Privacy Section - NEW -->
             <div class="security-section">
                 <div class="container">
-                    <h2 class="section-title">🔒 How We Protect Your Privacy & Security</h2>
-                    <p class="section-subtitle">Your anonymity is our top priority. Here's how we keep you safe.</p>
+                    <h2 class="section-title">{$_('home.security.title')}</h2>
+                    <p class="section-subtitle">{$_('home.security.subtitle')}</p>
                     
                     <div class="security-grid">
                         <div class="security-feature">
                             <div class="security-icon">🔒</div>
-                            <h3>Zero Data Logging</h3>
-                            <p>We don't log IP addresses, track user behavior, or store personal information. Your usage is completely anonymous. We have no way to trace temporary emails back to individual users.</p>
+                            <h3>{$_('home.security.zeroLog.title')}</h3>
+                            <p>{$_('home.security.zeroLog.text')}</p>
                         </div>
                         
                         <div class="security-feature">
                             <div class="security-icon">⏰</div>
-                            <h3>Automatic Deletion</h3>
-                            <p>All emails are automatically deleted after 24 hours maximum. No permanent storage means no data breaches. Even if someone wanted to access your old emails, they're already gone.</p>
+                            <h3>{$_('home.security.autoDeletion.title')}</h3>
+                            <p>{$_('home.security.autoDeletion.text')}</p>
                         </div>
                         
                         <div class="security-feature">
                             <div class="security-icon">🚫</div>
-                            <h3>No Registration Required</h3>
-                            <p>We never ask for your name, email, phone number, or any personal information. Just instant access to temporary email addresses. No account means no data to compromise.</p>
+                            <h3>{$_('home.security.noRegistration.title')}</h3>
+                            <p>{$_('home.security.noRegistration.text')}</p>
                         </div>
                         
                         <div class="security-feature">
                             <div class="security-icon">🛡️</div>
-                            <h3>Spam & Malware Filtering</h3>
-                            <p>Basic spam protection filters out malicious emails while allowing legitimate messages through. Suspicious attachments and phishing attempts are automatically blocked.</p>
+                            <h3>{$_('home.security.spamFilter.title')}</h3>
+                            <p>{$_('home.security.spamFilter.text')}</p>
                         </div>
                         
                         <div class="security-feature">
                             <div class="security-icon">🔐</div>
-                            <h3>HTTPS Encryption</h3>
-                            <p>All connections to Fire Temp Mail use HTTPS encryption. Your communication with our servers is secure and cannot be intercepted by third parties.</p>
+                            <h3>{$_('home.security.encryption.title')}</h3>
+                            <p>{$_('home.security.encryption.text')}</p>
                         </div>
                         
                         <div class="security-feature">
                             <div class="security-icon">👁️</div>
-                            <h3>No Third-Party Tracking</h3>
-                            <p>We don't use intrusive tracking cookies or share data with advertisers. Your browsing remains private while using our service.</p>
+                            <h3>{$_('home.security.noTracking.title')}</h3>
+                            <p>{$_('home.security.noTracking.text')}</p>
                         </div>
                     </div>
                 </div>
@@ -1056,46 +1116,46 @@ function normalizeGmailAddress(address) {
             <!-- Limitations Section - NEW (CRITICAL FOR TRUST) -->
             <div class="limitations-section">
                 <div class="container">
-                    <h2 class="section-title">⚠️ Important: What Fire Temp Mail Is NOT For</h2>
-                    <p class="section-subtitle">Be honest with yourself: temporary emails have limitations. Here's what you need to know.</p>
+                    <h2 class="section-title">{$_('home.limitations.title')}</h2>
+                    <p class="section-subtitle">{$_('home.limitations.subtitle')}</p>
                     
                     <div class="limitations-content">
                         <div class="limitation-warning major">
                             <div class="warning-icon">❌</div>
-                            <h3>Never Use Temporary Emails For:</h3>
+                            <h3>{$_('home.limitations.neverUseTitle')}</h3>
                             <ul class="limitations-list">
-                                <li><strong>Banking or Financial Accounts:</strong> You need permanent access to these accounts. Password resets and security notifications won't reach you if the email is deleted.</li>
-                                <li><strong>Primary Social Media:</strong> Facebook, Instagram, Twitter, LinkedIn—use your real email. You'll need it for account recovery.</li>
-                                <li><strong>Work or School Email:</strong> Important communications need to be permanent and reliable.</li>
-                                <li><strong>Government Services:</strong> Tax filings, benefits, official documents—these require permanent email addresses.</li>
-                                <li><strong>Healthcare Portals:</strong> Medical information and appointment reminders are too important for temporary emails.</li>
-                                <li><strong>E-commerce Accounts:</strong> If you plan to make purchases or track orders, use your real email for order confirmations and customer support.</li>
+                                <li><strong>{$_('home.limitations.banking')}:</strong> {$_('home.limitations.bankingText')}</li>
+                                <li><strong>{$_('home.limitations.socialMedia')}:</strong> {$_('home.limitations.socialMediaText')}</li>
+                                <li><strong>{$_('home.limitations.workSchool')}:</strong> {$_('home.limitations.workSchoolText')}</li>
+                                <li><strong>{$_('home.limitations.government')}:</strong> {$_('home.limitations.governmentText')}</li>
+                                <li><strong>{$_('home.limitations.healthcare')}:</strong> {$_('home.limitations.healthcareText')}</li>
+                                <li><strong>{$_('home.limitations.ecommerce')}:</strong> {$_('home.limitations.ecommerceText')}</li>
                             </ul>
-                            <p class="why-not"><strong>Why Not?</strong> Temporary emails are deleted automatically after 24 hours. If you need to recover your account, reset your password, or access important notifications later, you won't receive those emails. Use Fire Temp Mail only for non-critical, temporary needs.</p>
+                            <p class="why-not"><strong>{$_('home.limitations.whyNot')}</strong> {$_('home.limitations.whyNotText')}</p>
                         </div>
                         
                         <div class="limitation-info">
-                            <h3>📧 Other Important Limitations:</h3>
+                            <h3>{$_('home.limitations.otherLimitations')}</h3>
                             <ul>
-                                <li><strong>Cannot Send Emails:</strong> Fire Temp Mail is receive-only. You can read incoming emails but cannot send replies or compose new messages.</li>
-                                <li><strong>24-Hour Lifetime:</strong> Emails are kept for 24 hours maximum. After that, they're permanently deleted with no way to recover them.</li>
-                                <li><strong>No Attachments Security:</strong> While we filter malware, we cannot guarantee 100% safety. Don't open suspicious attachments.</li>
-                                <li><strong>Some Sites Block Temp Emails:</strong> Services like PayPal, banks, and some social platforms detect and block temporary email domains.</li>
-                                <li><strong>No Email Forwarding:</strong> You can view emails in our interface, but cannot automatically forward them to your real email.</li>
+                                <li><strong>{$_('home.limitations.cannotSend')}:</strong> {$_('home.limitations.cannotSendText')}</li>
+                                <li><strong>{$_('home.limitations.lifetime')}:</strong> {$_('home.limitations.lifetimeText')}</li>
+                                <li><strong>{$_('home.limitations.attachments')}:</strong> {$_('home.limitations.attachmentsText')}</li>
+                                <li><strong>{$_('home.limitations.blocked')}:</strong> {$_('home.limitations.blockedText')}</li>
+                                <li><strong>{$_('home.limitations.noForwarding')}:</strong> {$_('home.limitations.noForwardingText')}</li>
                             </ul>
                         </div>
                         
                         <div class="good-uses">
-                            <h3>✅ Fire Temp Mail IS Perfect For:</h3>
+                            <h3>{$_('home.limitations.perfectForTitle')}</h3>
                             <ul>
-                                <li>Free trial signups (streaming services, software)</li>
-                                <li>Downloading resources (eBooks, templates, guides)</li>
-                                <li>Newsletter signups you're unsure about</li>
-                                <li>Forum and community registrations</li>
-                                <li>Contest and giveaway entries</li>
-                                <li>Testing and development work</li>
-                                <li>One-time verifications</li>
-                                <li>Privacy protection on untrusted websites</li>
+                                <li>{$_('home.limitations.perfectFor1')}</li>
+                                <li>{$_('home.limitations.perfectFor2')}</li>
+                                <li>{$_('home.limitations.perfectFor3')}</li>
+                                <li>{$_('home.limitations.perfectFor4')}</li>
+                                <li>{$_('home.limitations.perfectFor5')}</li>
+                                <li>{$_('home.limitations.perfectFor6')}</li>
+                                <li>{$_('home.limitations.perfectFor7')}</li>
+                                <li>{$_('home.limitations.perfectFor8')}</li>
                             </ul>
                         </div>
                     </div>

@@ -15,6 +15,7 @@
     import Navigation from '$lib/components/Navigation.svelte';
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
+    import Hreflang from '$lib/components/Hreflang.svelte';
     
     // Import page data for SEO
     export let data;
@@ -410,15 +411,59 @@ function selectDomain(domain) {
         intervalID = setInterval(timedReload, 60000);
     }
 </script>
+<Hreflang path="/gmail-generator" />
 <svelte:head>
     <title>{data?.seo?.title || 'Gmail Generator - Create Temporary Gmail Addresses | Fire Temp Mail'}</title>
     <meta name="description" content={data?.seo?.description || 'Generate temporary Gmail addresses instantly. Protect your personal inbox from spam with Fire Temp Mail\'s disposable Gmail generator service.'}>
-    <meta name="keywords" content={data?.seo?.keywords || 'gmail generator, temporary gmail, disposable gmail'}>
     <meta name="author" content="Fire Temp Mail">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Canonical URL -->
     <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/gmail-generator'}>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Gmail Generator - Create Temporary Gmail Addresses | Fire Temp Mail" />
+    <meta property="og:description" content="Generate temporary Gmail addresses instantly. Protect your personal inbox from spam with Fire Temp Mail's disposable Gmail generator service." />
+    <meta property="og:url" content="https://firetempmail.com/gmail-generator" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fire Temp Mail" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Gmail Generator - Fire Temp Mail" />
+    <meta name="twitter:description" content="Generate temporary Gmail addresses instantly. Protect your personal inbox from spam with Fire Temp Mail." />
+
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+    <!-- WebApplication Schema -->
+    {@html '<script type="application/ld+json">' + JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Fire Temp Mail - Gmail Generator",
+      "url": "https://firetempmail.com/gmail-generator",
+      "description": "Generate temporary Gmail addresses instantly for signups and verifications.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "Fire Temp Mail",
+        "url": "https://firetempmail.com"
+      }
+    }) + '</script>'}
+
+    <!-- BreadcrumbList Schema -->
+    {@html '<script type="application/ld+json">' + JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Gmail Generator", "item": "https://firetempmail.com/gmail-generator" }
+      ]
+    }) + '</script>'}
 </svelte:head>
 <!-- Toast Notifications -->
 <div class="toast-container">
@@ -512,11 +557,10 @@ function selectDomain(domain) {
             <!-- Header -->
             <h1>
                 <span>📮&nbsp;</span>
-                Gmail Generator - Create Temporary Gmail Addresses
+                {$_('gmailGeneratorPage.h1')}
             </h1>
             <p class="lead">
-                Instantly generate disposable Gmail addresses that look and function like real Gmail accounts. Protect your personal inbox from spam and unwanted messages.
-            </p>
+                {$_('gmailGeneratorPage.lead')}</p>
             
             <!-- Email Address with Copy Button -->
             <div class="email-address-container">
@@ -525,7 +569,7 @@ function selectDomain(domain) {
                     <button 
                         on:click={copyToClipboard} 
                         class="btn-copy"
-                        title="Copy to clipboard"
+                        title={$_('email.copyToClipboard')}
                     >
                         {#if isCopying}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -582,31 +626,31 @@ function selectDomain(domain) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Generate New
+                        {$_('email.generateNew')}
                     </button>
                     
                     {#if emailType === 'domain'}
-                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
+                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title={$_('email.useCustomAlias2')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Custom Alias
+                        {$_('email.useCustomAlias2')}
                     </button>
                     
-                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title={$_('email.changeDomain')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Change Domain
+                        {$_('email.changeDomain')}
                     </button>
                     {/if}
                     
-                    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
+                    <button class="btn btn-secondary" on:click={manualReload} title={$_('email.refreshPage')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Refresh Page
+                        {$_('email.refreshPage')}
                     </button>
                 </div>
 
@@ -655,7 +699,7 @@ function selectDomain(domain) {
                         on:click={() => generateEmail(true, true)}
                         disabled={!customAlias}
                     >
-                        Generate Custom Email
+                        {$_('email.generateCustomEmail')}
                     </button>
                 </div>
                 {/if}
@@ -666,8 +710,8 @@ function selectDomain(domain) {
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
-                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
-                    <span>Waiting for incoming emails</span>
+                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading emails" loading="lazy">
+                    <span>{$_('email.waitingForEmails')}</span>
                 </div>
             {:else if !reloadActive}
                 <!-- Automatic refresh stopped -->
@@ -675,7 +719,7 @@ function selectDomain(domain) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>Automatic refresh stopped</span>
+                    <span>{$_('email.refreshStopped')}</span>
                 </div>
             {/if}
 
@@ -752,7 +796,7 @@ function selectDomain(domain) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                             <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                         </svg>
-                        <p>Your inbox is empty</p>
+                        <p>{$_('email.inboxEmpty')}</p>
                         <p>Emails sent to your temporary address will appear here</p>
                     </div>
                 {:else}
@@ -816,43 +860,12 @@ function selectDomain(domain) {
             </p>
 
             <!-- SEO article: Gmail-like generator (original content) -->
-            <section aria-labelledby="instant-gmail-generator" class="seo-article">
-                <h2 id="instant-gmail-generator">Instant Disposable Gmail Generator</h2>
-                <p>
-                    Getting flooded with notifications, promos, and low‑value alerts in your Gmail inbox? Struggling to spot important messages among the noise? Fire Temp Mail gives you instant, disposable Gmail‑style addresses so you can sign up anywhere without cluttering your primary email.
-                </p>
-                <p>
-                    Enjoy a cleaner, safer inbox with no registrations, no trials, and no personal details required. Generate a working address in seconds and keep your core mailbox focused on what matters.
-                </p>
+                        <section aria-labelledby="gmail-gen-seo" class="seo-article" style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
+                <h2 id="gmail-gen-seo">{$_('gmailGeneratorPage.seoTitle')}</h2>
+                <p>{$_('gmailGeneratorPage.seoP1')}</p>
 
-                <h2>Why Should I Use a Temporary Gmail Generator?</h2>
-                <p>
-                    Email is central to work, learning, and daily life—and most services demand an address to continue. Sharing your main inbox everywhere increases exposure to spam and data leaks. A temporary Gmail‑style address lets you access what you need while minimizing privacy risks and unwanted messages.
-                </p>
-
-                <h3>What is an Email Address?</h3>
-                <p>
-                    An email address identifies a mailbox used to send and receive messages across networks. Like a home address, it includes a name and a domain (e.g., .com, .org). While it stores all incoming mail, not every message is useful—many are redundant or irrelevant and can obscure the messages you actually need.
-                </p>
-
-                <h3>Spam Messages</h3>
-                <p>
-                    Spam is unsolicited, bulk email often triggered by sign‑ups, giveaways, or poorly protected mailing lists. Besides being annoying, spam can be a vector for scams or phishing. Keeping those messages away from your primary inbox is essential for security and clarity.
-                </p>
-
-                <h3>What should I do to protect my personal email online?</h3>
-                <p>
-                    with firetempmail, you can stop worrying about security issues. Our platform is simple and user-friendly, letting you instantly generate a custom Gmail address. You can pick from a wide range of ready-made Gmail addresses — all completely free. Prefer something unique? You can create your own Gmail address with a single click. Quick, easy, and convenient.    
-                </p>
-                <p>
-FireTempMail stands out from other temporary email services because it uses real Gmail addresses, not disposable ones. Many major platforms like Facebook, Google, Twitter, and Amazon automatically detect temporary or unauthorized email addresses, often blocking registrations or flagging accounts as suspicious. With FireTempMail, you can safely register on any platform without the risk of being flagged or banned, making it a secure and trusted solution for all your temporary email needs.
-                </p>
-                <h2>Advantages of Disposable Gmail address</h2>
-                <ul>
-                    <li><strong>Customizable Gmail Address:</strong> Create aliases using plus‑tags or dot variations to organize sign‑ups and filter replies with ease.</li>
-                    <li><strong>Hassle‑Free:</strong> One‑click address generation; start receiving instantly without extra steps or configuration.</li>
-                    <li><strong>No Registration required:</strong> No account creation, no personal data—just generate and use.</li>
-                </ul>
+                <h3>{$_('gmailGeneratorPage.howItWorksTitle')}</h3>
+                <p>{$_('gmailGeneratorPage.howItWorksP1')}</p>
             </section>
         </div>
 </div>

@@ -1,5 +1,6 @@
 <script>
     import { getAllPosts } from '$lib/data/blogPosts';
+    import Hreflang from '$lib/components/Hreflang.svelte';
     
     // Import page data for SEO
     export let data;
@@ -86,12 +87,57 @@
     }
 </script>
 
+<Hreflang path="/blog" />
 <svelte:head>
     <title>{data?.seo?.title || 'Blog - Fire Temp Mail | Email Privacy & Security Insights'}</title>
-    <meta name="description" content={data?.seo?.description || 'Learn about temporary email services, email privacy, spam protection, and online security. Expert guides and tips for protecting your digital identity with Fire Temp Mail.'}>
-    <meta name="keywords" content={data?.seo?.keywords || 'temp mail blog, disposable email, email privacy, online security'}>
+    <meta name="description" content={data?.seo?.description || 'Expert guides on temporary email, email privacy, spam protection, and online security. Tips for protecting your digital identity.'}>
     <meta name="robots" content="index, follow">
     <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/blog'}>
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Blog - Fire Temp Mail | Email Privacy & Security Insights" />
+    <meta property="og:description" content="Expert guides on temporary email, privacy, spam protection, and online security." />
+    <meta property="og:url" content="https://firetempmail.com/blog" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fire Temp Mail" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Blog - Fire Temp Mail" />
+    <meta name="twitter:description" content="Email privacy & security insights. Expert guides on temp mail and online privacy." />
+
+    <!-- Pagination -->
+    {#if currentPage > 1}
+        <link rel="prev" href="https://firetempmail.com/blog?page={currentPage - 1}" />
+    {/if}
+    {#if currentPage < totalPages}
+        <link rel="next" href="https://firetempmail.com/blog?page={currentPage + 1}" />
+    {/if}
+
+    <!-- CollectionPage + BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "CollectionPage",
+          "name": "Fire Temp Mail Blog",
+          "description": "Email privacy & security insights. Expert guides on temporary email, online privacy, and spam protection.",
+          "url": "https://firetempmail.com/blog",
+          "isPartOf": { "@id": "https://firetempmail.com/#website" },
+          "publisher": { "@id": "https://firetempmail.com/#organization" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://firetempmail.com/blog" }
+          ]
+        }
+      ]
+    }
+    </script>
 </svelte:head>
 
 <!-- Header -->

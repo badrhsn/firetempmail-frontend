@@ -15,6 +15,7 @@
     import Navigation from '$lib/components/Navigation.svelte';
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
+    import Hreflang from '$lib/components/Hreflang.svelte';
     
     // Import page data for SEO
     export let data;
@@ -372,66 +373,58 @@ function normalizeGmailAddress(address) {
     }
 </script>
 
+<Hreflang path="/edu-email-generator" />
 <svelte:head>
-    <title>{data?.seo?.title || 'EDU Email Generator 🎓 | Free Disposable .EDU Emails Online'}</title>
-    <meta name="description" content={data?.seo?.description || 'Generate free .EDU temporary emails instantly with our EDU Email Generator. Perfect for student discounts, trials, and signups — secure, fast, and disposable inbox service.'} />
-    <meta name="keywords" content={data?.seo?.keywords || 'EDU email generator, free edu email, disposable edu email, edu temp mail'} />
+    <title>{data?.seo?.title || 'EDU Email Generator | Free Disposable .EDU Emails Online'}</title>
+    <meta name="description" content={data?.seo?.description || 'Generate free .EDU temporary emails instantly. Perfect for student discounts, trials, and signups — secure, fast, and disposable.'} />
     <meta name="robots" content="index, follow" />
 
     <!-- Canonical URL -->
     <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/edu-email-generator'} />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="EDU Email Generator – Create Free Disposable .EDU Emails" />
-    <meta property="og:description" content="Use the EDU Email Generator to instantly create free disposable .EDU emails for student discounts, trials, and signups. Fast, secure, and private inbox." />
+    <meta property="og:description" content="Use the EDU Email Generator to instantly create free disposable .EDU emails for student discounts, trials, and signups." />
     <meta property="og:url" content="https://firetempmail.com/edu-email-generator" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fire Temp Mail" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="EDU Email Generator – Free Disposable .EDU Emails" />
-    <meta name="twitter:description" content="Generate free .EDU temporary emails instantly with our EDU Email Generator. Private, fast & disposable student email service." />
+    <meta name="twitter:description" content="Generate free .EDU temporary emails instantly. Private, fast & disposable student email service." />
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+    <!-- WebApplication + BreadcrumbList Schema -->
+    <script type="application/ld+json">
     {
-      "@type": "Question",
-      "name": "What is an EDU Email Generator?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "An EDU Email Generator creates disposable email addresses ending in .edu. These are often used for testing, student offers, or temporary registrations."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How long does a generated EDU email last?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Generated .EDU temporary emails usually last 24–48 hours before being deleted. You can generate a new EDU email at any time."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is it safe to use an EDU temp email?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, it’s safe for free trials, student discounts, and testing. However, don’t use EDU temp emails for banking or personal identity accounts."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I use an EDU Email Generator for student discounts?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, many use disposable EDU emails for accessing student discounts or free trials. Keep in mind these inboxes are temporary."
-      }
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "EDU Email Generator - Fire Temp Mail",
+          "url": "https://firetempmail.com/edu-email-generator",
+          "description": "Generate free .EDU temporary emails instantly. Perfect for student discounts, trials, and signups.",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          },
+          "creator": { "@id": "https://firetempmail.com/#organization" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
+            { "@type": "ListItem", "position": 2, "name": "EDU Email Generator", "item": "https://firetempmail.com/edu-email-generator" }
+          ]
+        }
+      ]
     }
-  ]
-}
-</script>
+    </script>
 </svelte:head>
 
 <!-- Toast Notifications -->
@@ -485,7 +478,7 @@ function normalizeGmailAddress(address) {
             <!-- Header -->
             <h1>
                 <span>🎓&nbsp;</span>
-                Free EDU Email Generator – Create Disposable .EDU Inbox Instantly
+                {$_('eduEmailPage.h1')}
             </h1>
             <p class="lead">
         Generate <strong>.EDU emails</strong> with our free <strong>EDU Email Generator</strong>. Perfect for signups, trials, student discounts, and more — without exposing your real inbox to spam.
@@ -501,7 +494,7 @@ function normalizeGmailAddress(address) {
                     <button 
                         on:click={copyToClipboard} 
                         class="btn-copy"
-                        title="Copy to clipboard"
+                        title={$_('email.copyToClipboard')}
                     >
                         {#if isCopying}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -556,31 +549,31 @@ function normalizeGmailAddress(address) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Generate New
+                        {$_('email.generateNew')}
                     </button>
                     
                     {#if emailType === 'domain'}
-                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title="Use custom alias">
+                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title={$_('email.useCustomAlias2')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Custom Alias
+                        {$_('email.useCustomAlias2')}
                     </button>
                     
-                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title="Change domain">
+                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title={$_('email.changeDomain')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Change Domain
+                        {$_('email.changeDomain')}
                     </button>
                     {/if}
                     
-                    <button class="btn btn-secondary" on:click={manualReload} title="Refresh page">
+                    <button class="btn btn-secondary" on:click={manualReload} title={$_('email.refreshPage')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Refresh Page
+                        {$_('email.refreshPage')}
                     </button>
                 </div>
 
@@ -629,7 +622,7 @@ function normalizeGmailAddress(address) {
                         on:click={() => generateEmail(true, true)}
                         disabled={!customAlias}
                     >
-                        Generate Custom Email
+                        {$_('email.generateCustomEmail')}
                     </button>
                 </div>
                 {/if}
@@ -640,8 +633,8 @@ function normalizeGmailAddress(address) {
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
-                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading">
-                    <span>Waiting for incoming emails</span>
+                    <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading emails" loading="lazy">
+                    <span>{$_('email.waitingForEmails')}</span>
                 </div>
             {:else if !reloadActive}
                 <!-- Automatic refresh stopped -->
@@ -649,7 +642,7 @@ function normalizeGmailAddress(address) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>Automatic refresh stopped</span>
+                    <span>{$_('email.refreshStopped')}</span>
                 </div>
             {/if}
 
@@ -726,7 +719,7 @@ function normalizeGmailAddress(address) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                             <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                         </svg>
-                        <p>Your inbox is empty</p>
+                        <p>{$_('email.inboxEmpty')}</p>
                         <p>Emails sent to your temporary address will appear here</p>
                     </div>
                 {:else}
@@ -786,136 +779,42 @@ function normalizeGmailAddress(address) {
 
             <!-- Student Discount & EDU Email Content -->
             <section aria-labelledby="edu-discounts" class="seo-article" style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
-                <h2 id="edu-discounts">Major Student Discounts & .EDU Email Benefits</h2>
+                <h2 id="edu-discounts">{$_('eduEmailPage.seoTitle')}</h2>
                 <p class="description">
-                    Student discounts can save you thousands of dollars per year on software, streaming services, and learning resources. While Fire Temp Mail provides temporary email addresses for testing and privacy, a legitimate .EDU email from your school unlocks significant savings across major platforms.
+                    {$_('eduEmailPage.seoP1')}
                 </p>
 
-                <h3>🎓 Top Student Discounts Requiring .EDU Verification</h3>
+                <h3>{$_('eduEmailPage.discountsTitle')}</h3>
                 
                 <div style="margin: 2rem 0;">
-                    <h4>Spotify Premium Student - $5.99/month (50% off)</h4>
-                    <p><strong>Regular Price:</strong> $10.99/month | <strong>Student Savings:</strong> $60/year</p>
-                    <p>Includes Hulu (with ads) and SHOWTIME at no additional cost. Verified through SheerID with your .EDU email. Must re-verify every 12 months.</p>
+                    <h4>{$_('eduEmailPage.spotifyTitle')}</h4>
+                    <p>{$_('eduEmailPage.spotifyP1')}</p>
+                    <p>{$_('eduEmailPage.spotifyP2')}</p>
                 </div>
 
                 <div style="margin: 2rem 0;">
-                    <h4>Amazon Prime Student - $7.49/month</h4>
-                    <p><strong>Regular Price:</strong> $14.99/month | <strong>Student Savings:</strong> $90/year + 6-month FREE trial</p>
-                    <p>Full Prime benefits: Free 2-day shipping, Prime Video, Prime Music, unlimited photo storage, exclusive deals, and student-only promotions.</p>
+                    <h4>{$_('eduEmailPage.amazonTitle')}</h4>
+                    <p>{$_('eduEmailPage.amazonP1')}</p>
+                    <p>{$_('eduEmailPage.amazonP2')}</p>
                 </div>
 
                 <div style="margin: 2rem 0;">
-                    <h4>Adobe Creative Cloud - 60% off</h4>
-                    <p><strong>Regular Price:</strong> $59.99/month | <strong>Student Price:</strong> $19.99/month | <strong>Savings:</strong> $480/year</p>
-                    <p>Full access to Photoshop, Illustrator, Premiere Pro, After Effects, and 20+ creative apps. Perfect for design students and content creators.</p>
+                    <h4>{$_('eduEmailPage.adobeTitle')}</h4>
+                    <p>{$_('eduEmailPage.adobeP1')}</p>
+                    <p>{$_('eduEmailPage.adobeP2')}</p>
                 </div>
 
                 <div style="margin: 2rem 0;">
-                    <h4>GitHub Student Developer Pack - FREE (Value: $200,000+)</h4>
-                    <p>The ultimate developer toolkit for students. Includes free access to:</p>
-                    <ul style="line-height: 1.8; margin-top: 1rem;">
-                        <li>GitHub Pro (unlimited private repositories)</li>
-                        <li>JetBrains All Products Pack ($649/year value)</li>
-                        <li>Microsoft Azure ($100 free credits)</li>
-                        <li>DigitalOcean ($200 credit)</li>
-                        <li>Heroku (free dyno hours)</li>
-                        <li>Canva Pro, Name.com domain, Bootstrap Studio, and 100+ more tools</li>
-                    </ul>
+                    <h4>{$_('eduEmailPage.appleTitle')}</h4>
+                    <p>{$_('eduEmailPage.appleP1')}</p>
+                    <p>{$_('eduEmailPage.appleP2')}</p>
                 </div>
 
                 <div style="margin: 2rem 0;">
-                    <h4>Other Major Student Discounts</h4>
-                    <ul style="line-height: 1.8;">
-                        <li><strong>YouTube Premium Student:</strong> $7.99/month (regular $13.99) - Ad-free YouTube + YouTube Music</li>
-                        <li><strong>Apple Music Student:</strong> $5.99/month (regular $10.99) - Includes Apple TV+ for free</li>
-                        <li><strong>Microsoft Office 365:</strong> FREE for students - Word, Excel, PowerPoint, OneNote, Teams</li>
-                        <li><strong>Notion:</strong> FREE Plus plan ($8/month value) - Notes, databases, wikis, calendars</li>
-                        <li><strong>Autodesk (AutoCAD, Maya, 3ds Max):</strong> FREE 1-year license ($1,785 value)</li>
-                        <li><strong>Figma:</strong> FREE for students - Professional UI/UX design tool</li>
-                    </ul>
+                    <h4>{$_('eduEmailPage.githubTitle')}</h4>
+                    <p>{$_('eduEmailPage.githubP1')}</p>
+                    <p>{$_('eduEmailPage.githubP2')}</p>
                 </div>
-
-                <h3>📚 Academic Resources Requiring .EDU Email</h3>
-                <p>Beyond consumer discounts, your .EDU email grants access to valuable academic databases and research tools:</p>
-                <ul style="line-height: 1.8; margin: 1rem 0;">
-                    <li><strong>JSTOR:</strong> Access to 12+ million academic journal articles, books, and primary sources</li>
-                    <li><strong>IEEE Xplore:</strong> Engineering and technology research papers</li>
-                    <li><strong>PubMed Central:</strong> Free access to biomedical and life sciences literature</li>
-                    <li><strong>Coursera:</strong> Financial aid available for verified students, many courses free to audit</li>
-                    <li><strong>LinkedIn Learning:</strong> Free access through many .EDU institutions</li>
-                </ul>
-
-                <h3>🔐 How Student Verification Works</h3>
-                <p>Most major platforms use third-party verification services to confirm your student status:</p>
-                <ul style="line-height: 1.8; margin: 1rem 0;">
-                    <li><strong>SheerID:</strong> Used by Spotify, Amazon, Adobe, Nike, Apple. Verifies enrollment through official school records.</li>
-                    <li><strong>UNiDAYS:</strong> Global student verification platform requiring .EDU email + proof of enrollment (student ID, transcript).</li>
-                    <li><strong>Direct .EDU Verification:</strong> Some services (GitHub, Microsoft) accept any active .EDU email address as proof.</li>
-                </ul>
-                <p><strong>Important:</strong> Most services require ACTIVE enrollment verification, not just a .EDU email. You may need to provide additional documentation like:</p>
-                <ul style="line-height: 1.8; margin: 1rem 0;">
-                    <li>Current semester class schedule</li>
-                    <li>Student ID with expiration date</li>
-                    <li>Official enrollment letter from registrar</li>
-                    <li>Recent tuition payment receipt</li>
-                </ul>
-
-                <h3>⚠️ Can Fire Temp Mail Generate "Real" .EDU Emails?</h3>
-                <p><strong>No.</strong> Let's be completely honest about what Fire Temp Mail can and cannot do:</p>
-                <ul style="line-height: 1.8; margin: 1rem 0; color: #ff6b6b;">
-                    <li>❌ We CANNOT generate legitimate .EDU email addresses</li>
-                    <li>❌ Our temporary emails will NOT pass student verification services like SheerID or UNiDAYS</li>
-                    <li>❌ You CANNOT use Fire Temp Mail to fraudulently claim student discounts</li>
-                    <li>❌ .EDU domains are restricted and controlled by accredited educational institutions only</li>
-                </ul>
-                <p><strong>What Fire Temp Mail IS for:</strong> Testing, privacy protection, avoiding spam, temporary registrations on non-critical websites. Our service uses domains like @firetempmail.com, NOT .EDU domains.</p>
-
-                <h3>📖 Ethical Considerations & Legal Warnings</h3>
-                <p style="color: #ffa502; font-weight: 600;">Attempting to fraudulently obtain student discounts is illegal and can result in:</p>
-                <ul style="line-height: 1.8; margin: 1rem 0;">
-                    <li>🚫 Account suspension or permanent ban from platforms (Spotify, Amazon, Adobe, etc.)</li>
-                    <li>⚖️ Legal action for fraud or identity theft</li>
-                    <li>💳 Financial penalties and requirement to pay back discounted rates</li>
-                    <li>🎓 Academic consequences if using another student's credentials</li>
-                </ul>
-                <p><strong>The right way to get student discounts:</strong></p>
-                <ol style="line-height: 1.8; margin: 1rem 0;">
-                    <li>Enroll in an accredited college or university (community college counts!)</li>
-                    <li>Use your official .EDU email from your school's registrar</li>
-                    <li>Provide legitimate enrollment verification when requested</li>
-                    <li>Re-verify annually as most services require proof of continued enrollment</li>
-                </ol>
-
-                <h3>🎯 Legitimate Ways to Get Student Discounts (Without College)</h3>
-                <p>If you're not currently enrolled but want to save money, consider these legal alternatives:</p>
-                <ul style="line-height: 1.8; margin: 1rem 0;">
-                    <li><strong>Community College Enrollment:</strong> Take a single class (~$200-500) to gain legitimate student status and .EDU email. Savings on Adobe alone ($480/year) make this profitable.</li>
-                    <li><strong>Free Audit Courses:</strong> Some universities offer free non-credit auditing with .EDU email access</li>
-                    <li><strong>Teacher/Educator Discounts:</strong> Many platforms offer similar discounts to teachers (Adobe, Apple, Microsoft)</li>
-                    <li><strong>Military Discounts:</strong> Active duty and veterans get discounts comparable to student rates</li>
-                    <li><strong>Non-Profit Worker Discounts:</strong> TechSoup, Microsoft, Adobe offer discounts to 501(c)(3) employees</li>
-                </ul>
-
-                <h3>⏰ What to Do Before You Graduate</h3>
-                <p>Your .EDU email typically remains active for 1-2 years after graduation, but eventually expires. Before losing access:</p>
-                <ul style="line-height: 1.8; margin: 1rem 0;">
-                    <li>✅ Download all important documents, transcripts, and records</li>
-                    <li>✅ Update email addresses on important accounts (banking, healthcare, professional networks)</li>
-                    <li>✅ Export contacts from your university email</li>
-                    <li>✅ Set up email forwarding to your personal address (if school allows)</li>
-                    <li>✅ Use your final year to maximize student discounts while you still qualify</li>
-                </ul>
-
-                <h3>💡 Fire Temp Mail: What It's Actually Good For</h3>
-                <p>While we can't help with student discounts, Fire Temp Mail is perfect for:</p>
-                <ul style="line-height: 1.8; margin: 1rem 0;">
-                    <li>✅ Testing software development email flows (verification emails, password resets)</li>
-                    <li>✅ Signing up for newsletters or free trials without spam to your main inbox</li>
-                    <li>✅ Quick registrations on forums, contests, or giveaways</li>
-                    <li>✅ Protecting your privacy when downloading free resources</li>
-                    <li>✅ Developer/QA testing of email-based features</li>
-                </ul>
             </section>
 
         </div>
