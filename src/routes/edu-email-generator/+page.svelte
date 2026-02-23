@@ -16,6 +16,7 @@
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     import Hreflang from '$lib/components/Hreflang.svelte';
+import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     
     // Import page data for SEO
     export let data;
@@ -389,11 +390,17 @@ function normalizeGmailAddress(address) {
     <meta property="og:url" content="https://firetempmail.com/edu-email-generator" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Fire Temp Mail" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://firetempmail.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="EDU Email Generator – Free Disposable .EDU Emails" />
     <meta name="twitter:description" content="Generate free .EDU temporary emails instantly. Private, fast & disposable student email service." />
+    <meta name="twitter:image" content="https://firetempmail.com/og-image.png" />
+    <meta name="twitter:site" content="@firetempmail" />
 
     <!-- WebApplication + BreadcrumbList Schema -->
     <script type="application/ld+json">
@@ -426,6 +433,9 @@ function normalizeGmailAddress(address) {
     }
     </script>
 </svelte:head>
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+    <Breadcrumb items={[{name: "Home", href: "/"}, {name: "EDU Email Generator", href: "/edu-email-generator"}]} />
+</div>
 
 <!-- Toast Notifications -->
 <div class="toast-container">

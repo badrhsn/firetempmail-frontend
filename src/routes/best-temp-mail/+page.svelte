@@ -14,6 +14,7 @@
     } from "../../lib/stores";
     import { browser } from '$app/environment';
     import Hreflang from '$lib/components/Hreflang.svelte';
+import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     
     // Import page data for SEO
     export let data;
@@ -406,6 +407,7 @@ function selectDomain(domain) {
 <svelte:head>
     <title>{data?.seo?.title || 'Best Temp Mail Services 2025 — FireTempMail Review & Guide'}</title>
     <meta name="description" content={data?.seo?.description || 'Looking for the best temporary email? Compare speed, privacy, .edu options and API access. Try FireTempMail — fast, private, no signup.'}>
+    <meta name="robots" content="index, follow">
     <meta name="author" content="Fire Temp Mail">
 
     <!-- Canonical URL -->
@@ -417,11 +419,17 @@ function selectDomain(domain) {
     <meta property="og:url" content="https://firetempmail.com/best-temp-mail" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Fire Temp Mail" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://firetempmail.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Best Temp Mail Services - Fire Temp Mail" />
     <meta name="twitter:description" content="Compare the best temporary email services. Try FireTempMail — fast, private, no signup." />
+    <meta name="twitter:image" content="https://firetempmail.com/og-image.png" />
+    <meta name="twitter:site" content="@firetempmail" />
 
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
@@ -456,6 +464,9 @@ function selectDomain(domain) {
       ]
     }) + '</script>'}
 </svelte:head>
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+    <Breadcrumb items={[{name: "Home", href: "/"}, {name: "Best Temp Mail", href: "/best-temp-mail"}]} />
+</div>
 <!-- Toast Notifications -->
 <div class="toast-container">
     {#each toasts as toast (toast.id)}

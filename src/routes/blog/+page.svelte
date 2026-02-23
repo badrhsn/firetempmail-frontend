@@ -1,6 +1,7 @@
 <script>
     import { getAllPosts } from '$lib/data/blogPosts';
     import Hreflang from '$lib/components/Hreflang.svelte';
+import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     
     // Import page data for SEO
     export let data;
@@ -101,11 +102,17 @@
     <meta property="og:url" content="https://firetempmail.com/blog" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Fire Temp Mail" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://firetempmail.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Blog - Fire Temp Mail" />
     <meta name="twitter:description" content="Email privacy & security insights. Expert guides on temp mail and online privacy." />
+    <meta name="twitter:image" content="https://firetempmail.com/og-image.png" />
+    <meta name="twitter:site" content="@firetempmail" />
 
     <!-- Pagination -->
     {#if currentPage > 1}
@@ -139,6 +146,9 @@
     }
     </script>
 </svelte:head>
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+    <Breadcrumb items={[{name: "Home", href: "/"}, {name: "Blog", href: "/blog"}]} />
+</div>
 
 <!-- Header -->
 <header class="blog-header">

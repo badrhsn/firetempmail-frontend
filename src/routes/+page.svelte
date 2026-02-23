@@ -409,6 +409,7 @@ function normalizeGmailAddress(address) {
     
     <!-- SEO Meta Tags -->
     <meta name="description" content={data?.seo?.description || "Free temporary email generator — create disposable Gmail-style addresses instantly. Block spam and protect your inbox privacy."}>
+    <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://firetempmail.com">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 
@@ -418,11 +419,17 @@ function normalizeGmailAddress(address) {
     <meta property="og:url" content="https://firetempmail.com" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Fire Temp Mail" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://firetempmail.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Fire Temp Mail — Free Disposable Email Generator" />
     <meta name="twitter:description" content="Create temporary email addresses instantly. Free, secure, and no signup required." />
+    <meta name="twitter:image" content="https://firetempmail.com/og-image.png" />
+    <meta name="twitter:site" content="@firetempmail" />
 
     <!-- WebSite + Organization Schema -->
     <script type="application/ld+json">
@@ -449,9 +456,14 @@ function normalizeGmailAddress(address) {
           "url": "https://firetempmail.com",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://firetempmail.com/favicon.ico"
+            "url": "https://firetempmail.com/og-image.png",
+            "width": 1200,
+            "height": 630
           },
-          "sameAs": []
+          "sameAs": [
+            "https://firetempmail.com/blog",
+            "https://firetempmail.com/about"
+          ]
         },
         {
           "@type": "WebApplication",

@@ -16,6 +16,7 @@
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     import Hreflang from '$lib/components/Hreflang.svelte';
+import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     
     // Import page data for SEO
     export let data;
@@ -415,6 +416,7 @@ function selectDomain(domain) {
 <svelte:head>
     <title>{data?.seo?.title || 'Gmail Generator - Create Temporary Gmail Addresses | Fire Temp Mail'}</title>
     <meta name="description" content={data?.seo?.description || 'Generate temporary Gmail addresses instantly. Protect your personal inbox from spam with Fire Temp Mail\'s disposable Gmail generator service.'}>
+    <meta name="robots" content="index, follow">
     <meta name="author" content="Fire Temp Mail">
 
     <!-- Canonical URL -->
@@ -426,11 +428,17 @@ function selectDomain(domain) {
     <meta property="og:url" content="https://firetempmail.com/gmail-generator" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Fire Temp Mail" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://firetempmail.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Gmail Generator - Fire Temp Mail" />
     <meta name="twitter:description" content="Generate temporary Gmail addresses instantly. Protect your personal inbox from spam with Fire Temp Mail." />
+    <meta name="twitter:image" content="https://firetempmail.com/og-image.png" />
+    <meta name="twitter:site" content="@firetempmail" />
 
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
@@ -465,6 +473,9 @@ function selectDomain(domain) {
       ]
     }) + '</script>'}
 </svelte:head>
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+    <Breadcrumb items={[{name: "Home", href: "/"}, {name: "Gmail Generator", href: "/gmail-generator"}]} />
+</div>
 <!-- Toast Notifications -->
 <div class="toast-container">
     {#each toasts as toast (toast.id)}

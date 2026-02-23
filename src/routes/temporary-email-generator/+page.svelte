@@ -17,6 +17,7 @@
     import { getPopularArticles } from '$lib/data/blogPosts';
     import { browser } from '$app/environment';
     import Hreflang from '$lib/components/Hreflang.svelte';
+import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     
     // Import page data for SEO
     export let data;
@@ -408,6 +409,7 @@ function selectDomain(domain) {
 <svelte:head>
     <title>{data?.seo?.title || 'Temp Gmail Generator - Create Disposable Gmail Addresses Instantly | Fire Temp Mail'}</title>
     <meta name="description" content={data?.seo?.description || 'Generate temporary email addresses instantly. Create disposable emails in seconds for signups, verifications & privacy protection.'}>
+    <meta name="robots" content="index, follow">
     <meta name="author" content="Fire Temp Mail">
     
     <!-- Canonical URL - Points to homepage to avoid duplicate content -->
@@ -444,11 +446,17 @@ function selectDomain(domain) {
     <meta property="og:url" content="https://firetempmail.com/temporary-email-generator" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Fire Temp Mail" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://firetempmail.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Temporary Email Generator - Fire Temp Mail" />
     <meta name="twitter:description" content="Advanced temporary email generator for creating instant disposable email addresses." />
+    <meta name="twitter:image" content="https://firetempmail.com/og-image.png" />
+    <meta name="twitter:site" content="@firetempmail" />
 
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
@@ -462,6 +470,9 @@ function selectDomain(domain) {
       ]
     }) + '</script>'}
 </svelte:head>
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+    <Breadcrumb items={[{name: "Home", href: "/"}, {name: "Temporary Email Generator", href: "/temporary-email-generator"}]} />
+</div>
 <!-- Toast Notifications -->
 <div class="toast-container">
     {#each toasts as toast (toast.id)}

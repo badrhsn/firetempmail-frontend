@@ -90,6 +90,7 @@
     <title>{post ? `${post.title} - Fire Temp Mail Blog` : 'Blog Post - Fire Temp Mail'}</title>
     {#if post}
         <meta name="description" content={post.excerpt} />
+    <meta name="robots" content="index, follow">
         <link rel="canonical" href={`https://firetempmail.com/blog/${post.slug}`} />
 
         <!-- Open Graph -->
@@ -98,14 +99,20 @@
         <meta property="og:url" content={`https://firetempmail.com/blog/${post.slug}`} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Fire Temp Mail" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://firetempmail.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
         <meta property="article:published_time" content={post.date} />
         <meta property="article:author" content="Fire Temp Mail Team" />
         <meta property="article:section" content={post.category} />
 
         <!-- Twitter Card -->
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={post.title} />
         <meta name="twitter:description" content={post.excerpt} />
+    <meta name="twitter:image" content="https://firetempmail.com/og-image.png" />
+    <meta name="twitter:site" content="@firetempmail" />
 
         <!-- Sitemap -->
         <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
@@ -129,7 +136,9 @@
                 "name": "Fire Temp Mail",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "https://firetempmail.com/favicon.ico"
+                    "url": "https://firetempmail.com/og-image.png",
+                    "width": 1200,
+                    "height": 630
                 }
             },
             "mainEntityOfPage": {

@@ -1,6 +1,7 @@
 <script>
     import { _ } from 'svelte-i18n';
     import Hreflang from '$lib/components/Hreflang.svelte';
+import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     
     // Import page data for SEO
     export let data;
@@ -12,6 +13,7 @@
 <svelte:head>
     <title>{data?.seo?.title || 'Contact Us - Fire Temp Mail'}</title>
     <meta name="description" content={data?.seo?.description || 'Get in touch with Fire Temp Mail. Contact our support, business, or report abuse via email. We\'re here to help!'}>
+    <meta name="robots" content="index, follow">
     <meta name="author" content="Fire Temp Mail">
     
     <!-- Canonical URL -->
@@ -23,11 +25,17 @@
     <meta property="og:url" content="https://firetempmail.com/contact" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Fire Temp Mail" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://firetempmail.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Contact Us - Fire Temp Mail" />
     <meta name="twitter:description" content="Get in touch with Fire Temp Mail. Contact our support, business, or report abuse via email." />
+    <meta name="twitter:image" content="https://firetempmail.com/og-image.png" />
+    <meta name="twitter:site" content="@firetempmail" />
 
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
@@ -41,6 +49,9 @@
       ]
     }) + '</script>'}
 </svelte:head>
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+    <Breadcrumb items={[{name: "Home", href: "/"}, {name: "Contact", href: "/contact"}]} />
+</div>
 
 
 <section class="py-4 py-xl-5">

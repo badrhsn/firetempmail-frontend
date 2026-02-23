@@ -1,6 +1,7 @@
 <script>
     import { _ } from 'svelte-i18n';
     import Hreflang from '$lib/components/Hreflang.svelte';
+import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     
     // Import page data for SEO
     export let data;
@@ -13,6 +14,7 @@
     <title>{data?.seo?.title || $_('advertising.metaTitle')}</title>
     <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/advertising'} />
     <meta name="description" content={data?.seo?.description || $_('advertising.metaDescription')} />
+    <meta name="robots" content="index, follow">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Advertising Opportunities - Fire Temp Mail" />
@@ -20,11 +22,17 @@
     <meta property="og:url" content="https://firetempmail.com/advertising" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Fire Temp Mail" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://firetempmail.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Advertising - Fire Temp Mail" />
     <meta name="twitter:description" content="Advertise with Fire Temp Mail. Reach privacy-conscious users through our advertising opportunities." />
+    <meta name="twitter:image" content="https://firetempmail.com/og-image.png" />
+    <meta name="twitter:site" content="@firetempmail" />
 
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
@@ -39,6 +47,9 @@
     }) + '</script>'}
     
 </svelte:head>
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+    <Breadcrumb items={[{name: "Home", href: "/"}, {name: "Advertising", href: "/advertising"}]} />
+</div>
 
 <section class="py-4 py-xl-5">
     <div class="container" style="max-width: 800px;">

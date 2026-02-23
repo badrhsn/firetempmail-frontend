@@ -38,6 +38,7 @@ export const GET: RequestHandler = async () => {
         { path: '/temporary-email-generator', priority: '0.7', changefreq: 'weekly', lastmod: today },
         { path: '/fire-mail', priority: '0.7', changefreq: 'weekly', lastmod: today },
         { path: '/gmailnator-alternative', priority: '0.7', changefreq: 'weekly', lastmod: today },
+        { path: '/gmail-generator', priority: '0.8', changefreq: 'weekly', lastmod: today },
         { path: '/blog', priority: '0.8', changefreq: 'daily', lastmod: today },
         { path: '/faq', priority: '0.7', changefreq: 'monthly', lastmod: today },
         { path: '/about', priority: '0.7', changefreq: 'monthly', lastmod: today },
