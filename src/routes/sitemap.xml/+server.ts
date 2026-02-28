@@ -4,110 +4,70 @@ import type { RequestHandler } from './$types';
 export const GET: RequestHandler = async () => {
     const siteUrl = 'https://firetempmail.com';
     const posts = getAllPosts();
-    const today = new Date().toISOString().split('T')[0];
 
-    // Supported languages for hreflang
-    const languages = ['en', 'es', 'de', 'fr', 'pt', 'ar', 'ru', 'zh'];
+    // ---------------------------------------------------------------
+    // SITEMAP STRATEGY (Phase 1 — English only)
+    //
+    // Why English-only?
+    //   1. Localized blog posts serve English content → near-duplicate.
+    //   2. Localized static pages are only partially translated → thin.
+    //   3. A 384-URL sitemap overwhelms crawl budget for a young site.
+    //   4. HTML <link rel="alternate" hreflang> on every page already
+    //      tells Google about every language variant — the sitemap
+    //      doesn't need to duplicate that signal.
+    //
+    // Once the English pages are indexed and the site builds authority,
+    // localized URLs can be added back (Phase 2).
+    // ---------------------------------------------------------------
 
-    // Helper: build localized URL (en = root, others = /lang/path)
-    function langUrl(path: string, lang: string): string {
-        const prefix = lang === 'en' ? '' : `/${lang}`;
-        if (path === '/') return `${siteUrl}${prefix || '/'}`;
-        return `${siteUrl}${prefix}${path}`;
-    }
-
-    // Helper: generate xhtml:link alternates for a path
-    function hreflangLinks(path: string): string {
-        return languages.map(lang =>
-            `            <xhtml:link rel="alternate" hreflang="${lang}" href="${langUrl(path, lang)}" />`
-        ).join('\n') +
-        `\n            <xhtml:link rel="alternate" hreflang="x-default" href="${langUrl(path, 'en')}" />`;
-    }
-
-    // Static pages - Only unique, non-redirected pages
+    // Static pages — English canonical URLs only (20 pages)
     const staticPages = [
-        { path: '/', priority: '1.0', changefreq: 'daily', lastmod: today },
-        { path: '/temp-gmail', priority: '0.9', changefreq: 'weekly', lastmod: today },
-        { path: '/email-generator', priority: '0.9', changefreq: 'daily', lastmod: today },
-        { path: '/edu-email-generator', priority: '0.9', changefreq: 'daily', lastmod: today },
-        { path: '/burner-email', priority: '0.8', changefreq: 'weekly', lastmod: today },
-        { path: '/best-temp-mail', priority: '0.9', changefreq: 'weekly', lastmod: today },
-        { path: '/10minutemail', priority: '0.8', changefreq: 'weekly', lastmod: today },
-        { path: '/temp-mail-edu', priority: '0.8', changefreq: 'weekly', lastmod: today },
-        { path: '/temporary-gmail', priority: '0.7', changefreq: 'weekly', lastmod: today },
-        { path: '/temporary-email-generator', priority: '0.7', changefreq: 'weekly', lastmod: today },
-        { path: '/fire-mail', priority: '0.7', changefreq: 'weekly', lastmod: today },
-        { path: '/gmailnator-alternative', priority: '0.7', changefreq: 'weekly', lastmod: today },
-        { path: '/gmail-generator', priority: '0.8', changefreq: 'weekly', lastmod: today },
-        { path: '/blog', priority: '0.8', changefreq: 'daily', lastmod: today },
-        { path: '/faq', priority: '0.7', changefreq: 'monthly', lastmod: today },
-        { path: '/about', priority: '0.7', changefreq: 'monthly', lastmod: today },
-        { path: '/contact', priority: '0.6', changefreq: 'monthly', lastmod: today },
-        { path: '/privacy-policy', priority: '0.5', changefreq: 'monthly', lastmod: today },
-        { path: '/terms', priority: '0.5', changefreq: 'monthly', lastmod: today },
-        { path: '/advertising', priority: '0.4', changefreq: 'monthly', lastmod: today }
+        { path: '/',                        priority: '1.0', changefreq: 'daily',   lastmod: '2026-02-28' },
+        { path: '/temp-gmail',              priority: '0.9', changefreq: 'weekly',  lastmod: '2026-02-28' },
+        { path: '/email-generator',         priority: '0.9', changefreq: 'daily',   lastmod: '2026-02-28' },
+        { path: '/edu-email-generator',     priority: '0.9', changefreq: 'daily',   lastmod: '2026-02-28' },
+        { path: '/burner-email',            priority: '0.8', changefreq: 'weekly',  lastmod: '2026-02-28' },
+        { path: '/best-temp-mail',          priority: '0.9', changefreq: 'weekly',  lastmod: '2026-02-28' },
+        { path: '/10minutemail',            priority: '0.8', changefreq: 'weekly',  lastmod: '2026-02-28' },
+        { path: '/temp-mail-edu',           priority: '0.8', changefreq: 'weekly',  lastmod: '2026-02-28' },
+        { path: '/temporary-gmail',         priority: '0.7', changefreq: 'weekly',  lastmod: '2026-02-28' },
+        { path: '/temporary-email-generator', priority: '0.7', changefreq: 'weekly', lastmod: '2026-02-28' },
+        { path: '/fire-mail',               priority: '0.7', changefreq: 'weekly',  lastmod: '2026-02-28' },
+        { path: '/gmailnator-alternative',  priority: '0.7', changefreq: 'weekly',  lastmod: '2026-02-28' },
+        { path: '/gmail-generator',         priority: '0.8', changefreq: 'weekly',  lastmod: '2026-02-28' },
+        { path: '/blog',                    priority: '0.8', changefreq: 'daily',   lastmod: '2026-02-28' },
+        { path: '/faq',                     priority: '0.7', changefreq: 'monthly', lastmod: '2026-02-28' },
+        { path: '/about',                   priority: '0.7', changefreq: 'monthly', lastmod: '2026-02-28' },
+        { path: '/contact',                 priority: '0.6', changefreq: 'monthly', lastmod: '2026-02-28' },
+        { path: '/privacy-policy',          priority: '0.5', changefreq: 'monthly', lastmod: '2026-02-28' },
+        { path: '/terms',                   priority: '0.5', changefreq: 'monthly', lastmod: '2026-02-28' },
+        { path: '/advertising',             priority: '0.4', changefreq: 'monthly', lastmod: '2026-02-28' }
     ];
 
-    // Build static page URLs with hreflang for each language
-    const staticUrls = staticPages.flatMap(page => {
-        // English (root) URL entry with hreflang
-        const entries = [`
+    // Build static page URL entries
+    const staticUrls = staticPages.map(page => `
         <url>
-            <loc>${langUrl(page.path, 'en')}</loc>
+            <loc>${siteUrl}${page.path === '/' ? '/' : page.path}</loc>
             <lastmod>${page.lastmod}</lastmod>
             <changefreq>${page.changefreq}</changefreq>
             <priority>${page.priority}</priority>
-${hreflangLinks(page.path)}
-        </url>`];
+        </url>`).join('');
 
-        // Non-English language URLs
-        for (const lang of languages) {
-            if (lang === 'en') continue;
-            entries.push(`
+    // Blog post URL entries — English only (28 posts)
+    const blogUrls = posts.map(post => `
         <url>
-            <loc>${langUrl(page.path, lang)}</loc>
-            <lastmod>${page.lastmod}</lastmod>
-            <changefreq>${page.changefreq}</changefreq>
-            <priority>${(parseFloat(page.priority) * 0.9).toFixed(1)}</priority>
-${hreflangLinks(page.path)}
-        </url>`);
-        }
-        return entries;
-    }).join('');
-
-    // Blog post URLs with hreflang
-    const blogUrls = posts.flatMap(post => {
-        const blogPath = `/blog/${post.slug}`;
-        const entries = [`
-        <url>
-            <loc>${langUrl(blogPath, 'en')}</loc>
+            <loc>${siteUrl}/blog/${post.slug}</loc>
             <lastmod>${post.date}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.7</priority>
-${hreflangLinks(blogPath)}
-        </url>`];
+        </url>`).join('');
 
-        for (const lang of languages) {
-            if (lang === 'en') continue;
-            entries.push(`
-        <url>
-            <loc>${langUrl(blogPath, lang)}</loc>
-            <lastmod>${post.date}</lastmod>
-            <changefreq>weekly</changefreq>
-            <priority>0.6</priority>
-${hreflangLinks(blogPath)}
-        </url>`);
-        }
-        return entries;
-    }).join('');
-
-    // Build XML with xhtml namespace for hreflang
+    // Build clean XML sitemap
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-            xmlns:xhtml="http://www.w3.org/1999/xhtml">
-        ${staticUrls}
-        ${blogUrls}
-    </urlset>`;
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    ${staticUrls}
+    ${blogUrls}
+</urlset>`;
 
     return new Response(sitemap, {
         headers: {
