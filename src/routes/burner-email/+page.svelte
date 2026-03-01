@@ -449,12 +449,14 @@ function selectDomain(domain) {
       "name": "Fire Temp Mail - Burner Email",
       "url": "https://firetempmail.com/burner-email",
       "description": "Create free burner email addresses. Temporary disposable inbox for privacy.",
+      "image": "https://firetempmail.com/og-image.png",
       "applicationCategory": "UtilitiesApplication",
       "operatingSystem": "Any",
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "USD"
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
       },
       "creator": {
         "@type": "Organization",

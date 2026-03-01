@@ -439,7 +439,7 @@ const blogPosts = [
     `
     }, {
         "id": 8,
-        "title": "Use Temporary Email for Free Trials: Protect Your Privacy & Avoid Spam",
+        "title": "Temp Email for Free Trials: Privacy Guide",
         "excerpt": "Learn how temporary email addresses help you protect your privacy, eliminate unwanted spam, and maintain online anonymity when signing up for free trials online.",
         "slug": "temporary-email-for-free-trials",
         "date": "2025-09-16",

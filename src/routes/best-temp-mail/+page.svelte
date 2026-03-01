@@ -440,12 +440,14 @@ function selectDomain(domain) {
       "name": "Fire Temp Mail - Best Temp Mail",
       "url": "https://firetempmail.com/best-temp-mail",
       "description": "Compare and use the best temporary email services. Fast, private, no signup.",
+      "image": "https://firetempmail.com/og-image.png",
       "applicationCategory": "UtilitiesApplication",
       "operatingSystem": "Any",
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "USD"
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
       },
       "creator": {
         "@type": "Organization",
@@ -559,7 +561,7 @@ function selectDomain(domain) {
             <!-- Header -->
            <h1>
             <span>🔥&nbsp;</span>
-            {$_('bestTempMailPage.h1')}
+            Best Temp Mail – #1 Free Temporary Disposable Email Service
             </h1>
             <p class="lead">
             Protect your privacy with <strong>FireTempMail</strong> — the fastest and most secure way to get a free temporary email address. 
@@ -853,21 +855,22 @@ function selectDomain(domain) {
 </p>
 
 <section aria-labelledby="best-temp-mail-generator" class="seo-article" style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
-    <h2 id="best-temp-mail-generator">{$_('bestTempMailPage.seoTitle')}</h2>
-    <p>{$_('bestTempMailPage.seoP1')}</p>
+    <h2 id="best-temp-mail-generator">Why Fire Temp Mail is the Best Temporary Email Service</h2>
+    <p>With dozens of temporary email services available online, choosing the right one matters. Fire Temp Mail stands out as the best temp mail service for several key reasons.</p>
 
-    <h3>{$_('bestTempMailPage.whyBestTitle')}</h3>
-    <p>{$_('bestTempMailPage.whyBestP1')}</p>
+    <h3>What Makes Us the Best</h3>
+    <p>Fire Temp Mail combines speed, privacy, and simplicity in a way that no other temporary email service does.</p>
     <ul style="line-height: 1.8; margin: 1.5rem 0;">
-        <li>{$_('bestTempMailPage.feature1')}</li>
-        <li>{$_('bestTempMailPage.feature2')}</li>
-        <li>{$_('bestTempMailPage.feature3')}</li>
-        <li>{$_('bestTempMailPage.feature4')}</li>
-        <li>{$_('bestTempMailPage.feature5')}</li>
-        <li>{$_('bestTempMailPage.feature6')}</li>
+        <li><strong>Instant Generation:</strong> No waiting, no signup. Visit the page and your temporary email is ready immediately.</li>
+        <li><strong>Multiple Domains:</strong> Choose from several different email domains to best suit your needs.</li>
+        <li><strong>Gmail-Style Addresses:</strong> Get temporary Gmail-like addresses that work everywhere.</li>
+        <li><strong>Custom Aliases:</strong> Create personalized temporary addresses for organization.</li>
+        <li><strong>Auto-Refresh Inbox:</strong> New emails appear automatically without manual refreshing.</li>
+        <li><strong>Privacy First:</strong> No tracking, no logging, no data collection.</li>
     </ul>
 
-    <h3>{$_('bestTempMailPage.comparison')}</h3>
+    <h3>Feature Comparison with Other Services</h3>
+    <p>When comparing the best temp mail services, Fire Temp Mail leads in speed, privacy, and ease of use. While services like Guerrilla Mail and Temp Mail offer basic disposable inboxes, Fire Temp Mail provides Gmail-style addresses, custom aliases, multiple domain options, and real-time email delivery — all completely free with no registration required. Our auto-deletion policy ensures your temporary emails are permanently removed after 24 hours, providing superior privacy protection compared to services that retain data for longer periods.</p>
 </section>
 
 

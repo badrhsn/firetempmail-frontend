@@ -412,6 +412,7 @@ function normalizeGmailAddress(address) {
           "name": "EDU Email Generator - Fire Temp Mail",
           "url": "https://firetempmail.com/edu-email-generator",
           "description": "Generate free .EDU temporary emails instantly. Perfect for student discounts, trials, and signups.",
+          "image": "https://firetempmail.com/og-image.png",
           "applicationCategory": "UtilitiesApplication",
           "operatingSystem": "All",
           "offers": {

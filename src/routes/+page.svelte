@@ -470,6 +470,7 @@ function normalizeGmailAddress(address) {
           "name": "Fire Temp Mail",
           "url": "https://firetempmail.com",
           "description": "Generate free disposable temporary email addresses instantly. Protect your inbox from spam.",
+          "image": "https://firetempmail.com/og-image.png",
           "applicationCategory": "UtilitiesApplication",
           "operatingSystem": "All",
           "offers": {

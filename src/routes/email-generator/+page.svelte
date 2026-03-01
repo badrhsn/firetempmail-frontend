@@ -439,12 +439,14 @@ function normalizeGmailAddress(address) {
       "name": "Fire Temp Mail - Email Generator",
       "url": "https://firetempmail.com/email-generator",
       "description": "Free temporary email generator. Create disposable email addresses instantly.",
+      "image": "https://firetempmail.com/og-image.png",
       "applicationCategory": "UtilitiesApplication",
       "operatingSystem": "Any",
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "USD"
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
       },
       "creator": {
         "@type": "Organization",

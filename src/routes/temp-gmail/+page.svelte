@@ -442,6 +442,7 @@ function selectDomain(domain) {
   "name": "Fire Temp Mail - Temp Gmail Generator",
   "url": "https://firetempmail.com/temp-gmail",
   "description": "Generate temporary Gmail addresses instantly with Fire Temp Mail – a fast, secure, and free disposable email generator for privacy-conscious users.",
+  "image": "https://firetempmail.com/og-image.png",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "All",
   "browserRequirements": "Requires JavaScript and an internet connection.",
