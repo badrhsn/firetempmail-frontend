@@ -3,22 +3,24 @@
     import { onMount } from "svelte";
     import { generate } from "random-words";
     import { _ } from 'svelte-i18n';
-    import { 
+    import { getPopularArticles } from '$lib/data/blogPosts';
+    import Hreflang from '$lib/components/Hreflang.svelte';
+    import {
         receivingEmail, 
         availableDomains, 
         selectedDomain, 
         updateEmailDomain,
         generateNewRandomEmail,
         gmailAccounts,
-        getNextGmailAccount
-    } from "../../lib/stores";
+        getNextGmailAccount,
+        emailsLoaded
+    } from "../lib/stores";
     import { browser } from '$app/environment';
-    import Hreflang from '$lib/components/Hreflang.svelte';
-import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     
     // Import page data for SEO
     export let data;
     
+    // Email type selection
     let emailType = 'domain';
     const url = "https://mail.firetempmail.com";
     
@@ -48,7 +50,7 @@ import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     let aliasError = '';
     let showDomainSelector = false;
 
-    // Reactive variables - BEFORE onMount
+    // Reactive store bindings
     let address = $receivingEmail;
     let currentDomain = $selectedDomain;
     let availableGmailAccounts = $gmailAccounts;
@@ -102,6 +104,7 @@ import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     }
     
     async function loadEmails() {
+        emailsLoaded.set(false);
         isLoading = true;
         try {
             if (!address) return;
@@ -131,6 +134,7 @@ import Breadcrumb from '$lib/components/Breadcrumb.svelte';
             showToast("Error", "Failed to load emails. Please try again.", "error");
         } finally {
             isLoading = false;
+            emailsLoaded.set(true);
         }
     }
     
@@ -149,7 +153,7 @@ import Breadcrumb from '$lib/components/Breadcrumb.svelte';
         if (!email || !email.recipient || !email.suffix) return '';
         return `${email.recipient}-${email.suffix}`;
     }
-    
+
     // Generate email based on selected type
     async function generateEmail(reload, useCustomAlias = false) {
         let fullAddress;
@@ -221,8 +225,6 @@ function normalizeGmailAddress(address) {
         viewEmail(email);
     }
     
-
-    
     function isValidAlias(alias) {
         const aliasRegex = /^[a-zA-Z0-9-]+$/;
         return aliasRegex.test(alias);
@@ -240,14 +242,12 @@ function normalizeGmailAddress(address) {
         showDomainSelector = !showDomainSelector;
     }
     
-function selectDomain(domain) {
-    updateEmailDomain(domain);
-    showDomainSelector = false;
-    
-    // Force UI update
-    address = $receivingEmail;
-    currentDomain = domain;
-}
+    function selectDomain(domain) {
+        updateEmailDomain(domain);
+        showDomainSelector = false;
+        address = $receivingEmail;
+        currentDomain = domain;
+    }
     
     function manualReload() {
         window.location.reload();
@@ -256,7 +256,7 @@ function selectDomain(domain) {
     async function deleteEmail(email) {
         if (!email || !email.recipient || !email.suffix) return;
         
-        if (confirm("Do you really want to permanently delete this email?")) {
+        if (confirm($_('email.delete') + '?')) {
             try {
                 let emailKey = email.recipient + "-" + email.suffix;
                 const response = await fetch(`${url}/mail/delete?key=${emailKey}`);
@@ -275,7 +275,7 @@ function selectDomain(domain) {
                         viewMode = 'list';
                     }
                     
-                    showToast("Success", "Email deleted successfully.", "success");
+                    showToast("Success", $_('toast.emailDeleted'), "success");
                 } else {
                     showToast("Error", `Failed to delete email: ${data.msg}`, "error");
                 }
@@ -292,7 +292,7 @@ function selectDomain(domain) {
             unreadEmails.clear();
             stats = {};
             generateEmail(true);
-            showToast("Success", "New email address generated", "success");
+            showToast("Success", $_('email.newEmail'), "success");
         }
     }
 
@@ -340,7 +340,7 @@ function selectDomain(domain) {
         isCopying = true;
         try {
             await navigator.clipboard.writeText(address);
-            showToast("Success", "Email address copied to clipboard!", "success");
+            showToast("Success", $_('toast.emailCopied'), "success");
         } catch (error) {
             console.error("Copy failed:", error);
             showToast("Error", "Failed to copy to clipboard.", "error");
@@ -403,20 +403,20 @@ function selectDomain(domain) {
         return unreadEmails.has(email.recipient + "-" + email.suffix);
     }
 </script>
-<Hreflang path="/best-temp-mail" />
+<Hreflang path="/" />
 <svelte:head>
-    <title>{data?.seo?.title || 'Best Temp Mail Services 2025 — FireTempMail Review & Guide'}</title>
-    <meta name="description" content={data?.seo?.description || 'Looking for the best temporary email? Compare speed, privacy, .edu options and API access. Try FireTempMail — fast, private, no signup.'}>
+    <title>{data?.seo?.title || 'Fire Temp Mail | Free Disposable Temporary Email Generator'}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content={data?.seo?.description || "Free temporary email generator — create disposable Gmail-style addresses instantly. Block spam and protect your inbox privacy."}>
     <meta name="robots" content="index, follow">
-    <meta name="author" content="Fire Temp Mail">
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/best-temp-mail'}>
+    <link rel="canonical" href="https://firetempmail.com">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Best Temp Mail Services 2025 — FireTempMail Review & Guide" />
-    <meta property="og:description" content="Looking for the best temporary email? Compare speed, privacy, .edu options and API access. Try FireTempMail — fast, private, no signup." />
-    <meta property="og:url" content="https://firetempmail.com/best-temp-mail" />
+    <meta property="og:title" content="Fire Temp Mail | Free Disposable Temporary Email Generator" />
+    <meta property="og:description" content="Generate free temporary email addresses instantly. Protect your inbox from spam with disposable emails — no signup required." />
+    <meta property="og:url" content="https://firetempmail.com" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Fire Temp Mail" />
     <meta property="og:locale" content="en_US" />
@@ -426,49 +426,66 @@ function selectDomain(domain) {
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Best Temp Mail Services - Fire Temp Mail" />
-    <meta name="twitter:description" content="Compare the best temporary email services. Try FireTempMail — fast, private, no signup." />
+    <meta name="twitter:title" content="Fire Temp Mail — Free Disposable Email Generator" />
+    <meta name="twitter:description" content="Create temporary email addresses instantly. Free, secure, and no signup required." />
     <meta name="twitter:image" content="https://firetempmail.com/og-image.png" />
     <meta name="twitter:site" content="@firetempmail" />
 
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
-
-    <!-- WebApplication Schema -->
-    {@html '<script type="application/ld+json">' + JSON.stringify({
+    <!-- WebSite + Organization Schema -->
+    <script type="application/ld+json">
+    {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Fire Temp Mail - Best Temp Mail",
-      "url": "https://firetempmail.com/best-temp-mail",
-      "description": "Compare and use the best temporary email services. Fast, private, no signup.",
-      "image": "https://firetempmail.com/og-image.png",
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": "Any",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock"
-      },
-      "creator": {
-        "@type": "Organization",
-        "name": "Fire Temp Mail",
-        "url": "https://firetempmail.com"
-      }
-    }) + '</script>'}
-
-    <!-- BreadcrumbList Schema -->
-    {@html '<script type="application/ld+json">' + JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Best Temp Mail", "item": "https://firetempmail.com/best-temp-mail" }
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://firetempmail.com/#website",
+          "url": "https://firetempmail.com",
+          "name": "Fire Temp Mail",
+          "description": "Free temporary email generator — create disposable Gmail-style addresses instantly.",
+          "publisher": { "@id": "https://firetempmail.com/#organization" },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://firetempmail.com/blog?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://firetempmail.com/#organization",
+          "name": "Fire Temp Mail",
+          "url": "https://firetempmail.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://firetempmail.com/og-image.png",
+            "width": 1200,
+            "height": 630
+          },
+          "sameAs": [
+            "https://firetempmail.com/blog",
+            "https://firetempmail.com/about"
+          ]
+        },
+        {
+          "@type": "WebApplication",
+          "name": "Fire Temp Mail",
+          "url": "https://firetempmail.com",
+          "description": "Generate free disposable temporary email addresses instantly. Protect your inbox from spam.",
+          "image": "https://firetempmail.com/og-image.png",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          },
+          "creator": { "@id": "https://firetempmail.com/#organization" }
+        }
       ]
-    }) + '</script>'}
+    }
+    </script>
 </svelte:head>
-<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
-    <Breadcrumb items={[{name: "Home", href: "/"}, {name: "Best Temp Mail", href: "/best-temp-mail"}]} />
-</div>
+
 <!-- Toast Notifications -->
 <div class="toast-container">
     {#each toasts as toast (toast.id)}
@@ -488,7 +505,7 @@ function selectDomain(domain) {
                     </svg>
                 {/if}
             </div>
-            
+
             <div class="toast-content">
                 <h4>{toast.title}</h4>
                 <p>{toast.message}</p>
@@ -503,55 +520,18 @@ function selectDomain(domain) {
     {/each}
 </div>
 
-<!-- Forward Email Modal -->
-{#if showForwardModal}
-<div class="modal-backdrop" on:click={() => showForwardModal = false}>
-    <div class="modal" on:click|stopPropagation>
-        <div class="modal-header">
-            <h3>Forward Email</h3>
-            <button on:click={() => showForwardModal = false} class="modal-close">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-        </div>
-        
-        <div class="modal-body">
-            <p>Enter the email address to forward this message to:</p>
-            
-            <input 
-                type="email" 
-                bind:value={forwardToEmail}
-                placeholder="recipient@example.com"
-                class="modal-input"
-            />
-        </div>
-        
-        <div class="modal-footer">
-            <button 
-                on:click={() => { showForwardModal = false; emailToForward = null; }}
-                class="btn btn-secondary"
-            >
-                Cancel
-            </button>
-            <button 
-                on:click={forwardEmail}
-                class="btn btn-primary"
-            >
-                Forward Email
-            </button>
-        </div>
-    </div>
-</div>
-{/if}
-
 <!-- Away Banner -->
 {#if !reloadActive}
     <div class="away-banner">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>Are you still there? Please reload the page to re-enable automatic refresh.</span>
+        <p class="text-center">
+            <span class="banner-icon-text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                {$_('email.awayQuestion')}
+            </span>
+            {$_('email.awayMessage')}
+        </p>
     </div>
 {/if}
 
@@ -559,16 +539,13 @@ function selectDomain(domain) {
     <div class="container">
         <div class="text-center p-4 p-lg-5">
             <!-- Header -->
-           <h1>
-            <span>🔥&nbsp;</span>
-            {$_('bestTempMailPage.h1')}
-            </h1>
+             <h1>
+                <span>📮&nbsp;</span>
+                {$_('home.title')}
+             </h1>
             <p class="lead">
-            Protect your privacy with <strong>FireTempMail</strong> — the fastest and most secure way to get a free temporary email address. 
-            Use it to sign up on websites, receive verification emails, and avoid spam — all without revealing your real inbox.
-            </p>
-
-            
+                {$_('home.subtitle')}
+            </p>            
             <!-- Email Address with Copy Button -->
             <div class="email-address-container">
                 <div class="email-display">
@@ -576,7 +553,7 @@ function selectDomain(domain) {
                     <button 
                         on:click={copyToClipboard} 
                         class="btn-copy"
-                        title={$_('email.copyToClipboard')}
+                        title="Copy to clipboard"
                     >
                         {#if isCopying}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -590,7 +567,6 @@ function selectDomain(domain) {
                     </button>
                 </div>
                 
-                <!-- Radio Button Selector -->
                 <div class="email-type-selector">
                     <div class="radio-group">
                         <label class="radio-option {emailType === 'domain' ? 'selected' : ''}">
@@ -633,31 +609,31 @@ function selectDomain(domain) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        {$_('email.generateNew')}
+                        {$_('email.newEmail')}
                     </button>
                     
                     {#if emailType === 'domain'}
-                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title={$_('email.useCustomAlias2')}>
+                    <button class="btn btn-secondary" on:click={toggleCustomAlias} title={$_('email.useCustomAlias')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M12 6V12M12 12L16 16M12 12L8 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        {$_('email.useCustomAlias2')}
+                        {$_('email.customAlias')}
                     </button>
                     
-                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title={$_('email.changeDomain')}>
+                    <button class="btn btn-secondary" on:click={toggleDomainSelector} title={$_('email.selectDomain')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        {$_('email.changeDomain')}
+                        {$_('email.selectDomain')}
                     </button>
                     {/if}
                     
-                    <button class="btn btn-secondary" on:click={manualReload} title={$_('email.refreshPage')}>
+                    <button class="btn btn-secondary" on:click={manualReload} title={$_('email.refresh')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        {$_('email.refreshPage')}
+                        {$_('email.refresh')}
                     </button>
                 </div>
 
@@ -687,13 +663,15 @@ function selectDomain(domain) {
                 </div>
                 {/if}
             
+                
+            
                 {#if showCustomAliasInput && emailType === 'domain'}
                 <div class="custom-alias-container">
                     <div class="alias-input-group">
                         <input 
                             type="text" 
                             bind:value={customAlias}
-                            placeholder="Enter your custom alias"
+                            placeholder={$_('email.enterAlias')}
                             class="alias-input"
                         />
                         <span class="domain-suffix">@{currentDomain}</span>
@@ -706,19 +684,17 @@ function selectDomain(domain) {
                         on:click={() => generateEmail(true, true)}
                         disabled={!customAlias}
                     >
-                        {$_('email.generateCustomEmail')}
+                        {$_('email.generate')}
                     </button>
                 </div>
                 {/if}
-            
-                
             </div>
             
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
                     <img src="/assets/img/ring-resize.svg?h=2f4014e589baa9dfda8b268abeba3c2b" alt="Loading emails" loading="lazy">
-                    <span>{$_('email.waitingForEmails')}</span>
+                    <span>{$_('common.loading')}</span>
                 </div>
             {:else if !reloadActive}
                 <!-- Automatic refresh stopped -->
@@ -726,13 +702,13 @@ function selectDomain(domain) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>{$_('email.refreshStopped')}</span>
+                    <span>{$_('email.autoRefresh')} {$_('email.stopAfter')}</span>
                 </div>
             {/if}
 
             {#if viewMode === 'detail' && selectedEmail}
                 <!-- Email Detail View -->
-                <div style="border: 2px solid rgb(215,215,215);border-radius: 16px;margin-bottom: 32px;overflow: hidden;">
+                                <div style="border: 2px solid rgb(215,215,215);border-radius: 16px;margin-bottom: 32px;overflow: hidden;">
                     <!-- Email Header -->
                     <div style="padding: 24px; border-bottom: 1px solid rgb(215,215,215);">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
@@ -749,35 +725,50 @@ function selectDomain(domain) {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
                                     <path d="M19 12H5M5 12L11 18M5 12L11 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                Back to inbox
+                                {$_('email.backToInbox')}
                             </button>
                             
                             <div style="display: flex; gap: 8px;">
                                 <button class="btn btn-primary" type="button" on:click={() => forwardEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-dark);">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                        <path d="M5 12H15M15 12L11 8M15 12L11 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M3 10H13C17.4183 10 21 13.5817 21 18V20M3 10L9 16M3 10L9 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                    Forward
                                 </button>
-                                <button class="btn btn-primary" type="button" on:click={() => deleteEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-dark);">
+                                
+                                <button class="btn btn-primary" type="button" on:click={() => deleteEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-red);">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                        <path d="M6 7H18M10 11V17M14 11V17M9 7L10 5H14L15 7M7 7V19C7 20.1 7.9 21 9 21H15C16.1 21 17 20.1 17 19V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M19 7L18.1327 19.1425C18.0579 20.1891 17.187 21 16.1378 21H7.86224C6.81296 21 5.94208 20.1891 5.86732 19.1425L5 7M10 11V17M14 11V17M15 7V4C15 3.44772 14.5523 3 14 3H10C9.44772 3 9 3.44772 9 4V7M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                    Delete
                                 </button>
                             </div>
                         </div>
-                        <span style="color: var(--bs-secondary); font-size: 14px;">
-                            {selectedEmail.date ? new Date(selectedEmail.date).toLocaleString() : 'Unknown date'}
-                        </span>
+                        
+                        <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 8px;">
+                            {selectedEmail.subject || $_('email.noSubject')}
+                        </h2>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center;">
+                                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="20" viewBox="0 0 24 24" width="20" fill="currentColor" style="margin-right: 8px; color: rgb(255,221,51);">
+                                    <g><rect fill="none" height="24" width="24"></rect></g>
+                                    <g><g><path d="M12,2C6.47,2,2,6.47,2,12s4.47,10,10,10s10-4.47,10-10S17.53,2,12,2z"></path></g></g>
+                                </svg>
+                                <span style="font-weight: 500;">{selectedEmail.sender || $_('email.unknownSender')}</span>
+                            </div>
+                            
+                            <span style="color: var(--bs-secondary); font-size: 14px;">
+                                {selectedEmail.date ? new Date(selectedEmail.date).toLocaleString() : $_('email.unknownDate')}
+                            </span>
+                        </div>
                     </div>
                     
                     <!-- Email Body -->
                     <div style="padding: 24px; overflow: auto; max-width: 100%; min-height: 200px;">
                         {@html selectedEmail["content-html"] 
-                            || selectedEmail["content-plain-formatted"] 
-                            || selectedEmail["content-plain"] 
-                            || 'No content available'}
+    || selectedEmail["content-plain-formatted"] 
+    || selectedEmail["content-plain"] 
+    || $_('email.noContent')}
+
                     </div>
                 </div>
             {:else}
@@ -788,20 +779,20 @@ function selectDomain(domain) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                             <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                         </svg>
-                        <p>{$_('email.inboxEmpty')}</p>
-                        <p>Emails sent to your temporary address will appear here</p>
+                        <p>{$_('email.noEmails')}</p>
+                        <p>{$_('email.emailsWillAppear')}</p>
                     </div>
                 {:else}
                     <!-- Email List -->
                     <div class="email-list-container">
                         <!-- List Header -->
                         <div class="list-header">
-                            <h3>Inbox ({emails.length})</h3>
+                            <h3>{$_('email.inbox')} ({emails.length})</h3>
                             <button on:click={manualReload} class="btn-refresh">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
                                     <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                Refresh
+                                {$_('email.refresh')}
                             </button>
                         </div>
                         
@@ -828,11 +819,11 @@ function selectDomain(domain) {
                                         
                                         <div class="email-content">
                                             <div class="email-header">
-                                                <span class="email-sender">{email.sender || 'Unknown Sender'}</span>
+                                                <span class="email-sender">{email.sender || $_('email.unknownSender')}</span>
                                                 <span class="email-date">{formatDate(email.date)}</span>
                                             </div>
                                             
-                                            <p class="email-subject">{email.subject || '(No Subject)'}</p>
+                                            <p class="email-subject">{email.subject || $_('email.noSubject')}</p>
                                             
                                             <p class="email-preview">
                                                 {getEmailPreview(email["content-html"] || email["content-text"])}
@@ -846,158 +837,485 @@ function selectDomain(domain) {
                 {/if}
             {/if}
 
-            <h2>Best Temporary Email Address</h2>
-<p class="description">
-    Looking for the best way to protect your inbox from spam and unwanted emails? 
-    <strong>FireTempMail</strong> gives you instant access to a free, disposable inbox that works anywhere. 
-    Use it to sign up for websites, receive verification codes, or test services without exposing your real email address.
-    Unlike limited-time options like 10 Minute Mail, FireTempMail stays active as long as you need it.
-</p>
+            <!-- Insert: Gmail temp mail SEO block (place this before the "What is Disposable Temporary E-mail?" section) -->
+           <div class="seo-content-section">
+    <div class="container">
+        <h2 class="section-title">{$_('home.gmailSection.title')}</h2>
+        <div class="seo-rich-content">
+            <p>
+                {$_('home.gmailSection.intro')}
+            </p>
 
-<section aria-labelledby="best-temp-mail-generator" class="seo-article" style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
-    <h2 id="best-temp-mail-generator">{$_('bestTempMailPage.seoTitle')}</h2>
-    <p>{$_('bestTempMailPage.seoP1')}</p>
+            <h2>{$_('home.gmailSection.whyTitle')}</h2>
+            <p>
+                {$_('home.gmailSection.whyText')}
+            </p>
 
-    <h3>{$_('bestTempMailPage.whyBestTitle')}</h3>
-    <p>{$_('bestTempMailPage.whyBestP1')}</p>
-    <ul style="line-height: 1.8; margin: 1.5rem 0;">
-        <li>{$_('bestTempMailPage.feature1')}</li>
-        <li>{$_('bestTempMailPage.feature2')}</li>
-        <li>{$_('bestTempMailPage.feature3')}</li>
-        <li>{$_('bestTempMailPage.feature4')}</li>
-        <li>{$_('bestTempMailPage.feature5')}</li>
-        <li>{$_('bestTempMailPage.feature6')}</li>
-    </ul>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>{$_('home.gmailSection.features.instant')}</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>{$_('home.gmailSection.features.real')}</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>{$_('home.gmailSection.features.free')}</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>{$_('home.gmailSection.features.bypass')}</span>
+                </div>
+            </div>
 
-    <h3>{$_('bestTempMailPage.comparison')}</h3>
-</section>
+            <h2>{$_('home.gmailSection.howTitle')}</h2>
+            <p>
+                {$_('home.gmailSection.howText')}
+            </p>
 
+            <h2>{$_('home.gmailSection.idealTitle')}</h2>
+            <p>
+                {$_('home.gmailSection.idealText')}
+            </p>
 
+            <p>
+                {$_('home.gmailSection.cta')}
+            </p>
         </div>
+    </div>
 </div>
+
+            <h2
+                class="text-center"
+                style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;"
+            >
+                {$_('home.whatIsTitle')}
+            </h2>
+            <p class="text-center" style="margin-bottom: 32px;font-size: 18px;">
+                {$_('home.whatIsText')}
+            </p>
+            <!-- Add this after the "What is Disposable Temporary E-mail?" section -->
+
+            <!-- Popular Articles Section -->
+            <div
+                style="margin: 3rem 0; padding: 2rem 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee;"
+            >
+                <h2
+                    class="text-center"
+                    style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 2rem;"
+                >
+                    {$_('blog.popular')}
+                </h2>
+
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;"
+                >
+                    {#each getPopularArticles() as article}
+                        <div
+                            style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; transition: transform 0.2s;"
+                        >
+                            <div
+                                style="display: flex; align-items: center; margin-bottom: 0.75rem;"
+                            >
+                                <span
+                                    style="background: #e9ecef; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.7rem; font-weight: 500;"
+                                >
+                                    {article.category}
+                                </span>
+                                <span style="margin: 0 0.5rem; color: #6c757d;"
+                                    >•</span
+                                >
+                                <span style="color: #6c757d; font-size: 0.8rem;"
+                                    >{article.readTime}</span
+                                >
+                            </div>
+
+                            <h3
+                                style="font-size: 1.2rem; margin-bottom: 0.75rem; font-weight: 600;"
+                            >
+                                <a
+                                    href="/blog/{article.slug}"
+                                    style="color: inherit; text-decoration: none;"
+                                >
+                                    {article.title}
+                                </a>
+                            </h3>
+
+                            <p
+                                style="color: #6c757d; margin-bottom: 1rem; font-size: 0.9rem;"
+                            >
+                                {article.excerpt}
+                            </p>
+                        </div>
+                    {/each}
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="/blog" class="btn btn-blog"> {$_('blog.visitBlog')} </a>
+                </div>
+            </div>
+
+            <!-- Featured Service-Specific Guides -->
+            <div class="featured-guides-section">
+                <h2 class="text-center" style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 1.5rem;">
+                    📱 {$_('home.guidesTitle')}
+                </h2>
+                <p class="text-center" style="color: #6c757d; margin-bottom: 2rem; font-size: 1.1rem;">
+                    {$_('home.guidesSubtitle')}
+                </p>
+                
+                <div class="guides-grid">
+                    <a href="/blog/how-to-use-temp-email-for-discord-verification" class="guide-card">
+                        <div class="guide-icon">💬</div>
+                        <h3>{$_('home.discordGuide.title')}</h3>
+                        <p>{$_('home.discordGuide.description')}</p>
+                        <span class="read-more">{$_('guides.readGuide')} →</span>
+                    </a>
+                    
+                    <a href="/blog/instagram-temp-mail-sign-up-without-personal-email" class="guide-card">
+                        <div class="guide-icon">📸</div>
+                        <h3>{$_('home.instagramGuide.title')}</h3>
+                        <p>{$_('home.instagramGuide.description')}</p>
+                        <span class="read-more">{$_('guides.readGuide')} →</span>
+                    </a>
+                    
+                    <a href="/blog/tiktok-temporary-email-guide-avoid-spam-signups" class="guide-card">
+                        <div class="guide-icon">🎵</div>
+                        <h3>{$_('home.tiktokGuide.title')}</h3>
+                        <p>{$_('home.tiktokGuide.description')}</p>
+                        <span class="read-more">{$_('guides.readGuide')} →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- How It Works Section - NEW -->
+            <div class="how-it-works-section">
+                <div class="container">
+                    <h2 class="section-title">{$_('home.howItWorks.title')}</h2>
+                    <p class="section-subtitle">{$_('home.howItWorks.subtitle')}</p>
+                    
+                    <div class="steps-grid">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <div class="step-icon">⚡</div>
+                            <h3>{$_('home.howItWorks.step1Title')}</h3>
+                            <p>{$_('home.howItWorks.step1Text')}</p>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <div class="step-icon">📋</div>
+                            <h3>{$_('home.howItWorks.step2Title')}</h3>
+                            <p>{$_('home.howItWorks.step2Text')}</p>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <div class="step-icon">📧</div>
+                            <h3>{$_('home.howItWorks.step3Title')}</h3>
+                            <p>{$_('home.howItWorks.step3Text')}</p>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">4</div>
+                            <div class="step-icon">🗑️</div>
+                            <h3>{$_('home.howItWorks.step4Title')}</h3>
+                            <p>{$_('home.howItWorks.step4Text')}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real Use Cases Section - NEW -->
+            <div class="use-cases-section">
+                <div class="container">
+                    <h2 class="section-title">{$_('home.useCases.title')}</h2>
+                    <p class="section-subtitle">{$_('home.useCases.subtitle')}</p>
+                    
+                    <div class="use-cases-grid">
+                        <div class="use-case-card">
+                            <div class="use-case-icon">🎮</div>
+                            <h3>{$_('home.useCases.gaming.title')}</h3>
+                            <p><strong>{$_('common.scenario')}:</strong> {$_('home.useCases.gaming.scenario')}</p>
+                            <p><strong>{$_('common.solution')}:</strong> {$_('home.useCases.gaming.solution')}</p>
+                        </div>
+                        
+                        <div class="use-case-card">
+                            <div class="use-case-icon">📥</div>
+                            <h3>{$_('home.useCases.downloads.title')}</h3>
+                            <p><strong>{$_('common.scenario')}:</strong> {$_('home.useCases.downloads.scenario')}</p>
+                            <p><strong>{$_('common.solution')}:</strong> {$_('home.useCases.downloads.solution')}</p>
+                        </div>
+                        
+                        <div class="use-case-card">
+                            <div class="use-case-icon">🛍️</div>
+                            <h3>{$_('home.useCases.shopping.title')}</h3>
+                            <p><strong>{$_('common.scenario')}:</strong> {$_('home.useCases.shopping.scenario')}</p>
+                            <p><strong>{$_('common.solution')}:</strong> {$_('home.useCases.shopping.solution')}</p>
+                        </div>
+                        
+                        <div class="use-case-card">
+                            <div class="use-case-icon">💻</div>
+                            <h3>{$_('home.useCases.developer.title')}</h3>
+                            <p><strong>{$_('common.scenario')}:</strong> {$_('home.useCases.developer.scenario')}</p>
+                            <p><strong>{$_('common.solution')}:</strong> {$_('home.useCases.developer.solution')}</p>
+                        </div>
+                        
+                        <div class="use-case-card">
+                            <div class="use-case-icon">📱</div>
+                            <h3>{$_('home.useCases.social.title')}</h3>
+                            <p><strong>{$_('common.scenario')}:</strong> {$_('home.useCases.social.scenario')}</p>
+                            <p><strong>{$_('common.solution')}:</strong> {$_('home.useCases.social.solution')}</p>
+                        </div>
+                        
+                        <div class="use-case-card">
+                            <div class="use-case-icon">🎁</div>
+                            <h3>{$_('home.useCases.contests.title')}</h3>
+                            <p><strong>{$_('common.scenario')}:</strong> {$_('home.useCases.contests.scenario')}</p>
+                            <p><strong>{$_('common.solution')}:</strong> {$_('home.useCases.contests.solution')}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security & Privacy Section - NEW -->
+            <div class="security-section">
+                <div class="container">
+                    <h2 class="section-title">{$_('home.security.title')}</h2>
+                    <p class="section-subtitle">{$_('home.security.subtitle')}</p>
+                    
+                    <div class="security-grid">
+                        <div class="security-feature">
+                            <div class="security-icon">🔒</div>
+                            <h3>{$_('home.security.zeroLog.title')}</h3>
+                            <p>{$_('home.security.zeroLog.text')}</p>
+                        </div>
+                        
+                        <div class="security-feature">
+                            <div class="security-icon">⏰</div>
+                            <h3>{$_('home.security.autoDeletion.title')}</h3>
+                            <p>{$_('home.security.autoDeletion.text')}</p>
+                        </div>
+                        
+                        <div class="security-feature">
+                            <div class="security-icon">🚫</div>
+                            <h3>{$_('home.security.noRegistration.title')}</h3>
+                            <p>{$_('home.security.noRegistration.text')}</p>
+                        </div>
+                        
+                        <div class="security-feature">
+                            <div class="security-icon">🛡️</div>
+                            <h3>{$_('home.security.spamFilter.title')}</h3>
+                            <p>{$_('home.security.spamFilter.text')}</p>
+                        </div>
+                        
+                        <div class="security-feature">
+                            <div class="security-icon">🔐</div>
+                            <h3>{$_('home.security.encryption.title')}</h3>
+                            <p>{$_('home.security.encryption.text')}</p>
+                        </div>
+                        
+                        <div class="security-feature">
+                            <div class="security-icon">👁️</div>
+                            <h3>{$_('home.security.noTracking.title')}</h3>
+                            <p>{$_('home.security.noTracking.text')}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Limitations Section - NEW (CRITICAL FOR TRUST) -->
+            <div class="limitations-section">
+                <div class="container">
+                    <h2 class="section-title">{$_('home.limitations.title')}</h2>
+                    <p class="section-subtitle">{$_('home.limitations.subtitle')}</p>
+                    
+                    <div class="limitations-content">
+                        <div class="limitation-warning major">
+                            <div class="warning-icon">❌</div>
+                            <h3>{$_('home.limitations.neverUseTitle')}</h3>
+                            <ul class="limitations-list">
+                                <li><strong>{$_('home.limitations.banking')}:</strong> {$_('home.limitations.bankingText')}</li>
+                                <li><strong>{$_('home.limitations.socialMedia')}:</strong> {$_('home.limitations.socialMediaText')}</li>
+                                <li><strong>{$_('home.limitations.workSchool')}:</strong> {$_('home.limitations.workSchoolText')}</li>
+                                <li><strong>{$_('home.limitations.government')}:</strong> {$_('home.limitations.governmentText')}</li>
+                                <li><strong>{$_('home.limitations.healthcare')}:</strong> {$_('home.limitations.healthcareText')}</li>
+                                <li><strong>{$_('home.limitations.ecommerce')}:</strong> {$_('home.limitations.ecommerceText')}</li>
+                            </ul>
+                            <p class="why-not"><strong>{$_('home.limitations.whyNot')}</strong> {$_('home.limitations.whyNotText')}</p>
+                        </div>
+                        
+                        <div class="limitation-info">
+                            <h3>{$_('home.limitations.otherLimitations')}</h3>
+                            <ul>
+                                <li><strong>{$_('home.limitations.cannotSend')}:</strong> {$_('home.limitations.cannotSendText')}</li>
+                                <li><strong>{$_('home.limitations.lifetime')}:</strong> {$_('home.limitations.lifetimeText')}</li>
+                                <li><strong>{$_('home.limitations.attachments')}:</strong> {$_('home.limitations.attachmentsText')}</li>
+                                <li><strong>{$_('home.limitations.blocked')}:</strong> {$_('home.limitations.blockedText')}</li>
+                                <li><strong>{$_('home.limitations.noForwarding')}:</strong> {$_('home.limitations.noForwardingText')}</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="good-uses">
+                            <h3>{$_('home.limitations.perfectForTitle')}</h3>
+                            <ul>
+                                <li>{$_('home.limitations.perfectFor1')}</li>
+                                <li>{$_('home.limitations.perfectFor2')}</li>
+                                <li>{$_('home.limitations.perfectFor3')}</li>
+                                <li>{$_('home.limitations.perfectFor4')}</li>
+                                <li>{$_('home.limitations.perfectFor5')}</li>
+                                <li>{$_('home.limitations.perfectFor6')}</li>
+                                <li>{$_('home.limitations.perfectFor7')}</li>
+                                <li>{$_('home.limitations.perfectFor8')}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add this after the Popular Articles section on your main page -->
+
+            <div class="seo-content-section">
+                <div class="container">
+                    <h2 class="section-title">
+                        {$_('home.techTitle')}
+                    </h2>
+
+                    <div class="seo-rich-content">
+                        <p>
+                            {$_('home.techIntro')}
+                        </p>
+
+                        <h3>{$_('home.deasTitle')}</h3>
+                        <p>
+                            {$_('home.deasText')}
+                        </p>
+
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <span class="feature-icon">→</span>
+                                <span>{$_('home.deasFeatures.register')}</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">→</span>
+                                <span>{$_('home.deasFeatures.protect')}</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">→</span>
+                                <span>{$_('home.deasFeatures.control')}</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">→</span>
+                                <span>{$_('home.deasFeatures.expire')}</span>
+                            </div>
+                        </div>
+
+                        <p>
+                            {$_('home.deasCompromise')}
+                        </p>
+
+                        <h3>{$_('home.usesTitle')}</h3>
+
+                        <div class="use-cases">
+                            <div class="use-case">
+                                <h4>{$_('home.uses.trials.title')}</h4>
+                                <p>
+                                    {$_('home.uses.trials.text')}
+                                </p>
+                            </div>
+
+                            <div class="use-case">
+                                <h4>{$_('home.uses.retail.title')}</h4>
+                                <p>
+                                    {$_('home.uses.retail.text')}
+                                </p>
+                            </div>
+
+                            <div class="use-case">
+                                <h4>{$_('home.uses.testing.title')}</h4>
+                                <p>
+                                    {$_('home.uses.testing.text')}
+                                </p>
+                            </div>
+
+                            <div class="use-case">
+                                <h4>{$_('home.uses.multiple.title')}</h4>
+                                <p>
+                                    {$_('home.uses.multiple.text')}
+                                </p>
+                            </div>
+
+                            <div class="use-case">
+                                <h4>{$_('home.uses.spam.title')}</h4>
+                                <p>
+                                    {$_('home.uses.spam.text')}
+                                </p>
+                            </div>
+                        </div>
+
+                        <h3>{$_('home.choosingTitle')}</h3>
+                        <p>{$_('home.choosingText')}</p>
+
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <span class="feature-icon">→</span>
+                                <span>{$_('home.choosingFeatures.instant')}</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">→</span>
+                                <span>{$_('home.choosingFeatures.privacy')}</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">→</span>
+                                <span>{$_('home.choosingFeatures.anonymous')}</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">→</span>
+                                <span>{$_('home.choosingFeatures.unlimited')}</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">→</span>
+                                <span>{$_('home.choosingFeatures.inbox')}</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">→</span>
+                                <span>{$_('home.choosingFeatures.interface')}</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">→</span>
+                                <span>{$_('home.choosingFeatures.custom')}</span>
+                            </div>
+                        </div>
+
+                        <h3>
+                            {$_('home.effectiveTitle')}
+                        </h3>
+                        <p>
+                            {$_('home.effectiveText')}
+                        </p>
+
+                        <p>
+                            {$_('home.effectiveAdvanced')}
+                        </p>
+
+                        <div class="conclusion-box">
+                            <h4>{$_('home.conclusionTitle')}</h4>
+                            <p>
+                                {$_('home.conclusionText')}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+
+    </div>
 </section>
 
-<style>
-           /* Footer Styles */
-        .footer {
-            background-color: #22242b;
-            color: #a7a7aa;
-            padding: 40px 0 20px;
-        }
-        .footer a {
-            color: #a7a7aa;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .footer a:hover {
-            color: #3498db;
-        }
-        .footer-title {
-            font-weight: 700;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-            color: #a7a7aa;
-        }
-        .footer-links {
-            list-style: none;
-            padding: 0;
-            line-height: 2.2;
-        }
-        .footer-links li {
-            margin-bottom: 8px;
-        }
-        .divider {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin: 30px 0 20px;
-        }
-        .donation-section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
-        }
-        .donation-options {
-            display: flex;
-            justify-content: center;
-            margin-top: 15px;
-        }
-        .kofi-qr {
-            text-align: center;
-            margin-top: 15px;
-        }
-        .kofi-qr img {
-            max-width: 150px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .kofi-text {
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
-        .copyright {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        .social-icons {
-            font-size: 1.5rem;
-            margin-top: 15px;
-        }
-        .social-icons a {
-            margin-right: 15px;
-        }
-        .counter {
-            color: rgb(255,255,255);
-            background: rgb(33,37,41);
-            border-radius: 10px;
-            padding: 4px 12px;
-            font-size: 14px;
-            margin: 0 2px;
-            font-family: monospace;
-        }
-                .email-type-selector {
-                    margin: 1rem 0;
-                }
-                
-                .radio-group {
-                    display: flex;
-                    justify-content: center;
-                    gap: 1rem;
-                    flex-wrap: wrap;
-                }
-                
-                .radio-option {
-                    display: flex;
-                    align-items: center;
-                    cursor: pointer;
-                    padding: 0.5rem 1rem;
-                    border: 2px solid #e9ecef;
-                    border-radius: 8px;
-                    transition: all 0.3s ease;
-                }
-                
-                .radio-option:hover {
-                    border-color: var(--bs-primary);
-                }
-                
-                .radio-option.selected {
-                    border-color: var(--bs-primary);
-                    background-color: rgba(var(--bs-primary-rgb), 0.1);
-                }
-                
-                .radio-option input[type="radio"] {
-                    margin-right: 0.5rem;
-                }
-                
-                .radio-option.selected .radio-label {
-                    color: var(--bs-primary);
-                    font-weight: 600;
-                }
-                
-                .radio-label {
-                    font-weight: 500;
-                }
-                
-                /* Style the radio buttons */
+<style>           /* Style the radio buttons */
                 input[type="radio"] {
                     -webkit-appearance: none;
                     -moz-appearance: none;
@@ -1270,188 +1588,6 @@ function selectDomain(domain) {
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         display: flex;
         align-items: flex-start;
-        border-left: 4px solid var(--bs-info);
-        animation: slideIn 0.3s ease-out;
-        max-width: 100%;
-    }
-    
-    @keyframes slideIn {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    .btn:hover {
-        opacity: 0.8;
-    }
-
-    .email-address-container {
-    margin-top: 32px;
-    margin-bottom: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.email-display {
-    padding: 8px 30px;
-    border: 2px solid rgb(215,215,215);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: white;
-    min-height: 50px;
-}
-
-.email-text {
-    margin-bottom: 0px;
-    font-size: 20px;
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.copy-btn {
-    margin-left: 12px;
-    background: transparent;
-    border: none;
-    padding: 4px 8px;
-    color: var(--bs-primary);
-}
-
-.regenerate-btn {
-    padding: 8px 30px;
-    border-radius: 16px;
-    border-width: 2px;
-    border-color: rgb(33,37,41);
-    background: rgb(33,37,41);
-    font-weight: 500;
-    height: 50px;
-    font-size: 20px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
-
-.btn-blog {
-    padding: 8px 30px;
-    border-radius: 16px;
-    border-width: 2px;
-    border-color: rgb(33,37,41);
-    background: rgb(33,37,41);
-    font-weight: 500;
-    height: 50px;
-    font-size: 20px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
-
-.regenerate-btn svg {
-    font-size: 24px;
-}
-
-/* Desktop styles - side by side layout */
-@media (min-width: 1200px) {
-    .email-address-container {
-        flex-direction: row;
-        align-items: center;
-    }
-    
-    .email-display {
-        width: 100%;
-        margin-right: 16px;
-        margin-bottom: 0;
-    }
-    
-    .regenerate-btn {
-        min-width: 220px;
-        margin-bottom: 0;
-    }
-}
-
-/* Mobile styles - stacked layout */
-@media (max-width: 1199px) {
-    .email-text {
-        white-space: normal;
-        text-overflow: clip;
-        word-break: break-all;
-    }
-}
-
-.copy-btn:hover,
-.regenerate-btn:hover {
-    opacity: 0.8;
-}
-/* Mobile styles for toast */
-@media (max-width: 768px) {
-    .toast-container {
-        top: 10px;
-        right: 10px;
-        left: 10px;
-        max-width: none;
-    }
-}
-/* Mobile styles for email list */
-@media (max-width: 768px) {
-    .email-item {
-        padding: 12px;
-    }
-    
-    .email-avatar {
-        width: 32px;
-        height: 32px;
-        font-size: 14px;
-        margin-right: 8px;
-    }
-    
-    .email-sender {
-        font-size: 14px;
-    }
-    
-    .email-date {
-        font-size: 11px;
-    }
-    
-    .email-subject {
-        font-size: 14px;
-    }
-    
-    .email-preview {
-        font-size: 12px;
-    }
-}
-
- /* Toast Notifications */
-    .toast-container {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 10000;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        max-width: 350px;
-    }
-    
-    .toast {
-        background: white;
-        padding: 1rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        display: flex;
-        align-items: flex-start;
         animation: slideIn 0.3s ease-out;
         max-width: 100%;
     }
@@ -1603,7 +1739,7 @@ function selectDomain(domain) {
     .btn-secondary {
         background: #f8f9fa;
         color: #212529;
-        border: 1px solid #dee2e6;
+        border: 2px solid #dee2e6;
     }
     
     .btn-danger {
@@ -1651,6 +1787,7 @@ function selectDomain(domain) {
         margin-bottom: 32px;
         font-size: 20px;
     }
+    
     
     /* Email Address Container */
     .email-address-container {
@@ -1715,7 +1852,7 @@ function selectDomain(domain) {
     }
         .email-action-buttons .btn-primary {
         background: rgb(33,37,41);
-        color: white;
+               color: white;
         border: 2px solid rgb(33,37,41);
     }
 
@@ -1779,7 +1916,7 @@ function selectDomain(domain) {
     }
     
     .email-header {
-        padding: 24px;
+               padding:  24px;
         border-bottom: 1px solid rgb(215,215,215);
     }
     
@@ -1922,7 +2059,7 @@ function selectDomain(domain) {
         padding: 16px;
         border-bottom: 1px solid rgb(240,240,240);
         cursor: pointer;
-        transition: background-color 0.2s;
+        transition: background-color  0.2s;
         display: flex;
         align-items: flex-start;
     }
@@ -1949,7 +2086,7 @@ function selectDomain(domain) {
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background: #e9ecef;
+                           background: #e9ecef;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1969,7 +2106,7 @@ function selectDomain(domain) {
     }
     
     .email-content {
-                      flex: 1;
+        flex: 1;
         min-width: 0;
     }
     
@@ -1995,7 +2132,6 @@ function selectDomain(domain) {
     
     .email-date {
         color: var(--bs-secondary);
-
         font-size: 12px;
         flex-shrink: 0;
     }
@@ -2097,6 +2233,374 @@ function selectDomain(domain) {
             transform: scale(1);
         }
     }
+
+    /* Featured Guides Section */
+    .featured-guides-section {
+        margin: 3rem 0;
+        padding: 2rem;
+        background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+        border-radius: 16px;
+    }
+
+    .guides-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .guide-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .guide-card:hover {
+        transform: translateY(-8px);
+        border-color: #667eea;
+        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+        text-decoration: none;
+    }
+
+    .guide-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .guide-card h3 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: #2c3e50;
+    }
+
+    .guide-card p {
+        color: #6c757d;
+        line-height: 1.6;
+        flex-grow: 1;
+        margin-bottom: 1rem;
+    }
+
+    .read-more {
+        color: #667eea;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        transition: transform 0.3s ease;
+    }
+
+    .guide-card:hover .read-more {
+        transform: translateX(5px);
+    }
+
+    @media (max-width: 768px) {
+        .guides-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .featured-guides-section {
+            padding: 1.5rem;
+        }
+    }
+
+    /* How It Works Section Styles */
+    .how-it-works-section {
+        padding: 4rem 2rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .step-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .step-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .step-number {
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #fff;
+        color: #667eea;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .step-icon {
+        font-size: 3rem;
+        margin: 1rem 0;
+    }
+
+    .step-card h3 {
+        font-size: 1.3rem;
+        margin: 1rem 0;
+        font-weight: 600;
+    }
+
+    .step-card p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        opacity: 0.9;
+    }
+
+    /* Use Cases Section Styles */
+    .use-cases-section {
+        padding: 4rem 2rem;
+        background: #f8f9fa;
+    }
+
+    .use-cases-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .use-case-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        transition: all 0.3s ease;
+        border-left: 4px solid #667eea;
+    }
+
+    .use-case-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .use-case-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .use-case-card h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #2c3e50;
+    }
+
+    .use-case-card p {
+        color: #6c757d;
+        line-height: 1.7;
+        margin-bottom: 0.75rem;
+    }
+
+    .use-case-card p strong {
+        color: #667eea;
+        font-weight: 600;
+    }
+
+    /* Security Section Styles */
+    .security-section {
+        padding: 4rem 2rem;
+        background: #2c3e50;
+        color: white;
+    }
+
+    .security-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .security-feature {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 2rem;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .security-feature:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-3px);
+    }
+
+    .security-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .security-feature h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+
+    .security-feature p {
+        line-height: 1.6;
+        opacity: 0.9;
+        font-size: 0.95rem;
+    }
+
+    /* Limitations Section Styles */
+    .limitations-section {
+        padding: 4rem 2rem;
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        color: white;
+    }
+
+    .limitations-content {
+        margin-top: 3rem;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .limitation-warning {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 2.5rem;
+        border-radius: 16px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        margin-bottom: 2rem;
+    }
+
+    .limitation-warning.major {
+        border: 3px solid #fff;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .warning-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .limitation-warning h3,
+    .limitation-info h3,
+    .good-uses h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+    }
+
+    .limitations-list {
+        list-style: none;
+        padding: 0;
+        margin: 1.5rem 0;
+    }
+
+    .limitations-list li {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        border-left: 4px solid #fff;
+        line-height: 1.7;
+    }
+
+    .limitations-list li strong {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+
+    .why-not {
+        margin-top: 1.5rem;
+        padding: 1.5rem;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        line-height: 1.7;
+        font-size: 1rem;
+    }
+
+    .why-not strong {
+        font-size: 1.1rem;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .limitation-info,
+    .good-uses {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+    }
+
+    .limitation-info ul,
+    .good-uses ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 1rem;
+    }
+
+    .limitation-info ul li,
+    .good-uses ul li {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        line-height: 1.6;
+    }
+
+    .limitation-info ul li:last-child,
+    .good-uses ul li:last-child {
+        border-bottom: none;
+    }
+
+    .limitation-info ul li strong,
+    .good-uses ul li strong {
+        font-weight: 600;
+    }
+
+    .good-uses {
+        background: rgba(255, 255, 255, 0.15);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* Shared Styles for All New Sections */
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+        font-size: 1.1rem;
+        text-align: center;
+        opacity: 0.9;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
         @media (min-width: 769px) and (max-width: 992px) {
         .email-action-buttons {
             flex-direction: row;
@@ -2189,88 +2693,6 @@ function selectDomain(domain) {
             font-size: 12px;
         }
     }
-
-    /* New SEO/Features section */
-.seo-section {
-  margin: 2.5rem 0;
-}
-.section-heading {
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-.feature-card {
-  background: #fff;
-  border: 1px solid #e9ecef;
-  border-radius: 12px;
-  padding: 1rem;
-  transition: transform .15s ease, box-shadow .15s ease;
-}
-.feature-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-}
-.feature-card-icon {
-  width: 40px; height: 40px;
-  display: grid; place-items: center;
-  border-radius: 10px;
-  background: #f1f3f5;
-  color: #0d6efd;
-  margin-bottom: .75rem;
-}
-.feature-card h3 {
-  font-size: 1rem;
-  margin: 0 0 .25rem 0;
-  font-weight: 600;
-}
-.feature-card p {
-  margin: 0;
-  color: #6c757d;
-  font-size: .95rem;
-  line-height: 1.5;
-}
-
-.two-col {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-  gap: 1.25rem;
-}
-.two-col h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: .5rem;
-}
-.pros-list {
-  padding-left: 1.1rem;
-  margin: .5rem 0 0 0;
-  color: #2c3e50;
-}
-.pros-list li { margin: .25rem 0; }
-
-.usecase-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: .75rem;
-}
-@media (max-width: 480px) {
-  .usecase-grid { grid-template-columns: 1fr; }
-}
-.usecase-item {
-  background: #f8f9fa;
-  border: 1px solid #eef2f6;
-  border-radius: 10px;
-  padding: .75rem;
-}
-.usecase-item strong { display:block; margin-bottom:.25rem; }
-.usecase-item p { margin:0; color:#6c757d; font-size:.95rem; }
-
-
+    
+    
 </style>
