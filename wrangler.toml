@@ -2,18 +2,7 @@ name = "firetempmail-frontend"
 pages_build_output_dir = ".svelte-kit/cloudflare"
 compatibility_date = "2024-01-29"
 
-[vars]
-API_SECRET = "005fd4d41190580a794495756c839041958e4ef80590777bb386ff0ec9243814"
-
 [[d1_databases]]
 binding = "BLOG_DB"
 database_name = "blog-db"
 database_id = "7dac6c8a-ff23-4317-862d-2c6073afab8e"
-
-[[kv_namespaces]]
-binding = "POST_DB"
-id = "a0d415a88a684842abd6d6adb6b8c9bd"
-
-[[kv_namespaces]]
-binding = "API_USAGE"
-id = "fd2850d5c2c040ecb83459b35c71149b"
