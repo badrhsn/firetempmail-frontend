@@ -24,7 +24,7 @@ export const actions = {
 
         cookies.set('admin_token', secret, {
             path: '/',
-            httpOnly: true,
+            httpOnly: false,
             secure: true,
             sameSite: 'strict',
             maxAge: 86400
