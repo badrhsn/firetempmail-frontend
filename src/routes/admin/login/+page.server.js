@@ -10,7 +10,13 @@ export const actions = {
     default: async ({ request, cookies, platform }) => {
         const formData = await request.formData();
         const password = formData.get('password');
-        const secret = platform.env.API_SECRET;
+        const secret = platform?.env?.API_SECRET;
+
+        console.log('API_SECRET exists:', !!secret);
+        console.log('API_SECRET length:', secret?.length);
+        console.log('Password length:', password?.length);
+        console.log('platform exists:', !!platform);
+        console.log('platform.env exists:', !!platform?.env);
 
         if (!password || password !== secret) {
             return { error: 'Wrong password' };
