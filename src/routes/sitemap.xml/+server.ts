@@ -1,9 +1,13 @@
-import { getAllPosts } from '$lib/data/blogPosts';
 import type { RequestHandler } from './$types';
 
-export const GET: RequestHandler = async () => {
+export const GET: RequestHandler = async ({ platform }) => {
     const siteUrl = 'https://firetempmail.com';
-    const posts = getAllPosts();
+    const db = platform.env.BLOG_DB;
+
+    // Fetch all published posts from D1
+    const { results: posts } = await db.prepare(
+        `SELECT slug, created_at FROM posts WHERE published = 1 ORDER BY created_at DESC`
+    ).all();
 
     // ---------------------------------------------------------------
     // SITEMAP STRATEGY (Phase 1 — English only)
@@ -11,7 +15,7 @@ export const GET: RequestHandler = async () => {
     // Why English-only?
     //   1. Localized blog posts serve English content → near-duplicate.
     //   2. Localized static pages are only partially translated → thin.
-    //   3. A 384-URL sitemap overwhelms crawl budget for a young site.
+    //   3. A large sitemap overwhelms crawl budget for a young site.
     //   4. HTML <link rel="alternate" hreflang> on every page already
     //      tells Google about every language variant — the sitemap
     //      doesn't need to duplicate that signal.
@@ -20,7 +24,7 @@ export const GET: RequestHandler = async () => {
     // localized URLs can be added back (Phase 2).
     // ---------------------------------------------------------------
 
-    // Static pages — English canonical URLs only (20 pages)
+    // Static pages — English canonical URLs only
     const staticPages = [
         { path: '/',                        priority: '1.0', changefreq: 'daily',   lastmod: '2026-02-28' },
         { path: '/temp-gmail',              priority: '0.9', changefreq: 'weekly',  lastmod: '2026-02-28' },
@@ -53,14 +57,17 @@ export const GET: RequestHandler = async () => {
             <priority>${page.priority}</priority>
         </url>`).join('');
 
-    // Blog post URL entries — English only (28 posts)
-    const blogUrls = posts.map(post => `
+    // Blog post URL entries from D1
+    const blogUrls = posts.map(post => {
+        const lastmod = post.created_at ? post.created_at.split('T')[0] : '2026-02-28';
+        return `
         <url>
             <loc>${siteUrl}/blog/${post.slug}</loc>
-            <lastmod>${post.date}</lastmod>
+            <lastmod>${lastmod}</lastmod>
             <changefreq>weekly</changefreq>
-            <priority>0.7</priority>
-        </url>`).join('');
+            <priority>0.8</priority>
+        </url>`;
+    }).join('');
 
     // Build clean XML sitemap
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -72,7 +79,7 @@ export const GET: RequestHandler = async () => {
     return new Response(sitemap, {
         headers: {
             'Content-Type': 'application/xml',
-            'Cache-Control': 'max-age=3600'
+            'Cache-Control': 'public, max-age=3600'
         }
     });
 };
