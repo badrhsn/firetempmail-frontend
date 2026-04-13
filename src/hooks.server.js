@@ -54,7 +54,18 @@ export async function handle({ event, resolve }) {
 
     return resolve(event, {
         transformPageChunk({ html }) {
-            return html.replace('lang="en"', `lang="${lang}"`);
+            let result = html.replace('lang="en"', `lang="${lang}"`);
+
+            // Fix canonical for translated /[lang]/ pages:
+            // Insert lang prefix so canonical is self-referencing
+            if (lang !== defaultLocale) {
+                result = result.replace(
+                    /(<link rel="canonical" href="https:\/\/firetempmail\.com)(?!\/[a-z]{2}\/|\/[a-z]{2}")(\/)/,
+                    `$1/${lang}$2`
+                );
+            }
+
+            return result;
         }
     });
 }

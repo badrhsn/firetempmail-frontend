@@ -2,8 +2,6 @@
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
     import { _ } from 'svelte-i18n';
-    import Hreflang from '$lib/components/Hreflang.svelte';
-
     export let data;
 
     let post = data?.post || null;
@@ -150,7 +148,6 @@
     }
 </script>
 
-{#if post}<Hreflang path={'/blog/' + post.slug} />{/if}
 <svelte:head>
     <title>{post ? `${post.title} - Fire Temp Mail Blog` : 'Blog Post - Fire Temp Mail'}</title>
     {#if post}

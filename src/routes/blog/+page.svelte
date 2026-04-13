@@ -1,6 +1,4 @@
 <script>
-    import Hreflang from '$lib/components/Hreflang.svelte';
-    
     export let data;
     
     const POSTS_PER_PAGE = 12;
@@ -89,7 +87,6 @@
     }
 </script>
 
-<Hreflang path="/blog" />
 <svelte:head>
     <title>{data?.seo?.title || 'Blog - Fire Temp Mail | Email Privacy & Security Insights'}</title>
     <meta name="description" content={data?.seo?.description || 'Expert guides on temporary email, email privacy, spam protection, and online security. Tips for protecting your digital identity.'}>
