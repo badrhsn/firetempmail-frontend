@@ -80,7 +80,7 @@ export const GET: RequestHandler = async ({ platform }) => {
     return new Response(sitemap, {
         headers: {
             'Content-Type': 'application/xml',
-            'Cache-Control': 'public, max-age=3600'
+            'Cache-Control': 'public, max-age=300, s-maxage=300'
         }
     });
 };
