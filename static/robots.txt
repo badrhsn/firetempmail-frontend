@@ -2,5 +2,14 @@
 User-agent: *
 Disallow: /admin/
 
+# Block untranslated locale paths (content is same as English)
+Disallow: /ar/
+Disallow: /de/
+Disallow: /es/
+Disallow: /fr/
+Disallow: /pt/
+Disallow: /ru/
+Disallow: /zh/
+
 # Sitemap location
 Sitemap: https://firetempmail.com/sitemap.xml
