@@ -1,52 +1,117 @@
 <script>
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
-    import { getPostBySlug, getAllPosts } from '$lib/data/blogPosts';
     import { _ } from 'svelte-i18n';
     import Hreflang from '$lib/components/Hreflang.svelte';
 
     export let data;
 
-    let post = data?.post || null; // Start with SSR data if available
+    let post = data?.post || null;
     let error = null;
-    let isLoading = !post; // Only loading if no post was preloaded
+    let isLoading = !post;
     let scrollPercentage = 0;
     let copyrightYear = new Date().getFullYear();
-    let relatedPosts = [];
+    let relatedPosts = data?.relatedPosts || [];
 
-    // Get slug from URL
-    let slug;
-    $: slug = $page.params.slug;
-
-    function getRelatedPosts(currentPost) {
-        if (!currentPost) return [];
-        const allPosts = getAllPosts();
-        return allPosts
-            .filter(p => p.slug !== currentPost.slug)
-            .filter(p => p.category === currentPost.category)
-            .slice(0, 3);
+    // Normalize D1 field names
+    $: if (post) {
+        if (!post.date && post.created_at) post.date = post.created_at;
+        if (!post.readTime && post.read_time) post.readTime = post.read_time;
     }
 
-    // Load post on mount if not already provided by SSR
+    // Determine if content is thin (< 1500 chars of text)
+    $: isThinContent = post?.content
+        ? post.content.replace(/<[^>]*>/g, '').length < 1500
+        : false;
+
+    // Build FAQPage schema from FAQ section in content
+    function extractFaqSchema(postObj) {
+        if (!postObj?.content) return null;
+        const faqItems = [];
+        const h3Regex = /<h3>(.*?)<\/h3>\s*<p>(.*?)<\/p>/gs;
+        let match;
+        while ((match = h3Regex.exec(postObj.content)) !== null) {
+            faqItems.push({
+                "@type": "Question",
+                "name": match[1].replace(/<[^>]*>/g, ''),
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": match[2].replace(/<[^>]*>/g, '')
+                }
+            });
+        }
+        if (faqItems.length === 0) return null;
+        return {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqItems
+        };
+    }
+
+    // Build HowTo schema for Guides category
+    function buildHowToSchema(postObj) {
+        if (!postObj || postObj.category !== 'Guides') return null;
+        // Extract ordered list items from the "How to Use" section
+        const olMatch = postObj.content?.match(/<h2>How to Use FireTempMail.*?<\/h2>.*?<ol>([\s\S]*?)<\/ol>/);
+        if (!olMatch) return null;
+        const steps = [];
+        const liRegex = /<li>.*?<strong>(.*?)<\/strong>(.*?)<\/li>/gs;
+        let m;
+        let pos = 1;
+        while ((m = liRegex.exec(olMatch[1])) !== null) {
+            steps.push({
+                "@type": "HowToStep",
+                "position": pos++,
+                "name": m[1].replace(/<[^>]*>/g, '').replace(/:$/, ''),
+                "text": (m[1] + m[2]).replace(/<[^>]*>/g, '').trim()
+            });
+        }
+        if (steps.length === 0) return null;
+        return {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": `How to Use Temp Email for ${postObj.platform || postObj.title}`,
+            "step": steps
+        };
+    }
+
+    // Build Review schema from test results data embedded in content
+    function buildReviewSchema(postObj) {
+        if (!postObj?.platform || !postObj?.content) return null;
+        // Extract rating from the test results table
+        const ratingMatch = postObj.content.match(/Compatibility rating<\/td>\s*<td[^>]*><strong>(\d)\/5<\/strong>\s*—\s*(\w+)/);
+        if (!ratingMatch) return null;
+        return {
+            "@context": "https://schema.org",
+            "@type": "Review",
+            "itemReviewed": {
+                "@type": "WebApplication",
+                "name": postObj.platform,
+                "applicationCategory": "WebApplication"
+            },
+            "author": {
+                "@type": "Organization",
+                "name": "Fire Temp Mail"
+            },
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": parseInt(ratingMatch[1]),
+                "bestRating": 5,
+                "worstRating": 1
+            },
+            "reviewBody": `We tested FireTempMail's disposable email service with ${postObj.platform}. Compatibility rating: ${ratingMatch[1]}/5 (${ratingMatch[2]}).`
+        };
+    }
+
+    $: faqSchema = extractFaqSchema(post);
+    $: howToSchema = buildHowToSchema(post);
+    $: reviewSchema = buildReviewSchema(post);
+
     onMount(() => {
         if (!post) {
-            try {
-                const fetchedPost = getPostBySlug(slug);
-                if (fetchedPost) {
-                    post = fetchedPost;
-                    relatedPosts = getRelatedPosts(post);
-                    isLoading = false;
-                } else {
-                    error = 'Post not found';
-                    isLoading = false;
-                }
-            } catch (err) {
-                console.error('Error loading post:', err);
-                error = 'Failed to load post';
-                isLoading = false;
-            }
+            error = 'Post not found';
+            isLoading = false;
         } else {
-            relatedPosts = getRelatedPosts(post);
             isLoading = false;
         }
 
@@ -90,7 +155,7 @@
     <title>{post ? `${post.title} - Fire Temp Mail Blog` : 'Blog Post - Fire Temp Mail'}</title>
     {#if post}
         <meta name="description" content={post.excerpt} />
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content={isThinContent ? "noindex, follow" : "index, follow"}>
         <link rel="canonical" href={`https://firetempmail.com/blog/${post.slug}`} />
 
         <!-- Open Graph -->
@@ -103,7 +168,7 @@
     <meta property="og:image" content="https://firetempmail.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-        <meta property="article:published_time" content={post.date} />
+        <meta property="article:published_time" content={post.created_at || post.date} />
         <meta property="article:author" content="Fire Temp Mail Team" />
         <meta property="article:section" content={post.category} />
 
@@ -123,8 +188,8 @@
             "@type": "BlogPosting",
             "headline": post.title,
             "description": post.excerpt,
-            "datePublished": post.date,
-            "dateModified": post.date,
+            "datePublished": post.created_at || post.date,
+            "dateModified": post.created_at || post.date,
             "author": {
                 "@type": "Person",
                 "name": post.author || "Fire Temp Mail Team",
@@ -159,6 +224,21 @@
                 { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://firetempmail.com/blog/${post.slug}` }
             ]
         })}</script>`}
+
+        <!-- FAQPage Schema (extracted from FAQ section) -->
+        {#if faqSchema}
+            {@html `<script type="application/ld+json">${JSON.stringify(faqSchema)}</script>`}
+        {/if}
+
+        <!-- HowTo Schema (for Guides category) -->
+        {#if howToSchema}
+            {@html `<script type="application/ld+json">${JSON.stringify(howToSchema)}</script>`}
+        {/if}
+
+        <!-- Review Schema (for platform compatibility rating) -->
+        {#if reviewSchema}
+            {@html `<script type="application/ld+json">${JSON.stringify(reviewSchema)}</script>`}
+        {/if}
     {:else}
         <meta name="description" content="Read about temporary email, privacy, and online security on the Fire Temp Mail blog." />
     {/if}
@@ -271,7 +351,7 @@
                             <a href="/blog/{related.slug}" style="display: block; padding: 1rem; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: inherit; transition: background 0.2s;">
                                 <div style="font-weight: 600; color: #333; margin-bottom: 0.25rem;">{related.title}</div>
                                 <div style="font-size: 0.85rem; color: #6c757d;">{related.excerpt}</div>
-                                <div style="font-size: 0.8rem; color: #999; margin-top: 0.5rem;">{related.category} · {related.readTime}</div>
+                                <div style="font-size: 0.8rem; color: #999; margin-top: 0.5rem;">{related.category} · {related.read_time || related.readTime}</div>
                             </a>
                         {/each}
                     </div>

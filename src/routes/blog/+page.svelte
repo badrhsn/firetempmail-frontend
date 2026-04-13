@@ -1,90 +1,91 @@
 <script>
-    import { getAllPosts } from '$lib/data/blogPosts';
     import Hreflang from '$lib/components/Hreflang.svelte';
-import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     
-    // Import page data for SEO
     export let data;
     
-    // Posts per page
-    const POSTS_PER_PAGE = 9;
+    const POSTS_PER_PAGE = 12;
     
-    // Reactive variables
     let copyrightYear = new Date().getFullYear();
-    let blogPosts = getAllPosts();
+    let blogPosts = (data?.posts || []).map(p => ({
+        ...p,
+        date: p.created_at || p.date,
+        readTime: p.read_time || p.readTime
+    }));
     let currentPage = 1;
+    let selectedCategory = 'all';
     
-    // Get categories
-    const categories = (() => {
+    // Build categories reactively
+    $: categories = (() => {
         const categoriesSet = new Set();
-        blogPosts.forEach(post => {
-            categoriesSet.add(post.category);
-        });
-        
-        const allCategories = Array.from(categoriesSet).map(cat => ({
-            id: cat.toLowerCase().replace(/\s+/g, '-'),
-            name: cat,
-            count: blogPosts.filter(p => p.category === cat).length
-        }));
-        
+        blogPosts.forEach(post => categoriesSet.add(post.category));
+        const allCategories = Array.from(categoriesSet)
+            .map(cat => ({
+                id: cat.toLowerCase().replace(/\s+/g, '-'),
+                name: cat,
+                count: blogPosts.filter(p => p.category === cat).length
+            }))
+            .sort((a, b) => b.count - a.count);
         return [
-            { id: 'all', name: 'All', count: blogPosts.length },
+            { id: 'all', name: 'All Posts', count: blogPosts.length },
             ...allCategories
         ];
     })();
     
-    // Category filter
-    let selectedCategory = 'all';
-    
-    // Filter posts
-    const filteredPosts = selectedCategory === 'all'
+    $: filteredPosts = selectedCategory === 'all'
         ? blogPosts
         : blogPosts.filter(post => 
             post.category.toLowerCase().replace(/\s+/g, '-') === selectedCategory
         );
     
-    // Pagination calculations
-    const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
-    const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
-    const endIndex = startIndex + POSTS_PER_PAGE;
-    const currentPosts = filteredPosts.slice(startIndex, endIndex);
+    $: totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+    $: startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+    $: endIndex = startIndex + POSTS_PER_PAGE;
+    $: currentPosts = filteredPosts.slice(startIndex, endIndex);
     
-    // Format date
+    // Featured post = first post (most recent)
+    $: featuredPost = selectedCategory === 'all' && currentPage === 1 ? blogPosts[0] : null;
+    $: displayPosts = featuredPost ? currentPosts.filter(p => p.id !== featuredPost.id) : currentPosts;
+    
     const formatDate = (dateString) => {
         try {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('en-US', { 
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric'
+            return new Date(dateString).toLocaleDateString('en-US', { 
+                month: 'short', day: 'numeric', year: 'numeric'
             });
-        } catch {
-            return dateString;
-        }
+        } catch { return dateString; }
     };
     
-    // Navigation functions
+    // Color mapping for categories
+    const categoryColors = {
+        'guides': { bg: '#f0f7ff', text: '#1a73e8', border: '#d2e3fc' },
+        'comparisons': { bg: '#fef7e0', text: '#b45309', border: '#fde68a' },
+        'privacy': { bg: '#f0fdf4', text: '#15803d', border: '#bbf7d0' },
+        'reviews': { bg: '#fdf4ff', text: '#9333ea', border: '#e9d5ff' },
+        'analysis': { bg: '#fff1f2', text: '#be123c', border: '#fecdd3' },
+        'security': { bg: '#f8fafc', text: '#475569', border: '#e2e8f0' },
+        'education': { bg: '#eff6ff', text: '#2563eb', border: '#bfdbfe' },
+        'streaming': { bg: '#fef2f2', text: '#dc2626', border: '#fecaca' },
+        'social': { bg: '#f0f9ff', text: '#0284c7', border: '#bae6fd' },
+        'gaming': { bg: '#ecfdf5', text: '#059669', border: '#a7f3d0' },
+        'tech': { bg: '#f5f3ff', text: '#7c3aed', border: '#ddd6fe' },
+        'shopping': { bg: '#fff7ed', text: '#c2410c', border: '#fed7aa' },
+        'finance': { bg: '#fefce8', text: '#a16207', border: '#fef08a' },
+        'ai-tools': { bg: '#f0fdfa', text: '#0d9488', border: '#99f6e4' },
+        'regional-guides': { bg: '#faf5ff', text: '#7e22ce', border: '#e9d5ff' },
+    };
+
+    function getCategoryColor(cat) {
+        const key = cat?.toLowerCase().replace(/\s+/g, '-') || '';
+        return categoryColors[key] || { bg: '#f8f9fa', text: '#6b7280', border: '#e5e7eb' };
+    }
+    
     function goToPage(page) {
         currentPage = page;
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
-    function nextPage() {
-        if (currentPage < totalPages) {
-            goToPage(currentPage + 1);
-        }
-    }
-    
-    function prevPage() {
-        if (currentPage > 1) {
-            goToPage(currentPage - 1);
-        }
-    }
-    
-    // Handle category change
     function handleCategoryChange(categoryId) {
         selectedCategory = categoryId;
-        currentPage = 1; // Reset to first page when category changes
+        currentPage = 1;
     }
 </script>
 
@@ -146,484 +147,813 @@ import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     }
     </script>
 </svelte:head>
-<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
-    <Breadcrumb items={[{name: "Home", href: "/"}, {name: "Blog", href: "/blog"}]} />
-</div>
 
-<!-- Header -->
-<header class="blog-header">
-    <h1>Blog</h1>
-    <p>Email privacy & security insights</p>
-</header>
+<div class="blog-page">
+    <!-- Hero Header -->
+    <header class="blog-hero">
+        <div class="hero-content">
+            <span class="hero-badge">FireTempMail Blog</span>
+            <h1>Email Privacy & Security</h1>
+            <p>Guides, reviews, and tested tips for using temporary email safely across {blogPosts.length}+ platforms and services.</p>
+        </div>
+    </header>
 
-<!-- Main Content -->
-<main class="blog-main">
+    <!-- Featured Post (only on first page, "all" category) -->
+    {#if featuredPost}
+    <section class="featured-section">
+        <a href="/blog/{featuredPost.slug}" class="featured-card">
+            <div class="featured-badge">Latest</div>
+            <div class="featured-body">
+                <span class="featured-category" style="background:{getCategoryColor(featuredPost.category).bg};color:{getCategoryColor(featuredPost.category).text};border:1px solid {getCategoryColor(featuredPost.category).border}">
+                    {featuredPost.category}
+                </span>
+                <h2>{featuredPost.title}</h2>
+                <p>{featuredPost.excerpt}</p>
+                <div class="featured-meta">
+                    <span class="featured-author">
+                        <span class="author-avatar">{(featuredPost.author || 'F').charAt(0)}</span>
+                        {featuredPost.author || 'Fire Temp Mail Team'}
+                    </span>
+                    <span class="featured-date">{formatDate(featuredPost.date)}</span>
+                    <span class="featured-readtime">{featuredPost.readTime}</span>
+                </div>
+            </div>
+            <div class="featured-arrow">→</div>
+        </a>
+    </section>
+    {/if}
+
     <!-- Category Filters -->
-    <div class="filters">
-        <div class="filters-inner">
+    <nav class="filters" aria-label="Blog categories">
+        <div class="filters-track">
             {#each categories as category}
                 <button 
-                    class="filter-btn {selectedCategory === category.id ? 'active' : ''}" 
+                    class="filter-chip {selectedCategory === category.id ? 'active' : ''}" 
                     on:click={() => handleCategoryChange(category.id)}
+                    aria-pressed={selectedCategory === category.id}
                 >
                     {category.name}
-                    <span class="count">({category.count})</span>
+                    <span class="chip-count">{category.count}</span>
                 </button>
             {/each}
         </div>
-    </div>
+    </nav>
 
-    <!-- Posts Grid -->
-    <div class="posts-grid">
-        {#each currentPosts as post}
-            <article class="post-card">
-                <div class="card-content">
-                    <div class="card-header">
-                        <span class="category">{post.category}</span>
-                        <span class="date">{formatDate(post.date)}</span>
-                    </div>
-                    
-                    <h3>
-                        <a href="/blog/{post.slug}">{post.title}</a>
-                    </h3>
-                    
-                    <p class="excerpt">{post.excerpt}</p>
-                    
-                    <div class="card-footer">
-                        <span class="author">{post.author}</span>
-                        <span class="read-time">• {post.readTime} read</span>
-                    </div>
+    <!-- Content Area -->
+    <main class="blog-content">
+        <!-- Posts Grid -->
+        <div class="posts-grid">
+            {#each displayPosts as post}
+                <article class="post-card">
+                    <a href="/blog/{post.slug}" class="card-link">
+                        <div class="card-top">
+                            <span class="card-category" style="background:{getCategoryColor(post.category).bg};color:{getCategoryColor(post.category).text}">
+                                {post.category}
+                            </span>
+                        </div>
+                        <h3>{post.title}</h3>
+                        <p class="card-excerpt">{post.excerpt}</p>
+                        <div class="card-bottom">
+                            <div class="card-author">
+                                <span class="author-dot" style="background:{getCategoryColor(post.category).text}"></span>
+                                {post.author || 'Fire Temp Mail Team'}
+                            </div>
+                            <div class="card-meta">
+                                <span>{formatDate(post.date)}</span>
+                                <span class="meta-sep">·</span>
+                                <span>{post.readTime}</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            {/each}
+        </div>
+
+        {#if currentPosts.length === 0}
+            <div class="empty-state">
+                <div class="empty-icon">📭</div>
+                <p>No articles found in this category</p>
+                <button on:click={() => handleCategoryChange('all')} class="reset-btn">
+                    View all articles
+                </button>
+            </div>
+        {/if}
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- About Box -->
+            <div class="sidebar-card about-card">
+                <h3>About This Blog</h3>
+                <p>We test temporary email services on real platforms and share honest results. Every guide includes actual test data — not just generic advice.</p>
+                <a href="/" class="sidebar-cta">Get Free Temp Email →</a>
+            </div>
+
+            <!-- Popular Categories -->
+            <div class="sidebar-card">
+                <h3>Browse by Topic</h3>
+                <div class="topic-list">
+                    {#each categories.slice(1, 8) as cat}
+                        <button 
+                            class="topic-item" 
+                            on:click={() => handleCategoryChange(cat.id)}
+                            class:active={selectedCategory === cat.id}
+                        >
+                            <span class="topic-dot" style="background:{getCategoryColor(cat.name).text}"></span>
+                            <span class="topic-name">{cat.name}</span>
+                            <span class="topic-count">{cat.count}</span>
+                        </button>
+                    {/each}
                 </div>
-            </article>
-        {/each}
-    </div>
+            </div>
+
+            <!-- Ad Placeholder for AdSense -->
+            <div class="sidebar-card ad-placeholder">
+                <div class="ad-label">Advertisement</div>
+                <div class="ad-slot">
+                    <!-- AdSense unit goes here -->
+                </div>
+            </div>
+        </aside>
+    </main>
 
     <!-- Pagination -->
     {#if totalPages > 1}
-        <div class="pagination">
-            <button 
-                class="pagination-btn prev" 
-                on:click={prevPage}
-                disabled={currentPage === 1}
-            >
-                ← Previous
-            </button>
-            
-            <div class="page-numbers">
-                {#each Array.from({ length: totalPages }, (_, i) => i + 1) as pageNumber}
-                    {#if pageNumber === 1 || pageNumber === totalPages || 
-                        (pageNumber >= currentPage - 1 && pageNumber <= currentPage + 1)}
-                        <button 
-                            class="page-number {currentPage === pageNumber ? 'active' : ''}" 
-                            on:click={() => goToPage(pageNumber)}
-                        >
-                            {pageNumber}
-                        </button>
-                    {:else if pageNumber === currentPage - 2 || pageNumber === currentPage + 2}
-                        <span class="ellipsis">...</span>
-                    {/if}
-                {/each}
+        <div class="pagination-wrap">
+            <div class="pagination">
+                <button 
+                    class="page-btn" 
+                    on:click={() => goToPage(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    aria-label="Previous page"
+                >
+                    ← Prev
+                </button>
+                
+                <div class="page-nums">
+                    {#each Array.from({ length: totalPages }, (_, i) => i + 1) as pageNumber}
+                        {#if pageNumber === 1 || pageNumber === totalPages || 
+                            (pageNumber >= currentPage - 1 && pageNumber <= currentPage + 1)}
+                            <button 
+                                class="page-num {currentPage === pageNumber ? 'active' : ''}" 
+                                on:click={() => goToPage(pageNumber)}
+                                aria-label="Page {pageNumber}"
+                                aria-current={currentPage === pageNumber ? 'page' : null}
+                            >
+                                {pageNumber}
+                            </button>
+                        {:else if pageNumber === currentPage - 2 || pageNumber === currentPage + 2}
+                            <span class="page-ellipsis">…</span>
+                        {/if}
+                    {/each}
+                </div>
+                
+                <button 
+                    class="page-btn" 
+                    on:click={() => goToPage(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    aria-label="Next page"
+                >
+                    Next →
+                </button>
             </div>
-            
-            <button 
-                class="pagination-btn next" 
-                on:click={nextPage}
-                disabled={currentPage === totalPages}
-            >
-                Next →
-            </button>
-        </div>
-        
-        <div class="pagination-info">
-            Showing {startIndex + 1}-{Math.min(endIndex, filteredPosts.length)} of {filteredPosts.length} articles
+            <p class="pagination-info">
+                Showing {startIndex + 1}–{Math.min(endIndex, filteredPosts.length)} of {filteredPosts.length} articles
+            </p>
         </div>
     {/if}
-    
-    {#if currentPosts.length === 0}
-        <div class="empty-state">
-            <p>No articles found in this category</p>
-            <button on:click={() => handleCategoryChange('all')} class="reset-btn">
-                View all articles
-            </button>
-        </div>
-    {/if}
-</main>
 
-<!-- Newsletter -->
-<aside class="newsletter">
-    <div class="newsletter-content">
-        <h3>Stay Updated</h3>
-        <p>Get privacy tips and security insights delivered to your inbox</p>
-        <form class="subscribe-form">
-            <input type="email" placeholder="Email address" required />
-            <button type="submit">Subscribe</button>
-        </form>
-    </div>
-</aside>
+    <!-- Bottom CTA -->
+    <section class="bottom-cta">
+        <div class="cta-inner">
+            <h2>Need a Temporary Email Right Now?</h2>
+            <p>No signup, no installation — get a free disposable email in one click.</p>
+            <a href="/" class="cta-button">Get Free Temp Email →</a>
+        </div>
+    </section>
+</div>
 
 <style>
-    /* Reset */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    .blog-page {
+        --accent: #ff6b35;
+        --accent-light: #fff4ef;
+        --text: #1a1a2e;
+        --text-secondary: #64748b;
+        --border: #e2e8f0;
+        --bg: #ffffff;
+        --bg-subtle: #f8fafc;
+        --radius: 12px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        color: var(--text);
     }
-    
-    /* Header */
-    .blog-header {
-        padding: 60px 0 40px;
+
+    /* Hero */
+    .blog-hero {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        padding: 64px 24px 56px;
         text-align: center;
-        border-bottom: 1px solid #f0f0f0;
         margin-bottom: 40px;
     }
-    
-    .blog-header h1 {
-        font-size: 48px;
-        font-weight: 400;
-        margin-bottom: 12px;
-        color: #222;
-    }
-    
-    .blog-header p {
-        font-size: 18px;
-        color: #666;
-        font-weight: 300;
-    }
-    
-    /* Main Content */
-    .blog-main {
-        max-width: 1200px;
+
+    .hero-content {
+        max-width: 640px;
         margin: 0 auto;
-        padding: 0 20px;
     }
-    
+
+    .hero-badge {
+        display: inline-block;
+        background: rgba(255, 107, 53, 0.15);
+        color: var(--accent);
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        margin-bottom: 16px;
+    }
+
+    .blog-hero h1 {
+        font-size: clamp(28px, 5vw, 42px);
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 12px;
+        line-height: 1.2;
+    }
+
+    .blog-hero p {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.6;
+        max-width: 520px;
+        margin: 0 auto;
+    }
+
+    /* Featured Post */
+    .featured-section {
+        max-width: 1200px;
+        margin: -32px auto 32px;
+        padding: 0 24px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .featured-card {
+        display: flex;
+        align-items: center;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 28px 32px;
+        text-decoration: none;
+        color: inherit;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        position: relative;
+        gap: 24px;
+    }
+
+    .featured-card:hover {
+        border-color: var(--accent);
+        box-shadow: 0 8px 24px rgba(255, 107, 53, 0.08);
+    }
+
+    .featured-badge {
+        position: absolute;
+        top: -10px;
+        left: 24px;
+        background: var(--accent);
+        color: white;
+        padding: 3px 12px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .featured-body {
+        flex: 1;
+    }
+
+    .featured-category {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .featured-card h2 {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        line-height: 1.3;
+        color: var(--text);
+    }
+
+    .featured-card p {
+        font-size: 15px;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        margin-bottom: 12px;
+    }
+
+    .featured-meta {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 13px;
+        color: var(--text-secondary);
+    }
+
+    .featured-author {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 500;
+    }
+
+    .author-avatar {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: white;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .featured-arrow {
+        font-size: 24px;
+        color: var(--accent);
+        flex-shrink: 0;
+    }
+
     /* Filters */
     .filters {
-        margin-bottom: 40px;
+        max-width: 1200px;
+        margin: 0 auto 32px;
+        padding: 0 24px;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
     }
-    
-    .filters-inner {
+    .filters::-webkit-scrollbar { display: none; }
+
+    .filters-track {
         display: flex;
-        gap: 12px;
-        padding-bottom: 8px;
+        gap: 8px;
         min-width: min-content;
     }
-    
-    .filter-btn {
-        padding: 10px 20px;
-        border: 1px solid #e0e0e0;
-        background: white;
-        border-radius: 25px;
-        font-size: 14px;
-        color: #666;
+
+    .filter-chip {
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        background: var(--bg);
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-secondary);
         cursor: pointer;
         white-space: nowrap;
-        transition: all 0.2s ease;
+        transition: all 0.15s;
         display: flex;
         align-items: center;
         gap: 6px;
     }
-    
-    .filter-btn:hover {
-        border-color: #007bff;
-        color: #007bff;
+
+    .filter-chip:hover {
+        border-color: var(--accent);
+        color: var(--accent);
     }
-    
-    .filter-btn.active {
-        background: #007bff;
-        border-color: #007bff;
+
+    .filter-chip.active {
+        background: var(--accent);
+        border-color: var(--accent);
         color: white;
     }
-    
-    .filter-btn.active .count {
-        color: rgba(255, 255, 255, 0.9);
+
+    .filter-chip.active .chip-count {
+        background: rgba(255, 255, 255, 0.25);
+        color: white;
     }
-    
-    .count {
-        font-size: 12px;
-        color: #999;
+
+    .chip-count {
+        font-size: 11px;
+        background: var(--bg-subtle);
+        padding: 1px 7px;
+        border-radius: 10px;
+        font-weight: 600;
     }
-    
+
+    /* Content Layout: Grid + Sidebar */
+    .blog-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 40px;
+        align-items: start;
+    }
+
     /* Posts Grid */
     .posts-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        gap: 30px;
-        margin-bottom: 60px;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
     }
-    
-    @media (max-width: 768px) {
-        .posts-grid {
-            grid-template-columns: 1fr;
-            gap: 24px;
-        }
-    }
-    
-    /* Post Cards */
+
+    /* Post Card */
     .post-card {
-        border: 1px solid #eee;
-        border-radius: 8px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
         overflow: hidden;
-        transition: all 0.2s ease;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
+        transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+        background: var(--bg);
     }
-    
+
     .post-card:hover {
-        border-color: #007bff;
+        border-color: var(--accent);
+        box-shadow: 0 4px 16px rgba(255, 107, 53, 0.06);
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
     }
-    
-    .card-content {
-        padding: 24px;
-        flex: 1;
+
+    .card-link {
         display: flex;
         flex-direction: column;
-    }
-    
-    .card-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 16px;
-        font-size: 13px;
-    }
-    
-    .category {
-        color: #007bff;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-size: 12px;
-    }
-    
-    .date {
-        color: #888;
-    }
-    
-    .post-card h3 {
-        font-size: 20px;
-        font-weight: 500;
-        line-height: 1.4;
-        margin-bottom: 12px;
-        color: #222;
-    }
-    
-    .post-card h3 a {
-        color: inherit;
+        height: 100%;
+        padding: 20px;
         text-decoration: none;
+        color: inherit;
     }
-    
-    .post-card h3 a:hover {
-        color: #007bff;
+
+    .card-top {
+        margin-bottom: 12px;
     }
-    
-    .excerpt {
-        color: #666;
-        line-height: 1.6;
-        margin-bottom: 20px;
-        flex: 1;
-        font-size: 15px;
+
+    .card-category {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
     }
-    
-    .card-footer {
-        display: flex;
-        align-items: center;
-        gap: 8px;
+
+    .post-card h3 {
+        font-size: 16px;
+        font-weight: 650;
+        line-height: 1.4;
+        margin-bottom: 8px;
+        color: var(--text);
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .card-excerpt {
         font-size: 14px;
-        color: #888;
-        padding-top: 16px;
-        border-top: 1px solid #f0f0f0;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        flex: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-bottom: 16px;
+    }
+
+    .card-bottom {
+        padding-top: 12px;
+        border-top: 1px solid var(--border);
         margin-top: auto;
     }
-    
-    .author {
+
+    .card-author {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
         font-weight: 500;
-        color: #666;
+        color: var(--text);
+        margin-bottom: 4px;
     }
-    
-    /* Pagination */
-    .pagination {
+
+    .author-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .card-meta {
         display: flex;
-        justify-content: center;
         align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--text-secondary);
+    }
+
+    .meta-sep {
+        color: var(--border);
+    }
+
+    /* Sidebar */
+    .sidebar {
+        display: flex;
+        flex-direction: column;
         gap: 20px;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
+        position: sticky;
+        top: 20px;
     }
-    
-    .pagination-btn {
-        padding: 10px 20px;
-        border: 1px solid #e0e0e0;
-        background: white;
-        border-radius: 6px;
+
+    .sidebar-card {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px;
+    }
+
+    .sidebar-card h3 {
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: var(--text);
+    }
+
+    .about-card p {
         font-size: 14px;
-        color: #333;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        min-width: 100px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 16px;
     }
-    
-    .pagination-btn:hover:not(:disabled) {
-        border-color: #007bff;
-        color: #007bff;
+
+    .sidebar-cta {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        transition: opacity 0.15s;
     }
-    
-    .pagination-btn:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-    
-    .page-numbers {
+    .sidebar-cta:hover { opacity: 0.9; }
+
+    .topic-list {
         display: flex;
-        gap: 8px;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .topic-item {
+        display: flex;
         align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border: none;
+        background: transparent;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.1s;
+        width: 100%;
+        text-align: left;
+        font-size: 13px;
+        color: var(--text);
     }
-    
-    .page-number {
-        width: 40px;
-        height: 40px;
+
+    .topic-item:hover, .topic-item.active {
+        background: var(--bg-subtle);
+    }
+
+    .topic-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .topic-name { flex: 1; font-weight: 500; }
+
+    .topic-count {
+        font-size: 12px;
+        color: var(--text-secondary);
+        background: var(--bg-subtle);
+        padding: 1px 8px;
+        border-radius: 10px;
+    }
+
+    /* Ad Placeholder */
+    .ad-placeholder {
+        background: var(--bg-subtle);
+        border-style: dashed;
+        min-height: 250px;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        border: 1px solid #e0e0e0;
-        background: white;
-        border-radius: 6px;
-        font-size: 14px;
-        color: #666;
-        cursor: pointer;
-        transition: all 0.2s ease;
     }
-    
-    .page-number:hover {
-        border-color: #007bff;
-        color: #007bff;
+
+    .ad-label {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
     }
-    
-    .page-number.active {
-        background: #007bff;
-        border-color: #007bff;
-        color: white;
+
+    .ad-slot {
+        width: 100%;
+        min-height: 200px;
     }
-    
-    .ellipsis {
-        color: #999;
-        padding: 0 4px;
-        user-select: none;
-    }
-    
-    .pagination-info {
-        text-align: center;
-        color: #888;
-        font-size: 14px;
-        margin-bottom: 60px;
-    }
-    
+
     /* Empty State */
     .empty-state {
         text-align: center;
         padding: 60px 20px;
-        color: #666;
+        grid-column: 1 / -1;
     }
-    
+
+    .empty-icon { font-size: 48px; margin-bottom: 16px; }
+
     .empty-state p {
-        margin-bottom: 20px;
-        font-size: 16px;
+        color: var(--text-secondary);
+        margin-bottom: 16px;
     }
-    
+
     .reset-btn {
-        padding: 12px 24px;
-        border: 1px solid #007bff;
-        background: white;
-        color: #007bff;
-        border-radius: 6px;
+        padding: 10px 24px;
+        border: 1px solid var(--accent);
+        background: var(--bg);
+        color: var(--accent);
+        border-radius: 8px;
         font-size: 14px;
+        font-weight: 500;
         cursor: pointer;
-        transition: all 0.2s ease;
+        transition: background 0.15s;
     }
-    
-    .reset-btn:hover {
-        background: #f8f9fa;
+    .reset-btn:hover { background: var(--accent-light); }
+
+    /* Pagination */
+    .pagination-wrap {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 24px;
+        text-align: center;
     }
-    
-    /* Newsletter */
-    .newsletter {
-        padding: 60px 20px;
-        background: #f8f9fa;
-        border-top: 1px solid #e0e0e0;
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .page-btn {
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        background: var(--bg);
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text);
+        cursor: pointer;
+        transition: all 0.15s;
+    }
+
+    .page-btn:hover:not(:disabled) {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    .page-btn:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+    }
+
+    .page-nums {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+    }
+
+    .page-num {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border);
+        background: var(--bg);
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.15s;
+    }
+
+    .page-num:hover { border-color: var(--accent); color: var(--accent); }
+
+    .page-num.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: white;
+    }
+
+    .page-ellipsis {
+        color: var(--text-secondary);
+        padding: 0 2px;
+    }
+
+    .pagination-info {
+        font-size: 13px;
+        color: var(--text-secondary);
+    }
+
+    /* Bottom CTA */
+    .bottom-cta {
+        background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+        padding: 56px 24px;
         margin-top: 40px;
     }
-    
-    .newsletter-content {
-        max-width: 500px;
+
+    .cta-inner {
+        max-width: 540px;
         margin: 0 auto;
         text-align: center;
     }
-    
-    .newsletter h3 {
+
+    .bottom-cta h2 {
         font-size: 24px;
-        margin-bottom: 12px;
-        color: #222;
-    }
-    
-    .newsletter p {
-        color: #666;
-        margin-bottom: 24px;
-        line-height: 1.5;
-    }
-    
-    .subscribe-form {
-        display: flex;
-        gap: 10px;
-        max-width: 400px;
-        margin: 0 auto;
-    }
-    
-    .subscribe-form input {
-        flex: 1;
-        padding: 12px 16px;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        font-size: 14px;
-        transition: border-color 0.2s ease;
-    }
-    
-    .subscribe-form input:focus {
-        outline: none;
-        border-color: #007bff;
-    }
-    
-    .subscribe-form button {
-        padding: 12px 24px;
-        border: none;
-        background: #007bff;
+        font-weight: 700;
         color: white;
-        border-radius: 6px;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background 0.2s ease;
+        margin-bottom: 8px;
     }
-    
-    .subscribe-form button:hover {
-        background: #0056b3;
+
+    .bottom-cta p {
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.65);
+        margin-bottom: 24px;
     }
-    
-    @media (max-width: 480px) {
-        .subscribe-form {
+
+    .cta-button {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        padding: 14px 32px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 700;
+        transition: opacity 0.15s, transform 0.15s;
+    }
+
+    .cta-button:hover {
+        opacity: 0.92;
+        transform: translateY(-1px);
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+        .blog-content {
+            grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+            position: static;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .featured-card {
             flex-direction: column;
+            gap: 0;
         }
+
+        .featured-arrow { display: none; }
+    }
+
+    @media (max-width: 600px) {
+        .blog-hero { padding: 48px 20px 40px; }
+        .blog-hero h1 { font-size: 26px; }
+        .featured-section { margin-top: -24px; }
+        .featured-card { padding: 20px; }
+        .featured-card h2 { font-size: 18px; }
+        .posts-grid { grid-template-columns: 1fr; }
         
-        .pagination {
-            gap: 10px;
+        .sidebar {
+            grid-template-columns: 1fr;
         }
-        
-        .pagination-btn {
-            min-width: auto;
-            padding: 10px 16px;
-        }
+
+        .pagination { gap: 4px; }
+        .page-btn { padding: 8px 12px; font-size: 12px; }
     }
 </style>

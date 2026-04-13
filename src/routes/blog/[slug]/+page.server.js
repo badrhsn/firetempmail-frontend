@@ -10,5 +10,14 @@ export async function load({ params, platform }) {
     throw error(404, 'Post not found');
   }
 
-  return { post };
+  // Fetch related posts from same category
+  const { results: relatedPosts } = await db.prepare(
+    `SELECT id, title, slug, excerpt, category, read_time, author, created_at
+     FROM posts
+     WHERE category = ? AND slug != ? AND published = 1
+     ORDER BY created_at DESC
+     LIMIT 3`
+  ).bind(post.category, post.slug).all();
+
+  return { post, relatedPosts: relatedPosts || [] };
 }
