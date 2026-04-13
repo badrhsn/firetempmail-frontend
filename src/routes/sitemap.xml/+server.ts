@@ -59,7 +59,8 @@ export const GET: RequestHandler = async ({ platform }) => {
 
     // Blog post URL entries from D1
     const blogUrls = posts.map(post => {
-        const lastmod = post.created_at ? post.created_at.split('T')[0] : '2026-02-28';
+        // Normalize created_at to YYYY-MM-DD (handles both "T" and space separators)
+        const lastmod = post.created_at ? post.created_at.split(/[T ]/)[0] : '2026-02-28';
         return `
         <url>
             <loc>${siteUrl}/blog/${post.slug}</loc>
