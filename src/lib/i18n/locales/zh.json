@@ -121,7 +121,8 @@
     "emailGenerator": "电子邮件生成器",
     "gmailGenerator": "Gmail生成器",
     "tempMailEdu": "临时邮件EDU",
-    "tenMinuteMail": "10分钟邮件"
+    "tenMinuteMail": "10分钟邮件",
+    "api": "API"
   },
   "toast": {
     "emailCopied": "电子邮件地址已复制到剪贴板！",

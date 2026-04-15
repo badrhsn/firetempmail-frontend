@@ -121,7 +121,8 @@
     "emailGenerator": "E-Mail-Generator",
     "gmailGenerator": "Gmail-Generator",
     "tempMailEdu": "Temporäre E-Mail EDU",
-    "tenMinuteMail": "10-Minuten-Mail"
+    "tenMinuteMail": "10 Minute Mail",
+    "api": "API"
   },
   "toast": {
     "emailCopied": "E-Mail-Adresse in die Zwischenablage kopiert!",

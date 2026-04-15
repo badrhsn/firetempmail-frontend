@@ -121,7 +121,8 @@
     "emailGenerator": "مولد البريد الإلكتروني",
     "gmailGenerator": "مولد Gmail",
     "tempMailEdu": "بريد مؤقت EDU",
-    "tenMinuteMail": "بريد 10 دقائق"
+    "tenMinuteMail": "بريد 10 دقائق",
+    "api": "API"
   },
   "toast": {
     "emailCopied": "تم نسخ عنوان البريد الإلكتروني إلى الحافظة!",

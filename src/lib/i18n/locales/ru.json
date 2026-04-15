@@ -121,7 +121,8 @@
     "emailGenerator": "Генератор Email",
     "gmailGenerator": "Генератор Gmail",
     "tempMailEdu": "Временная почта EDU",
-    "tenMinuteMail": "Почта на 10 минут"
+    "tenMinuteMail": "Почта на 10 минут",
+    "api": "API"
   },
   "toast": {
     "emailCopied": "Адрес электронной почты скопирован в буфер обмена!",

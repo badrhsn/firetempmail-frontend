@@ -121,7 +121,8 @@
     "emailGenerator": "Gerador de Email",
     "gmailGenerator": "Gerador Gmail",
     "tempMailEdu": "Email Temporário EDU",
-    "tenMinuteMail": "Email de 10 Minutos"
+    "tenMinuteMail": "Email de 10 Minutos",
+    "api": "API"
   },
   "toast": {
     "emailCopied": "Endereço de e-mail copiado para a área de transferência!",

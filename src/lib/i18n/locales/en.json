@@ -121,7 +121,8 @@
     "emailGenerator": "Email Generator",
     "gmailGenerator": "Gmail Generator",
     "tempMailEdu": "Temp Mail EDU",
-    "tenMinuteMail": "10 Minute Mail"
+    "tenMinuteMail": "10 Minute Mail",
+    "api": "API"
   },
   "toast": {
     "emailCopied": "Email address copied to clipboard!",
