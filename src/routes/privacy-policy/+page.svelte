@@ -104,6 +104,36 @@ import Breadcrumb from '$lib/components/Breadcrumb.svelte';
                     <li><strong>{$_('privacy.contact.email')}</strong></li>
                 </ul>
 
+                <h2>14. {$_('privacy.ezoic.title')}</h2>
+                <p>{$_('privacy.ezoic.intro')}</p>
+                <p>{$_('privacy.ezoic.collectTitle')}</p>
+                <ul>
+                    <li>{@html $_('privacy.ezoic.collectItems.0')}</li>
+                    <li>{@html $_('privacy.ezoic.collectItems.1')}</li>
+                    <li>{@html $_('privacy.ezoic.collectItems.2')}</li>
+                </ul>
+                <p>{$_('privacy.ezoic.anonymousNote')}</p>
+                <p>{$_('privacy.ezoic.learnMore')} <a href="https://g.ezoic.net/privacy/firetempmail.com" target="_blank" rel="noopener noreferrer">{$_('privacy.ezoic.linkText')}</a>.</p>
+
+                <h2>15. {$_('privacy.consent.title')}</h2>
+                <p>{$_('privacy.consent.continueText')}</p>
+                <p><strong>{$_('privacy.consent.optOutTitle')}</strong></p>
+                <ul>
+                    <li><strong>{$_('privacy.consent.ezoicOptOut')}</strong> <a href="https://g.ezoic.net/privacy/firetempmail.com" target="_blank" rel="noopener noreferrer">Ezoic's Privacy Manager</a></li>
+                    <li><strong>{$_('privacy.consent.googleOptOut')}</strong> <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">Google Ad Settings</a></li>
+                    <li><strong>{$_('privacy.consent.industryOptOut')}</strong> <a href="https://optout.aboutads.info" target="_blank" rel="noopener noreferrer">Digital Advertising Alliance (DAA)</a></li>
+                </ul>
+                <p>{$_('privacy.consent.note')}</p>
+
+                <h2>16. {$_('privacy.legalBasis.title')}</h2>
+                <p>{$_('privacy.legalBasis.text')}</p>
+                <ul>
+                    <li>{@html $_('privacy.legalBasis.items.0')}</li>
+                    <li>{@html $_('privacy.legalBasis.items.1')}</li>
+                    <li>{@html $_('privacy.legalBasis.items.2')}</li>
+                </ul>
+                <p>{$_('privacy.legalBasis.rightsNote')}</p>
+
                 <hr class="my-4">
                 <p class="text-muted"><small>© {copyrightYear} Fire Temp Mail</small></p>
             </div>

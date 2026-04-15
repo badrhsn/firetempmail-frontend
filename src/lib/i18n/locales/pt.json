@@ -595,6 +595,38 @@
       "text": "Para questões sobre esta Política de Privacidade ou práticas de tratamento de dados, contacte-nos em:",
       "email": "E-mail: support@firetempmail.com"
     },
+    "ezoic": {
+      "title": "Publicidade & Parceiros Publicitários de Terceiros (Ezoic)",
+      "intro": "Utilizamos o Ezoic para exibir publicidade personalizada e não personalizada no nosso Serviço. O Ezoic pode recolher e processar certos dados sobre a sua visita para fornecer anúncios relevantes, medir o desempenho dos anúncios e melhorar a entrega de anúncios.",
+      "collectTitle": "O Ezoic e os seus parceiros publicitários podem utilizar:",
+      "collectItems": [
+        "<strong>Cookies</strong> \u2013 para rastrear o desempenho e a frequência dos anúncios",
+        "<strong>Informações do dispositivo</strong> \u2013 incluindo endereço IP, tipo de navegador e sistema operativo",
+        "<strong>Dados de utilização</strong> \u2013 páginas visitadas, tempo gasto, cliques"
+      ],
+      "anonymousNote": "Estes dados são recolhidos de forma anónima sempre que possível e não são utilizados para identificar pessoalmente a menos que tenha dado consentimento explícito.",
+      "learnMore": "Para mais informações sobre as práticas de privacidade do Ezoic, visite:",
+      "linkText": "Política de Privacidade do Ezoic"
+    },
+    "consent": {
+      "title": "O Seu Consentimento & Direitos de Exclusão",
+      "continueText": "Ao continuar a utilizar o nosso site, consente na utilização de cookies e tecnologias semelhantes para fins publicitários e analíticos conforme descrito nesta Política de Privacidade.",
+      "optOutTitle": "Pode optar por não receber publicidade personalizada a qualquer momento:",
+      "ezoicOptOut": "Exclusão do Ezoic:",
+      "googleOptOut": "Exclusão do Google Ads:",
+      "industryOptOut": "Exclusão da indústria:",
+      "note": "Desativar os anúncios personalizados não para completamente os anúncios \u2014 continuará a ver anúncios não personalizados."
+    },
+    "legalBasis": {
+      "title": "Base Legal para o Tratamento de Dados (Marrocos)",
+      "text": "Em conformidade com a Lei Marroquina n.º 09-08 relativa à proteção das pessoas singulares no que diz respeito ao tratamento de dados pessoais, a nossa base legal para o tratamento dos seus dados inclui:",
+      "items": [
+        "<strong>Interesse legítimo</strong> \u2013 para operar, proteger e monetizar o nosso Serviço",
+        "<strong>Consentimento</strong> \u2013 para cookies, análises e publicidade personalizada",
+        "<strong>Necessidade contratual</strong> \u2013 para fornecer serviços de e-mail temporário"
+      ],
+      "rightsNote": "Tem o direito de retirar o consentimento a qualquer momento sem afetar a licitude do tratamento baseado no consentimento antes da sua retirada."
+    },
     "footer": {
       "quickLinks": "Links Rápidos",
       "supportService": "Apoie o Nosso Serviço",

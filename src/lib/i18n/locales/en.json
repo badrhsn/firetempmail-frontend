@@ -518,6 +518,38 @@
       "text": "For questions regarding this Privacy Policy or data handling practices, contact us at:",
       "email": "Email: support@firetempmail.com"
     },
+    "ezoic": {
+      "title": "Advertising & Third-Party Ad Partners (Ezoic)",
+      "intro": "We use Ezoic to display personalized and non-personalized advertisements on our Service. Ezoic may collect and process certain data about your visit to provide relevant ads, measure ad performance, and improve ad delivery.",
+      "collectTitle": "Ezoic and its advertising partners may use:",
+      "collectItems": [
+        "<strong>Cookies</strong> \u2013 to track ad performance and frequency",
+        "<strong>Device information</strong> \u2013 including IP address, browser type, and operating system",
+        "<strong>Usage data</strong> \u2013 pages visited, time spent, clicks"
+      ],
+      "anonymousNote": "This data is collected anonymously where possible and is not used to personally identify you unless you have given explicit consent.",
+      "learnMore": "For more information about Ezoic's privacy practices, visit:",
+      "linkText": "Ezoic Privacy Policy"
+    },
+    "consent": {
+      "title": "Your Consent & Opt-Out Rights",
+      "continueText": "By continuing to use our website, you consent to the use of cookies and similar technologies for advertising and analytics purposes as described in this Privacy Policy.",
+      "optOutTitle": "You can opt out of personalized advertising at any time:",
+      "ezoicOptOut": "Ezoic opt-out:",
+      "googleOptOut": "Google Ads opt-out:",
+      "industryOptOut": "Industry opt-out:",
+      "note": "Disabling personalized ads does not stop ads completely \u2014 you will still see non-personalized ads."
+    },
+    "legalBasis": {
+      "title": "Legal Basis for Data Processing (Morocco)",
+      "text": "In compliance with Moroccan Law No. 09-08 on the protection of individuals with regard to personal data processing, our legal basis for processing your data includes:",
+      "items": [
+        "<strong>Legitimate interest</strong> \u2013 to operate, secure, and monetize our Service",
+        "<strong>Consent</strong> \u2013 for cookies, analytics, and personalized advertising",
+        "<strong>Contractual necessity</strong> \u2013 for providing temporary email services"
+      ],
+      "rightsNote": "You have the right to withdraw consent at any time without affecting the lawfulness of processing based on consent before its withdrawal."
+    },
     "footer": {
       "quickLinks": "Quick Links",
       "supportService": "Support Our Service",
