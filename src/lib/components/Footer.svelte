@@ -74,6 +74,7 @@
                         <li><a href={lp('/about')}>About Us</a></li>
                         <li><a href={lp('/blog')}>{$_('footer.blog')}</a></li>
                         <li><a href={lp('/faq')}>{$_('footer.faq')}</a></li>
+                        <li><a href="https://rapidapi.com/badr.hsn96/api/firetempmail" target="_blank" rel="noopener noreferrer">{$_('footer.api')}</a></li>
                     </ul>
                 </div>
                 
