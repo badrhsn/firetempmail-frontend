@@ -1,9 +1,8 @@
-import { SEO_META, OG_LOCALES } from './_seo.js';
+import { getHomeSeo } from '$lib/i18n/home-seo.js';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
-    const lang = 'en';
-    const seo = SEO_META.en;
+    const seo = getHomeSeo('en');
     const canonical = 'https://firetempmail.com';
 
     return {
@@ -12,8 +11,8 @@ export async function load() {
             description: seo.description,
             keywords: seo.keywords,
             canonical,
-            lang,
-            ogLocale: OG_LOCALES.en || 'en_US'
+            lang: seo.lang,
+            ogLocale: seo.ogLocale
         }
     };
 }

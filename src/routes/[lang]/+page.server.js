@@ -1,10 +1,11 @@
-import { SEO_META, OG_LOCALES } from '../_seo.js';
+import { getHomeSeo } from '$lib/i18n/home-seo.js';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
-    const lang = params.lang || 'en';
-    const seo = SEO_META[lang] || SEO_META['en'];
-    const canonical = `https://firetempmail.com/${lang}`;
+    const seo = getHomeSeo(params.lang || 'en');
+    const canonical = seo.lang === 'en'
+        ? 'https://firetempmail.com'
+        : `https://firetempmail.com/${seo.lang}`;
 
     return {
         seo: {
@@ -12,8 +13,8 @@ export async function load({ params }) {
             description: seo.description,
             keywords: seo.keywords,
             canonical,
-            lang,
-            ogLocale: OG_LOCALES[lang] || 'en_US'
+            lang: seo.lang,
+            ogLocale: seo.ogLocale
         }
     };
 }

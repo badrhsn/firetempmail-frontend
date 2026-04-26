@@ -18,6 +18,23 @@
     
     // Import page data for SEO
     export let data;
+
+    const OG_LOCALE_MAP = {
+        en: 'en_US',
+        fr: 'fr_FR',
+        de: 'de_DE',
+        es: 'es_ES',
+        it: 'it_IT',
+        pt: 'pt_PT',
+        nl: 'nl_NL',
+        pl: 'pl_PL',
+        ar: 'ar_AR',
+        ru: 'ru_RU',
+        zh: 'zh_CN'
+    };
+    const ALL_OG_LOCALES = Object.values(OG_LOCALE_MAP);
+    $: currentOgLocale = data?.seo?.ogLocale || OG_LOCALE_MAP.en;
+    $: ogLocaleAlternates = ALL_OG_LOCALES.filter((locale) => locale !== currentOgLocale);
     
     // Email type selection
     let emailType = 'domain';
@@ -432,7 +449,10 @@ function normalizeGmailAddress(address) {
     <meta property="og:url" content={data?.seo?.canonical || 'https://firetempmail.com'} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Fire Temp Mail" />
-    <meta property="og:locale" content={data?.seo?.ogLocale || 'en_US'} />
+    <meta property="og:locale" content={currentOgLocale} />
+    {#each ogLocaleAlternates as localeAlternate}
+        <meta property="og:locale:alternate" content={localeAlternate} />
+    {/each}
     <meta property="og:image" content="https://firetempmail.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
