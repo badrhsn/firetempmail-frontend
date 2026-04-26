@@ -596,35 +596,21 @@
       "text": "Bei Fragen zu dieser Datenschutzrichtlinie oder zu Datenverarbeitungspraktiken kontaktieren Sie uns unter:",
       "email": "E-Mail: support@firetempmail.com"
     },
-    "ezoic": {
-      "title": "Werbung & Drittanbieter-Werbepartner (Ezoic)",
-      "intro": "Wir verwenden Ezoic, um personalisierte und nicht personalisierte Werbung auf unserem Service anzuzeigen. Ezoic kann bestimmte Daten über Ihren Besuch sammeln und verarbeiten, um relevante Anzeigen bereitzustellen, die Anzeigenleistung zu messen und die Anzeigenbereitstellung zu verbessern.",
-      "collectTitle": "Ezoic und seine Werbepartner können folgendes verwenden:",
-      "collectItems": [
-        "<strong>Cookies</strong> \u2013 zur Verfolgung der Anzeigenleistung und -häufigkeit",
-        "<strong>Geräteinformationen</strong> \u2013 einschließlich IP-Adresse, Browsertyp und Betriebssystem",
-        "<strong>Nutzungsdaten</strong> \u2013 besuchte Seiten, verbrachte Zeit, Klicks"
-      ],
-      "anonymousNote": "Diese Daten werden nach Möglichkeit anonym erhoben und nicht zur persönlichen Identifizierung verwendet, es sei denn, Sie haben ausdrücklich eingewilligt.",
-      "learnMore": "Weitere Informationen zu den Datenschutzpraktiken von Ezoic finden Sie unter:",
-      "linkText": "Ezoic Datenschutzrichtlinie"
-    },
     "consent": {
       "title": "Ihre Einwilligung & Opt-out-Rechte",
       "continueText": "Durch die weitere Nutzung unserer Website stimmen Sie der Verwendung von Cookies und ähnlichen Technologien für Werbe- und Analysezwecke gemäß dieser Datenschutzrichtlinie zu.",
       "optOutTitle": "Sie können sich jederzeit von personalisierter Werbung abmelden:",
-      "ezoicOptOut": "Ezoic Opt-out:",
       "googleOptOut": "Google Ads Opt-out:",
       "industryOptOut": "Branchen-Opt-out:",
-      "note": "Die Deaktivierung personalisierter Anzeigen stoppt Werbung nicht vollständig \u2014 Sie sehen weiterhin nicht personalisierte Anzeigen."
+      "note": "Die Deaktivierung personalisierter Anzeigen stoppt Werbung nicht vollständig — Sie sehen weiterhin nicht personalisierte Anzeigen."
     },
     "legalBasis": {
       "title": "Rechtsgrundlage für die Datenverarbeitung (Marokko)",
       "text": "In Übereinstimmung mit dem marokkanischen Gesetz Nr. 09-08 zum Schutz von Personen bezüglich der Verarbeitung personenbezogener Daten umfasst unsere Rechtsgrundlage für die Verarbeitung Ihrer Daten:",
       "items": [
-        "<strong>Berechtigtes Interesse</strong> \u2013 zur Betreibung, Sicherung und Monetarisierung unseres Services",
-        "<strong>Einwilligung</strong> \u2013 für Cookies, Analysen und personalisierte Werbung",
-        "<strong>Vertragliche Notwendigkeit</strong> \u2013 zur Bereitstellung temporärer E-Mail-Dienste"
+        "<strong>Berechtigtes Interesse</strong> – zur Betreibung, Sicherung und Monetarisierung unseres Services",
+        "<strong>Einwilligung</strong> – für Cookies, Analysen und personalisierte Werbung",
+        "<strong>Vertragliche Notwendigkeit</strong> – zur Bereitstellung temporärer E-Mail-Dienste"
       ],
       "rightsNote": "Sie haben das Recht, Ihre Einwilligung jederzeit zu widerrufen, ohne die Rechtmäßigkeit der vor dem Widerruf auf Grundlage der Einwilligung erfolgten Verarbeitung zu berühren."
     },

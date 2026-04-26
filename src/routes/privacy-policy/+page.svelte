@@ -104,9 +104,6 @@ import Breadcrumb from '$lib/components/Breadcrumb.svelte';
                     <li><strong>{$_('privacy.contact.email')}</strong></li>
                 </ul>
 
-                <!-- Ezoic privacy policy embed — disclosures injected automatically -->
-                <span id="ezoic-privacy-policy-embed"></span>
-
                 <hr class="my-4">
                 <p class="text-muted"><small>© {copyrightYear} Fire Temp Mail</small></p>
             </div>

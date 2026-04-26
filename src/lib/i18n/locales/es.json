@@ -525,35 +525,21 @@
       "text": "Para preguntas sobre esta Política de Privacidad o prácticas de manejo de datos, contáctanos en:",
       "email": "Correo: support@firetempmail.com"
     },
-    "ezoic": {
-      "title": "Publicidad y Socios Publicitarios de Terceros (Ezoic)",
-      "intro": "Utilizamos Ezoic para mostrar publicidad personalizada y no personalizada en nuestro Servicio. Ezoic puede recopilar y procesar ciertos datos sobre tu visita para proporcionar anuncios relevantes, medir el rendimiento de los anuncios y mejorar la entrega de anuncios.",
-      "collectTitle": "Ezoic y sus socios publicitarios pueden utilizar:",
-      "collectItems": [
-        "<strong>Cookies</strong> \u2013 para rastrear el rendimiento y la frecuencia de los anuncios",
-        "<strong>Información del dispositivo</strong> \u2013 incluyendo dirección IP, tipo de navegador y sistema operativo",
-        "<strong>Datos de uso</strong> \u2013 páginas visitadas, tiempo invertido, clics"
-      ],
-      "anonymousNote": "Estos datos se recopilan de forma anónima cuando es posible y no se utilizan para identificarte personalmente a menos que hayas dado consentimiento explícito.",
-      "learnMore": "Para más información sobre las prácticas de privacidad de Ezoic, visita:",
-      "linkText": "Política de Privacidad de Ezoic"
-    },
     "consent": {
       "title": "Tu Consentimiento y Derechos de Exclusión",
       "continueText": "Al continuar usando nuestro sitio web, consientes el uso de cookies y tecnologías similares para fines publicitarios y analíticos como se describe en esta Política de Privacidad.",
       "optOutTitle": "Puedes optar por no recibir publicidad personalizada en cualquier momento:",
-      "ezoicOptOut": "Exclusión de Ezoic:",
       "googleOptOut": "Exclusión de Google Ads:",
       "industryOptOut": "Exclusión de la industria:",
-      "note": "Deshabilitar los anuncios personalizados no detiene los anuncios por completo \u2014 seguirás viendo anuncios no personalizados."
+      "note": "Deshabilitar los anuncios personalizados no detiene los anuncios por completo — seguirás viendo anuncios no personalizados."
     },
     "legalBasis": {
       "title": "Base Legal para el Tratamiento de Datos (Marruecos)",
       "text": "De conformidad con la Ley marroquí N° 09-08 sobre la protección de las personas con respecto al tratamiento de datos personales, nuestra base legal para procesar tus datos incluye:",
       "items": [
-        "<strong>Interés legítimo</strong> \u2013 para operar, asegurar y monetizar nuestro Servicio",
-        "<strong>Consentimiento</strong> \u2013 para cookies, análisis y publicidad personalizada",
-        "<strong>Necesidad contractual</strong> \u2013 para proporcionar servicios de correo electrónico temporal"
+        "<strong>Interés legítimo</strong> – para operar, asegurar y monetizar nuestro Servicio",
+        "<strong>Consentimiento</strong> – para cookies, análisis y publicidad personalizada",
+        "<strong>Necesidad contractual</strong> – para proporcionar servicios de correo electrónico temporal"
       ],
       "rightsNote": "Tienes el derecho de retirar el consentimiento en cualquier momento sin afectar la legalidad del tratamiento basado en el consentimiento antes de su retirada."
     },
