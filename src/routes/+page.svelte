@@ -2597,8 +2597,7 @@ function normalizeGmailAddress(address) {
         border-bottom: none;
     }
 
-    .limitation-info ul li strong,
-    .good-uses ul li strong {
+    .limitation-info ul li strong {
         font-weight: 600;
     }
 
