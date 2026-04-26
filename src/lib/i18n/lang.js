@@ -5,7 +5,7 @@
  * Other languages get `/lang/` prefix: /es/, /de/, /fr/, /pt/, /ar/, /ru/, /zh/
  */
 
-export const supportedLocales = ['en', 'es', 'de', 'fr', 'pt', 'ar', 'ru', 'zh'];
+export const supportedLocales = ['en', 'es', 'de', 'fr', 'pt', 'ar', 'ru', 'zh', 'it', 'nl', 'pl'];
 export const defaultLocale = 'en';
 
 /**

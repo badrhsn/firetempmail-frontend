@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "contact": "Contatti",
+    "advertising": "Pubblicità"
+  },
+  "hero": {
+    "title": "Fire Temp Mail",
+    "subtitle": "Servizio Email Temporanea",
+    "description": "Proteggi la tua privacy con indirizzi email usa e getta. Nessuna registrazione richiesta.",
+    "getStarted": "Inizia Ora"
+  },
+  "email": {
+    "type": {
+      "domain": "Email Dominio",
+      "gmail": "Account Gmail"
+    },
+    "yourEmail": "La Tua Email Temporanea",
+    "copy": "Copia",
+    "copied": "Copiato!",
+    "refresh": "Aggiorna",
+    "newEmail": "Nuova Email",
+    "customAlias": "Alias Personalizzato",
+    "useCustomAlias": "Usa alias personalizzato",
+    "enterAlias": "Inserisci il tuo alias personalizzato",
+    "generate": "Genera",
+    "cancel": "Annulla",
+    "selectDomain": "Seleziona Dominio",
+    "inbox": "Posta in Arrivo",
+    "noEmails": "Nessuna email. In attesa di messaggi in arrivo...",
+    "emailsWillAppear": "Le email inviate al tuo indirizzo temporaneo appariranno qui",
+    "from": "Da",
+    "subject": "Oggetto",
+    "received": "Ricevuto",
+    "viewEmail": "Visualizza Email",
+    "backToInbox": "Torna alla Posta",
+    "forward": "Inoltra",
+    "delete": "Elimina",
+    "generateNew": "Genera Nuova",
+    "changeDomain": "Cambia Dominio",
+    "refreshPage": "Aggiorna Pagina",
+    "inboxEmpty": "La tua posta è vuota",
+    "domain": "Dominio",
+    "gmail": "Gmail",
+    "googlemail": "GoogleMail",
+    "copyToClipboard": "Copia negli appunti"
+  },
+  "features": {
+    "title": "Perché Scegliere Fire Temp Mail?",
+    "instant": {
+      "title": "Istantaneo & Anonimo",
+      "description": "Ottieni un indirizzo email temporaneo istantaneamente senza registrazione"
+    },
+    "secure": {
+      "title": "Sicuro & Privato",
+      "description": "Le tue email vengono automaticamente eliminate dopo un breve periodo"
+    },
+    "unlimited": {
+      "title": "Uso Illimitato",
+      "description": "Crea tutti gli indirizzi email temporanei di cui hai bisogno"
+    }
+  },
+  "footer": {
+    "product": "Prodotto",
+    "resources": "Risorse",
+    "legal": "Legale",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "privacy": "Informativa sulla Privacy",
+    "terms": "Termini di Servizio",
+    "contact": "Contatti",
+    "rights": "Tutti i diritti riservati",
+    "emailGenerator": "Generatore Email",
+    "api": "API"
+  },
+  "common": {
+    "loading": "Caricamento...",
+    "close": "Chiudi",
+    "save": "Salva",
+    "cancel": "Annulla",
+    "confirm": "Conferma",
+    "delete": "Elimina",
+    "back": "Indietro",
+    "next": "Avanti",
+    "search": "Cerca"
+  },
+  "home": {
+    "title": "Fire Temp Mail – Generatore di Email Temporanee Gratis",
+    "subtitle": "Genera un indirizzo email temporaneo istantaneamente. Mantieni privato il tuo vero indirizzo email e la tua casella pulita da messaggi indesiderati e spam.",
+    "whatIsTitle": "Cos'è un'Email Temporanea?",
+    "whatIsText": "Un indirizzo email temporaneo è un servizio gratuito che crea una casella di posta a breve termine per ricevere email. Spesso chiamato tempmail, email usa e getta o burner mail, ti aiuta a evitare lo spam e proteggere la tua email principale."
+  },
+  "blog": {
+    "title": "Blog Fire Temp Mail",
+    "subtitle": "Suggerimenti, guide e approfondimenti su email temporanee e privacy online",
+    "readMore": "Leggi di Più",
+    "backToBlog": "Torna al Blog",
+    "loading": "Caricamento...",
+    "by": "Di"
+  },
+  "stats": {
+    "emailsCreated": "Email Create",
+    "emailsReceived": "Email Ricevute",
+    "activeUsers": "Utenti Attivi"
+  },
+  "toast": {
+    "emailCopied": "Indirizzo email copiato negli appunti!",
+    "error": "Si è verificato un errore. Riprova.",
+    "customAliasCreated": "Email personalizzata creata con successo!"
+  }
+}

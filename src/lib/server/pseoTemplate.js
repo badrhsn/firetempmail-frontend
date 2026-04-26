@@ -97,7 +97,7 @@ const USER_SCENARIOS = {
         title: 'Why People Use Temp Email for Spotify',
         scenarios: [
             { icon: '🎵', label: 'Testing Spotify for Podcasters', text: 'Podcast creators create secondary Spotify accounts to experience what their podcast listing looks like from a listener perspective. A temp email lets you create that "listener" account without cluttering your main podcaster inbox.' },
-            { icon: '🎧', label: 'Student discount verification', text: 'Students often use a temp .edu email to verify their student status for Spotify's student discount without giving their actual university email to Spotify\'s marketing systems.' },
+            { icon: '🎧', label: 'Student discount verification', text: 'Students often use a temp .edu email to verify their student status for Spotify\'s student discount without giving their actual university email to Spotify\'s marketing systems.' },
             { icon: '📱', label: 'Family plan research', text: 'Families comparing subscription tiers create individual test accounts to understand what each tier includes before converting to a paid Family plan. Temp email keeps the test accounts separate.' },
         ]
     },
@@ -114,7 +114,7 @@ const USER_SCENARIOS = {
         scenarios: [
             { icon: '🕵️', label: 'Anonymous posting', text: 'Whistleblowers and people posting about sensitive topics (health, relationships, legal situations) create throwaway Reddit accounts specifically so the post can\'t be traced to their main identity. Temp email is the standard approach.' },
             { icon: '🔬', label: 'Research accounts', text: 'Academics studying Reddit community behavior need to create accounts that don\'t contaminate their research with their personal posting history. A fresh account with a temp email is standard research practice.' },
-            { icon: '💭', label: 'Testing subreddit culture', text: 'New users often create a throwaway account to gauge a community's vibe before committing their main account to posting there.' },
+            { icon: '💭', label: 'Testing subreddit culture', text: 'New users often create a throwaway account to gauge a community\'s vibe before committing their main account to posting there.' },
         ]
     },
     'GitHub': {

@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "advertising": "Adverteren"
+  },
+  "hero": {
+    "title": "Fire Temp Mail",
+    "subtitle": "Tijdelijke E-mail Service",
+    "description": "Bescherm je privacy met wegwerp e-mailadressen. Geen registratie vereist.",
+    "getStarted": "Aan de Slag"
+  },
+  "email": {
+    "type": {
+      "domain": "Domein Email",
+      "gmail": "Gmail Account"
+    },
+    "yourEmail": "Jouw Tijdelijke Email",
+    "copy": "Kopiëren",
+    "copied": "Gekopieerd!",
+    "refresh": "Vernieuwen",
+    "newEmail": "Nieuwe Email",
+    "customAlias": "Aangepaste Alias",
+    "useCustomAlias": "Aangepaste alias gebruiken",
+    "enterAlias": "Voer je aangepaste alias in",
+    "generate": "Genereren",
+    "cancel": "Annuleren",
+    "selectDomain": "Selecteer Domein",
+    "inbox": "Inbox",
+    "noEmails": "Nog geen e-mails. Wachten op inkomende berichten...",
+    "emailsWillAppear": "E-mails verzonden naar je tijdelijke adres verschijnen hier",
+    "from": "Van",
+    "subject": "Onderwerp",
+    "received": "Ontvangen",
+    "viewEmail": "Email Bekijken",
+    "backToInbox": "Terug naar Inbox",
+    "forward": "Doorsturen",
+    "delete": "Verwijderen",
+    "generateNew": "Nieuwe Genereren",
+    "changeDomain": "Domein Wijzigen",
+    "refreshPage": "Pagina Vernieuwen",
+    "inboxEmpty": "Je inbox is leeg",
+    "domain": "Domein",
+    "gmail": "Gmail",
+    "googlemail": "GoogleMail",
+    "copyToClipboard": "Kopiëren naar klembord"
+  },
+  "features": {
+    "title": "Waarom Fire Temp Mail Kiezen?",
+    "instant": {
+      "title": "Direct & Anoniem",
+      "description": "Krijg direct een tijdelijk e-mailadres zonder registratie"
+    },
+    "secure": {
+      "title": "Veilig & Privé",
+      "description": "Je e-mails worden automatisch verwijderd na een korte periode"
+    },
+    "unlimited": {
+      "title": "Onbeperkt Gebruik",
+      "description": "Maak zoveel tijdelijke e-mailadressen aan als je nodig hebt"
+    }
+  },
+  "footer": {
+    "product": "Product",
+    "resources": "Bronnen",
+    "legal": "Juridisch",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "privacy": "Privacybeleid",
+    "terms": "Servicevoorwaarden",
+    "contact": "Contact",
+    "rights": "Alle rechten voorbehouden",
+    "emailGenerator": "Email Generator",
+    "api": "API"
+  },
+  "common": {
+    "loading": "Laden...",
+    "close": "Sluiten",
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "confirm": "Bevestigen",
+    "delete": "Verwijderen",
+    "back": "Terug",
+    "next": "Volgende",
+    "search": "Zoeken"
+  },
+  "home": {
+    "title": "Fire Temp Mail – Gratis Tijdelijk Wegwerp Email Generator",
+    "subtitle": "Genereer direct een tijdelijk e-mailadres. Houd je echte e-mailadres privé en je inbox vrij van ongewenste berichten en spam.",
+    "whatIsTitle": "Wat is een Tijdelijk E-mailadres?",
+    "whatIsText": "Een tijdelijk e-mailadres is een gratis service die een kortdurende inbox creëert voor het ontvangen van e-mails. Vaak tempmail, wegwerp email of nep email genoemd, het helpt je spam te vermijden en je primaire e-mail te beschermen."
+  },
+  "blog": {
+    "title": "Fire Temp Mail Blog",
+    "subtitle": "Tips, gidsen en inzichten over tijdelijke email en online privacy",
+    "readMore": "Lees Meer",
+    "backToBlog": "Terug naar Blog",
+    "loading": "Laden...",
+    "by": "Door"
+  },
+  "stats": {
+    "emailsCreated": "Emails Aangemaakt",
+    "emailsReceived": "Emails Ontvangen",
+    "activeUsers": "Actieve Gebruikers"
+  },
+  "toast": {
+    "emailCopied": "E-mailadres gekopieerd naar klembord!",
+    "error": "Er is een fout opgetreden. Probeer het opnieuw.",
+    "customAliasCreated": "Aangepaste email succesvol aangemaakt!"
+  }
+}

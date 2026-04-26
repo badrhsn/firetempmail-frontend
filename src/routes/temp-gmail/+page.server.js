@@ -1,11 +1,21 @@
+import { SEO_META, OG_LOCALES } from './_seo.js';
+
 /** @type {import('./$types').PageServerLoad} */
-export async function load() {
+export async function load({ params, url }) {
+    const lang = params.lang || 'en';
+    const seoByLang = SEO_META[lang] || SEO_META['en'];
+    const canonical = lang === 'en'
+        ? 'https://firetempmail.com/temp-gmail'
+        : `https://firetempmail.com/${lang}/temp-gmail`;
+
     return {
         seo: {
-            title: 'Temp Gmail - Create Disposable Gmail Addresses Instantly',
-            description: 'Instantly generate temporary Gmail addresses with our advanced Gmailnator alternative. Create disposable emails that work everywhere for signups, verifications & spam protection.',
-            keywords: 'temp gmail, temporary gmail, gmailnator, emailnator, gmail generator, gmail nator, gmailinator, temp mail gmail, 10 minute gmail, disposable gmail, fake gmail, Fire Temp Mail',
-            canonical: 'https://firetempmail.com/temp-gmail'
+            title: seoByLang.title,
+            description: seoByLang.description,
+            keywords: seoByLang.keywords,
+            canonical,
+            lang,
+            ogLocale: OG_LOCALES[lang] || 'en_US'
         }
     };
 }

@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "home": "Strona główna",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "advertising": "Reklama"
+  },
+  "hero": {
+    "title": "Fire Temp Mail",
+    "subtitle": "Tymczasowa Poczta E-mail",
+    "description": "Chroń swoją prywatność dzięki jednorazowym adresom e-mail. Bez rejestracji.",
+    "getStarted": "Rozpocznij"
+  },
+  "email": {
+    "type": {
+      "domain": "Email Domenowy",
+      "gmail": "Konto Gmail"
+    },
+    "yourEmail": "Twój Tymczasowy Email",
+    "copy": "Kopiuj",
+    "copied": "Skopiowano!",
+    "refresh": "Odśwież",
+    "newEmail": "Nowy Email",
+    "customAlias": "Własny Alias",
+    "useCustomAlias": "Użyj własnego aliasu",
+    "enterAlias": "Wpisz swój własny alias",
+    "generate": "Generuj",
+    "cancel": "Anuluj",
+    "selectDomain": "Wybierz Domenę",
+    "inbox": "Skrzynka",
+    "noEmails": "Brak e-maili. Oczekiwanie na wiadomości...",
+    "emailsWillAppear": "E-maile wysłane na twój tymczasowy adres pojawią się tutaj",
+    "from": "Od",
+    "subject": "Temat",
+    "received": "Odebrano",
+    "viewEmail": "Zobacz Email",
+    "backToInbox": "Powrót do Skrzynki",
+    "forward": "Prześlij dalej",
+    "delete": "Usuń",
+    "generateNew": "Generuj Nowy",
+    "changeDomain": "Zmień Domenę",
+    "refreshPage": "Odśwież Stronę",
+    "inboxEmpty": "Twoja skrzynka jest pusta",
+    "domain": "Domena",
+    "gmail": "Gmail",
+    "googlemail": "GoogleMail",
+    "copyToClipboard": "Kopiuj do schowka"
+  },
+  "features": {
+    "title": "Dlaczego Fire Temp Mail?",
+    "instant": {
+      "title": "Natychmiastowy i Anonimowy",
+      "description": "Otrzymaj tymczasowy adres e-mail natychmiast bez rejestracji"
+    },
+    "secure": {
+      "title": "Bezpieczny i Prywatny",
+      "description": "Twoje e-maile są automatycznie usuwane po krótkim czasie"
+    },
+    "unlimited": {
+      "title": "Nieograniczone Użycie",
+      "description": "Twórz tyle tymczasowych adresów e-mail, ile potrzebujesz"
+    }
+  },
+  "footer": {
+    "product": "Produkt",
+    "resources": "Zasoby",
+    "legal": "Prawne",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "privacy": "Polityka Prywatności",
+    "terms": "Regulamin",
+    "contact": "Kontakt",
+    "rights": "Wszelkie prawa zastrzeżone",
+    "emailGenerator": "Generator Email",
+    "api": "API"
+  },
+  "common": {
+    "loading": "Ładowanie...",
+    "close": "Zamknij",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "confirm": "Potwierdź",
+    "delete": "Usuń",
+    "back": "Wstecz",
+    "next": "Dalej",
+    "search": "Szukaj"
+  },
+  "home": {
+    "title": "Fire Temp Mail – Darmowy Tymczasowy Jednorazowy Email",
+    "subtitle": "Wygeneruj natychmiast tymczasowy adres e-mail. Zachowaj prywatność swojego prawdziwego adresu e-mail i utrzymaj skrzynkę wolną od niechcianych wiadomości i spamu.",
+    "whatIsTitle": "Czym jest Tymczasowy Adres E-mail?",
+    "whatIsText": "Tymczasowy adres e-mail to darmowa usługa, która tworzy krótkotrwałą skrzynkę pocztową do odbierania e-maili. Często nazywany tempmail, jednorazowy email lub fałszywy email, pomaga unikać spamu i chronić główny adres e-mail."
+  },
+  "blog": {
+    "title": "Blog Fire Temp Mail",
+    "subtitle": "Porady, przewodniki i informacje o tymczasowych e-mailach i prywatności online",
+    "readMore": "Czytaj Więcej",
+    "backToBlog": "Powrót do Bloga",
+    "loading": "Ładowanie...",
+    "by": "Autor"
+  },
+  "stats": {
+    "emailsCreated": "Emaili Utworzonych",
+    "emailsReceived": "Emaili Odebranych",
+    "activeUsers": "Aktywnych Użytkowników"
+  },
+  "toast": {
+    "emailCopied": "Adres e-mail skopiowany do schowka!",
+    "error": "Wystąpił błąd. Spróbuj ponownie.",
+    "customAliasCreated": "Własny email pomyślnie utworzony!"
+  }
+}

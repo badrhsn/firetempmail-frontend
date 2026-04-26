@@ -37,17 +37,15 @@
     });
 </script>
 
-{#if !$isLoading}
-     <!--Global banner (top only) --
-    <BannerTop />-->
-    
-    <slot />
-    
-    <Footer />
-{:else}
+<!-- Translations are pre-loaded server-side via +layout.js waitLocale().
+     The $isLoading check is kept only as a client-side fallback for navigation. -->
+{#if $isLoading}
     <div class="loading-screen">
         <div class="loader"></div>
     </div>
+{:else}
+    <slot />
+    <Footer />
 {/if}
 
 <style>

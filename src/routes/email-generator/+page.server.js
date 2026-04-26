@@ -1,11 +1,21 @@
+import { SEO_META, OG_LOCALES } from './_seo.js';
+
 /** @type {import('./$types').PageServerLoad} */
-export async function load() {
+export async function load({ params }) {
+    const lang = params.lang || 'en';
+    const seo = SEO_META[lang] || SEO_META['en'];
+    const canonical = lang === 'en'
+        ? 'https://firetempmail.com/email-generator'
+        : `https://firetempmail.com/${lang}/email-generator`;
+
     return {
         seo: {
-            title: 'Temp Email Generator — Instant Disposable Address, No Registration (2026)',
-            description: 'Generate a temporary email address instantly. Auto-refreshing inbox, no signup needed. Use for free trials, app testing, and keeping spam out of your real inbox.',
-            keywords: 'email generator, random email, temporary email, disposable email, temp email generator',
-            canonical: 'https://firetempmail.com/email-generator'
+            title: seo.title,
+            description: seo.description,
+            keywords: seo.keywords,
+            canonical,
+            lang,
+            ogLocale: OG_LOCALES[lang] || 'en_US'
         }
     };
 }

@@ -415,18 +415,18 @@ function selectDomain(domain) {
     <!-- Open Graph -->
     <meta property="og:title" content={data?.seo?.title || 'Temp Gmail - Create Disposable Gmail Addresses Instantly'} />
     <meta property="og:description" content={data?.seo?.description || 'Instantly generate temporary Gmail addresses. Create disposable emails that work everywhere for signups, verifications & spam protection.'} />
-    <meta property="og:url" content="https://firetempmail.com/temp-gmail" />
+    <meta property="og:url" content={data?.seo?.canonical || 'https://firetempmail.com/temp-gmail'} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Fire Temp Mail" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={data?.seo?.ogLocale || 'en_US'} />
     <meta property="og:image" content="https://firetempmail.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Temp Gmail - Disposable Gmail Addresses" />
-    <meta name="twitter:description" content="Generate temporary Gmail addresses instantly. Free, secure, and disposable." />
+    <meta name="twitter:title" content={data?.seo?.title || 'Temp Gmail - Disposable Gmail Addresses'} />
+    <meta name="twitter:description" content={data?.seo?.description || 'Generate temporary Gmail addresses instantly. Free, secure, and disposable.'} />
     <meta name="twitter:image" content="https://firetempmail.com/og-image.png" />
     <meta name="twitter:site" content="@firetempmail" />
     
