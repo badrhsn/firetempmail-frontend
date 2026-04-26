@@ -451,6 +451,7 @@ function selectDomain(domain) {
     <meta property="og:image" content="https://firetempmail.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Fire Temp Mail – free disposable temporary email service" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -483,12 +484,7 @@ function selectDomain(domain) {
               "url": "https://firetempmail.com/logo.svg",
               "width": 512,
               "height": 512
-            },
-            "sameAs": [
-              "[TWITTER_URL]",
-              "[GITHUB_URL]",
-              "[PRODUCTHUNT_URL]"
-            ]
+            }
           }
         },
         {

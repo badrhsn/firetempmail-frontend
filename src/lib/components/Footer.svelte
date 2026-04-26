@@ -9,12 +9,13 @@
     let copyrightYear = new Date().getFullYear();
     let stats = { count: '0' };
 
-    // Replace placeholders with your real public profile URLs.
+    // Set real public profile URLs here when available.
     const socialProfiles = {
-        twitter: '[TWITTER_URL]',
-        github: '[GITHUB_URL]',
-        productHunt: '[PRODUCTHUNT_URL]'
+        twitter: '',
+        github: '',
+        productHunt: ''
     };
+    $: hasSocialLinks = socialProfiles.twitter || socialProfiles.github || socialProfiles.productHunt;
     
     // Reactive language prefix based on current URL
     $: currentLang = getLangFromPath($page.url.pathname);
@@ -100,6 +101,7 @@
         <!-- Bottom Bar -->
         <div class="footer-bottom">
             <p class="copyright">© {copyrightYear} FireTempMail. {$_('footer.rights')}</p>
+            {#if hasSocialLinks}
             <div class="footer-support">
                 <SocialLinks
                     twitterUrl={socialProfiles.twitter}
@@ -107,6 +109,7 @@
                     productHuntUrl={socialProfiles.productHunt}
                 />
             </div>
+            {/if}
         </div>
     </div>
 </footer>

@@ -165,6 +165,7 @@
     <meta property="og:image" content="https://firetempmail.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="{post.title} – Fire Temp Mail" />
         <meta property="article:published_time" content={post.created_at || post.date} />
         <meta property="article:author" content="Fire Temp Mail Team" />
         <meta property="article:section" content={post.category} />

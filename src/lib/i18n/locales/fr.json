@@ -203,7 +203,7 @@
     "uses": {
       "trials": {
         "title": "Confidentialité des essais gratuits",
-        "text": "De nombreux services comme Netflix, Hulu et Amazon Prime proposent des essais limités. Les e-mails jetables vous aident à évaluer le service tout en protégeant votre boîte principale et en respectant les règles de la plateforme."
+        "text": "Les services de streaming et logiciels proposent souvent des périodes d'essai limitées. Un e-mail jetable vous permet d'évaluer ces services tout en gardant votre boîte principale privée — sans marketing indésirable."
       },
       "retail": {
         "title": "Offres de vente au détail sans spam",
@@ -342,7 +342,7 @@
       "noForwarding": "Pas de transfert d'email :",
       "noForwardingText": "Vous pouvez consulter les emails dans notre interface, mais ne pouvez pas les transférer automatiquement vers votre vrai email.",
       "perfectForTitle": "✅ Fire Temp Mail EST parfait pour :",
-      "perfectFor1": "Inscriptions d'essai gratuit (services de streaming, logiciels)",
+      "perfectFor1": "Protéger votre boîte de réception lors de l'évaluation de nouveaux services",
       "perfectFor2": "Téléchargement de ressources (eBooks, modèles, guides)",
       "perfectFor3": "Inscriptions aux newsletters dont vous n'êtes pas sûr",
       "perfectFor4": "Inscriptions aux forums et communautés",

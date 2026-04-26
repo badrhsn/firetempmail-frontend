@@ -203,7 +203,7 @@
     "uses": {
       "trials": {
         "title": "Privacidad en pruebas gratuitas",
-        "text": "Muchos servicios como Netflix, Hulu y Amazon Prime ofrecen pruebas limitadas. El correo desechable te ayuda a evaluar el servicio mientras proteges tu bandeja principal y respetas las políticas de la plataforma."
+        "text": "Los servicios de streaming y software suelen ofrecer periodos de prueba limitados. Un correo desechable te permite evaluar estos servicios manteniendo tu bandeja principal privada, sin correos de marketing no deseados."
       },
       "retail": {
         "title": "Ofertas Minoristas Sin Spam",
@@ -342,7 +342,7 @@
       "noForwarding": "Sin reenvío de correo:",
       "noForwardingText": "Puedes ver correos en nuestra interfaz, pero no puedes reenviarlos automáticamente a tu correo real.",
       "perfectForTitle": "✅ Fire Temp Mail ES perfecto para:",
-      "perfectFor1": "Registros de prueba gratuita (servicios de streaming, software)",
+      "perfectFor1": "Proteger tu bandeja de entrada al evaluar nuevos servicios",
       "perfectFor2": "Descarga de recursos (eBooks, plantillas, guías)",
       "perfectFor3": "Suscripciones a boletines de los que no estás seguro",
       "perfectFor4": "Registros en foros y comunidades",

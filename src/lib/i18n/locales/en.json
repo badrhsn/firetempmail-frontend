@@ -203,7 +203,7 @@
     "uses": {
       "trials": {
         "title": "Free-Trial Inbox Privacy",
-        "text": "Many streaming services like Netflix, Hulu, and Amazon Prime offer limited-time trials. Disposable emails help you evaluate these services while protecting your primary inbox and following platform trial policies."
+        "text": "Streaming and software services often offer limited-time trials. A disposable email lets you evaluate these services while keeping your real inbox private — no unwanted follow-up marketing."
       },
       "retail": {
         "title": "Retail Offers Without Spam",
@@ -342,7 +342,7 @@
       "noForwarding": "No Email Forwarding:",
       "noForwardingText": "You can view emails in our interface, but cannot automatically forward them to your real email.",
       "perfectForTitle": "✅ Fire Temp Mail IS Perfect For:",
-      "perfectFor1": "Free trial signups (streaming services, software)",
+      "perfectFor1": "Protecting your inbox when evaluating new services",
       "perfectFor2": "Downloading resources (eBooks, templates, guides)",
       "perfectFor3": "Newsletter signups you're unsure about",
       "perfectFor4": "Forum and community registrations",

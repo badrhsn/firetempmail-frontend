@@ -203,7 +203,7 @@
     "uses": {
       "trials": {
         "title": "Postfachschutz bei Testversionen",
-        "text": "Viele Dienste wie Netflix, Hulu und Amazon Prime bieten zeitlich begrenzte Testversionen. Wegwerf-E-Mails helfen bei der Evaluation und schützen Ihr Hauptpostfach im Rahmen der Plattformregeln."
+        "text": "Streaming- und Softwaredienste bieten oft zeitlich begrenzte Testzeiträume. Eine Wegwerf-E-Mail ermöglicht es Ihnen, diese Dienste zu evaluieren und dabei Ihren echten Posteingang privat zu halten."
       },
       "retail": {
         "title": "Einzelhandelsangebote ohne Spam",
@@ -342,7 +342,7 @@
       "noForwarding": "Keine E-Mail-Weiterleitung:",
       "noForwardingText": "Sie können E-Mails in unserer Oberfläche ansehen, aber nicht automatisch an Ihre echte E-Mail weiterleiten.",
       "perfectForTitle": "✅ Fire Temp Mail IST perfekt für:",
-      "perfectFor1": "Kostenlose Probe-Anmeldungen (Streaming-Dienste, Software)",
+      "perfectFor1": "Ihren Posteingang beim Testen neuer Dienste schützen",
       "perfectFor2": "Ressourcen herunterladen (eBooks, Vorlagen, Anleitungen)",
       "perfectFor3": "Newsletter-Anmeldungen, bei denen Sie unsicher sind",
       "perfectFor4": "Forum- und Community-Registrierungen",

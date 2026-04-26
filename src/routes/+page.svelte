@@ -456,6 +456,7 @@ function normalizeGmailAddress(address) {
     <meta property="og:image" content="https://firetempmail.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Fire Temp Mail – free disposable temporary email service" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -492,12 +493,7 @@ function normalizeGmailAddress(address) {
                         "url": "https://firetempmail.com/logo.svg",
                         "width": 512,
                         "height": 512
-                    },
-                    "sameAs": [
-                        "[TWITTER_URL]",
-                        "[GITHUB_URL]",
-                        "[PRODUCTHUNT_URL]"
-                    ]
+                    }
                 },
         {
           "@type": "WebApplication",
@@ -514,6 +510,67 @@ function normalizeGmailAddress(address) {
             "availability": "https://schema.org/InStock"
           },
           "creator": { "@id": "https://firetempmail.com/#organization" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is temporary email?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Temporary email (also called disposable email or throwaway email) is a free, short-lived email address you can use to receive messages without revealing your real inbox. Fire Temp Mail generates one instantly — no signup required. Your address and all received emails are automatically deleted after 24 hours."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long do temporary emails last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Emails received at your Fire Temp Mail address are kept for up to 24 hours and then permanently deleted. The address itself can be used as long as you need it during your session, but emails are not stored beyond 24 hours."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is Fire Temp Mail free to use?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, Fire Temp Mail is completely free. There are no subscriptions, no hidden fees, and no registration required. Generate a disposable email address instantly and start receiving emails right away."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I use temp mail for Instagram, Discord, or TikTok verification?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Fire Temp Mail works for most platform email verifications including Instagram, Discord, TikTok, Reddit, and many others. Simply copy your temporary address, use it during signup to receive the verification email, then discard it. Note that some platforms may detect and block known temporary email domains."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is temporary email safe and private?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Fire Temp Mail does not log IP addresses, does not require registration, and does not store personal information. All emails are automatically deleted after 24 hours. The service uses HTTPS encryption. It is designed for privacy — no account means no data that can be compromised."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What email domains are available?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Fire Temp Mail supports multiple email domains for your disposable address. You can choose from the available domains using the 'Select Domain' button on the homepage. You can also generate Gmail-style and GoogleMail-style addresses using the email type selector."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I send or reply to emails with a temporary address?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Fire Temp Mail is receive-only. You can read incoming emails in your temporary inbox, but you cannot send new emails or reply to messages. For two-way communication you need a permanent email account."
+              }
+            }
+          ]
         }
       ]
     }
@@ -932,7 +989,8 @@ function normalizeGmailAddress(address) {
             </p>
             <!-- Add this after the "What is Disposable Temporary E-mail?" section -->
 
-            <!-- Popular Articles Section -->
+            <!-- Popular Articles Section (English only — blog content is in English) -->
+            {#if !data?.seo?.lang || data.seo.lang === 'en'}
             <div
                 style="margin: 3rem 0; padding: 2rem 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee;"
             >
@@ -990,6 +1048,7 @@ function normalizeGmailAddress(address) {
                     <a href="/blog" class="btn btn-blog"> {$_('blog.visitBlog')} </a>
                 </div>
             </div>
+            {/if}
 
             <!-- Featured Service-Specific Guides -->
             <div class="featured-guides-section">

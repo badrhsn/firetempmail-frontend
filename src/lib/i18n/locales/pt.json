@@ -203,7 +203,7 @@
     "uses": {
       "trials": {
         "title": "Privacidade em testes gratuitos",
-        "text": "Muitos serviços como Netflix, Hulu e Amazon Prime oferecem testes por tempo limitado. O e-mail descartável ajuda a avaliar o serviço protegendo sua caixa principal e respeitando as regras da plataforma."
+        "text": "Serviços de streaming e software frequentemente oferecem períodos de avaliação limitados. Um e-mail descartável permite avaliar esses serviços mantendo sua caixa principal privada."
       },
       "retail": {
         "title": "Ofertas de varejo sem spam",
@@ -342,7 +342,7 @@
       "noForwarding": "Sem encaminhamento de email:",
       "noForwardingText": "Você pode ver emails em nossa interface, mas não pode encaminhá-los automaticamente para seu email real.",
       "perfectForTitle": "✅ O Fire Temp Mail É perfeito para:",
-      "perfectFor1": "Cadastros de teste gratuito (serviços de streaming, software)",
+      "perfectFor1": "Proteger sua caixa de entrada ao avaliar novos serviços",
       "perfectFor2": "Download de recursos (eBooks, templates, guias)",
       "perfectFor3": "Assinaturas de newsletters sobre as quais você não tem certeza",
       "perfectFor4": "Registros em fóruns e comunidades",
