@@ -1,9 +1,8 @@
 <script>
-    import { onMount } from 'svelte';
+    import { onMount, mount, unmount } from 'svelte';
     import Footer from '$lib/components/Footer.svelte';
     import LanguageSelector from '$lib/components/LanguageSelector.svelte';
     import BannerTop from '$lib/components/BannerTop.svelte';
-    import { onDestroy } from 'svelte';
     import { allBanners, setBanner, rotateBanners } from '$lib/stores/banners';
     import '$lib/i18n';
     import { isLoading } from 'svelte-i18n';
@@ -21,19 +20,32 @@
         // optional rotation (30s)
         rotationId = rotateBanners(30000);
 
-        // Mount the LanguageSelector into the static header placeholder (if present)
+        // Mount the LanguageSelector into the static header placeholder.
+        // If the placeholder is missing, create a fallback container inside the header nav.
         if (typeof window !== 'undefined') {
-            const root = document.getElementById('language-selector-root');
+            let root = document.getElementById('language-selector-root');
+            if (!root) {
+                const headerNav = document.querySelector('.header-nav');
+                if (headerNav) {
+                    root = document.createElement('div');
+                    root.id = 'language-selector-root';
+                    headerNav.appendChild(root);
+                }
+            }
+
             if (root) {
-                languageSelectorInstance = new LanguageSelector({ target: root });
+                languageSelectorInstance = mount(LanguageSelector, { target: root });
             }
         }
 
-        onDestroy(() => {
+        return () => {
             unsubscribe();
             if (rotationId) clearInterval(rotationId);
-            if (languageSelectorInstance) languageSelectorInstance.$destroy();
-        });
+            if (languageSelectorInstance) {
+                unmount(languageSelectorInstance);
+                languageSelectorInstance = null;
+            }
+        };
     });
 </script>
 

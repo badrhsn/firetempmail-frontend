@@ -443,7 +443,7 @@ function selectDomain(domain) {
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
     <!-- WebApplication Schema -->
-    {@html '<script type="application/ld+json">' + JSON.stringify({
+    <script type="application/ld+json">{JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Fire Temp Mail - Burner Email",
@@ -475,7 +475,7 @@ function selectDomain(domain) {
           "[PRODUCTHUNT_URL]"
         ]
       }
-    }) + '</script>'}
+    })}</script>
 
     <!-- FAQ Structured Data -->
     <script type="application/ld+json">
@@ -528,14 +528,14 @@ function selectDomain(domain) {
     </script>
 
     <!-- BreadcrumbList Schema -->
-    {@html '<script type="application/ld+json">' + JSON.stringify({
+    <script type="application/ld+json">{JSON.stringify({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
         { "@type": "ListItem", "position": 2, "name": "Burner Email", "item": "https://firetempmail.com/burner-email" }
       ]
-    }) + '</script>'}
+    })}</script>
 </svelte:head>
 <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
     <Breadcrumb items={[{name: "Home", href: "/"}, {name: "Burner Email", href: "/burner-email"}]} />

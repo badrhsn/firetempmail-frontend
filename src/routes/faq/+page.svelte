@@ -122,14 +122,14 @@ import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     <meta name="twitter:site" content="@firetempmail" />
 
     <!-- BreadcrumbList Schema -->
-    {@html '<script type="application/ld+json">' + JSON.stringify({
+    <script type="application/ld+json">{JSON.stringify({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
         { "@type": "ListItem", "position": 2, "name": "FAQ", "item": "https://firetempmail.com/faq" }
       ]
-    }) + '</script>'}
+    })}</script>
     
     <!-- JSON-LD structured data for FAQ SEO -->
 </svelte:head>

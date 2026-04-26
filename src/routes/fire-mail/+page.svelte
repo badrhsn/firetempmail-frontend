@@ -473,14 +473,14 @@ function selectDomain(domain) {
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
     <!-- BreadcrumbList Schema -->
-    {@html '<script type="application/ld+json">' + JSON.stringify({
+    <script type="application/ld+json">{JSON.stringify({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
         { "@type": "ListItem", "position": 2, "name": "Fire Mail", "item": "https://firetempmail.com/fire-mail" }
       ]
-    }) + '</script>'}
+    })}</script>
 </svelte:head>
 <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
     <Breadcrumb items={[{name: "Home", href: "/"}, {name: "Fire Mail", href: "/fire-mail"}]} />

@@ -462,7 +462,7 @@ function selectDomain(domain) {
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
     <!-- WebApplication + BreadcrumbList Schema -->
-    {@html '<script type="application/ld+json">' + JSON.stringify({
+    <script type="application/ld+json">{JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         {
@@ -499,7 +499,7 @@ function selectDomain(domain) {
           ]
         }
       ]
-    }) + '</script>'}
+    })}</script>
 </svelte:head>
 <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
     <Breadcrumb items={[{name: "Home", href: "/"}, {name: "10 Minute Mail", href: "/10minutemail"}]} />
