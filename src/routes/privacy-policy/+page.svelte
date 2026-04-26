@@ -115,18 +115,14 @@ import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     .container { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.6; color: #333; }
     h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem; color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
     h2 { font-size: 1.8rem; font-weight: 600; margin: 2rem 0 1rem 0; color: #2c3e50; padding-top: 10px; }
-    h3 { font-size: 1.3rem; font-weight: 600; margin: 1.5rem 0 0.5rem 0; color: #34495e; }
     p { margin-bottom: 1rem; line-height: 1.6; }
     ul { margin-left: 1.5rem; margin-bottom: 1rem; list-style: disc; }
     li { margin-bottom: 0.5rem; line-height: 1.5; }
     strong { color: #2c3e50; }
     hr { border: 0; height: 1px; background: linear-gradient(to right, transparent, #3498db, transparent); margin: 2rem 0; }
-    a { color: #3498db; text-decoration: none; }
-    a:hover { text-decoration: underline; }
     @media (max-width: 768px) {
         h1 { font-size: 2rem; }
         h2 { font-size: 1.5rem; }
-        h3 { font-size: 1.2rem; }
         .container { padding: 15px; }
     }
 </style>

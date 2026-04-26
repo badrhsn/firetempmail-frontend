@@ -272,68 +272,6 @@ import Breadcrumb from '$lib/components/Breadcrumb.svelte';
 
 <style>
     /* Footer Styles */
-    .footer {
-        background-color: #22242b;
-        color: #a7a7aa;
-        padding: 40px 0 20px;
-    }
-    .footer a {
-        color: #a7a7aa;
-        text-decoration: none;
-        transition: color 0.3s;
-    }
-    .footer a:hover {
-        color: #3498db;
-    }
-    .footer-title {
-        font-weight: 700;
-        margin-bottom: 20px;
-        font-size: 1.3rem;
-        color: #a7a7aa;
-    }
-    .footer-links {
-        list-style: none;
-        padding: 0;
-        line-height: 2.2;
-    }
-    .footer-links li {
-        margin-bottom: 8px;
-    }
-    .divider {
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        margin: 30px 0 20px;
-    }
-    .donation-section {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        padding: 20px;
-        margin-top: 20px;
-    }
-    .kofi-qr {
-        text-align: center;
-        margin-top: 15px;
-    }
-    .kofi-qr img {
-        max-width: 150px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    .kofi-text {
-        font-size: 0.9rem;
-        margin-top: 10px;
-    }
-    .copyright {
-        font-size: 0.9rem;
-        opacity: 0.8;
-    }
-    .social-icons {
-        font-size: 1.5rem;
-        margin-top: 15px;
-    }
-    .social-icons a {
-        margin-right: 15px;
-    }
-    
     /* FAQ Page Styles */
     .page-header {
         margin-bottom: 3rem;
@@ -507,21 +445,6 @@ import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     .answer-content {
         border-left: 3px solid #3498db;
         padding-left: 1rem;
-    }
-    
-    .answer-content p {
-        margin-bottom: 1rem;
-        line-height: 1.7;
-    }
-    
-    .answer-content ul, .answer-content ol {
-        margin-left: 1.5rem;
-        margin-bottom: 1rem;
-    }
-    
-    .answer-content li {
-        margin-bottom: 0.5rem;
-        line-height: 1.6;
     }
     
     /* Quick Stats */

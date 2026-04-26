@@ -1,9 +1,7 @@
 <script>
     import { _ } from 'svelte-i18n';
     import Hreflang from '$lib/components/Hreflang.svelte';
-import Breadcrumb from '$lib/components/Breadcrumb.svelte';
-    
-    export let data;
+    import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     
     let copyrightYear = new Date().getFullYear();
 </script>
@@ -155,7 +153,6 @@ import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     .feature-box:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
     .feature-icon { font-size: 3rem; margin-bottom: 1rem; }
     .feature-box h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem; color: #212529; }
-    .feature-box p { color: #6c757d; margin: 0; line-height: 1.6; }
     .use-case-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
     .use-case-item { background: #e9f5ff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #007bff; }
     .use-case-item p { color: #495057; margin: 0; }

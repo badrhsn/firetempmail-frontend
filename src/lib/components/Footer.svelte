@@ -230,26 +230,6 @@
         align-items: center;
     }
 
-    .support-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        color: #1a1a1a;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 500;
-        padding: 8px 16px;
-        background: #f7fafc;
-        border-radius: 8px;
-        transition: all 0.2s ease;
-    }
-
-    .support-link:hover {
-        background: #1a1a1a;
-        color: #ffffff;
-        transform: translateY(-1px);
-    }
-
     /* Responsive */
     @media (max-width: 992px) {
         .footer-content {

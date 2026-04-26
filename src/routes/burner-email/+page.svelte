@@ -1013,14 +1013,8 @@ function selectDomain(domain) {
             color: #a7a7aa;
             padding: 40px 0 20px;
         }
-        .footer a {
-            color: #a7a7aa;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .footer a:hover {
-            color: #3498db;
-        }
+
+
         .footer-title {
             font-weight: 700;
             margin-bottom: 20px;
@@ -1032,9 +1026,7 @@ function selectDomain(domain) {
             padding: 0;
             line-height: 2.2;
         }
-        .footer-links li {
-            margin-bottom: 8px;
-        }
+
         .divider {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             margin: 30px 0 20px;
@@ -1054,11 +1046,7 @@ function selectDomain(domain) {
             text-align: center;
             margin-top: 15px;
         }
-        .kofi-qr img {
-            max-width: 150px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+
         .kofi-text {
             font-size: 0.9rem;
             margin-top: 10px;
@@ -1071,9 +1059,7 @@ function selectDomain(domain) {
             font-size: 1.5rem;
             margin-top: 15px;
         }
-        .social-icons a {
-            margin-right: 15px;
-        }
+
         .counter {
             color: rgb(255,255,255);
             background: rgb(33,37,41);
@@ -1309,12 +1295,7 @@ function selectDomain(domain) {
         margin: 0 auto;
     }
     
-    .seo-rich-content h3 {
-        font-size: 1.5rem;
-        margin: 2rem 0 1rem 0;
-        color: #007bff;
-        font-weight: 600;
-    }
+
     
     .seo-rich-content h4 {
         font-size: 1.2rem;
@@ -1376,9 +1357,7 @@ function selectDomain(domain) {
             grid-template-columns: 1fr;
         }
         
-        .seo-rich-content h3 {
-            font-size: 1.3rem;
-        }
+
     }
     
     .toast-container {
@@ -1676,10 +1655,7 @@ function selectDomain(domain) {
         align-items: center;
     }
     
-    .modal-header h3 {
-        margin: 0;
-        font-size: 1.5rem;
-    }
+
     
     .modal-close {
         background: none;
@@ -1770,10 +1746,7 @@ function selectDomain(domain) {
         text-align: left;
     }
     
-    h1 span {
-        font-weight: normal !important;
-        color: rgb(255, 255, 255);
-    }
+
     
     .lead {
         text-align: left;
@@ -1947,11 +1920,7 @@ function selectDomain(domain) {
         color: var(--bs-red);
     }
     
-    .email-detail h2 {
-        font-size: 24px;
-        font-weight: 600;
-        margin-bottom: 8px;
-    }
+
     
     .email-meta {
         display: flex;

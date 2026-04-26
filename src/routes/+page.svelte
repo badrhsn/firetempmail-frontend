@@ -1716,11 +1716,6 @@ function normalizeGmailAddress(address) {
         align-items: center;
     }
     
-    .modal-header h3 {
-        margin: 0;
-        font-size: 1.5rem;
-    }
-    
     .modal-close {
         background: none;
         border: none;
@@ -1986,12 +1981,6 @@ function normalizeGmailAddress(address) {
     
     .btn-delete {
         color: var(--bs-red);
-    }
-    
-    .email-detail h2 {
-        font-size: 24px;
-        font-weight: 600;
-        margin-bottom: 8px;
     }
     
     .email-meta {

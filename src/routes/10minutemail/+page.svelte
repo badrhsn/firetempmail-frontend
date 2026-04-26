@@ -524,8 +524,8 @@ function selectDomain(domain) {
 
 <!-- Forward Email Modal -->
 {#if showForwardModal}
-<div class="modal-backdrop" on:click={() => showForwardModal = false}>
-    <div class="modal" on:click|stopPropagation>
+<div class="modal-backdrop" role="button" tabindex="0" aria-label="Close forward email modal" on:click={(e) => e.target === e.currentTarget && (showForwardModal = false)} on:keydown={(e) => (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ' ) && (showForwardModal = false)}>
+    <div class="modal" role="dialog" aria-modal="true">
         <div class="modal-header">
             <h3>Forward Email</h3>
             <button on:click={() => showForwardModal = false} class="modal-close">
@@ -902,14 +902,8 @@ function selectDomain(domain) {
             color: #a7a7aa;
             padding: 40px 0 20px;
         }
-        .footer a {
-            color: #a7a7aa;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .footer a:hover {
-            color: #3498db;
-        }
+
+
         .footer-title {
             font-weight: 700;
             margin-bottom: 20px;
@@ -921,9 +915,7 @@ function selectDomain(domain) {
             padding: 0;
             line-height: 2.2;
         }
-        .footer-links li {
-            margin-bottom: 8px;
-        }
+
         .divider {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             margin: 30px 0 20px;
@@ -943,11 +935,7 @@ function selectDomain(domain) {
             text-align: center;
             margin-top: 15px;
         }
-        .kofi-qr img {
-            max-width: 150px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+
         .kofi-text {
             font-size: 0.9rem;
             margin-top: 10px;
@@ -960,9 +948,7 @@ function selectDomain(domain) {
             font-size: 1.5rem;
             margin-top: 15px;
         }
-        .social-icons a {
-            margin-right: 15px;
-        }
+
         .counter {
             color: rgb(255,255,255);
             background: rgb(33,37,41);
@@ -1198,12 +1184,7 @@ function selectDomain(domain) {
         margin: 0 auto;
     }
     
-    .seo-rich-content h3 {
-        font-size: 1.5rem;
-        margin: 2rem 0 1rem 0;
-        color: #007bff;
-        font-weight: 600;
-    }
+
     
     .seo-rich-content h4 {
         font-size: 1.2rem;
@@ -1265,9 +1246,7 @@ function selectDomain(domain) {
             grid-template-columns: 1fr;
         }
         
-        .seo-rich-content h3 {
-            font-size: 1.3rem;
-        }
+
     }
     
     .toast-container {
@@ -1565,10 +1544,7 @@ function selectDomain(domain) {
         align-items: center;
     }
     
-    .modal-header h3 {
-        margin: 0;
-        font-size: 1.5rem;
-    }
+
     
     .modal-close {
         background: none;
@@ -1659,10 +1635,7 @@ function selectDomain(domain) {
         text-align: left;
     }
     
-    h1 span {
-        font-weight: normal !important;
-        color: rgb(255, 255, 255);
-    }
+
     
     .lead {
         text-align: left;
@@ -1726,10 +1699,7 @@ function selectDomain(domain) {
         align-items: center;
     }
     
-    .modal-header h3 {
-        margin: 0;
-        font-size: 1.5rem;
-    }
+
     
     .modal-close {
         background: none;
@@ -1820,10 +1790,7 @@ function selectDomain(domain) {
         text-align: left;
     }
     
-    h1 span {
-        font-weight: normal !important;
-        color: rgb(255, 255, 255);
-    }
+
     
     .lead {
         text-align: left;
@@ -1998,11 +1965,7 @@ function selectDomain(domain) {
         color: var(--bs-red);
     }
     
-    .email-detail h2 {
-        font-size: 24px;
-        font-weight: 600;
-        margin-bottom: 8px;
-    }
+
     
     .email-meta {
         display: flex;
@@ -2405,11 +2368,7 @@ function selectDomain(domain) {
   color: #0d6efd;
   margin-bottom: .75rem;
 }
-.feature-card h3 {
-  font-size: 1rem;
-  margin: 0 0 .25rem 0;
-  font-weight: 600;
-}
+
 .feature-card p {
   margin: 0;
   color: #6c757d;
@@ -2422,17 +2381,13 @@ function selectDomain(domain) {
   grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
   gap: 1.25rem;
 }
-.two-col h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: .5rem;
-}
+
 .pros-list {
   padding-left: 1.1rem;
   margin: .5rem 0 0 0;
   color: #2c3e50;
 }
-.pros-list li { margin: .25rem 0; }
+
 
 .usecase-grid {
   display: grid;
@@ -2448,7 +2403,7 @@ function selectDomain(domain) {
   border-radius: 10px;
   padding: .75rem;
 }
-.usecase-item strong { display:block; margin-bottom:.25rem; }
+
 .usecase-item p { margin:0; color:#6c757d; font-size:.95rem; }
 
 

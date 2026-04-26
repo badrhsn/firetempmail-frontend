@@ -49,13 +49,6 @@
 {/if}
 
 <style>
-    .language-selector-wrapper {
-        position: fixed;
-        top: 80px;
-        right: 2rem;
-        z-index: 999;
-    }
-    
     .loading-screen {
         display: flex;
         align-items: center;
@@ -78,13 +71,6 @@
         100% { transform: rotate(360deg); }
     }
     
-    @media (max-width: 768px) {
-        .language-selector-wrapper {
-            top: 70px;
-            right: 1rem;
-        }
-    }
-
     /* Reduce space between top banner and first page title */
     :global(h1:first-of-type) {
         margin-top: 0;
@@ -93,9 +79,7 @@
     /* When the top banner is present, remove top padding from the first content section
        so the banner sits flush with the page title. Use the general sibling selector
        to handle intervening elements (language selector, wrappers). */
-    :global(.top-banner-container) ~ :global(section:first-of-type),
-    :global(.top-banner-container) ~ :global(section:first-of-type) .container,
-    :global(.top-banner-container) ~ :global(section:first-of-type) .text-center {
+    :global(.top-banner-container) ~ :global(section:first-of-type) {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
