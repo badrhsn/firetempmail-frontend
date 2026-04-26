@@ -463,7 +463,7 @@ function selectDomain(domain) {
         "url": "https://firetempmail.com",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://firetempmail.com/favicon.png",
+          "url": "https://firetempmail.com/logo.svg",
           "width": 512,
           "height": 512
         },

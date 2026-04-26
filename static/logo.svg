@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="FireTempMail logo">
+  <defs>
+    <linearGradient id="fireGradient" x1="120" y1="72" x2="392" y2="448" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF6B35"/>
+      <stop offset="1" stop-color="#E63946"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#fireGradient)" d="M256 36C236 72 208 102 183 128C153 159 128 196 128 252C128 353 193 435 256 470C319 435 384 353 384 252C384 196 359 159 329 128C304 102 276 72 256 36Z"/>
+  <path fill="#FFFFFF" fill-opacity="0.16" d="M256 128C239 160 216 184 196 207C173 234 160 267 160 309C160 373 202 426 256 454C310 426 352 373 352 309C352 267 339 234 316 207C296 184 273 160 256 128Z"/>
+  <path fill="#FFEDE7" fill-opacity="0.42" d="M256 180C234 214 220 244 220 273C220 308 236 336 256 350C276 336 292 308 292 273C292 244 278 214 256 180Z"/>
+  <g>
+    <rect x="166" y="228" width="180" height="130" rx="24" fill="#FFF7F3" stroke="#C92B38" stroke-width="12"/>
+    <path d="M178 248L256 304L334 248" fill="none" stroke="#C92B38" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M178 346L233 294" fill="none" stroke="#C92B38" stroke-width="10" stroke-linecap="round"/>
+    <path d="M334 346L279 294" fill="none" stroke="#C92B38" stroke-width="10" stroke-linecap="round"/>
+  </g>
+</svg>
