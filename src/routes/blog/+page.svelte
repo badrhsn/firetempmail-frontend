@@ -1,4 +1,8 @@
 <script>
+    // @ts-nocheck
+    import { onMount } from 'svelte';
+    import { browser } from '$app/environment';
+
     export let data;
     
     const POSTS_PER_PAGE = 12;
@@ -7,10 +11,100 @@
     let blogPosts = (data?.posts || []).map(p => ({
         ...p,
         date: p.created_at || p.date,
-        readTime: p.read_time || p.readTime
+        readTime: p.read_time || p.readTime,
+        description: p.description || p.excerpt || ''
     }));
     let currentPage = 1;
     let selectedCategory = 'all';
+    let searchQuery = (data?.initialQuery || '').trim();
+
+    onMount(() => {
+        const handlePopState = () => {
+            const nextUrl = new URL(window.location.href);
+            searchQuery = (nextUrl.searchParams.get('q') || '').trim();
+            currentPage = 1;
+        };
+
+        window.addEventListener('popstate', handlePopState);
+
+        return () => {
+            window.removeEventListener('popstate', handlePopState);
+        };
+    });
+
+    function postMatchesQuery(post, query) {
+        const normalizedQuery = query.trim().toLowerCase();
+        if (!normalizedQuery) return true;
+
+        const searchableFields = [
+            post.title,
+            post.slug,
+            post.description || post.excerpt,
+            post.category
+        ].map((field) => (field || '').toString().toLowerCase());
+
+        return searchableFields.some((field) => field.includes(normalizedQuery));
+    }
+
+    function scoreField(value, query, exactWeight, startsWithWeight, includesWeight) {
+        const normalizedValue = (value || '').toString().toLowerCase();
+        if (!normalizedValue) return 0;
+        if (normalizedValue === query) return exactWeight;
+        if (normalizedValue.startsWith(query)) return startsWithWeight;
+        if (normalizedValue.includes(query)) return includesWeight;
+        return 0;
+    }
+
+    function getSearchRelevanceScore(post, query) {
+        if (!query) return 0;
+
+        let score = 0;
+        score += scoreField(post.title, query, 120, 90, 60);
+        score += scoreField(post.slug, query, 80, 55, 35);
+        score += scoreField(post.category, query, 45, 30, 18);
+        score += scoreField(post.description || post.excerpt, query, 20, 12, 8);
+
+        // Small boost for multi-token matches in title/description.
+        const tokens = query.split(/\s+/).filter(Boolean);
+        if (tokens.length > 1) {
+            const title = (post.title || '').toString().toLowerCase();
+            const description = (post.description || post.excerpt || '').toString().toLowerCase();
+            const tokenMatches = tokens.reduce((acc, token) => {
+                if (title.includes(token) || description.includes(token)) return acc + 1;
+                return acc;
+            }, 0);
+            score += tokenMatches * 4;
+        }
+
+        return score;
+    }
+
+    function syncSearchParam(query) {
+        if (!browser) return;
+
+        const url = new URL(window.location.href);
+        const normalizedQuery = query.trim();
+
+        if (normalizedQuery) {
+            url.searchParams.set('q', normalizedQuery);
+        } else {
+            url.searchParams.delete('q');
+        }
+
+        window.history.replaceState(window.history.state, '', `${url.pathname}${url.search}${url.hash}`);
+    }
+
+    function handleSearchInput(event) {
+        searchQuery = event.currentTarget.value;
+        currentPage = 1;
+        syncSearchParam(searchQuery);
+    }
+
+    function clearSearch() {
+        searchQuery = '';
+        currentPage = 1;
+        syncSearchParam(searchQuery);
+    }
     
     // Build categories reactively
     $: categories = (() => {
@@ -29,19 +123,37 @@
         ];
     })();
     
-    $: filteredPosts = selectedCategory === 'all'
+    $: categoryFilteredPosts = selectedCategory === 'all'
         ? blogPosts
         : blogPosts.filter(post => 
             post.category.toLowerCase().replace(/\s+/g, '-') === selectedCategory
         );
+
+    $: filteredPosts = (() => {
+        const matches = categoryFilteredPosts.filter((post) => postMatchesQuery(post, searchQuery));
+        const normalizedQuery = searchQuery.trim().toLowerCase();
+
+        if (!normalizedQuery) return matches;
+
+        return [...matches].sort((a, b) => {
+            const scoreDiff = getSearchRelevanceScore(b, normalizedQuery) - getSearchRelevanceScore(a, normalizedQuery);
+            if (scoreDiff !== 0) return scoreDiff;
+
+            // Tie-break on publish date (newer first) to keep fresh content visible.
+            return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
+    })();
+
+    $: hasActiveSearch = searchQuery.trim().length > 0;
     
-    $: totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+    $: totalPages = Math.max(1, Math.ceil(filteredPosts.length / POSTS_PER_PAGE));
+    $: if (currentPage > totalPages) currentPage = totalPages;
     $: startIndex = (currentPage - 1) * POSTS_PER_PAGE;
     $: endIndex = startIndex + POSTS_PER_PAGE;
     $: currentPosts = filteredPosts.slice(startIndex, endIndex);
     
     // Featured post = first post (most recent)
-    $: featuredPost = selectedCategory === 'all' && currentPage === 1 ? blogPosts[0] : null;
+    $: featuredPost = selectedCategory === 'all' && !hasActiveSearch && currentPage === 1 ? blogPosts[0] : null;
     $: displayPosts = featuredPost ? currentPosts.filter(p => p.id !== featuredPost.id) : currentPosts;
     
     const formatDate = (dateString) => {
@@ -90,7 +202,7 @@
 <svelte:head>
     <title>{data?.seo?.title || 'Blog - Fire Temp Mail | Email Privacy & Security Insights'}</title>
     <meta name="description" content={data?.seo?.description || 'Expert guides on temporary email, email privacy, spam protection, and online security. Tips for protecting your digital identity.'}>
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content={hasActiveSearch ? 'noindex, follow' : 'index, follow'}>
     <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/blog'}>
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 
@@ -113,10 +225,10 @@
     <meta name="twitter:site" content="@firetempmail" />
 
     <!-- Pagination -->
-    {#if currentPage > 1}
+    {#if !hasActiveSearch && currentPage > 1}
         <link rel="prev" href="https://firetempmail.com/blog?page={currentPage - 1}" />
     {/if}
-    {#if currentPage < totalPages}
+    {#if !hasActiveSearch && currentPage < totalPages}
         <link rel="next" href="https://firetempmail.com/blog?page={currentPage + 1}" />
     {/if}
 
@@ -181,6 +293,31 @@
     {/if}
 
     <!-- Category Filters -->
+    <section class="search-section" aria-label="Blog search">
+        <label class="search-label" for="blog-search">Search blog posts</label>
+        <div class="search-input-wrap">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <input
+                id="blog-search"
+                class="search-input"
+                type="search"
+                placeholder="Search title, slug, description, or category..."
+                value={searchQuery}
+                on:input={handleSearchInput}
+            />
+            {#if hasActiveSearch}
+                <button class="clear-search-btn" type="button" on:click={clearSearch} aria-label="Clear search">
+                    Clear
+                </button>
+            {/if}
+        </div>
+        {#if hasActiveSearch}
+            <p class="search-summary">Showing results for "{searchQuery.trim()}"</p>
+        {/if}
+    </section>
+
     <nav class="filters" aria-label="Blog categories">
         <div class="filters-track">
             {#each categories as category}
@@ -229,9 +366,9 @@
         {#if currentPosts.length === 0}
             <div class="empty-state">
                 <div class="empty-icon">📭</div>
-                <p>No articles found in this category</p>
+                <p>{hasActiveSearch ? `No posts match "${searchQuery.trim()}".` : 'No articles found in this category'}</p>
                 <button on:click={() => handleCategoryChange('all')} class="reset-btn">
-                    View all articles
+                    {hasActiveSearch ? 'Reset filters and search' : 'View all articles'}
                 </button>
             </div>
         {/if}
@@ -274,7 +411,7 @@
     </main>
 
     <!-- Pagination -->
-    {#if totalPages > 1}
+    {#if !hasActiveSearch && totalPages > 1}
         <div class="pagination-wrap">
             <div class="pagination">
                 <button 
@@ -489,6 +626,79 @@
     }
 
     /* Filters */
+    .search-section {
+        max-width: 1200px;
+        margin: 0 auto 20px;
+        padding: 0 24px;
+    }
+
+    .search-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+    }
+
+    .search-input-wrap {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--bg);
+        padding: 0 10px;
+    }
+
+    .search-input-wrap:focus-within {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.12);
+    }
+
+    .search-icon {
+        width: 18px;
+        height: 18px;
+        color: var(--text-secondary);
+        flex-shrink: 0;
+    }
+
+    .search-input {
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: var(--text);
+        font-size: 14px;
+        padding: 11px 0;
+    }
+
+    .search-input::placeholder {
+        color: #94a3b8;
+    }
+
+    .clear-search-btn {
+        border: 1px solid var(--border);
+        background: var(--bg-subtle);
+        color: var(--text-secondary);
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 5px 10px;
+        cursor: pointer;
+        transition: all 0.15s;
+    }
+
+    .clear-search-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    .search-summary {
+        margin: 8px 0 0;
+        font-size: 13px;
+        color: var(--text-secondary);
+    }
+
     .filters {
         max-width: 1200px;
         margin: 0 auto 32px;
@@ -609,6 +819,7 @@
         color: var(--text);
         display: -webkit-box;
         -webkit-line-clamp: 2;
+        line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
@@ -620,6 +831,7 @@
         flex: 1;
         display: -webkit-box;
         -webkit-line-clamp: 3;
+        line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
         margin-bottom: 16px;
