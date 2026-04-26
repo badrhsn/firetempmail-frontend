@@ -482,22 +482,23 @@ function normalizeGmailAddress(address) {
             "query-input": "required name=search_term_string"
           }
         },
-        {
-          "@type": "Organization",
-          "@id": "https://firetempmail.com/#organization",
-          "name": "Fire Temp Mail",
-          "url": "https://firetempmail.com",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://firetempmail.com/og-image.png",
-            "width": 1200,
-            "height": 630
-          },
-          "sameAs": [
-            "https://firetempmail.com/blog",
-            "https://firetempmail.com/about"
-          ]
-        },
+                {
+                    "@type": "Organization",
+                    "@id": "https://firetempmail.com/#organization",
+                    "name": "Fire Temp Mail",
+                    "url": "https://firetempmail.com",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://firetempmail.com/favicon.png",
+                        "width": 512,
+                        "height": 512
+                    },
+                    "sameAs": [
+                        "[TWITTER_URL]",
+                        "[GITHUB_URL]",
+                        "[PRODUCTHUNT_URL]"
+                    ]
+                },
         {
           "@type": "WebApplication",
           "name": "Fire Temp Mail",

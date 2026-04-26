@@ -4,9 +4,17 @@
     import { page } from '$app/stores';
     import { receivingEmail } from '$lib/stores';
     import { getLangFromPath, localePath } from '$lib/i18n/lang.js';
+    import SocialLinks from '$lib/components/SocialLinks.svelte';
     
     let copyrightYear = new Date().getFullYear();
     let stats = { count: '0' };
+
+    // Replace placeholders with your real public profile URLs.
+    const socialProfiles = {
+        twitter: '[TWITTER_URL]',
+        github: '[GITHUB_URL]',
+        productHunt: '[PRODUCTHUNT_URL]'
+    };
     
     // Reactive language prefix based on current URL
     $: currentLang = getLangFromPath($page.url.pathname);
@@ -93,7 +101,11 @@
         <div class="footer-bottom">
             <p class="copyright">© {copyrightYear} FireTempMail. {$_('footer.rights')}</p>
             <div class="footer-support">
-                
+                <SocialLinks
+                    twitterUrl={socialProfiles.twitter}
+                    githubUrl={socialProfiles.github}
+                    productHuntUrl={socialProfiles.productHunt}
+                />
             </div>
         </div>
     </div>

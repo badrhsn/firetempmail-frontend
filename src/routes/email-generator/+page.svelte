@@ -450,8 +450,20 @@ function normalizeGmailAddress(address) {
       },
       "creator": {
         "@type": "Organization",
+        "@id": "https://firetempmail.com/#organization",
         "name": "Fire Temp Mail",
-        "url": "https://firetempmail.com"
+        "url": "https://firetempmail.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://firetempmail.com/favicon.png",
+          "width": 512,
+          "height": 512
+        },
+        "sameAs": [
+          "[TWITTER_URL]",
+          "[GITHUB_URL]",
+          "[PRODUCTHUNT_URL]"
+        ]
       }
     }) + '</script>'}
 
