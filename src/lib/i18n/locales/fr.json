@@ -164,7 +164,7 @@
         "instant": "Génération instantanée d'adresse Gmail - aucune inscription requise",
         "real": "Vraies adresses Gmail qui fonctionnent sur toutes les plateformes et sites Web",
         "free": "Service Gmail temporaire entièrement gratuit sans frais cachés",
-        "bypass": "Parfait pour contourner les blocages et restrictions de vérification par e-mail"
+        "bypass": "Idéal pour des inscriptions axées confidentialité et la protection de la boîte de réception"
       },
       "howTitle": "Comment obtenir votre Gmail temporaire",
       "howText": "Obtenir votre adresse Gmail jetable est simple. Sélectionnez simplement l'option Gmail et générez votre e-mail temporaire. Utilisez-le immédiatement pour toute inscription sur un site Web, vérification d'application ou inscription à un service. Vos messages apparaîtront instantanément dans votre boîte de réception privée.",
@@ -182,7 +182,7 @@
     },
     "instagramGuide": {
       "title": "Instagram E-mail temporaire",
-      "description": "Inscrivez-vous sur Instagram en utilisant un e-mail jetable. Évitez le spam et gérez plusieurs comptes."
+      "description": "Inscrivez-vous sur Instagram avec un e-mail jetable. Évitez le spam et séparez les profils de test de votre boîte principale."
     },
     "tiktokGuide": {
       "title": "TikTok E-mail temporaire",
@@ -202,8 +202,8 @@
     "usesTitle": "Utilisations pratiques des adresses e-mail temporaires",
     "uses": {
       "trials": {
-        "title": "Essais gratuits prolongés",
-        "text": "De nombreux services de streaming comme Netflix, Hulu et Amazon Prime offrent des essais à durée limitée. Avec des e-mails jetables, vous pouvez prolonger vos périodes d'essai tout en maintenant l'accès à ces services."
+        "title": "Confidentialité des essais gratuits",
+        "text": "De nombreux services comme Netflix, Hulu et Amazon Prime proposent des essais limités. Les e-mails jetables vous aident à évaluer le service tout en protégeant votre boîte principale et en respectant les règles de la plateforme."
       },
       "retail": {
         "title": "Offres de vente au détail sans spam",
@@ -211,11 +211,11 @@
       },
       "testing": {
         "title": "Test d'applications",
-        "text": "Les développeurs peuvent créer plusieurs comptes de test en utilisant des e-mails jetables pour évaluer minutieusement leurs applications avant leur publication."
+        "text": "Les développeurs peuvent créer des profils de test séparés avec des e-mails jetables pour évaluer leurs applications avant publication."
       },
       "multiple": {
-        "title": "Gestion de plusieurs comptes",
-        "text": "Lorsque les services nécessitent des comptes séparés pour différents objectifs (comme la gestion de plusieurs profils de réseaux sociaux), les e-mails jetables fournissent la séparation nécessaire sans créer de nouveaux comptes permanents."
+        "title": "Séparation des profils",
+        "text": "Quand un service nécessite des profils distincts pour différents usages, les e-mails jetables offrent la séparation nécessaire sans exposer votre boîte principale."
       },
       "spam": {
         "title": "Prévention du spam",
@@ -682,11 +682,11 @@
     "whyPlusP1": "1. Traquer les Vendeurs d'Email : Si vous vous inscrivez à un service avec votremail+serviceX@gmail.com et commencez à recevoir du spam à cette adresse, vous savez exactement qui a vendu votre email aux marketeurs.",
     "whyPlusP2": "2. Filtrage Automatique : Créez des filtres Gmail basés sur le label \"+\" pour organiser automatiquement les emails en dossiers, appliquer des étiquettes ou même supprimer automatiquement le spam de sources spécifiques.",
     "whyPlusP3": "3. Organiser les Inscriptions : Utilisez différents labels pour différentes catégories : +travail, +perso, +tests, +shopping. Voyez instantanément à quelle catégorie appartient chaque email.",
-    "whyPlusP4": "4. Contourner les Restrictions \"Un Email Par Compte\" : Certains services (forums, concours, essais) n'autorisent qu'un compte par email. Utilisez l'adressage plus pour créer \"plusieurs\" adresses.",
+    "whyPlusP4": "4. Organiser les inscriptions par source : certains services et newsletters envoient beaucoup de relances. L’adressage plus permet de bien séparer les sources.",
     "dotTitle": "L'Astuce du Point Gmail : Le Placement des Points ne Compte Pas",
     "dotP1": "Gmail ignore complètement les points dans la partie nom d'utilisateur de votre adresse email. Cela signifie que johnsmith@gmail.com, john.smith@gmail.com, j.o.h.n.s.m.i.t.h@gmail.com sont tous livrés dans la même boîte de réception.",
     "dotUseTitle": "Comment Utiliser l'Astuce du Point",
-    "dotUseP1": "Inscriptions Multi-Comptes : Si un site web n'autorise qu'un email par personne, vous pouvez inscrire plusieurs comptes en utilisant différents placements de points. Le site les voit comme des emails différents, mais Gmail les voit tous comme les vôtres.",
+    "dotUseP1": "Tests d’alias et organisation : les variantes avec points permettent de vérifier la normalisation Gmail tout en recevant tous les messages dans une seule boîte.",
     "combineTitle": "Combiner l'Adressage Plus ET l'Astuce du Point",
     "combineP1": "Pour une flexibilité maximale, combinez les deux fonctionnalités : j.o.h.n.smith+netflix@gmail.com. Cela crée virtuellement des adresses uniques illimitées qui vont toutes dans votre seule boîte Gmail tout en offrant des capacités maximales de suivi et de filtrage.",
     "breachTitle": "Exemple Réel : Traquer les Fuites de Données",
@@ -728,7 +728,7 @@
     "tip1P1": "Configurez un filtre dédié pour tous les emails avec adressage plus :",
     "tip1L1": "Condition du filtre : to:votremail+*@gmail.com",
     "tip1L2": "Action : Appliquer le label \"Inscriptions Suivies\" et ignorer la boîte de réception",
-    "tip1L3": "Résultat : Tous les emails avec adressage plus contournent votre boîte principale, la gardant propre",
+    "tip1L3": "Résultat : les e-mails avec adressage plus peuvent être routés hors de la boîte principale pour la garder propre",
     "tip2Title": "2. Utiliser des Conventions de Nommage Systématiques",
     "tip2P1": "Développez un système de labellisation cohérent :",
     "tip2L1": "+achat-[nomsite] — Sites d'achats",
@@ -883,7 +883,7 @@
     "whatWeDo2": "Boîte de réception en temps réel — recevez des emails instantanément dans votre navigateur",
     "whatWeDo3": "Domaines multiples — choisissez parmi plusieurs domaines email disponibles",
     "whatWeDo4": "Alias personnalisés — créez des adresses temporaires personnalisées",
-    "whatWeDo5": "Adresses style Gmail — obtenez des adresses temporaires type Gmail",
+    "whatWeDo5": "Adresses de style Gmail — alias avec points pour l’organisation de la boîte et les tests de compatibilité",
     "whatWeDo6": "Auto-suppression — les emails sont automatiquement nettoyés pour une confidentialité totale",
     "whyTitle": "Pourquoi Fire Temp Mail ?",
     "whyP1": "Dans un monde où les fuites de données, le spam et le marketing non sollicité sont des problèmes quotidiens, Fire Temp Mail offre une solution simple mais puissante.",

@@ -164,7 +164,7 @@
         "instant": "Sofortige Gmail-Adressgenerierung - keine Registrierung erforderlich",
         "real": "Echte Gmail-Adressen, die auf allen Plattformen und Websites funktionieren",
         "free": "Völlig kostenloser temporärer Gmail-Service ohne versteckte Kosten",
-        "bypass": "Perfekt zum Umgehen von E-Mail-Verifizierungssperren und -beschränkungen"
+        "bypass": "Ideal für datenschutzfreundliche Anmeldungen und Posteingangsschutz"
       },
       "howTitle": "So erhalten Sie Ihr temporäres Gmail",
       "howText": "Das Erhalten Ihrer Wegwerf-Gmail-Adresse ist einfach. Wählen Sie einfach die Gmail-Option und generieren Sie Ihre temporäre E-Mail. Verwenden Sie sie sofort für jede Website-Registrierung, App-Verifizierung oder Service-Anmeldung. Ihre Nachrichten erscheinen sofort in Ihrem privaten Posteingang.",
@@ -182,7 +182,7 @@
     },
     "instagramGuide": {
       "title": "Instagram Temp E-Mail",
-      "description": "Melden Sie sich für Instagram mit Wegwerf-E-Mail an. Vermeiden Sie Spam und verwalten Sie mehrere Konten."
+      "description": "Melden Sie sich für Instagram mit Wegwerf-E-Mail an. Vermeiden Sie Spam und trennen Sie Testprofile von Ihrem Hauptpostfach."
     },
     "tiktokGuide": {
       "title": "TikTok temporäre E-Mail",
@@ -202,8 +202,8 @@
     "usesTitle": "Praktische Verwendungsmöglichkeiten für temporäre E-Mail-Adressen",
     "uses": {
       "trials": {
-        "title": "Erweiterte kostenlose Testversionen",
-        "text": "Viele Streaming-Dienste wie Netflix, Hulu und Amazon Prime bieten zeitlich begrenzte Testversionen an. Mit Wegwerf-E-Mails können Sie Ihre Testzeiträume verlängern und gleichzeitig Zugang zu diesen Diensten behalten."
+        "title": "Postfachschutz bei Testversionen",
+        "text": "Viele Dienste wie Netflix, Hulu und Amazon Prime bieten zeitlich begrenzte Testversionen. Wegwerf-E-Mails helfen bei der Evaluation und schützen Ihr Hauptpostfach im Rahmen der Plattformregeln."
       },
       "retail": {
         "title": "Einzelhandelsangebote ohne Spam",
@@ -211,11 +211,11 @@
       },
       "testing": {
         "title": "Anwendungstests",
-        "text": "Entwickler können mehrere Testkonten mit Wegwerf-E-Mails erstellen, um ihre Anwendungen gründlich zu bewerten, bevor sie veröffentlicht werden."
+        "text": "Entwickler können getrennte Testprofile mit Wegwerf-E-Mails erstellen, um Anwendungen vor der Veröffentlichung gründlich zu prüfen."
       },
       "multiple": {
-        "title": "Verwaltung mehrerer Konten",
-        "text": "Wenn Dienste separate Konten für verschiedene Zwecke erfordern (wie die Verwaltung mehrerer Social-Media-Profile), bieten Wegwerf-E-Mails die notwendige Trennung, ohne permanente neue Konten zu erstellen."
+        "title": "Profiltrennung",
+        "text": "Wenn Dienste getrennte Profile für verschiedene Zwecke erfordern, bieten Wegwerf-E-Mails die nötige Trennung, ohne das Hauptpostfach offenzulegen."
       },
       "spam": {
         "title": "Spam-Prävention",
@@ -682,11 +682,11 @@
     "whyPlusP1": "1. E-Mail-Verkäufer Aufspüren: Wenn du dich bei einem Dienst mit deinname+dienstX@gmail.com anmeldest und Spam an diese Adresse erhältst, weißt du genau, wer deine E-Mail an Vermarkter verkauft hat.",
     "whyPlusP2": "2. Automatisches Filtern: Erstelle Gmail-Filter basierend auf dem \"+\"-Label, um E-Mails automatisch in Ordner zu sortieren, Labels anzuwenden oder sogar Spam aus bestimmten Quellen automatisch zu löschen.",
     "whyPlusP3": "3. Anmeldungen Organisieren: Verwende verschiedene Labels für verschiedene Kategorien: +arbeit, +persönlich, +tests, +shopping. Sieh sofort, zu welcher Kategorie jede E-Mail gehört.",
-    "whyPlusP4": "4. \"Ein E-Mail Pro Konto\"-Beschränkungen Umgehen: Einige Dienste (Foren, Gewinnspiele, Testversionen) erlauben nur ein Konto pro E-Mail. Verwende Plus-Adressierung, um \"mehrere\" Adressen zu erstellen.",
+    "whyPlusP4": "4. Anmeldungen nach Quelle organisieren: Einige Dienste und Newsletter senden viele Folge-E-Mails. Mit Plus-Adressierung bleiben Quellen sauber getrennt.",
     "dotTitle": "Der Gmail-Punkt-Trick: Punktplatzierung Spielt Keine Rolle",
     "dotP1": "Gmail ignoriert Punkte im Benutzernamenteil deiner E-Mail-Adresse vollständig. Das bedeutet, dass johnsmith@gmail.com, john.smith@gmail.com, j.o.h.n.s.m.i.t.h@gmail.com alle an denselben Posteingang zugestellt werden.",
     "dotUseTitle": "Wie Man den Punkt-Trick Verwendet",
-    "dotUseP1": "Mehrfach-Konto-Anmeldungen: Wenn eine Website nur eine E-Mail pro Person erlaubt, kannst du mehrere Konten mit verschiedenen Punktplatzierungen registrieren. Die Website sieht sie als verschiedene E-Mails, aber Gmail sieht sie alle als deine.",
+    "dotUseP1": "Alias-Tests und Organisation: Mit Punktvarianten kannst du prüfen, wie Websites Gmail-Adressen normalisieren, während alle Nachrichten im selben Postfach ankommen.",
     "combineTitle": "Plus-Adressierung UND Punkt-Trick Kombinieren",
     "combineP1": "Für maximale Flexibilität kombiniere beide Funktionen: j.o.h.n.smith+netflix@gmail.com. Dies erzeugt praktisch unbegrenzte einzigartige Adressen, die alle an deinen einzigen Gmail-Posteingang gehen, während sie maximale Verfolgungs- und Filtermöglichkeiten bieten.",
     "breachTitle": "Praxisbeispiel: Datenlecks Aufspüren",
@@ -728,7 +728,7 @@
     "tip1P1": "Richte einen dedizierten Filter für alle Plus-adressierten E-Mails ein:",
     "tip1L1": "Filterbedingung: to:deinname+*@gmail.com",
     "tip1L2": "Aktion: Label \"Verfolgte Anmeldungen\" anwenden und Posteingang überspringen",
-    "tip1L3": "Ergebnis: Alle Plus-adressierten E-Mails umgehen deinen Hauptposteingang und halten ihn sauber",
+    "tip1L3": "Ergebnis: Plus-adressierte E-Mails können automatisch vom Hauptposteingang getrennt werden und halten ihn sauber",
     "tip2Title": "2. Systematische Namenskonventionen Verwenden",
     "tip2P1": "Entwickle ein konsistentes Labeling-System:",
     "tip2L1": "+shop-[seitenname] — Shopping-Seiten",
@@ -883,7 +883,7 @@
     "whatWeDo2": "Echtzeit-Posteingang — empfange E-Mails sofort in deinem Browser",
     "whatWeDo3": "Mehrere Domains — wähle aus verschiedenen verfügbaren E-Mail-Domains",
     "whatWeDo4": "Benutzerdefinierte Aliase — erstelle personalisierte temporäre Adressen",
-    "whatWeDo5": "Gmail-Stil-Adressen — erhalte temporäre Gmail-ähnliche Adressen",
+    "whatWeDo5": "Gmail-ähnliche Adressen — Punkt-Aliase für Postfachorganisation und Kompatibilitätstests",
     "whatWeDo6": "Auto-Löschung — E-Mails werden automatisch für vollständige Privatsphäre bereinigt",
     "whyTitle": "Warum Fire Temp Mail?",
     "whyP1": "In einer Welt, in der Datenlecks, Spam und unerwünschtes Marketing alltägliche Probleme sind, bietet Fire Temp Mail eine einfache, aber leistungsstarke Lösung.",

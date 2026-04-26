@@ -21,7 +21,7 @@ const homeTranslations = {
         instant: "Sofortige Gmail-Adressgenerierung - keine Registrierung erforderlich",
         real: "Echte Gmail-Adressen, die auf allen Plattformen und Websites funktionieren",
         free: "Völlig kostenloser temporärer Gmail-Service ohne versteckte Kosten",
-        bypass: "Perfekt zum Umgehen von E-Mail-Verifizierungssperren und -beschränkungen"
+        bypass: "Ideal für datenschutzfreundliche Anmeldungen und Posteingangsschutz"
       },
       howTitle: "So erhalten Sie Ihr temporäres Gmail",
       howText: "Das Erhalten Ihrer Wegwerf-Gmail-Adresse ist einfach. Wählen Sie einfach die Gmail-Option und generieren Sie Ihre temporäre E-Mail. Verwenden Sie sie sofort für jede Website-Registrierung, App-Verifizierung oder Service-Anmeldung. Ihre Nachrichten erscheinen sofort in Ihrem privaten Posteingang.",
@@ -39,7 +39,7 @@ const homeTranslations = {
     },
     instagramGuide: {
       title: "Instagram Temp E-Mail",
-      description: "Melden Sie sich für Instagram mit Wegwerf-E-Mail an. Vermeiden Sie Spam und verwalten Sie mehrere Konten."
+      description: "Melden Sie sich für Instagram mit Wegwerf-E-Mail an. Vermeiden Sie Spam und trennen Sie Testprofile von Ihrem Hauptpostfach."
     },
     tiktokGuide: {
       title: "TikTok temporäre E-Mail",
@@ -108,7 +108,7 @@ const homeTranslations = {
         instant: "Génération instantanée d'adresse Gmail - aucune inscription requise",
         real: "Vraies adresses Gmail qui fonctionnent sur toutes les plateformes et sites Web",
         free: "Service Gmail temporaire entièrement gratuit sans frais cachés",
-        bypass: "Parfait pour contourner les blocages et restrictions de vérification par e-mail"
+        bypass: "Idéal pour des inscriptions axées confidentialité et la protection de la boîte de réception"
       },
       howTitle: "Comment obtenir votre Gmail temporaire",
       howText: "Obtenir votre adresse Gmail jetable est simple. Sélectionnez simplement l'option Gmail et générez votre e-mail temporaire. Utilisez-le immédiatement pour toute inscription sur un site Web, vérification d'application ou inscription à un service. Vos messages apparaîtront instantanément dans votre boîte de réception privée.",
@@ -126,7 +126,7 @@ const homeTranslations = {
     },
     instagramGuide: {
       title: "Instagram E-mail temporaire",
-      description: "Inscrivez-vous sur Instagram en utilisant un e-mail jetable. Évitez le spam et gérez plusieurs comptes."
+      description: "Inscrivez-vous sur Instagram avec un e-mail jetable. Évitez le spam et séparez les profils de test de votre boîte principale."
     },
     tiktokGuide: {
       title: "TikTok E-mail temporaire",
@@ -155,10 +155,10 @@ const homeTranslations = {
       },
       testing: {
         title: "Test d'applications",
-        text: "Les développeurs peuvent créer plusieurs comptes de test en utilisant des e-mails jetables pour évaluer minutieusement leurs applications avant leur publication."
+        text: "Les développeurs peuvent créer des profils de test séparés en utilisant des e-mails jetables pour évaluer minutieusement leurs applications avant publication."
       },
       multiple: {
-        title: "Gestion de plusieurs comptes",
+        title: "Séparation des profils",
         text: "Lorsque les services nécessitent des comptes séparés pour différents objectifs (comme la gestion de plusieurs profils de réseaux sociaux), les e-mails jetables fournissent la séparation nécessaire sans créer de nouveaux comptes permanents."
       },
       spam: {
@@ -195,7 +195,7 @@ const homeTranslations = {
         instant: "Geração instantânea de endereço Gmail - sem registro necessário",
         real: "Endereços Gmail reais que funcionam em todas as plataformas e sites",
         free: "Serviço Gmail temporário completamente gratuito sem custos ocultos",
-        bypass: "Perfeito para contornar bloqueios e restrições de verificação de e-mail"
+        bypass: "Ideal para cadastros com privacidade e proteção da caixa de entrada"
       },
       howTitle: "Como obter seu Gmail temporário",
       howText: "Obter seu endereço Gmail descartável é simples. Basta selecionar a opção Gmail e gerar seu e-mail temporário. Use-o imediatamente para qualquer registro de site, verificação de aplicativo ou inscrição em serviço. Suas mensagens aparecerão instantaneamente em sua caixa de entrada privada.",
@@ -213,7 +213,7 @@ const homeTranslations = {
     },
     instagramGuide: {
       title: "Instagram E-mail temporário",
-      description: "Inscreva-se no Instagram usando e-mail descartável. Evite spam e mantenha múltiplas contas."
+      description: "Inscreva-se no Instagram usando e-mail descartável. Evite spam e separe perfis de teste da sua caixa principal."
     },
     tiktokGuide: {
       title: "TikTok E-mail temporário",
@@ -245,7 +245,7 @@ const homeTranslations = {
         text: "Desenvolvedores podem criar várias contas de teste usando e-mails descartáveis para avaliar minuciosamente seus aplicativos antes do lançamento público."
       },
       multiple: {
-        title: "Gerenciamento de múltiplas contas",
+        title: "Separação de perfis",
         text: "Quando os serviços exigem contas separadas para diferentes propósitos (como gerenciar vários perfis de mídia social), e-mails descartáveis fornecem a separação necessária sem criar novas contas permanentes."
       },
       spam: {
@@ -282,7 +282,7 @@ const homeTranslations = {
         instant: "إنشاء عنوان Gmail فوري - لا يلزم التسجيل",
         real: "عناوين Gmail حقيقية تعمل على جميع المنصات والمواقع",
         free: "خدمة Gmail مؤقتة مجانية تمامًا بدون تكاليف خفية",
-        bypass: "مثالي لتجاوز حظر التحقق من البريد الإلكتروني والقيود"
+        bypass: "مثالي للتسجيلات مع الخصوصية وحماية صندوق الوارد"
       },
       howTitle: "كيفية الحصول على Gmail المؤقت الخاص بك",
       howText: "الحصول على عنوان Gmail المؤقت الخاص بك أمر بسيط. ما عليك سوى تحديد خيار Gmail وإنشاء بريدك الإلكتروني المؤقت. استخدمه على الفور لأي تسجيل موقع ويب أو تحقق من التطبيق أو تسجيل خدمة. ستظهر رسائلك على الفور في صندوق الوارد الخاص.",
@@ -300,7 +300,7 @@ const homeTranslations = {
     },
     instagramGuide: {
       title: "Instagram بريد إلكتروني مؤقت",
-      description: "سجل في Instagram باستخدام بريد إلكتروني قابل للتصرف. تجنب البريد العشوائي وحافظ على حسابات متعددة."
+      description: "سجل في Instagram باستخدام بريد إلكتروني قابل للتصرف. تجنب البريد العشوائي وافصل ملفات الاختبار عن صندوقك الرئيسي."
     },
     tiktokGuide: {
       title: "TikTok بريد إلكتروني مؤقت",
@@ -332,7 +332,7 @@ const homeTranslations = {
         text: "يمكن للمطورين إنشاء حسابات اختبار متعددة باستخدام رسائل بريد إلكتروني قابلة للتصرف لتقييم تطبيقاتهم بدقة قبل الإصدار العام."
       },
       multiple: {
-        title: "إدارة حسابات متعددة",
+        title: "فصل الملفات الشخصية",
         text: "عندما تتطلب الخدمات حسابات منفصلة لأغراض مختلفة (مثل إدارة ملفات تعريف وسائل التواصل الاجتماعي المتعددة)، توفر رسائل البريد الإلكتروني القابلة للتصرف الفصل الضروري دون إنشاء حسابات جديدة دائمة."
       },
       spam: {
@@ -369,7 +369,7 @@ const homeTranslations = {
         instant: "Мгновенная генерация адреса Gmail - регистрация не требуется",
         real: "Настоящие адреса Gmail, которые работают на всех платформах и веб-сайтах",
         free: "Полностью бесплатный сервис временного Gmail без скрытых затрат",
-        bypass: "Идеально для обхода блокировок верификации электронной почты и ограничений"
+        bypass: "Идеально для приватных регистраций и защиты почтового ящика"
       },
       howTitle: "Как получить ваш временный Gmail",
       howText: "Получить ваш одноразовый адрес Gmail просто. Просто выберите опцию Gmail и сгенерируйте вашу временную почту. Используйте её немедленно для любой регистрации на веб-сайте, верификации приложения или регистрации в сервисе. Ваши сообщения появятся мгновенно в вашем приватном почтовом ящике.",
@@ -387,7 +387,7 @@ const homeTranslations = {
     },
     instagramGuide: {
       title: "Instagram временная электронная почта",
-      description: "Регистрируйтесь в Instagram, используя одноразовую почту. Избегайте спама и управляйте несколькими аккаунтами."
+      description: "Регистрируйтесь в Instagram с одноразовой почтой. Избегайте спама и отделяйте тестовые профили от основной почты."
     },
     tiktokGuide: {
       title: "TikTok временная электронная почта",
@@ -416,11 +416,11 @@ const homeTranslations = {
       },
       testing: {
         title: "Тестирование приложений",
-        text: "Разработчики могут создавать несколько тестовых аккаунтов, используя одноразовые почты, чтобы тщательно оценить свои приложения перед публичным запуском."
+        text: "Разработчики могут создавать отдельные тестовые профили, используя одноразовые почты, чтобы тщательно оценить приложения перед запуском."
       },
       multiple: {
-        title: "Управление несколькими аккаунтами",
-        text: "Когда сервисы требуют отдельные аккаунты для разных целей (например, управление несколькими профилями в социальных сетях), одноразовые почты обеспечивают необходимое разделение без создания новых постоянных аккаунтов."
+        title: "Разделение профилей",
+        text: "Когда сервисам нужны отдельные профили для разных задач (например, личных и рабочих), одноразовые почты дают нужное разделение без раскрытия основной почты."
       },
       spam: {
         title: "Предотвращение спама",

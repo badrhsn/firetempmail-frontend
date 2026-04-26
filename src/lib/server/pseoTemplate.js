@@ -7,6 +7,18 @@
 
 const year = new Date().getFullYear();
 
+const STREAMING_PLATFORM_PATTERN = /netflix|hulu|amazon prime|prime video|disney|spotify|twitch|youtube|kick|crunchyroll|soundcloud/i;
+
+const STREAMING_POLICY_DISCLAIMER = 'This guide is for email privacy and inbox management only. It does not promote payment evasion, deceptive duplicate accounts, or violations of platform Terms of Service.';
+
+const STREAMING_TALKING_POINTS = [
+    'Use a temporary address to keep your primary inbox private when testing a new streaming service.',
+    'Reduce promotional email clutter and keep marketing campaigns out of your personal inbox.',
+    'Limit unnecessary exposure of your long-term email address to third-party ad systems.',
+    'Separate signup, verification, and onboarding emails from day-to-day personal communication.',
+    'Always follow platform billing rules, account policies, and Terms of Service.'
+];
+
 // Deterministic hash for template rotation (same platform → same template every time)
 function hashStr(str) {
     let h = 0;
@@ -46,7 +58,7 @@ const BLOCK_ERRORS = {
 
 // Platform-specific tips that add unique value
 const PLATFORM_TIPS = {
-    'Netflix': 'Netflix remembers device fingerprints, so use a different browser or incognito mode for each trial.',
+    'Netflix': 'Use a dedicated inbox for signup and review Netflix account policies before creating a long-term subscription account.',
     'Spotify': 'Spotify free tier works without email verification on mobile — but Premium trials require a valid inbox.',
     'Disney Plus': 'Disney+ bundles (with Hulu/ESPN+) require separate email addresses for each service.',
     'Twitch': 'Twitch affiliate payouts require a permanent email — only use temp email for viewer accounts.',
@@ -59,11 +71,11 @@ const PLATFORM_TIPS = {
     'LinkedIn': 'LinkedIn is aggressive about detecting disposable emails — consider using it only for research accounts.',
     'Discord': 'Discord requires email verification to DM users or join some servers. Keep the temp inbox open until verified.',
     'Steam': 'Steam Guard (2FA) emails go to your registered email — add a phone number as backup if you plan to trade items.',
-    'Epic Games': 'Epic gives away free games weekly — create accounts to claim them before they expire.',
+    'Epic Games': 'Epic gives away free games weekly — use a dedicated signup inbox so claim emails stay out of your primary account.',
     'Roblox': 'Roblox accounts for users under 13 have chat restrictions regardless of email used.',
-    'ChatGPT': 'OpenAI gives limited free messages per day — temp email lets you start fresh when the limit resets.',
+    'ChatGPT': 'OpenAI has usage limits on free tiers — temp email helps keep test signups and experiment inboxes separate while following usage policies.',
     'Midjourney': 'Midjourney now requires a subscription — but you can preview the community gallery without logging in.',
-    'Amazon': 'Amazon links your address and payment to accounts — temp email alone won\'t create a fully anonymous account.',
+    'Amazon': 'Amazon links address and payment signals to accounts — temp email helps with inbox privacy but does not replace standard identity and billing checks.',
     'PayPal': 'PayPal verifies identity for financial transactions — temp email works for initial signup but not for sending/receiving money.',
     'GitHub': 'Git commits will show your temp email in public repos — configure git to use a noreply address after signup.',
     'Notion': 'Notion workspaces can be shared — create a temp account to test collaboration features before committing.',
@@ -88,7 +100,7 @@ const USER_SCENARIOS = {
     'Netflix': {
         title: 'Common Netflix Temp Email Scenarios',
         scenarios: [
-            { icon: '🎬', label: 'Free trial restart', text: 'After the first Netflix free trial expires, many users want to try a different plan tier before committing. Generating a new address lets you test a different plan — just make sure you cancel before any billing cycle.' },
+            { icon: '🎬', label: 'Inbox privacy before subscribing', text: 'People comparing Netflix plans sometimes prefer not to connect their primary inbox until they decide on a long-term subscription. A temporary address keeps promotional messages separate during evaluation.' },
             { icon: '🌍', label: 'Region-locked content testing', text: 'Journalists and content researchers often create secondary accounts to document what content is available in different Netflix regions. A temp email keeps the research account separate from the primary account.' },
             { icon: '📊', label: 'UI/UX research', text: 'Product designers and Netflix competitors create fresh accounts specifically to screenshot onboarding flows and study the first-time user experience — something you can\'t replicate on an existing account.' },
         ]
@@ -104,9 +116,9 @@ const USER_SCENARIOS = {
     'Discord': {
         title: 'Common Discord Use Cases for Temp Email',
         scenarios: [
-            { icon: '🎮', label: 'Alt accounts for gaming', text: 'Competitive gamers create secondary Discord accounts to join community servers anonymously and research strategies without revealing their main account identity to competitors.' },
+            { icon: '🎮', label: 'Separate gaming community profiles', text: 'Gamers often keep a separate Discord profile for community testing and event participation so their primary inbox stays free of server notifications.' },
             { icon: '🤖', label: 'Bot testing', text: 'Discord bot developers create test accounts to verify bot behavior without using their main account. Each test account needs a unique email — temp email makes this easy.' },
-            { icon: '📢', label: 'Community research', text: 'Community managers use alt accounts to observe their server from a member\'s perspective — seeing exactly what new joiners see, without the elevated permissions of their admin account.' },
+            { icon: '📢', label: 'Member-experience testing', text: 'Community managers use separate test profiles to observe their server from a new member\'s perspective without changing their main admin setup.' },
         ]
     },
     'Reddit': {
@@ -128,7 +140,7 @@ const USER_SCENARIOS = {
     'ChatGPT': {
         title: 'Common ChatGPT Use Cases for Temp Email',
         scenarios: [
-            { icon: '🔢', label: 'Bypassing daily message limits', text: 'The free tier of ChatGPT has message limits per day. Researchers and students who need to test behavior across multiple conversation resets create secondary accounts with temp email to start fresh sessions.' },
+            { icon: '🔢', label: 'Prompt sandbox separation', text: 'Researchers and students often separate experimental prompt work from their daily account so test conversations stay isolated and inbox notifications remain organized.' },
             { icon: '📝', label: 'Prompt engineering research', text: 'Prompt engineers test how GPT responds to the same inputs on accounts with different conversation histories — a blank account gives completely fresh context without any prior conversation influencing responses.' },
             { icon: '🧪', label: 'Feature comparison testing', text: 'Developers building on the OpenAI API create secondary accounts to test how different interface versions and model defaults behave, isolated from their production API key account.' },
         ]
@@ -136,7 +148,7 @@ const USER_SCENARIOS = {
     'Steam': {
         title: 'Why Gamers Use Temp Email for Steam',
         scenarios: [
-            { icon: '🎮', label: 'Trying a refunded game again', text: 'After refunding a game, Steam prevents re-purchase on the same account within certain timeframes. Some players create secondary accounts with temp email to access a game again after a refund.' },
+            { icon: '🎮', label: 'Fresh testing environment', text: 'Players sometimes create a separate Steam profile to test onboarding flows, new-game setup, or controller mappings without affecting their main account history.' },
             { icon: '🏆', label: 'Achievement hunting reset', text: 'Hardcore achievement hunters create secondary Steam accounts to replay games from scratch without affecting their main account\'s playtime statistics.' },
             { icon: '🔒', label: 'Sharing a library', text: 'Players exploring Steam Family Library Sharing create secondary accounts to test the sharing setup from the borrower\'s perspective before sharing with family members.' },
         ]
@@ -144,8 +156,8 @@ const USER_SCENARIOS = {
     'Epic Games': {
         title: 'Epic Games + Temp Email: Typical Use Cases',
         scenarios: [
-            { icon: '🆓', label: 'Weekly free game claiming', text: 'Epic gives away one free game every week. Users who want to claim games without associating them with their main Epic account — or who want to give games to friends — create secondary accounts with temp email addresses.' },
-            { icon: '🎯', label: 'Fortnite practice accounts', text: 'Competitive Fortnite players create smurf or practice accounts with temp email to practice in lower-skill lobbies without it affecting their main account\'s statistics.' },
+            { icon: '🆓', label: 'Weekly claim inbox separation', text: 'Epic gives away one free game every week. Users often keep claim and promotional messages in a separate inbox so their primary email stays clean.' },
+            { icon: '🎯', label: 'Feature testing profiles', text: 'Players and community managers use separate test profiles to validate settings, controls, and onboarding flows before changing their main account setup.' },
             { icon: '🛒', label: 'Reviewing the purchase flow', text: 'Game developers publishing on Epic\'s store create customer-perspective accounts to experience the purchase flow exactly as their customers would — seeing every screen, permission request, and email they send.' },
         ]
     },
@@ -160,7 +172,7 @@ const USER_SCENARIOS = {
     'Twitter': {
         title: 'Common Twitter/X Use Cases for Temp Email',
         scenarios: [
-            { icon: '🗣️', label: 'Anonymous commentary', text: 'Journalists, activists, and regular users who want to comment on current events without it being traceable to their main professional account regularly use throwaway Twitter accounts created with temporary emails.' },
+            { icon: '🗣️', label: 'Topic-focused commentary accounts', text: 'Journalists, activists, and regular users sometimes separate topic-specific commentary from their main professional profile to keep inboxes and notifications organized.' },
             { icon: '🔬', label: 'Social media research', text: 'Academics and platform researchers use fresh accounts to observe how Twitter\'s algorithm surfaces content to brand new users, how trending topics appear, and what the onboarding experience looks like.' },
             { icon: '🤖', label: 'Bot detection testing', text: 'Platform security researchers create test accounts with temp emails to study how Twitter\'s bot detection responds to different types of new account behavior.' },
         ]
@@ -168,7 +180,7 @@ const USER_SCENARIOS = {
     'Instagram': {
         title: 'Instagram + Temp Email: Why It\'s Useful',
         scenarios: [
-            { icon: '📷', label: 'Creator research accounts', text: 'Content creators often maintain "finsta" (fake Instagram) accounts to observe their own content without the metrics pressure of their main account. A temp email keeps this research account truly separate.' },
+            { icon: '📷', label: 'Creator research profiles', text: 'Content creators often maintain a separate research profile to observe their own content without changing the main account workflow. A temp email keeps the research inbox separate.' },
             { icon: '🕵️', label: 'Brand monitoring', text: 'Brands and their agencies create follower-perspective accounts to monitor how their Instagram presence appears to ordinary users, checking hashtag performance and discovery behavior.' },
             { icon: '📊', label: 'Testing different content strategies', text: 'Creators test whether changes to their caption style, posting frequency, or hashtag strategy affect reach by creating secondary test accounts with temp email to run controlled comparisons.' },
         ]
@@ -177,7 +189,7 @@ const USER_SCENARIOS = {
         title: 'Why Users Create TikTok Accounts with Temp Email',
         scenarios: [
             { icon: '🎯', label: 'Testing the recommendation algorithm', text: 'Social media researchers and marketers create fresh TikTok accounts specifically to observe how the For You page algorithm builds a content bubble from zero activity — something impossible to study on an established account.' },
-            { icon: '🌍', label: 'Regional content comparison', text: 'Journalists documenting differences in TikTok content across regions create multiple accounts to compare what appears in different location contexts.' },
+            { icon: '🌍', label: 'Regional content comparison', text: 'Journalists documenting differences in TikTok content across regions use separate test profiles to compare what appears in different location contexts.' },
             { icon: '📱', label: 'Children\'s mode testing', text: 'Parents concerned about their children\'s TikTok experience create test accounts to experience TikTok\'s restricted mode exactly the way their child would see it.' },
         ]
     },
@@ -200,7 +212,7 @@ const USER_SCENARIOS = {
     'Amazon': {
         title: 'Amazon + Temp Email: Why Users Do It',
         scenarios: [
-            { icon: '📦', label: 'Testing Prime trial for specific events', text: 'Users who only want Amazon Prime for a specific shipping need (holiday period, one large order) create accounts with temp email for the trial period, fully intending to cancel after their shipment arrives.' },
+            { icon: '📦', label: 'Inbox privacy before subscribing', text: 'Users evaluating Prime features sometimes use a temporary address first so their primary inbox is not tied to promotional campaigns before they decide on a long-term subscription.' },
             { icon: '⭐', label: 'Review research accounts', text: 'Researchers studying Amazon\'s review verification process create secondary buyer accounts to understand what review prompts are sent, when, and under what purchase conditions.' },
             { icon: '🎁', label: 'Anonymous gift sending', text: 'Users who want to send gifts without the recipient knowing it\'s them create secondary Amazon accounts with temp email and a separate delivery name/address.' },
         ]
@@ -303,14 +315,14 @@ const USER_SCENARIOS = {
 
 // 8 meta description templates — rotated deterministically per platform
 const META_TEMPLATES_BLOCKS = [
-    (p) => `${p} blocks some temp emails. Here's what actually works in ${year}. Tested with FireTempMail.`,
-    (p) => `We tested FireTempMail on ${p}: blocked on first try, succeeded on the second. Full results inside.`,
-    (p) => `Can you use a disposable email for ${p}? It's tricky — but we found a fix. Updated ${year}.`,
-    (p) => `${p} rejects temp mail domains. We tested 3 workarounds — one works reliably. See results.`,
-    (p) => `Honest test: ${p} blocks most temp emails. Our workaround took 2 minutes. Guide + proof inside.`,
-    (p) => `${p} vs temp email: they try to block it. Here's the bypass that worked for us in ${year}.`,
-    (p) => `Tried signing up to ${p} with temp email and got rejected? Same. Here's the fix we found.`,
-    (p) => `We tested disposable email on ${p} — blocked, then found a workaround. ${year} results.`,
+    (p) => `${p} may reject some temp email domains. See our privacy-safe signup guidance for ${year}.`,
+    (p) => `We tested FireTempMail on ${p}: some domains were rejected, others worked. Full results inside.`,
+    (p) => `Can you use disposable email for ${p}? It depends on domain acceptance. Updated ${year} guide.`,
+    (p) => `${p} sometimes rejects temp mail domains. See tested outcomes and safer next steps.`,
+    (p) => `Honest test: ${p} blocks some temp emails. Here is a compliance-first setup guide.`,
+    (p) => `${p} and temp email: tested acceptance patterns and practical privacy guidance for ${year}.`,
+    (p) => `Got rejected on ${p} with temp email? Here are policy-safe options that worked in testing.`,
+    (p) => `We tested disposable email on ${p}: acceptance varied by domain. ${year} results and tips.`,
 ];
 const META_TEMPLATES_EASY = [
     (p) => `Use temp email for ${p} in 30 seconds. Free, instant, works in ${year}. No signup needed.`,
@@ -333,13 +345,21 @@ const META_TEMPLATES_MEDIUM = [
     (p) => `Can you use a burner email for ${p}? Yes, with caveats. Our ${year} test results inside.`,
 ];
 
+const META_TEMPLATES_STREAMING_SAFE = [
+    (p) => `Temp email for ${p} can help protect your inbox and reduce promo spam while following platform terms.`,
+    (p) => `Looking for a privacy-first temp email setup for ${p}? Here's a practical guide focused on inbox protection.`,
+    (p) => `Use temporary email with ${p} for signup privacy and spam control. Compliance-focused guidance only.`,
+    (p) => `Privacy guide: using temp email for ${p} to keep your main inbox clean and organized.`,
+    (p) => `${p} + temporary email: safer signup flow, cleaner inbox, and clear compliance guidance.`,
+];
+
 // 5 title templates per variant — rotated deterministically
 const TITLE_TEMPLATES_BLOCKS = [
-    (p) => `Does ${p} Block Temp Email? Honest Answer + Working Fix (${year})`,
-    (p) => `${p} Blocks Disposable Email — Here's What Still Works (${year})`,
-    (p) => `Can You Use Temp Email for ${p}? (Tested ${year} — With Workaround)`,
-    (p) => `${p} vs Temp Mail: Blocked? Yes. Fixable? Also Yes. (${year} Guide)`,
-    (p) => `We Tested Temp Email on ${p} — It Got Blocked. Then We Found a Fix.`,
+    (p) => `Does ${p} Block Temp Email? What to Expect (${year})`,
+    (p) => `${p} and Disposable Email: Tested Results (${year})`,
+    (p) => `Can You Use Temp Email for ${p}? (Tested ${year})`,
+    (p) => `${p} vs Temp Mail: Acceptance Patterns and Next Steps (${year})`,
+    (p) => `We Tested Temp Email on ${p} — Here Are the Results`,
 ];
 const TITLE_TEMPLATES_EASY = [
     (p) => `Temp Email for ${p} — Free & Works in ${year}`,
@@ -354,6 +374,14 @@ const TITLE_TEMPLATES_MEDIUM = [
     (p) => `Can You Sign Up for ${p} With a Temp Email? (Workaround Guide)`,
     (p) => `We Tested 3 Temp Emails on ${p} — Here's the One That Worked`,
     (p) => `Using Throwaway Email for ${p}: Our ${year} Test Results`,
+];
+
+const TITLE_TEMPLATES_STREAMING_SAFE = [
+    (p) => `Temp Email for ${p}: Privacy-First Signup Guide (${year})`,
+    (p) => `How to Use Temp Email for ${p} Without Inbox Spam (${year})`,
+    (p) => `${p} Temp Email Guide: Privacy, Verification, and Best Practices`,
+    (p) => `Temporary Email for ${p}: Safer Signup and Spam Control`,
+    (p) => `${p} + Temp Mail: Clean Inbox Strategy (${year})`,
 ];
 
 /**
@@ -376,43 +404,17 @@ export function generatePseoPost({ platform, category, blocks_temp_mail, reason,
     const slug = slug_override || `temp-email-for-${platform.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`;
     const platformSlug = platform.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
     const h = hashStr(platform);
-
-    // --- ROTATED TITLE (deterministic per platform) ---
-    let title, metaTitle;
-    if (blocks_temp_mail) {
-        title = TITLE_TEMPLATES_BLOCKS[h % TITLE_TEMPLATES_BLOCKS.length](platform);
-        metaTitle = `Does ${platform} Block Temp Email? Fix That Works | FireTempMail`;
-    } else if (difficulty === 'easy') {
-        title = TITLE_TEMPLATES_EASY[h % TITLE_TEMPLATES_EASY.length](platform);
-        metaTitle = `Temp Email for ${platform} (Free, Instant) | FireTempMail`;
-    } else {
-        title = TITLE_TEMPLATES_MEDIUM[h % TITLE_TEMPLATES_MEDIUM.length](platform);
-        metaTitle = `Best Temp Email for ${platform} — Workaround Guide | FireTempMail`;
-    }
-
-    // --- ROTATED META DESCRIPTION (deterministic, 8 templates per variant) ---
-    let metaDescription;
-    if (blocks_temp_mail) {
-        metaDescription = META_TEMPLATES_BLOCKS[h % META_TEMPLATES_BLOCKS.length](platform);
-    } else if (difficulty === 'easy') {
-        metaDescription = META_TEMPLATES_EASY[h % META_TEMPLATES_EASY.length](platform);
-    } else {
-        metaDescription = META_TEMPLATES_MEDIUM[h % META_TEMPLATES_MEDIUM.length](platform);
-    }
-    metaDescription = metaDescription.slice(0, 160);
-
-    const excerpt = blocks_temp_mail
-        ? `Does ${platform} block temporary emails? Yes — but here's a working fix. Learn how to use a disposable email for ${platform} to ${reason}.`
-        : `Learn how to use a temporary email for ${platform} to ${reason}. Free, instant, no signup required. Works in ${year}.`;
-
-    const difficultyLabel = {
-        easy: 'very straightforward — most users finish in under 2 minutes',
-        medium: 'possible with the right approach — expect to try 2-3 email addresses',
-        hard: 'challenging but doable — you may need workarounds described below'
-    }[difficulty];
-
-    const errorMsg = BLOCK_ERRORS[platform] || 'This email address is not allowed';
-    const specificTip = PLATFORM_TIPS[platform] || '';
+    const isStreamingPost = category === 'Streaming' || STREAMING_PLATFORM_PATTERN.test(platform);
+    const safeReason = isStreamingPost
+        ? 'protect your main inbox, reduce promotional email, and keep your real address private while evaluating the service'
+        : reason;
+    const keywordPhrase = platform === 'Netflix'
+        ? 'temp mail for Netflix'
+        : platform === 'Hulu'
+            ? 'temp email for Hulu free trial'
+            : /amazon prime/i.test(platform)
+                ? 'disposable email for Amazon Prime trial'
+                : `temp email for ${platform}`;
 
     // Varied CTA anchor text (deterministic per platform)
     const cta = CTA_ANCHORS[h % CTA_ANCHORS.length];
@@ -425,6 +427,68 @@ export function generatePseoPost({ platform, category, blocks_temp_mail, reason,
     const testDateFormatted = test_date
         ? new Date(test_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
         : new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+    const streamingDisclaimerHtml = isStreamingPost
+        ? `<p style="background:#fff8e1;border:1px solid #f3e5ab;border-radius:8px;padding:12px 14px;"><strong>Compliance note:</strong> ${STREAMING_POLICY_DISCLAIMER}</p>`
+        : '';
+
+    const streamingTalkingPointsHtml = isStreamingPost
+        ? `<h2>Legitimate Privacy Talking Points for Streaming Signups</h2>
+        <ul>
+            ${STREAMING_TALKING_POINTS.map((point) => `<li>${point}</li>`).join('')}
+        </ul>`
+        : '';
+
+    const introParagraph = isStreamingPost
+        ? `<p>If you\'re researching <strong>${keywordPhrase}</strong>, the privacy-first goal is to protect your primary inbox, reduce promotional clutter, and avoid sharing your real email before you\'re sure a service is right for you. A temporary address helps separate signup messages from everyday communication. This guide focuses on privacy and inbox control while respecting platform policies.</p>`
+        : (blocks_temp_mail
+            ? `<p><strong>${platform} may reject some temporary emails</strong>. If you\'ve tried to sign up with a disposable address and got rejected, you\'re not alone. We tested ${domains_tested || 3} FireTempMail domains on ${platform} and found that <strong>${success_rate || '~60%'} were accepted</strong>. In this guide, we explain why acceptance varies, what to do if a domain is rejected, and how to use ${ctaLink} for inbox privacy — step by step.</p>`
+            : `<p>Need a <strong>temp email for ${platform}</strong>? Good news — ${platform} doesn't block disposable email addresses, so this is ${difficulty === 'easy' ? 'quick and painless' : 'straightforward with the right approach'}. We tested it on ${testDateFormatted}: signup worked on the first try, and the verification email arrived in <strong>${verification_time_seconds || '< 30'} seconds</strong>. Whether you want to ${safeReason} or just keep your inbox clean, here's exactly how to do it with ${ctaLink}.</p>`
+        );
+
+    // --- ROTATED TITLE (deterministic per platform) ---
+    let title, metaTitle;
+    if (isStreamingPost) {
+        title = TITLE_TEMPLATES_STREAMING_SAFE[h % TITLE_TEMPLATES_STREAMING_SAFE.length](platform);
+        metaTitle = `Temp Email for ${platform}: Privacy & Spam Control | FireTempMail`;
+    } else if (blocks_temp_mail) {
+        title = TITLE_TEMPLATES_BLOCKS[h % TITLE_TEMPLATES_BLOCKS.length](platform);
+        metaTitle = `Does ${platform} Block Temp Email? What To Do | FireTempMail`;
+    } else if (difficulty === 'easy') {
+        title = TITLE_TEMPLATES_EASY[h % TITLE_TEMPLATES_EASY.length](platform);
+        metaTitle = `Temp Email for ${platform} (Free, Instant) | FireTempMail`;
+    } else {
+        title = TITLE_TEMPLATES_MEDIUM[h % TITLE_TEMPLATES_MEDIUM.length](platform);
+        metaTitle = `Best Temp Email for ${platform} — Workaround Guide | FireTempMail`;
+    }
+
+    // --- ROTATED META DESCRIPTION (deterministic, 8 templates per variant) ---
+    let metaDescription;
+    if (isStreamingPost) {
+        metaDescription = META_TEMPLATES_STREAMING_SAFE[h % META_TEMPLATES_STREAMING_SAFE.length](platform);
+    } else if (blocks_temp_mail) {
+        metaDescription = META_TEMPLATES_BLOCKS[h % META_TEMPLATES_BLOCKS.length](platform);
+    } else if (difficulty === 'easy') {
+        metaDescription = META_TEMPLATES_EASY[h % META_TEMPLATES_EASY.length](platform);
+    } else {
+        metaDescription = META_TEMPLATES_MEDIUM[h % META_TEMPLATES_MEDIUM.length](platform);
+    }
+    metaDescription = metaDescription.slice(0, 160);
+
+    const excerpt = isStreamingPost
+        ? `Looking for ${keywordPhrase}? Use a temporary email for privacy, spam reduction, and inbox protection while following platform terms.`
+        : (blocks_temp_mail
+            ? `Does ${platform} block temporary emails? Sometimes. Learn tested acceptance patterns and privacy-first signup options for ${platform}.`
+            : `Learn how to use a temporary email for ${platform} to ${safeReason}. Free, instant, no signup required. Works in ${year}.`);
+
+    const difficultyLabel = {
+        easy: 'very straightforward — most users finish in under 2 minutes',
+        medium: 'possible with the right approach — expect to try 2-3 email addresses',
+        hard: 'challenging but doable — you may need workarounds described below'
+    }[difficulty];
+
+    const errorMsg = BLOCK_ERRORS[platform] || 'This email address is not allowed';
+    const specificTip = PLATFORM_TIPS[platform] || '';
 
     // Compatibility rating for Review schema (1-5 scale)
     const compatRating = blocks_temp_mail
@@ -468,7 +532,12 @@ export function generatePseoPost({ platform, category, blocks_temp_mail, reason,
         </div>`;
 
     // --- BLOCKS SECTION ---
-    const blocksSection = blocks_temp_mail
+    const blocksSection = (isStreamingPost && blocks_temp_mail)
+        ? `<h2>Does ${platform} Block Temp Emails?</h2>
+        <p><strong>Sometimes, yes.</strong> Some streaming platforms restrict disposable domains to reduce abuse and enforce account quality controls.</p>
+        <p>If your temporary address is rejected, use a permanent email and continue only within ${platform}'s Terms of Service. This guide is about inbox privacy and spam reduction while respecting subscription policies.</p>
+        <p>${specificTip ? `<strong>Tip:</strong> ${specificTip}` : ''}</p>`
+        : (blocks_temp_mail
         ? `<h2>Does ${platform} Block Temp Emails?</h2>
         <p><strong>Short answer: Yes.</strong> ${platform} maintains a blocklist of known disposable email domains. When you try to sign up with a blocked address, you'll typically see this error:</p>
         <blockquote style="background:#f8f9fa;border-left:4px solid #dc3545;padding:12px 16px;margin:16px 0;border-radius:4px;">
@@ -476,19 +545,19 @@ export function generatePseoPost({ platform, category, blocks_temp_mail, reason,
         </blockquote>
         <p>This happens because ${platform} checks your email domain against a database of known temporary email providers. However, <strong>${ctaLink} regularly rotates domains</strong> — many of which aren't on ${platform}'s blocklist yet.</p>
         <p>In our testing, <strong>${success_rate || '~60%'}</strong> of FireTempMail domains were accepted by ${platform}. We tested ${domains_tested || 3} domains total — not every one works, but generating 2-3 addresses usually gets you through.</p>
-        <h3>How to Get Around ${platform}'s Block</h3>
+        <h3>How to Handle ${platform} Email Rejections Responsibly</h3>
         <ol>
-            <li><strong>Generate multiple addresses</strong> — Try 2-3 different emails from ${ctaLink2}. Each uses a different domain</li>
-            <li><strong>Act quickly</strong> — Use the email before ${platform} updates their blocklist</li>
-            <li><strong>Complete verification immediately</strong> — Don't leave the signup half-done</li>
+            <li><strong>Try another generated address</strong> — Domain acceptance can vary, so testing 2-3 addresses is normal</li>
+            <li><strong>Complete verification immediately</strong> — Don\'t leave the signup half-done</li>
             <li><strong>Check your inbox within 60 seconds</strong> — Verification codes expire fast on ${platform}</li>
+            <li><strong>If repeated rejections continue</strong> — switch to a permanent email and follow the platform\'s standard signup flow</li>
         </ol>
         <p>Difficulty level: <strong>${difficulty}</strong> — it's ${difficultyLabel}.</p>`
         : `<h2>Does ${platform} Block Temp Emails?</h2>
         <p><strong>No — ${platform} does not actively block temporary email addresses.</strong> Unlike some platforms that maintain blocklists, ${platform} accepts most email domains, including disposable ones from ${ctaLink}.</p>
         <p>In our testing, the verification email arrived in <strong>${verification_time_seconds || '< 30'} seconds</strong>, and the signup process completed without any issues. Success rate: <strong>${success_rate || '100%'}</strong>.</p>
         <p>This makes ${platform} one of the ${difficulty === 'easy' ? 'easiest' : 'more manageable'} platforms to use with a temp email. Difficulty level: <strong>${difficulty}</strong> — it's ${difficultyLabel}.</p>
-        ${specificTip ? `<p><strong>Pro tip:</strong> ${specificTip}</p>` : ''}`;
+        ${specificTip ? `<p><strong>Pro tip:</strong> ${specificTip}</p>` : ''}`);
 
     // --- INTERNAL LINKS: 3 thematic related posts (not bulk list) ---
     const relatedSlugs = (CATEGORY_LINKS[category] || [])
@@ -543,10 +612,9 @@ export function generatePseoPost({ platform, category, blocks_temp_mail, reason,
             <a href="/">Home</a> → <a href="/blog">Blog</a> → <a href="/blog?category=${encodeURIComponent(category)}">${category}</a> → ${platform}
         </nav>
 
-        ${blocks_temp_mail
-            ? `<p><strong>${platform} blocks some temporary emails</strong> — but there's a workaround. If you've tried to sign up with a disposable address and got rejected, you're not alone. We tested ${domains_tested || 3} FireTempMail domains on ${platform} and found that <strong>${success_rate || '~60%'} worked</strong>. In this guide, we'll explain exactly why ${platform} blocks temp emails, which ones still work, and how to use ${ctaLink} to ${reason} — step by step.</p>`
-            : `<p>Need a <strong>temp email for ${platform}</strong>? Good news — ${platform} doesn't block disposable email addresses, so this is ${difficulty === 'easy' ? 'quick and painless' : 'straightforward with the right approach'}. We tested it on ${testDateFormatted}: signup worked on the first try, and the verification email arrived in <strong>${verification_time_seconds || '< 30'} seconds</strong>. Whether you want to ${reason} or just keep your inbox clean, here's exactly how to do it with ${ctaLink}.</p>`
-        }
+        ${introParagraph}
+
+        ${streamingDisclaimerHtml}
 
         ${testResultsHtml}
 
@@ -557,8 +625,10 @@ export function generatePseoPost({ platform, category, blocks_temp_mail, reason,
             <li><strong>Third-party sharing</strong> — Your email may be shared with ${platform}'s advertising partners</li>
             <li><strong>Account tracking</strong> — ${platform} links your activity across devices using your email</li>
         </ul>
-        <p>The #1 reason users search for "temp email for ${platform}" is to <strong>${reason}</strong>. A disposable email solves this by giving you a working address that you don't need to maintain.</p>
+        <p>The #1 reason users search for "temp email for ${platform}" is to <strong>${safeReason}</strong>. A disposable email solves this by giving you a working address that you don't need to maintain.</p>
         ${specificTip && !blocks_temp_mail ? `<p><strong>Good to know:</strong> ${specificTip}</p>` : ''}
+
+        ${streamingTalkingPointsHtml}
 
         ${USER_SCENARIOS[platform] ? `
         <h2>${USER_SCENARIOS[platform].title}</h2>
@@ -593,8 +663,10 @@ export function generatePseoPost({ platform, category, blocks_temp_mail, reason,
             <li><strong>Complete signup fast</strong> — Temp emails expire after ${difficulty === 'easy' ? '10-60' : '10'} minutes, so don't leave the process halfway</li>
             <li><strong>Save your ${platform} password</strong> — You won't be able to reset it via email once the temp address expires</li>
             ${blocks_temp_mail
-                ? `<li><strong>Try multiple addresses</strong> — If ${platform} rejects one, generate a new one instantly on ${ctaLink}</li>
-                <li><strong>Use incognito mode</strong> — ${platform} may track failed attempts via cookies</li>`
+                ? (isStreamingPost
+                    ? `<li><strong>If blocked, switch to permanent email</strong> — continue with official signup and billing flows</li>`
+                    : `<li><strong>Try multiple addresses</strong> — If ${platform} rejects one, generate a new one instantly on ${ctaLink}</li>
+                <li><strong>Use incognito mode</strong> — ${platform} may track failed attempts via cookies</li>`)
                 : `<li><strong>One email per account</strong> — Each ${platform} account needs a unique email address</li>`
             }
             <li><strong>Add a recovery option</strong> — If you plan to keep the ${platform} account long-term, add a phone number or switch to a permanent email in settings</li>
@@ -603,7 +675,9 @@ export function generatePseoPost({ platform, category, blocks_temp_mail, reason,
 
         <h2>Our Recommendation</h2>
         <p>${blocks_temp_mail
-            ? `Using a disposable email for ${platform} is <strong>possible but requires patience</strong>. Based on our testing (${success_rate || '~60%'} success rate), you should expect to generate 2-3 addresses before finding one that works. The process takes about ${difficulty === 'easy' ? '1 minute' : difficulty === 'medium' ? '3 minutes' : '5 minutes'} total. We rate ${platform}'s temp email compatibility at <strong>${compatRating}/5 (${compatLabel})</strong>.`
+            ? (isStreamingPost
+                ? `${platform} may reject disposable domains in some cases. If that happens, use your permanent email and continue only within official account policies. We rate ${platform}'s temp email compatibility at <strong>${compatRating}/5 (${compatLabel})</strong>.`
+                : `Using a disposable email for ${platform} is <strong>possible but requires patience</strong>. Based on our testing (${success_rate || '~60%'} success rate), you should expect to generate 2-3 addresses before finding one that works. The process takes about ${difficulty === 'easy' ? '1 minute' : difficulty === 'medium' ? '3 minutes' : '5 minutes'} total. We rate ${platform}'s temp email compatibility at <strong>${compatRating}/5 (${compatLabel})</strong>.`)
             : `${platform} is <strong>${difficulty === 'easy' ? 'one of the easiest platforms' : 'a manageable platform'}</strong> to use with a temporary email. In our testing, the verification email arrived in ${verification_time_seconds || '< 30'} seconds and the signup process worked without any hiccups. We rate ${platform}'s temp email compatibility at <strong>${compatRating}/5 (${compatLabel})</strong>.`
         }</p>
         <p>${blocks_temp_mail
@@ -630,7 +704,9 @@ export function generatePseoPost({ platform, category, blocks_temp_mail, reason,
 
         <h3>What if ${platform} blocks my temp email?</h3>
         <p>${blocks_temp_mail
-            ? `Expected. Generate a new address on FireTempMail — each one uses a different domain. In our tests, ${success_rate || '~60%'} of domains worked. Try 2-3 addresses to find one that ${platform} accepts.`
+            ? (isStreamingPost
+                ? `If ${platform} rejects your temporary email, use a permanent address and continue with standard signup and billing flows.`
+                : `Domain rejections can happen. You can test another FireTempMail address, and if rejections continue, switch to a permanent email that follows ${platform}'s standard account policies.`)
             : `Unlikely based on our testing, but if it happens, simply generate a new address. FireTempMail uses multiple domains, so the next one will likely work.`
         }</p>
 

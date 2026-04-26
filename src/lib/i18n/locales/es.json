@@ -164,7 +164,7 @@
         "instant": "Generación instantánea de dirección de Gmail - sin registro requerido",
         "real": "Direcciones de Gmail reales que funcionan en todas las plataformas y sitios web",
         "free": "Servicio de Gmail temporal completamente gratuito sin costos ocultos",
-        "bypass": "Perfecto para evitar bloqueos y restricciones de verificación de correo"
+        "bypass": "Ideal para registros centrados en privacidad y protección de la bandeja de entrada"
       },
       "howTitle": "Cómo Obtener Tu Gmail Temporal",
       "howText": "Obtener tu dirección de Gmail desechable es simple. Solo selecciona la opción de Gmail y genera tu correo temporal. Úsalo inmediatamente para cualquier registro de sitio web, verificación de aplicación o registro de servicio. Tus mensajes aparecerán instantáneamente en tu bandeja de entrada privada.",
@@ -182,7 +182,7 @@
     },
     "instagramGuide": {
       "title": "Correo Temporal de Instagram",
-      "description": "Regístrate en Instagram usando correo desechable. Evita spam y mantén múltiples cuentas."
+      "description": "Regístrate en Instagram con correo desechable. Evita spam y separa perfiles de prueba de tu bandeja principal."
     },
     "tiktokGuide": {
       "title": "Correo Temporal de TikTok",
@@ -202,8 +202,8 @@
     "usesTitle": "Usos Prácticos para Direcciones de Correo Temporal",
     "uses": {
       "trials": {
-        "title": "Pruebas Gratuitas Extendidas",
-        "text": "Muchos servicios de transmisión como Netflix, Hulu y Amazon Prime ofrecen pruebas de tiempo limitado. Con correos desechables, puedes extender tus períodos de prueba mientras mantienes acceso a estos servicios."
+        "title": "Privacidad en pruebas gratuitas",
+        "text": "Muchos servicios como Netflix, Hulu y Amazon Prime ofrecen pruebas limitadas. El correo desechable te ayuda a evaluar el servicio mientras proteges tu bandeja principal y respetas las políticas de la plataforma."
       },
       "retail": {
         "title": "Ofertas Minoristas Sin Spam",
@@ -211,11 +211,11 @@
       },
       "testing": {
         "title": "Prueba de Aplicaciones",
-        "text": "Los desarrolladores pueden crear múltiples cuentas de prueba usando correos desechables para evaluar minuciosamente sus aplicaciones antes del lanzamiento público."
+        "text": "Los desarrolladores pueden crear perfiles de prueba separados usando correos desechables para evaluar aplicaciones antes del lanzamiento."
       },
       "multiple": {
-        "title": "Gestión de Múltiples Cuentas",
-        "text": "Cuando los servicios requieren cuentas separadas para diferentes propósitos (como gestionar múltiples perfiles de redes sociales), los correos desechables proporcionan la separación necesaria sin crear nuevas cuentas permanentes."
+        "title": "Separación de perfiles",
+        "text": "Cuando un servicio requiere perfiles separados para distintos fines, el correo desechable ofrece separación sin exponer tu bandeja principal."
       },
       "spam": {
         "title": "Prevención de Spam",
@@ -697,11 +697,11 @@
     "whyPlusP1": "1. Rastrear Vendedores de Email: Si te registras en un servicio con tunombre+servicioX@gmail.com y empiezas a recibir spam en esa dirección, sabes exactamente quién vendió tu email a los vendedores.",
     "whyPlusP2": "2. Filtrado Automático: Crea filtros de Gmail basados en la etiqueta \"+\" para organizar automáticamente los emails en carpetas, aplicar etiquetas o incluso auto-eliminar spam de fuentes específicas.",
     "whyPlusP3": "3. Organizar Registros: Usa diferentes etiquetas para diferentes categorías: +trabajo, +personal, +pruebas, +compras. Ve instantáneamente a qué categoría pertenece cada email.",
-    "whyPlusP4": "4. Evitar Restricciones de \"Un Email Por Cuenta\": Algunos servicios (foros, concursos, pruebas) solo permiten una cuenta por email. Usa plus-addressing para crear \"múltiples\" direcciones.",
+    "whyPlusP4": "4. Organiza registros por fuente: algunos servicios y boletines envían mucho seguimiento. El plus-addressing ayuda a separar cada origen.",
     "dotTitle": "El Truco del Punto de Gmail: La Colocación de Puntos No Importa",
     "dotP1": "Gmail ignora completamente los puntos en la parte del nombre de usuario de tu dirección de email. Eso significa que johnsmith@gmail.com, john.smith@gmail.com, j.o.h.n.s.m.i.t.h@gmail.com todos se entregan a la misma bandeja de entrada.",
     "dotUseTitle": "Cómo Usar el Truco del Punto",
-    "dotUseP1": "Registros en Múltiples Cuentas: Si un sitio web solo permite un email por persona, puedes registrar múltiples cuentas usando diferentes colocaciones de puntos. El sitio los ve como emails diferentes, pero Gmail los ve todos como tuyos.",
+    "dotUseP1": "Pruebas de alias y organización: las variantes con puntos permiten comprobar cómo un sitio normaliza Gmail mientras todo llega a la misma bandeja.",
     "combineTitle": "Combinando Plus-Addressing Y el Truco del Punto",
     "combineP1": "Para máxima flexibilidad, combina ambas funciones: j.o.h.n.smith+netflix@gmail.com. Esto crea prácticamente direcciones únicas ilimitadas que todas se dirigen a tu única bandeja de entrada de Gmail mientras proporcionan capacidades máximas de rastreo y filtrado.",
     "breachTitle": "Ejemplo del Mundo Real: Rastrear Filtraciones de Datos",
@@ -743,7 +743,7 @@
     "tip1P1": "Configura un filtro dedicado para todos los emails con plus-addressing:",
     "tip1L1": "Condición del filtro: to:tunombre+*@gmail.com",
     "tip1L2": "Acción: Aplicar etiqueta \"Registros Rastreados\" y saltar bandeja de entrada",
-    "tip1L3": "Resultado: Todos los emails con plus-addressing evitan tu bandeja principal, manteniéndola limpia",
+    "tip1L3": "Resultado: los correos con plus-addressing pueden enrutarse fuera de la bandeja principal para mantenerla limpia",
     "tip2Title": "2. Usar Convenciones de Nombres Sistemáticas",
     "tip2P1": "Desarrolla un sistema de etiquetado consistente:",
     "tip2L1": "+compra-[nombresitio] — Sitios de compras",
@@ -898,7 +898,7 @@
     "whatWeDo2": "Bandeja en tiempo real — recibe emails instantáneamente en tu navegador",
     "whatWeDo3": "Múltiples dominios — elige entre varios dominios de email disponibles",
     "whatWeDo4": "Alias personalizados — crea direcciones temporales personalizadas",
-    "whatWeDo5": "Direcciones estilo Gmail — obtén direcciones temporales tipo Gmail",
+    "whatWeDo5": "Direcciones estilo Gmail — alias con puntos para organizar bandeja y probar compatibilidad",
     "whatWeDo6": "Auto-eliminación — los emails se limpian automáticamente para total privacidad",
     "whyTitle": "¿Por Qué Fire Temp Mail?",
     "whyP1": "En un mundo donde las filtraciones de datos, el spam y el marketing no solicitado son problemas cotidianos, Fire Temp Mail ofrece una solución simple pero poderosa.",

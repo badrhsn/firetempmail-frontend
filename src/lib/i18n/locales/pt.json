@@ -164,7 +164,7 @@
         "instant": "Geração instantânea de endereço Gmail - sem registro necessário",
         "real": "Endereços Gmail reais que funcionam em todas as plataformas e sites",
         "free": "Serviço Gmail temporário completamente gratuito sem custos ocultos",
-        "bypass": "Perfeito para contornar bloqueios e restrições de verificação de e-mail"
+        "bypass": "Ideal para cadastros com privacidade e proteção da caixa de entrada"
       },
       "howTitle": "Como obter seu Gmail temporário",
       "howText": "Obter seu endereço Gmail descartável é simples. Basta selecionar a opção Gmail e gerar seu e-mail temporário. Use-o imediatamente para qualquer registro de site, verificação de aplicativo ou inscrição em serviço. Suas mensagens aparecerão instantaneamente em sua caixa de entrada privada.",
@@ -182,7 +182,7 @@
     },
     "instagramGuide": {
       "title": "Instagram E-mail temporário",
-      "description": "Inscreva-se no Instagram usando e-mail descartável. Evite spam e mantenha múltiplas contas."
+      "description": "Inscreva-se no Instagram usando e-mail descartável. Evite spam e separe perfis de teste da sua caixa principal."
     },
     "tiktokGuide": {
       "title": "TikTok E-mail temporário",
@@ -202,8 +202,8 @@
     "usesTitle": "Usos práticos para endereços de e-mail temporários",
     "uses": {
       "trials": {
-        "title": "Testes gratuitos estendidos",
-        "text": "Muitos serviços de streaming como Netflix, Hulu e Amazon Prime oferecem testes de tempo limitado. Com e-mails descartáveis, você pode estender seus períodos de teste enquanto mantém acesso a esses serviços."
+        "title": "Privacidade em testes gratuitos",
+        "text": "Muitos serviços como Netflix, Hulu e Amazon Prime oferecem testes por tempo limitado. O e-mail descartável ajuda a avaliar o serviço protegendo sua caixa principal e respeitando as regras da plataforma."
       },
       "retail": {
         "title": "Ofertas de varejo sem spam",
@@ -211,11 +211,11 @@
       },
       "testing": {
         "title": "Teste de aplicativos",
-        "text": "Desenvolvedores podem criar várias contas de teste usando e-mails descartáveis para avaliar minuciosamente seus aplicativos antes do lançamento público."
+        "text": "Desenvolvedores podem criar perfis de teste separados com e-mails descartáveis para avaliar aplicativos antes do lançamento."
       },
       "multiple": {
-        "title": "Gerenciamento de múltiplas contas",
-        "text": "Quando os serviços exigem contas separadas para diferentes propósitos (como gerenciar vários perfis de mídia social), e-mails descartáveis fornecem a separação necessária sem criar novas contas permanentes."
+        "title": "Separação de perfis",
+        "text": "Quando serviços exigem perfis separados para finalidades diferentes, e-mails descartáveis oferecem separação sem expor sua caixa principal."
       },
       "spam": {
         "title": "Prevenção de spam",
@@ -682,11 +682,11 @@
     "whyPlusP1": "1. Rastrear Vendedores de Email: Se você se cadastra em um serviço com seunome+servicoX@gmail.com e começa a receber spam nesse endereço, você sabe exatamente quem vendeu seu email para os marketeiros.",
     "whyPlusP2": "2. Filtragem Automática: Crie filtros do Gmail baseados no rótulo \"+\" para organizar automaticamente os emails em pastas, aplicar etiquetas ou até mesmo auto-excluir spam de fontes específicas.",
     "whyPlusP3": "3. Organizar Cadastros: Use diferentes rótulos para diferentes categorias: +trabalho, +pessoal, +testes, +compras. Veja instantaneamente a qual categoria cada email pertence.",
-    "whyPlusP4": "4. Evitar Restrições de \"Um Email Por Conta\": Alguns serviços (fóruns, concursos, testes) só permitem uma conta por email. Use plus-addressing para criar \"múltiplos\" endereços.",
+    "whyPlusP4": "4. Organize cadastros por origem: alguns serviços e newsletters enviam muitos e-mails de acompanhamento. O plus-addressing ajuda a separar cada origem.",
     "dotTitle": "O Truque do Ponto do Gmail: A Posição dos Pontos Não Importa",
     "dotP1": "O Gmail ignora completamente os pontos na parte do nome de usuário do seu endereço de email. Isso significa que johnsmith@gmail.com, john.smith@gmail.com, j.o.h.n.s.m.i.t.h@gmail.com todos são entregues na mesma caixa de entrada.",
     "dotUseTitle": "Como Usar o Truque do Ponto",
-    "dotUseP1": "Cadastros em Múltiplas Contas: Se um site permite apenas um email por pessoa, você pode cadastrar múltiplas contas usando diferentes posições de pontos. O site os vê como emails diferentes, mas o Gmail vê todos como seus.",
+    "dotUseP1": "Teste de aliases e organização: variantes com pontos ajudam a verificar a normalização do Gmail enquanto tudo chega na mesma caixa.",
     "combineTitle": "Combinando Plus-Addressing E o Truque do Ponto",
     "combineP1": "Para máxima flexibilidade, combine ambas as funcionalidades: j.o.h.n.smith+netflix@gmail.com. Isso cria praticamente endereços únicos ilimitados que todos vão para sua única caixa de entrada do Gmail enquanto fornecem capacidades máximas de rastreamento e filtragem.",
     "breachTitle": "Exemplo Real: Rastrear Vazamentos de Dados",
@@ -728,7 +728,7 @@
     "tip1P1": "Configure um filtro dedicado para todos os emails com plus-addressing:",
     "tip1L1": "Condição do filtro: to:seunome+*@gmail.com",
     "tip1L2": "Ação: Aplicar etiqueta \"Cadastros Rastreados\" e pular caixa de entrada",
-    "tip1L3": "Resultado: Todos os emails com plus-addressing evitam sua caixa principal, mantendo-a limpa",
+    "tip1L3": "Resultado: e-mails com plus-addressing podem ser roteados para fora da caixa principal, mantendo-a limpa",
     "tip2Title": "2. Usar Convenções de Nomes Sistemáticas",
     "tip2P1": "Desenvolva um sistema de rotulagem consistente:",
     "tip2L1": "+compra-[nomesite] — Sites de compras",
@@ -883,7 +883,7 @@
     "whatWeDo2": "Caixa de entrada em tempo real — receba emails instantaneamente no seu navegador",
     "whatWeDo3": "Múltiplos domínios — escolha entre vários domínios de email disponíveis",
     "whatWeDo4": "Aliases personalizados — crie endereços temporários personalizados",
-    "whatWeDo5": "Endereços estilo Gmail — obtenha endereços temporários tipo Gmail",
+    "whatWeDo5": "Endereços no estilo Gmail — aliases com pontos para organização da caixa e testes de compatibilidade",
     "whatWeDo6": "Auto-exclusão — os emails são automaticamente limpos para total privacidade",
     "whyTitle": "Por Que Fire Temp Mail?",
     "whyP1": "Em um mundo onde vazamentos de dados, spam e marketing não solicitado são problemas cotidianos, Fire Temp Mail oferece uma solução simples mas poderosa.",

@@ -164,7 +164,7 @@
         "instant": "Instant Gmail address generation - no registration required",
         "real": "Real Gmail addresses that work on all platforms and websites",
         "free": "Completely free temporary Gmail service with no hidden costs",
-        "bypass": "Perfect for bypassing email verification blocks and restrictions"
+        "bypass": "Ideal for privacy-first signups and inbox protection"
       },
       "howTitle": "How to Get Your Temporary Gmail",
       "howText": "Getting your disposable Gmail address is simple. Just select the Gmail option and generate your temporary email. Use it immediately for any website registration, app verification, or service sign-up. Your messages will appear instantly in your private inbox.",
@@ -182,7 +182,7 @@
     },
     "instagramGuide": {
       "title": "Instagram Temp Email",
-      "description": "Sign up for Instagram using disposable email. Avoid spam and maintain multiple accounts."
+      "description": "Sign up for Instagram using disposable email. Avoid spam and keep test profiles separate from your primary inbox."
     },
     "tiktokGuide": {
       "title": "TikTok Temporary Email",
@@ -202,8 +202,8 @@
     "usesTitle": "Practical Uses for Temporary Email Addresses",
     "uses": {
       "trials": {
-        "title": "Extended Free Trials",
-        "text": "Many streaming services like Netflix, Hulu, and Amazon Prime offer limited-time trials. With disposable emails, you can extend your trial periods while maintaining access to these services."
+        "title": "Free-Trial Inbox Privacy",
+        "text": "Many streaming services like Netflix, Hulu, and Amazon Prime offer limited-time trials. Disposable emails help you evaluate these services while protecting your primary inbox and following platform trial policies."
       },
       "retail": {
         "title": "Retail Offers Without Spam",
@@ -211,11 +211,11 @@
       },
       "testing": {
         "title": "Application Testing",
-        "text": "Developers can create multiple test accounts using disposable emails to thoroughly evaluate their applications before public release."
+        "text": "Developers can create separate test profiles using disposable emails to thoroughly evaluate their applications before public release."
       },
       "multiple": {
-        "title": "Multiple Account Management",
-        "text": "When services require separate accounts for different purposes (like managing multiple social media profiles), disposable emails provide the necessary separation without creating permanent new accounts."
+        "title": "Profile Separation",
+        "text": "When services require separate profiles for different purposes (like personal and business workflows), disposable emails provide separation without exposing your primary inbox."
       },
       "spam": {
         "title": "Spam Prevention",
@@ -682,11 +682,11 @@
     "whyPlusP1": "1. Track Email Sellers: If you sign up for a service with yourname+serviceX@gmail.com and start receiving spam at that address, you know exactly who sold your email to marketers.",
     "whyPlusP2": "2. Automatic Filtering: Create Gmail filters based on the \"+\" tag to automatically organize emails into folders, apply labels, or even auto-delete spam from specific sources.",
     "whyPlusP3": "3. Organize Signups: Use different tags for different categories: +work, +personal, +trials, +shopping. Instantly see what category each email belongs to.",
-    "whyPlusP4": "4. Bypass \"One Email Per Account\" Restrictions: Some services (forums, contests, trials) only allow one account per email. Use plus-addressing to create \"multiple\" addresses.",
+    "whyPlusP4": "4. Organize Signups by Source: Some services, newsletters, and communities send heavy follow-up email. Use plus-addressing to create source-specific aliases and keep messages organized.",
     "dotTitle": "The Gmail Dot Trick: Period Placement Doesn't Matter",
     "dotP1": "Gmail completely ignores periods (dots) in the username portion of your email address. That means johnsmith@gmail.com, john.smith@gmail.com, j.o.h.n.s.m.i.t.h@gmail.com all deliver to the exact same inbox.",
     "dotUseTitle": "How to Use the Dot Trick",
-    "dotUseP1": "Multiple Account Signups: If a website only allows one email per person, you can register multiple accounts using different dot placements. The site sees them as different emails, but Gmail sees them all as yours.",
+    "dotUseP1": "Alias Testing and Organization: Dot variants let you test how websites normalize Gmail addresses and keep signups categorized, while all messages still arrive in one inbox.",
     "combineTitle": "Combining Plus-Addressing AND the Dot Trick",
     "combineP1": "For maximum flexibility, combine both features: j.o.h.n.smith+netflix@gmail.com. This creates virtually unlimited unique addresses that all route to your single Gmail inbox while providing maximum tracking and filtering capabilities.",
     "breachTitle": "Real-World Example: Tracking Data Breaches",
@@ -728,7 +728,7 @@
     "tip1P1": "Set up a dedicated filter for all plus-addressed emails:",
     "tip1L1": "Filter condition: to:yourname+*@gmail.com",
     "tip1L2": "Action: Apply label \"Tracked Signups\" and skip inbox",
-    "tip1L3": "Result: All plus-addressed emails bypass your main inbox, keeping it clean",
+    "tip1L3": "Result: Plus-addressed emails can be auto-routed away from your main inbox, keeping it clean",
     "tip2Title": "2. Use Systematic Naming Conventions",
     "tip2P1": "Develop a consistent tagging system:",
     "tip2L1": "+shop-[sitename] — Shopping sites",
@@ -883,7 +883,7 @@
     "whatWeDo2": "Real-time inbox — verification emails appear within seconds",
     "whatWeDo3": "Multiple domains — rotate domains if a service blocks one",
     "whatWeDo4": "Custom aliases — pick your own username before the @ symbol",
-    "whatWeDo5": "Gmail-style addresses — dot-trick addresses that bypass Gmail filters",
+    "whatWeDo5": "Gmail-style addresses — dot-trick aliases for inbox organization and compatibility testing",
     "whatWeDo6": "Auto-deletion — everything disappears when the session ends",
     "whyTitle": "Who Uses FireTempMail",
     "whyP1": "Our GSC data is public in a sense — Nigeria is our #1 country by traffic, followed by the US, India, Brazil, and Bangladesh. The use cases vary: Nigerian students using .edu email generators for student discounts, US developers testing registration flows, Indian users avoiding aggressive spam from local e-commerce platforms. The common thread is the same everywhere: people want to use the internet without giving away their permanent identity.",
