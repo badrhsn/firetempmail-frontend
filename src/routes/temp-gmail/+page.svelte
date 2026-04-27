@@ -18,9 +18,28 @@
     import { browser } from '$app/environment';
     import Hreflang from '$lib/components/Hreflang.svelte';
 import Breadcrumb from '$lib/components/Breadcrumb.svelte';
+import RelatedGuides from '$lib/components/RelatedGuides.svelte';
     
     // Import page data for SEO
     export let data;
+
+    const tempGmailGuides = [
+        {
+            href: '/blog/temporary-gmail',
+            title: 'What is a Temporary Gmail Address?',
+            description: 'Everything you need to know about temp Gmail addresses and when to use them.'
+        },
+        {
+            href: '/blog/how-to-use-temp-gmail-safely-signups',
+            title: 'How to Use Temp Gmail Safely for Signups',
+            description: 'Step-by-step guide to using temporary Gmail addresses without risking your privacy.'
+        },
+        {
+            href: '/blog/protect-privacy-with-temporary-gmail',
+            title: 'Protect Your Privacy with a Temporary Gmail',
+            description: 'How disposable Gmail addresses keep your real inbox clean and private.'
+        },
+    ];
     
     // These will reactively update when the stores change
     let address;
@@ -985,6 +1004,9 @@ function selectDomain(domain) {
     <p>{$_('tempGmailPage.ctaP1')}</p>
     <p>{$_('tempGmailPage.ctaP2')}</p>
 </section>
+
+<RelatedGuides guides={tempGmailGuides} />
+
         </div>
 </div>
 </section>

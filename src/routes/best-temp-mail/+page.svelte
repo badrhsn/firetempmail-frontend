@@ -15,9 +15,28 @@
     import { browser } from '$app/environment';
     import Hreflang from '$lib/components/Hreflang.svelte';
 import Breadcrumb from '$lib/components/Breadcrumb.svelte';
+import RelatedGuides from '$lib/components/RelatedGuides.svelte';
     
     // Import page data for SEO
     export let data;
+
+    const bestTempMailGuides = [
+        {
+            href: '/blog/best-temp-mail-gmail-alternatives',
+            title: 'Best Temp Mail Gmail Alternatives',
+            description: 'The top disposable Gmail alternatives ranked by features and reliability.'
+        },
+        {
+            href: '/blog/gmailnator-alternatives',
+            title: 'Top Gmailnator Alternatives in 2025',
+            description: 'Looking for a Gmailnator replacement? Here are the best options available.'
+        },
+        {
+            href: '/blog/gmailnator-alternative-guide',
+            title: 'Complete Gmailnator Alternative Guide',
+            description: 'A thorough guide to switching from Gmailnator to a better temp mail service.'
+        },
+    ];
     
     let emailType = 'domain';
     const url = "https://mail.firetempmail.com";
@@ -970,6 +989,7 @@ function selectDomain(domain) {
     <p style="color:rgba(255,255,255,0.75);margin-bottom:1rem;">Yes, for receiving emails. You should never use a temp mail address as the recovery email for accounts you care about, because once the temp address expires you lose access to account recovery. Use temp mail for one-time signups and free trials — not for your main accounts.</p>
 </section>
 
+<RelatedGuides guides={bestTempMailGuides} />
 
         </div>
 </div>

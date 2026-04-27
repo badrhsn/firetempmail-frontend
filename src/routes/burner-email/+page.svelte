@@ -17,9 +17,28 @@
     import { browser } from '$app/environment';
     import Hreflang from '$lib/components/Hreflang.svelte';
 import Breadcrumb from '$lib/components/Breadcrumb.svelte';
+import RelatedGuides from '$lib/components/RelatedGuides.svelte';
     
     // Import page data for SEO
     export let data;
+
+    const burnerEmailGuides = [
+        {
+            href: '/blog/temp-mail-vs-burner-email',
+            title: "Temp Mail vs Burner Email: What's the Difference?",
+            description: 'A clear comparison of temp mail and burner email — which one should you use?'
+        },
+        {
+            href: '/blog/disposable-emails-privacy-guide',
+            title: 'Complete Disposable Email Privacy Guide',
+            description: 'How disposable email addresses protect your data and reduce spam.'
+        },
+        {
+            href: '/blog/why-use-temporary-email',
+            title: 'Why Use a Temporary Email Address?',
+            description: 'The top reasons millions of people use disposable email every day.'
+        },
+    ];
     
     // These will reactively update when the stores change
     let address;
@@ -1007,6 +1026,8 @@ function selectDomain(domain) {
         {$_('burnerEmailPage.use7P')}
     </p>
 </section>
+
+<RelatedGuides guides={burnerEmailGuides} />
 
         </div>
 

@@ -15,9 +15,28 @@
     import { browser } from '$app/environment';
     import Hreflang from '$lib/components/Hreflang.svelte';
 import Breadcrumb from '$lib/components/Breadcrumb.svelte';
+import RelatedGuides from '$lib/components/RelatedGuides.svelte';
     
     // Import page data for SEO
     export let data;
+
+    const emailGeneratorGuides = [
+        {
+            href: '/blog/why-use-temporary-email',
+            title: 'Why Use a Temporary Email Address?',
+            description: 'The top reasons millions of people use disposable email every day.'
+        },
+        {
+            href: '/blog/temp-mail-vs-burner-email',
+            title: 'Temp Mail vs Burner Email Explained',
+            description: 'Understand the difference and pick the right tool for your use case.'
+        },
+        {
+            href: '/blog/disposable-emails-privacy-guide',
+            title: 'Disposable Email Privacy Guide',
+            description: 'How disposable email addresses protect your data and reduce spam.'
+        },
+    ];
     
     // Email type selection
     let emailType = 'domain';
@@ -894,6 +913,8 @@ function normalizeGmailAddress(address) {
                 <p>{$_('emailGeneratorPage.startP1')}</p>
                 <p><strong>{$_('email.perfectFor')}</strong> {$_('emailGeneratorPage.startP2')}</p>
             </section>
+
+<RelatedGuides guides={emailGeneratorGuides} />
 
         </div>
 

@@ -17,9 +17,28 @@
     import { browser } from '$app/environment';
     import Hreflang from '$lib/components/Hreflang.svelte';
 import Breadcrumb from '$lib/components/Breadcrumb.svelte';
+import RelatedGuides from '$lib/components/RelatedGuides.svelte';
     
     // Import page data for SEO
     export let data;
+
+    const eduEmailGuides = [
+        {
+            href: '/blog/why-temp-student-gmail-accounts-popular',
+            title: 'Why Temp Student Gmail Accounts Are Popular',
+            description: 'Why students and researchers turn to temporary email for academic signups.'
+        },
+        {
+            href: '/blog/disposable-emails-privacy-guide',
+            title: 'Disposable Email Privacy Guide',
+            description: 'How disposable email addresses protect your data and keep spam out.'
+        },
+        {
+            href: '/blog/how-to-avoid-spam-emails',
+            title: 'How to Avoid Spam Emails',
+            description: 'Practical tips to stop spam before it reaches your real inbox.'
+        },
+    ];
     
     // These will reactively update when the stores change
     $: address = $receivingEmail;
@@ -839,6 +858,8 @@ function normalizeGmailAddress(address) {
                     <p>{$_('eduEmailPage.githubP2')}</p>
                 </div>
             </section>
+
+<RelatedGuides guides={eduEmailGuides} />
 
         </div>
 
