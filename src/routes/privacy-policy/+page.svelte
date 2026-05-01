@@ -28,14 +28,16 @@ import Breadcrumb from '$lib/components/Breadcrumb.svelte';
     <meta name="twitter:image" content="https://firetempmail.com/og-image.png" />
     <meta name="twitter:site" content="@firetempmail" />
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
-    <script type="application/ld+json">{JSON.stringify({
+    <script type="application/ld+json">
+    {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
         { "@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://firetempmail.com/privacy-policy" }
       ]
-    })}</script>
+    }
+    </script>
 </svelte:head>
 <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
     <Breadcrumb items={[{name: "Home", href: "/"}, {name: "Privacy Policy", href: "/privacy-policy"}]} />

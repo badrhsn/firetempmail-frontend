@@ -453,7 +453,8 @@ function normalizeGmailAddress(address) {
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
     <!-- WebApplication Schema -->
-    <script type="application/ld+json">{JSON.stringify({
+    <script type="application/ld+json">
+    {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Fire Temp Mail - Email Generator",
@@ -480,17 +481,20 @@ function normalizeGmailAddress(address) {
           "height": 512
         }
       }
-    })}</script>
+    }
+    </script>
 
     <!-- BreadcrumbList Schema -->
-    <script type="application/ld+json">{JSON.stringify({
+    <script type="application/ld+json">
+    {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
         { "@type": "ListItem", "position": 2, "name": "Email Generator", "item": "https://firetempmail.com/email-generator" }
       ]
-    })}</script>
+    }
+    </script>
 </svelte:head>
 <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
     <Breadcrumb items={[{name: "Home", href: "/"}, {name: "Email Generator", href: "/email-generator"}]} />
