@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
     import { _ } from 'svelte-i18n';
+    import AuthorBox from '$lib/components/AuthorBox.svelte';
     export let data;
 
     let post = data?.post || null;
@@ -167,7 +168,7 @@
     <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="{post.title} – Fire Temp Mail" />
         <meta property="article:published_time" content={post.created_at || post.date} />
-        <meta property="article:author" content="Fire Temp Mail Team" />
+        <meta property="article:author" content="Alex Morgan" />
         <meta property="article:section" content={post.category} />
 
         <!-- Twitter Card -->
@@ -190,8 +191,9 @@
             "dateModified": post.created_at || post.date,
             "author": {
                 "@type": "Person",
-                "name": post.author || "Fire Temp Mail Team",
-                "url": "https://firetempmail.com/about"
+                "@id": "https://firetempmail.com/about/author#person",
+                "name": "Alex Morgan",
+                "url": "https://firetempmail.com/about/author"
             },
             "publisher": {
                 "@type": "Organization",
@@ -314,15 +316,7 @@
                         {post.excerpt}
                     </p>
                     
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 40px; height: 40px; background: #007bff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; color: white; font-weight: 600;">
-                            {post.author.charAt(0)}
-                        </div>
-                        <div>
-                            <a href="/about" style="font-weight: 500; color: inherit; text-decoration: none;">{post.author}</a>
-                            <div style="color: #6c757d; font-size: 0.9rem;">Privacy & Security Expert at Fire Temp Mail</div>
-                        </div>
-                    </div>
+                    <AuthorBox compact={true} />
                 </div>
                 
                 <!-- Article Content -->
@@ -330,6 +324,9 @@
                     {@html post.content}
                 </div>
                 
+                <!-- Author Box -->
+                <AuthorBox />
+
                 <!-- Share buttons -->
                 <div style="text-align: left; margin: 2rem 0; padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
                     <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">{$_('blog.shareArticle')}</h3>
