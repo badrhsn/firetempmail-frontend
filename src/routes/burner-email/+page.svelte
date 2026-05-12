@@ -958,7 +958,7 @@ function selectDomain(domain) {
 </section>
 
 <!-- Burner Email Content Section -->
-<section aria-labelledby="burner-email-guide" class="seo-article" style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
+<section aria-labelledby="burner-email-guide" class="seo-article" style="margin-top: 3rem; padding: 2rem; background:#f8fafc; border-radius: 12px;">
     <h2 id="burner-email-guide">{$_('burnerEmailPage.seoTitle')}</h2>
     <p class="description">
         {$_('burnerEmailPage.seoP1')}
@@ -1061,11 +1061,11 @@ function selectDomain(domain) {
         }
 
         .divider {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border:1px solid #e2e8f0;
             margin: 30px 0 20px;
         }
         .donation-section {
-            background: rgba(255, 255, 255, 0.1);
+            background:#f1f5f9;
             border-radius: 10px;
             padding: 20px;
             margin-top: 20px;

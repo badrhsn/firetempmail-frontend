@@ -820,7 +820,7 @@ function normalizeGmailAddress(address) {
             {/if}
 
             <!-- Student Discount & EDU Email Content -->
-            <section aria-labelledby="edu-discounts" class="seo-article" style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
+            <section aria-labelledby="edu-discounts" class="seo-article" style="margin-top: 3rem; padding: 2rem; background:#f8fafc; border-radius: 12px;">
                 <h2 id="edu-discounts">{$_('eduEmailPage.seoTitle')}</h2>
                 <p class="description">
                     {$_('eduEmailPage.seoP1')}
@@ -888,11 +888,11 @@ function normalizeGmailAddress(address) {
     }
 
     .divider {
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border:1px solid #e2e8f0;
         margin: 30px 0 20px;
     }
     .donation-section {
-        background: rgba(255, 255, 255, 0.1);
+        background:#f1f5f9;
         border-radius: 10px;
         padding: 20px;
         margin-top: 20px;

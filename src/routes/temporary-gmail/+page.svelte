@@ -875,7 +875,7 @@ function startPolling(){
     Fire Temp Mail lets you generate <strong>temporary Gmail addresses</strong> that behave like real Gmail accounts without the long-term commitment. Ideal for signing up on websites, accessing limited-time content, or protecting your primary inbox from spam and clutter.
 </p>
 
-            <section aria-labelledby="temp-gmail-seo" class="seo-article" style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
+            <section aria-labelledby="temp-gmail-seo" class="seo-article" style="margin-top: 3rem; padding: 2rem; background:#f8fafc; border-radius: 12px;">
                 <h2 id="temp-gmail-seo">{$_('temporaryGmailPage.seoTitle')}</h2>
                 <p>{$_('temporaryGmailPage.seoP1')}</p>
 
@@ -909,11 +909,11 @@ function startPolling(){
         }
 
         .divider {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border:1px solid #e2e8f0;
             margin: 30px 0 20px;
         }
         .donation-section {
-            background: rgba(255, 255, 255, 0.1);
+            background:#f1f5f9;
             border-radius: 10px;
             padding: 20px;
             margin-top: 20px;
