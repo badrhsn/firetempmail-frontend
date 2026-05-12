@@ -106,6 +106,27 @@
     $: howToSchema = buildHowToSchema(post);
     $: reviewSchema = buildReviewSchema(post);
 
+    // Top 15 traffic articles to show the methodology badge on (May 2026).
+    // Kept deliberately narrow to avoid the "everything was changed at once" footprint.
+    const METHODOLOGY_BADGE_SLUGS = new Set([
+        'best-temp-mail-gmail-alternatives',
+        'best-temp-mail-in-germany',
+        'how-to-recover-temp-mail-email-address',
+        'temp-email-for-claude',
+        'instagram-temp-mail-sign-up-without-personal-email',
+        'germany-temp-mail-services',
+        'temp-mail-vs-burner-email',
+        'gmailnator-alternatives',
+        'temp-email-for-chatgpt',
+        'temp-email-for-grok',
+        'temp-mail-for-amazon-prime',
+        'temp-email-for-cursor',
+        'temp-email-for-onlyfans',
+        'tiktok-temporary-email-guide-avoid-spam-signups',
+        'temp-email-for-tiktok'
+    ]);
+    $: showMethodologyBadge = post && METHODOLOGY_BADGE_SLUGS.has(post.slug);
+
     onMount(() => {
         if (!post) {
             error = 'Post not found';
@@ -286,7 +307,17 @@
     <section class="py-4 py-xl-5">
         <div class="container" style="max-width: 800px;">
             <div class="text-center p-4 p-lg-5">
-                <!-- Back button -->
+
+                    {#if showMethodologyBadge}
+                        <div class="methodology-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M9 12l2 2 4-4"/>
+                                <circle cx="12" cy="12" r="10"/>
+                            </svg>
+                            Reviewed against our <a href="/methodology">testing methodology</a>
+                        </div>
+                    {/if}
+ Back button -->
                 <div style="text-align: left; margin-bottom: 2rem;">
                     <a href="/blog" style="color: #007bff; text-decoration: none; display: inline-flex; align-items: center;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
@@ -384,6 +415,34 @@
         background: linear-gradient(90deg, #007bff, #0056b3);
         transition: width 0.2s ease-out;
         box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    }
+
+    /* Subtle methodology badge — sits under the date/category line on top traffic articles */
+    .methodology-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.82rem;
+        color: #475569;
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        margin-bottom: 1rem;
+    }
+    .methodology-badge svg {
+        color: #16a34a;
+        flex-shrink: 0;
+    }
+    .methodology-badge a {
+        color: #475569;
+        text-decoration: underline;
+        text-decoration-color: #cbd5e1;
+        text-underline-offset: 2px;
+    }
+    .methodology-badge a:hover {
+        color: #0f172a;
+        text-decoration-color: #0f172a;
     }
 
     /* Blog Content Styling */

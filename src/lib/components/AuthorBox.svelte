@@ -39,12 +39,17 @@
                     I research email privacy, spam protection, and disposable inbox tools — and I've spent years testing what actually keeps your real address safe online.
                     When I'm not writing, I'm digging into how platforms handle user data and what that means for everyday people trying to stay private.
                 </p>
-                <a href="/about/author" class="author-more-link">
-                    More about Alex
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </a>
+                <div class="author-links-row">
+                    <a href="/about/author" class="author-more-link">
+                        More about Alex
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="/methodology" class="author-more-link author-more-link-secondary">
+                        How we test
+                    </a>
+                </div>
             </div>
         </div>
     </aside>
@@ -144,6 +149,21 @@
     }
     .author-more-link:hover {
         gap: 0.5rem;
+    }
+    .author-links-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.25rem;
+        align-items: center;
+    }
+    .author-more-link-secondary {
+        color: #475569;
+        font-weight: 500;
+        text-decoration: underline;
+        text-decoration-color: #cbd5e1;
+    }
+    .author-more-link-secondary:hover {
+        color: #0f172a;
     }
 
     @media (max-width: 480px) {

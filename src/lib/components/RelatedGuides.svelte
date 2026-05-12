@@ -31,8 +31,8 @@
     .related-guides {
         margin-top: 3rem;
         padding: 2rem;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
         border-radius: 12px;
     }
 
@@ -40,7 +40,7 @@
         font-size: 1.35rem;
         font-weight: 700;
         margin: 0 0 1.25rem;
-        color: rgba(255, 255, 255, 0.9);
+        color: #0f172a;
     }
 
     .rg-list {
@@ -61,16 +61,16 @@
         align-items: flex-start;
         gap: 0.75rem;
         padding: 0.875rem 1rem;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
         border-radius: 8px;
         text-decoration: none;
         transition: background 0.15s, border-color 0.15s;
     }
 
     .rg-link:hover {
-        background: rgba(255, 255, 255, 0.12);
-        border-color: rgba(255, 255, 255, 0.2);
+        background: #f1f5f9;
+        border-color: #cbd5e1;
         text-decoration: none;
     }
 
@@ -88,14 +88,14 @@
     }
 
     .rg-title {
-        color: rgba(255, 255, 255, 0.9);
+        color: #0f172a;
         font-weight: 600;
         font-size: 0.95rem;
         line-height: 1.4;
     }
 
     .rg-desc {
-        color: rgba(255, 255, 255, 0.55);
+        color: #475569;
         font-size: 0.85rem;
         line-height: 1.4;
     }

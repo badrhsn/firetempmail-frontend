@@ -1,1 +1,4 @@
-/ads.txt https://srv.adstxtmanager.com/84091/firetempmail.com 301
+# (Blog 301 redirects are handled in src/routes/blog/[slug]/+page.server.js
+# because the SvelteKit Cloudflare worker intercepts dynamic routes before
+# Cloudflare Pages _redirects rules can apply.)
+
