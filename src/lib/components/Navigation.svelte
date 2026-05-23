@@ -56,7 +56,6 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <nav class="site-navigation" bind:this={navEl} on:keydown={handleNavKeydown}>
     <a href={lp('/')} class:active={isActive('/')}>{$_('nav.home')}</a>
-    <a href="https://ko-fi.com/firetempmail" class="support-link" target="_blank" rel="noopener noreferrer">Support us</a>
 
     <!-- Tools dropdown -->
     <div class="nav-dropdown" class:open={toolsOpen}>
@@ -135,17 +134,6 @@
     .nav-dropdown-btn.active {
         background-color: #dee2e6;
         font-weight: 600;
-    }
-
-    .site-navigation .support-link {
-        background: #ff6b35;
-        color: #ffffff;
-        font-weight: 600;
-    }
-
-    .site-navigation .support-link:hover {
-        background: #e85d2b;
-        color: #ffffff;
     }
 
     /* Dropdown container */

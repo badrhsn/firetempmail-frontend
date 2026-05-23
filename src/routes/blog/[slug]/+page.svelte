@@ -292,17 +292,6 @@
         </div>
     </section>
 {:else if post}
-    <!-- Breadcrumb Navigation -->
-    <nav aria-label="Breadcrumb" style="max-width: 800px; margin: 1rem auto; padding: 0 1rem;">
-        <ol style="display: flex; list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: #6c757d;">
-            <li><a href="/" style="color: #007bff; text-decoration: none;">Home</a></li>
-            <li style="margin: 0 0.5rem;">/</li>
-            <li><a href="/blog" style="color: #007bff; text-decoration: none;">Blog</a></li>
-            <li style="margin: 0 0.5rem;">/</li>
-            <li style="color: #333;">{post.title}</li>
-        </ol>
-    </nav>
-
     <!-- Show actual post content when data is available -->
     <section class="py-4 py-xl-5">
         <div class="container" style="max-width: 800px;">
