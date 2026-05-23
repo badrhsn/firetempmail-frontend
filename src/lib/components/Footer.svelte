@@ -84,6 +84,8 @@
                         <li><a href={lp('/blog')}>{$_('footer.blog')}</a></li>
                         <li><a href={lp('/faq')}>{$_('footer.faq')}</a></li>
                         <li><a href={lp('/methodology')}>How we test</a></li>
+                        <li><a href={lp('/changelog')}>Changelog</a></li>
+                        <li><a href="https://ko-fi.com/firetempmail" target="_blank" rel="noopener noreferrer">Support us</a></li>
                         <li><a href="https://rapidapi.com/badr.hsn96/api/firetempmail" target="_blank" rel="noopener noreferrer">{$_('footer.api')}</a></li>
                     </ul>
                 </div>
