@@ -306,16 +306,6 @@
                             Reviewed against our <a href="/methodology">testing methodology</a>
                         </div>
                     {/if}
- Back button -->
-                <div style="text-align: left; margin-bottom: 2rem;">
-                    <a href="/blog" style="color: #007bff; text-decoration: none; display: inline-flex; align-items: center;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
-                            <path d="M19 12H5M5 12l6-6m-6 6l6 6"></path>
-                        </svg>
-                        {$_('blog.backToBlog')}
-                    </a>
-                </div>
-                
                 <!-- Article Header -->
                 <div style="text-align: left; margin-bottom: 2rem;">
                     <div style="display: flex; align-items: center; margin-bottom: 1rem;">
