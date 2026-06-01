@@ -2,12 +2,26 @@ import type { RequestHandler } from './$types';
 
 const SITE_URL = 'https://firetempmail.com';
 
+const NOINDEX_BLOG_SLUGS = [
+    'temp-email-for-tumblr',
+    'temp-email-for-pinterest',
+    'temp-email-for-kick',
+    'temp-email-for-aliexpress',
+    'temp-email-for-reddit',
+    'temp-email-for-notion',
+    'temp-email-for-spotify'
+];
+
 export const GET: RequestHandler = async ({ platform }) => {
     const db = platform.env.BLOG_DB;
 
     const { results: posts } = await db.prepare(
-        `SELECT slug, created_at FROM posts WHERE published = 1 ORDER BY created_at DESC`
-    ).all();
+        `SELECT slug, created_at
+         FROM posts
+         WHERE published = 1
+           AND slug NOT IN (${NOINDEX_BLOG_SLUGS.map(() => '?').join(',')})
+         ORDER BY created_at DESC`
+    ).bind(...NOINDEX_BLOG_SLUGS).all();
 
     const urls = posts.map(post => {
         const lastmod = post.created_at ? post.created_at.split(/[T ]/)[0] : '2026-02-28';

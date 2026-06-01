@@ -144,7 +144,7 @@
         </ol>
         <p>What we deliberately don&#39;t test:</p>
         <ul class="m-bullets">
-            <li>Bypassing bans. If your account was suspended, a different email won&#39;t fix it, and we&#39;re not going to publish a method that would basically only serve people doing that.</li>
+            <li>Evading bans. If your account was suspended, a different email won&#39;t fix it, and we&#39;re not going to publish a method that would basically only serve people doing that.</li>
             <li>Mass account creation. We sign up once, sometimes twice, never at scale. The temp email exists for privacy, not for throwaway-farms.</li>
             <li>Anything covered by the platform&#39;s explicit ToS as &quot;don&#39;t do this.&quot; If a platform says no temp emails, we&#39;ll still test what happens, but we&#39;ll note their position so you can decide.</li>
         </ul>

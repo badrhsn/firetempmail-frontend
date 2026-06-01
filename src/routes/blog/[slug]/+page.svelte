@@ -23,6 +23,17 @@
         ? post.content.replace(/<[^>]*>/g, '').length < 1500
         : false;
 
+    const ADSENSE_REVIEW_NOINDEX_SLUGS = new Set([
+        'temp-email-for-tumblr',
+        'temp-email-for-pinterest',
+        'temp-email-for-kick',
+        'temp-email-for-aliexpress',
+        'temp-email-for-reddit',
+        'temp-email-for-notion',
+        'temp-email-for-spotify'
+    ]);
+    $: isNoindexPost = post && (isThinContent || ADSENSE_REVIEW_NOINDEX_SLUGS.has(post.slug));
+
     // Build FAQPage schema from FAQ section in content
     function extractFaqSchema(postObj) {
         if (!postObj?.content) return null;
@@ -174,7 +185,7 @@
     <title>{post ? `${post.title} - Fire Temp Mail Blog` : 'Blog Post - Fire Temp Mail'}</title>
     {#if post}
         <meta name="description" content={post.excerpt} />
-    <meta name="robots" content={isThinContent ? "noindex, follow" : "index, follow"}>
+        <meta name="robots" content={isNoindexPost ? "noindex, follow" : "index, follow"}>
         <link rel="canonical" href={`https://firetempmail.com/blog/${post.slug}`} />
 
         <!-- Open Graph -->

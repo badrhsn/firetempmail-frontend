@@ -243,7 +243,7 @@ const USER_SCENARIOS = {
     'Duolingo': {
         title: 'Duolingo + Temp Email: Learning Experiments',
         scenarios: [
-            { icon: '🌍', label: 'Testing a new language anonymously', text: 'Adult learners who feel self-conscious about being beginners create Duolingo accounts with temp email before committing — exploring the experience without it being tied to their main learning profile.' },
+            { icon: '🌍', label: 'Testing a new language anonymously', text: 'Learners who feel self-conscious about being beginners create Duolingo accounts with temp email before committing — exploring the experience without it being tied to their main learning profile.' },
             { icon: '📊', label: 'Streak experiment reset', text: 'Duolingo researchers studying how streak psychology affects engagement create fresh accounts to study the early-streak experience, which is dramatically different from the established-streak experience.' },
             { icon: '👨‍🏫', label: 'Classroom experience testing', text: 'Teachers setting up Duolingo for their students create student-perspective accounts with temp email to verify what the classroom assignment experience looks like from a student\'s view.' },
         ]
