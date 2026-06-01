@@ -29,12 +29,12 @@ function hashStr(str) {
 // Category → related slugs for internal linking (thematic, not bulk)
 const CATEGORY_LINKS = {
     'Streaming': ['netflix', 'spotify', 'disney-plus', 'twitch', 'youtube', 'kick', 'crunchyroll', 'soundcloud'],
-    'Social': ['reddit', 'twitter', 'instagram', 'tiktok', 'pinterest', 'linkedin', 'tumblr', 'telegram', 'snapchat', 'patreon', 'onlyfans'],
-    'Gaming': ['steam', 'epic-games', 'roblox', 'discord', 'xbox', 'playstation', 'fortnite', 'nexus-mods', 'vrchat', 'lichess'],
+    'Social': ['reddit', 'twitter', 'instagram', 'tiktok', 'pinterest', 'linkedin', 'tumblr', 'telegram', 'snapchat'],
+    'Gaming': ['steam', 'epic-games', 'roblox', 'discord', 'xbox', 'playstation', 'fortnite', 'nexus-mods', 'lichess'],
     'Tech': ['github', 'notion', 'canva', 'figma', 'adobe', 'dropbox', 'replit', 'cursor', 'jetbrains', 'freepik', 'zoom', 'windscribe', 'proton-vpn', 'icloud', 'microsoft', 'outlook'],
     'Shopping': ['amazon', 'ebay', 'aliexpress', 'etsy', 'shein', 'uber-eats', 'uber'],
     'Finance': ['paypal', 'coinbase', 'binance', 'cash-app'],
-    'AI Tools': ['chatgpt', 'midjourney', 'canva-ai', 'grok', 'deepseek', 'claude', 'elevenlabs', 'runway', 'heygen', 'kling-ai', 'pixverse', 'perplexity', 'leonardo-ai', 'openrouter', 'novelai', 'gemini'],
+    'AI Tools': ['chatgpt', 'midjourney', 'canva-ai', 'grok', 'deepseek', 'claude', 'elevenlabs', 'runway', 'heygen', 'kling-ai', 'pixverse', 'perplexity', 'leonardo-ai', 'openrouter', 'gemini'],
     'Education': ['quizlet', 'duolingo'],
     'Guides': ['otp', 'free-trials'],
 };
@@ -295,13 +295,6 @@ const USER_SCENARIOS = {
         scenarios: [
             { icon: '🏡', label: 'Anonymous mood boarding', text: 'Interior designers and architects sometimes prefer to do initial client research on Pinterest anonymously — separate from their professional profile — before sharing a curated board.' },
             { icon: '📊', label: 'Algorithm research', text: 'Social media strategists create fresh Pinterest accounts with temp email to study how the home feed builds itself for a new user, particularly how quickly it personalizes based on a few followed boards.' },
-        ]
-    },
-    'Patreon': {
-        title: 'Why Creators Use Temp Email for Patreon',
-        scenarios: [
-            { icon: '👥', label: 'Viewing your own patron experience', text: 'Patreon creators use secondary accounts with temp email to become patrons of their own page at different tiers — seeing exactly what their supporters see when they join, including onboarding messages and exclusive posts.' },
-            { icon: '🔍', label: 'Competitor page research', text: 'Creators studying successful Patreon campaigns become free members of competitor pages with temp email accounts, studying what content strategy keeps paying patrons engaged.' },
         ]
     },
     'Dropbox': {

@@ -118,10 +118,10 @@
         'temp-mail-vs-burner-email',
         'gmailnator-alternatives',
         'temp-email-for-chatgpt',
-        'temp-email-for-grok',
+        'temp-email-for-ai-tools',
         'temp-mail-for-amazon-prime',
         'temp-email-for-cursor',
-        'temp-email-for-onlyfans',
+        'temp-email-for-gaming-platforms',
         'tiktok-temporary-email-guide-avoid-spam-signups',
         'temp-email-for-tiktok'
     ]);
