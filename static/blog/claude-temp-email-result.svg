@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Claude temp email success or error result</title>
+  <desc id="desc">Screenshot-style visual comparing successful Claude verification with a blocked temp email error.</desc>
+  <rect width="1200" height="720" fill="#f7f5f0"/>
+  <rect x="80" y="72" width="500" height="576" rx="20" fill="#ffffff" stroke="#d6eadb"/>
+  <circle cx="330" cy="192" r="56" fill="#e7f7eb"/>
+  <path d="M300 193l22 22 46-52" fill="none" stroke="#198754" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="330" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#1f2937">Verification succeeded</text>
+  <text x="330" y="334" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#4b5563">offredaily.sa.com delivered the code</text>
+  <rect x="150" y="408" width="360" height="66" rx="10" fill="#198754"/>
+  <text x="330" y="449" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#ffffff">Continue to Claude</text>
+  <rect x="620" y="72" width="500" height="576" rx="20" fill="#ffffff" stroke="#f1c8c8"/>
+  <circle cx="870" cy="192" r="56" fill="#fff1f1"/>
+  <path d="M845 167l50 50M895 167l-50 50" fill="none" stroke="#dc3545" stroke-width="12" stroke-linecap="round"/>
+  <text x="870" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#1f2937">Domain blocked</text>
+  <text x="870" y="334" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#4b5563">This email address is not supported.</text>
+  <rect x="690" y="408" width="360" height="66" rx="10" fill="#fff5f5" stroke="#f1c8c8"/>
+  <text x="870" y="449" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#b02a37">Try another domain</text>
+</svg>

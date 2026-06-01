@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Claude verification email in FireTempMail inbox</title>
+  <desc id="desc">Screenshot-style visual showing an Anthropic verification email inside a FireTempMail inbox.</desc>
+  <rect width="1200" height="720" fill="#f4f7fb"/>
+  <rect x="70" y="54" width="1060" height="612" rx="22" fill="#ffffff" stroke="#d8e0ea"/>
+  <rect x="70" y="54" width="1060" height="82" rx="22" fill="#fff6ef"/>
+  <text x="116" y="104" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#ff6b35">FireTempMail</text>
+  <rect x="114" y="170" width="972" height="72" rx="12" fill="#f8fafc" stroke="#dce3ec"/>
+  <text x="144" y="214" font-family="Arial, sans-serif" font-size="21" fill="#1f2937">alex-test@offredaily.sa.com</text>
+  <rect x="936" y="186" width="112" height="40" rx="8" fill="#ff6b35"/>
+  <text x="992" y="212" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Copy</text>
+  <text x="114" y="292" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#1f2937">Inbox</text>
+  <rect x="114" y="322" width="972" height="96" rx="12" fill="#ffffff" stroke="#cfe7d5" stroke-width="2"/>
+  <circle cx="154" cy="370" r="18" fill="#d97757"/>
+  <text x="154" y="377" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#ffffff">A</text>
+  <text x="190" y="360" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#1f2937">Anthropic</text>
+  <text x="190" y="390" font-family="Arial, sans-serif" font-size="17" fill="#4b5563">Your Claude verification code</text>
+  <text x="1016" y="376" text-anchor="end" font-family="Arial, sans-serif" font-size="15" fill="#6b7280">Just now</text>
+  <rect x="114" y="446" width="972" height="116" rx="12" fill="#f8fafc" stroke="#dce3ec"/>
+  <text x="144" y="491" font-family="Arial, sans-serif" font-size="18" fill="#374151">Verification code</text>
+  <text x="144" y="534" font-family="Arial, sans-serif" font-size="36" font-weight="700" letter-spacing="4" fill="#111827">482913</text>
+</svg>

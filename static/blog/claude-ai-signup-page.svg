@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Claude.ai signup page screenshot</title>
+  <desc id="desc">Screenshot-style visual showing the Claude.ai signup page with an email field.</desc>
+  <rect width="1200" height="720" fill="#f7f5f0"/>
+  <rect x="72" y="56" width="1056" height="608" rx="22" fill="#ffffff" stroke="#ded8cc"/>
+  <rect x="72" y="56" width="1056" height="58" rx="22" fill="#faf8f3"/>
+  <circle cx="104" cy="85" r="8" fill="#e35d4f"/>
+  <circle cx="130" cy="85" r="8" fill="#e5b64b"/>
+  <circle cx="156" cy="85" r="8" fill="#5aaa6f"/>
+  <rect x="210" y="73" width="760" height="24" rx="12" fill="#eee9de"/>
+  <text x="600" y="91" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#6f675d">claude.ai</text>
+  <text x="600" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#2f2a24">Create your Claude account</text>
+  <text x="600" y="228" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#6f675d">Continue with email to start using Claude</text>
+  <rect x="356" y="280" width="488" height="64" rx="10" fill="#ffffff" stroke="#cfc7b8" stroke-width="2"/>
+  <text x="382" y="319" font-family="Arial, sans-serif" font-size="18" fill="#9a9184">Email address</text>
+  <rect x="356" y="364" width="488" height="58" rx="10" fill="#d97757"/>
+  <text x="600" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#ffffff">Continue</text>
+  <line x1="356" y1="466" x2="844" y2="466" stroke="#eee9de" stroke-width="2"/>
+  <text x="600" y="515" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#7b7267">Screenshot: Claude.ai signup page</text>
+</svg>
