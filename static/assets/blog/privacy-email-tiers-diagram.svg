@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Email privacy tiers</title>
+  <desc id="desc">Diagram showing three tiers of email privacy: real email, aliases, and temporary email.</desc>
+  <rect width="1200" height="650" fill="#f8fafc"/>
+  <rect x="120" y="95" width="960" height="120" rx="18" fill="#fee2e2" stroke="#fca5a5"/>
+  <text x="170" y="148" font-family="Arial" font-size="28" font-weight="700" fill="#991b1b">Tier 1: Real email</text><text x="170" y="185" font-family="Arial" font-size="18" fill="#7f1d1d">Banking, government, healthcare, tax, primary accounts</text>
+  <rect x="120" y="265" width="960" height="120" rx="18" fill="#ffedd5" stroke="#fdba74"/>
+  <text x="170" y="318" font-family="Arial" font-size="28" font-weight="700" fill="#9a3412">Tier 2: Email aliases</text><text x="170" y="355" font-family="Arial" font-size="18" fill="#7c2d12">Services you use often but do not fully trust</text>
+  <rect x="120" y="435" width="960" height="120" rx="18" fill="#dcfce7" stroke="#86efac"/>
+  <text x="170" y="488" font-family="Arial" font-size="28" font-weight="700" fill="#166534">Tier 3: Temporary email</text><text x="170" y="525" font-family="Arial" font-size="18" fill="#14532d">One-time downloads, trials, research, low-stakes verification</text>
+</svg>

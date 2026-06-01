@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Developer testing signup with temp email</title>
+  <desc id="desc">Screenshot-style split view of a local signup form and FireTempMail inbox.</desc>
+  <rect width="1200" height="720" fill="#0f172a"/>
+  <rect x="70" y="70" width="500" height="580" rx="18" fill="#111827" stroke="#334155"/>
+  <text x="110" y="125" font-family="Arial" font-size="24" font-weight="700" fill="#e5e7eb">localhost:5173/signup</text>
+  <rect x="110" y="185" width="420" height="56" rx="8" fill="#1f2937" stroke="#475569"/><text x="135" y="220" font-family="Arial" font-size="18" fill="#cbd5e1">qa-run-42@offredaily.sa.com</text>
+  <rect x="110" y="270" width="420" height="56" rx="8" fill="#1f2937" stroke="#475569"/><text x="135" y="305" font-family="Arial" font-size="18" fill="#64748b">••••••••••</text>
+  <rect x="110" y="360" width="180" height="54" rx="10" fill="#2563eb"/><text x="200" y="395" text-anchor="middle" font-family="Arial" font-size="18" font-weight="700" fill="#fff">Create user</text>
+  <rect x="630" y="70" width="500" height="580" rx="18" fill="#fff" stroke="#334155"/>
+  <text x="670" y="125" font-family="Arial" font-size="24" font-weight="700" fill="#ff6b35">FireTempMail</text>
+  <rect x="670" y="185" width="420" height="84" rx="10" fill="#f8fafc" stroke="#cbd5e1"/><text x="700" y="235" font-family="Arial" font-size="18" fill="#111827">qa-run-42@offredaily.sa.com</text>
+  <rect x="670" y="320" width="420" height="110" rx="10" fill="#ecfdf5" stroke="#86efac"/><text x="700" y="362" font-family="Arial" font-size="20" font-weight="700" fill="#111827">Verify your account</text><text x="700" y="395" font-family="Arial" font-size="18" fill="#166534">OTP: 482913</text>
+</svg>

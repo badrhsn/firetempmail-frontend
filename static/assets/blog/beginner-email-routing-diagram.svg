@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">How temporary email routing works</title>
+  <desc id="desc">A diagram showing a website sending email through DNS MX records to a temp mail provider and then into a temporary inbox.</desc>
+  <rect width="1200" height="650" fill="#f7fafc"/>
+  <rect x="70" y="90" width="220" height="140" rx="18" fill="#fff" stroke="#d8e2ec" stroke-width="2"/>
+  <text x="180" y="145" text-anchor="middle" font-family="Arial" font-size="26" font-weight="700" fill="#1f2937">Website</text>
+  <text x="180" y="180" text-anchor="middle" font-family="Arial" font-size="16" fill="#64748b">sends verification email</text>
+  <rect x="490" y="90" width="220" height="140" rx="18" fill="#fff8ed" stroke="#fed7aa" stroke-width="2"/>
+  <text x="600" y="145" text-anchor="middle" font-family="Arial" font-size="26" font-weight="700" fill="#9a3412">DNS / MX</text>
+  <text x="600" y="180" text-anchor="middle" font-family="Arial" font-size="16" fill="#9a3412">domain says where mail goes</text>
+  <rect x="910" y="90" width="220" height="140" rx="18" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text x="1020" y="145" text-anchor="middle" font-family="Arial" font-size="26" font-weight="700" fill="#1e40af">Mail Server</text>
+  <text x="1020" y="180" text-anchor="middle" font-family="Arial" font-size="16" fill="#1e40af">receives and stores message</text>
+  <rect x="400" y="380" width="400" height="150" rx="18" fill="#ecfdf5" stroke="#bbf7d0" stroke-width="2"/>
+  <text x="600" y="436" text-anchor="middle" font-family="Arial" font-size="28" font-weight="700" fill="#166534">Temporary Inbox</text>
+  <text x="600" y="474" text-anchor="middle" font-family="Arial" font-size="17" fill="#166534">you read the code until the inbox expires</text>
+  <path d="M295 160H480" stroke="#334155" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M715 160H900" stroke="#334155" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M1020 238C1020 330 760 328 690 378" stroke="#334155" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L8 3L0 6Z" fill="#334155"/></marker></defs>
+</svg>
