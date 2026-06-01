@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Freepik account download page</title>
+  <desc id="desc">Screenshot-style visual showing a Freepik account with a free resource download page.</desc>
+  <rect width="1200" height="720" fill="#f5f7f6"/>
+  <rect x="64" y="52" width="1072" height="616" rx="22" fill="#fff" stroke="#dce5e1"/>
+  <rect x="64" y="52" width="1072" height="72" rx="22" fill="#0f172a"/>
+  <text x="112" y="97" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#fff">Freepik</text>
+  <rect x="760" y="72" width="142" height="34" rx="17" fill="#172f28"/>
+  <text x="831" y="94" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#a7f3d0">Free account</text>
+  <rect x="924" y="72" width="154" height="34" rx="17" fill="#11a37f"/>
+  <text x="1001" y="94" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#fff">Upgrade</text>
+  <rect x="110" y="170" width="410" height="330" rx="18" fill="#e9f8f2" stroke="#cfeee1"/>
+  <rect x="154" y="218" width="322" height="190" rx="14" fill="#fff" stroke="#d7e5de"/>
+  <circle cx="238" cy="298" r="50" fill="#11a37f"/>
+  <rect x="308" y="256" width="118" height="84" rx="12" fill="#dff6ec"/>
+  <text x="315" y="456" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#142a23">Free vector resource</text>
+  <text x="315" y="486" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#60746b">Attribution required on free plan</text>
+  <text x="660" y="206" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#142a23">Download access</text>
+  <text x="660" y="250" font-family="Arial, sans-serif" font-size="19" fill="#53645d">Free account: 10 stock downloads per day</text>
+  <rect x="660" y="294" width="330" height="66" rx="12" fill="#11a37f"/>
+  <text x="825" y="335" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#fff">Download free file</text>
+  <rect x="660" y="390" width="330" height="66" rx="12" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="825" y="431" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#9a3412">Premium asset locked</text>
+  <text x="660" y="535" font-family="Arial, sans-serif" font-size="16" fill="#6b7c74">Screenshot-style: account access and download page.</text>
+</svg>

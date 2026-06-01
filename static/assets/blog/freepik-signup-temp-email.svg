@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Freepik signup with temp email</title>
+  <desc id="desc">Screenshot-style visual showing a Freepik signup form with a temporary email address.</desc>
+  <rect width="1200" height="720" fill="#eef7f3"/>
+  <rect x="74" y="56" width="1052" height="608" rx="22" fill="#fff" stroke="#d8e7e1"/>
+  <rect x="74" y="56" width="1052" height="62" rx="22" fill="#f7fbf9"/>
+  <circle cx="106" cy="87" r="8" fill="#f06565"/>
+  <circle cx="132" cy="87" r="8" fill="#f2c94c"/>
+  <circle cx="158" cy="87" r="8" fill="#27ae60"/>
+  <rect x="220" y="74" width="740" height="26" rx="13" fill="#e7f0ec"/>
+  <text x="590" y="92" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#60746b">freepik.com/signup</text>
+  <text x="600" y="184" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#142a23">Create your Freepik account</text>
+  <text x="600" y="224" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#65756f">Use email to download free resources</text>
+  <rect x="330" y="276" width="540" height="70" rx="12" fill="#fff" stroke="#11a37f" stroke-width="3"/>
+  <text x="360" y="319" font-family="Arial, sans-serif" font-size="22" fill="#17211d">design-test@offredaily.sa.com</text>
+  <rect x="330" y="370" width="540" height="60" rx="10" fill="#11a37f"/>
+  <text x="600" y="408" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#fff">Sign up</text>
+  <text x="600" y="510" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#6b7c74">Screenshot-style: Freepik signup tested with a temporary email.</text>
+</svg>
