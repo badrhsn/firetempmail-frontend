@@ -31,53 +31,6 @@
         .modern-header {
             margin-bottom: 2rem;
         }
-        .support-banner {
-            background: #fff7ed;
-            border-top: 1px solid #fed7aa;
-            border-bottom: 1px solid #fed7aa;
-            padding: 10px 16px;
-            margin-top: -2rem;
-            margin-bottom: 2rem;
-        }
-        .support-banner-inner {
-            max-width: 1160px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            text-align: center;
-            color: #7c2d12;
-            font-size: 14px;
-            line-height: 1.45;
-        }
-        .support-banner-text {
-            font-weight: 600;
-        }
-        .support-banner-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: #ff6b35;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 8px;
-            padding: 7px 12px;
-            font-size: 13px;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-        .support-banner-link:hover {
-            background: #e85d2b;
-            color: #ffffff;
-            text-decoration: none;
-        }
-        @media (max-width: 640px) {
-            .support-banner-inner {
-                flex-direction: column;
-                gap: 8px;
-            }
-        }
     </style>
     
 
@@ -137,12 +90,6 @@
             </nav>
         </div>
     </header>
-    <div class="support-banner" role="region" aria-label="Support Fire Temp Mail">
-        <div class="support-banner-inner">
-            <span class="support-banner-text">Fire Temp Mail is free to use. Support hosting, testing, and maintenance if it helps you.</span>
-            <a href="https://ko-fi.com/firetempmail" class="support-banner-link" target="_blank" rel="noopener noreferrer">Support us</a>
-        </div>
-    </div>
     <div style="display: contents">%sveltekit.body%</div>
 
     <!-- Mobile Menu Overlay -->
@@ -175,7 +122,6 @@
             <a href="/best-temp-mail" class="mobile-nav-link">Best Temp Mail</a>
             <a href="/faq" class="mobile-nav-link">FAQ</a>
             <a href="/blog" class="mobile-nav-link">Blog</a>
-            <a href="https://ko-fi.com/firetempmail" class="mobile-nav-link support-nav-link" target="_blank" rel="noopener noreferrer">Support us</a>
         </nav>
     </div>
 
