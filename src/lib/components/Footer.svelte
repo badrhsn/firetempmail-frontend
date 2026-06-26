@@ -71,7 +71,6 @@
                     <ul class="footer-links">
                         <li><a href={lp('/temp-gmail')}>Temp Gmail</a></li>
                         <li><a href={lp('/email-generator')}>{$_('footer.emailGenerator')}</a></li>
-                        <li><a href={lp('/edu-email-generator')}>EDU Email Generator</a></li>
                         <li><a href={lp('/burner-email')}>Burner Email</a></li>
                         <li><a href={lp('/best-temp-mail')}>Best Temp Mail</a></li>
                     </ul>

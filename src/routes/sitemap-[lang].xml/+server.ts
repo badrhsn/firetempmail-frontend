@@ -8,7 +8,6 @@ const SERVICE_PAGES = [
     { path: '/',                    priority: '1.0', changefreq: 'daily',   lastmod: '2026-04-16' },
     { path: '/temp-gmail',          priority: '0.9', changefreq: 'weekly',  lastmod: '2026-04-16' },
     { path: '/email-generator',     priority: '0.9', changefreq: 'daily',   lastmod: '2026-04-16' },
-    { path: '/edu-email-generator', priority: '0.9', changefreq: 'daily',   lastmod: '2026-04-16' },
     { path: '/burner-email',        priority: '0.8', changefreq: 'weekly',  lastmod: '2026-04-16' },
     { path: '/best-temp-mail',      priority: '0.9', changefreq: 'weekly',  lastmod: '2026-04-16' },
     { path: '/faq',                 priority: '0.7', changefreq: 'monthly', lastmod: '2026-02-28' },

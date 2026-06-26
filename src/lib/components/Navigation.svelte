@@ -11,7 +11,6 @@
         { path: '/temp-gmail',         label: 'Temp Gmail' },
         { path: '/burner-email',        label: 'Burner Email' },
         { path: '/email-generator',     label: 'Email Generator' },
-        { path: '/edu-email-generator', label: 'EDU Email' },
         { path: '/best-temp-mail',      label: 'Best Temp Mail' },
     ];
 

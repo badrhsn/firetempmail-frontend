@@ -24,6 +24,21 @@
         : false;
 
     const ADSENSE_REVIEW_NOINDEX_SLUGS = new Set([
+        'temp-mail-for-amazon-prime',
+        'why-temp-student-gmail-accounts-popular',
+        'temporary-email-for-free-trials',
+        'temp-email-for-free-trials',
+        'instagram-temp-mail-sign-up-without-personal-email',
+        'tiktok-temporary-email-guide-avoid-spam-signups',
+        'temp-email-for-ai-tools',
+        'temp-email-for-ai-video-tools',
+        'temp-email-for-gaming-platforms',
+        'temp-email-for-vpn-services',
+        'temp-email-for-chatgpt',
+        'temp-email-for-claude',
+        'temp-email-for-freepik',
+        'temp-email-for-canva',
+        'temp-email-for-adobe',
         'temp-email-for-tumblr',
         'temp-email-for-pinterest',
         'temp-email-for-kick',

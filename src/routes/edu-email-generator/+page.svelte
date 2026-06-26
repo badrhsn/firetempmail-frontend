@@ -395,17 +395,17 @@ function normalizeGmailAddress(address) {
 
 <Hreflang path="/edu-email-generator" />
 <svelte:head>
-    <title>{data?.seo?.title || 'EDU Email Generator | Free Disposable .EDU Emails Online'}</title>
-    <meta name="description" content={data?.seo?.description || 'Generate free .EDU temporary emails instantly. Perfect for student discounts, trials, and signups — secure, fast, and disposable.'} />
-    <meta name="robots" content="index, follow" />
+    <title>{data?.seo?.title || 'Academic Email Privacy Tool | FireTempMail'}</title>
+    <meta name="description" content={data?.seo?.description || 'Temporary email for privacy-oriented testing, inbox separation, and non-critical academic workflows.'} />
+    <meta name="robots" content="noindex, follow" />
 
     <!-- Canonical URL -->
     <link rel="canonical" href={data?.seo?.canonical || 'https://firetempmail.com/edu-email-generator'} />
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
     <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="EDU Email Generator – Create Free Disposable .EDU Emails" />
-    <meta property="og:description" content="Use the EDU Email Generator to instantly create free disposable .EDU emails for student discounts, trials, and signups." />
+    <meta property="og:title" content="Academic Email Privacy Tool" />
+    <meta property="og:description" content="Temporary email for privacy-oriented testing, inbox separation, and non-critical academic workflows." />
     <meta property="og:url" content="https://firetempmail.com/edu-email-generator" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Fire Temp Mail" />
@@ -417,8 +417,8 @@ function normalizeGmailAddress(address) {
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="EDU Email Generator – Free Disposable .EDU Emails" />
-    <meta name="twitter:description" content="Generate free .EDU temporary emails instantly. Private, fast & disposable student email service." />
+    <meta name="twitter:title" content="Academic Email Privacy Tool" />
+    <meta name="twitter:description" content="Temporary email for privacy-oriented testing and inbox separation." />
     <meta name="twitter:image" content="https://firetempmail.com/og-image.png" />
     <meta name="twitter:site" content="@firetempmail" />
 
@@ -429,9 +429,9 @@ function normalizeGmailAddress(address) {
       "@graph": [
         {
           "@type": "WebApplication",
-          "name": "EDU Email Generator - Fire Temp Mail",
+          "name": "Academic Email Privacy Tool - Fire Temp Mail",
           "url": "https://firetempmail.com/edu-email-generator",
-          "description": "Generate free .EDU temporary emails instantly. Perfect for student discounts, trials, and signups.",
+          "description": "Temporary email utility for privacy-oriented testing and inbox separation.",
           "image": "https://firetempmail.com/og-image.png",
           "applicationCategory": "UtilitiesApplication",
           "operatingSystem": "All",
@@ -458,7 +458,7 @@ function normalizeGmailAddress(address) {
           "@type": "BreadcrumbList",
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firetempmail.com/" },
-            { "@type": "ListItem", "position": 2, "name": "EDU Email Generator", "item": "https://firetempmail.com/edu-email-generator" }
+            { "@type": "ListItem", "position": 2, "name": "Academic Email Privacy Tool", "item": "https://firetempmail.com/edu-email-generator" }
           ]
         }
       ]
@@ -466,7 +466,7 @@ function normalizeGmailAddress(address) {
     </script>
 </svelte:head>
 <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
-    <Breadcrumb items={[{name: "Home", href: "/"}, {name: "EDU Email Generator", href: "/edu-email-generator"}]} />
+    <Breadcrumb items={[{name: "Home", href: "/"}, {name: "Academic Email Privacy Tool", href: "/edu-email-generator"}]} />
 </div>
 
 <!-- Toast Notifications -->
@@ -523,7 +523,7 @@ function normalizeGmailAddress(address) {
                 {$_('eduEmailPage.h1')}
             </h1>
             <p class="lead">
-        Generate <strong>.EDU emails</strong> with our free <strong>EDU Email Generator</strong>. Perfect for signups, trials, student discounts, and more — without exposing your real inbox to spam.
+        Use a temporary inbox for privacy-oriented testing and inbox separation. Do not use disposable email to misrepresent student status, evade platform rules, or abuse discounts.
             </p>
             
             <!-- Email Address with Copy Button -->
@@ -819,44 +819,14 @@ function normalizeGmailAddress(address) {
                 {/if}
             {/if}
 
-            <!-- Student Discount & EDU Email Content -->
-            <section aria-labelledby="edu-discounts" class="seo-article" style="margin-top: 3rem; padding: 2rem; background:#f8fafc; border-radius: 12px;">
-                <h2 id="edu-discounts">{$_('eduEmailPage.seoTitle')}</h2>
+            <section aria-labelledby="responsible-use" class="seo-article" style="margin-top: 3rem; padding: 2rem; background:#f8fafc; border-radius: 12px;">
+                <h2 id="responsible-use">Responsible Temporary Email Use</h2>
                 <p class="description">
-                    {$_('eduEmailPage.seoP1')}
+                    Temporary email is appropriate for testing forms you own, separating low-risk inbox traffic, and reducing exposure to unwanted marketing. It should not be used for accounts that require a durable recovery address or verified personal identity.
                 </p>
-
-                <h3>{$_('eduEmailPage.discountsTitle')}</h3>
-                
-                <div style="margin: 2rem 0;">
-                    <h4>{$_('eduEmailPage.spotifyTitle')}</h4>
-                    <p>{$_('eduEmailPage.spotifyP1')}</p>
-                    <p>{$_('eduEmailPage.spotifyP2')}</p>
-                </div>
-
-                <div style="margin: 2rem 0;">
-                    <h4>{$_('eduEmailPage.amazonTitle')}</h4>
-                    <p>{$_('eduEmailPage.amazonP1')}</p>
-                    <p>{$_('eduEmailPage.amazonP2')}</p>
-                </div>
-
-                <div style="margin: 2rem 0;">
-                    <h4>{$_('eduEmailPage.adobeTitle')}</h4>
-                    <p>{$_('eduEmailPage.adobeP1')}</p>
-                    <p>{$_('eduEmailPage.adobeP2')}</p>
-                </div>
-
-                <div style="margin: 2rem 0;">
-                    <h4>{$_('eduEmailPage.appleTitle')}</h4>
-                    <p>{$_('eduEmailPage.appleP1')}</p>
-                    <p>{$_('eduEmailPage.appleP2')}</p>
-                </div>
-
-                <div style="margin: 2rem 0;">
-                    <h4>{$_('eduEmailPage.githubTitle')}</h4>
-                    <p>{$_('eduEmailPage.githubP1')}</p>
-                    <p>{$_('eduEmailPage.githubP2')}</p>
-                </div>
+                <p class="description">
+                    If a service requires proof of eligibility, use the official email or identity method requested by that service. Fire Temp Mail is a privacy utility, not a tool for bypassing platform rules.
+                </p>
             </section>
 
 <RelatedGuides guides={eduEmailGuides} />
