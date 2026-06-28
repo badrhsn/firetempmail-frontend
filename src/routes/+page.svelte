@@ -943,6 +943,17 @@ function normalizeGmailAddress(address) {
                 {/if}
             {/if}
 
+                    <div class="inbox-explainer">
+                        <h2
+                            class="text-center"
+                            style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;"
+                        >
+                            {$_('home.whatIsTitle')}
+                        </h2>
+                        <p class="text-center" style="margin-bottom: 0;font-size: 18px;">
+                            {$_('home.whatIsText')}
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -972,15 +983,6 @@ function normalizeGmailAddress(address) {
     </div>
 </div>
 
-            <h2
-                class="text-center"
-                style="font-family: 'Inter Tight', sans-serif;font-weight: 600;margin-bottom: 16px;"
-            >
-                {$_('home.whatIsTitle')}
-            </h2>
-            <p class="text-center" style="margin-bottom: 32px;font-size: 18px;">
-                {$_('home.whatIsText')}
-            </p>
             <!-- Add this after the "What is Disposable Temporary E-mail?" section -->
 
             <div class="publisher-layout">
@@ -1098,7 +1100,7 @@ function normalizeGmailAddress(address) {
                     </a>
                 </div>
             </div>
-                    <div class="ad-sidebar" aria-hidden="true"></div>
+                    <!-- <div class="ad-sidebar" aria-hidden="true"></div> -->
                 </aside>
             </div>
 
@@ -1140,7 +1142,7 @@ function normalizeGmailAddress(address) {
                 </div>
             </div>
 
-            <div class="ad-banner-middle" aria-hidden="true"></div>
+            <!-- <div class="ad-banner-middle" aria-hidden="true"></div> -->
 
             <!-- Real Use Cases Section - NEW -->
             <div class="use-cases-section">
@@ -1291,7 +1293,7 @@ function normalizeGmailAddress(address) {
 
             <!-- Add this after the Popular Articles section on your main page -->
 
-            <div class="ad-banner-bottom" aria-hidden="true"></div>
+            <!-- <div class="ad-banner-bottom" aria-hidden="true"></div> -->
 
             <div class="seo-content-section">
                 <div class="container">
@@ -2831,11 +2833,11 @@ function normalizeGmailAddress(address) {
 
     .hero-grid {
         display: grid;
-        grid-template-columns: minmax(0, 0.9fr) minmax(520px, 1.1fr);
-        gap: 56px;
-        align-items: center;
-        min-height: 420px;
-        padding: 40px 0 48px;
+        grid-template-columns: minmax(0, 1fr) minmax(500px, 1.05fr);
+        gap: 44px;
+        align-items: start;
+        min-height: 0;
+        padding: 40px 0 44px;
     }
 
     .hero-copy {
@@ -2844,10 +2846,10 @@ function normalizeGmailAddress(address) {
 
     .hero-copy h1 {
         max-width: 620px;
-        margin: 0 0 20px;
+        margin: 0 0 16px;
         color: #111827;
-        font-size: 48px;
-        line-height: 1.08;
+        font-size: 40px;
+        line-height: 1.12;
         letter-spacing: 0;
         text-align: left;
     }
@@ -2860,8 +2862,8 @@ function normalizeGmailAddress(address) {
         max-width: 580px;
         margin: 0;
         color: #5d6878;
-        font-size: 18px;
-        line-height: 1.7;
+        font-size: 16px;
+        line-height: 1.6;
         text-align: left;
     }
 
@@ -2869,9 +2871,9 @@ function normalizeGmailAddress(address) {
         display: flex;
         flex-wrap: wrap;
         gap: 10px 18px;
-        margin-top: 26px;
+        margin-top: 20px;
         color: #344054;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 600;
     }
 
@@ -3016,6 +3018,24 @@ function normalizeGmailAddress(address) {
         width: 100%;
         max-width: 700px;
         margin: 0 auto 72px;
+    }
+
+    .inbox-explainer {
+        width: 100%;
+        margin: 28px 0 0;
+        padding: 28px 8px 4px;
+        border-top: 1px solid #e3e8ef;
+    }
+
+    .inbox-explainer h2 {
+        color: #111827;
+        font-size: 28px;
+        line-height: 1.25;
+    }
+
+    .inbox-explainer p {
+        color: #667085;
+        line-height: 1.7;
     }
 
     .inbox-panel,
@@ -3540,6 +3560,19 @@ function normalizeGmailAddress(address) {
 
         .inbox-layout {
             margin-bottom: 48px;
+        }
+
+        .inbox-explainer {
+            margin: 24px 0 0;
+            padding: 24px 0 2px;
+        }
+
+        .inbox-explainer h2 {
+            font-size: 25px;
+        }
+
+        .inbox-explainer p {
+            font-size: 16px !important;
         }
 
         .inbox-panel {
