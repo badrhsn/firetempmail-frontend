@@ -601,7 +601,7 @@ function normalizeGmailAddress(address) {
                 <p>{toast.message}</p>
             </div>
             
-            <button on:click={() => removeToast(toast.id)} class="toast-close">
+            <button on:click={() => removeToast(toast.id)} class="toast-close" aria-label="Close notification">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
                     <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -625,19 +625,29 @@ function normalizeGmailAddress(address) {
     </div>
 {/if}
 
-<section class="py-4 py-xl-5">
-    <div class="container">
-        <div class="text-center p-4 p-lg-5">
-            <!-- Header -->
-             <h1>
-                <span>📮&nbsp;</span>
-                {$_('home.title')}
-             </h1>
-            <p class="lead">
-                {$_('home.subtitle')}
-            </p>            
-            <!-- Email Address with Copy Button -->
-            <div class="email-address-container">
+<section class="py-4 py-xl-5 homepage-shell">
+    <div class="container homepage-container">
+        <div class="text-center p-4 p-lg-5 homepage-content">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <h1>
+                        <span>📮&nbsp;</span>
+                        {$_('home.title')}
+                    </h1>
+                    <p class="lead">
+                        {$_('home.subtitle')}
+                    </p>
+
+                    <div class="hero-trust-row" aria-label="Service benefits">
+                        <span><span aria-hidden="true">✓</span>{$_('home.gmailSection.features.free')}</span>
+                        <span><span aria-hidden="true">✓</span>{$_('home.security.noRegistration.title')}</span>
+                        <span><span aria-hidden="true">✓</span>{$_('home.security.encryption.title')}</span>
+                    </div>
+                </div>
+
+                <div class="generator-card">
+                    <!-- Email Address with Copy Button -->
+                    <div class="email-address-container">
                 <div class="email-display">
                     <p>{address}</p>
                     <button 
@@ -778,8 +788,14 @@ function normalizeGmailAddress(address) {
                     </button>
                 </div>
                 {/if}
+                    </div>
+                </div>
             </div>
-            
+
+            <!-- <div class="ad-banner-top" aria-hidden="true"></div> -->
+
+            <div class="inbox-layout">
+                <div class="inbox-panel">
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
@@ -819,13 +835,13 @@ function normalizeGmailAddress(address) {
                             </button>
                             
                             <div style="display: flex; gap: 8px;">
-                                <button class="btn btn-primary" type="button" on:click={() => forwardEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-dark);">
+                                <button class="btn btn-primary" type="button" on:click={() => forwardEmail(selectedEmail)} aria-label="Forward email" style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-dark);">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
                                         <path d="M3 10H13C17.4183 10 21 13.5817 21 18V20M3 10L9 16M3 10L9 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </button>
                                 
-                                <button class="btn btn-primary" type="button" on:click={() => deleteEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-red);">
+                                <button class="btn btn-primary" type="button" on:click={() => deleteEmail(selectedEmail)} aria-label="Delete email" style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-red);">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
                                         <path d="M19 7L18.1327 19.1425C18.0579 20.1891 17.187 21 16.1378 21H7.86224C6.81296 21 5.94208 20.1891 5.86732 19.1425L5 7M10 11V17M14 11V17M15 7V4C15 3.44772 14.5523 3 14 3H10C9.44772 3 9 3.44772 9 4V7M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
@@ -927,6 +943,9 @@ function normalizeGmailAddress(address) {
                 {/if}
             {/if}
 
+                </div>
+            </div>
+
             <!-- Insert: Gmail temp mail SEO block (place this before the "What is Disposable Temporary E-mail?" section) -->
            <div class="seo-content-section">
     <div class="container">
@@ -935,30 +954,6 @@ function normalizeGmailAddress(address) {
             <p>
                 {$_('home.gmailSection.intro')}
             </p>
-
-            <h2>{$_('home.gmailSection.whyTitle')}</h2>
-            <p>
-                {$_('home.gmailSection.whyText')}
-            </p>
-
-            <div class="feature-list">
-                <div class="feature-item">
-                    <span class="feature-icon">✓</span>
-                    <span>{$_('home.gmailSection.features.instant')}</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">✓</span>
-                    <span>{$_('home.gmailSection.features.real')}</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">✓</span>
-                    <span>{$_('home.gmailSection.features.free')}</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">✓</span>
-                    <span>{$_('home.gmailSection.features.bypass')}</span>
-                </div>
-            </div>
 
             <h2>{$_('home.gmailSection.howTitle')}</h2>
             <p>
@@ -988,11 +983,11 @@ function normalizeGmailAddress(address) {
             </p>
             <!-- Add this after the "What is Disposable Temporary E-mail?" section -->
 
+            <div class="publisher-layout">
+                <div class="publisher-main">
             <!-- Popular Articles Section (English only — blog content is in English) -->
             {#if !data?.seo?.lang || data.seo.lang === 'en'}
-            <div
-                style="margin: 3rem 0; padding: 2rem 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee;"
-            >
+            <div class="popular-articles-section">
                 <h2
                     class="text-center"
                     style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 2rem;"
@@ -1000,13 +995,9 @@ function normalizeGmailAddress(address) {
                     {$_('blog.popular')}
                 </h2>
 
-                <div
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;"
-                >
+                <div class="popular-articles-grid">
                     {#each data.popularArticles as article}
-                        <div
-                            style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; transition: transform 0.2s;"
-                        >
+                        <article class="popular-article-card">
                             <div
                                 style="display: flex; align-items: center; margin-bottom: 0.75rem;"
                             >
@@ -1039,7 +1030,7 @@ function normalizeGmailAddress(address) {
                             >
                                 {article.excerpt}
                             </p>
-                        </div>
+                        </article>
                     {/each}
                 </div>
 
@@ -1048,8 +1039,34 @@ function normalizeGmailAddress(address) {
                 </div>
             </div>
             {/if}
+                </div>
 
             <!-- Featured Service-Specific Guides -->
+                <aside class="publisher-sidebar" aria-label="Temporary email information and featured guides">
+            <div class="sidebar-card why-card">
+                <h2>{$_('home.gmailSection.whyTitle')}</h2>
+                <p>{$_('home.gmailSection.whyText')}</p>
+
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>{$_('home.gmailSection.features.instant')}</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>{$_('home.gmailSection.features.real')}</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>{$_('home.gmailSection.features.free')}</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>{$_('home.gmailSection.features.bypass')}</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="featured-guides-section">
                 <h2 class="text-center" style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 1.5rem;">
                     📱 {$_('home.guidesTitle')}
@@ -1080,6 +1097,9 @@ function normalizeGmailAddress(address) {
                         <span class="read-more">{$_('guides.readGuide')} →</span>
                     </a>
                 </div>
+            </div>
+                    <div class="ad-sidebar" aria-hidden="true"></div>
+                </aside>
             </div>
 
             <!-- How It Works Section - NEW -->
@@ -1119,6 +1139,8 @@ function normalizeGmailAddress(address) {
                     </div>
                 </div>
             </div>
+
+            <div class="ad-banner-middle" aria-hidden="true"></div>
 
             <!-- Real Use Cases Section - NEW -->
             <div class="use-cases-section">
@@ -1268,6 +1290,8 @@ function normalizeGmailAddress(address) {
             </div>
 
             <!-- Add this after the Popular Articles section on your main page -->
+
+            <div class="ad-banner-bottom" aria-hidden="true"></div>
 
             <div class="seo-content-section">
                 <div class="container">
@@ -1586,7 +1610,7 @@ function normalizeGmailAddress(address) {
     .seo-rich-content {
         line-height: 1.8;
         color: #2c3e50;
-        max-width: 800px;
+        max-width: 700px;
         margin: 0 auto;
     }
     
@@ -2773,6 +2797,840 @@ function normalizeGmailAddress(address) {
             font-size: 12px;
         }
     }
-    
-    
+    /* Homepage publisher + SaaS redesign */
+    :global(body) {
+        background: #f7f9fc;
+        color: #172033;
+    }
+
+    :global(.modern-header) {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        margin-bottom: 0;
+        border-bottom: 1px solid #e5eaf1;
+        box-shadow: 0 2px 12px rgba(23, 32, 51, 0.04);
+    }
+
+    .homepage-shell {
+        padding: 32px 0 80px !important;
+        background: #f7f9fc;
+    }
+
+    .homepage-container {
+        width: 100%;
+        max-width: 1200px !important;
+        padding: 0 24px !important;
+        color: #172033 !important;
+    }
+
+    .homepage-content {
+        padding: 0 !important;
+        text-align: left !important;
+    }
+
+    .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(520px, 1.1fr);
+        gap: 56px;
+        align-items: center;
+        min-height: 420px;
+        padding: 40px 0 48px;
+    }
+
+    .hero-copy {
+        min-width: 0;
+    }
+
+    .hero-copy h1 {
+        max-width: 620px;
+        margin: 0 0 20px;
+        color: #111827;
+        font-size: 48px;
+        line-height: 1.08;
+        letter-spacing: 0;
+        text-align: left;
+    }
+
+    .hero-copy h1 span {
+        color: inherit;
+    }
+
+    .hero-copy .lead {
+        max-width: 580px;
+        margin: 0;
+        color: #5d6878;
+        font-size: 18px;
+        line-height: 1.7;
+        text-align: left;
+    }
+
+    .hero-trust-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        margin-top: 26px;
+        color: #344054;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .hero-trust-row > span {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+    }
+
+    .hero-trust-row > span > span {
+        display: inline-flex;
+        width: 20px;
+        height: 20px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: #dcfce7;
+        color: #15803d;
+        font-size: 12px;
+    }
+
+    .generator-card {
+        min-width: 0;
+        padding: 28px;
+        border: 1px solid #dfe5ed;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 12px 32px rgba(23, 32, 51, 0.09);
+    }
+
+    .generator-card .email-address-container {
+        gap: 16px;
+        margin: 0;
+    }
+
+    .generator-card .email-display {
+        width: 100%;
+        height: 58px;
+        padding: 8px 18px;
+        border: 1px solid #cfd7e3;
+        border-radius: 6px;
+        box-shadow: inset 0 1px 2px rgba(23, 32, 51, 0.03);
+    }
+
+    .generator-card .email-display p {
+        color: #111827;
+        font-size: 17px;
+        font-weight: 500;
+    }
+
+    .generator-card .btn-copy {
+        width: 40px;
+        height: 40px;
+        margin-left: 8px;
+        padding: 0;
+        border-radius: 6px;
+        color: #2563eb;
+    }
+
+    .generator-card .btn-copy:hover {
+        background: #eff6ff;
+    }
+
+    .generator-card .radio-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 20px;
+    }
+
+    .generator-card .radio-option {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        margin: 0;
+        color: #475467;
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    .generator-card .email-action-buttons {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .generator-card .email-action-buttons .btn {
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        min-height: 48px;
+        padding: 8px 10px;
+        border-width: 1px;
+        border-radius: 6px;
+        font-size: 13px;
+        line-height: 1.25;
+        white-space: normal;
+    }
+
+    .generator-card .email-action-buttons .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(23, 32, 51, 0.1);
+    }
+
+    .generator-card .email-action-buttons svg {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 auto;
+    }
+
+    .generator-card .domain-dropdown,
+    .generator-card .custom-alias-container {
+        border-color: #dfe5ed;
+        border-radius: 6px;
+        box-shadow: 0 8px 20px rgba(23, 32, 51, 0.08);
+    }
+
+    .ad-banner-top,
+    .ad-banner-middle,
+    .ad-banner-bottom,
+    .ad-sidebar {
+        border: 1px dashed #d6deea;
+        background: #f1f5f9;
+    }
+
+    .ad-banner-top,
+    .ad-banner-middle,
+    .ad-banner-bottom {
+        width: 100%;
+        min-height: 96px;
+        margin: 24px 0 34px;
+    }
+
+    .ad-sidebar {
+        width: 100%;
+        min-height: 250px;
+        margin-top: 20px;
+    }
+
+    .inbox-layout {
+        display: block;
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto 72px;
+    }
+
+    .inbox-panel,
+    .sidebar-card {
+        border: 1px solid #dfe5ed;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 4px 16px rgba(23, 32, 51, 0.05);
+    }
+
+    .inbox-panel {
+        min-width: 0;
+        min-height: 360px;
+        padding: 24px;
+    }
+
+    .publisher-sidebar {
+        position: sticky;
+        top: 104px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        min-width: 0;
+    }
+
+    .sidebar-card {
+        padding: 24px;
+    }
+
+    .sidebar-card h2 {
+        margin: 0 0 12px;
+        color: #111827;
+        font-size: 20px;
+        line-height: 1.3;
+        text-align: left;
+    }
+
+    .sidebar-card > p {
+        margin-bottom: 18px;
+        color: #667085;
+        font-size: 14px;
+        line-height: 1.65;
+    }
+
+    .sidebar-card .feature-list {
+        display: grid;
+        gap: 11px;
+        margin: 0;
+    }
+
+    .sidebar-card .feature-item {
+        gap: 9px;
+        padding: 0;
+        color: #344054;
+        font-size: 14px;
+        line-height: 1.45;
+    }
+
+    .sidebar-card .feature-icon {
+        display: inline-flex;
+        width: 22px;
+        height: 22px;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        border-radius: 50%;
+        background: #ecfdf3;
+        color: #15803d;
+        font-size: 12px;
+    }
+
+    .inbox-panel .loading-indicator,
+    .inbox-panel .refresh-stopped {
+        min-height: 48px;
+        margin: 0 0 16px;
+        padding: 8px 12px;
+        color: #475467;
+        border-radius: 6px;
+        background: #f8fafc;
+    }
+
+    .inbox-panel .loading-indicator span,
+    .inbox-panel .refresh-stopped span {
+        font-size: 14px;
+    }
+
+    .inbox-panel .empty-inbox {
+        min-height: 260px;
+        margin: 0;
+        padding: 48px 24px;
+        border: 0;
+        border-radius: 6px;
+        background: #151b26;
+        color: #d7deea;
+    }
+
+    .inbox-panel .empty-inbox svg {
+        color: #8491a5;
+    }
+
+    .inbox-panel .empty-inbox p:first-of-type {
+        color: #ffffff;
+    }
+
+    .inbox-panel .empty-inbox p:last-of-type {
+        color: #aeb8c7;
+    }
+
+    .inbox-panel .email-list-container {
+        margin: 0;
+        border-width: 1px;
+        border-color: #dfe5ed;
+        border-radius: 6px;
+    }
+
+    .seo-content-section {
+        margin: 72px 0;
+        /*padding: 56px 0;*/
+        border-top: 1px solid #e3e8ef;
+        border-bottom: 1px solid #e3e8ef;
+        border-radius: 0;
+        background: #ffffff;
+    }
+
+    .seo-content-section > .container,
+    .how-it-works-section > .container,
+    .use-cases-section > .container,
+    .security-section > .container,
+    .limitations-section > .container {
+        max-width: 1120px;
+        padding: 0;
+        color: inherit;
+    }
+
+    .seo-content-section .section-title,
+    .section-title {
+        margin-bottom: 14px;
+        color: #111827;
+        font-size: 32px;
+        line-height: 1.2;
+        letter-spacing: 0;
+    }
+
+    .section-subtitle {
+        color: #667085;
+        line-height: 1.7;
+    }
+
+    .seo-rich-content {
+        max-width: 860px;
+        color: #475467;
+        line-height: 1.8;
+        text-align: left;
+    }
+
+    .seo-rich-content h2,
+    .seo-rich-content h3,
+    .seo-rich-content h4 {
+        color: #172033;
+        text-align: left;
+    }
+
+    .publisher-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 7fr) minmax(280px, 3fr);
+        gap: 28px;
+        align-items: start;
+        margin: 64px 0 80px;
+    }
+
+    .publisher-main,
+    .publisher-sidebar {
+        min-width: 0;
+    }
+
+    .publisher-sidebar .ad-sidebar {
+        margin-top: 0;
+    }
+
+    .popular-articles-section {
+        margin: 0;
+        padding: 0;
+    }
+
+    .popular-articles-section > h2 {
+        margin-bottom: 28px !important;
+        color: #111827;
+        font-size: 30px;
+        text-align: left !important;
+    }
+
+    .popular-articles-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .popular-article-card {
+        min-width: 0;
+        padding: 22px;
+        border: 1px solid #dfe5ed;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 2px 10px rgba(23, 32, 51, 0.04);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .popular-article-card:hover {
+        transform: translateY(-2px);
+        border-color: #b9c5d5;
+        box-shadow: 0 8px 20px rgba(23, 32, 51, 0.08);
+    }
+
+    .popular-article-card h3 {
+        font-size: 18px !important;
+        line-height: 1.4;
+    }
+
+    .popular-article-card p {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        line-height: 1.6;
+    }
+
+    .popular-articles-section .btn-blog {
+        display: inline-flex;
+        width: auto;
+        min-width: 0;
+        justify-content: center;
+        border: 1px solid #cfd7e3;
+        background: #ffffff;
+        color: #172033;
+    }
+
+    .featured-guides-section {
+        margin: 0;
+        padding: 24px;
+        border: 1px solid #dfe5ed;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 4px 16px rgba(23, 32, 51, 0.05);
+    }
+
+    .featured-guides-section > h2 {
+        margin-bottom: 10px !important;
+        font-size: 20px;
+        text-align: left !important;
+    }
+
+    .featured-guides-section > p {
+        margin-bottom: 18px !important;
+        font-size: 14px !important;
+        line-height: 1.6;
+        text-align: left !important;
+    }
+
+    .featured-guides-section .guides-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin: 0;
+    }
+
+    .featured-guides-section .guide-card {
+        display: grid;
+        grid-template-columns: 34px minmax(0, 1fr);
+        gap: 2px 10px;
+        padding: 14px;
+        border: 1px solid #e4e9f0;
+        border-radius: 6px;
+        box-shadow: none;
+    }
+
+    .featured-guides-section .guide-card:hover {
+        transform: translateY(-1px);
+        border-color: #bac6d5;
+        box-shadow: 0 5px 12px rgba(23, 32, 51, 0.06);
+    }
+
+    .featured-guides-section .guide-icon {
+        grid-row: 1 / span 3;
+        margin: 0;
+        font-size: 24px;
+    }
+
+    .featured-guides-section .guide-card h3 {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .featured-guides-section .guide-card p {
+        display: -webkit-box;
+        overflow: hidden;
+        margin: 4px 0;
+        color: #667085;
+        font-size: 12px;
+        line-height: 1.45;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    .featured-guides-section .read-more {
+        font-size: 12px;
+        color: #2563eb;
+    }
+
+    .how-it-works-section,
+    .use-cases-section,
+    .security-section,
+    .limitations-section {
+        margin: 0;
+        padding: 64px 0;
+        color: #172033;
+        background: transparent;
+    }
+
+    .how-it-works-section {
+        border-top: 1px solid #e3e8ef;
+        border-bottom: 1px solid #e3e8ef;
+        background: #ffffff;
+    }
+
+    .steps-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 40px;
+    }
+
+    .step-card,
+    .use-case-card,
+    .security-feature {
+        padding: 24px;
+        border: 1px solid #dfe5ed;
+        border-radius: 8px;
+        background: #ffffff;
+        color: #172033;
+        box-shadow: 0 2px 10px rgba(23, 32, 51, 0.04);
+    }
+
+    .step-card:hover,
+    .use-case-card:hover,
+    .security-feature:hover {
+        transform: translateY(-2px);
+        background: #ffffff;
+        box-shadow: 0 8px 20px rgba(23, 32, 51, 0.08);
+    }
+
+    .step-number {
+        top: -16px;
+        width: 32px;
+        height: 32px;
+        background: #2563eb;
+        color: #ffffff;
+        font-size: 14px;
+        box-shadow: none;
+    }
+
+    .step-icon,
+    .use-case-icon,
+    .security-icon {
+        font-size: 30px;
+    }
+
+    .step-card h3,
+    .use-case-card h3,
+    .security-feature h3 {
+        color: #172033;
+        font-size: 17px;
+    }
+
+    .step-card p,
+    .use-case-card p,
+    .security-feature p {
+        color: #667085;
+        opacity: 1;
+    }
+
+    .use-cases-section {
+        padding-top: 72px;
+    }
+
+    .use-cases-grid,
+    .security-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 40px;
+    }
+
+    .use-case-card {
+        border-left: 1px solid #dfe5ed;
+    }
+
+    .security-section {
+        border-top: 1px solid #dce9e1;
+        border-bottom: 1px solid #dce9e1;
+        background: #eef8f2;
+    }
+
+    .limitations-section {
+        background: #fff7f7;
+        color: #172033;
+    }
+
+    .limitations-content {
+        max-width: 940px;
+    }
+
+    .limitation-warning,
+    .limitation-warning.major,
+    .limitation-info,
+    .good-uses {
+        border: 1px solid #f0caca;
+        border-radius: 8px;
+        background: #ffffff;
+        color: #344054;
+        box-shadow: none;
+    }
+
+    .limitations-list li,
+    .why-not {
+        border-color: #efb5b5;
+        background: #fff4f4;
+        color: #475467;
+    }
+
+    .limitation-info ul li,
+    .good-uses ul li {
+        border-bottom-color: #edf0f4;
+    }
+
+    @media (max-width: 1024px) {
+        .hero-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
+            min-height: 0;
+            padding-top: 24px;
+        }
+
+        .hero-copy {
+            max-width: 760px;
+        }
+
+        .hero-copy h1 {
+            font-size: 42px;
+        }
+
+        .generator-card {
+            width: 100%;
+        }
+
+        .publisher-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .publisher-sidebar {
+            position: static;
+        }
+
+        .publisher-sidebar {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .publisher-sidebar .ad-sidebar {
+            grid-column: 1 / -1;
+            min-height: 180px;
+            margin-top: 0;
+        }
+
+        .steps-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 768px) {
+        :global(.modern-header) {
+            position: relative;
+        }
+
+        .homepage-shell {
+            padding-top: 16px !important;
+        }
+
+        .homepage-container {
+            padding: 0 16px !important;
+        }
+
+        .hero-grid {
+            gap: 24px;
+            padding: 12px 0 28px;
+        }
+
+        .hero-copy h1 {
+            font-size: 34px;
+            line-height: 1.14;
+        }
+
+        .hero-copy .lead {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .hero-trust-row {
+            margin-top: 20px;
+        }
+
+        .generator-card {
+            padding: 18px;
+        }
+
+        .generator-card .email-action-buttons {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .generator-card .email-action-buttons .btn {
+            max-width: none;
+            min-width: 0;
+        }
+
+        .inbox-layout {
+            margin-bottom: 48px;
+        }
+
+        .inbox-panel {
+            min-height: 320px;
+            padding: 16px;
+        }
+
+        .publisher-sidebar {
+            display: block;
+        }
+
+        .publisher-sidebar .ad-sidebar {
+            min-height: 180px;
+            margin-top: 20px;
+        }
+
+        .ad-banner-top,
+        .ad-banner-middle,
+        .ad-banner-bottom {
+            min-height: 72px;
+            margin: 20px 0 28px;
+        }
+
+        .seo-content-section,
+        .publisher-layout {
+            margin: 48px 0;
+        }
+
+        .seo-content-section,
+        .how-it-works-section,
+        .use-cases-section,
+        .security-section,
+        .limitations-section {
+            padding: 44px 0;
+        }
+
+        .section-title,
+        .seo-content-section .section-title {
+            font-size: 28px;
+        }
+
+        .popular-articles-grid,
+        .steps-grid,
+        .use-cases-grid,
+        .security-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .popular-articles-section > h2 {
+            font-size: 27px;
+        }
+    }
+
+    @media (max-width: 420px) {
+        .homepage-container {
+            padding: 0 12px !important;
+        }
+
+        .hero-copy h1 {
+            font-size: 30px;
+        }
+
+        .hero-trust-row {
+            display: grid;
+        }
+
+        .generator-card {
+            padding: 14px;
+        }
+
+        .generator-card .email-display {
+            padding: 8px 10px;
+        }
+
+        .generator-card .email-display p {
+            font-size: 15px;
+        }
+
+        .generator-card .email-action-buttons .btn {
+            padding: 8px 6px;
+            font-size: 12px;
+        }
+
+        .sidebar-card,
+        .popular-article-card,
+        .featured-guides-section,
+        .step-card,
+        .use-case-card,
+        .security-feature {
+            padding: 18px;
+        }
+    }
+
 </style>
