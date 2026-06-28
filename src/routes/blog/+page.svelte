@@ -401,13 +401,6 @@
                 </div>
             </div>
 
-            <!-- Ad Placeholder for AdSense -->
-            <div class="sidebar-card ad-placeholder">
-                <div class="ad-label">Advertisement</div>
-                <div class="ad-slot">
-                    <!-- AdSense unit goes here -->
-                </div>
-            </div>
         </aside>
     </main>
 
@@ -957,30 +950,6 @@
         background: var(--bg-subtle);
         padding: 1px 8px;
         border-radius: 10px;
-    }
-
-    /* Ad Placeholder */
-    .ad-placeholder {
-        background: var(--bg-subtle);
-        border-style: dashed;
-        min-height: 250px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .ad-label {
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--text-secondary);
-        margin-bottom: 8px;
-    }
-
-    .ad-slot {
-        width: 100%;
-        min-height: 200px;
     }
 
     /* Empty State */

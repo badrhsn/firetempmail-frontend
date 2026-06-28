@@ -3,7 +3,6 @@
     import { onMount } from "svelte";
     import { generate } from "random-words";
     import { _ } from 'svelte-i18n';
-    import { getPopularArticles } from '$lib/data/blogPosts';
     import {
         receivingEmail, 
         availableDomains, 
@@ -1004,7 +1003,7 @@ function normalizeGmailAddress(address) {
                 <div
                     style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;"
                 >
-                    {#each getPopularArticles() as article}
+                    {#each data.popularArticles as article}
                         <div
                             style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; transition: transform 0.2s;"
                         >
