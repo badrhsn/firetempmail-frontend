@@ -18,6 +18,7 @@
     import Hreflang from '$lib/components/Hreflang.svelte';
 import Breadcrumb from '$lib/components/Breadcrumb.svelte';
 import RelatedGuides from '$lib/components/RelatedGuides.svelte';
+import '$lib/styles/tool-page-layout.css';
     
     // Import page data for SEO
     export let data;
@@ -605,9 +606,9 @@ function selectDomain(domain) {
     </div>
 {/if}
 
-<section class="py-4 py-xl-5">
-    <div class="container">
-        <div class="text-center p-4 p-lg-5">
+<section class="py-4 py-xl-5 tool-page-shell">
+    <div class="container tool-page-container">
+        <div class="text-center p-4 p-lg-5 tool-page-content">
             <!-- Header -->
             <h1>
         🔥 Free Burner Email – Disposable Temporary Inbox Instantly
@@ -759,6 +760,7 @@ function selectDomain(domain) {
                 
             </div>
             
+            <div class="tool-inbox">
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
@@ -906,23 +908,21 @@ function selectDomain(domain) {
                 {/if}
             {/if}
 
-            <h2>Burner Email Generator - Temporary & Disposable Email</h2>
-<p class="description">
-  Looking for a <strong>temporary email</strong> to protect your inbox and stay anonymous online? Fire Temp Mail offers a <strong>disposable email</strong> service that lets you create a <strong>burner inbox</strong> instantly. Use it for testing, online registrations, or trial accounts — completely free and secure.
-</p>
-
-<h3>Why Use Our Burner Email Generator?</h3>
-<ul class="text-start mx-auto" style="max-width: 720px;">
-  <li>🔒 Keep your real email safe from spam, phishing, and unwanted subscriptions.</li>
-  <li>📩 Receive OTPs, account confirmations, and trial codes instantly.</li>
-  <li>⏳ Temporary emails auto-expire after 24–48 hours — no cleanup needed.</li>
-  <li>💻 Use a <strong>disposable email</strong> anywhere online without revealing personal info.</li>
-</ul>
-
-<p class="description">
-  Fire Temp Mail makes generating a <strong>temporary burner email</strong> simple and reliable. Whether you need a <strong>disposable inbox</strong> for testing, anonymous signups, or short-term online use, you can create your <strong>burner email</strong> in seconds.
-</p>
-
+            <div class="tool-inbox-intro">
+                <h2>Why Use Our Burner Email Generator?</h2>
+                <ul class="tool-inbox-benefits">
+                    <li>🔒 Keep your real email safe from spam, phishing, and unwanted subscriptions.</li>
+                    <li>📩 Receive OTPs, account confirmations, and trial codes instantly.</li>
+                    <li>⏳ Temporary emails auto-expire after 24–48 hours — no cleanup needed.</li>
+                    <li>💻 Use a <strong>disposable email</strong> anywhere online without revealing personal info.</li>
+                </ul>
+                <p class="description">
+                    Fire Temp Mail makes generating a <strong>temporary burner email</strong> simple and reliable. Whether you need a <strong>disposable inbox</strong> for testing, anonymous signups, or short-term online use, you can create your <strong>burner email</strong> in seconds.
+                </p>
+            </div>
+            </div>
+            <div class="tool-content-with-aside">
+                <main class="tool-main-content">
 <section class="mt-10 p-6 bg-gray-50 rounded-xl shadow-md">
   <h2 class="text-xl font-semibold mb-4">Frequently Asked Questions about Burner Email Generator</h2>
   
@@ -1031,7 +1031,11 @@ function selectDomain(domain) {
     </p>
 </section>
 
-<RelatedGuides guides={burnerEmailGuides} />
+                </main>
+                <aside class="tool-sidebar" aria-label="Related guides">
+                    <RelatedGuides guides={burnerEmailGuides} />
+                </aside>
+            </div>
 
         </div>
 

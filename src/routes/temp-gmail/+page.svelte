@@ -19,6 +19,7 @@
     import Hreflang from '$lib/components/Hreflang.svelte';
 import Breadcrumb from '$lib/components/Breadcrumb.svelte';
 import RelatedGuides from '$lib/components/RelatedGuides.svelte';
+import '$lib/styles/tool-page-layout.css';
     
     // Import page data for SEO
     export let data;
@@ -587,9 +588,9 @@ function selectDomain(domain) {
     </div>
 {/if}
 
-<section class="py-4 py-xl-5">
-    <div class="container">
-        <div class="text-center p-4 p-lg-5">
+<section class="py-4 py-xl-5 tool-page-shell">
+    <div class="container tool-page-container">
+        <div class="text-center p-4 p-lg-5 tool-page-content">
             <!-- Header -->
             <h1>
                 <span>📮&nbsp;</span>
@@ -743,6 +744,7 @@ function selectDomain(domain) {
                 {/if}
             </div>
             
+            <div class="tool-inbox">
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
@@ -890,11 +892,15 @@ function selectDomain(domain) {
                 {/if}
             {/if}
 
-            <h2>Temporary Gmail Generator - Leverage Gmail's Built-in Privacy Features</h2>
-<p class="description">
-    Master Gmail's powerful plus-addressing and dot trick features to create unlimited email aliases from your existing Gmail account. Organize signups, filter spam, and track who's selling your email—all without creating new accounts.
-</p>
-
+            <div class="tool-inbox-intro">
+                <h2>Temporary Gmail Generator - Leverage Gmail's Built-in Privacy Features</h2>
+                <p class="description">
+                    Master Gmail's powerful plus-addressing and dot trick features to create unlimited email aliases from your existing Gmail account. Organize signups, filter spam, and track who's selling your email—all without creating new accounts.
+                </p>
+            </div>
+            </div>
+            <div class="tool-content-with-aside">
+                <main class="tool-main-content">
 <!-- SEO article: Gmail-SPECIFIC features (unique content) -->
 <section aria-labelledby="gmail-tricks" class="seo-article">
     <h2 id="gmail-tricks">{$_('tempGmailPage.seoTitle1')}</h2>
@@ -1005,7 +1011,11 @@ function selectDomain(domain) {
     <p>{$_('tempGmailPage.ctaP2')}</p>
 </section>
 
-<RelatedGuides guides={tempGmailGuides} />
+                </main>
+                <aside class="tool-sidebar" aria-label="Related guides">
+                    <RelatedGuides guides={tempGmailGuides} />
+                </aside>
+            </div>
 
         </div>
 </div>

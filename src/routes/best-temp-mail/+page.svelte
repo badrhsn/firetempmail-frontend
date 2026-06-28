@@ -16,6 +16,7 @@
     import Hreflang from '$lib/components/Hreflang.svelte';
 import Breadcrumb from '$lib/components/Breadcrumb.svelte';
 import RelatedGuides from '$lib/components/RelatedGuides.svelte';
+import '$lib/styles/tool-page-layout.css';
     
     // Import page data for SEO
     export let data;
@@ -586,9 +587,9 @@ function selectDomain(domain) {
     </div>
 {/if}
 
-<section class="py-4 py-xl-5">
-    <div class="container">
-        <div class="text-center p-4 p-lg-5">
+<section class="py-4 py-xl-5 tool-page-shell">
+    <div class="container tool-page-container">
+        <div class="text-center p-4 p-lg-5 tool-page-content">
             <!-- Header -->
            <h1>
             <span>🔥&nbsp;</span>
@@ -745,6 +746,7 @@ function selectDomain(domain) {
                 
             </div>
             
+            <div class="tool-inbox">
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
@@ -877,14 +879,15 @@ function selectDomain(domain) {
                 {/if}
             {/if}
 
-            <h2>Best Temporary Email Address</h2>
-<p class="description">
-    Looking for the best way to protect your inbox from spam and unwanted emails? 
-    <strong>FireTempMail</strong> gives you instant access to a free, disposable inbox that works anywhere. 
-    Use it to sign up for websites, receive verification codes, or test services without exposing your real email address.
-    Unlike limited-time options like 10 Minute Mail, FireTempMail stays active as long as you need it.
-</p>
-
+            <div class="tool-inbox-intro">
+                <h2>A Fast, Private Temp Mail Service for Everyday Use</h2>
+                <p class="description">
+                    FireTempMail gives you a free disposable inbox for signups, verification emails, and service testing. Generate an address instantly, receive messages in your browser, and keep unwanted mail away from your personal inbox.
+                </p>
+            </div>
+            </div>
+            <div class="tool-content-with-aside">
+                <main class="tool-main-content">
 <section aria-labelledby="best-temp-mail-guide" class="seo-article" style="margin-top: 3rem; padding: 2.5rem 2rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;">
     <h2 id="best-temp-mail-guide" style="font-size:1.6rem;margin-bottom:1rem;;color:#0f172a">Best Temp Mail Services Compared (2026)</h2>
     <p style="color:#374151;margin-bottom:1.5rem;">
@@ -993,7 +996,11 @@ function selectDomain(domain) {
     <p style="color:#374151;margin-bottom:1rem;">Yes, for receiving emails. You should never use a temp mail address as the recovery email for accounts you care about, because once the temp address expires you lose access to account recovery. Use temp mail for one-time signups and free trials — not for your main accounts.</p>
 </section>
 
-<RelatedGuides guides={bestTempMailGuides} />
+                </main>
+                <aside class="tool-sidebar" aria-label="Related guides">
+                    <RelatedGuides guides={bestTempMailGuides} />
+                </aside>
+            </div>
 
         </div>
 </div>

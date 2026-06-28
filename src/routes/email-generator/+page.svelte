@@ -16,6 +16,7 @@
     import Hreflang from '$lib/components/Hreflang.svelte';
 import Breadcrumb from '$lib/components/Breadcrumb.svelte';
 import RelatedGuides from '$lib/components/RelatedGuides.svelte';
+import '$lib/styles/tool-page-layout.css';
     
     // Import page data for SEO
     export let data;
@@ -544,9 +545,9 @@ function normalizeGmailAddress(address) {
     </div>
 {/if}
 
-<section class="py-4 py-xl-5">
-    <div class="container">
-        <div class="text-center p-4 p-lg-5">
+<section class="py-4 py-xl-5 tool-page-shell">
+    <div class="container tool-page-container">
+        <div class="text-center p-4 p-lg-5 tool-page-content">
             <!-- Header -->
             <h1>
                 <span>📮&nbsp;</span>
@@ -698,6 +699,7 @@ function normalizeGmailAddress(address) {
                 
             </div>
             
+            <div class="tool-inbox">
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
                 <div class="loading-indicator">
@@ -845,7 +847,15 @@ function normalizeGmailAddress(address) {
                 {/if}
             {/if}
 
-
+            <div class="tool-inbox-intro">
+                <h2>Free Email Generator for Fast, Private Signups</h2>
+                <p class="description">
+                    Create a disposable email address in seconds and receive verification messages without exposing your personal inbox. Fire Temp Mail is useful for website registrations, app testing, newsletters, and other short-term online tasks.
+                </p>
+            </div>
+            </div>
+            <div class="tool-content-with-aside">
+                <main class="tool-main-content">
             <!-- Developer & QA Testing Content -->
             <section aria-labelledby="developer-testing" class="seo-article" style="margin-top: 3rem; padding: 2rem; background:#f8fafc; border-radius: 12px;">
                 <h2 id="developer-testing">{$_('emailGeneratorPage.seoTitle')}</h2>
@@ -918,7 +928,11 @@ function normalizeGmailAddress(address) {
                 <p><strong>{$_('email.perfectFor')}</strong> {$_('emailGeneratorPage.startP2')}</p>
             </section>
 
-<RelatedGuides guides={emailGeneratorGuides} />
+                </main>
+                <aside class="tool-sidebar" aria-label="Related guides">
+                    <RelatedGuides guides={emailGeneratorGuides} />
+                </aside>
+            </div>
 
         </div>
 
