@@ -957,6 +957,8 @@ function normalizeGmailAddress(address) {
                 </div>
             </div>
 
+            <div class="content-with-aside">
+                <div class="home-main-content">
             <!-- Insert: Gmail temp mail SEO block (place this before the "What is Disposable Temporary E-mail?" section) -->
            <div class="seo-content-section">
     <div class="container">
@@ -985,8 +987,6 @@ function normalizeGmailAddress(address) {
 
             <!-- Add this after the "What is Disposable Temporary E-mail?" section -->
 
-            <div class="publisher-layout">
-                <div class="publisher-main">
             <!-- Popular Articles Section (English only — blog content is in English) -->
             {#if !data?.seo?.lang || data.seo.lang === 'en'}
             <div class="popular-articles-section">
@@ -1041,68 +1041,6 @@ function normalizeGmailAddress(address) {
                 </div>
             </div>
             {/if}
-                </div>
-
-            <!-- Featured Service-Specific Guides -->
-                <aside class="publisher-sidebar" aria-label="Temporary email information and featured guides">
-            <div class="sidebar-card why-card">
-                <h2>{$_('home.gmailSection.whyTitle')}</h2>
-                <p>{$_('home.gmailSection.whyText')}</p>
-
-                <div class="feature-list">
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>{$_('home.gmailSection.features.instant')}</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>{$_('home.gmailSection.features.real')}</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>{$_('home.gmailSection.features.free')}</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>{$_('home.gmailSection.features.bypass')}</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="featured-guides-section">
-                <h2 class="text-center" style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 1.5rem;">
-                    📱 {$_('home.guidesTitle')}
-                </h2>
-                <p class="text-center" style="color: #6c757d; margin-bottom: 2rem; font-size: 1.1rem;">
-                    {$_('home.guidesSubtitle')}
-                </p>
-                
-                <div class="guides-grid">
-                    <a href="/blog/how-to-use-temp-email-for-discord-verification" class="guide-card">
-                        <div class="guide-icon">💬</div>
-                        <h3>{$_('home.discordGuide.title')}</h3>
-                        <p>{$_('home.discordGuide.description')}</p>
-                        <span class="read-more">{$_('guides.readGuide')} →</span>
-                    </a>
-                    
-                    <a href="/blog/instagram-temp-mail-sign-up-without-personal-email" class="guide-card">
-                        <div class="guide-icon">📸</div>
-                        <h3>{$_('home.instagramGuide.title')}</h3>
-                        <p>{$_('home.instagramGuide.description')}</p>
-                        <span class="read-more">{$_('guides.readGuide')} →</span>
-                    </a>
-                    
-                    <a href="/blog/tiktok-temporary-email-guide-avoid-spam-signups" class="guide-card">
-                        <div class="guide-icon">🎵</div>
-                        <h3>{$_('home.tiktokGuide.title')}</h3>
-                        <p>{$_('home.tiktokGuide.description')}</p>
-                        <span class="read-more">{$_('guides.readGuide')} →</span>
-                    </a>
-                </div>
-            </div>
-                    <!-- <div class="ad-sidebar" aria-hidden="true"></div> -->
-                </aside>
-            </div>
 
             <!-- How It Works Section - NEW -->
             <div class="how-it-works-section">
@@ -1426,6 +1364,66 @@ function normalizeGmailAddress(address) {
                         </div>
                     </div>
                 </div>
+            </div>
+                </div>
+
+                <aside class="publisher-sidebar" aria-label="Temporary email information and featured guides">
+                    <div class="sidebar-card why-card">
+                        <h2>{$_('home.gmailSection.whyTitle')}</h2>
+                        <p>{$_('home.gmailSection.whyText')}</p>
+
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>{$_('home.gmailSection.features.instant')}</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>{$_('home.gmailSection.features.real')}</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>{$_('home.gmailSection.features.free')}</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>{$_('home.gmailSection.features.bypass')}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="featured-guides-section">
+                        <h2 class="text-center" style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 1.5rem;">
+                            📱 {$_('home.guidesTitle')}
+                        </h2>
+                        <p class="text-center" style="color: #6c757d; margin-bottom: 2rem; font-size: 1.1rem;">
+                            {$_('home.guidesSubtitle')}
+                        </p>
+
+                        <div class="guides-grid">
+                            <a href="/blog/how-to-use-temp-email-for-discord-verification" class="guide-card">
+                                <div class="guide-icon">💬</div>
+                                <h3>{$_('home.discordGuide.title')}</h3>
+                                <p>{$_('home.discordGuide.description')}</p>
+                                <span class="read-more">{$_('guides.readGuide')} →</span>
+                            </a>
+
+                            <a href="/blog/instagram-temp-mail-sign-up-without-personal-email" class="guide-card">
+                                <div class="guide-icon">📸</div>
+                                <h3>{$_('home.instagramGuide.title')}</h3>
+                                <p>{$_('home.instagramGuide.description')}</p>
+                                <span class="read-more">{$_('guides.readGuide')} →</span>
+                            </a>
+
+                            <a href="/blog/tiktok-temporary-email-guide-avoid-spam-signups" class="guide-card">
+                                <div class="guide-icon">🎵</div>
+                                <h3>{$_('home.tiktokGuide.title')}</h3>
+                                <p>{$_('home.tiktokGuide.description')}</p>
+                                <span class="read-more">{$_('guides.readGuide')} →</span>
+                            </a>
+                        </div>
+                    </div>
+                </aside>
             </div>
             </div>
 
@@ -3198,17 +3196,21 @@ function normalizeGmailAddress(address) {
         text-align: left;
     }
 
-    .publisher-layout {
+    .content-with-aside {
         display: grid;
         grid-template-columns: minmax(0, 7fr) minmax(280px, 3fr);
         gap: 28px;
         align-items: start;
-        margin: 64px 0 80px;
+        margin: 72px 0 80px;
     }
 
-    .publisher-main,
+    .home-main-content,
     .publisher-sidebar {
         min-width: 0;
+    }
+
+    .home-main-content > .seo-content-section:first-child {
+        margin-top: 0;
     }
 
     .publisher-sidebar .ad-sidebar {
@@ -3488,12 +3490,17 @@ function normalizeGmailAddress(address) {
             width: 100%;
         }
 
-        .publisher-layout {
+        .content-with-aside {
             grid-template-columns: 1fr;
         }
 
         .publisher-sidebar {
             position: static;
+            grid-row: 1;
+        }
+
+        .home-main-content {
+            grid-row: 2;
         }
 
         .publisher-sidebar {
@@ -3597,7 +3604,7 @@ function normalizeGmailAddress(address) {
         }
 
         .seo-content-section,
-        .publisher-layout {
+        .content-with-aside {
             margin: 48px 0;
         }
 
