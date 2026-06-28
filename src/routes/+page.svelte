@@ -3051,8 +3051,7 @@ function normalizeGmailAddress(address) {
     }
 
     .publisher-sidebar {
-        position: sticky;
-        top: 104px;
+        position: static;
         display: flex;
         flex-direction: column;
         gap: 20px;
@@ -3211,6 +3210,12 @@ function normalizeGmailAddress(address) {
 
     .home-main-content > .seo-content-section:first-child {
         margin-top: 0;
+    }
+
+    .home-main-content .steps-grid,
+    .home-main-content .use-cases-grid,
+    .home-main-content .security-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .publisher-sidebar .ad-sidebar {
