@@ -887,7 +887,7 @@ function selectDomain(domain) {
             </div>
             </div>
             <div class="tool-content-with-aside">
-                <main class="tool-main-content">
+                <main class="tool-main-content journey-content entry-content">
 <section aria-labelledby="best-temp-mail-guide" class="seo-article" style="margin-top: 3rem; padding: 2.5rem 2rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;">
     <h2 id="best-temp-mail-guide" style="font-size:1.6rem;margin-bottom:1rem;;color:#0f172a">Best Temp Mail Services Compared (2026)</h2>
     <p style="color:#374151;margin-bottom:1.5rem;">
@@ -997,7 +997,7 @@ function selectDomain(domain) {
 </section>
 
                 </main>
-                <aside class="tool-sidebar" aria-label="Related guides">
+                <aside class="tool-sidebar journey-sidebar" aria-label="Related guides">
                     <RelatedGuides guides={bestTempMailGuides} />
                 </aside>
             </div>

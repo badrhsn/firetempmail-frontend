@@ -319,9 +319,10 @@
     </section>
 {:else if post}
     <!-- Show actual post content when data is available -->
-    <section class="py-4 py-xl-5">
-        <div class="container" style="max-width: 800px;">
-            <div class="text-center p-4 p-lg-5">
+    <section class="py-4 py-xl-5 blog-post-shell">
+        <div class="container blog-post-container">
+            <div class="blog-post-layout">
+                <main class="blog-post-main">
 
                     {#if showMethodologyBadge}
                         <div class="methodology-badge">
@@ -356,7 +357,7 @@
                 </div>
                 
                 <!-- Article Content -->
-                <div style="text-align: left; line-height: 1.8;">
+                <div class="article-content journey-content entry-content" style="text-align: left; line-height: 1.8;">
                     {@html post.content}
                 </div>
                 
@@ -373,21 +374,38 @@
                     </div>
                 </div>
 
-                <!-- Related Articles -->
-                {#if relatedPosts.length > 0}
-                <div style="text-align: left; margin: 2rem 0; padding: 1.5rem; border-top: 1px solid #e9ecef;">
-                    <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem;">Related Articles</h3>
-                    <div style="display: grid; gap: 1rem;">
+                </main>
+
+                <aside class="blog-post-sidebar journey-sidebar" aria-label="Related articles and popular tools">
+                    <section class="article-sidebar-card">
+                        <h2>Related Articles</h2>
+                        {#if relatedPosts.length > 0}
+                        <nav class="article-sidebar-links" aria-label="Related articles">
                         {#each relatedPosts as related}
-                            <a href="/blog/{related.slug}" style="display: block; padding: 1rem; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: inherit; transition: background 0.2s;">
-                                <div style="font-weight: 600; color: #333; margin-bottom: 0.25rem;">{related.title}</div>
-                                <div style="font-size: 0.85rem; color: #6c757d;">{related.excerpt}</div>
-                                <div style="font-size: 0.8rem; color: #999; margin-top: 0.5rem;">{related.category} · {related.read_time || related.readTime}</div>
+                            <a href="/blog/{related.slug}" class="article-sidebar-link">
+                                <strong>{related.title}</strong>
+                                <span>{related.category} · {related.read_time || related.readTime}</span>
                             </a>
                         {/each}
-                    </div>
-                </div>
-                {/if}
+                        </nav>
+                        {:else}
+                            <a href="/blog" class="article-sidebar-link article-sidebar-link-single">
+                                <strong>Browse all articles</strong>
+                                <span>Explore privacy guides and temporary email tutorials.</span>
+                            </a>
+                        {/if}
+                    </section>
+
+                    <section class="article-sidebar-card">
+                        <h2>Popular Tools</h2>
+                        <nav class="article-tool-links" aria-label="Popular temporary email tools">
+                            <a href="/email-generator">Email Generator</a>
+                            <a href="/temp-gmail">Temp Gmail</a>
+                            <a href="/burner-email">Burner Email</a>
+                            <a href="/best-temp-mail">Best Temp Mail</a>
+                        </nav>
+                    </section>
+                </aside>
             </div>
         </div>
     </section>
@@ -404,6 +422,114 @@
 {/if}
 
 <style>
+    .blog-post-shell {
+        background: #f7f9fc;
+    }
+
+    .blog-post-container {
+        width: 100%;
+        max-width: 1200px !important;
+        padding: 0 24px !important;
+    }
+
+    .blog-post-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 300px;
+        gap: 40px;
+        align-items: start;
+    }
+
+    .blog-post-main,
+    .blog-post-sidebar {
+        min-width: 0;
+    }
+
+    .blog-post-main {
+        padding: 0;
+        text-align: center;
+    }
+
+    .article-content {
+        overflow-wrap: anywhere;
+    }
+
+    .blog-post-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .article-sidebar-card {
+        padding: 20px;
+        border: 1px solid #dfe5ed;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 2px 10px rgba(23, 32, 51, 0.04);
+        text-align: left;
+    }
+
+    .article-sidebar-card h2 {
+        margin: 0 0 14px;
+        color: #111827;
+        font-size: 18px;
+        line-height: 1.3;
+        text-align: left;
+    }
+
+    .article-sidebar-links,
+    .article-tool-links {
+        display: grid;
+        gap: 10px;
+    }
+
+    .article-sidebar-link {
+        display: grid;
+        gap: 5px;
+        padding: 12px;
+        border: 1px solid #e5e9f0;
+        border-radius: 6px;
+        color: #172033;
+        text-decoration: none;
+        transition: border-color 0.15s, background 0.15s;
+    }
+
+    .article-sidebar-link:hover {
+        border-color: #cfd6e1;
+        background: #f8fafc;
+    }
+
+    .article-sidebar-link strong {
+        font-size: 14px;
+        line-height: 1.35;
+    }
+
+    .article-sidebar-link span {
+        color: #667085;
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .article-sidebar-link-single {
+        margin-top: 2px;
+    }
+
+    .article-tool-links a {
+        padding: 9px 0;
+        border-bottom: 1px solid #edf0f4;
+        color: #344054;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .article-tool-links a:last-child {
+        border-bottom: 0;
+    }
+
+    .article-tool-links a:hover {
+        color: #111827;
+    }
+
     .reading-progress-bar {
         position: fixed;
         top: 0;
@@ -626,6 +752,27 @@
 
         :global(article table) {
             font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .blog-post-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .blog-post-sidebar {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 640px) {
+        .blog-post-container {
+            padding: 0 16px !important;
+        }
+
+        .blog-post-sidebar {
+            grid-template-columns: 1fr;
         }
     }
 </style>

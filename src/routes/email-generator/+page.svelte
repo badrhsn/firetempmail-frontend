@@ -855,7 +855,7 @@ function normalizeGmailAddress(address) {
             </div>
             </div>
             <div class="tool-content-with-aside">
-                <main class="tool-main-content">
+                <main class="tool-main-content journey-content entry-content">
             <!-- Developer & QA Testing Content -->
             <section aria-labelledby="developer-testing" class="seo-article" style="margin-top: 3rem; padding: 2rem; background:#f8fafc; border-radius: 12px;">
                 <h2 id="developer-testing">{$_('emailGeneratorPage.seoTitle')}</h2>
@@ -929,7 +929,7 @@ function normalizeGmailAddress(address) {
             </section>
 
                 </main>
-                <aside class="tool-sidebar" aria-label="Related guides">
+                <aside class="tool-sidebar journey-sidebar" aria-label="Related guides">
                     <RelatedGuides guides={emailGeneratorGuides} />
                 </aside>
             </div>

@@ -337,7 +337,7 @@
     <!-- Content Area -->
     <main class="blog-content">
         <!-- Posts Grid -->
-        <div class="posts-grid">
+        <div class="posts-grid journey-content entry-content">
             {#each displayPosts as post}
                 <article class="post-card">
                     <a href="/blog/{post.slug}" class="card-link">
@@ -375,7 +375,7 @@
         {/if}
 
         <!-- Sidebar -->
-        <aside class="sidebar">
+        <aside class="sidebar journey-sidebar">
             <!-- About Box -->
             <div class="sidebar-card about-card">
                 <h3>About This Blog</h3>

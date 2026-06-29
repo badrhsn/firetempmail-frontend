@@ -900,7 +900,7 @@ function selectDomain(domain) {
             </div>
             </div>
             <div class="tool-content-with-aside">
-                <main class="tool-main-content">
+                <main class="tool-main-content journey-content entry-content">
 <!-- SEO article: Gmail-SPECIFIC features (unique content) -->
 <section aria-labelledby="gmail-tricks" class="seo-article">
     <h2 id="gmail-tricks">{$_('tempGmailPage.seoTitle1')}</h2>
@@ -1012,7 +1012,7 @@ function selectDomain(domain) {
 </section>
 
                 </main>
-                <aside class="tool-sidebar" aria-label="Related guides">
+                <aside class="tool-sidebar journey-sidebar" aria-label="Related guides">
                     <RelatedGuides guides={tempGmailGuides} />
                 </aside>
             </div>

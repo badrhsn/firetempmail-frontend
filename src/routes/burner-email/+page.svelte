@@ -922,7 +922,7 @@ function selectDomain(domain) {
             </div>
             </div>
             <div class="tool-content-with-aside">
-                <main class="tool-main-content">
+                <main class="tool-main-content journey-content entry-content">
 <section class="mt-10 p-6 bg-gray-50 rounded-xl shadow-md">
   <h2 class="text-xl font-semibold mb-4">Frequently Asked Questions about Burner Email Generator</h2>
   
@@ -1032,7 +1032,7 @@ function selectDomain(domain) {
 </section>
 
                 </main>
-                <aside class="tool-sidebar" aria-label="Related guides">
+                <aside class="tool-sidebar journey-sidebar" aria-label="Related guides">
                     <RelatedGuides guides={burnerEmailGuides} />
                 </aside>
             </div>

@@ -958,7 +958,7 @@ function normalizeGmailAddress(address) {
             </div>
 
             <div class="content-with-aside">
-                <div class="home-main-content">
+                <div class="home-main-content journey-content entry-content">
             <!-- Insert: Gmail temp mail SEO block (place this before the "What is Disposable Temporary E-mail?" section) -->
            <div class="seo-content-section">
     <div class="container">
@@ -1367,7 +1367,7 @@ function normalizeGmailAddress(address) {
             </div>
                 </div>
 
-                <aside class="publisher-sidebar" aria-label="Temporary email information and featured guides">
+                <aside class="publisher-sidebar journey-sidebar" aria-label="Temporary email information and featured guides">
                     <div class="sidebar-card why-card">
                         <h2>{$_('home.gmailSection.whyTitle')}</h2>
                         <p>{$_('home.gmailSection.whyText')}</p>
