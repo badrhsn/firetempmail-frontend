@@ -3,6 +3,7 @@
     import Footer from '$lib/components/Footer.svelte';
     import LanguageSelector from '$lib/components/LanguageSelector.svelte';
     import BannerTop from '$lib/components/BannerTop.svelte';
+    import AdBlockGate from '$lib/components/AdBlockGate.svelte';
     import { allBanners, setBanner, rotateBanners } from '$lib/stores/banners';
     import '$lib/i18n';
     import { isLoading } from 'svelte-i18n';
@@ -48,6 +49,8 @@
         };
     });
 </script>
+
+<AdBlockGate />
 
 <!-- Translations are pre-loaded server-side via +layout.js waitLocale().
      The $isLoading check is kept only as a client-side fallback for navigation. -->

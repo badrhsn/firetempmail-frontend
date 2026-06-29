@@ -3197,8 +3197,8 @@ function normalizeGmailAddress(address) {
 
     .content-with-aside {
         display: grid;
-        grid-template-columns: minmax(0, 7fr) minmax(280px, 3fr);
-        gap: 28px;
+        grid-template-columns: minmax(0, 1fr) 300px;
+        gap: 40px;
         align-items: start;
         margin: 72px 0 80px;
     }
