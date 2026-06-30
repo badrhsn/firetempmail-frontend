@@ -3221,7 +3221,8 @@ function normalizeGmailAddress(address) {
     }
 
     .home-publisher-layout {
-        margin-top: 64px;
+        margin: 32px 0 80px !important;
+        padding-top: 0 !important;
     }
 
     .homepage-article {
