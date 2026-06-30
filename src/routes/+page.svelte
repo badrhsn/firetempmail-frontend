@@ -803,8 +803,8 @@ function normalizeGmailAddress(address) {
 
             <!-- <div class="ad-banner-top" aria-hidden="true"></div> -->
 
-            <div class="content-with-aside home-publisher-layout">
-            <div class="home-publisher-primary">
+            <div class="content-with-aside home-publisher-layout tool-content-with-aside tool-publisher-layout">
+            <div class="home-publisher-primary tool-publisher-primary">
             <div class="inbox-layout">
                 <div class="inbox-panel">
             {#if reloadActive && !isLoading}
@@ -968,7 +968,7 @@ function normalizeGmailAddress(address) {
                 </div>
             </div>
 
-                <div class="home-main-content journey-content entry-content">
+                <main class="home-main-content tool-main-content journey-content entry-content">
                     <div class="sidebar-card why-card home-why-card">
                         <h2>{$_('home.gmailSection.whyTitle')}</h2>
                         <p>{$_('home.gmailSection.whyText')}</p>
@@ -1017,63 +1017,6 @@ function normalizeGmailAddress(address) {
         </div>
     </div>
 </div>
-
-            <!-- Add this after the "What is Disposable Temporary E-mail?" section -->
-
-            <!-- Popular Articles Section (English only — blog content is in English) -->
-            {#if !data?.seo?.lang || data.seo.lang === 'en'}
-            <div class="popular-articles-section">
-                <h2
-                    class="text-center"
-                    style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 2rem;"
-                >
-                    {$_('blog.popular')}
-                </h2>
-
-                <div class="popular-articles-grid">
-                    {#each data.popularArticles as article}
-                        <article class="popular-article-card">
-                            <div
-                                style="display: flex; align-items: center; margin-bottom: 0.75rem;"
-                            >
-                                <span
-                                    style="background: #e9ecef; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.7rem; font-weight: 500;"
-                                >
-                                    {article.category}
-                                </span>
-                                <span style="margin: 0 0.5rem; color: #6c757d;"
-                                    >•</span
-                                >
-                                <span style="color: #6c757d; font-size: 0.8rem;"
-                                    >{article.readTime}</span
-                                >
-                            </div>
-
-                            <h3
-                                style="font-size: 1.2rem; margin-bottom: 0.75rem; font-weight: 600;"
-                            >
-                                <a
-                                    href="/blog/{article.slug}"
-                                    style="color: inherit; text-decoration: none;"
-                                >
-                                    {article.title}
-                                </a>
-                            </h3>
-
-                            <p
-                                style="color: #6c757d; margin-bottom: 1rem; font-size: 0.9rem;"
-                            >
-                                {article.excerpt}
-                            </p>
-                        </article>
-                    {/each}
-                </div>
-
-                <div style="text-align: center; margin-top: 2rem;">
-                    <a href="/blog" class="btn btn-blog"> {$_('blog.visitBlog')} </a>
-                </div>
-            </div>
-            {/if}
 
             <!-- How It Works Section - NEW -->
             <div class="how-it-works-section">
@@ -1398,7 +1341,43 @@ function normalizeGmailAddress(address) {
                     </div>
                 </div>
             </div>
-                </div>
+                </main>
+
+                    {#if !data?.seo?.lang || data.seo.lang === 'en'}
+                    <div class="popular-articles-section">
+                        <h2 class="text-center" style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 2rem;">
+                            {$_('blog.popular')}
+                        </h2>
+
+                        <div class="popular-articles-grid">
+                            {#each data.popularArticles as article}
+                                <article class="popular-article-card">
+                                    <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
+                                        <span style="background: #e9ecef; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.7rem; font-weight: 500;">
+                                            {article.category}
+                                        </span>
+                                        <span style="margin: 0 0.5rem; color: #6c757d;">•</span>
+                                        <span style="color: #6c757d; font-size: 0.8rem;">{article.readTime}</span>
+                                    </div>
+
+                                    <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem; font-weight: 600;">
+                                        <a href="/blog/{article.slug}" style="color: inherit; text-decoration: none;">
+                                            {article.title}
+                                        </a>
+                                    </h3>
+
+                                    <p style="color: #6c757d; margin-bottom: 1rem; font-size: 0.9rem;">
+                                        {article.excerpt}
+                                    </p>
+                                </article>
+                            {/each}
+                        </div>
+
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <a href="/blog" class="btn btn-blog"> {$_('blog.visitBlog')} </a>
+                        </div>
+                    </div>
+                    {/if}
 
                     <div class="featured-guides-section">
                         <h2 class="text-center" style="font-family: 'Inter Tight', sans-serif; font-weight: 600; margin-bottom: 1.5rem;">
