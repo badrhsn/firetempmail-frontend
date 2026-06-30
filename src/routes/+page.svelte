@@ -1433,7 +1433,7 @@ function normalizeGmailAddress(address) {
                     </div>
             </div>
 
-                <aside class="publisher-sidebar journey-sidebar sidebar" aria-label="Temporary email information and featured guides">
+                <aside class="publisher-sidebar tool-sidebar journey-sidebar sidebar" aria-label="Related guides">
                     <RelatedGuides guides={homeGuides} />
                 </aside>
             </div>
