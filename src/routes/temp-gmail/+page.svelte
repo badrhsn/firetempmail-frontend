@@ -744,8 +744,8 @@ function selectDomain(domain) {
                 {/if}
             </div>
             
-            <div class="tool-content-with-aside temp-gmail-publisher-layout">
-            <div class="temp-gmail-primary">
+            <div class="tool-content-with-aside tool-publisher-layout">
+            <div class="tool-publisher-primary">
             <div class="tool-inbox">
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
@@ -1024,32 +1024,6 @@ function selectDomain(domain) {
 </section>
 
 <style>
-    .temp-gmail-publisher-layout {
-        margin-top: 64px;
-    }
-
-    .temp-gmail-primary {
-        min-width: 0;
-    }
-
-    .temp-gmail-primary .tool-inbox {
-        margin: 0 auto 72px;
-    }
-
-    @media (max-width: 1115px) {
-        .temp-gmail-publisher-layout {
-            margin-top: 40px;
-        }
-
-        .temp-gmail-primary {
-            grid-row: 1;
-        }
-
-        .temp-gmail-publisher-layout > .tool-sidebar {
-            grid-row: 2;
-        }
-    }
-
            /* Footer Styles */
         .footer {
             background-color: #22242b;

@@ -699,6 +699,8 @@ function normalizeGmailAddress(address) {
                 
             </div>
             
+            <div class="tool-content-with-aside tool-publisher-layout">
+            <div class="tool-publisher-primary">
             <div class="tool-inbox">
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
@@ -854,7 +856,6 @@ function normalizeGmailAddress(address) {
                 </p>
             </div>
             </div>
-            <div class="tool-content-with-aside">
                 <main class="tool-main-content journey-content entry-content">
             <!-- Developer & QA Testing Content -->
             <section aria-labelledby="developer-testing" class="seo-article" style="margin-top: 3rem; padding: 2rem; background:#f8fafc; border-radius: 12px;">
@@ -929,8 +930,9 @@ function normalizeGmailAddress(address) {
             </section>
 
                 </main>
+            </div>
                 <aside class="tool-sidebar journey-sidebar sidebar" aria-label="Related guides">
-                    <RelatedGuides guides={emailGeneratorGuides} />
+                    <RelatedGuides guides={emailGeneratorGuides.slice(0, 1)} />
                 </aside>
             </div>
 

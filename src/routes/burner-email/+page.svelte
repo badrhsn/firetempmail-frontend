@@ -760,6 +760,8 @@ function selectDomain(domain) {
                 
             </div>
             
+            <div class="tool-content-with-aside tool-publisher-layout">
+            <div class="tool-publisher-primary">
             <div class="tool-inbox">
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
@@ -921,7 +923,6 @@ function selectDomain(domain) {
                 </p>
             </div>
             </div>
-            <div class="tool-content-with-aside">
                 <main class="tool-main-content journey-content entry-content">
 <section class="mt-10 p-6 bg-gray-50 rounded-xl shadow-md">
   <h2 class="text-xl font-semibold mb-4">Frequently Asked Questions about Burner Email Generator</h2>
@@ -1032,8 +1033,9 @@ function selectDomain(domain) {
 </section>
 
                 </main>
+            </div>
                 <aside class="tool-sidebar journey-sidebar sidebar" aria-label="Related guides">
-                    <RelatedGuides guides={burnerEmailGuides} />
+                    <RelatedGuides guides={burnerEmailGuides.slice(0, 1)} />
                 </aside>
             </div>
 

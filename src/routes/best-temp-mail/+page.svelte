@@ -746,6 +746,8 @@ function selectDomain(domain) {
                 
             </div>
             
+            <div class="tool-content-with-aside tool-publisher-layout">
+            <div class="tool-publisher-primary">
             <div class="tool-inbox">
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
@@ -886,7 +888,6 @@ function selectDomain(domain) {
                 </p>
             </div>
             </div>
-            <div class="tool-content-with-aside">
                 <main class="tool-main-content journey-content entry-content">
 <section aria-labelledby="best-temp-mail-guide" class="seo-article" style="margin-top: 3rem; padding: 2.5rem 2rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;">
     <h2 id="best-temp-mail-guide" style="font-size:1.6rem;margin-bottom:1rem;;color:#0f172a">Best Temp Mail Services Compared (2026)</h2>
@@ -997,8 +998,9 @@ function selectDomain(domain) {
 </section>
 
                 </main>
+            </div>
                 <aside class="tool-sidebar journey-sidebar sidebar" aria-label="Related guides">
-                    <RelatedGuides guides={bestTempMailGuides} />
+                    <RelatedGuides guides={bestTempMailGuides.slice(0, 1)} />
                 </aside>
             </div>
 

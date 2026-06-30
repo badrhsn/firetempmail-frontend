@@ -108,6 +108,18 @@
     grid-column: 1 / -1;
 }
 
+.tool-publisher-layout {
+    margin-top: 64px;
+}
+
+.tool-publisher-primary {
+    min-width: 0;
+}
+
+.tool-publisher-primary .tool-inbox {
+    margin: 0 auto 72px;
+}
+
 .tool-inbox {
     width: 100%;
     max-width: 700px;
@@ -301,6 +313,18 @@
 
     .tool-content-with-aside {
         grid-template-columns: 1fr;
+    }
+
+    .tool-publisher-layout {
+        margin-top: 40px;
+    }
+
+    .tool-publisher-primary {
+        grid-row: 1;
+    }
+
+    .tool-publisher-layout > .tool-sidebar {
+        grid-row: 2;
     }
 
     .tool-sidebar {
