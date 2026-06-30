@@ -19,7 +19,7 @@
     
     // Import page data for SEO
     export let data;
-    const journeyHomepageStructureTest = true;
+    const journeyHomepageStructureTest = false;
 
     const homeGuides = [
         {
