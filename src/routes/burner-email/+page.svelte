@@ -1032,7 +1032,7 @@ function selectDomain(domain) {
 </section>
 
                 </main>
-                <aside class="tool-sidebar journey-sidebar" aria-label="Related guides">
+                <aside class="tool-sidebar journey-sidebar sidebar" aria-label="Related guides">
                     <RelatedGuides guides={burnerEmailGuides} />
                 </aside>
             </div>

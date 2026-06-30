@@ -376,7 +376,7 @@
 
                 </main>
 
-                <aside class="blog-post-sidebar journey-sidebar" aria-label="Related articles and popular tools">
+                <aside class="blog-post-sidebar journey-sidebar sidebar" aria-label="Related articles and popular tools">
                     <section class="article-sidebar-card">
                         <h2>Related Articles</h2>
                         {#if relatedPosts.length > 0}
@@ -755,7 +755,7 @@
         }
     }
 
-    @media (max-width: 1024px) {
+    @media (max-width: 1115px) {
         .blog-post-layout {
             grid-template-columns: 1fr;
         }

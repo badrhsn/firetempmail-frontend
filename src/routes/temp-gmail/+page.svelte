@@ -744,6 +744,8 @@ function selectDomain(domain) {
                 {/if}
             </div>
             
+            <div class="tool-content-with-aside temp-gmail-publisher-layout">
+            <div class="temp-gmail-primary">
             <div class="tool-inbox">
             {#if reloadActive && !isLoading}
                 <!-- Loading Indicator -->
@@ -899,7 +901,6 @@ function selectDomain(domain) {
                 </p>
             </div>
             </div>
-            <div class="tool-content-with-aside">
                 <main class="tool-main-content journey-content entry-content">
 <!-- SEO article: Gmail-SPECIFIC features (unique content) -->
 <section aria-labelledby="gmail-tricks" class="seo-article">
@@ -1012,8 +1013,9 @@ function selectDomain(domain) {
 </section>
 
                 </main>
-                <aside class="tool-sidebar journey-sidebar" aria-label="Related guides">
-                    <RelatedGuides guides={tempGmailGuides} />
+            </div>
+                <aside class="tool-sidebar journey-sidebar sidebar" aria-label="Related guides">
+                    <RelatedGuides guides={tempGmailGuides.slice(0, 1)} />
                 </aside>
             </div>
 
@@ -1022,6 +1024,32 @@ function selectDomain(domain) {
 </section>
 
 <style>
+    .temp-gmail-publisher-layout {
+        margin-top: 64px;
+    }
+
+    .temp-gmail-primary {
+        min-width: 0;
+    }
+
+    .temp-gmail-primary .tool-inbox {
+        margin: 0 auto 72px;
+    }
+
+    @media (max-width: 1115px) {
+        .temp-gmail-publisher-layout {
+            margin-top: 40px;
+        }
+
+        .temp-gmail-primary {
+            grid-row: 1;
+        }
+
+        .temp-gmail-publisher-layout > .tool-sidebar {
+            grid-row: 2;
+        }
+    }
+
            /* Footer Styles */
         .footer {
             background-color: #22242b;

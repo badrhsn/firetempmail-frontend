@@ -1367,7 +1367,7 @@ function normalizeGmailAddress(address) {
             </div>
                 </div>
 
-                <aside class="publisher-sidebar journey-sidebar" aria-label="Temporary email information and featured guides">
+                <aside class="publisher-sidebar journey-sidebar sidebar" aria-label="Temporary email information and featured guides">
                     <div class="sidebar-card why-card">
                         <h2>{$_('home.gmailSection.whyTitle')}</h2>
                         <p>{$_('home.gmailSection.whyText')}</p>
@@ -3475,7 +3475,7 @@ function normalizeGmailAddress(address) {
         border-bottom-color: #edf0f4;
     }
 
-    @media (max-width: 1024px) {
+    @media (max-width: 1115px) {
         .hero-grid {
             grid-template-columns: 1fr;
             gap: 32px;

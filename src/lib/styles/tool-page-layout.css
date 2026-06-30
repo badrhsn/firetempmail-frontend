@@ -281,7 +281,7 @@
     box-shadow: 0 4px 16px rgba(23, 32, 51, 0.05);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1115px) {
     .tool-page-content {
         grid-template-columns: 1fr;
         gap: 26px;

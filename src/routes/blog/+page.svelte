@@ -1101,7 +1101,7 @@
     }
 
     /* Responsive */
-    @media (max-width: 960px) {
+    @media (max-width: 1115px) {
         .blog-content {
             grid-template-columns: 1fr;
         }

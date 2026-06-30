@@ -819,7 +819,7 @@ function normalizeGmailAddress(address) {
                 {/if}
             {/if}
 
-            <section aria-labelledby="responsible-use" class="seo-article" style="margin-top: 3rem; padding: 2rem; background:#f8fafc; border-radius: 12px;">
+            <section aria-labelledby="responsible-use" class="seo-article journey-content entry-content" style="margin-top: 3rem; padding: 2rem; background:#f8fafc; border-radius: 12px;">
                 <h2 id="responsible-use">Responsible Temporary Email Use</h2>
                 <p class="description">
                     Temporary email is appropriate for testing forms you own, separating low-risk inbox traffic, and reducing exposure to unwanted marketing. It should not be used for accounts that require a durable recovery address or verified personal identity.
