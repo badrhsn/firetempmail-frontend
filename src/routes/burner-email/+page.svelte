@@ -17,7 +17,7 @@
     import { browser } from '$app/environment';
     import Hreflang from '$lib/components/Hreflang.svelte';
 import Breadcrumb from '$lib/components/Breadcrumb.svelte';
-import RelatedGuides from '$lib/components/RelatedGuides.svelte';
+import JourneySidebar from '$lib/components/JourneySidebar.svelte';
 import '$lib/styles/tool-page-layout.css';
     
     // Import page data for SEO
@@ -1034,9 +1034,7 @@ function selectDomain(domain) {
 
                 </main>
             </div>
-                <aside class="tool-sidebar journey-sidebar sidebar" aria-label="Related guides">
-                    <RelatedGuides guides={burnerEmailGuides.slice(0, 1)} />
-                </aside>
+                <JourneySidebar guides={burnerEmailGuides.slice(0, 1)} />
             </div>
 
         </div>

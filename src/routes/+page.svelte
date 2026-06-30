@@ -14,7 +14,7 @@
         emailsLoaded
     } from "../lib/stores";
     import { browser } from '$app/environment';
-    import RelatedGuides from '$lib/components/RelatedGuides.svelte';
+    import JourneySidebar from '$lib/components/JourneySidebar.svelte';
     
     // Import page data for SEO
     export let data;
@@ -1433,9 +1433,7 @@ function normalizeGmailAddress(address) {
                     </div>
             </div>
 
-                <aside class="publisher-sidebar tool-sidebar journey-sidebar sidebar" aria-label="Related guides">
-                    <RelatedGuides guides={homeGuides} />
-                </aside>
+                <JourneySidebar guides={homeGuides} />
             </div>
             </div>
 
