@@ -15,11 +15,9 @@
     } from "../lib/stores";
     import { browser } from '$app/environment';
     import JourneySidebar from '$lib/components/JourneySidebar.svelte';
-    import TempGmailPage from './temp-gmail/+page.svelte';
     
     // Import page data for SEO
     export let data;
-    const journeyHomepageStructureTest = true;
 
     const homeGuides = [
         {
@@ -586,10 +584,6 @@ function normalizeGmailAddress(address) {
     }
     </script>
 </svelte:head>
-
-{#if journeyHomepageStructureTest}
-    <TempGmailPage {data} />
-{:else}
 
 <!-- Toast Notifications -->
 <div class="toast-container">
@@ -1428,7 +1422,6 @@ function normalizeGmailAddress(address) {
 
     </div>
 </section>
-{/if}
 
 <style>           /* Style the radio buttons */
                 input[type="radio"] {
