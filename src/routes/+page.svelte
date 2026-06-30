@@ -14,9 +14,18 @@
         emailsLoaded
     } from "../lib/stores";
     import { browser } from '$app/environment';
+    import RelatedGuides from '$lib/components/RelatedGuides.svelte';
     
     // Import page data for SEO
     export let data;
+
+    const homeGuides = [
+        {
+            href: '/blog/why-use-temporary-email',
+            title: 'Why Use a Temporary Email Address?',
+            description: 'The top reasons people use disposable email to protect their primary inbox.'
+        }
+    ];
 
     const OG_LOCALE_MAP = {
         en: 'en_US',
@@ -960,6 +969,29 @@ function normalizeGmailAddress(address) {
             </div>
 
                 <div class="home-main-content journey-content entry-content">
+                    <div class="sidebar-card why-card home-why-card">
+                        <h2>{$_('home.gmailSection.whyTitle')}</h2>
+                        <p>{$_('home.gmailSection.whyText')}</p>
+
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>{$_('home.gmailSection.features.instant')}</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>{$_('home.gmailSection.features.real')}</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>{$_('home.gmailSection.features.free')}</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>{$_('home.gmailSection.features.bypass')}</span>
+                            </div>
+                        </div>
+                    </div>
             <!-- Insert: Gmail temp mail SEO block (place this before the "What is Disposable Temporary E-mail?" section) -->
            <div class="seo-content-section">
     <div class="container">
@@ -1402,30 +1434,7 @@ function normalizeGmailAddress(address) {
             </div>
 
                 <aside class="publisher-sidebar journey-sidebar sidebar" aria-label="Temporary email information and featured guides">
-                    <div class="sidebar-card why-card">
-                        <h2>{$_('home.gmailSection.whyTitle')}</h2>
-                        <p>{$_('home.gmailSection.whyText')}</p>
-
-                        <div class="feature-list">
-                            <div class="feature-item">
-                                <span class="feature-icon">✓</span>
-                                <span>{$_('home.gmailSection.features.instant')}</span>
-                            </div>
-                            <div class="feature-item">
-                                <span class="feature-icon">✓</span>
-                                <span>{$_('home.gmailSection.features.real')}</span>
-                            </div>
-                            <div class="feature-item">
-                                <span class="feature-icon">✓</span>
-                                <span>{$_('home.gmailSection.features.free')}</span>
-                            </div>
-                            <div class="feature-item">
-                                <span class="feature-icon">✓</span>
-                                <span>{$_('home.gmailSection.features.bypass')}</span>
-                            </div>
-                        </div>
-                    </div>
-
+                    <RelatedGuides guides={homeGuides} />
                 </aside>
             </div>
             </div>
@@ -3061,6 +3070,14 @@ function normalizeGmailAddress(address) {
         min-width: 0;
     }
 
+    .publisher-sidebar :global(.related-guides) {
+        margin-top: 0;
+        padding: 22px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 4px 16px rgba(23, 32, 51, 0.05);
+    }
+
     .sidebar-card {
         padding: 24px;
     }
@@ -3080,9 +3097,8 @@ function normalizeGmailAddress(address) {
         line-height: 1.65;
     }
 
-    .home-publisher-layout .why-card > p,
-    .home-publisher-layout .why-card .feature-item:nth-child(n + 3) {
-        display: none;
+    .home-why-card {
+        margin-bottom: 32px;
     }
 
     .sidebar-card .feature-list {

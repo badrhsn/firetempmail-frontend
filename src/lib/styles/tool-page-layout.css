@@ -109,7 +109,8 @@
 }
 
 .tool-publisher-layout {
-    margin-top: 64px;
+    margin: 0 0 80px;
+    padding-top: 64px;
 }
 
 .tool-publisher-primary {
@@ -316,7 +317,8 @@
     }
 
     .tool-publisher-layout {
-        margin-top: 40px;
+        margin-top: 0;
+        padding-top: 40px;
     }
 
     .tool-publisher-primary {
