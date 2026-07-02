@@ -4,8 +4,8 @@ import { checkAuth } from '$lib/server/adminAuth.js';
 const ALLOWED_FIELDS = ['title', 'excerpt', 'content', 'category', 'platform', 'lang', 'meta_title', 'meta_description', 'read_time', 'published', 'author'];
 
 /** @type {import('./$types').RequestHandler} */
-export async function PUT({ request, platform }) {
-    if (!checkAuth(request, platform)) {
+export async function PUT({ request, platform, cookies }) {
+    if (!await checkAuth(request, platform, cookies)) {
         return json({ error: 'Unauthorized' }, { status: 401 });
     }
 

@@ -1,4 +1,5 @@
 import { redirect } from '@sveltejs/kit';
+import { createAdminSession, SESSION_COOKIE } from '$lib/server/adminAuth.js';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
@@ -12,19 +13,14 @@ export const actions = {
         const password = formData.get('password');
         const secret = platform?.env?.API_SECRET;
 
-        console.log('API_SECRET exists:', !!secret);
-        console.log('API_SECRET length:', secret?.length);
-        console.log('Password length:', password?.length);
-        console.log('platform exists:', !!platform);
-        console.log('platform.env exists:', !!platform?.env);
-
         if (!password || password !== secret) {
             return { error: 'Wrong password' };
         }
 
-        cookies.set('admin_token', secret, {
+        const session = await createAdminSession(secret);
+        cookies.set(SESSION_COOKIE, session, {
             path: '/',
-            httpOnly: false,
+            httpOnly: true,
             secure: true,
             sameSite: 'strict',
             maxAge: 86400

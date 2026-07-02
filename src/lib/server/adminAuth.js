@@ -1,15 +1,28 @@
-/**
- * Shared admin authentication helper.
- * Validates Bearer token against API_SECRET environment variable.
- */
-export function checkAuth(request, platform) {
-    const header = request.headers.get('authorization');
-    const secret = platform?.env?.API_SECRET;
-    console.log('[AUTH DEBUG] header exists:', !!header);
-    console.log('[AUTH DEBUG] header value:', header ? `Bearer ***${header.slice(-4)}` : 'null');
-    console.log('[AUTH DEBUG] secret exists:', !!secret);
-    console.log('[AUTH DEBUG] secret length:', secret?.length);
-    console.log('[AUTH DEBUG] match:', header === `Bearer ${secret}`);
-    if (!secret || !header) return false;
-    return header === `Bearer ${secret}`;
+const SESSION_COOKIE = 'admin_session';
+
+async function sha256(value) {
+    const bytes = new TextEncoder().encode(value);
+    const digest = await crypto.subtle.digest('SHA-256', bytes);
+    return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('');
 }
+
+export async function createAdminSession(secret) {
+    if (!secret) return null;
+    return sha256(`firetempmail-admin-session:${secret}`);
+}
+
+export async function checkAuth(request, platform, cookies) {
+    const secret = platform?.env?.API_SECRET;
+    const suppliedSession = cookies?.get(SESSION_COOKIE);
+    if (!secret || !suppliedSession) return false;
+
+    if (!['GET', 'HEAD', 'OPTIONS'].includes(request.method)) {
+        const origin = request.headers.get('origin');
+        if (!origin || origin !== new URL(request.url).origin) return false;
+    }
+
+    const expectedSession = await createAdminSession(secret);
+    return suppliedSession === expectedSession;
+}
+
+export { SESSION_COOKIE };

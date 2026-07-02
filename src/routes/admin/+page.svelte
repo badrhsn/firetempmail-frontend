@@ -47,11 +47,6 @@
             : base;
     }
 
-    function getToken() {
-        const match = document.cookie.match(/(?:^|;\s*)admin_token=([^;]*)/);
-        return match ? decodeURIComponent(match[1]) : '';
-    }
-
     function showMessage(text, type = 'success') {
         message = text;
         messageType = type;
@@ -71,7 +66,6 @@
         }
 
         loading = true;
-        const token = getToken();
         const endpoint = editing ? '/api/admin/update-post' : '/api/admin/create-post';
         const method = editing ? 'PUT' : 'POST';
 
@@ -85,8 +79,7 @@
             const res = await fetch(endpoint, {
                 method,
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(body)
             });
@@ -109,13 +102,11 @@
     async function handleDelete(slug) {
         if (!confirm(`Delete "${slug}"? This cannot be undone.`)) return;
 
-        const token = getToken();
         try {
             const res = await fetch('/api/admin/delete-post', {
                 method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ slug })
             });

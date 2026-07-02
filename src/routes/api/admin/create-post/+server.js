@@ -4,8 +4,8 @@ import { checkAuth } from '$lib/server/adminAuth.js';
 const SLUG_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 /** @type {import('./$types').RequestHandler} */
-export async function POST({ request, platform }) {
-    if (!checkAuth(request, platform)) {
+export async function POST({ request, platform, cookies }) {
+    if (!await checkAuth(request, platform, cookies)) {
         return json({ error: 'Unauthorized' }, { status: 401 });
     }
 

@@ -1,11 +1,9 @@
 import { redirect } from '@sveltejs/kit';
+import { checkAuth } from '$lib/server/adminAuth.js';
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ cookies, platform }) {
-    const token = cookies.get('admin_token');
-    const secret = platform.env.API_SECRET;
-
-    if (!token || token !== secret) {
+export async function load({ cookies, platform, request }) {
+    if (!await checkAuth(request, platform, cookies)) {
         throw redirect(302, '/admin/login');
     }
 

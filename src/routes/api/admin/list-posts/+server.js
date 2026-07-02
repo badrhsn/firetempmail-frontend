@@ -2,8 +2,8 @@ import { json } from '@sveltejs/kit';
 import { checkAuth } from '$lib/server/adminAuth.js';
 
 /** @type {import('./$types').RequestHandler} */
-export async function GET({ request, platform, url }) {
-    if (!checkAuth(request, platform)) {
+export async function GET({ request, platform, url, cookies }) {
+    if (!await checkAuth(request, platform, cookies)) {
         return json({ error: 'Unauthorized' }, { status: 401 });
     }
 
