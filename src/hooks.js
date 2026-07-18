@@ -7,7 +7,10 @@ export function reroute({ url }) {
             'top-iptv-apps-for-firestick-usa',
             'setup-iptv-on-iphone-ipad',
             'how-to-install-iptv-on-smart-tv',
-            'install-iptv-on-ibo-player'
+            'install-iptv-on-ibo-player',
+            'best-iptv-providers-in-canada',
+            'how-to-watch-live-sports-on-iptv',
+            'best-iptv-service-providers-in-the-usa'
         ]);
 
         if (url.pathname === '/') {
