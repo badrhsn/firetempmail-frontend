@@ -25,6 +25,7 @@
             note: 'Best for testing the service',
             tag: 'Entry',
             subject: 'IPTV Starter Plan',
+            checkoutUrl: 'https://whop.com/checkout/plan_yxlYDTTc1rXWp',
             features: ['1 device connection', 'Live TV, movies, and series', 'HD streaming support', 'IPTV Smarters Pro setup guide', 'Fast email activation']
         },
         {
@@ -34,6 +35,7 @@
             note: 'A flexible short-term package',
             tag: 'Flexible',
             subject: 'IPTV 3 Month Plan',
+            checkoutUrl: 'https://whop.com/checkout/plan_0hsU4XR6ihdLg',
             features: ['1 device connection', 'USA, UK, Canada channel focus', 'VOD library access', 'Sports and entertainment categories', 'Setup help included']
         },
         {
@@ -43,6 +45,7 @@
             note: 'Popular for regular viewers',
             tag: 'Popular',
             subject: 'IPTV 6 Month Plan',
+            checkoutUrl: 'https://whop.com/checkout/plan_t4VxRSKNwBoQ4',
             featured: true,
             features: ['1 device connection', 'HD and 4K-ready streams', 'Priority activation support', 'Compatible app guidance', 'Stable everyday viewing']
         },
@@ -53,6 +56,7 @@
             note: 'For households with two screens',
             tag: 'Best value',
             subject: 'IPTV 12 Month 2 Device Plan',
+            checkoutUrl: 'https://whop.com/checkout/plan_TpcHHIOJ60tcY',
             features: ['2 device connections', 'Long-term subscription access', 'Multi-room friendly setup', 'Renewal reminder support', 'Premium device compatibility']
         }
     ];
@@ -90,6 +94,48 @@
         ['How fast is activation?', 'Most activations are prepared quickly after plan confirmation, with setup instructions sent directly by email.'],
         ['Can I use the same plan on multiple devices?', 'That depends on the plan. Choose the two-device package if more than one screen needs to stream at the same time.']
     ];
+
+    function getPlanValue(plan) {
+        return Number(plan.price.replace(/[^0-9.]/g, '')) || 0;
+    }
+
+    function trackCheckout(event, plan) {
+        if (!plan.checkoutUrl || typeof window === 'undefined' || typeof window.gtag !== 'function') {
+            return;
+        }
+
+        event.preventDefault();
+
+        const checkoutUrl = plan.checkoutUrl;
+        let didNavigate = false;
+        const navigate = () => {
+            if (didNavigate) return;
+            didNavigate = true;
+            window.location.href = checkoutUrl;
+        };
+
+        window.setTimeout(navigate, 900);
+        window.gtag('event', 'begin_checkout', {
+            currency: 'USD',
+            value: getPlanValue(plan),
+            payment_provider: 'whop',
+            checkout_url: checkoutUrl,
+            plan_name: plan.name,
+            plan_duration: plan.period,
+            items: [
+                {
+                    item_id: plan.subject,
+                    item_name: `${plan.name} - ${plan.period}`,
+                    item_category: 'IPTV Subscription',
+                    item_variant: plan.period,
+                    price: getPlanValue(plan),
+                    quantity: 1
+                }
+            ],
+            event_callback: navigate,
+            event_timeout: 800
+        });
+    }
 </script>
 
 <main class="iptv-page">
@@ -201,7 +247,12 @@
                             <li>{feature}</li>
                         {/each}
                     </ul>
-                    <a class="plan-btn" href={`mailto:business@firetempmail.com?subject=${encodeURIComponent(plan.subject)}`}>Order now</a>
+                    <a
+                        class="plan-btn"
+                        href={plan.checkoutUrl || `mailto:business@firetempmail.com?subject=${encodeURIComponent(plan.subject)}`}
+                        rel={plan.checkoutUrl ? 'noopener sponsored' : undefined}
+                        onclick={(event) => trackCheckout(event, plan)}
+                    >Order now</a>
                 </article>
             {/each}
         </div>

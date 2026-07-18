@@ -37,12 +37,22 @@
     <!-- Analytics and advertising scripts -->
     <script type="text/javascript" async="async" data-noptimize="1" data-cfasync="false" src="//scripts.scriptwrapper.com/tags/a97ac20f-4fe3-4f21-98bf-c4b6d0ccf662.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9403845690894641" crossorigin="anonymous"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V7Y8WEB63T"></script>
     <script>
+        (function () {
+            var measurementId = window.location.hostname === 'iptvsmarterspro.firetempmail.com'
+                ? 'G-SR5SQ62B1L'
+                : 'G-V7Y8WEB63T';
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+            document.head.appendChild(script);
+
+            window.__GA_MEASUREMENT_ID__ = measurementId;
+        })();
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-        gtag('config', 'G-V7Y8WEB63T');
+        gtag('config', window.__GA_MEASUREMENT_ID__);
     </script>
 </head>
 
