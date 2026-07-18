@@ -52,8 +52,9 @@
     });
 </script>
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<nav class="site-navigation" bind:this={navEl} on:keydown={handleNavKeydown}>
+<svelte:window on:keydown={handleNavKeydown} />
+
+<nav class="site-navigation" bind:this={navEl}>
     <a href={lp('/')} class:active={isActive('/')}>{$_('nav.home')}</a>
 
     <!-- Tools dropdown -->

@@ -2,7 +2,6 @@
     import { onMount, mount, unmount } from 'svelte';
     import Footer from '$lib/components/Footer.svelte';
     import LanguageSelector from '$lib/components/LanguageSelector.svelte';
-    import BannerTop from '$lib/components/BannerTop.svelte';
     import AdBlockGate from '$lib/components/AdBlockGate.svelte';
     import { allBanners, setBanner, rotateBanners } from '$lib/stores/banners';
     import '$lib/i18n';
@@ -18,7 +17,6 @@
             });
         });
 
-        // optional rotation (30s)
         rotationId = rotateBanners(30000);
 
         // Mount the LanguageSelector into the static header placeholder.

@@ -5438,15 +5438,8 @@ It's the gateway to the entire Google ecosystem. It's integrated with Google Dri
   }
 ];
 
-// Simple function with debugging
 export const getPostBySlug = (slug) => {
-    console.log('🔍 Searching for slug:', slug);
-    console.log('📝 Available slugs:', blogPosts.map(p => p.slug));
-
-    const post = blogPosts.find(post => post.slug === slug);
-    console.log('✅ Found post:', post ? post.title : 'None');
-
-    return post;
+    return blogPosts.find(post => post.slug === slug);
 };
 
 // Other functions

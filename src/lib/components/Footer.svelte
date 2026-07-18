@@ -2,7 +2,6 @@
     import { onMount } from 'svelte';
     import { _ } from 'svelte-i18n';
     import { page } from '$app/stores';
-    import { receivingEmail } from '$lib/stores';
     import { getLangFromPath, localePath } from '$lib/i18n/lang.js';
     import SocialLinks from '$lib/components/SocialLinks.svelte';
     
@@ -21,14 +20,12 @@
     $: currentLang = getLangFromPath($page.url.pathname);
     $: lp = (/** @type {string} */ path) => localePath(path, currentLang);
     
-    // Fetch stats when component mounts
+    // Fetch global received-email stats when component mounts.
     async function fetchStats() {
         try {
-            const email = $receivingEmail;
-            if (!email) return;
-            
             const url = 'https://mail.firetempmail.com';
-            const response = await fetch(`${url}/mail/get?address=${encodeURIComponent(email)}`);
+            const response = await fetch(`${url}/mail/get?stats=1`);
+            if (!response.ok) return;
             const data = await response.json();
             
             if (data && data.stats) {
@@ -43,10 +40,6 @@
     onMount(() => {
         fetchStats();
     });
-    
-    $: if ($receivingEmail) {
-        fetchStats();
-    }
 </script>
 
 <footer class="footer">

@@ -526,7 +526,7 @@ function selectDomain(domain) {
                 <p>{toast.message}</p>
             </div>
             
-            <button on:click={() => removeToast(toast.id)} class="toast-close">
+            <button on:click={() => removeToast(toast.id)} class="toast-close" aria-label="Close notification">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
                     <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -541,7 +541,7 @@ function selectDomain(domain) {
     <div class="modal" role="dialog" aria-modal="true">
         <div class="modal-header">
             <h3>Forward Email</h3>
-            <button on:click={() => showForwardModal = false} class="modal-close">
+            <button on:click={() => showForwardModal = false} class="modal-close" aria-label="Close modal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -788,13 +788,13 @@ function selectDomain(domain) {
                             </button>
                             
                             <div style="display: flex; gap: 8px;">
-                                <button class="btn btn-primary" type="button" on:click={() => forwardEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-dark);">
+                                <button class="btn btn-primary" type="button" on:click={() => forwardEmail(selectedEmail)} aria-label="Forward email" style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-dark);">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
                                         <path d="M5 12H15M15 12L11 8M15 12L11 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                     Forward
                                 </button>
-                                <button class="btn btn-primary" type="button" on:click={() => deleteEmail(selectedEmail)} style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-dark);">
+                                <button class="btn btn-primary" type="button" on:click={() => deleteEmail(selectedEmail)} aria-label="Delete email" style="padding: 4px 8px; border-radius: 8px; background: transparent; border: 1px solid rgb(215,215,215); color: var(--bs-dark);">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
                                         <path d="M6 7H18M10 11V17M14 11V17M9 7L10 5H14L15 7M7 7V19C7 20.1 7.9 21 9 21H15C16.1 21 17 20.1 17 19V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>

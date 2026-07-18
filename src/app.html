@@ -34,7 +34,7 @@
     </style>
 
 
-    <!-- Google Analytics -->
+    <!-- Analytics and advertising scripts -->
     <script type="text/javascript" async="async" data-noptimize="1" data-cfasync="false" src="//scripts.scriptwrapper.com/tags/a97ac20f-4fe3-4f21-98bf-c4b6d0ccf662.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9403845690894641" crossorigin="anonymous"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-V7Y8WEB63T"></script>
@@ -43,14 +43,6 @@
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-V7Y8WEB63T');
-    </script>
-    <!-- Maintenance Mode Toggle Script -->
-    <script>
-        // Set this to true to enable maintenance mode
-        window.MAINTENANCE_MODE = false;
-        
-        // Alternative: Check from environment or API
-        // window.MAINTENANCE_MODE = '%sveltekit.env.PUBLIC_MAINTENANCE_MODE%' === 'true';
     </script>
 </head>
 
@@ -76,7 +68,7 @@
                 <div id="language-selector-root"></div>
                 
                 <!-- Mobile Menu Button -->
-                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <button class="mobile-menu-btn" type="button" aria-label="Open menu" onclick="toggleMobileMenu()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="3" y1="6" x2="21" y2="6"></line>
                         <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -89,7 +81,7 @@
     <div style="display: contents">%sveltekit.body%</div>
 
     <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
+    <div class="mobile-menu-overlay" role="presentation" onclick="closeMobileMenu()"></div>
     
     <!-- Mobile Menu -->
     <div class="mobile-menu">
@@ -101,7 +93,7 @@
                     <span class="logo-tagline" style="font-size: 10px;">Disposable Emails</span>
                 </div>
             </div>
-            <button class="mobile-menu-close" onclick="closeMobileMenu()">
+            <button class="mobile-menu-close" type="button" aria-label="Close menu" onclick="closeMobileMenu()">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>

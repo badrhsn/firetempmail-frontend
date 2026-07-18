@@ -26,11 +26,14 @@ function getPreferredLocale(acceptLanguage) {
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ event, resolve }) {
     const { pathname } = event.url;
+    const host = event.request.headers.get('host')?.split(':')[0];
+    const isIptvSubdomain = host === 'iptvsmarterspro.firetempmail.com';
+
     const lang = event.params?.lang || defaultLocale;
 
     // --- Browser language detection & redirect ---
     // Only on root path '/' when no lang cookie exists (first-time visitors)
-    if (pathname === '/') {
+    if (!isIptvSubdomain && pathname === '/') {
         const langCookie = event.cookies.get('lang');
 
         if (!langCookie) {

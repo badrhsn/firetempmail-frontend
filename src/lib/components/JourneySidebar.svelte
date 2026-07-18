@@ -6,7 +6,7 @@
     export let label = 'Related guides';
 </script>
 
-<aside class="tool-sidebar journey-sidebar sidebar" aria-label={label}>
+<aside class="tool-sidebar journey-sidebar publisher-sidebar sidebar" aria-label={label}>
     <RelatedGuides {guides} />
 </aside>
 

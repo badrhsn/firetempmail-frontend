@@ -3035,8 +3035,7 @@ function normalizeGmailAddress(address) {
         line-height: 1.7;
     }
 
-    .inbox-panel,
-    .sidebar-card {
+    .inbox-panel {
         border: 1px solid #dfe5ed;
         border-radius: 8px;
         background: #ffffff;
@@ -3049,7 +3048,7 @@ function normalizeGmailAddress(address) {
         padding: 24px;
     }
 
-    .publisher-sidebar {
+    :global(.publisher-sidebar) {
         position: static;
         display: flex;
         flex-direction: column;
@@ -3057,7 +3056,7 @@ function normalizeGmailAddress(address) {
         min-width: 0;
     }
 
-    .publisher-sidebar :global(.related-guides) {
+    :global(.publisher-sidebar .related-guides) {
         margin-top: 0;
         padding: 22px;
         border-radius: 8px;
@@ -3065,54 +3064,8 @@ function normalizeGmailAddress(address) {
         box-shadow: 0 4px 16px rgba(23, 32, 51, 0.05);
     }
 
-    .sidebar-card {
-        padding: 24px;
-    }
-
-    .sidebar-card h2 {
-        margin: 0 0 12px;
-        color: #111827;
-        font-size: 20px;
-        line-height: 1.3;
-        text-align: left;
-    }
-
-    .sidebar-card > p {
-        margin-bottom: 18px;
-        color: #667085;
-        font-size: 14px;
-        line-height: 1.65;
-    }
-
     .home-why-card {
         margin-bottom: 32px;
-    }
-
-    .sidebar-card .feature-list {
-        display: grid;
-        gap: 11px;
-        margin: 0;
-    }
-
-    .sidebar-card .feature-item {
-        gap: 9px;
-        padding: 0;
-        color: #344054;
-        font-size: 14px;
-        line-height: 1.45;
-    }
-
-    .sidebar-card .feature-icon {
-        display: inline-flex;
-        width: 22px;
-        height: 22px;
-        align-items: center;
-        justify-content: center;
-        margin: 0;
-        border-radius: 50%;
-        background: #ecfdf3;
-        color: #15803d;
-        font-size: 12px;
     }
 
     .inbox-panel .loading-indicator,
@@ -3216,7 +3169,7 @@ function normalizeGmailAddress(address) {
 
     .home-main-content,
     .home-publisher-primary,
-    .publisher-sidebar {
+    :global(.publisher-sidebar) {
         min-width: 0;
     }
 
@@ -3281,17 +3234,13 @@ function normalizeGmailAddress(address) {
         box-shadow: none;
     }
 
-    .home-main-content > .seo-content-section:first-child {
-        margin-top: 0;
-    }
-
     .home-main-content .steps-grid,
     .home-main-content .use-cases-grid,
     .home-main-content .security-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .publisher-sidebar .ad-sidebar {
+    :global(.publisher-sidebar .ad-sidebar) {
         margin-top: 0;
     }
 
@@ -3576,17 +3525,17 @@ function normalizeGmailAddress(address) {
             grid-row: 1;
         }
 
-        .publisher-sidebar {
+        :global(.publisher-sidebar) {
             position: static;
             grid-row: 2;
         }
 
-        .publisher-sidebar {
+        :global(.publisher-sidebar) {
             display: block;
             gap: 20px;
         }
 
-        .publisher-sidebar .ad-sidebar {
+        :global(.publisher-sidebar .ad-sidebar) {
             grid-column: 1 / -1;
             min-height: 180px;
             margin-top: 0;
@@ -3668,11 +3617,11 @@ function normalizeGmailAddress(address) {
             padding: 22px;
         }
 
-        .publisher-sidebar {
+        :global(.publisher-sidebar) {
             display: block;
         }
 
-        .publisher-sidebar .ad-sidebar {
+        :global(.publisher-sidebar .ad-sidebar) {
             min-height: 180px;
             margin-top: 20px;
         }
