@@ -1,4 +1,4 @@
-# Ads.txt v20260707
+# Ads.txt v20260716
 managerdomain=journeymv.com
 contact=sales@journeymv.com
 ownerdomain=firetempmail.com
@@ -6,7 +6,6 @@ journeymv.com, a97ac20f-4fe3-4f21-98bf-c4b6d0ccf662, DIRECT, 1363c924529b3998
 
 google.com, pub-1601477034266482, DIRECT, f08c47fec0942fa0
 google.com, pub-7585907861569631, DIRECT, f08c47fec0942fa0
-google.com, pub-9403845690894641, DIRECT, f08c47fec0942fa0
 google.com, pub-1601477034266482, RESELLER, f08c47fec0942fa0
 media.net, 8CU41446D, DIRECT
 media.net, 8CUE82J0B, DIRECT
@@ -29,7 +28,7 @@ gumgum.com, 15958, RESELLER, ffdef49475d318a9
 rubiconproject.com, 26278, DIRECT, 0bfd66d529a55807
 indexexchange.com, 207882, DIRECT, 50b1c356f2c5c8fc
 indexexchange.com, 208002, DIRECT, 50b1c356f2c5c8fc
-indexexchange.com, 214230, DIRECT, 50b1c356f2c5c8fc 
+indexexchange.com, 214230, DIRECT, 50b1c356f2c5c8fc
 kargo.com, 8851, DIRECT
 rubiconproject.com, 11864, RESELLER, 0bfd66d529a55807
 appnexus.com, 8173, RESELLER, f5ab79cb980f11d1
@@ -194,5 +193,4 @@ connectad.io, 587, DIRECT, 85ac85a30c93b3e5
 adform.com, 768, RESELLER, 9f5210a2f0999e32
 rubiconproject.com, 26800, RESELLER, 0bfd66d529a55807
 openx.com, 537145117, RESELLER, 6a698e2ec38604c6
-
 
