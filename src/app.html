@@ -3,14 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <!-- Ezoic is only loaded on the FireTempMail site, not the separate IPTV subdomain. -->
     <script>
         if (window.location.hostname !== 'iptvsmarterspro.firetempmail.com') {
             document.write('<script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"><\\/script>');
             document.write('<script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js"><\\/script>');
-            document.write('<script async src="https://www.ezojs.com/ezoic/sa.min.js"><\\/script>');
+            document.write('<script data-cfasync="false" src="https://www.ezojs.com/ezoic/sa.min.js"><\\/script>');
             document.write('<script>window.ezstandalone = window.ezstandalone || {}; ezstandalone.cmd = ezstandalone.cmd || []; <\\/script>');
-            document.write('<script src="https://ezoicanalytics.com/analytics.js"><\\/script>');
         }
     </script>
     %sveltekit.head%
