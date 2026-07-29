@@ -1,4 +1,4 @@
-import { redirect } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import { supportedLocales, defaultLocale, isSupported } from '$lib/i18n/lang.js';
 
 /**
@@ -28,6 +28,10 @@ export async function handle({ event, resolve }) {
     const { pathname } = event.url;
     const host = event.request.headers.get('host')?.split(':')[0];
     const isIptvSubdomain = host === 'iptvsmarterspro.firetempmail.com';
+
+    if (!isIptvSubdomain && pathname.startsWith('/iptv-smarters-pro')) {
+        throw error(404, 'Not found');
+    }
 
     const lang = event.params?.lang || defaultLocale;
 
