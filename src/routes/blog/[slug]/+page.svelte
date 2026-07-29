@@ -47,6 +47,13 @@
         'temp-email-for-notion',
         'temp-email-for-spotify'
     ]);
+    // Ensure known thin or low-content posts are explicitly noindexed for ad network review
+    [
+        'how-to-avoid-email-spam',
+        'temp-mail-vs-burner-email',
+        'why-use-temporary-email',
+        'best-temp-mail-in-germany'
+    ].forEach((s) => ADSENSE_REVIEW_NOINDEX_SLUGS.add(s));
     $: isNoindexPost = post && (isThinContent || ADSENSE_REVIEW_NOINDEX_SLUGS.has(post.slug));
 
     // Build FAQPage schema from FAQ section in content

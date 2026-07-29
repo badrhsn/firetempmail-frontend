@@ -1,9 +1,7 @@
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ request }) {
-    const host = request.headers.get('host')?.split(':')[0];
-    const sitemap = host === 'iptvsmarterspro.firetempmail.com'
-        ? 'https://iptvsmarterspro.firetempmail.com/sitemap-iptv.xml'
-        : 'https://firetempmail.com/sitemap.xml';
+    // Always point robots to the main FireTempMail sitemap to avoid exposing the IPTV section
+    const sitemap = 'https://firetempmail.com/sitemap.xml';
 
     const body = `User-agent: *
 Allow: /
