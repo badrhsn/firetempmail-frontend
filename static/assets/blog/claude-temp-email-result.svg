@@ -6,7 +6,7 @@
   <circle cx="330" cy="192" r="56" fill="#e7f7eb"/>
   <path d="M300 193l22 22 46-52" fill="none" stroke="#198754" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
   <text x="330" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#1f2937">Verification succeeded</text>
-  <text x="330" y="334" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#4b5563">offredaily.sa.com delivered the code</text>
+  <text x="330" y="334" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#4b5563">offrework.click delivered the code</text>
   <rect x="150" y="408" width="360" height="66" rx="10" fill="#198754"/>
   <text x="330" y="449" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#ffffff">Continue to Claude</text>
   <rect x="620" y="72" width="500" height="576" rx="20" fill="#ffffff" stroke="#f1c8c8"/>

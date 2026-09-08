@@ -4,13 +4,13 @@ import { generate } from "random-words";
 
 // Available domains for email generation
 export const availableDomains = [
-    'offredaily.sa.com', 
-    'ctm.edu.pl', 
+    'offrework.click', 
+    'service-today.click', 
     'jobsdeforyou.sa.com',
 ];
 
 // Default domain
-export const defaultDomain = 'offredaily.sa.com';
+export const defaultDomain = 'offrework.click';
 
 // Store for selected domain with safe localStorage access
 export const selectedDomain = writable(defaultDomain);

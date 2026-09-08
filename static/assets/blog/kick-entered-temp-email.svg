@@ -6,7 +6,7 @@
   <text x="1020" y="140" text-anchor="end" font-family="Arial" font-size="18" fill="#111827">May 2026 test</text>
   <text x="180" y="250" font-family="Arial" font-size="36" font-weight="700" fill="#111827">Temp email entered</text>
   <rect x="180" y="305" width="840" height="76" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
-  <text x="215" y="353" font-family="Arial" font-size="22" fill="#334155">test@offredaily.sa.com</text>
+  <text x="215" y="353" font-family="Arial" font-size="22" fill="#334155">test@offrework.click</text>
   <rect x="180" y="430" width="300" height="64" rx="12" fill="#53fc18"/>
   <text x="330" y="471" text-anchor="middle" font-family="Arial" font-size="20" font-weight="700" fill="#111827">Continue</text>
   <text x="180" y="570" font-family="Arial" font-size="18" fill="#64748b">Screenshot-style test capture for Kick temp email verification.</text>

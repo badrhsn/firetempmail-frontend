@@ -21249,7 +21249,7 @@ var init_stores2 = __esm({
   ".svelte-kit/output/server/chunks/stores2.js"() {
     init_index3();
     init_random_words();
-    defaultDomain = "offredaily.sa.com";
+    defaultDomain = "offrework.click";
     selectedDomain = writable(defaultDomain);
     gmailAccounts = writable([
       { base: "kourichkhalid", domain: "gmail.com", lastUsed: 0 },

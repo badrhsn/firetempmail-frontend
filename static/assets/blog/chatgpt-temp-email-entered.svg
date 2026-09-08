@@ -3,7 +3,7 @@
   <rect x="330" y="90" width="540" height="540" rx="28" fill="#fff" stroke="#ddd"/>
   <text x="600" y="190" text-anchor="middle" font-family="Arial" font-size="34" font-weight="700" fill="#202123">Email verification</text>
   <rect x="420" y="285" width="360" height="58" rx="10" fill="#fff" stroke="#10a37f" stroke-width="3"/>
-  <text x="445" y="322" font-family="Arial" font-size="19" fill="#222">test@offredaily.sa.com</text>
+  <text x="445" y="322" font-family="Arial" font-size="19" fill="#222">test@offrework.click</text>
   <rect x="420" y="370" width="360" height="56" rx="10" fill="#10a37f"/>
   <text x="600" y="406" text-anchor="middle" font-family="Arial" font-size="18" font-weight="700" fill="#fff">Continue</text>
   <text x="600" y="485" text-anchor="middle" font-family="Arial" font-size="16" fill="#666">Temp email entered during the ChatGPT signup test</text>
