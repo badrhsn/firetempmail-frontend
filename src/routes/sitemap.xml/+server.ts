@@ -12,6 +12,9 @@ export const GET: RequestHandler = async () => {
         ),
         `    <sitemap>
         <loc>${SITE_URL}/sitemap-blog.xml</loc>
+    </sitemap>`,
+        `    <sitemap>
+        <loc>${SITE_URL}/sitemap-pages.xml</loc>
     </sitemap>`
     ].join('\n');
 

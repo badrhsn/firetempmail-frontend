@@ -56,6 +56,7 @@
 
 <nav class="site-navigation" bind:this={navEl}>
     <a href={lp('/')} class:active={isActive('/')}>{$_('nav.home')}</a>
+    <a href="/api" class:active={$page.url.pathname === '/api'}>Developers</a>
 
     <!-- Tools dropdown -->
     <div class="nav-dropdown" class:open={toolsOpen}>
