@@ -12,6 +12,42 @@
     let copyrightYear = new Date().getFullYear();
     let relatedPosts = data?.relatedPosts || [];
 
+    // Every guide should pass readers to the one tool that best matches its intent.
+    // This creates a clear, useful internal-link path without keyword-stuffed footers.
+    $: toolRecommendation = (() => {
+        const text = `${post?.title || ''} ${post?.slug || ''}`.toLowerCase();
+
+        if (text.includes('gmail') || text.includes('googlemail')) {
+            return {
+                href: '/temp-gmail',
+                label: 'Try the Temp Gmail Alias Generator',
+                description: 'Create a Gmail plus or dot alias for signup organization and inbox privacy.'
+            };
+        }
+
+        if (text.includes('burner') || text.includes('throwaway')) {
+            return {
+                href: '/burner-email',
+                label: 'Create a burner email address',
+                description: 'Use a disposable address when you need short-term inbox privacy.'
+            };
+        }
+
+        if (text.includes('developer') || text.includes('test') || text.includes('api')) {
+            return {
+                href: '/email-generator',
+                label: 'Generate a temporary email for testing',
+                description: 'Create a disposable inbox for test signups and verification-email checks.'
+            };
+        }
+
+        return {
+            href: '/',
+            label: 'Generate a free temporary email',
+            description: 'Create a disposable inbox instantly for one-time signups and verification emails.'
+        };
+    })();
+
     // Normalize D1 field names
     $: if (post) {
         if (!post.date && post.created_at) post.date = post.created_at;
@@ -367,6 +403,12 @@
                 <div class="article-content journey-content entry-content" style="text-align: left; line-height: 1.8;">
                     {@html post.content}
                 </div>
+
+                <section class="tool-recommendation" aria-label="Recommended temporary email tool">
+                    <h2>Need a temporary inbox?</h2>
+                    <p>{toolRecommendation.description}</p>
+                    <a href={toolRecommendation.href}>{toolRecommendation.label}</a>
+                </section>
                 
                 <!-- Author Box -->
                 <AuthorBox />
@@ -429,6 +471,38 @@
 {/if}
 
 <style>
+    .tool-recommendation {
+        margin: 2rem 0;
+        padding: 1.5rem;
+        background: #fff7ed;
+        border: 1px solid #fed7aa;
+        border-radius: 12px;
+    }
+
+    .tool-recommendation h2 {
+        margin: 0 0 0.5rem;
+        font-size: 1.2rem;
+    }
+
+    .tool-recommendation p {
+        margin: 0 0 1rem;
+    }
+
+    .tool-recommendation a {
+        display: inline-block;
+        padding: 0.65rem 1rem;
+        background: #ea580c;
+        border-radius: 7px;
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .tool-recommendation a:hover {
+        background: #c2410c;
+        color: #fff;
+    }
+
     .blog-post-shell {
         background: #f7f9fc;
     }
