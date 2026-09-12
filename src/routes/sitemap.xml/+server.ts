@@ -1,20 +1,17 @@
 import type { RequestHandler } from './$types';
 
 const SITE_URL = 'https://firetempmail.com';
-const SUPPORTED_LOCALES = ['en', 'fr', 'de', 'es', 'it', 'pt', 'nl', 'pl', 'ru', 'ar'];
-const TODAY = '2026-04-16';
+const SUPPORTED_LOCALES = ['en', 'fr', 'de', 'es', 'it', 'pt', 'nl', 'pl', 'ru', 'ar', 'zh'];
 
 export const GET: RequestHandler = async () => {
     const sitemaps = [
         ...SUPPORTED_LOCALES.map(lang =>
             `    <sitemap>
         <loc>${SITE_URL}/sitemap-${lang}.xml</loc>
-        <lastmod>${TODAY}</lastmod>
     </sitemap>`
         ),
         `    <sitemap>
         <loc>${SITE_URL}/sitemap-blog.xml</loc>
-        <lastmod>${TODAY}</lastmod>
     </sitemap>`
     ].join('\n');
 

@@ -6,9 +6,9 @@ export const OG_LOCALES = {
 
 export const SEO_META = {
     en: {
-        title: 'Temp Email Generator - Instant Disposable Address | FireTempMail',
-        description: 'Generate a temporary email address instantly. No registration required. Create disposable emails for signups, verifications, and spam protection.',
-        keywords: 'email generator, temp email generator, random email, temporary email address, disposable email, fake email generator',
+        title: 'Temporary Email Generator – Free Disposable Address | FireTempMail',
+        description: 'Generate a free temporary email address instantly. Use a disposable inbox for signups, verification emails, testing, and spam protection.',
+        keywords: 'temporary email generator, temp email generator, disposable email generator, free email generator, temporary email address',
     },
     fr: {
         title: 'Générateur Email Jetable - Adresse Temporaire Gratuite | FireTempMail',

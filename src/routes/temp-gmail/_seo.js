@@ -6,9 +6,9 @@ export const OG_LOCALES = {
 
 export const SEO_META = {
     en: {
-        title: 'Temp Gmail Address - Free Disposable Gmail | FireTempMail',
-        description: 'Generate a free temporary Gmail address instantly. No signup needed. Protect your inbox from spam with a disposable Gmail account.',
-        keywords: 'temp gmail, temporary gmail, gmailnator, disposable gmail, fake gmail, gmail generator, Fire Temp Mail',
+        title: 'Temp Gmail Alias Generator – Plus & Dot Aliases | FireTempMail',
+        description: 'Create a temporary Gmail alias using plus addressing or the Gmail dot trick. Organize signups and keep your primary inbox tidy.',
+        keywords: 'temp gmail alias, gmail alias generator, gmail plus alias, gmail dot trick, temporary gmail alias',
     },
     fr: {
         title: 'Gmail Jetable Gratuit - Adresse Mail Temporaire | FireTempMail',

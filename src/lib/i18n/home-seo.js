@@ -47,7 +47,11 @@ export function getHomeSeo(locale = 'en') {
     const current = LOCALE_STRINGS[lang] || LOCALE_STRINGS.en;
     const fallback = LOCALE_STRINGS.en;
 
-    const title = current?.home?.title || fallback?.home?.title || 'Fire Temp Mail';
+    const title = /** @type {any} */ (current?.home)?.metaTitle
+        || current?.home?.title
+        || /** @type {any} */ (fallback?.home)?.metaTitle
+        || fallback?.home?.title
+        || 'Fire Temp Mail';
     const description = current?.home?.subtitle || fallback?.home?.subtitle || 'Generate free temporary email addresses instantly.';
 
     return {

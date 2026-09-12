@@ -1,20 +1,21 @@
 import type { RequestHandler } from './$types';
 
 const SITE_URL = 'https://firetempmail.com';
-const SUPPORTED_LOCALES = ['en', 'fr', 'de', 'es', 'it', 'pt', 'nl', 'pl', 'ru', 'ar'];
+const SUPPORTED_LOCALES = ['en', 'fr', 'de', 'es', 'it', 'pt', 'nl', 'pl', 'ru', 'ar', 'zh'];
 
 // Service pages that have localized versions
 const SERVICE_PAGES = [
-    { path: '/',                    priority: '1.0', changefreq: 'daily',   lastmod: '2026-04-16' },
-    { path: '/temp-gmail',          priority: '0.9', changefreq: 'weekly',  lastmod: '2026-04-16' },
-    { path: '/email-generator',     priority: '0.9', changefreq: 'daily',   lastmod: '2026-04-16' },
-    { path: '/burner-email',        priority: '0.8', changefreq: 'weekly',  lastmod: '2026-04-16' },
-    { path: '/best-temp-mail',      priority: '0.9', changefreq: 'weekly',  lastmod: '2026-04-16' },
-    { path: '/faq',                 priority: '0.7', changefreq: 'monthly', lastmod: '2026-02-28' },
-    { path: '/about',               priority: '0.7', changefreq: 'monthly', lastmod: '2026-04-16' },
-    { path: '/contact',             priority: '0.6', changefreq: 'monthly', lastmod: '2026-02-28' },
-    { path: '/privacy-policy',      priority: '0.5', changefreq: 'monthly', lastmod: '2026-02-28' },
-    { path: '/terms',               priority: '0.5', changefreq: 'monthly', lastmod: '2026-02-28' },
+    { path: '/',                    priority: '1.0', changefreq: 'daily' },
+    { path: '/temp-gmail',          priority: '0.9', changefreq: 'weekly' },
+    { path: '/email-generator',     priority: '0.9', changefreq: 'daily' },
+    { path: '/burner-email',        priority: '0.8', changefreq: 'weekly' },
+    { path: '/best-temp-mail',      priority: '0.9', changefreq: 'weekly' },
+    { path: '/edu-email-generator', priority: '0.6', changefreq: 'monthly' },
+    { path: '/faq',                 priority: '0.7', changefreq: 'monthly' },
+    { path: '/about',               priority: '0.7', changefreq: 'monthly' },
+    { path: '/contact',             priority: '0.6', changefreq: 'monthly' },
+    { path: '/privacy-policy',      priority: '0.5', changefreq: 'monthly' },
+    { path: '/terms',               priority: '0.5', changefreq: 'monthly' },
 ];
 
 export const GET: RequestHandler = async ({ params }) => {
@@ -39,7 +40,6 @@ export const GET: RequestHandler = async ({ params }) => {
     const urls = SERVICE_PAGES.map(page => `
         <url>
             <loc>${langUrl(page.path)}</loc>
-            <lastmod>${page.lastmod}</lastmod>
             <changefreq>${page.changefreq}</changefreq>
             <priority>${page.priority}</priority>
 ${hreflangLinks(page.path)}

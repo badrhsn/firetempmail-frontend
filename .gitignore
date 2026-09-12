@@ -3,6 +3,8 @@ node_modules
 /build
 /.svelte-kit
 /package
+/.wrangler
+/backups
 .env
 .env.*
 !.env.example

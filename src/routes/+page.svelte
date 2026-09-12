@@ -976,56 +976,6 @@ function normalizeGmailAddress(address) {
 
                 <main class="home-main-content tool-main-content journey-content entry-content">
                     <article class="homepage-article">
-            <!-- Insert: Gmail temp mail SEO block (place this before the "What is Disposable Temporary E-mail?" section) -->
-           <div class="seo-content-section">
-    <div class="container">
-        <h2 class="section-title">{$_('home.gmailSection.title')}</h2>
-        <div class="seo-rich-content">
-            <p>
-                {$_('home.gmailSection.intro')}
-            </p>
-
-            <section class="why-card home-why-card" aria-labelledby="home-why-gmail-title">
-                <h2 id="home-why-gmail-title">{$_('home.gmailSection.whyTitle')}</h2>
-                <p>{$_('home.gmailSection.whyText')}</p>
-
-                <div class="feature-list">
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>{$_('home.gmailSection.features.instant')}</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>{$_('home.gmailSection.features.real')}</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>{$_('home.gmailSection.features.free')}</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>{$_('home.gmailSection.features.bypass')}</span>
-                    </div>
-                </div>
-            </section>
-
-            <h2>{$_('home.gmailSection.howTitle')}</h2>
-            <p>
-                {$_('home.gmailSection.howText')}
-            </p>
-
-            <h2>{$_('home.gmailSection.idealTitle')}</h2>
-            <p>
-                {$_('home.gmailSection.idealText')}
-            </p>
-
-            <p>
-                {$_('home.gmailSection.cta')}
-            </p>
-        </div>
-    </div>
-</div>
-
             <!-- How It Works Section - NEW -->
             <div class="how-it-works-section">
                 <div class="container">

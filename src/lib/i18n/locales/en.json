@@ -153,8 +153,9 @@
     "solution": "Solution"
   },
   "home": {
-    "title": "Fire Temp Mail – Your Free Temporary Disposable Email Generator",
-    "subtitle": "Instantly generate a disposable Email Generator address. Keep your real email address private and your inbox clean from unwanted messages and spam.",
+    "title": "Free Temp Mail & Temporary Email Address",
+    "metaTitle": "Temp Mail – Free Temporary Email Address | FireTempMail",
+    "subtitle": "Create a free disposable email address instantly. Receive emails without sharing your personal inbox or creating an account.",
     "gmailSection": {
       "title": "Gmail Temp Mail Generator: Get a Free Temporary Gmail Address Instantly",
       "intro": "Create a fully functional temporary Gmail address in seconds with our advanced Gmail temp mail generator. Get a free, disposable Gmail address that works exactly like a real Gmail account—perfect for signing up on any website without revealing your personal email.",
@@ -623,8 +624,8 @@
     }
   },
   "emailGeneratorPage": {
-    "h1": "Fire Temp Mail – Your Free Temporary Disposable Email Generator",
-    "lead": "Instantly generate a disposable Email Generator address. Keep your real email address private and your inbox clean from unwanted messages and spam.",
+    "h1": "Free Temporary Email Generator",
+    "lead": "Generate a disposable email address instantly for signups, verification emails, and keeping your personal inbox free from spam.",
     "seoTitle": "Email Generator for Developers & QA Testing",
     "seoDesc": "Professional temporary email generator designed specifically for software developers, QA engineers, and automation testers. Generate unlimited disposable email addresses to test registration flows, email verification systems, password resets, and notification logic—without managing test accounts or cluttering personal inboxes.",
     "whyTitle": "Why Developers Need Disposable Emails for Testing",
@@ -666,8 +667,8 @@
     "startP2": "Frontend developers, backend engineers, QA testers, DevOps engineers, automation specialists, and anyone building email-dependent features."
   },
   "tempGmailPage": {
-    "h1": "Temp Gmail - Create Temporary Gmail Addresses",
-    "lead": "Instantly generate disposable Gmail addresses that look and function like real Gmail accounts. Protect your personal inbox from spam and unwanted messages.",
+    "h1": "Temp Gmail Alias Generator",
+    "lead": "Create a Gmail plus or dot alias for signups and inbox organization. These are aliases of managed Gmail inboxes, not newly created Gmail accounts.",
     "seoTitle1": "Gmail's Hidden Privacy Features: Plus-Addressing & The Dot Trick",
     "seoP1": "Did you know your Gmail account can generate unlimited email addresses without creating new accounts? Gmail has two powerful built-in features that most users don't know about: plus-addressing (aliasing) and the dot trick (period placement). Fire Temp Mail helps you leverage these Gmail-specific features to protect your privacy and organize your inbox.",
     "seoP2": "These aren't \"disposable\" emails from a third-party service—they're legitimate variations of your actual Gmail address that deliver directly to your existing inbox while letting you track, filter, and organize messages by source.",

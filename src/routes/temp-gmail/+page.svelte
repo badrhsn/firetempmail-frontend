@@ -460,9 +460,9 @@ function selectDomain(domain) {
     {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Fire Temp Mail - Temp Gmail Generator",
+  "name": "Fire Temp Mail - Temp Gmail Alias Generator",
   "url": "https://firetempmail.com/temp-gmail",
-  "description": "Generate temporary Gmail addresses instantly with Fire Temp Mail – a fast, secure, and free disposable email generator for privacy-conscious users.",
+  "description": "Create Gmail plus and dot aliases with Fire Temp Mail for inbox organization and privacy-conscious signups.",
   "image": "https://firetempmail.com/og-image.png",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "All",
